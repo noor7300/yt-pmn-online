@@ -25,7 +25,8 @@ export function Footer() {
           ))}
         </div>
         <p className="mt-10 text-xs text-zinc-400">
-          © {new Date().getFullYear()} {SITE_NAME}. Tutorials sourced from the PMN Online YouTube channel.
+          © {new Date().getFullYear()} {SITE_NAME}. Tech tutorials by PMN Online, sourced from the PMN
+          Online YouTube channel.
         </p>
       </div>
     </footer>

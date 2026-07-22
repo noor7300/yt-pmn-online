@@ -1,7 +1,7 @@
 import { getCategories, getPublishedTutorials } from "@/lib/data";
 import { CategoryCard } from "@/components/CategoryCard";
 import { TutorialCard } from "@/components/TutorialCard";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 
 export default function Home() {
   const categories = getCategories();
@@ -14,9 +14,9 @@ export default function Home() {
           Free, step-by-step tutorials for the software you use every day
         </h1>
         <p className="mt-4 text-lg text-zinc-600">
-          {SITE_NAME} turns thousands of hands-on YouTube tutorials into searchable, written guides —
-          Shopify, QuickBooks, Power BI, Canva, Google Workspace, and hundreds more tools, organized by
-          topic.
+          {SITE_NAME} ({SITE_TAGLINE}) turns thousands of hands-on YouTube tutorials into searchable,
+          written guides — Shopify, QuickBooks, Power BI, Canva, Google Workspace, and hundreds more
+          tools, organized by topic.
         </p>
       </section>
 
