@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-use-hubspot-api-easily-2026",
+  "seoTitle": "How to Use the HubSpot API: 2026 Guide",
+  "metaDescription": "Learn how HubSpot's date-based API works, from generating Private App tokens to fetching CRM records with batch requests and handling rate limits.",
+  "intro": "HubSpot moved from numbered API versions to date-based endpoints, which changes how you structure requests if you're used to the old system. This guide covers setting up a Private App for authentication, building requests against the new endpoint paths, and handling pagination and rate limits. It's meant for developers building or maintaining integrations against HubSpot's CRM.",
+  "steps": [
+    { "heading": "Understand the date-based versioning shift", "body": "Know that HubSpot now uses date-based endpoint paths instead of numeric versions, so older integration code may need updating." },
+    { "heading": "Set up a Private App", "body": "Go to your account settings, open Integrations, and create a Private App or configure OAuth scopes for your integration." },
+    { "heading": "Generate a bearer token", "body": "Create your Service Key or use the token endpoint to generate a bearer authentication string for your requests." },
+    { "heading": "Build your request payloads", "body": "Construct REST calls against the updated endpoint paths to pull or update objects like Contacts and Deals." },
+    { "heading": "Handle pagination and batching", "body": "Use pagination parameters and batch requests so you don't run into strict API rate limits when working with large datasets." },
+    { "heading": "Plan for rate limit errors", "body": "Set up exponential backoff retry logic to gracefully handle 429 rate limit responses." }
+  ],
+  "faq": [
+    { "question": "What changed with HubSpot's API versioning?", "answer": "HubSpot moved from numeric versions like v3 to date-based endpoints, so integrations need to reference the correct dated path." },
+    { "question": "How do I authenticate HubSpot API requests?", "answer": "You generate a bearer token through a Private App or OAuth flow and pass it in the Authorization header of each request." },
+    { "question": "How many records can I fetch in one batch call?", "answer": "Batch endpoints typically let you fetch up to 100 records per request, which helps you stay within rate limits." },
+    { "question": "What should I do if I get a 429 error?", "answer": "Implement an exponential backoff retry strategy so your integration waits and retries instead of failing outright." }
+  ],
+  "generatedAt": "2026-07-22T00:00:00.000Z"
+}

@@ -1,18 +1,23 @@
 import type { MetadataRoute } from "next";
-import { getCategories, getPublishedTutorials } from "@/lib/data";
+import { getCategories, getPublishedTutorials, CATEGORY_PAGE_SIZE } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const categories = getCategories();
   const tutorials = getPublishedTutorials();
 
+  const categoryPages = categories.flatMap((c) => {
+    const totalPages = Math.max(1, Math.ceil(c.count / CATEGORY_PAGE_SIZE));
+    return Array.from({ length: totalPages }, (_, i) => {
+      const page = i + 1;
+      const url = page === 1 ? `${SITE_URL}/tutorials/${c.slug}` : `${SITE_URL}/tutorials/${c.slug}/page/${page}`;
+      return { url, changeFrequency: "weekly" as const, priority: page === 1 ? 0.7 : 0.5 };
+    });
+  });
+
   return [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
-    ...categories.map((c) => ({
-      url: `${SITE_URL}/tutorials/${c.slug}`,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    })),
+    ...categoryPages,
     ...tutorials.map((t) => ({
       url: `${SITE_URL}/tutorials/${t.video.category}/${t.video.slug}`,
       lastModified: t.article.generatedAt,

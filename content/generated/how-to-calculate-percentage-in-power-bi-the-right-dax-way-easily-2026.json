@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-calculate-percentage-in-power-bi-the-right-dax-way-easily-2026",
+  "seoTitle": "Calculate Percentages in Power BI the Correct DAX Way",
+  "metaDescription": "Learn the right DAX approach for calculating percentages in Power BI, including common formula mistakes and how to fix them for accurate reports.",
+  "intro": "Percentage calculations in Power BI look simple until context and filters throw the numbers off, which is why so many reports quietly show the wrong figures. This guide covers setting up your data correctly, the key DAX formulas for percentages, and how to catch common errors before they reach a dashboard. It's built for anyone who's been burned by a percentage that didn't add up.",
+  "steps": [
+    { "heading": "Set up your data for percentage calculation", "body": "Confirm your data model has the correct numerator and denominator fields available, and check that relationships between tables are set up properly before writing any formula." },
+    { "heading": "Apply the key DAX formulas", "body": "Use DIVIDE() instead of a plain division operator to avoid divide-by-zero errors, and wrap your percentage logic in a measure rather than a calculated column for filter context to work correctly." },
+    { "heading": "Troubleshoot common DAX errors", "body": "Watch for issues like blank results from missing DIVIDE alternatives or percentages that don't respond to slicers because they were built as static columns instead of measures." },
+    { "heading": "Apply percentages to business scenarios", "body": "Use the correct percentage logic for things like KPI tracking, market share, or performance-to-target calculations where accuracy directly affects decisions." },
+    { "heading": "Streamline with automation tips", "body": "Once your percentage measure is built correctly, it recalculates automatically across every filter context, so it doesn't need to be rebuilt for each new report page." }
+  ],
+  "faq": [
+    { "question": "Why does my Power BI percentage show a blank or error?", "answer": "This usually happens when dividing by zero using a plain division operator; switching to the DIVIDE() function with a default fallback value fixes it." },
+    { "question": "Should percentages be calculated columns or measures?", "answer": "Measures are almost always the right choice for percentages since they recalculate dynamically based on filters and slicers, unlike static calculated columns." },
+    { "question": "How do I calculate percentage of total in Power BI?", "answer": "Use a measure that divides a value by the total using functions like CALCULATE with ALL or ALLSELECTED to remove filters from the denominator, then apply DIVIDE for the final result." },
+    { "question": "Can percentage measures be automated across multiple reports?", "answer": "Yes, once you've written the DAX measure correctly, you can reuse it or its logic in other reports connected to the same data model without rebuilding it from scratch." }
+  ],
+  "generatedAt": "2026-07-21T10:05:06.000Z"
+}

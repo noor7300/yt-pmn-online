@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-connect-power-bi-to-servicenow-easily-2026",
+  "seoTitle": "How to Connect Power BI to ServiceNow Easily (2026)",
+  "metaDescription": "Learn how to pull ServiceNow incident and CMDB data into Power BI using the REST Table API and Power Query's Web connector.",
+  "intro": "Manually exporting ServiceNow incident and change data to Excel every day is slow and prone to formatting errors. This guide shows how to use ServiceNow's REST API Explorer to generate a query endpoint, then connect it to Power BI Desktop through the Web connector and expand the resulting JSON into usable tables. It's built for IT teams who want live ITSM reporting without custom scripts.",
+  "steps": [
+    { "heading": "Build your query in ServiceNow", "body": "In ServiceNow, search for REST API Explorer, select your target table, configure filters to limit rows, test the request, and copy the auto-generated Base URL." },
+    { "heading": "Connect using Power BI's Web connector", "body": "In Power BI Desktop, click Get Data, select Web, and paste your copied ServiceNow endpoint URL." },
+    { "heading": "Authenticate", "body": "Choose Basic or Access Token authentication and enter your verified user credentials, then click Connect." },
+    { "heading": "Expand the JSON response", "body": "In Power Query, click the List icon next to the Result record to convert the JSON into a structured table, then use Expand Column to reveal readable fields." },
+    { "heading": "Load, publish, and schedule refresh", "body": "Set valid data types, click Close & Apply, build your visuals, publish to your workspace, then toggle on Scheduled Refresh for the semantic model." }
+  ],
+  "faq": [
+    { "question": "Do I need admin access in ServiceNow to build this connection?", "answer": "You need enough access to use the REST API Explorer and generate query URLs for your target table, which may require coordination with your ServiceNow admin." },
+    { "question": "How do I limit which ServiceNow rows get pulled into Power BI?", "answer": "Use system filters inside the REST API Explorer to accurately limit column sizes and prevent pulling more data than you need." },
+    { "question": "Why does my data come in as one long JSON string?", "answer": "The raw response loads as a record in Power Query, and you need to click the List icon and then Expand Column to convert it into a usable table." },
+    { "question": "Can I schedule automatic refreshes from ServiceNow?", "answer": "Yes, after publishing, open your semantic model settings in Power BI Service and toggle on Scheduled Refresh." }
+  ],
+  "generatedAt": "2026-07-22T00:00:00.000Z"
+}

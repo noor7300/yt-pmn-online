@@ -1,0 +1,14 @@
+Content generation rollout — paused by user request at 2,182/3,066 done (884 remaining).
+
+To resume in a future session, just say "continue generating the remaining tutorial content" —
+the actual state lives in the files, not this note:
+
+  node -e "const fs=require('fs');const all=require('./data/categorized/videos.json');const gen=new Set(fs.readdirSync('content/generated').filter(f=>f.endsWith('.json')).map(f=>f.replace(/\.json$/,'')));console.log(all.filter(v=>!gen.has(v.slug)).length)"
+
+Process used: split remaining videos into chunks of 50 (data/full/chunks/chunk-NNN.json),
+dispatch ~4 parallel background agents (subagent_type general-purpose) each pointed at one
+chunk file + content/GENERATION_GUIDE.md, explicitly telling them not to spawn their own
+sub-agents or scripts. Redispatch a new chunk each time one finishes to keep concurrency
+steady. Session usage limits get hit periodically (roughly every few hours of sustained
+work) — when that happens, just wait for the stated reset time and relaunch with the same
+approach; content/generated/ is idempotent so nothing is lost.

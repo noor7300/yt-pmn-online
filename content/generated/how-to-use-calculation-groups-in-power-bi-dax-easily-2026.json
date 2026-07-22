@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-use-calculation-groups-in-power-bi-dax-easily-2026",
+  "seoTitle": "How to Use Calculation Groups in Power BI DAX (2026)",
+  "metaDescription": "Learn how to build Power BI calculation groups with SELECTEDMEASURE() to avoid duplicating YTD, MoM, and PY DAX formulas for every metric.",
+  "intro": "Writing a separate YTD, MoM, and prior-year DAX formula for every single measure in your model quickly bloats your file and makes maintenance painful. This guide shows how to use Power BI's native calculation groups to write one reusable formula that applies across every explicit measure. You'll learn the SELECTEDMEASURE() function, dynamic format strings, and how to expose your new calculation items as an interactive slicer.",
+  "steps": [
+    { "heading": "Open the Model view and create a calculation group", "body": "Click into the Model view tab, then click the Calculation group icon in the top ribbon and confirm the implicit measures notice to unlock the design canvas." },
+    { "heading": "Rename the group and default column", "body": "Rename the new calculation group to something like Time Intelligence, and rename its default column to Period." },
+    { "heading": "Add a Current calculation item", "body": "Keep the first default item named Current using the baseline SELECTEDMEASURE() expression." },
+    { "heading": "Write YTD and Prior Year items", "body": "Create new calculation items using formulas like CALCULATE(SELECTEDMEASURE(), DATESYTD('Calendar'[Date])) for YTD and SAMEPERIODLASTYEAR for prior year comparisons." },
+    { "heading": "Apply dynamic formatting and deploy", "body": "Toggle Dynamic Format String for percentage-based items, then drag your new Period column into a Slicer visual and drop your base measures into a Matrix to see them calculate dynamically." }
+  ],
+  "faq": [
+    { "question": "What does SELECTEDMEASURE() actually do?", "answer": "It's a pass-through expression that dynamically inherits whichever measure is currently placed on the visual, letting one calculation item apply to any metric." },
+    { "question": "Why use calculation groups instead of separate measures?", "answer": "Calculation groups let you write a single reusable DAX formula that scales across every explicit measure instead of duplicating logic for each one." },
+    { "question": "Can I format some calculation items as percentages and others as currency?", "answer": "Yes, use Dynamic Format String in the properties drawer to apply conditional formatting per calculation item." },
+    { "question": "Do calculation groups disable other measures in my model?", "answer": "Power BI shows a notice about implicit measures when you first create a calculation group, since it restricts using unaggregated fields directly in visuals." }
+  ],
+  "generatedAt": "2026-07-22T00:00:00.000Z"
+}

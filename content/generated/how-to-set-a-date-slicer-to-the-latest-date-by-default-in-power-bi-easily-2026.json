@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-set-a-date-slicer-to-the-latest-date-by-default-in-power-bi-easily-2026",
+  "seoTitle": "How to Default a Power BI Date Slicer to Latest Date (2026)",
+  "metaDescription": "Learn how to write a DAX column to auto-select the latest date in a Power BI slicer so dashboards always open on current data.",
+  "intro": "Requiring users to manually scroll through thousands of rows to find today's date every time they open a dashboard is a poor experience. This guide shows how to write a simple DAX column that flags the latest date in your table, then use it to force a slicer to default to that value. You'll also learn how to keep the option open for users to still view historical data if needed.",
+  "steps": [
+    { "heading": "Open the Data View", "body": "Go to your Master Date or Transaction table in Data View and click New Column in the Table Tools ribbon." },
+    { "heading": "Write the DAX flag formula", "body": "Use an IF() statement that checks whether the current row's date equals MAX() of your date column, labeling matches as \"Latest Date\" and everything else as \"Past Dates\"." },
+    { "heading": "Add the slicer visual", "body": "Return to your report canvas, drop a standard Slicer visual, and drag your new DAX column into its field well." },
+    { "heading": "Set the default selection", "body": "Check the \"Latest Date\" value in the slicer's list, then switch the layout style to Dropdown in the Format pane if preferred." },
+    { "heading": "Lock the filter and test", "body": "Open the Filters on this visual panel to lock the selection to your dynamic flag, then refresh your data to confirm the slicer advances automatically." }
+  ],
+  "faq": [
+    { "question": "Why doesn't a normal slicer update automatically to the latest date?", "answer": "Standard static selections don't advance on their own when new date rows are imported, which is why a DAX-based flag column is needed." },
+    { "question": "Can users still select older dates after I lock the default?", "answer": "Yes, you can tune the visual options so users can still expand the slicer to view historical trends even though it defaults to the latest date." },
+    { "question": "Does this method require a calculated column or a measure?", "answer": "It typically uses a calculated column with an IF() and MAX() formula so each row can be flagged and used inside a slicer field well." },
+    { "question": "How do I confirm the default updates after a refresh?", "answer": "Add a new date to your source table, refresh the model, and check that the slicer's default selection moves to the newest date." }
+  ],
+  "generatedAt": "2026-07-22T00:00:00.000Z"
+}

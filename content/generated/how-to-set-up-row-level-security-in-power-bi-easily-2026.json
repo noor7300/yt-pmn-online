@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-set-up-row-level-security-in-power-bi-easily-2026",
+  "seoTitle": "How to Set Up Row Level Security in Power BI (2026)",
+  "metaDescription": "Learn how to configure Row-Level Security roles in Power BI using static and dynamic DAX filters to restrict data by user.",
+  "intro": "Building separate dashboard files for every region or client just to control data access wastes time and creates duplication risk. This guide shows how to use Power BI's Row-Level Security to build a single master report that filters data automatically based on who's logged in. You'll learn both static role-based filtering and the dynamic USERPRINCIPALNAME() approach for automatic per-user filtering.",
+  "steps": [
+    { "heading": "Open Manage Roles", "body": "Click the Modeling tab in the top toolbar and select Manage Roles to open the security configuration window." },
+    { "heading": "Create a new role", "body": "Click New, name your role clearly, such as East Region Access, and select the table you want to filter." },
+    { "heading": "Write your DAX filter", "body": "Use the Add Filter option or DAX Editor to write a condition, such as [Region] = \"East\", to isolate specific rows." },
+    { "heading": "Or use dynamic filtering", "body": "For automatic per-user filtering, set your table filter to equal the USERPRINCIPALNAME() function, which evaluates the recipient's login email." },
+    { "heading": "Test and publish", "body": "Use View As to simulate a specific role locally, then publish and assign live users or Entra security groups in the Security panel inside Power BI Service." }
+  ],
+  "faq": [
+    { "question": "What's the difference between static and dynamic RLS?", "answer": "Static RLS uses fixed DAX conditions like a specific region name, while dynamic RLS uses USERPRINCIPALNAME() to automatically filter based on who's logged in." },
+    { "question": "Can I test RLS without publishing my report?", "answer": "Yes, use the View As button next to Manage Roles inside Power BI Desktop to simulate a specific role locally." },
+    { "question": "How do I assign users to a role after publishing?", "answer": "Open your semantic model's Security panel in Power BI Service, then map users or Microsoft Entra security groups to your defined roles." },
+    { "question": "Does RLS work across related tables?", "answer": "Yes, the evaluation engine applies row-level filtration across active table relationships, so filtering one table can cascade to related data." }
+  ],
+  "generatedAt": "2026-07-22T00:00:00.000Z"
+}

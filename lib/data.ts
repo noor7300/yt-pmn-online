@@ -88,6 +88,22 @@ export function getTutorialsByCategory(categorySlug: string): PublishedTutorial[
   return getPublishedTutorials().filter((t) => t.video.category === categorySlug);
 }
 
+export const CATEGORY_PAGE_SIZE = 24;
+
+export interface PagedTutorials {
+  items: PublishedTutorial[];
+  currentPage: number;
+  totalPages: number;
+}
+
+export function getTutorialsByCategoryPaged(categorySlug: string, page: number): PagedTutorials {
+  const all = getTutorialsByCategory(categorySlug);
+  const totalPages = Math.max(1, Math.ceil(all.length / CATEGORY_PAGE_SIZE));
+  const currentPage = Math.min(Math.max(1, page), totalPages);
+  const start = (currentPage - 1) * CATEGORY_PAGE_SIZE;
+  return { items: all.slice(start, start + CATEGORY_PAGE_SIZE), currentPage, totalPages };
+}
+
 export function getRelatedTutorials(current: PublishedTutorial, limit = 4): PublishedTutorial[] {
   return getTutorialsByCategory(current.video.category)
     .filter((t) => t.video.slug !== current.video.slug)

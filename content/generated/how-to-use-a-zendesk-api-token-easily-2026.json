@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-use-a-zendesk-api-token-easily-2026",
+  "seoTitle": "How to Use a Zendesk API Token Securely in 2026",
+  "metaDescription": "Learn how to generate and use a Zendesk API token, format Basic Auth requests, test with cURL, and prepare for the shift to OAuth 2.0.",
+  "intro": "Custom scripts and integrations need a secure way to authenticate with Zendesk, and API tokens are the standard method for legacy connections. This guide covers generating a token, formatting authentication strings correctly, and testing your setup, along with a note on Zendesk's 2026 shift toward OAuth 2.0.",
+  "steps": [
+    { "heading": "Enable API token access", "body": "In Admin Center, expand Apps and Integrations and click API Settings." },
+    { "heading": "Toggle on token access", "body": "Switch the Token Access setting to on and click Add API Token." },
+    { "heading": "Generate the token", "body": "Input a clear description, click Generate, and immediately copy the secret token string since it won't be shown again in full." },
+    { "heading": "Format your authentication string", "body": "Construct your authentication using the email_address/token suffix pattern required by Zendesk's API." },
+    { "heading": "Test with a real request", "body": "Drop the credentials into a command-line cURL command or Postman request to confirm the connection works." },
+    { "heading": "Monitor for migration to OAuth", "body": "Check your token's Last Used property periodically and start planning a move to OAuth 2.0 client credentials ahead of Zendesk's deprecation timeline." }
+  ],
+  "faq": [
+    { "question": "Are API tokens still supported in 2026?", "answer": "They still work for legacy systems, but Zendesk is phasing them out in favor of OAuth 2.0, so new integrations should plan to migrate." },
+    { "question": "What format does the authentication string need?", "answer": "It follows the pattern of your email address followed by /token as the suffix, paired with your generated secret token." },
+    { "question": "What happens if a token goes unused for too long?", "answer": "Zendesk's 2026 policy can automatically deactivate tokens that show no recent activity in the Last Used property." },
+    { "question": "Can I test my token without writing a full integration?", "answer": "Yes, a simple cURL command or a tool like Postman is enough to verify the connection returns a valid JSON response." }
+  ],
+  "generatedAt": "2026-07-22T00:00:00Z"
+}
