@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import type { CategorizedVideo, GeneratedArticle } from "./types";
 import { TAXONOMY } from "./taxonomy";
+import { INDEXABLE_LIMIT } from "./site";
 
 const CATEGORIZED_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GENERATED_DIR = path.join(process.cwd(), "content", "generated");
@@ -56,6 +57,24 @@ export function getPublishedTutorials(): PublishedTutorial[] {
 
 export function getTutorialBySlug(slug: string): PublishedTutorial | null {
   return getPublishedTutorials().find((t) => t.video.slug === slug) ?? null;
+}
+
+let _indexableSlugs: Set<string> | null = null;
+
+/** The top INDEXABLE_LIMIT tutorials by view count, for the phased indexing
+ * rollout — these get `index`ed and appear in the sitemap; the rest stay
+ * `noindex, follow` so Google can still crawl and discover them without
+ * indexing everything on day one. Raise INDEXABLE_LIMIT in lib/site.ts once
+ * Search Console shows healthy indexing for the current batch. */
+function getIndexableSlugs(): Set<string> {
+  if (!_indexableSlugs) {
+    _indexableSlugs = new Set(getPublishedTutorials().slice(0, INDEXABLE_LIMIT).map((t) => t.video.slug));
+  }
+  return _indexableSlugs;
+}
+
+export function isIndexable(tutorial: PublishedTutorial): boolean {
+  return getIndexableSlugs().has(tutorial.video.slug);
 }
 
 export function getCategories(): CategorySummary[] {

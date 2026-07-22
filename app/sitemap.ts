@@ -1,10 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getCategories, getPublishedTutorials, CATEGORY_PAGE_SIZE } from "@/lib/data";
+import { getCategories, getPublishedTutorials, isIndexable, CATEGORY_PAGE_SIZE } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const categories = getCategories();
-  const tutorials = getPublishedTutorials();
+  // Only the currently-indexable tutorials go in the sitemap — the rest are
+  // noindex for now as part of a phased rollout (see INDEXABLE_LIMIT in lib/site.ts).
+  const tutorials = getPublishedTutorials().filter(isIndexable);
 
   const categoryPages = categories.flatMap((c) => {
     const totalPages = Math.max(1, Math.ceil(c.count / CATEGORY_PAGE_SIZE));

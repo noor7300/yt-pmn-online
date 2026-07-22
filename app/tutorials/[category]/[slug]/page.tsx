@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPublishedTutorials, getTutorialBySlug, getRelatedTutorials } from "@/lib/data";
+import { getPublishedTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable } from "@/lib/data";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { FaqBlock } from "@/components/FaqBlock";
 import { RelatedTutorials } from "@/components/RelatedTutorials";
@@ -34,6 +34,7 @@ export async function generateMetadata({
       images: thumb ? [thumb.url] : [],
       type: "article",
     },
+    robots: isIndexable(tutorial) ? { index: true, follow: true } : { index: false, follow: true },
   };
 }
 
