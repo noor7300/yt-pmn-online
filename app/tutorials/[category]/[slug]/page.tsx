@@ -74,19 +74,19 @@ export default async function TutorialPage({
         ]}
       />
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-900">{video.title}</h1>
+      <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground">{video.title}</h1>
 
       <div className="mt-6">
         {thumb && <VideoEmbed videoId={video.id} title={video.title} thumbnailUrl={thumb.url} />}
       </div>
 
-      <p className="mt-6 text-lg text-zinc-700">{article.intro}</p>
+      <p className="mt-6 text-lg text-foreground/90">{article.intro}</p>
 
       <div className="mt-8 space-y-6">
         {article.steps.map((step) => (
           <section key={step.heading}>
-            <h2 className="text-xl font-semibold text-zinc-900">{step.heading}</h2>
-            <p className="mt-2 text-zinc-700">{step.body}</p>
+            <h2 className="text-xl font-semibold text-foreground">{step.heading}</h2>
+            <p className="mt-2 text-muted">{step.body}</p>
           </section>
         ))}
       </div>

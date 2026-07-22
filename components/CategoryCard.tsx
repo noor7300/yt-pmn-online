@@ -5,11 +5,13 @@ export function CategoryCard({ category }: { category: CategorySummary }) {
   return (
     <Link
       href={`/tutorials/${category.slug}`}
-      className="flex flex-col justify-between rounded-xl border border-zinc-200 bg-white p-4 transition hover:border-indigo-300 hover:shadow-md"
+      className="flex flex-col justify-between rounded-md border border-line bg-panel p-4 transition hover:border-accent"
     >
-      <span className="text-xs font-medium uppercase tracking-wide text-indigo-600">{category.groupLabel}</span>
-      <span className="mt-1 text-base font-semibold text-zinc-900">{category.label}</span>
-      <span className="mt-2 text-xs text-zinc-500">
+      <span className="font-mono text-xs font-medium uppercase tracking-wide text-accent">
+        {category.groupLabel}
+      </span>
+      <span className="mt-1 text-base font-semibold text-foreground">{category.label}</span>
+      <span className="mt-2 font-mono text-xs text-muted tabular-nums">
         {category.count} tutorial{category.count === 1 ? "" : "s"}
       </span>
     </Link>

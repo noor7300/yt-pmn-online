@@ -36,7 +36,7 @@ export function VideoEmbed({ videoId, title, thumbnailUrl }: { videoId: string; 
         priority
       />
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg transition group-hover:scale-105">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-panel/90 shadow-lg transition group-hover:scale-105">
           <svg viewBox="0 0 24 24" className="ml-1 h-7 w-7 fill-red-600">
             <path d="M8 5v14l11-7z" />
           </svg>

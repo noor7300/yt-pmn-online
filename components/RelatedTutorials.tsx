@@ -6,7 +6,7 @@ export function RelatedTutorials({ tutorials, categoryLabel }: { tutorials: Publ
 
   return (
     <section aria-labelledby="related-heading" className="mt-12">
-      <h2 id="related-heading" className="text-xl font-semibold text-zinc-900">
+      <h2 id="related-heading" className="text-xl font-semibold text-foreground">
         More {categoryLabel} tutorials
       </h2>
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

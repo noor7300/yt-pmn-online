@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
       <section className="max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           Free, step-by-step tutorials for the software you use every day
         </h1>
-        <p className="mt-4 text-lg text-zinc-600">
+        <p className="mt-4 text-lg text-muted">
           {SITE_NAME} ({SITE_TAGLINE}) turns thousands of hands-on YouTube tutorials into searchable,
           written guides — Shopify, QuickBooks, Power BI, Canva, Google Workspace, and hundreds more
           tools, organized by topic.
@@ -21,7 +21,7 @@ export default function Home() {
       </section>
 
       <section id="categories" className="mt-16 scroll-mt-20">
-        <h2 className="text-2xl font-semibold text-zinc-900">Browse by category</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Browse by category</h2>
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => (
             <CategoryCard key={category.slug} category={category} />
@@ -31,7 +31,7 @@ export default function Home() {
 
       {latest.length > 0 && (
         <section id="latest" className="mt-16 scroll-mt-20">
-          <h2 className="text-2xl font-semibold text-zinc-900">Most popular tutorials</h2>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">Most popular tutorials</h2>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {latest.map((t) => (
               <TutorialCard key={t.video.id} tutorial={t} />

@@ -10,9 +10,9 @@ export function TutorialCard({ tutorial }: { tutorial: PublishedTutorial }) {
   return (
     <Link
       href={href}
-      className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white transition hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-md border border-line bg-panel transition hover:border-accent"
     >
-      <div className="relative aspect-video w-full overflow-hidden bg-zinc-100">
+      <div className="relative aspect-video w-full overflow-hidden bg-background">
         {thumb && (
           <Image
             src={thumb.url}
@@ -22,15 +22,15 @@ export function TutorialCard({ tutorial }: { tutorial: PublishedTutorial }) {
             className="object-cover transition group-hover:scale-[1.02]"
           />
         )}
-        <span className="absolute bottom-2 left-2 rounded bg-black/70 px-1.5 py-0.5 text-xs font-medium text-white">
+        <span className="absolute bottom-2 left-2 rounded bg-background/90 px-1.5 py-0.5 font-mono text-xs font-medium uppercase tracking-wide text-accent">
           {video.categoryLabel}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="line-clamp-2 text-sm font-semibold text-zinc-900 group-hover:text-indigo-600">
+        <h3 className="line-clamp-2 text-sm font-semibold text-foreground group-hover:text-accent">
           {article.seoTitle}
         </h3>
-        <p className="line-clamp-2 text-xs text-zinc-500">{article.metaDescription}</p>
+        <p className="line-clamp-2 text-xs text-muted">{article.metaDescription}</p>
       </div>
     </Link>
   );

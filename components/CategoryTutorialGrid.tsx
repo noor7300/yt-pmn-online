@@ -26,10 +26,10 @@ export function CategoryTutorialGrid({ categorySlug, page }: { categorySlug: str
       />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: category.label, href: `/tutorials/${category.slug}` }]} />
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-900">
+      <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground">
         {category.label} Tutorials{currentPage > 1 ? ` — Page ${currentPage}` : ""}
       </h1>
-      <p className="mt-2 max-w-2xl text-zinc-600">
+      <p className="mt-2 max-w-2xl text-muted">
         {category.count} free, step-by-step {category.label} guides covering setup, common tasks, fixes, and
         best practices — each with a full video walkthrough.
       </p>
