@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-configure-mx-spf-and-dkim-for-a-cloudflare-easily-2026",
+  "seoTitle": "Configure MX, SPF, and DKIM in Cloudflare (2026)",
+  "metaDescription": "Set up mail routing and email authentication in Cloudflare by adding MX records, an SPF TXT rule, and DKIM keys to stop spoofing and delivery issues.",
+  "intro": "Getting email working reliably on a domain means more than just pointing MX records at your mail host — you also need SPF and DKIM to prove your mail is legitimate. This guide covers adding all three record types in Cloudflare's DNS panel.",
+  "steps": [
+    { "heading": "Open your DNS Records panel", "body": "Select your domain zone in Cloudflare and navigate to DNS Records in the left sidebar." },
+    { "heading": "Add your MX record", "body": "Click Add Record, switch the type to MX, enter your root symbol, your mail server host address, and set the priority value." },
+    { "heading": "Add an SPF TXT record", "body": "Create a new TXT row containing your v=spf1 authorization string to declare which infrastructure is allowed to send mail on your behalf." },
+    { "heading": "Add your DKIM record", "body": "Create your mail selector DKIM record and paste in the public cryptographic key provided by your mail service." },
+    { "heading": "Keep mail records DNS-only", "body": "Verify that all MX, SPF, and DKIM records are set to 'DNS Only' (gray cloud) rather than proxied, since email traffic should bypass Cloudflare's proxy." }
+  ],
+  "faq": [
+    { "question": "Why do my mail records need to stay on 'DNS Only' instead of proxied?", "answer": "Cloudflare's proxy is built for web traffic; mail-related records like MX, SPF, and DKIM need to resolve directly (DNS Only) so mail servers can read them correctly." },
+    { "question": "What happens if I skip SPF or DKIM?", "answer": "Without SPF and DKIM, your outgoing email is more likely to be flagged as spam or rejected outright by receiving mail servers that check for sender authentication." },
+    { "question": "Can I have more than one MX record?", "answer": "Yes, many mail setups use multiple MX records with different priority values as backups in case the primary mail server is unavailable." },
+    { "question": "Where do I get the DKIM key values to paste into Cloudflare?", "answer": "Your email service provider (such as Google Workspace or Microsoft 365) generates the DKIM selector and public key, which you then copy into a TXT record in Cloudflare." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

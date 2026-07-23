@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-add-dkim-in-cloudflare-create-setup-records-easily-2026",
+  "seoTitle": "How to Add DKIM in Cloudflare: Setup Records Easily",
+  "metaDescription": "Learn how to add a DKIM TXT record in Cloudflare, format the selector and domainkey name correctly, and keep the proxy off so email authentication works.",
+  "intro": "DKIM lets receiving mail servers verify that your outgoing emails really came from your domain, and Cloudflare is where you'll publish that authentication record if your DNS is hosted there. This guide walks through pulling your DKIM public key from your email provider and correctly adding it as a TXT record in Cloudflare, including the one setting that trips people up most.",
+  "steps": [
+    { "heading": "Get your DKIM key from your email provider", "body": "Before touching Cloudflare, log into your email service and generate your DKIM public key along with the selector string it assigns you — you'll need both to build the record." },
+    { "heading": "Open your domain's DNS records in Cloudflare", "body": "Log into Cloudflare, select the domain, and go to the DNS management view where you'll add a new record." },
+    { "heading": "Add a new TXT record", "body": "Click Add Record and choose TXT as the type, since DKIM keys are published as text records rather than any other DNS type." },
+    { "heading": "Format the record name with your selector", "body": "Enter your selector name followed by `._domainkey` as the record name — this exact format is what mail servers look for when verifying your key." },
+    { "heading": "Paste the key value", "body": "Paste your key string starting with `v=DKIM1; k=rsa; p=` into the content field exactly as your email provider generated it." },
+    { "heading": "Turn the proxy off and save", "body": "Set the record to \"DNS Only\" instead of proxied — DKIM values must resolve directly or verification will fail — then save and check your status with a mail-testing tool." }
+  ],
+  "faq": [
+    { "question": "Why does my DKIM record fail verification in Cloudflare?", "answer": "The most common cause is leaving the proxy toggled on (orange cloud). DKIM TXT records must be set to DNS Only so mail servers can read the raw value." },
+    { "question": "What goes in the record name field?", "answer": "Your selector string followed by `._domainkey`, exactly as provided by your email service — not just the selector alone." },
+    { "question": "Can I have more than one DKIM record?", "answer": "Yes, if you use multiple email services or selectors, each gets its own TXT record with a different selector prefix." },
+    { "question": "How do I confirm DKIM is working after saving?", "answer": "Use a mail-testing tool to send a test email and check that the DKIM signature validates against the published record." }
+  ],
+  "generatedAt": "2026-07-23T06:48:39Z"
+}

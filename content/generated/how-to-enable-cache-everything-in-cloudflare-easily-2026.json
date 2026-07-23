@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-enable-cache-everything-in-cloudflare-easily-2026",
+  "seoTitle": "How to Enable Cache Everything in Cloudflare",
+  "metaDescription": "Force full-page HTML caching in Cloudflare with a Cache Rule, set a custom Edge TTL, and exclude sensitive paths like login and checkout.",
+  "intro": "By default, Cloudflare only caches static assets, but sometimes you want dynamic HTML pages cached too for maximum speed. This guide covers building a Cache Everything rule while making sure sensitive areas like login and checkout stay excluded.",
+  "steps": [
+    { "heading": "Open Cache Rules", "body": "Navigate to the Caching sub-directory and open the dedicated Cache Rules panel." },
+    { "heading": "Create a new rule", "body": "Use the Expression Builder to isolate the specific domain and path names you want cached." },
+    { "heading": "Set Cache Eligibility to Eligible", "body": "In the rule settings, toggle the Cache Eligibility option to override standard media-only limits and force full-page caching." },
+    { "heading": "Set an Edge TTL", "body": "Define a distinct Edge Cache TTL duration to control how long Cloudflare's servers retain the cached HTML copies." },
+    { "heading": "Exclude sensitive paths and deploy", "body": "Stack exclusion rules to bypass caching on login pages, checkout portals, or authenticated sessions, then deploy and audit response headers to confirm cache hits." }
+  ],
+  "faq": [
+    { "question": "Is it safe to cache dynamic HTML pages?", "answer": "It's safe as long as you exclude pages with personalized or sensitive content, like login and checkout flows, using bypass rules." },
+    { "question": "What does Cache Eligibility do in a Cache Rule?", "answer": "It overrides Cloudflare's default behavior of only caching static file types, allowing dynamic HTML responses to be cached as well." },
+    { "question": "How do I make sure logged-in users see fresh, personalized content?", "answer": "Use cookie-based bypass rules within your Cache Rules to keep authenticated sessions dynamic and excluded from caching." },
+    { "question": "How can I confirm Cache Everything is actually working?", "answer": "Run a header audit on a cached page and look for a cache status header indicating a hit rather than a miss." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

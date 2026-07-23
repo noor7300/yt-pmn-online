@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-pause-cloudflare-stop-it-from-blocking-websites-easily-2026",
+  "seoTitle": "How to Pause Cloudflare to Stop It Blocking a Site (2026)",
+  "metaDescription": "If Cloudflare is wrongly blocking visitors, pause it site-wide or switch specific records to DNS Only to route traffic straight to your origin.",
+  "intro": "If Cloudflare's security layer is mistakenly blocking legitimate visitors, pausing it gives you a quick way to restore access while you investigate. This guide covers pausing the whole zone, or unproxying just the affected records instead.",
+  "steps": [
+    { "heading": "Open your domain overview", "body": "In Cloudflare, click into the specific website domain that's affected." },
+    { "heading": "Find the Advanced Actions panel", "body": "Scroll down the overview screen to locate the pause control." },
+    { "heading": "Pause Cloudflare on Site", "body": "Click the pause link and confirm the security warning, noting the roughly five-minute delay before it fully applies." },
+    { "heading": "Or unproxy specific records instead", "body": "If you only want to stop blocking for certain paths, go to DNS Records and switch relevant entries to the gray-cloud 'DNS Only' mode instead of pausing everything." },
+    { "heading": "Verify traffic is unblocked", "body": "Refresh the overview page to confirm the paused status, then run a terminal ping test to confirm requests reach your origin server directly." }
+  ],
+  "faq": [
+    { "question": "Should I pause the whole domain or just unproxy one record?", "answer": "Pausing affects your entire zone at once, while switching a single record to DNS Only lets you resolve a specific blocking issue without losing protection elsewhere." },
+    { "question": "Will pausing Cloudflare fix a false-positive security block right away?", "answer": "Yes, since pausing stops the proxy from evaluating traffic, but expect roughly a five-minute window before the change is fully live." },
+    { "question": "What should I check on my origin server while Cloudflare is paused?", "answer": "This is a good window to run diagnostics directly against your server to confirm it's healthy and responding correctly without Cloudflare in front of it." },
+    { "question": "Does pausing affect my DNS records permanently?", "answer": "No, your DNS records and configuration stay intact; pausing only disables the proxy layer until you turn it back on." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

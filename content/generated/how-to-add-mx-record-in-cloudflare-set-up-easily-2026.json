@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-add-mx-record-in-cloudflare-set-up-easily-2026",
+  "seoTitle": "How to Add an MX Record in Cloudflare (2026)",
+  "metaDescription": "Set up email routing in Cloudflare by adding an MX record with the correct priority and mail server hostname, kept on DNS Only mode.",
+  "intro": "Getting incoming email working for your domain means pointing an MX record at your mail provider's server. This guide covers adding and configuring that record correctly inside Cloudflare's DNS panel.",
+  "steps": [
+    { "heading": "Open your DNS Records panel", "body": "Select your active domain in Cloudflare and open the DNS Records grid view." },
+    { "heading": "Click Add Record", "body": "Click '+ Add Record' to launch the configuration form for a new entry." },
+    { "heading": "Select MX as the type", "body": "Change the record type to MX (Mail Exchange) from the dropdown." },
+    { "heading": "Enter the root symbol and mail server details", "body": "Type '@' for the root domain, enter your mail server's hostname, and set the numeric priority value." },
+    { "heading": "Confirm DNS Only mode and save", "body": "Verify the record is set to DNS Only (not proxied), click Save, and review your zone for any conflicting legacy mail entries." }
+  ],
+  "faq": [
+    { "question": "Why should an MX record use the root symbol '@'?", "answer": "The '@' symbol tells Cloudflare the record applies to your apex domain rather than a subdomain, which is standard for mail routing." },
+    { "question": "What does the priority number on an MX record do?", "answer": "Lower priority numbers are tried first, so if you have multiple mail servers, the one with the lowest number acts as the primary." },
+    { "question": "Can I proxy an MX record through Cloudflare?", "answer": "No, MX records must stay on DNS Only mode since mail servers need to resolve them directly rather than through Cloudflare's web proxy." },
+    { "question": "How do I know if my MX record is working?", "answer": "You can check propagation with an external MX lookup tool or send a test email to confirm delivery." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

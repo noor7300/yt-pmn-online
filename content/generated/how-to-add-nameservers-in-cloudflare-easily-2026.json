@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-add-nameservers-in-cloudflare-easily-2026",
+  "seoTitle": "How to Add Nameservers in Cloudflare (2026)",
+  "metaDescription": "Set up your domain's nameservers to point to Cloudflare: run the DNS import scan, copy your assigned nameservers, and update your registrar.",
+  "intro": "Routing a domain through Cloudflare requires updating your nameservers at your registrar, which is the step that actually hands control of your DNS over to Cloudflare. This guide covers finding your assigned nameservers and updating them safely.",
+  "steps": [
+    { "heading": "Start a new domain zone", "body": "In Cloudflare, click to add a fresh domain and begin the onboarding process." },
+    { "heading": "Run the automated DNS scan", "body": "Let Cloudflare import your critical existing records automatically before making any changes." },
+    { "heading": "Find your assigned nameservers", "body": "Open the Zone Overview panel to see the unique pair of nameservers assigned to your account." },
+    { "heading": "Update your registrar", "body": "Log into your external registrar, such as GoDaddy, Namecheap, or Hostinger, and replace the default nameservers with Cloudflare's pointers." },
+    { "heading": "Verify and disable conflicting security", "body": "Turn off DNSSEC at your registrar during the migration to avoid resolution issues, then return to Cloudflare and click 'Check Nameservers' to verify activation." }
+  ],
+  "faq": [
+    { "question": "Why do I need to disable DNSSEC before switching nameservers?", "answer": "If DNSSEC is enabled at your old registrar and doesn't match Cloudflare's new signing keys, it can cause resolution failures during the migration, so it's safest to turn it off first." },
+    { "question": "How long do nameserver changes take to propagate?", "answer": "It can range from a few minutes to up to 24 hours or more, depending on your registrar and previous DNS caching settings." },
+    { "question": "What happens to my existing DNS records when I switch nameservers?", "answer": "As long as the automated DNS scan imported your records correctly before switching, they'll continue resolving the same way once Cloudflare's nameservers take over." },
+    { "question": "How can I confirm the nameserver change was successful?", "answer": "Cloudflare's 'Check Nameservers' button runs a live verification, and your domain will show an active status once confirmed." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

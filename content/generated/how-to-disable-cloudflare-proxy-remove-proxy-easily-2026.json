@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-disable-cloudflare-proxy-remove-proxy-easily-2026",
+  "seoTitle": "How to Disable the Cloudflare Proxy on a Record",
+  "metaDescription": "Turn a Cloudflare record from proxied (orange cloud) to DNS Only (gray cloud) so traffic routes directly to your origin server.",
+  "intro": "Sometimes you need one specific record to bypass Cloudflare's proxy entirely, whether for debugging or because a service requires a direct connection. This guide covers switching an individual A, CNAME, or AAAA record from proxied to DNS Only mode.",
+  "steps": [
+    { "heading": "Open your DNS Records grid", "body": "Select your domain and navigate to the DNS Records panel." },
+    { "heading": "Find the proxied record", "body": "Look for rows showing the orange proxied cloud icon next to the record you want to change." },
+    { "heading": "Click Edit", "body": "Click the Edit action next to your target A or CNAME record." },
+    { "heading": "Toggle the proxy switch off", "body": "Switch the Proxy Status toggle to convert the record into gray-cloud DNS Only mode." },
+    { "heading": "Save and verify", "body": "Save your change, wait through the roughly five-minute Auto TTL propagation window, and run a ping or dig test to confirm direct origin IP resolution." }
+  ],
+  "faq": [
+    { "question": "What's the difference between orange cloud and gray cloud in Cloudflare?", "answer": "Orange cloud means the record is proxied through Cloudflare's network for caching and security, while gray cloud (DNS Only) routes traffic directly to your origin server." },
+    { "question": "Why would I want to disable the proxy for a specific record?", "answer": "Common reasons include debugging origin server issues directly, or because a service requires a direct connection that Cloudflare's proxy can interfere with." },
+    { "question": "Does disabling the proxy remove SSL protection?", "answer": "Yes, DNS Only records bypass Cloudflare's edge SSL handling, so your origin server needs its own valid SSL certificate for HTTPS to keep working." },
+    { "question": "How long does it take for the change to apply?", "answer": "Expect roughly a five-minute propagation window under the default Auto TTL setting before the change is fully reflected." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

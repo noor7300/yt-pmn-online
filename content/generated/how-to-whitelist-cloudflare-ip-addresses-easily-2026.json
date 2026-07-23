@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-whitelist-cloudflare-ip-addresses-easily-2026",
+  "seoTitle": "How to Whitelist IP Addresses in Cloudflare (2026)",
+  "metaDescription": "Allow trusted IP addresses to bypass Cloudflare's firewall rules using WAF Custom Rules with a Skip action, so legitimate traffic never gets blocked.",
+  "intro": "If a trusted service, API partner, or your own office IP keeps getting caught by Cloudflare's security rules, whitelisting it prevents unnecessary blocks. This guide shows how to build a custom WAF rule that lets specific IP addresses skip your firewall checks entirely.",
+  "steps": [
+    { "heading": "Open the Security WAF section", "body": "In your domain's dashboard, navigate to the Security directory and open the WAF panel." },
+    { "heading": "Create a custom rule", "body": "Select the Custom Rules tab and click 'Create rule' to start a new exception condition." },
+    { "heading": "Filter by IP Source Address", "body": "Name your rule, set the field parameter to 'IP Source Address', choose the Equals operator, and enter the trusted IP or CIDR range." },
+    { "heading": "Set the action to Skip", "body": "In the action section, choose 'Skip' and check the remaining security filters you want this IP to bypass." },
+    { "heading": "Deploy and verify", "body": "Click Deploy to activate the rule, then test the whitelisted IP to confirm it no longer triggers security challenges." }
+  ],
+  "faq": [
+    { "question": "What's the difference between the WAF Custom Rules and IP Access Rules for whitelisting?", "answer": "Custom Rules let you build a targeted skip condition for specific firewall filters, while IP Access Rules offer a simpler, account-wide allow option." },
+    { "question": "Can I whitelist a whole IP range instead of a single address?", "answer": "Yes, you can enter a CIDR notation range in the IP Source Address field to whitelist a block of addresses at once." },
+    { "question": "Will whitelisting an IP disable all security checks for it?", "answer": "It depends on which filters you check in the Skip action; you can choose to bypass all remaining rules or only specific ones." },
+    { "question": "How quickly does a new whitelist rule take effect?", "answer": "Deployed WAF rules generally apply within moments across Cloudflare's edge network." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-block-a-country-in-cloudflare-easily-2026",
+  "seoTitle": "How to Block a Country in Cloudflare (2026)",
+  "metaDescription": "Restrict traffic from specific countries using Cloudflare's WAF Custom Rules, choosing between a hard block, challenge, or rate limit.",
+  "intro": "If you're seeing abuse or spam traffic concentrated from certain regions, Cloudflare's WAF lets you filter it out by country. This guide covers building a geo-location firewall rule and choosing the right mitigation action for your situation.",
+  "steps": [
+    { "heading": "Open the WAF section", "body": "Select your domain, go to the Security directory, and click into WAF." },
+    { "heading": "Create a new rule", "body": "Select Custom Rules and click 'Create rule' to open the expression builder." },
+    { "heading": "Set the field to Country", "body": "Name your rule and use the Field dropdown to select the 'Country' selector." },
+    { "heading": "Choose your target countries", "body": "Pick an operator like 'equals' or 'in' and check the boxes for the specific countries you want to restrict." },
+    { "heading": "Choose your action and deploy", "body": "Set the action to Block, Managed Challenge, or a rate-limiting rule depending on how strict you want the restriction, then deploy and monitor the security events log." }
+  ],
+  "faq": [
+    { "question": "Should I always use a hard Block instead of a Challenge?", "answer": "A hard Block denies access entirely, while a Managed Challenge lets legitimate visitors through after passing a verification step; the right choice depends on whether you want to fully exclude a region or just filter out bots." },
+    { "question": "Can I block multiple countries in one rule?", "answer": "Yes, using the 'in' operator lets you check boxes for several countries within a single custom rule." },
+    { "question": "Will blocking a country affect search engine crawlers based there?", "answer": "It can, since geo-blocking rules apply to all traffic from that country unless you add exceptions, so consider allowing known crawler IP ranges if that's a concern." },
+    { "question": "How do I check if the rule is actually blocking traffic?", "answer": "Review your Security Events log after deploying the rule to see live traffic being matched and blocked by your country filter." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-enable-cloudflare-ssl-install-use-ssl-certificate-easily-2026",
+  "seoTitle": "How to Enable and Install Cloudflare SSL",
+  "metaDescription": "Activate Cloudflare's free Universal SSL, choose the right encryption mode, install an Origin CA certificate, and enforce HTTPS site-wide.",
+  "intro": "Cloudflare provides a free SSL certificate for every domain, but choosing the correct encryption mode is key to avoiding redirect loops. This guide covers activating SSL, generating an origin certificate for your host, and enforcing HTTPS across your site.",
+  "steps": [
+    { "heading": "Open the SSL/TLS Overview", "body": "Select your domain and navigate to the SSL/TLS Overview tab to check your current security status." },
+    { "heading": "Choose your encryption mode", "body": "Select Flexible, Full, or Full (Strict) based on your hosting setup, with Full (Strict) recommended for maximum end-to-end security." },
+    { "heading": "Generate an Origin CA certificate", "body": "Go to Origin Server settings and generate a free Cloudflare Origin certificate to install on your backend host." },
+    { "heading": "Install the certificate on your host", "body": "Paste the cryptographic key files into your web host's SSL settings, such as Nginx, Apache, or cPanel." },
+    { "heading": "Enforce HTTPS site-wide", "body": "In Edge Certificates, turn on 'Always Use HTTPS' and 'Automatic HTTPS Rewrites' to eliminate mixed content errors." }
+  ],
+  "faq": [
+    { "question": "Why do I get a redirect loop after enabling SSL?", "answer": "Redirect loops usually happen when the encryption mode doesn't match your host's actual SSL setup; switching to Full or Full (Strict) instead of Flexible often resolves it." },
+    { "question": "Is Cloudflare's SSL certificate really free?", "answer": "Yes, Cloudflare issues a free Universal SSL certificate automatically for domains on its network, including the free plan." },
+    { "question": "Do I need to install anything on my host if I use Flexible mode?", "answer": "Flexible mode doesn't require an origin certificate since it only encrypts traffic between the visitor and Cloudflare, not between Cloudflare and your server, though this is less secure overall." },
+    { "question": "What does Automatic HTTPS Rewrites actually fix?", "answer": "It rewrites insecure HTTP links in your page's HTML to HTTPS automatically, helping eliminate mixed content warnings in browsers." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

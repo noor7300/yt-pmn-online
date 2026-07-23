@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-set-cloudflare-dns-easily-2026",
+  "seoTitle": "How to Set Cloudflare DNS Easily (2026 Guide)",
+  "metaDescription": "Step-by-step guide to setting up Cloudflare DNS: scan existing records, swap nameservers at your registrar, and configure the proxy toggle correctly.",
+  "intro": "Moving your domain's DNS to Cloudflare means replacing your registrar's default nameservers with Cloudflare's own, then making sure your existing records survive the switch. This guide covers the full process from the initial automated scan to flipping the proxy toggle so your site keeps working without downtime.",
+  "steps": [
+    { "heading": "Add your domain to Cloudflare", "body": "Log into your Cloudflare dashboard and start a new domain setup by entering your existing domain name." },
+    { "heading": "Run the automated DNS scan", "body": "Cloudflare scans your current DNS zone and imports records like your web root and mail servers automatically, saving you from re-entering everything by hand." },
+    { "heading": "Review the imported records", "body": "Check the imported list for anything missing — scans don't always catch every record, so compare against your old provider's panel if you're unsure." },
+    { "heading": "Copy your new Cloudflare nameservers", "body": "Cloudflare generates a unique pair of nameservers for your domain; copy these to use in the next step." },
+    { "heading": "Update nameservers at your registrar", "body": "Log into wherever you registered the domain and replace the default nameservers with the Cloudflare pair to route traffic through Cloudflare." },
+    { "heading": "Add missing records and set the proxy", "body": "Add any A, CNAME, or MX records the scan missed, then decide per record whether to proxy through Cloudflare (orange cloud) or leave it DNS only (grey cloud)." }
+  ],
+  "faq": [
+    { "question": "How long does it take for DNS changes to take effect?", "answer": "Nameserver propagation can take anywhere from a few minutes to 24-48 hours depending on your registrar and previous DNS TTL settings." },
+    { "question": "What's the difference between the orange and grey cloud icons?", "answer": "Orange means the record is proxied through Cloudflare's network for speed and security; grey means it resolves directly with no Cloudflare features applied." },
+    { "question": "Will I lose my email if I switch to Cloudflare DNS?", "answer": "Not if your MX records are imported or re-added correctly — always verify mail records after the scan before finalizing the switch." },
+    { "question": "Do I need a paid plan to use Cloudflare DNS?", "answer": "No, DNS management and the free tier of proxy features are available on Cloudflare's free plan." }
+  ],
+  "generatedAt": "2026-07-23T06:48:39Z"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-change-hosting-ip-and-dns-ip-in-cloudflare-easily-2026",
+  "seoTitle": "How to Change Your Hosting IP in Cloudflare DNS",
+  "metaDescription": "Update both your hosting and DNS IP addresses in Cloudflare after a server migration, covering root and subdomain records.",
+  "intro": "A server migration means every DNS record pointing to the old host needs updating, not just the root domain. This guide walks through changing your hosting IP across A and AAAA records in Cloudflare, including related subdomains.",
+  "steps": [
+    { "heading": "Open your domain's DNS zone", "body": "Navigate to your active domain and open the refreshed DNS Records grid view." },
+    { "heading": "Edit your root A record", "body": "Locate your main website root A record and click the Edit action component." },
+    { "heading": "Update to the new IP", "body": "Highlight the old hosting server IP and paste in your new core server destination address." },
+    { "heading": "Check subdomain pointers", "body": "Review related subdomains like www or mail roots to make sure they align with the correct matching target fields." },
+    { "heading": "Save and confirm", "body": "Adjust your proxy status and TTL parameters, save to deploy the changes, and run a live ping test to verify the new routing." }
+  ],
+  "faq": [
+    { "question": "Do I need to update every subdomain manually after a migration?", "answer": "Yes, each subdomain record is independent, so you'll need to check and update any that pointed to your old hosting IP." },
+    { "question": "How can I avoid downtime during a hosting IP change?", "answer": "Making the switch during low-traffic periods and confirming with a live test right after saving helps minimize any impact from propagation delay." },
+    { "question": "Should I lower the TTL before migrating?", "answer": "Lowering TTL ahead of a planned migration can help changes propagate faster when you do make the switch, though Cloudflare's Auto TTL is usually sufficient for most cases." },
+    { "question": "What if my new host uses a different IP for IPv6?", "answer": "You'll need to update or add a separate AAAA record with the new IPv6 address if your new host supports it." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

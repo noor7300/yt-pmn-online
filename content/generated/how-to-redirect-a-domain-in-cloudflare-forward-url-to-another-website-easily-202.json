@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-redirect-a-domain-in-cloudflare-forward-url-to-another-website-easily-202",
+  "seoTitle": "How to Redirect a Domain in Cloudflare to Another Site",
+  "metaDescription": "Forward one domain to another website using Cloudflare's Redirect Rules: set up a proxied placeholder record and write the redirect expression.",
+  "intro": "Forwarding an entire domain to a different website in Cloudflare requires a proxied DNS placeholder record before any redirect rule can take effect, which is the step most people miss. This guide walks through setting up that record and configuring a Redirect Rule to send visitors to your target destination with the right status code.",
+  "steps": [
+    { "heading": "Open your domain's DNS panel", "body": "Log into Cloudflare and go to the DNS records section for the domain you want to redirect." },
+    { "heading": "Create a proxied placeholder record", "body": "Add an A or AAAA record and make sure it's proxied (orange cloud) — Redirect Rules only process traffic that passes through Cloudflare's edge." },
+    { "heading": "Go to Redirect Rules", "body": "Navigate to the Rules section in the sidebar and select Redirect Rules." },
+    { "heading": "Create and name your rule", "body": "Click Create Rule and give it a descriptive name so you can identify it later." },
+    { "heading": "Match the incoming hostname", "body": "Use the expression builder to match requests to your specific source hostname accurately." },
+    { "heading": "Set the destination and status code", "body": "Enter your target destination URL, choose a 301 Permanent Redirect status, then click Deploy to activate the forwarding." }
+  ],
+  "faq": [
+    { "question": "Why do I need a DNS record if I'm just redirecting the domain?", "answer": "Cloudflare's Redirect Rules only trigger on traffic that reaches its edge network, which requires a proxied DNS record to exist even if it just points to a placeholder." },
+    { "question": "Should I use a 301 or 302 status code for a domain redirect?", "answer": "Use 301 for a permanent move — it tells search engines and browsers to update their records to the new destination." },
+    { "question": "Can I redirect a subdomain instead of the whole domain?", "answer": "Yes, you can scope the expression to match a specific subdomain hostname instead of the whole apex domain." },
+    { "question": "How fast does a Redirect Rule take effect after deploying?", "answer": "Changes typically propagate across Cloudflare's edge network within seconds to a couple of minutes." }
+  ],
+  "generatedAt": "2026-07-23T06:48:39Z"
+}

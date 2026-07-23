@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-stop-turn-off-and-disable-cloudflare-easily-2026",
+  "seoTitle": "How to Stop and Turn Off Cloudflare (2026)",
+  "metaDescription": "Turn off Cloudflare for a domain using the zone pause feature, routing traffic straight to your origin server for troubleshooting or testing.",
+  "intro": "There are times you'll want to temporarily stop Cloudflare from proxying your traffic, whether for troubleshooting a caching issue or testing your origin server directly. This guide covers pausing Cloudflare for a domain and confirming the change took effect.",
+  "steps": [
+    { "heading": "Select your target domain", "body": "From the Cloudflare dashboard, click into the specific website you want to stop protecting." },
+    { "heading": "Scroll to Advanced Actions", "body": "On the domain overview page, scroll down to find the Advanced Actions panel." },
+    { "heading": "Click Pause Cloudflare on Site", "body": "Select the pause link and confirm the security warning that appears." },
+    { "heading": "Allow the propagation window", "body": "Give the change roughly five minutes to take full effect across the edge network." },
+    { "heading": "Confirm with a direct test", "body": "Refresh the overview page to check the paused status, then run a terminal ping or dig test to confirm traffic is now hitting your origin server directly." }
+  ],
+  "faq": [
+    { "question": "Is pausing Cloudflare the same as removing the domain entirely?", "answer": "No, pausing keeps your domain and DNS records set up in Cloudflare; it just stops the proxy from intercepting traffic until you reactivate it." },
+    { "question": "Can I pause just one record instead of the whole domain?", "answer": "Yes, switching an individual record to 'DNS Only' unproxies just that record, while the site-wide pause affects everything at once." },
+    { "question": "How long does the pause take to fully apply?", "answer": "Expect roughly a five-minute propagation window before the change is fully reflected across Cloudflare's network." },
+    { "question": "Will my site lose its SSL certificate while paused?", "answer": "Cloudflare's edge SSL handling is disabled during a pause, so your site depends on your origin server's own SSL certificate for the duration." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

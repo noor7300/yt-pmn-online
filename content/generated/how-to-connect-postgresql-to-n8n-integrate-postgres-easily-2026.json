@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-connect-postgresql-to-n8n-integrate-postgres-easily-2026",
+  "seoTitle": "Connect PostgreSQL to n8n: Full Integration Guide",
+  "metaDescription": "Learn how to connect PostgreSQL to n8n, set up secure credentials, and run SQL queries or row inserts inside your automation workflows.",
+  "intro": "If you want your n8n automations to read from or write to a relational database, PostgreSQL is one of the most common choices, and n8n has a dedicated node for it. This guide walks through adding the Postgres node to your canvas, securing your connection credentials, and choosing between visual data operations and raw SQL. By the end you'll be able to insert, update, and query rows as part of a live workflow.",
+  "steps": [
+    { "heading": "Open a workflow canvas", "body": "Start from your n8n dashboard and create a new, empty workflow so you have a clean space to build the database integration." },
+    { "heading": "Add the PostgreSQL node", "body": "Search for and drop the official PostgreSQL node onto the canvas from the node panel." },
+    { "heading": "Configure your credentials", "body": "Open the credentials section and enter your Postgres host, database name, port, and authentication details. Keep these values in a credential profile rather than hardcoding them in the workflow." },
+    { "heading": "Choose an operation", "body": "Decide whether to use the visual builder for inserting, updating, or selecting rows, or switch to the custom SQL editor for more complex multi-table queries." },
+    { "heading": "Map your data and connect the node", "body": "Define the target table and map incoming JSON fields to the right columns, then connect the node into the rest of your workflow sequence." },
+    { "heading": "Test the connection", "body": "Run the node manually to confirm the query executes and the returned data looks correct before relying on it in production." }
+  ],
+  "faq": [
+    { "question": "Do I need a separate database server to use this node?", "answer": "Yes, the PostgreSQL node connects to an existing Postgres instance, whether that's self-hosted, on a VPS, or a managed cloud database — n8n doesn't include a database itself." },
+    { "question": "Can I write raw SQL instead of using the visual builder?", "answer": "Yes, the node supports a custom SQL query mode for cases like multi-table joins or bulk updates that the visual operation builder can't express." },
+    { "question": "Is it safe to store my database password in n8n?", "answer": "Store it as a credential rather than typing it into node parameters directly, and treat those credential values the same way you'd treat any production database password." },
+    { "question": "Why is my node returning a connection error?", "answer": "Double-check the host, port, database name, and firewall or network access rules — a common cause is the database not accepting external connections from n8n's host." }
+  ],
+  "generatedAt": "2026-07-23T06:48:40Z"
+}

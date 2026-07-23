@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-add-txt-records-in-cloudflare-create-it-in-dns-easily-2026",
+  "seoTitle": "How to Add a TXT Record in Cloudflare (2026)",
+  "metaDescription": "Create a TXT record in Cloudflare for domain verification, SPF, or DMARC strings, with the correct host name and TTL settings.",
+  "intro": "TXT records are the workhorse of domain verification, whether you're proving ownership to a third-party service or setting up SPF and DMARC for email. This guide covers creating a TXT record correctly in Cloudflare's DNS panel.",
+  "steps": [
+    { "heading": "Open the DNS Records page", "body": "Select your target domain and go to the DNS Records grid in the sidebar." },
+    { "heading": "Click Add Record", "body": "Click '+ Add Record' to launch the configuration panel." },
+    { "heading": "Set the type to TXT", "body": "Change the Type dropdown to TXT for a text-based record." },
+    { "heading": "Enter the host name", "body": "Type '@' for the apex domain, or a specific subdomain like '_dmarc' depending on what you're verifying." },
+    { "heading": "Paste the content string and save", "body": "Paste the multi-part verification or security string into the content field, leave TTL on Auto, and click Save." }
+  ],
+  "faq": [
+    { "question": "What's the difference between using '@' and a subdomain like '_dmarc'?", "answer": "'@' applies the TXT record to your apex domain, while a specific prefix like '_dmarc' scopes it to that particular subdomain, which is standard for DMARC policy records." },
+    { "question": "Can I have multiple TXT records on the same host name?", "answer": "Yes, multiple TXT records can coexist on the same host, though some services like SPF specifically require only one combined record rather than duplicates." },
+    { "question": "How long should TXT record content strings be?", "answer": "Length limits vary by use case, but Cloudflare supports the standard long strings needed for SPF, DKIM, and site verification codes." },
+    { "question": "Why isn't my new TXT record verifying yet?", "answer": "Give it a few minutes for propagation, and double-check for typos in the content string, since even small formatting errors can cause verification to fail." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

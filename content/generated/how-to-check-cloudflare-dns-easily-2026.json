@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-check-cloudflare-dns-easily-2026",
+  "seoTitle": "How to Check Your Cloudflare DNS Records (2026)",
+  "metaDescription": "Verify your Cloudflare DNS setup: audit nameservers, inspect proxied vs. unproxied records, and check global propagation with external lookup tools.",
+  "intro": "Before assuming a site or email issue is a hosting problem, it's worth confirming your Cloudflare DNS setup is actually correct. This guide covers checking nameserver status, reviewing your records, and using external propagation tools to see what the rest of the internet sees.",
+  "steps": [
+    { "heading": "Audit your nameserver status", "body": "Open your domain zone in Cloudflare and confirm your nameservers are showing as active." },
+    { "heading": "Review your DNS Records grid", "body": "Open the DNS Records page and check each entry for correct values and proxy status." },
+    { "heading": "Run an external propagation check", "body": "Copy your domain name and use a third-party global DNS checker to see how your A, CNAME, or MX records resolve worldwide." },
+    { "heading": "Compare proxied vs. unproxied results", "body": "Note the difference between orange-cloud (proxied) records, which show Cloudflare IPs, and gray-cloud (DNS only) records, which show your actual origin IP." },
+    { "heading": "Flush your local DNS cache", "body": "Clear your device's local DNS resolver cache so you're seeing the freshest results rather than a stale cached lookup." }
+  ],
+  "faq": [
+    { "question": "Why does my domain show a Cloudflare IP instead of my server's real IP?", "answer": "This happens when a record is proxied (orange cloud), which routes traffic through Cloudflare's network rather than exposing your origin server's IP directly." },
+    { "question": "How can I tell if my nameservers have finished propagating?", "answer": "Cloudflare's dashboard shows an active status once your nameservers are confirmed, and external checkers can confirm this from multiple locations." },
+    { "question": "Why does my computer show old DNS results after I made a change?", "answer": "Your device or router may be caching an old DNS lookup; flushing your local DNS resolver cache typically resolves this." },
+    { "question": "What's the fastest way to check MX records specifically?", "answer": "You can view them directly in the Cloudflare DNS Records grid, or run a public MX lookup tool for an outside perspective." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

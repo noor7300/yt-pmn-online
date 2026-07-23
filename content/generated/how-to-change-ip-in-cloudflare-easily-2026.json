@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-change-ip-in-cloudflare-easily-2026",
+  "seoTitle": "How to Change an IP Address in Cloudflare (2026)",
+  "metaDescription": "Update the IP address in your Cloudflare A or AAAA records when migrating servers, and confirm the change with a live ping test.",
+  "intro": "Moving to a new server means your Cloudflare DNS records need to point at the new IP, or visitors will keep hitting your old host. This guide walks through editing your A and AAAA records safely during a migration.",
+  "steps": [
+    { "heading": "Open the DNS Records grid", "body": "Select your domain and navigate to the DNS Records panel in the sidebar." },
+    { "heading": "Find your root A record", "body": "Locate your main website A record and click Edit." },
+    { "heading": "Replace the old IP", "body": "Clear out the old server IP and paste in your new hosting destination address." },
+    { "heading": "Check subdomain pointers too", "body": "Review related subdomain records like www or mail to make sure they align with the new target where needed." },
+    { "heading": "Save and test", "body": "Adjust your proxy status and TTL as needed, save the change, and run a live ping test to confirm the new routing is working." }
+  ],
+  "faq": [
+    { "question": "Do I need to update AAAA records too, or just A records?", "answer": "If your new server supports IPv6, you'll want to update the AAAA record as well; otherwise you can remove it if it's no longer applicable." },
+    { "question": "Will changing my IP address cause downtime?", "answer": "There can be a brief propagation window while the change spreads across DNS resolvers, so testing at a low-traffic time helps minimize disruption." },
+    { "question": "Should I proxy the record after changing the IP?", "answer": "Keeping it proxied (orange cloud) preserves Cloudflare's caching and security benefits, while DNS Only exposes your new server's IP directly." },
+    { "question": "How do I confirm the new IP is actually live?", "answer": "Run a ping or dig command from your terminal after saving to confirm the domain now resolves to the updated address." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

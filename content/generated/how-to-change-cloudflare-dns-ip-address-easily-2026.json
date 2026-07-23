@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-change-cloudflare-dns-ip-address-easily-2026",
+  "seoTitle": "How to Change a DNS IP Address in Cloudflare",
+  "metaDescription": "Update the IP address behind your Cloudflare A or AAAA records, review subdomain pointers, and confirm the change with a live test.",
+  "intro": "When your hosting IP changes, whether from a migration or a provider update, your Cloudflare DNS records need to reflect the new address. This guide walks through locating and updating those records without missing related subdomains.",
+  "steps": [
+    { "heading": "Open the DNS Records panel", "body": "Select your domain zone and go to the DNS Records section." },
+    { "heading": "Locate your A record", "body": "Find your main website root A record and click Edit." },
+    { "heading": "Swap in the new IP", "body": "Replace the old server IP with your newly assigned hosting address." },
+    { "heading": "Check related subdomains", "body": "Review pointers for www or mail subdomains to make sure they align with the correct target." },
+    { "heading": "Save and confirm", "body": "Adjust proxy status and TTL as needed, save the record, and run a live ping test to verify the new routing is active." }
+  ],
+  "faq": [
+    { "question": "What record type do I edit for an IPv6 address change?", "answer": "IPv6 addresses use AAAA records rather than A records, so make sure you're editing the correct record type for your new IP format." },
+    { "question": "Do subdomains automatically update when I change my root A record?", "answer": "No, each subdomain has its own separate record that you'll need to check and update individually if it also points to the changed server." },
+    { "question": "How can I minimize disruption while changing my DNS IP?", "answer": "Making the change during low-traffic hours and confirming with a live test right after saving helps minimize the impact of any brief propagation delay." },
+    { "question": "Should the record stay proxied after I change the IP?", "answer": "That depends on whether you want Cloudflare's caching and security active for that record; proxied (orange cloud) keeps those benefits, DNS Only exposes the new IP directly." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

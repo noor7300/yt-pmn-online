@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-enable-dnssec-with-cloudflare-easily-2026",
+  "seoTitle": "How to Enable DNSSEC With Cloudflare (2026)",
+  "metaDescription": "Turn on DNSSEC in Cloudflare, copy your DS record details, and add them at your registrar to protect your domain from spoofing and cache poisoning.",
+  "intro": "DNSSEC adds a cryptographic layer of trust to your domain's DNS responses, making it much harder for attackers to spoof records or poison caches. This guide covers enabling DNSSEC inside Cloudflare and completing the handoff step at your domain registrar.",
+  "steps": [
+    { "heading": "Open DNS Settings for your domain", "body": "From your Cloudflare dashboard, select your target website zone and navigate to the DNS Settings directory." },
+    { "heading": "Enable DNSSEC", "body": "Find the DNSSEC card and click the 'Enable DNSSEC' button so Cloudflare can auto-generate your cryptographic signatures." },
+    { "heading": "Copy your DS record details", "body": "Review the generated DS record dialog and copy the Key Tag, Algorithm, and Digest values to your clipboard." },
+    { "heading": "Add the DS record at your registrar", "body": "Log in to your domain registrar (such as GoDaddy, Namecheap, or Porkbun) and paste the security values into their DNSSEC settings fields." },
+    { "heading": "Validate the signed status", "body": "Return to Cloudflare and run a validation check, or use an external tool like DNSViz, to confirm your domain shows as fully signed." }
+  ],
+  "faq": [
+    { "question": "What does DNSSEC actually protect against?", "answer": "DNSSEC establishes an authenticated chain of trust for DNS responses, protecting against attacks like cache poisoning and DNS spoofing." },
+    { "question": "Do I need to enable DNSSEC at both Cloudflare and my registrar?", "answer": "Yes, Cloudflare generates the signing keys and DS record, but you still need to submit that DS record to your registrar to complete the chain of trust." },
+    { "question": "How long does it take for DNSSEC to become active after enabling it?", "answer": "Once the DS record is added at your registrar, activation can take anywhere from a few minutes to a couple of hours depending on propagation and your registrar's processing time." },
+    { "question": "What happens if I enter the wrong DS record values at my registrar?", "answer": "Incorrect DS record values can cause your domain to fail DNS validation entirely, making it unreachable, so double-check the Key Tag, Algorithm, and Digest before saving." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}

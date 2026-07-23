@@ -1,0 +1,21 @@
+{
+  "slug": "how-to-set-up-301-redirects-using-page-rules-in-cloudflare-easily-2026",
+  "seoTitle": "How to Set Up 301 Redirects with Cloudflare Rules",
+  "metaDescription": "Set up a permanent 301 redirect in Cloudflare using Page Rules or the newer Redirect Rules engine, with wildcard matching and path preservation.",
+  "intro": "Cloudflare offers two ways to forward URLs permanently: the legacy Page Rules interface and the newer Redirect Rules engine, and knowing which to use — and how to write the matching pattern — makes the difference between a clean redirect and a broken one. This guide covers both paths, including wildcard matching and preserving deep page paths during the forward.",
+  "steps": [
+    { "heading": "Set up a proxied placeholder record", "body": "Make sure the hostname you're redirecting has a proxied (orange cloud) DNS record, since Cloudflare's rules only apply to traffic passing through its edge." },
+    { "heading": "Choose your redirect method", "body": "Decide between a traditional Page Rule or the modern Single Redirect rule, both found under the Rules section of your dashboard." },
+    { "heading": "Build a Page Rule redirect", "body": "Create a Page Rule, enter your source URL pattern using wildcards where needed, and select the Forwarding URL setting for the action." },
+    { "heading": "Or build a Redirect Rule", "body": "Use the modern Redirect Rules expression builder to match incoming requests with custom filter expressions instead of simple wildcards." },
+    { "heading": "Map the destination with path variables", "body": "Use dynamic replacements like `${1}` in your destination URL to preserve the original page path when forwarding wildcard matches." },
+    { "heading": "Set the status code and deploy", "body": "Choose \"301 – Permanent Redirect,\" decide whether to preserve the query string, then deploy and test the live links." }
+  ],
+  "faq": [
+    { "question": "Should I use Page Rules or Redirect Rules?", "answer": "Redirect Rules is the newer, more flexible engine and is generally recommended; Page Rules still works but is being phased toward legacy status." },
+    { "question": "Why isn't my redirect working even though the rule looks correct?", "answer": "Check that the source DNS record is proxied (orange cloud) — Cloudflare rules only fire on traffic that passes through its network." },
+    { "question": "What's the difference between a 301 and a 302 redirect?", "answer": "A 301 signals a permanent move and is best for SEO when a URL is changing for good; a 302 signals a temporary redirect." },
+    { "question": "Can I preserve query strings during a redirect?", "answer": "Yes, both Page Rules and Redirect Rules include a toggle to preserve the original query string when forwarding." }
+  ],
+  "generatedAt": "2026-07-23T06:48:39Z"
+}

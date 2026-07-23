@@ -1,0 +1,20 @@
+{
+  "slug": "how-to-redirect-non-www-to-www-in-cloudflare-easily-2026",
+  "seoTitle": "How to Redirect Non-WWW to WWW in Cloudflare",
+  "metaDescription": "Set up a permanent 301 redirect from your root domain to www using Cloudflare's Redirect Rules and a proxied placeholder DNS record.",
+  "intro": "Consolidating traffic to a single version of your domain, either root or www, helps avoid duplicate content issues and keeps links consistent. This guide covers setting up a proxied placeholder record and building the redirect with Cloudflare's Rules engine.",
+  "steps": [
+    { "heading": "Add a placeholder A record", "body": "In DNS Records, add a proxied dummy A record for the apex root symbol '@' using the placeholder IP 192.0.2.1, which forces traffic through Cloudflare's edge rules." },
+    { "heading": "Open the Rules directory", "body": "Navigate to the Rules section in the sidebar and select Redirect Rules." },
+    { "heading": "Choose a redirect template", "body": "Click Create Rule and select the pre-made 'Redirect from Root to WWW' configuration template to auto-fill the required expressions." },
+    { "heading": "Review the redirect settings", "body": "Check the filter expression and forwarding destination, then set the status to 301 Permanent Redirect and enable query string preservation." },
+    { "heading": "Deploy and test", "body": "Click Deploy to activate the rule, then run a live access test to confirm requests to your root domain now forward correctly to www." }
+  ],
+  "faq": [
+    { "question": "Why do I need a placeholder A record for this redirect to work?", "answer": "Cloudflare's Redirect Rules only apply to proxied traffic, so the apex domain needs an active proxied record to route through the edge rules engine in the first place." },
+    { "question": "What's the significance of the 192.0.2.1 placeholder IP?", "answer": "It's a reserved documentation IP address that doesn't route anywhere real, used purely to satisfy the requirement for a proxied record without pointing to an actual server." },
+    { "question": "Should I use a 301 or a 302 redirect?", "answer": "A 301 Permanent Redirect is generally recommended for a root-to-www setup since it signals to search engines that the change is permanent." },
+    { "question": "Will this redirect preserve query strings and specific page paths?", "answer": "Yes, as long as you enable the query string preservation option when configuring the redirect rule." }
+  ],
+  "generatedAt": "2026-07-23T00:00:00.000Z"
+}
