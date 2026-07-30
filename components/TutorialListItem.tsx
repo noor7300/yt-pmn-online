@@ -23,7 +23,10 @@ export function TutorialListItem({
     <article className="flex flex-col gap-4 border-b border-line py-6 first:pt-0 sm:flex-row sm:gap-6">
       <Link
         href={href}
-        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-panel sm:w-56"
+        // sm:self-start stops the flex row stretching this to the text column's
+        // height — that stretch beats aspect-video and made object-cover crop
+        // the thumbnail's left and right edges.
+        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-panel sm:w-56 sm:self-start"
         tabIndex={-1}
         aria-hidden="true"
       >
