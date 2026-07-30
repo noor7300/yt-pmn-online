@@ -1,0 +1,72 @@
+import Link from "next/link";
+import Image from "next/image";
+import type { PublishedTutorial } from "@/lib/data";
+import { formatDate, excerpt } from "@/lib/format";
+import { SITE_OWNER } from "@/lib/site";
+
+/** Blog-style listing row: thumbnail, title, byline, excerpt. Used on category
+ * pages and the homepage "latest" strip. */
+export function TutorialListItem({
+  tutorial,
+  showCategory = false,
+}: {
+  tutorial: PublishedTutorial;
+  showCategory?: boolean;
+}) {
+  const { video, article } = tutorial;
+  // maxres and medium are both 16:9 like the container; high/standard are 4:3
+  // and would get cropped top-and-bottom by object-cover.
+  const thumb = video.thumbnails.maxres ?? video.thumbnails.medium ?? video.thumbnails.high;
+  const href = `/tutorials/${video.category}/${video.slug}`;
+
+  return (
+    <article className="flex flex-col gap-4 border-b border-line py-6 first:pt-0 sm:flex-row sm:gap-6">
+      <Link
+        href={href}
+        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-panel sm:w-56"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        {thumb && (
+          <Image
+            src={thumb.url}
+            alt=""
+            fill
+            sizes="(min-width: 640px) 224px, 100vw"
+            className="object-cover transition hover:scale-[1.02]"
+          />
+        )}
+      </Link>
+
+      <div className="flex flex-1 flex-col">
+        <h2 className="text-lg font-semibold leading-snug text-foreground">
+          <Link href={href} className="hover:text-accent">
+            {article.seoTitle}
+          </Link>
+        </h2>
+
+        <p className="mt-1.5 font-mono text-xs text-muted">
+          By {SITE_OWNER}
+          <span aria-hidden="true"> · </span>
+          <time dateTime={video.publishedAt.slice(0, 10)}>{formatDate(video.publishedAt)}</time>
+          {showCategory && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <Link href={`/tutorials/${video.category}`} className="text-accent hover:underline">
+                {video.categoryLabel}
+              </Link>
+            </>
+          )}
+        </p>
+
+        <p className="mt-2.5 text-sm leading-relaxed text-muted">{excerpt(article.intro)}</p>
+
+        <p className="mt-3">
+          <Link href={href} className="text-sm font-medium text-accent hover:underline">
+            Read the guide →
+          </Link>
+        </p>
+      </div>
+    </article>
+  );
+}

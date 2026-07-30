@@ -1,11 +1,12 @@
-import { getCategories, getPublishedTutorials } from "@/lib/data";
+import Link from "next/link";
+import { getCategories, getNewestTutorials } from "@/lib/data";
 import { CategoryCard } from "@/components/CategoryCard";
-import { TutorialCard } from "@/components/TutorialCard";
+import { TutorialListItem } from "@/components/TutorialListItem";
 import { SITE_NAME } from "@/lib/site";
 
 export default function Home() {
   const categories = getCategories();
-  const latest = getPublishedTutorials().slice(0, 8);
+  const latest = getNewestTutorials(10);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
@@ -20,8 +21,22 @@ export default function Home() {
         </p>
       </section>
 
+      {latest.length > 0 && (
+        <section id="latest" className="mt-16 scroll-mt-20">
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">Latest tutorials</h2>
+          <div className="mt-6 max-w-3xl">
+            {latest.map((t) => (
+              <TutorialListItem key={t.video.id} tutorial={t} showCategory />
+            ))}
+          </div>
+        </section>
+      )}
+
       <section id="categories" className="mt-16 scroll-mt-20">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Browse by category</h2>
+        <p className="mt-2 max-w-2xl text-muted">
+          Every tool covered on the site, grouped by what you use it for.
+        </p>
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => (
             <CategoryCard key={category.slug} category={category} />
@@ -29,16 +44,9 @@ export default function Home() {
         </div>
       </section>
 
-      {latest.length > 0 && (
-        <section id="latest" className="mt-16 scroll-mt-20">
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">Most popular tutorials</h2>
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {latest.map((t) => (
-              <TutorialCard key={t.video.id} tutorial={t} />
-            ))}
-          </div>
-        </section>
-      )}
+      <p className="mt-12 text-sm text-muted">
+        New here? <Link href="/about" className="text-accent hover:underline">Read more about this site</Link>.
+      </p>
     </div>
   );
 }

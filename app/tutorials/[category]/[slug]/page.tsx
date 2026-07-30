@@ -7,7 +7,8 @@ import { RelatedTutorials } from "@/components/RelatedTutorials";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { videoObjectSchema, articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_OWNER } from "@/lib/site";
+import { formatDate } from "@/lib/format";
 
 export function generateStaticParams() {
   return getPublishedTutorials().map((t) => ({ category: t.video.category, slug: t.video.slug }));
@@ -76,9 +77,15 @@ export default async function TutorialPage({
 
       <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground">{video.title}</h1>
 
-      <div className="mt-6">
-        {thumb && <VideoEmbed videoId={video.id} title={video.title} thumbnailUrl={thumb.url} />}
-      </div>
+      <p className="mt-3 font-mono text-xs text-muted">
+        By {SITE_OWNER}
+        <span aria-hidden="true"> · </span>
+        <time dateTime={video.publishedAt.slice(0, 10)}>{formatDate(video.publishedAt)}</time>
+        <span aria-hidden="true"> · </span>
+        <a href="#video-walkthrough" className="text-accent hover:underline">
+          Prefer to watch? Jump to the video ↓
+        </a>
+      </p>
 
       <p className="mt-6 text-lg text-foreground/90">{article.intro}</p>
 
@@ -92,6 +99,16 @@ export default async function TutorialPage({
       </div>
 
       <FaqBlock items={article.faq} />
+
+      <section id="video-walkthrough" className="mt-12 scroll-mt-20">
+        <h2 className="text-xl font-semibold text-foreground">Watch the full walkthrough</h2>
+        <p className="mt-2 text-sm text-muted">
+          The same steps, demonstrated on screen from start to finish.
+        </p>
+        <div className="mt-4">
+          {thumb && <VideoEmbed videoId={video.id} title={video.title} thumbnailUrl={thumb.url} />}
+        </div>
+      </section>
 
       <RelatedTutorials tutorials={related} categoryLabel={video.categoryLabel} />
     </article>

@@ -1,4 +1,4 @@
-import { SITE_NAME } from "./site";
+import { SITE_NAME, SITE_OWNER } from "./site";
 import type { PublishedTutorial } from "./data";
 
 export function videoObjectSchema(t: PublishedTutorial) {
@@ -30,7 +30,7 @@ export function articleSchema(t: PublishedTutorial, url: string) {
     description: t.article.metaDescription,
     datePublished: t.video.publishedAt,
     dateModified: t.article.generatedAt,
-    author: { "@type": "Organization", name: SITE_NAME },
+    author: { "@type": "Person", name: SITE_OWNER },
     publisher: { "@type": "Organization", name: SITE_NAME },
     mainEntityOfPage: url,
   };

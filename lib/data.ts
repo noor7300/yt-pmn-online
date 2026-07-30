@@ -103,11 +103,30 @@ export function getCategory(slug: string): CategorySummary | null {
   return getCategories().find((c) => c.slug === slug) ?? null;
 }
 
+/** Category listing order, view-count descending — used for "related" picks. */
 export function getTutorialsByCategory(categorySlug: string): PublishedTutorial[] {
   return getPublishedTutorials().filter((t) => t.video.category === categorySlug);
 }
 
-export const CATEGORY_PAGE_SIZE = 24;
+/** Newest first, by the video's real YouTube publish date. This is the order
+ * the category pages and the homepage "latest" strip read in. */
+export function getTutorialsByCategoryNewest(categorySlug: string): PublishedTutorial[] {
+  return [...getTutorialsByCategory(categorySlug)].sort((a, b) =>
+    b.video.publishedAt.localeCompare(a.video.publishedAt)
+  );
+}
+
+let _newest: PublishedTutorial[] | null = null;
+export function getNewestTutorials(limit?: number): PublishedTutorial[] {
+  if (!_newest) {
+    _newest = [...getPublishedTutorials()].sort((a, b) =>
+      b.video.publishedAt.localeCompare(a.video.publishedAt)
+    );
+  }
+  return limit ? _newest.slice(0, limit) : _newest;
+}
+
+export const CATEGORY_PAGE_SIZE = 5;
 
 export interface PagedTutorials {
   items: PublishedTutorial[];
@@ -116,7 +135,7 @@ export interface PagedTutorials {
 }
 
 export function getTutorialsByCategoryPaged(categorySlug: string, page: number): PagedTutorials {
-  const all = getTutorialsByCategory(categorySlug);
+  const all = getTutorialsByCategoryNewest(categorySlug);
   const totalPages = Math.max(1, Math.ceil(all.length / CATEGORY_PAGE_SIZE));
   const currentPage = Math.min(Math.max(1, page), totalPages);
   const start = (currentPage - 1) * CATEGORY_PAGE_SIZE;
