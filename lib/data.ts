@@ -6,6 +6,28 @@ import { INDEXABLE_LIMIT } from "./site";
 
 const CATEGORIZED_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GENERATED_DIR = path.join(process.cwd(), "content", "generated");
+const SCREENSHOTS_PATH = path.join(process.cwd(), "data", "screenshots.json");
+
+export interface Screenshot {
+  file: string;
+  atSeconds: number;
+  /** Chapter title from the video's description, when it had timestamps. */
+  label: string | null;
+}
+
+let _screenshots: Record<string, Screenshot[]> | null = null;
+function screenshotManifest(): Record<string, Screenshot[]> {
+  if (!_screenshots) {
+    _screenshots = existsSync(SCREENSHOTS_PATH)
+      ? JSON.parse(readFileSync(SCREENSHOTS_PATH, "utf-8"))
+      : {};
+  }
+  return _screenshots!;
+}
+
+export function getScreenshots(videoId: string): Screenshot[] {
+  return screenshotManifest()[videoId] ?? [];
+}
 
 export interface PublishedTutorial {
   video: CategorizedVideo;
@@ -61,14 +83,19 @@ export function getTutorialBySlug(slug: string): PublishedTutorial | null {
 
 let _indexableSlugs: Set<string> | null = null;
 
-/** The top INDEXABLE_LIMIT tutorials by view count, for the phased indexing
- * rollout — these get `index`ed and appear in the sitemap; the rest stay
- * `noindex, follow` so Google can still crawl and discover them without
- * indexing everything on day one. Raise INDEXABLE_LIMIT in lib/site.ts once
- * Search Console shows healthy indexing for the current batch. */
+/** Phased indexing: only the strongest pages are `index`ed and listed in the
+ * sitemap; everything else stays `noindex, follow` so Google can still crawl
+ * and discover it without indexing the whole catalogue at once.
+ *
+ * "Strongest" now means *has step screenshots* rather than *has the most
+ * views* — a page with real captioned screenshots is substantially more
+ * useful than a text-only one, whatever its view count. INDEXABLE_LIMIT
+ * stays as a safety cap so this can't suddenly open the floodgates if
+ * screenshots later get extracted for the whole catalogue. */
 function getIndexableSlugs(): Set<string> {
   if (!_indexableSlugs) {
-    _indexableSlugs = new Set(getPublishedTutorials().slice(0, INDEXABLE_LIMIT).map((t) => t.video.slug));
+    const withShots = getPublishedTutorials().filter((t) => getScreenshots(t.video.id).length > 0);
+    _indexableSlugs = new Set(withShots.slice(0, INDEXABLE_LIMIT).map((t) => t.video.slug));
   }
   return _indexableSlugs;
 }

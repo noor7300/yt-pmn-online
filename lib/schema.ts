@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_OWNER } from "./site";
+import { SITE_NAME, SITE_OWNER, SITE_URL } from "./site";
 import type { PublishedTutorial } from "./data";
 
 export function videoObjectSchema(t: PublishedTutorial) {
@@ -22,7 +22,7 @@ export function videoObjectSchema(t: PublishedTutorial) {
   };
 }
 
-export function articleSchema(t: PublishedTutorial, url: string) {
+export function articleSchema(t: PublishedTutorial, url: string, imagePaths: string[] = []) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -33,6 +33,10 @@ export function articleSchema(t: PublishedTutorial, url: string) {
     author: { "@type": "Person", name: SITE_OWNER },
     publisher: { "@type": "Organization", name: SITE_NAME },
     mainEntityOfPage: url,
+    // Screenshots are declared as article images only when the page actually
+    // shows them — absolute URLs, since schema.org consumers don't resolve
+    // site-relative paths.
+    ...(imagePaths.length ? { image: imagePaths.map((p) => `${SITE_URL}${p}`) } : {}),
   };
 }
 

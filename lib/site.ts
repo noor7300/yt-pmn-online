@@ -7,8 +7,9 @@ export const SITE_DESCRIPTION =
 export const SITE_OWNER = "Impran M N";
 export const SITE_EMAIL = "imp.mn007@gmail.com";
 
-/** Phased indexing rollout: only the top N tutorials by view count are
- * marked indexable (and included in the sitemap) at any given time. Raise
- * this gradually as Search Console shows healthy indexing with no issues —
- * see data/full/dispatch-progress.txt for the rollout log. */
-export const INDEXABLE_LIMIT = 300;
+/** Safety cap on the phased indexing rollout. Indexable pages are the ones
+ * carrying step screenshots (see getIndexableSlugs in lib/data.ts); this cap
+ * just stops that set from growing without a deliberate decision. Currently
+ * 315 tutorials have screenshots, so 400 leaves headroom without opening up
+ * the full 3,066-page catalogue. */
+export const INDEXABLE_LIMIT = 400;

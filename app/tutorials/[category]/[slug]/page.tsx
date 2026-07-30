@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPublishedTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable } from "@/lib/data";
+import { getPublishedTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { FaqBlock } from "@/components/FaqBlock";
 import { RelatedTutorials } from "@/components/RelatedTutorials";
+import { ScreenshotGallery } from "@/components/ScreenshotGallery";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { videoObjectSchema, articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
@@ -52,12 +53,13 @@ export default async function TutorialPage({
   const thumb = video.thumbnails.maxres ?? video.thumbnails.medium ?? video.thumbnails.high;
   const url = `${SITE_URL}/tutorials/${video.category}/${video.slug}`;
   const related = getRelatedTutorials(tutorial);
+  const shots = getScreenshots(video.id);
   const faq = faqSchema(tutorial);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <JsonLd data={videoObjectSchema(tutorial)} />
-      <JsonLd data={articleSchema(tutorial, url)} />
+      <JsonLd data={articleSchema(tutorial, url, shots.map((s) => s.file))} />
       {faq && <JsonLd data={faq} />}
       <JsonLd
         data={breadcrumbSchema([
@@ -97,6 +99,8 @@ export default async function TutorialPage({
           </section>
         ))}
       </div>
+
+      <ScreenshotGallery shots={shots} videoId={video.id} title={video.title} />
 
       <FaqBlock items={article.faq} />
 
