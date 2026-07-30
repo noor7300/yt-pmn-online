@@ -17,8 +17,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
+  const staticPages = ["/about", "/contact", "/privacy", "/terms"].map((path) => ({
+    url: `${SITE_URL}${path}`,
+    changeFrequency: "yearly" as const,
+    priority: 0.3,
+  }));
+
   return [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
+    ...staticPages,
     ...categoryPages,
     ...tutorials.map((t) => ({
       url: `${SITE_URL}/tutorials/${t.video.category}/${t.video.slug}`,

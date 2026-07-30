@@ -24,10 +24,26 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <p className="mt-10 text-xs text-muted">
-          © {new Date().getFullYear()} {SITE_NAME}. Tech tutorials by PMN Online, sourced from the PMN
-          Online YouTube channel.
-        </p>
+        <div className="mt-10 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-muted">
+            © {new Date().getFullYear()} {SITE_NAME}. All product names and trademarks belong to
+            their respective owners.
+          </p>
+          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-xs">
+            <Link href="/about" className="text-muted hover:text-accent">
+              About
+            </Link>
+            <Link href="/contact" className="text-muted hover:text-accent">
+              Contact
+            </Link>
+            <Link href="/privacy" className="text-muted hover:text-accent">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-muted hover:text-accent">
+              Terms of Use
+            </Link>
+          </nav>
+        </div>
       </div>
     </footer>
   );
