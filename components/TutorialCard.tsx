@@ -4,7 +4,7 @@ import type { PublishedTutorial } from "@/lib/data";
 
 export function TutorialCard({ tutorial }: { tutorial: PublishedTutorial }) {
   const { video, article } = tutorial;
-  const thumb = video.thumbnails.high ?? video.thumbnails.medium ?? video.thumbnails.default;
+  const thumb = video.thumbnails.medium ?? video.thumbnails.maxres ?? video.thumbnails.high;
   const href = `/tutorials/${video.category}/${video.slug}`;
 
   return (

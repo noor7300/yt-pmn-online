@@ -14,9 +14,9 @@ export function TutorialListItem({
   showCategory?: boolean;
 }) {
   const { video, article } = tutorial;
-  // maxres and medium are both 16:9 like the container; high/standard are 4:3
-  // and would get cropped top-and-bottom by object-cover.
-  const thumb = video.thumbnails.maxres ?? video.thumbnails.medium ?? video.thumbnails.high;
+  // medium (320x180) is 16:9 like the container and ~10KB. Images are served
+  // unoptimised, so pick a source close to the display size rather than maxres.
+  const thumb = video.thumbnails.medium ?? video.thumbnails.maxres ?? video.thumbnails.high;
   const href = `/tutorials/${video.category}/${video.slug}`;
 
   return (

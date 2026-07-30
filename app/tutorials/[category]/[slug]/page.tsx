@@ -23,7 +23,7 @@ export async function generateMetadata({
   const tutorial = getTutorialBySlug(slug);
   if (!tutorial) return {};
 
-  const thumb = tutorial.video.thumbnails.high ?? tutorial.video.thumbnails.medium ?? tutorial.video.thumbnails.default;
+  const thumb = tutorial.video.thumbnails.maxres ?? tutorial.video.thumbnails.medium ?? tutorial.video.thumbnails.high;
 
   return {
     title: tutorial.article.seoTitle,
@@ -49,7 +49,7 @@ export default async function TutorialPage({
   if (!tutorial || tutorial.video.category !== categorySlug) notFound();
 
   const { video, article } = tutorial;
-  const thumb = video.thumbnails.high ?? video.thumbnails.medium ?? video.thumbnails.default;
+  const thumb = video.thumbnails.maxres ?? video.thumbnails.medium ?? video.thumbnails.high;
   const url = `${SITE_URL}/tutorials/${video.category}/${video.slug}`;
   const related = getRelatedTutorials(tutorial);
   const faq = faqSchema(tutorial);
