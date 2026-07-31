@@ -1,20 +1,46 @@
 {
   "slug": "how-to-integrate-asana-with-jira",
   "seoTitle": "How to Integrate Asana With Jira",
-  "metaDescription": "Connect Asana and Jira so tasks and updates stay in sync between teams that use different project management tools.",
-  "intro": "It's common for one team to run on Jira while another prefers Asana, and integrating the two prevents information from getting stuck in one system. This guide covers setting up a connection between Asana and Jira.",
+  "metaDescription": "Connect Asana and Jira using Asana's own Jira Cloud app so business and engineering teams stay in sync without leaving either tool.",
+  "intro": "It's common for a business or marketing team to plan in Asana while engineering tracks the same work in Jira, and without a link between them, someone ends up manually copying status updates back and forth. Asana publishes its own Jira Cloud app for exactly this reason — it's built and maintained by Asana, not a third-party workaround, and it shows Jira context directly inside an Asana task instead of forcing anyone to switch tools. This guide walks through what that integration looks like, what it can do on a free workspace versus a paid one, and how to set expectations before you turn it on for a team.",
   "steps": [
-    { "heading": "Pick an integration method", "body": "Decide whether you'll use a marketplace connector app or a middleware tool like Zapier to link the two platforms." },
-    { "heading": "Install the integration app", "body": "Add the chosen integration from the Atlassian Marketplace or your automation platform of choice." },
-    { "heading": "Authorize both accounts", "body": "Sign in and grant access to both your Jira and Asana accounts so the integration can read and write data." },
-    { "heading": "Set up the sync rules", "body": "Define which fields map between the two tools, such as task name, status, and assignee." },
-    { "heading": "Test with a sample task", "body": "Create a test task in one tool and confirm it appears correctly in the other before rolling it out to your team." }
+    {
+      "heading": "Know what you're connecting on each side",
+      "body": "Before installing anything, it helps to see the shape of both tools. Asana's Home and Inbox are where business-side users track their own tasks and notifications — overdue items, due-today items, and activity grouped by date. On the Jira side, work lives in Spaces (in newer Jira Cloud instances, alongside classic projects) with items like epics, stories, and tasks carrying their own keys such as TS-8 or POS-3. The integration's whole job is to let someone living in the Asana view above see and act on what's happening in a Jira space like the one below, without needing a Jira login.",
+      "image": { "file": "/screenshots/gLXzTtEZp7k/01.webp", "caption": "Asana's Inbox, grouping overdue and upcoming tasks by date — the home screen for a business-side user before Jira is connected." }
+    },
+    {
+      "heading": "See the Jira side you're syncing against",
+      "body": "A typical Jira space, like a Scrum backlog, organizes work into an active sprint and a backlog underneath it, with each item showing a status (To Do, In Progress, In Review), a due date, story points, and an assignee avatar. This is the granular, engineering-facing view the integration reaches into — when someone in Asana wants an update on \"Design Packaging\" or \"Monitor KPI,\" the Jira Cloud app is what pulls that status back into their Asana task instead of them opening Jira directly.",
+      "image": { "file": "/screenshots/gLXzTtEZp7k/03.webp", "caption": "A Jira Scrum backlog, with sprint items and backlog items each carrying a status, due date, and assignee." }
+    },
+    {
+      "heading": "Install the Jira Cloud app from Browse apps",
+      "body": "Inside an Asana project, open Browse apps and search for Jira Cloud. The listing is developed by Asana itself, and the About the app section explains the split clearly: business teams get real-time Jira updates without leaving Asana, and engineering teams keep working in Jira while their changes surface automatically on the linked Asana task, including the ability to create a new Jira issue directly from Asana. A preview screenshot in the listing shows the integration in practice — a Jira issue card embedded inline in an Asana task's activity feed, complete with status, assignee, and priority.",
+      "image": { "file": "/screenshots/gLXzTtEZp7k/04.webp", "caption": "The Jira Cloud app listing inside Asana, developed by Asana, showing how a Jira issue appears embedded in an Asana task." }
+    },
+    {
+      "heading": "Understand the free-tier limits before relying on it",
+      "body": "The same listing is upfront that some capabilities sit behind an Upgrade to Starter prompt. Automation-style Rules — for example, moving a task to a new section automatically creating a Jira issue, or a single-select field change triggering a new issue — are gated features you'll need a paid Asana tier to unlock. On a free workspace you can still install the app and view linked Jira context, but the automatic issue-creation rules won't be available until you upgrade, which is worth checking before you promise a team a fully automated workflow.",
+      "image": { "file": "/screenshots/gLXzTtEZp7k/05.webp", "caption": "The Rules section of the Jira Cloud app, showing automation triggers like task-moved-to-section that require an upgraded Asana plan." }
+    },
+    {
+      "heading": "Review the permissions before authorizing",
+      "body": "The same install screen lists exactly what Jira Cloud can do on your behalf once connected: access your name and email address, access your tasks, projects, and workspaces, create and modify tasks and comments, and display external Jira data on your Asana tasks — visible to anyone who already has access to those tasks. That last point matters for anything containing sensitive information, since linking a Jira issue to a shared Asana task makes that Jira context visible to every collaborator on the task, not just you.",
+      "image": null
+    },
+    {
+      "heading": "Link a task and confirm the sync works",
+      "body": "With the app installed, open an Asana task, find the Jira Cloud option in the task's app row, and either link it to an existing Jira issue or create a new one from inside Asana. Test with something low-stakes first — link one task, change its status in Jira, and confirm the update appears back on the Asana side within a few minutes. Once you've confirmed a two-way update actually lands, it's safe to roll the app out to the rest of the projects that need it."
+    }
   ],
   "faq": [
-    { "question": "Is there a native integration between Asana and Jira?", "answer": "There's no single official Atlassian-built integration; most teams rely on marketplace apps or automation tools like Zapier." },
-    { "question": "Does syncing tasks between Asana and Jira cost money?", "answer": "It depends on the integration tool chosen, since some marketplace apps and automation platforms require a paid plan." },
-    { "question": "Can updates sync in both directions?", "answer": "Many integration tools support two-way sync, though some setups only push data one direction depending on configuration." },
-    { "question": "Will subtasks and comments sync too?", "answer": "This depends on the specific integration's feature set; not all tools sync every field, including comments and subtasks." }
+    { "question": "Is there a native integration between Asana and Jira?", "answer": "Yes — Asana publishes and maintains its own Jira Cloud app, installable from Browse apps inside any Asana project, rather than requiring a third-party connector." },
+    { "question": "Does the Asana + Jira Cloud integration cost money?", "answer": "Installing it and viewing linked Jira context works on a free Asana workspace, but automation Rules that auto-create Jira issues from Asana triggers require an upgraded (Starter or higher) Asana plan." },
+    { "question": "Can updates sync in both directions?", "answer": "Yes for status and context — changes made in Jira Cloud display in Asana in real time automatically, and you can create new Jira issues directly from Asana without switching tools." },
+    { "question": "Who can see the Jira data linked to an Asana task?", "answer": "Anyone with access to that Asana task can see the displayed Jira data, so avoid linking sensitive Jira issues to tasks with broad sharing permissions." },
+    { "question": "What information does the Jira Cloud app access in my Asana account?", "answer": "Per its permissions listing, it can access your name and email, your tasks, projects, and workspaces, and it can create, modify, and display data on your behalf — all shown on the install screen before you authorize it." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

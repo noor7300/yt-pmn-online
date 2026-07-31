@@ -1,20 +1,48 @@
 {
   "slug": "how-to-add-quick-filters-to-a-sprint-or-kanban-board-in-jira",
   "seoTitle": "How to Add Quick Filters to a Jira Board",
-  "metaDescription": "Learn how to set up quick filters on a Jira Scrum or Kanban board so your team can narrow down issues by assignee, type, or priority in one click.",
-  "intro": "As a board fills up with issues, finding the ones that matter to you gets harder. Quick filters in Jira let you add one-click toggles that narrow the board down to a specific slice of work, whether that's your own tickets or a particular issue type.",
+  "metaDescription": "Add quick filters to a Jira Scrum or Kanban board from Board settings, using a name and a JQL query to build one-click toggles for your team.",
+  "intro": "Once a board fills up with more than a handful of cards, scanning it for just your own tickets or just the high-priority ones gets tedious fast. Quick filters solve this with one-click toggles sitting right above the board columns, each backed by a short JQL query that narrows what's visible. This guide walks through where that toolbar lives, how to reach the settings screen that manages it, and what the create-a-filter form actually asks for.",
   "steps": [
-    { "heading": "Open your board settings", "body": "Go to the configuration settings for the Scrum or Kanban board where you want to add a quick filter." },
-    { "heading": "Find the quick filters section", "body": "Locate the quick filters option within the board's configuration menu." },
-    { "heading": "Create a new filter", "body": "Add a new quick filter and give it a clear name that describes what it will show, such as 'My Issues' or 'High Priority'." },
-    { "heading": "Write the JQL for the filter", "body": "Define the filter's logic using Jira Query Language, such as filtering by assignee, issue type, or priority." },
-    { "heading": "Save and test the filter", "body": "Save your changes, then go to the board and click the new quick filter to confirm it narrows down issues as expected." }
+    {
+      "heading": "Notice where quick filters live on the board",
+      "body": "Open any board — a Kanban board like \"Marketing\" works the same way a Scrum board does here. Along the toolbar above the columns, next to Epic, Type, and Label dropdowns, there's a Quick filters control. This is the toggle bar your team will actually click day to day; everything else in this guide is about populating it with filters worth having.",
+      "image": { "file": "/screenshots/r8jJvUdukUI/01.webp", "caption": "A board's toolbar, with Quick filters sitting alongside the Epic, Type, and Label dropdowns used to narrow the view." }
+    },
+    {
+      "heading": "Open Board settings",
+      "body": "From the board, open its settings — reachable from the board's menu — which takes you to a dedicated settings screen for that specific board, not the whole space. The left-hand panel here lists Details, Working Days, Timeline, and a Layout section that expands into Columns, Swimlanes, Card colors, Card layout, and Quick filters. Click Quick filters."
+    },
+    {
+      "heading": "Find the Quick filters settings page",
+      "body": "This settings page is scoped to one board at a time — in this case, a board called \"TS board\" inside the TEST SPACE. That scoping matters: quick filters you build here apply to this board specifically, not every board across the space, so if your team works from multiple boards you'll set this up separately on each one.",
+      "image": { "file": "/screenshots/r8jJvUdukUI/04.webp", "caption": "The Quick filters entry inside a board's Layout settings, the destination for managing every filter available on that board." }
+    },
+    {
+      "heading": "Click Create quick filter",
+      "body": "The Quick filters page lists any filters that already exist for the board — by default you'll typically see starter filters like \"Recently Updated\" and \"Assigned to me\" already in place. Click Create quick filter in the top right to open the creation form and add your own."
+    },
+    {
+      "heading": "Fill in the name, JQL query, and description",
+      "body": "The Create quick filter form asks for three things: a required Name (what shows on the toggle itself, so keep it short — \"My Bugs,\" not \"Bugs Currently Assigned to Me\"), a required JQL query that defines the actual filter logic, and an optional Description for context. The existing \"Assigned to me\" filter, for reference, is built on a query checking that the issue is assigned to the current user, and \"Recently Updated\" checks for items updated within the last day — both useful patterns to copy if you're unsure how to phrase your own.",
+      "image": { "file": "/screenshots/r8jJvUdukUI/05.webp", "caption": "The Create quick filter dialog, requiring a name and a JQL query, with existing filters like Assigned to me listed for reference." }
+    },
+    {
+      "heading": "Write JQL for the slice of work you actually need",
+      "body": "For a priority filter, something like priority = High narrows the board to urgent items. For an issue-type filter, type = Bug isolates defects from stories and tasks. You can combine conditions with AND if a single toggle needs to represent more than one rule — just keep in mind that more conditions make the filter's name and purpose harder to guess at a glance, so favor a few well-named filters over one that tries to do everything."
+    },
+    {
+      "heading": "Save, then test it from the board",
+      "body": "Click Create to save the filter, then go back to the board and find it in the Quick filters toolbar. Click it and confirm the board actually narrows the way you expected — if it shows nothing or everything, the JQL syntax is the first place to check, since a small typo there is the most common reason a new filter doesn't behave."
+    }
   ],
   "faq": [
-    { "question": "Do I need to know JQL to create a quick filter?", "answer": "Yes, quick filters are built using Jira Query Language, though simple filters like filtering by assignee or issue type use fairly basic syntax." },
+    { "question": "Do I need to know JQL to create a quick filter?", "answer": "Yes, quick filters are built on a JQL query, though simple ones — filtering by assignee, issue type, or priority — use fairly basic syntax you can copy from the board's existing default filters." },
     { "question": "Can multiple quick filters be applied at once?", "answer": "Yes, you can typically toggle on more than one quick filter at a time to narrow the board down further." },
-    { "question": "Are quick filters visible to the whole team?", "answer": "Quick filters are set at the board level, so anyone with access to that board can see and use them." },
-    { "question": "Can I edit a quick filter after creating it?", "answer": "Yes, you can go back into the board's configuration settings at any time to adjust or remove an existing quick filter." }
+    { "question": "Are quick filters visible to the whole team?", "answer": "Quick filters are set at the board level inside Board settings, so anyone with access to that specific board can see and use them." },
+    { "question": "Do quick filters apply to every board in a space?", "answer": "No. They're scoped to the individual board they're created on, so a filter built for one board won't automatically appear on another board in the same space." },
+    { "question": "Can I edit a quick filter after creating it?", "answer": "Yes, go back into Board settings → Layout → Quick filters at any time to adjust the name, JQL query, or description, or remove it entirely." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

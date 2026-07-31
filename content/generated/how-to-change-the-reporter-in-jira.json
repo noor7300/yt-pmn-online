@@ -1,20 +1,44 @@
 {
   "slug": "how-to-change-the-reporter-in-jira",
   "seoTitle": "How to Change the Reporter in Jira",
-  "metaDescription": "Learn how to update the reporter field on a Jira issue, which is useful for correcting misattributed tickets or reassigning ownership of a report.",
-  "intro": "The reporter field in Jira identifies who originally raised an issue, and sometimes it needs to be corrected or reassigned. This guide covers how to update that field on an existing issue.",
+  "metaDescription": "Update the Reporter field on a Jira work item from the Details panel — open the issue, find the field, and search for the correct user.",
+  "intro": "The Reporter field on a Jira work item records who originally raised it, and it's easy to end up with the wrong name there — someone files a bug on a teammate's behalf, or a ticket gets created through an integration under a generic account. Fixing it takes under a minute once you know where the field lives, which is inside the Details panel on the right side of the work item, not on the main card itself. This guide walks through opening an item and changing that field using the same backlog and work item panel Jira shows by default.",
   "steps": [
-    { "heading": "Open the issue", "body": "Navigate to the specific Jira issue where you need to update the reporter." },
-    { "heading": "Locate the reporter field", "body": "Find the reporter field, typically shown in the details panel alongside other issue metadata like assignee and priority." },
-    { "heading": "Select a new reporter", "body": "Click into the field and search for the user you want to set as the new reporter." },
-    { "heading": "Save the change", "body": "Confirm the update so the issue reflects the new reporter going forward." },
-    { "heading": "Verify permissions if the field is locked", "body": "If you can't edit the field, check with your Jira admin, since editing the reporter typically requires specific project permissions." }
+    {
+      "heading": "Open the project backlog",
+      "body": "From the left sidebar, pick the space or project holding the item you need to fix — in this walkthrough that's a project called SOFTWARE DEV TEAM — then open its Backlog view. The backlog lists every work item with its key, status, and assignee avatar in a single row, which is the fastest place to find a specific item if you already know roughly what it's called.",
+      "image": { "file": "/screenshots/vEi6MQLUON0/01.webp", "caption": "A Jira backlog view listing work items by key, status, and assignee — the starting point for locating the issue you need to correct." }
+    },
+    {
+      "heading": "Click into the work item",
+      "body": "Clicking a row, such as \"Fix Bugs\" (SDT-1), opens a Jira work item panel on the right side of the screen without leaving the backlog. The top of that panel shows the title, status dropdown, description field, subtasks, and linked items — useful context, but not where the reporter lives. Scroll down within this panel rather than looking for a separate edit screen.",
+      "image": { "file": "/screenshots/vEi6MQLUON0/03.webp", "caption": "The work item panel for \"Fix Bugs,\" opened directly from the backlog row without navigating to a new page." }
+    },
+    {
+      "heading": "Expand the Details section",
+      "body": "Below the description and linked items, a collapsible Details section holds the metadata fields — start date, sprint, story point estimate, and Reporter among them. If it's collapsed, click to expand it. This is standard across Jira work item types, so the same panel structure applies whether you're looking at a bug, task, or story."
+    },
+    {
+      "heading": "Click the Reporter field and search for a user",
+      "body": "Click directly into the Reporter field and a search box opens with a dropdown of matching users below it — in this case, typing brought up a user named trickerguru16. Type enough of the correct person's name or username to narrow the list, since larger projects can have dozens of similarly-named accounts and picking the wrong one is an easy mistake to make quickly.",
+      "image": { "file": "/screenshots/vEi6MQLUON0/05.webp", "caption": "The Reporter field opened for editing, with a search dropdown showing a matching user ready to be selected." }
+    },
+    {
+      "heading": "Select the correct reporter",
+      "body": "Click the right name in the dropdown to set it. Jira saves the change immediately — there's no separate Save button to hunt for, since edits made inside the Details panel commit as soon as you make the selection. Glance at the field afterward to confirm the new name stuck before moving on."
+    },
+    {
+      "heading": "Check your permissions if the field won't open",
+      "body": "If clicking the Reporter field does nothing or shows it as read-only, you likely don't have edit permission on that project, or the field has been locked down by a workflow scheme. That's a project-level permission, not a personal account setting, so the fix is asking your Jira admin to grant edit access rather than looking for a workaround in your own profile."
+    }
   ],
   "faq": [
-    { "question": "Why would I need to change the reporter on an issue?", "answer": "This is often done to correct a misattributed ticket, such as when someone files an issue on behalf of a teammate or a support request gets logged under the wrong name." },
-    { "question": "Do I need special permissions to change the reporter?", "answer": "Yes, editing the reporter field typically requires edit permissions on the issue, which may be restricted depending on your project's permission scheme." },
-    { "question": "Does changing the reporter affect the issue's history?", "answer": "The change itself is usually recorded in the issue's activity log, so there's a record of who the original and updated reporter were." },
-    { "question": "Can I bulk change the reporter across multiple issues?", "answer": "Jira supports bulk editing for some fields, so check whether your version allows bulk changes to the reporter field if you need to update several issues at once." }
+    { "question": "Why would I need to change the reporter on an issue?", "answer": "Most often to correct a misattributed ticket — someone files an issue on behalf of a teammate, or an integration creates it under a generic or incorrect account." },
+    { "question": "Do I need special permissions to change the reporter?", "answer": "Yes. Editing the Reporter field requires edit permission on the issue, which depends on your project's permission scheme and may be restricted for some roles." },
+    { "question": "Where exactly is the Reporter field located?", "answer": "Inside the work item panel, under the collapsible Details section alongside fields like start date, sprint, and story point estimate — not on the main card header." },
+    { "question": "Does the change save automatically?", "answer": "Yes. Selecting a new reporter from the search dropdown saves immediately with no separate confirmation step." },
+    { "question": "Can I bulk change the reporter across multiple issues?", "answer": "Jira supports bulk editing for some fields from list views, so check whether your instance allows a bulk update to Reporter if you need to fix several items at once rather than one at a time." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }
