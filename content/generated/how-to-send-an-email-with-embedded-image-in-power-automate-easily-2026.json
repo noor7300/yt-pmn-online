@@ -1,19 +1,44 @@
 {
   "slug": "how-to-send-an-email-with-embedded-image-in-power-automate-easily-2026",
   "seoTitle": "How to Send an Email With Embedded Image in Power Automate",
-  "metaDescription": "Learn how to build HTML emails in Power Automate with images embedded directly in the body using CID or image URLs.",
-  "intro": "Sending professional emails with images shown inline, rather than as attachments, makes automated notifications look far more polished. This guide covers how to build an HTML email in Power Automate with embedded images using the Outlook connector.",
+  "metaDescription": "Send HTML emails with a truly inline image in Power Automate — get the file content, convert it to a data URI with Compose, then reference it in Send an email.",
+  "intro": "An image that shows up as a paperclip attachment instead of sitting inline in the email body looks unfinished, especially for automated reports or notifications you want to look intentional. Power Automate can embed an image directly into the HTML body without attaching it or hosting it anywhere public, using a short chain of actions: pull the file content, convert it to a data URI, then drop that string straight into an img tag. This guide follows that exact flow structure, screen by screen, so you can build the same thing.",
   "steps": [
-    { "heading": "Create a new cloud flow", "body": "Start a new flow in Power Automate with a trigger that fits your use case, such as a scheduled or event-based trigger." },
-    { "heading": "Build the HTML email template", "body": "Write the HTML content for your email body, structuring it so image placeholders can be embedded within the text." },
-    { "heading": "Embed images in the email body", "body": "Use Content-ID (CID) references or publicly accessible image URLs so the images render inline rather than as separate attachments." },
-    { "heading": "Configure Outlook and test the flow", "body": "Set up the Outlook send email action with your HTML content, then run the flow and check that images display correctly across email clients." }
+    {
+      "heading": "Start the flow from the Create page",
+      "body": "Open Create in Power Automate and choose to build an instant cloud flow if you want to trigger it manually for testing, or pick a trigger that matches your real use case. The \"Build an instant cloud flow\" dialog lists a long set of trigger options beyond the obvious manual button — SharePoint events, HTTP requests, webhooks, and more — scrollable in a panel on the right. For this walkthrough the flow starts with \"Manually trigger a flow,\" which is the simplest way to test the email-building logic before wiring it to a real trigger.",
+      "image": { "file": "/screenshots/_MsfwVsQd-Y/03.webp", "caption": "The Build an instant cloud flow dialog, listing trigger options like SharePoint events and HTTP Webhook alongside the default manual trigger." }
+    },
+    {
+      "heading": "Get the image file's content",
+      "body": "Add a \"Get file content\" action pointed at wherever the image lives — OneDrive or SharePoint are the common choices — and this pulls the raw file bytes into the flow as an output you can reference in later steps. This step alone doesn't do anything with the image yet; it just makes the binary data available to whatever comes next in the chain."
+    },
+    {
+      "heading": "Convert the file into a data URI with Compose",
+      "body": "This is the step that actually makes inline embedding work. A Compose action takes the file content from the previous step and wraps it with the dataUriBody() expression, which converts the binary image data into a base64-encoded data URI string — the kind of value you'd normally see as a very long \"data:image/png;base64,...\" string. That single string is everything an img tag needs to render the picture without linking out to any external file or attaching it separately. In the flow shown, this Compose step briefly flagged \"Invalid parameters\" until the correct file content reference was wired into its Inputs field, which is a common snag worth checking if your Compose step shows the same warning.",
+      "image": { "file": "/screenshots/_MsfwVsQd-Y/04.webp", "caption": "The Compose action's Inputs field wired to dataUriBody(...), the expression that turns the image's raw content into a base64 data URI string." }
+    },
+    {
+      "heading": "Store the data URI in a variable",
+      "body": "Add an \"Initialize variable\" action after Compose and set its value to the Compose output. This isn't strictly required — you could reference the Compose output directly in the email body — but it keeps the HTML template easier to read, since you're inserting a short variable name into your img src attribute instead of a Compose reference buried in expression syntax. It also makes the flow easier to debug, since you can inspect the variable's run history separately from the Compose step."
+    },
+    {
+      "heading": "Reference the data URI inside your HTML email body",
+      "body": "In your \"Send an email (V2)\" action, switch the body to HTML mode and write an img tag whose src attribute points to the variable you just initialized, something like <img src=\"@{variables('ImageDataUri')}\" />. Because the data URI contains the full image data as text, the email client renders it inline directly from the HTML — no attachment, no external image request, and nothing that can break because a hosted file got moved or deleted later.",
+      "image": { "file": "/screenshots/_MsfwVsQd-Y/05.webp", "caption": "The completed flow structure — Get file content, Compose, Initialize variable, and Send an email (V2) — with a banner confirming it's ready to test." }
+    },
+    {
+      "heading": "Test the flow and check rendering across clients",
+      "body": "Run the flow and open the resulting email in a couple of different clients if you can — Outlook desktop, Outlook web, and Gmail don't always render embedded HTML identically. Data URIs are broadly supported but some older or more locked-down email clients strip them for security reasons, so if your audience includes a lot of unknown or older mail clients, it's worth testing there specifically rather than assuming it'll look the same everywhere it did in your own test."
+    }
   ],
   "faq": [
-    { "question": "What's the difference between using CID and an image URL?", "answer": "CID embeds the image file directly with the email, while an image URL pulls the image from a public web location each time the email is opened." },
-    { "question": "Will embedded images work in every email client?", "answer": "Compatibility can vary between email clients, so it's worth testing your email in a few common clients before relying on it broadly." },
-    { "question": "Can I use this for automated newsletters or reports?", "answer": "Yes, embedded image emails work well for branded newsletters, automated reports, and approval notifications." },
-    { "question": "Do I need coding skills to build the HTML email?", "answer": "Basic HTML knowledge helps for structuring the email body, though many teams start from a template and adjust it as needed." }
+    { "question": "What's the difference between a data URI and a CID reference for embedding images?", "answer": "A data URI encodes the entire image as base64 text directly inside the HTML, as built here with dataUriBody(), so nothing else needs to load. A CID reference points to an image attached to the same email by a content ID, which some mail systems handle more consistently but requires managing the attachment separately." },
+    { "question": "Will embedded images work in every email client?", "answer": "Compatibility varies. Data URIs render in most modern clients, but some older or more security-restrictive ones strip them, so testing across the clients your recipients actually use is worth doing before relying on it broadly." },
+    { "question": "Can I use this for automated newsletters or reports?", "answer": "Yes. This same Get file content → Compose → Send an email (V2) pattern works well for branded report headers, automated notification logos, and approval emails where you want a consistent inline image every time." },
+    { "question": "Why did my Compose action show 'Invalid parameters'?", "answer": "This usually means the Inputs field isn't correctly wired to the Get file content output yet. Confirm the dataUriBody() expression references the right file content field before running the flow." },
+    { "question": "Do I need coding skills to build the HTML email?", "answer": "Basic HTML knowledge helps for writing the img tag and structuring the body, but the data URI conversion itself is handled entirely by the dataUriBody() expression inside Compose — no scripting required." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

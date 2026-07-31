@@ -1,19 +1,39 @@
 {
   "slug": "how-to-get-your-freshdesk-api-key",
   "seoTitle": "How to Get Your Freshdesk API Key",
-  "metaDescription": "Learn where to find your Freshdesk API key so you can connect Freshdesk to other tools and build custom integrations.",
-  "intro": "An API key lets you connect Freshdesk to external tools, scripts, or integrations without sharing your login credentials. This guide shows where to find your personal API key inside your Freshdesk profile.",
+  "metaDescription": "Find your Freshdesk API key in My Profile Settings, so you can connect Freshdesk to other tools and build custom integrations without sharing your login.",
+  "intro": "An API key lets you connect Freshdesk to external tools, scripts, or integrations without handing out your login credentials. It's tucked into your personal profile rather than the admin settings, which trips up a lot of people looking for it in the wrong place. This guide follows the actual path from your profile menu to the key itself, using the real Freshdesk settings screen so you know precisely what you're looking for and where it sits once you get there.",
   "steps": [
-    { "heading": "Log in to Freshdesk", "body": "Sign in with the account whose API key you want to retrieve." },
-    { "heading": "Open your profile settings", "body": "Click on your profile picture or name to access your personal settings page." },
-    { "heading": "Locate the API key section", "body": "Find the section labeled for your API key, usually shown alongside your contact and account details." },
-    { "heading": "Copy the key securely", "body": "Copy the API key and store it somewhere safe, since it grants access to your Freshdesk account through the API." }
+    {
+      "heading": "Open My Profile Settings",
+      "body": "Click your avatar in the top-right corner of Freshdesk and choose Profile settings. This lands you on a page titled My Profile Settings, which is different from the account-wide Admin settings — it holds things tied specifically to you as an agent, like your time zone, display language, and email signature. If you're on a trial account you'll still see the usual banner reminders across the top, but they don't affect anything on this page.",
+      "image": { "file": "/screenshots/HAJ-vqcJqCA/04.webp", "caption": "The My Profile Settings page, showing time zone, language, and signature fields alongside personal preferences like Focus Mode and Undo send." }
+    },
+    {
+      "heading": "Scroll to the top of the page for your API key",
+      "body": "The key itself sits above the fields you just saw, in a card labeled Your API Key right next to your Profile Details — full name, email, and phone number. It's a long alphanumeric string shown in a read-only box, already masked or partially selected so you don't accidentally edit it. Right below the key is a Reset API Key button, which is worth noting now even if you don't need it yet.",
+      "image": { "file": "/screenshots/HAJ-vqcJqCA/05.webp", "caption": "The top of the profile page with Your API Key displayed next to Profile Details, and a Reset API Key button underneath it." }
+    },
+    {
+      "heading": "Copy the key and store it somewhere safe",
+      "body": "Select the string in the API key box, copy it, and paste it directly into whatever integration, script, or password manager you're setting up — don't leave it sitting in a plain text file or a chat message. This key authenticates as you, with your exact permissions, so anything with the key can read and write Freshdesk data on your behalf. If you're building something a whole team will maintain, consider creating a dedicated service agent for the integration rather than tying it to one person's personal key."
+    },
+    {
+      "heading": "Use the key with basic authentication",
+      "body": "Freshdesk's REST API accepts the API key as the username in HTTP basic authentication, with any string (commonly the letter X) as the password — this is documented in Freshdesk's API reference and is the standard pattern most integration tools expect. Test the connection with a simple read request, like fetching your ticket list, before wiring up anything that writes data, so you catch a bad key or wrong domain early rather than after an automation starts running."
+    },
+    {
+      "heading": "Reset the key if it's ever exposed",
+      "body": "If you accidentally commit the key to a public repository, paste it somewhere it shouldn't be, or simply suspect it's been seen by someone it shouldn't have, use the Reset API Key button on the same profile page. Resetting immediately invalidates the old key, so update every integration that used it right away — Freshdesk won't warn those tools individually, they'll just start failing until you swap in the new value."
+    }
   ],
   "faq": [
-    { "question": "Where is the Freshdesk API key located?", "answer": "It's found on your individual profile settings page within your Freshdesk account." },
-    { "question": "Is the API key the same for every agent?", "answer": "No, each agent has their own unique API key tied to their account and permissions." },
-    { "question": "Can I regenerate my API key?", "answer": "Yes, if your key is compromised or you simply want a new one, Freshdesk allows you to regenerate it from the same settings page." },
-    { "question": "Is it safe to share my API key?", "answer": "No, your API key should be kept private since it can be used to access and modify your Freshdesk data." }
+    { "question": "Where is the Freshdesk API key located?", "answer": "It's on your individual My Profile Settings page — click your avatar, choose Profile settings, and the key is shown near the top next to your Profile Details, not in the account-wide Admin settings." },
+    { "question": "Is the API key the same for every agent?", "answer": "No. Each agent has their own unique API key tied to their account, and API calls made with it carry that agent's specific permissions." },
+    { "question": "Can I regenerate my API key?", "answer": "Yes. The Reset API Key button sits right under the key on the same profile page — use it if the key is compromised or you simply want a fresh one, and update any integrations afterward." },
+    { "question": "Is it safe to share my API key?", "answer": "No. Treat it like a password — anyone with the key can read and write your Freshdesk data through the API, so store it in a secrets manager or environment variable, never in plain text or shared chat." },
+    { "question": "How do I use the API key to authenticate requests?", "answer": "Pass it as the username in HTTP basic authentication, with any string as the password — this is the standard pattern Freshdesk's REST API expects and what most integration tools default to." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

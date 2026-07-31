@@ -2,18 +2,41 @@
   "slug": "what-is-the-relationship-between-logic-apps-and-power-automate-see-the-differenc",
   "seoTitle": "Logic Apps vs Power Automate: What's the Relationship",
   "metaDescription": "Understand how Azure Logic Apps and Power Automate relate, where they overlap, and when to use each for your workflows.",
-  "intro": "Azure Logic Apps and Power Automate share the same underlying automation engine but serve different audiences and use cases. This guide breaks down how they relate, where they differ, and how to decide which one fits your project.",
+  "intro": "Ask five people how Logic Apps and Power Automate relate and you'll get five different answers, because Microsoft genuinely ships them as two separate products with two separate icons, price lists, and portals. The confusion is fair: under the hood they run on the same workflow engine, use the same connector model, and can even open each other's flow definitions. This guide untangles what's actually shared, what's genuinely different, and — since a screen recording of \"Logic Apps\" often turns out to be Power Automate doing the work — how to tell which one you're actually looking at.",
   "steps": [
-    { "heading": "Understand what each platform is", "body": "Power Automate is built for business users automating everyday tasks, while Logic Apps is aimed at developers building enterprise-grade integrations on Azure." },
-    { "heading": "Compare key similarities and differences", "body": "Both share triggers, actions, and connectors, but differ in pricing models, scalability, and the level of technical control available." },
-    { "heading": "Look at real-world use cases and integrations", "body": "See how businesses use Power Automate for departmental automation and Logic Apps for large-scale, integration-heavy enterprise workflows." },
-    { "heading": "Decide which platform fits your needs", "body": "Choose Power Automate for quick business automations and Logic Apps when you need deeper Azure integration and enterprise scalability." }
+    {
+      "heading": "One engine, two front doors",
+      "body": "Power Automate and Azure Logic Apps are both built on Microsoft's Workflow Definition Language, the same trigger-condition-action runtime under the surface. Power Automate is that engine wrapped in a business-user-friendly maker portal at make.powerautomate.com, licensed per user or per flow through Microsoft 365 or standalone Power Platform plans. Logic Apps is the same engine exposed as an Azure resource, created and billed inside the Azure portal alongside your other cloud infrastructure, and priced per action execution rather than per user. If a flow can be built in one, it can almost always be rebuilt in the other — the difference is who's meant to build it and where it lives afterward.",
+      "image": null
+    },
+    {
+      "heading": "Power Automate leans on templates and a maker-first UI",
+      "body": "Open Power Automate's template gallery and the sheer volume tells you who it's for: hundreds of pre-built flows like \"Send an Office 365 Outlook email from a shared mailbox,\" \"Save attachments to a SharePoint mailbox,\" or \"Extract entities of received emails using AI Builder,\" each ready to clone and adapt with a couple of clicks. This is the core of Power Automate's pitch — a business user with no development background can find something close enough to their need and adjust the details rather than starting from a blank canvas. Logic Apps has connectors and starter templates too, but it doesn't lead with a browsing experience like this; it assumes you're arriving with a specific integration already in mind.",
+      "image": { "file": "/screenshots/x-7wJO7XwT0/04.webp", "caption": "Power Automate's template gallery — rows of ready-made flows for common Outlook, SharePoint, and Excel automations that a business user can clone directly." }
+    },
+    {
+      "heading": "Where Logic Apps pulls away technically",
+      "body": "The gap opens up once you need enterprise integration features: Logic Apps supports source control and CI/CD through Azure DevOps or GitHub, VS Code authoring with the Azure Logic Apps extension, virtual network integration for calling internal systems securely, and a consumption-based Standard tier that can run inside your own Azure infrastructure for compliance reasons. None of that is really on offer in Power Automate's maker portal, which is deliberately simplified. If your workflow needs to sit behind a firewall, deploy through a release pipeline, or integrate with Azure-native services like Service Bus or Event Grid at scale, that's the signal you've outgrown Power Automate's audience and landed in Logic Apps territory.",
+      "image": null
+    },
+    {
+      "heading": "The shared building blocks look identical once you're inside a flow",
+      "body": "Whichever front door you use, the actual flow you build looks the same: a trigger at the top, actions chained beneath it, and a Condition step that splits into a green True branch and a red False branch, each holding its own independent set of follow-up actions. An approval-and-condition pattern built in Power Automate's designer, complete with a live Test Flow panel for running it manually or automatically, is structurally the same object Logic Apps would produce from its own designer — same shape, same underlying JSON definition, different authoring surface. This is the clearest proof that the \"relationship\" isn't marketing language; it's one engine wearing two outfits.",
+      "image": { "file": "/screenshots/x-7wJO7XwT0/05.webp", "caption": "A flow's condition step branching into True and False paths, with the Test Flow panel open — the same trigger-condition-action shape Logic Apps runs under a different portal." }
+    },
+    {
+      "heading": "Match the platform to who's building and who's paying",
+      "body": "For a departmental automation — routing approvals, syncing a form to SharePoint, summarizing emails — Power Automate's per-user licensing and template-driven portal gets a non-developer to a working flow fastest. For an integration that's part of a larger application, needs to scale to thousands of executions per minute, or has to live inside an existing Azure DevOps release process, Logic Apps' consumption pricing and Azure-native tooling are the better fit even though the learning curve is steeper. Plenty of organizations run both side by side: Power Automate for business teams, Logic Apps for the platform team's integration layer, occasionally calling into each other when a business flow needs to trigger something the integration layer owns.",
+      "image": null
+    }
   ],
   "faq": [
-    { "question": "Are Logic Apps and Power Automate the same product?", "answer": "No, they run on the same underlying automation engine but are packaged differently for different audiences and use cases." },
-    { "question": "Can Logic Apps and Power Automate work together?", "answer": "Yes, businesses often use both together, combining Power Automate's ease of use with Logic Apps' enterprise integration capabilities." },
-    { "question": "Which one is cheaper?", "answer": "Pricing structures differ significantly, with Power Automate using per-user licensing and Logic Apps using consumption-based Azure pricing, so cost depends on your usage pattern." },
-    { "question": "Do I need coding skills to use Logic Apps?", "answer": "Logic Apps generally requires more technical familiarity with Azure than Power Automate, which is designed to be accessible to non-developers." }
+    { "question": "Are Logic Apps and Power Automate the same product?", "answer": "No, but they run on the same underlying Workflow Definition Language engine. Power Automate wraps that engine in a business-user maker portal with per-user licensing; Logic Apps exposes it as an Azure resource with consumption-based pricing and developer tooling." },
+    { "question": "Can Logic Apps and Power Automate work together?", "answer": "Yes. It's common for a Power Automate flow to call a Logic App for a heavier integration step, or for both to sit side by side — Power Automate handling business-team automations while Logic Apps handles the platform team's Azure-native integrations." },
+    { "question": "Which one is cheaper?", "answer": "It depends entirely on usage. Power Automate's per-user or per-flow licensing suits steady, moderate-volume business automations; Logic Apps' consumption pricing (pay per action execution) can be cheaper at high volume but adds up quickly for chatty, high-frequency flows." },
+    { "question": "Do I need coding skills to use Logic Apps?", "answer": "Not strictly — Logic Apps has a visual designer too — but its ecosystem assumes more Azure familiarity: resource groups, VS Code authoring, DevOps pipelines. Power Automate is the one explicitly designed so a non-developer never has to touch any of that." },
+    { "question": "If I build a flow in Power Automate, can I move it to Logic Apps later?", "answer": "There's no one-click migration, but because both share the same trigger-condition-action model and connector concepts, a flow built in Power Automate can typically be recreated in Logic Apps by an Azure developer without redesigning the logic from scratch." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

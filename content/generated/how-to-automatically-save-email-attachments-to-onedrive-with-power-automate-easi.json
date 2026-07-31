@@ -1,20 +1,44 @@
 {
   "slug": "how-to-automatically-save-email-attachments-to-onedrive-with-power-automate-easi",
   "seoTitle": "How to Save Email Attachments to OneDrive With Power Automate",
-  "metaDescription": "Learn how to automatically save Outlook email attachments to OneDrive using a Power Automate cloud flow.",
-  "intro": "If you're tired of manually downloading and uploading email attachments to OneDrive, Power Automate can handle it for you automatically. This guide walks through building a flow that saves incoming attachments straight to a OneDrive folder.",
+  "metaDescription": "Automatically save Outlook email attachments to OneDrive with Power Automate — trigger on new email, branch by sender, and save each attachment to a folder.",
+  "intro": "Dragging attachments out of email and into OneDrive by hand is the kind of task that's easy to fall behind on the moment your inbox gets busy. Power Automate can do it the instant an email arrives, and it can even sort attachments into different folders depending on who sent them. This guide follows a real flow built exactly that way — trigger on new email, branch true or false on a condition, then loop through and save each attachment — using the actual designer screens so you can see how the pieces connect.",
   "steps": [
-    { "heading": "Create an automated cloud flow", "body": "Start a new flow in Power Automate with an automated trigger connected to your Outlook account." },
-    { "heading": "Configure the Outlook email trigger", "body": "Set the flow to trigger when a new email arrives, adjusting filters for sender, subject, or folder." },
-    { "heading": "Filter emails and extract attachments", "body": "Add conditions to only process relevant emails, then extract the attachments for saving." },
-    { "heading": "Save files to OneDrive", "body": "Use the OneDrive create file action to upload each attachment into your chosen folder." },
-    { "heading": "Organize files and avoid duplicates", "body": "Add logic to sort attachments into folders and check for existing files before saving to prevent duplicate uploads." }
+    {
+      "heading": "Start an automated cloud flow and choose the email trigger",
+      "body": "From Create, choose Automated cloud flow, which opens a \"Build an automated cloud flow\" dialog asking for a Flow name and a trigger. The trigger list is searchable and covers a wide range of events — When a new response is submitted, When an item is created in SharePoint, When a file is created in OneDrive for Business, and more — but for this flow you want the Outlook trigger, \"When a new email arrives.\" Naming the flow clearly here (rather than leaving the auto-generated name) makes it much easier to find later in a busy My flows list.",
+      "image": { "file": "/screenshots/n29Uyfu22ZE/03.webp", "caption": "The Build an automated cloud flow dialog, with a searchable list of triggers including SharePoint and OneDrive events." }
+    },
+    {
+      "heading": "Add a Condition to branch by sender",
+      "body": "After the email trigger, this flow adds a Condition step that splits into a True branch and a False branch — in this case, checking whether the email came from inside the organization (pmnonline) versus an outside customer. Branching like this before you even touch attachments means you can route internal files and external files to completely different destinations without writing two separate flows."
+    },
+    {
+      "heading": "Add the OneDrive action to each branch",
+      "body": "Inside the flow designer, search the action picker for \"onedrive\" to see the available OneDrive actions: Create file, Copy file using path, Upload file from URL, Get file tags, and more. Create file is the one that matters here — it takes a file name and content and writes it into a folder you specify. This flow adds a Create file action inside both the True and False branches of the earlier condition, so each path ends up writing to its own destination.",
+      "image": { "file": "/screenshots/n29Uyfu22ZE/04.webp", "caption": "The Add an action panel filtered to OneDrive actions, shown alongside the flow's Condition block with True and False branches ready to receive an action each." }
+    },
+    {
+      "heading": "Loop through attachments with Apply to each",
+      "body": "An email can carry more than one attachment, so each branch wraps its Create file action inside an Apply to each loop set to the trigger's Attachments output. In the finished flow this shows up as two clearly named loops — \"Apply to each email attachment from pmnonline\" feeding into \"Create file in pmnonline,\" and \"Apply to each email attachment from outside customer\" feeding into \"Create file for Customers.\" Naming the loops and actions this specifically, rather than leaving Power Automate's defaults, makes the whole flow self-documenting when you or a teammate opens it months later.",
+      "image": { "file": "/screenshots/n29Uyfu22ZE/05.webp", "caption": "The completed flow: an email trigger feeding a Condition, with each branch looping through attachments and creating a file in a different OneDrive location." }
+    },
+    {
+      "heading": "Point each branch at the right OneDrive folder",
+      "body": "Inside each Create file action, set the folder path to wherever that branch's files should land — an internal team folder for the True branch, a customer-facing or intake folder for the False branch. Keeping these destinations separate at the flow level means nobody has to remember to manually sort attachments after the fact; the routing decision happens automatically based on the sender."
+    },
+    {
+      "heading": "Guard against duplicate uploads",
+      "body": "Because this flow can run every time a matching email arrives, the same attachment name can show up more than once if someone resends a message. Add a check before Create file — either a Get file metadata call against the target folder or a simple condition on the file name — and if a match already exists, append a timestamp to the new file's name rather than overwriting or skipping it, so you never lose a file silently."
+    }
   ],
   "faq": [
-    { "question": "Can I choose which OneDrive folder attachments go into?", "answer": "Yes, you specify the destination folder when configuring the OneDrive save action in the flow." },
-    { "question": "Will this work with multiple attachments in one email?", "answer": "Yes, the flow can loop through each attachment in an email and save them all individually." },
-    { "question": "Can I filter out emails I don't want processed?", "answer": "Yes, you can filter by sender, subject, or folder so only specific emails trigger the save action." },
-    { "question": "How do I prevent the same attachment from being saved twice?", "answer": "You can add a check within the flow for existing files with the same name before uploading a new copy." }
+    { "question": "Can I choose which OneDrive folder attachments go into?", "answer": "Yes. Each Create file action specifies its own destination folder, and this flow uses two different folders depending on which branch of the Condition an email falls into." },
+    { "question": "Will this work with multiple attachments in one email?", "answer": "Yes. Each branch wraps its Create file action inside an Apply to each loop over the trigger's Attachments output, so every attachment in the email gets saved individually." },
+    { "question": "Can I filter out emails I don't want processed?", "answer": "Yes. Beyond the Condition used here to branch by sender, the email trigger's own Advanced parameters let you filter by sender, subject, or folder so irrelevant emails never enter the flow at all." },
+    { "question": "How do I prevent the same attachment from being saved twice?", "answer": "Add a file-existence check against the destination OneDrive folder before the Create file step, and append a timestamp to the filename if a match already exists." },
+    { "question": "Why use a Condition to branch instead of one Create file action?", "answer": "Branching lets you route attachments to different folders based on who sent the email — internal senders to one location, outside customers to another — without building and maintaining two separate flows." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

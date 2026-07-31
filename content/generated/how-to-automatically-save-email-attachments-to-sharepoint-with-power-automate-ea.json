@@ -1,20 +1,44 @@
 {
   "slug": "how-to-automatically-save-email-attachments-to-sharepoint-with-power-automate-ea",
   "seoTitle": "How to Save Email Attachments to SharePoint With Power Automate",
-  "metaDescription": "Learn how to automatically save Outlook email attachments to a SharePoint document library using Power Automate.",
-  "intro": "Manually saving email attachments to SharePoint is tedious and easy to forget. This guide shows how to build a Power Automate flow that watches for new emails and saves their attachments straight into a SharePoint document library.",
+  "metaDescription": "Automatically save Outlook email attachments to a SharePoint document library with Power Automate — configure the email trigger, filter by subject, and save.",
+  "intro": "Manually pulling attachments out of email and dropping them into SharePoint is one of those small chores that quietly eats a chunk of every week. Power Automate replaces it with a flow that watches your inbox and saves matching attachments the moment they arrive. This guide follows a real automated flow — built around a \"When a new email arrives (V3)\" trigger filtered to a specific subject line — so you can see the actual trigger configuration and the inbox it's watching, not just a generic description of the steps.",
   "steps": [
-    { "heading": "Create an automated cloud flow", "body": "Start a new flow in Power Automate using an automated trigger tied to your Outlook mailbox." },
-    { "heading": "Configure the Outlook email trigger", "body": "Set the trigger to fire when a new email arrives, and narrow it down by sender, subject, or folder as needed." },
-    { "heading": "Extract email attachments", "body": "Add steps to pull the attachments out of the incoming email so they can be processed individually." },
-    { "heading": "Save files to SharePoint", "body": "Use a SharePoint action to create the file in your chosen document library, organizing it into folders if needed." },
-    { "heading": "Avoid duplicates and organize files", "body": "Add logic to check for existing files or naming conflicts so the same attachment isn't saved multiple times." }
+    {
+      "heading": "Find your existing flows or start a new one",
+      "body": "Open My flows in Power Automate to see everything you've already built, listed with a Name, Modified date, and Type column. In a working account this list fills up fast — automated flows, instant button-triggered flows, scheduled ones — so it's worth naming things clearly, as seen with entries like \"Automated Report\" and \"When a new email arrives (V3) -> Condition Apply to e...\" which describe what they do at a glance. To start a fresh flow for saving attachments, use New flow and choose an automated cloud flow, since this needs to fire on an event (a new email) rather than a fixed schedule.",
+      "image": { "file": "/screenshots/gvTWNgYQMRo/02.webp", "caption": "The My flows list, showing existing automated flows including one built around a new-email trigger with a condition step." }
+    },
+    {
+      "heading": "Configure the When a new email arrives trigger",
+      "body": "The trigger block, \"When a new email arrives (V3),\" connects to your Outlook mailbox and exposes a set of Advanced parameters beyond the basic folder and sender fields. Two matter most here: Include Attachments, set to Yes, which is what makes the attachment data available to later steps at all, and Subject Filter, set to a value like \"Automated Reports,\" which narrows the trigger so it only fires for emails matching that subject instead of every message that lands in the inbox. Filtering by subject (or sender, or folder) up front keeps the flow from processing irrelevant mail and wasting runs.",
+      "image": { "file": "/screenshots/gvTWNgYQMRo/04.webp", "caption": "The email trigger's Advanced parameters panel, with Include Attachments set to Yes and a Subject Filter narrowing it to matching emails." }
+    },
+    {
+      "heading": "Confirm what the trigger is actually watching",
+      "body": "It helps to look at the real inbox the flow is connected to before trusting the automation. In this account, the Outlook inbox shows a thread of test emails with the subject \"Automated Report,\" sent to confirm the trigger fires as expected — exactly the kind of matching subject line the Subject Filter parameter was set to catch. Sending yourself a test email with the target subject and attachment before going live is the fastest way to confirm the trigger condition is set up correctly.",
+      "image": { "file": "/screenshots/gvTWNgYQMRo/05.webp", "caption": "The connected Outlook inbox with a series of \"Automated Report\" test emails, used to confirm the trigger's subject filter is matching correctly." }
+    },
+    {
+      "heading": "Extract the attachments and loop through them",
+      "body": "Once the trigger fires, add a step to pull the attachments out of the email body — Power Automate exposes them as a collection you can loop over with an Apply to each control, which matters because a single email might carry more than one file. Inside that loop, each attachment gives you its file name and content, which is exactly what the next step needs to write it somewhere else."
+    },
+    {
+      "heading": "Save each attachment to a SharePoint document library",
+      "body": "Add the \"Create file\" action for SharePoint, point it at your target site and document library, and map the attachment's file name and content into it. If you want attachments organized rather than dumped into one folder, add a condition before the Create file step that checks the sender or subject and routes the file into a matching subfolder — for example, reports from one sender going into a \"Finance\" folder and another sender's into \"Operations.\""
+    },
+    {
+      "heading": "Guard against duplicate files",
+      "body": "Re-sent emails or slightly different messages with the same filename can otherwise overwrite or clutter the library. Add a check — either a \"Get file metadata\" call against the target folder or a simple existence check — before the Create file step, and if a match is found, append a timestamp or a counter to the filename rather than skipping the save outright, so nothing gets silently lost."
+    }
   ],
   "faq": [
-    { "question": "Can I filter which emails trigger the flow?", "answer": "Yes, you can filter by sender, subject line, or folder so only relevant emails trigger the attachment save." },
-    { "question": "What happens if an email has multiple attachments?", "answer": "The flow can loop through each attachment individually and save all of them to SharePoint." },
-    { "question": "How do I avoid saving duplicate files?", "answer": "You can add a check within the flow to see if a file with the same name already exists before saving a new copy." },
-    { "question": "Can attachments be organized into different folders automatically?", "answer": "Yes, you can use conditions based on sender or subject to route attachments into different SharePoint folders." }
+    { "question": "Can I filter which emails trigger the flow?", "answer": "Yes. The trigger's Advanced parameters include a Subject Filter (and options for sender or folder), so only matching emails start the flow instead of every message in the inbox." },
+    { "question": "What happens if an email has multiple attachments?", "answer": "Wrap the SharePoint save step in an Apply to each loop over the email's attachments collection, so every file in the email gets processed and saved individually." },
+    { "question": "How do I avoid saving duplicate files?", "answer": "Add a file-existence check against the target SharePoint folder before the Create file step, and append a timestamp or counter to the filename if a match is found." },
+    { "question": "Can attachments be organized into different folders automatically?", "answer": "Yes. Add a condition based on sender or subject before the Create file step to route attachments into different SharePoint folders." },
+    { "question": "Do I need Include Attachments turned on for this to work?", "answer": "Yes. The email trigger's Include Attachments parameter must be set to Yes, or the flow won't have access to the attachment data at all." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

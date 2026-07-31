@@ -1,6 +1,6 @@
 # Deep-article log (Phase 3)
 
-129 of 315 flagship articles rewritten with curated inline images.
+150 of 315 flagship articles rewritten with curated inline images.
 Regenerate with `npx tsx scripts/build-deep-log.ts`.
 
 | Title | Category | Images | Words | Rewritten |
@@ -37,23 +37,31 @@ Regenerate with `npx tsx scripts/build-deep-log.ts`.
 | [Cloudflare vs Cloudfront,Best Alternative in Google DNS, AWS, Godaddy, Namecheap, Crowdstrike, Quad9](https://easytechtuts.shop/tutorials/cloudflare/cloudflare-vs-cloudfront-best-alternative-in-google-dns-aws-godaddy-namecheap-cr) | Cloudflare | 0 | 734 | 2026-07-31 |
 | [Google Sheets Tutorial for Beginners, How to Use Google Sheets in the AI Era Easily 2026](https://easytechtuts.shop/tutorials/google-sheets/google-sheets-tutorial-for-beginners-how-to-use-google-sheets-in-the-ai-era-easi) | Google Sheets | 4 | 681 | 2026-07-31 |
 | [Google Sheets vs Excel, Best Google Sheets Alternatives in MS Excel, Smartsheet, Notion in AI ERA](https://easytechtuts.shop/tutorials/google-sheets/google-sheets-vs-excel-best-google-sheets-alternatives-in-ms-excel-smartsheet-no) | Google Sheets | 4 | 664 | 2026-07-31 |
+| [How to Add Users in Freshdesk](https://easytechtuts.shop/tutorials/freshdesk/how-to-add-users-in-freshdesk) | Freshdesk | 2 | 516 | 2026-07-31 |
 | [How to Add WhatsApp Button on Canva Website with this Canva Tutorial Easily 2026](https://easytechtuts.shop/tutorials/whatsapp/how-to-add-whatsapp-button-on-canva-website-with-this-canva-tutorial-easily-2026) | WhatsApp | 3 | 570 | 2026-07-31 |
+| [How to Assign Tickets in Freshdesk](https://easytechtuts.shop/tutorials/freshdesk/how-to-assign-tickets-in-freshdesk) | Freshdesk | 3 | 606 | 2026-07-31 |
+| [How to Automatically Save Email Attachments to OneDrive with Power Automate Easily 2026](https://easytechtuts.shop/tutorials/power-automate/how-to-automatically-save-email-attachments-to-onedrive-with-power-automate-easi) | Power Automate | 3 | 578 | 2026-07-31 |
+| [How to Automatically Save Email Attachments to SharePoint With Power Automate Easily 2026](https://easytechtuts.shop/tutorials/sharepoint/how-to-automatically-save-email-attachments-to-sharepoint-with-power-automate-ea) | SharePoint | 3 | 596 | 2026-07-31 |
 | [How to Buy Coursera Plus | Plans & Pricing Explained | Easily 2026](https://easytechtuts.shop/tutorials/coursera/how-to-buy-coursera-plus) | Coursera | 3 | 695 | 2026-07-31 |
 | [How to Change the Font in Freshdesk](https://easytechtuts.shop/tutorials/freshdesk/how-to-change-the-font-in-freshdesk) | Freshdesk | 3 | 615 | 2026-07-31 |
 | [How to Connect Gmail to ChatGPT | Inbox Automation Setup | Easily 2026](https://easytechtuts.shop/tutorials/gmail/how-to-connect-gmail-to-chatgpt) | Gmail | 3 | 855 | 2026-07-31 |
 | [How to Copy and Paste Content From Google Gemini to a Word Document Easily 2026](https://easytechtuts.shop/tutorials/gemini/how-to-copy-and-paste-content-from-google-gemini-to-a-word-document-easily-2026) | Gemini | 2 | 853 | 2026-07-31 |
 | [How to Create a CRM With Google Sheets and Gemini AI Easily 2026](https://easytechtuts.shop/tutorials/google-sheets/how-to-create-a-crm-with-google-sheets-and-gemini-ai-easily-2026) | Google Sheets | 3 | 601 | 2026-07-31 |
+| [How to Create a Scheduled Flow in Microsoft Power Automate Easily 2026](https://easytechtuts.shop/tutorials/power-automate/how-to-create-a-scheduled-flow-in-microsoft-power-automate-easily-2026) | Power Automate | 4 | 658 | 2026-07-31 |
 | [How to Create an Instagram Reel in Canva Easily 2026](https://easytechtuts.shop/tutorials/instagram/how-to-create-an-instagram-reel-in-canva-easily-2026) | Instagram | 3 | 590 | 2026-07-31 |
 | [How to Delete Images From ChatGPT Library | Clean Up Your Account | Easily 2026](https://easytechtuts.shop/tutorials/chatgpt/how-to-delete-images-from-chatgpt-library) | ChatGPT | 2 | 913 | 2026-07-31 |
 | [How to Design a Facebook Cover Photo in Canva Easily 2026](https://easytechtuts.shop/tutorials/facebook/how-to-design-a-facebook-cover-photo-in-canva-easily-2026) | Facebook | 4 | 613 | 2026-07-31 |
 | [How to Enter Medical Expenses in TurboTax Easily 2026](https://easytechtuts.shop/tutorials/turbotax/how-to-enter-medical-expenses-in-turbotax-easily-2026) | TurboTax | 3 | 561 | 2026-07-31 |
 | [How to Export ChatGPT Chats Without Copy and Paste | Faster Method | Easily 2026](https://easytechtuts.shop/tutorials/chatgpt/how-to-export-chatgpt-chats-without-copy-and-paste) | ChatGPT | 2 | 935 | 2026-07-31 |
 | [How to Generate Presentation Slides With Gemini AI in Google Slides | Easily 2026](https://easytechtuts.shop/tutorials/gemini/how-to-generate-presentation-slides-with-gemini-ai-in-google-slides) | Gemini | 2 | 839 | 2026-07-31 |
+| [How to Get the Freshdesk Widget](https://easytechtuts.shop/tutorials/freshdesk/how-to-get-the-freshdesk-widget) | Freshdesk | 3 | 620 | 2026-07-31 |
+| [How to Get Your Freshdesk API Key](https://easytechtuts.shop/tutorials/freshdesk/how-to-get-your-freshdesk-api-key) | Freshdesk | 2 | 465 | 2026-07-31 |
 | [How to Integrate Asana With Jira](https://easytechtuts.shop/tutorials/asana/how-to-integrate-asana-with-jira) | Asana | 4 | 657 | 2026-07-31 |
 | [How to Integrate ClickUp With Jira](https://easytechtuts.shop/tutorials/clickup/how-to-integrate-clickup-with-jira) | ClickUp | 4 | 604 | 2026-07-31 |
 | [How to Integrate Notion With Jira](https://easytechtuts.shop/tutorials/notion/how-to-integrate-notion-with-jira) | Notion | 4 | 622 | 2026-07-31 |
 | [How to Make Facebook Reels in Canva Easily 2026](https://easytechtuts.shop/tutorials/facebook/how-to-make-facebook-reels-in-canva-easily-2026) | Facebook | 3 | 628 | 2026-07-31 |
 | [How to Remove Gemini AI Photo Watermark | What's Actually Allowed | Easily 2026](https://easytechtuts.shop/tutorials/gemini/how-to-remove-gemini-ai-photo-watermark) | Gemini | 3 | 874 | 2026-07-31 |
+| [How to Send an Email with Embedded Image in Power Automate Easily 2026](https://easytechtuts.shop/tutorials/power-automate/how-to-send-an-email-with-embedded-image-in-power-automate-easily-2026) | Power Automate | 3 | 604 | 2026-07-31 |
 | [How to Sync Etsy with QuickBooks Online Easily 2026](https://easytechtuts.shop/tutorials/etsy/how-to-sync-etsy-with-quickbooks-online-easily-2026) | Etsy | 3 | 660 | 2026-07-31 |
 | [How to Use ChatGPT to Create AutoLISP Code for AutoCAD | Automate Drafting | Easily 2026](https://easytechtuts.shop/tutorials/chatgpt/how-to-use-chatgpt-to-create-autolisp-code-for-autocad) | ChatGPT | 2 | 897 | 2026-07-31 |
 | [How to Use Gems in Gemini to Save Time With AI | Custom Assistants Explained | Easily 2026](https://easytechtuts.shop/tutorials/gemini/how-to-use-gems-in-gemini-to-save-time-with-ai) | Gemini | 2 | 863 | 2026-07-31 |
@@ -72,6 +80,7 @@ Regenerate with `npx tsx scripts/build-deep-log.ts`.
 | [Clickup Tutorial for Beginners, How to use clickup for Task & Project Management in the AI Era 2026](https://easytechtuts.shop/tutorials/clickup/clickup-tutorial-for-beginners-how-to-use-clickup-for-task-project-management-in) | ClickUp | 4 | 785 | 2026-07-31 |
 | [Clickup vs Noton, Best Clickup Alternatives in Monday, Asana, Jira, Trello, Slack in the AI Era 2026](https://easytechtuts.shop/tutorials/clickup/clickup-vs-noton-best-clickup-alternatives-in-monday-asana-jira-trello-slack-in-) | ClickUp | 4 | 958 | 2026-07-31 |
 | [How to Add HTML to Squarespace Easily 2026](https://easytechtuts.shop/tutorials/squarespace/how-to-add-html-to-squarespace-easily-2026) | Squarespace | 3 | 757 | 2026-07-31 |
+| [How to Add Images to a Microsoft Loop Page Easily 2026](https://easytechtuts.shop/tutorials/microsoft-loop/how-to-add-images-to-a-microsoft-loop-page-easily-2026) | Microsoft Loop | 2 | 657 | 2026-07-31 |
 | [How to Add Quick Filters to a Sprint or Kanban Board in Jira](https://easytechtuts.shop/tutorials/jira/how-to-add-quick-filters-to-a-sprint-or-kanban-board-in-jira) | Jira | 3 | 538 | 2026-07-31 |
 | [How to Add Services to Squarespace Easily 2026](https://easytechtuts.shop/tutorials/squarespace/how-to-add-services-to-squarespace-easily-2026) | Squarespace | 3 | 691 | 2026-07-31 |
 | [How to Add the Meta Pixel to a Squarespace Website Easily 2026](https://easytechtuts.shop/tutorials/squarespace/how-to-add-the-meta-pixel-to-a-squarespace-website-easily-2026) | Squarespace | 3 | 733 | 2026-07-31 |
@@ -106,14 +115,20 @@ Regenerate with `npx tsx scripts/build-deep-log.ts`.
 | [How to Create a Landing Page in Power BI Dashboard (Pro First Page) Easily 2026](https://easytechtuts.shop/tutorials/power-bi/how-to-create-a-landing-page-in-power-bi-dashboard-pro-first-page-easily-2026) | Power BI | 3 | 831 | 2026-07-31 |
 | [How to Create a Scrum Board in Jira](https://easytechtuts.shop/tutorials/jira/how-to-create-a-scrum-board-in-jira) | Jira | 2 | 546 | 2026-07-31 |
 | [How to Create a Survey With Canva Easily 2026](https://easytechtuts.shop/tutorials/canva/how-to-create-a-survey-with-canva-easily-2026) | Canva | 3 | 541 | 2026-07-31 |
+| [How to Create an Approval Flow in Power Automate, Build Approval Workflow Process Easily 2026](https://easytechtuts.shop/tutorials/power-automate/how-to-create-an-approval-flow-in-power-automate-build-approval-workflow-process) | Power Automate | 4 | 822 | 2026-07-31 |
 | [How to Create and Edit Table With Enter Data in Power BI (Manual Tables) Easily 2026](https://easytechtuts.shop/tutorials/power-bi/how-to-create-and-edit-table-with-enter-data-in-power-bi-manual-tables-easily-20) | Power BI | 3 | 710 | 2026-07-31 |
 | [How to Create Stickers on Canva to Sell on Etsy Easily 2026](https://easytechtuts.shop/tutorials/canva/how-to-create-stickers-on-canva-to-sell-on-etsy-easily-2026) | Canva | 4 | 574 | 2026-07-31 |
 | [How to Create SVG Files With Canva Easily 2026](https://easytechtuts.shop/tutorials/canva/how-to-create-svg-files-with-canva-easily-2026) | Canva | 3 | 572 | 2026-07-31 |
 | [How to Design a Facebook Ad Post in Canva for Real Estate with this Tutorial Easily 2026](https://easytechtuts.shop/tutorials/facebook/how-to-design-a-facebook-ad-post-in-canva-for-real-estate-with-this-tutorial-eas) | Facebook | 3 | 605 | 2026-07-31 |
+| [How to Edit a Typeform Easily 2026](https://easytechtuts.shop/tutorials/typeform/how-to-edit-a-typeform-easily-2026) | Typeform | 3 | 655 | 2026-07-31 |
 | [How to Embed Instagram into GoHighLevel Website Easily 2026](https://easytechtuts.shop/tutorials/instagram/how-to-embed-instagram-into-gohighlevel-website-easily-2026) | Instagram | 4 | 631 | 2026-07-31 |
+| [How to Embed Typeform in an Email Easily 2026](https://easytechtuts.shop/tutorials/typeform/how-to-embed-typeform-in-an-email-easily-2026) | Typeform | 2 | 616 | 2026-07-31 |
+| [How to Embed Typeform in Wordpress Easily 2026](https://easytechtuts.shop/tutorials/typeform/how-to-embed-typeform-in-wordpress-easily-2026) | Typeform | 2 | 602 | 2026-07-31 |
 | [How to Export the General Ledger to Excel in QuickBooks Online Easily 2026](https://easytechtuts.shop/tutorials/excel/how-to-export-the-general-ledger-to-excel-in-quickbooks-online-easily-2026) | Microsoft Excel | 4 | 569 | 2026-07-31 |
 | [How to Extract Data From a PDF to Google Sheets Easily 2026](https://easytechtuts.shop/tutorials/google-sheets/how-to-extract-data-from-a-pdf-to-google-sheets-easily-2026) | Google Sheets | 3 | 682 | 2026-07-31 |
 | [How to Fix Access Denied Website Error in Chrome (Common Causes Solved) Easily 2026](https://easytechtuts.shop/tutorials/chrome/how-to-fix-access-denied-website-error-in-chrome-common-causes-solved-easily-202) | Google Chrome | 1 | 865 | 2026-07-31 |
+| [How to Format Text in Microsoft Loop Easily 2026](https://easytechtuts.shop/tutorials/microsoft-loop/how-to-format-text-in-microsoft-loop-easily-2026) | Microsoft Loop | 3 | 555 | 2026-07-31 |
+| [How to Get Microsoft Forms Responses to Excel and Email With Power Automate Easily 2026](https://easytechtuts.shop/tutorials/microsoft-forms/how-to-get-microsoft-forms-responses-to-excel-and-email-with-power-automate-easi) | Microsoft Forms | 4 | 792 | 2026-07-31 |
 | [How to Import and Edit Google Docs in Canva Easily 2026](https://easytechtuts.shop/tutorials/google-docs/how-to-import-and-edit-google-docs-in-canva-easily-2026) | Google Docs | 3 | 562 | 2026-07-31 |
 | [How to Import CSV Data in Power BI (Clean Import Guide) Easily 2026](https://easytechtuts.shop/tutorials/power-bi/how-to-import-csv-data-in-power-bi-clean-import-guide-easily-2026) | Power BI | 4 | 822 | 2026-07-31 |
 | [How to Import Data From Excel into QuickBooks Online Easily 2026](https://easytechtuts.shop/tutorials/excel/how-to-import-data-from-excel-into-quickbooks-online-easily-2026) | Microsoft Excel | 2 | 565 | 2026-07-31 |
@@ -125,11 +140,17 @@ Regenerate with `npx tsx scripts/build-deep-log.ts`.
 | [How to Pan and Zoom Images in Canva Videos Easily 2026](https://easytechtuts.shop/tutorials/zoom/how-to-pan-and-zoom-images-in-canva-videos-easily-2026) | Zoom | 3 | 636 | 2026-07-31 |
 | [How to Reconcile Credit Card in QuickBooks Online Easily 2026](https://easytechtuts.shop/tutorials/quickbooks/how-to-reconcile-credit-card-in-quickbooks-online-easily-2026) | QuickBooks | 3 | 528 | 2026-07-31 |
 | [How to Remove Yahoo Search From Google Chrome (Stop Browser Hijacking) Easily 2026](https://easytechtuts.shop/tutorials/chrome/how-to-remove-yahoo-search-from-google-chrome-stop-browser-hijacking-easily-2026) | Google Chrome | 2 | 910 | 2026-07-31 |
+| [How to Restore a Deleted Microsoft Loop Page Easily 2026](https://easytechtuts.shop/tutorials/microsoft-loop/how-to-restore-a-deleted-microsoft-loop-page-easily-2026) | Microsoft Loop | 2 | 654 | 2026-07-31 |
 | [How to Set Up a Loan in QuickBooks Easily 2026](https://easytechtuts.shop/tutorials/quickbooks/how-to-set-up-a-loan-in-quickbooks-easily-2026) | QuickBooks | 2 | 541 | 2026-07-31 |
+| [How to Set Up Automated Messages in Microsoft Teams With Power Automate Easily 2026](https://easytechtuts.shop/tutorials/microsoft-teams/how-to-set-up-automated-messages-in-microsoft-teams-with-power-automate-easily-2) | Microsoft Teams | 4 | 709 | 2026-07-31 |
 | [How to Share Screen With Gemini | Real-Time AI Help | Easily 2026](https://easytechtuts.shop/tutorials/gemini/how-to-share-screen-with-gemini) | Gemini | 2 | 704 | 2026-07-31 |
 | [How to Upload Manual Bank Transactions From CSV or Excel in QuickBooks Online Easily 2026](https://easytechtuts.shop/tutorials/excel/how-to-upload-manual-bank-transactions-from-csv-or-excel-in-quickbooks-online-ea) | Microsoft Excel | 3 | 664 | 2026-07-31 |
+| [How to Use Mermaid in Microsoft Loop Easily 2026](https://easytechtuts.shop/tutorials/microsoft-loop/how-to-use-mermaid-in-microsoft-loop-easily-2026) | Microsoft Loop | 2 | 556 | 2026-07-31 |
 | [How to Use Vertical Tabs in Chrome (Tab Overload Fix) Easily 2026](https://easytechtuts.shop/tutorials/chrome/how-to-use-vertical-tabs-in-chrome-tab-overload-fix-easily-2026) | Google Chrome | 1 | 780 | 2026-07-31 |
 | [Jira vs Trello, Best Jira Alternatives from Asana, ServiceNow, Confluence Clickup in the AI Era 2026](https://easytechtuts.shop/tutorials/jira/jira-vs-trello-best-jira-alternatives-from-asana-servicenow-confluence-clickup-i) | Jira | 3 | 839 | 2026-07-31 |
+| [Typeform Tutorial For Beginners: How to use Typeform in AI Era 2026?](https://easytechtuts.shop/tutorials/typeform/typeform-tutorial-for-beginners-how-to-use-typeform-in-ai-era-2026) | Typeform | 3 | 642 | 2026-07-31 |
+| [Typeform vs Jotform, Which Typeform Alternative is Best in AI Era 2026?](https://easytechtuts.shop/tutorials/typeform/typeform-vs-jotform-which-typeform-alternative-is-best-in-ai-era-2026) | Typeform | 3 | 684 | 2026-07-31 |
+| [What Is the Relationship Between Logic Apps and Power Automate, See the Differences Easily 2026](https://easytechtuts.shop/tutorials/power-automate/what-is-the-relationship-between-logic-apps-and-power-automate-see-the-differenc) | Power Automate | 2 | 663 | 2026-07-31 |
 | [Wix vs Squarespace, Best Squarespace Alternative from Godaddy, Shopify, Wordpress, Square, Hostinger](https://easytechtuts.shop/tutorials/wix/wix-vs-squarespace-best-squarespace-alternative-from-godaddy-shopify-wordpress-s) | Wix | 4 | 874 | 2026-07-31 |
 | [Zapier Tutorial for Beginners, How to use Zapiers in AI era](https://easytechtuts.shop/tutorials/zapier/zapier-tutorial-for-beginners-how-to-use-zapiers-in-ai-era) | Zapier | 4 | 887 | 2026-07-31 |
 | [Zapier vs Make vs N8n, Best Zapier Alternative from Make com, N8N, IFTTT & Workato](https://easytechtuts.shop/tutorials/zapier/zapier-vs-make-vs-n8n-best-zapier-alternative-from-make-com-n8n-ifttt-workato) | Zapier | 3 | 643 | 2026-07-31 |
