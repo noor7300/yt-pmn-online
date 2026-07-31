@@ -10,7 +10,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { videoObjectSchema, articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, SITE_OWNER } from "@/lib/site";
-import { formatDate } from "@/lib/format";
+import { formatDate, toParagraphs } from "@/lib/format";
 
 export function generateStaticParams() {
   return getPublishedTutorials().map((t) => ({ category: t.video.category, slug: t.video.slug }));
@@ -95,13 +95,21 @@ export default async function TutorialPage({
         </a>
       </p>
 
-      <p className="mt-6 text-lg text-foreground/90">{article.intro}</p>
+      <div className="mt-6 space-y-4 text-lg text-foreground/90">
+        {toParagraphs(article.intro).map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
+      </div>
 
       <div className="mt-8 space-y-8">
         {article.steps.map((step) => (
           <section key={step.heading}>
             <h2 className="text-xl font-semibold text-foreground">{step.heading}</h2>
-            <p className="mt-2 text-muted">{step.body}</p>
+            <div className="mt-2 space-y-3 text-muted">
+              {toParagraphs(step.body).map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
             {step.image && (
               <figure className="mt-4 overflow-hidden rounded-md border border-line bg-panel">
                 <div className="relative aspect-video w-full bg-background">
