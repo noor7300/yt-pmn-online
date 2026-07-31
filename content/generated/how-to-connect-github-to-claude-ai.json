@@ -2,42 +2,63 @@
   "slug": "how-to-connect-github-to-claude-ai",
   "seoTitle": "How to Connect GitHub to Claude AI, Full Setup Guide",
   "metaDescription": "Connect GitHub to Claude AI to bring AI-driven coding suggestions and insights directly into your repositories and development workflow.",
-  "intro": "Linking GitHub with Claude AI brings AI-driven suggestions and insights directly into your development workflow, right where your code already lives. This guide covers authenticating your GitHub account, configuring Claude AI, and applying best practices once the integration is live.",
+  "intro": "Linking GitHub with Claude brings your repositories directly into conversation with the AI you already use for coding help, instead of pasting code snippets back and forth. The setup itself is a short OAuth authorization, but knowing exactly where that connector lives inside Claude's settings — and what access it actually grants — saves you from hunting through menus. This guide walks through the authorization flow from both sides, GitHub's permission screen and Claude's connectors panel, and shows what to check to confirm the integration actually took. It also covers what changes day to day once the connection is live, and how to manage access responsibly if you're using it on a shared team account.",
   "steps": [
     {
-      "heading": "Set up your GitHub account",
-      "body": "Make sure your GitHub account is ready for the integration, which is the starting point before connecting to Claude AI."
+      "heading": "Check your GitHub dashboard is ready",
+      "body": "Before starting the connection, make sure you're signed into the GitHub account you actually want Claude working against — the dashboard shows your top repositories in the left sidebar, which is a quick way to confirm you're in the right account if you manage more than one. You don't need to change anything here; this is just your starting point, and the repositories visible now are the ones Claude will be able to see once the integration is authorized. If you work across a personal account and an organization account, decide up front which one you're connecting, since switching later means repeating the whole authorization flow from GitHub's side.",
+      "image": { "file": "/screenshots/W76BJPoz6No/02.webp", "caption": "The GitHub dashboard, showing top repositories in the sidebar — worth a glance to confirm you're signed into the right account before connecting." }
     },
     {
-      "heading": "Authenticate with Claude AI",
-      "body": "Complete the authentication process to link your GitHub account with Claude AI, establishing the connection needed for the integration to work."
+      "heading": "Open Claude and head to Settings",
+      "body": "In Claude, the connection lives under Settings rather than anywhere in the main chat interface, so from the home screen open the settings panel and look for Connectors in the Customize section. This is also where Skills and Plugins live if you want to extend Claude further later, but for GitHub specifically, Connectors is the only stop you need. It's easy to assume an integration this central would be surfaced somewhere in the chat window itself, so knowing it's a settings-level feature rather than a chat feature saves you a few minutes of searching the wrong place.",
+      "image": { "file": "/screenshots/W76BJPoz6No/03.webp", "caption": "Claude's home screen. The GitHub connection isn't started from here — it's tucked inside Settings, under Connectors." }
     },
     {
-      "heading": "Configure settings for optimal use",
-      "body": "Adjust Claude AI's configuration so it performs well alongside your GitHub repositories and fits your specific project needs."
+      "heading": "Authorize Claude to access your GitHub account",
+      "body": "Adding the GitHub connector redirects you to a GitHub authorization screen headed \"Claude by Anthropic wants access to your GitHub account.\" Read the permission list before clicking through — it spells out exactly what you're granting: verifying your GitHub identity, knowing which resources you can access, and acting on your behalf. GitHub also shows how long the app has existed and roughly how many users already use it, which is a useful sanity check before authorizing anything. Click Authorize and you'll be redirected back to Claude automatically.",
+      "image": { "file": "/screenshots/W76BJPoz6No/04.webp", "caption": "GitHub's authorization screen for Claude, listing exactly what access you're granting before you click Authorize." }
     },
     {
-      "heading": "Apply best practices and automation tips",
-      "body": "Use the recommended practices for getting the most out of the integration, including tips for enhancing collaboration among team members using automated tools."
+      "heading": "Confirm the connector is active",
+      "body": "Back in Claude's Connectors settings, switch to the Connected tab and you should see GitHub Integration listed with a Web type and a checkmark under Status. This is the confirmation that the OAuth handshake actually completed — if it's missing here, the authorization didn't go through and you'll need to repeat the previous step rather than assuming it's working in the background.",
+      "image": { "file": "/screenshots/W76BJPoz6No/05.webp", "caption": "Claude's Connectors panel with GitHub Integration showing as connected — the checkmark confirms the authorization succeeded." }
+    },
+    {
+      "heading": "Start referencing your repositories in chat",
+      "body": "With the connector active, you can ask Claude about a specific repository by name, request a summary of recent activity, or have it help draft an issue or pull request description grounded in your actual code rather than a hypothetical example. This is the practical payoff of the setup — Claude can pull real context from your GitHub account instead of you copying files or diffs into the chat manually. It's particularly useful when you're jumping into a repository you haven't touched in a while, since asking Claude for a quick orientation is faster than reading through commit history yourself."
+    },
+    {
+      "heading": "Manage or revoke access later",
+      "body": "If you ever want to disconnect GitHub, the same Connectors panel in Claude's settings is where you'll remove it, and GitHub's own account settings under Applications will also show Claude listed with the ability to revoke access from that side. Doing this occasionally is good hygiene, especially if you've changed which repositories you want an AI tool to see, since revoking and reconnecting is the cleanest way to reset permissions."
+    },
+    {
+      "heading": "Use it well in a team setting",
+      "body": "If you're on a shared team account, agree on a convention for how the connector gets used before everyone starts asking Claude to touch the same repositories — for instance, treating Claude-drafted pull request descriptions as suggestions to review rather than something that gets merged unread. The integration is genuinely useful for cutting down the time spent writing boilerplate documentation and issue summaries, but it works best as a drafting assistant sitting alongside your team's existing review process, not a replacement for it."
     }
   ],
   "faq": [
     {
-      "question": "What can I do once GitHub is connected to Claude AI?",
-      "answer": "The integration opens up automated coding suggestions, enhanced collaboration, and quick access to AI-driven insights within your repositories."
+      "question": "What can I do once GitHub is connected to Claude?",
+      "answer": "Claude can reference your actual repositories in conversation — summarizing activity, helping draft issues or pull requests, and answering questions grounded in your real code instead of hypothetical examples."
     },
     {
-      "question": "Is this integration suitable for beginners?",
-      "answer": "Yes, the tutorial is tailored for both beginners looking to learn about integration and developers seeking to enhance productivity with AI."
+      "question": "Where exactly do I connect GitHub inside Claude?",
+      "answer": "Open Claude's Settings, go to the Customize section, and choose Connectors. Adding GitHub there starts the OAuth flow on GitHub's side."
     },
     {
-      "question": "What if I run into setup issues?",
-      "answer": "The video includes tips for troubleshooting common setup issues as part of the full walkthrough."
+      "question": "What access does Claude actually get when I authorize it?",
+      "answer": "GitHub's authorization screen spells this out explicitly: verifying your GitHub identity, knowing which resources you can access, and acting on your behalf. Review that list before clicking Authorize."
     },
     {
-      "question": "Who is this guide meant for?",
-      "answer": "Software developers, project managers, and anyone interested in leveraging AI within their coding projects."
+      "question": "How do I confirm the integration actually worked?",
+      "answer": "In Claude's Connectors settings, check the Connected tab — GitHub Integration should appear with a checkmark under Status. If it's not listed there, the authorization didn't complete."
+    },
+    {
+      "question": "How do I disconnect GitHub from Claude later?",
+      "answer": "Remove it from the Connectors panel in Claude's settings, or revoke access directly from GitHub's Applications settings — either side works."
     }
   ],
-  "generatedAt": "2026-07-21T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

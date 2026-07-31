@@ -169,6 +169,17 @@ export function getTutorialsByCategoryPaged(categorySlug: string, page: number):
   return { items: all.slice(start, start + CATEGORY_PAGE_SIZE), currentPage, totalPages };
 }
 
+/** Tutorials that have been through the Phase 3 deep-article pass (richer
+ * prose + curated inline images from real extracted frames). This is the
+ * authoritative source for "deep" status — it reads the same `deep` flag
+ * the page template checks, so it can never drift from what's actually
+ * live. Use this to feature these guides on the homepage or elsewhere. */
+export function getDeepTutorials(): PublishedTutorial[] {
+  return getPublishedTutorials()
+    .filter((t) => t.article.deep)
+    .sort((a, b) => b.article.generatedAt.localeCompare(a.article.generatedAt));
+}
+
 export function getRelatedTutorials(current: PublishedTutorial, limit = 4): PublishedTutorial[] {
   return getTutorialsByCategory(current.video.category)
     .filter((t) => t.video.slug !== current.video.slug)

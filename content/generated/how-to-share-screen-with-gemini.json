@@ -2,42 +2,57 @@
   "slug": "how-to-share-screen-with-gemini",
   "seoTitle": "How to Share Your Screen With Gemini for Real-Time AI Help",
   "metaDescription": "Share your screen with Gemini to get real-time AI assistance during presentations, demos, or collaborative problem-solving sessions.",
-  "intro": "Screen sharing with Gemini opens up real-time collaboration where AI can help you work through problems, presentations, or demos as they happen. This guide covers how to start a screen share, use it effectively for collaboration, and troubleshoot common issues.",
+  "intro": "Describing a problem to an AI assistant in text only gets you so far when the problem is actually on your screen. Gemini's Live API in Google AI Studio can watch your screen in real time and talk you through what it sees, which turns a slow back-and-forth into something closer to pairing with a colleague. This guide walks through starting a live session, sharing a window instead of typing out a description, and using that connection for presentations, demos, and troubleshooting. It also covers what to do when the stream doesn't behave, since screen sharing depends on browser permissions that trip people up the first time.",
   "steps": [
     {
-      "heading": "Initiate screen sharing in Gemini",
-      "body": "Start the screen share directly within Gemini, which sets up the connection needed for real-time collaboration."
+      "heading": "Open Google AI Studio and start a Live session",
+      "body": "Screen sharing with Gemini happens through the Playground in Google AI Studio, not the consumer Gemini app, so head to aistudio.google.com and sign in with your Google account. In the Playground, the run settings panel on the right lets you pick the model powering the session — the Live variant (labeled as a low-latency, audio-to-audio model built for real-time dialogue) is what enables screen and voice interaction rather than plain text chat. Leave the default voice and media resolution settings alone for your first run; you can tune those later once you know the workflow. This is also where you'd add system instructions if you want Gemini to adopt a particular tone while it's watching your session."
     },
     {
-      "heading": "Use screen sharing for real-time collaboration",
-      "body": "Apply the feature during dynamic presentations, brainstorming sessions, or problem-solving where showing your screen live adds value over describing it in text."
+      "heading": "Find the Share Screen option",
+      "body": "Once you're in a fresh Playground session, the center of the screen shows three buttons for starting the Live API: Talk, Webcam, and Share Screen. Share Screen is the one that matters here — clicking it hands control to your browser's own screen-sharing dialog rather than anything Google-specific, so the picker you see next is the same one you'd get sharing a window in a video call.",
+      "image": { "file": "/screenshots/t9IWQGytRys/03.webp", "caption": "The Live API Playground with its three entry points — Talk, Webcam, and Share Screen — before a session has started." }
     },
     {
-      "heading": "Follow best practices for presentations and demos",
-      "body": "Use the tips covered to make your screen-sharing sessions clearer and more effective, whether presenting to a client or guiding your team through a demo."
+      "heading": "Choose a window and confirm the stream",
+      "body": "Your browser will ask which window, tab, or full screen you want to share. Pick a specific application window when you can — sharing your entire desktop tends to send Gemini more visual noise than it needs and can expose things you didn't mean to show. After you confirm, AI Studio drops a small live thumbnail of the shared window into the Playground and a persistent bar at the bottom of the browser reading \"aistudio.google.com is sharing a window,\" with a Stop sharing button next to it. That bar is your indicator that the feed is actually live, and it's the fastest way to check the connection without asking Gemini anything.",
+      "image": { "file": "/screenshots/t9IWQGytRys/04.webp", "caption": "A window mid-share — the thumbnail preview in the center of the Playground and the \"Stream is live\" status confirm Gemini can see it." }
     },
     {
-      "heading": "Troubleshoot common screen sharing issues",
-      "body": "If you run into problems while sharing your screen, work through the troubleshooting guidance provided to get the session back on track."
+      "heading": "Talk to Gemini about what's on screen",
+      "body": "With the stream live, use the Talk button or the text prompt box to ask questions about whatever is visible in the shared window. Because Gemini is processing the video in real time, you can point at specific elements verbally — a chart, an error message, a line of code — instead of describing them from scratch, and it will respond to what's actually rendered at that moment. This is the core value of the feature over a static screenshot upload: the model reacts to changes as you make them, so you can iterate live instead of re-capturing and re-asking."
+    },
+    {
+      "heading": "Use it for presentations, demos, and collaboration",
+      "body": "The same setup works well beyond one-on-one troubleshooting. Share a slide deck or a live product and let Gemini answer audience questions about what's on screen, or use it during a client walkthrough so it can flag inconsistencies or summarize sections as you move through them. For team demos, it doubles as a second set of eyes — ask it to note anything confusing about the flow you're showing, since it's seeing the interface with no prior context, similar to a first-time user."
+    },
+    {
+      "heading": "Troubleshoot a stream that won't start or drops out",
+      "body": "Most Share Screen problems trace back to browser permissions rather than Gemini itself. If the picker never appears, check that your browser has screen-recording permission enabled at the OS level, not just inside the browser's own settings — this is a common blocker on macOS in particular. If the stream starts but freezes, confirm you shared a window and not a tab that's since been closed or navigated away from, since that severs the feed. And if Gemini seems to respond to a stale image, give it a few seconds — there's a small delay between what changes on your screen and what the model has actually processed, so pause briefly after making a change before asking about it."
     }
   ],
   "faq": [
     {
       "question": "What is screen sharing with Gemini useful for?",
-      "answer": "It supports dynamic presentations, collaborative brainstorming sessions, and effective problem-solving in real time, making it useful for both client-facing and internal work."
+      "answer": "It supports dynamic presentations, collaborative brainstorming sessions, and real-time troubleshooting, making it useful for both client-facing demos and internal debugging where describing the screen in text would be slower."
     },
     {
-      "question": "What if screen sharing doesn't work properly?",
-      "answer": "The tutorial includes a section specifically on troubleshooting common screen sharing issues to help resolve typical problems."
+      "question": "Where do I actually turn on screen sharing with Gemini?",
+      "answer": "Through the Live API Playground in Google AI Studio (aistudio.google.com), using the Share Screen button alongside Talk and Webcam — not the standard Gemini chat app."
+    },
+    {
+      "question": "Why won't the screen share start?",
+      "answer": "It's almost always a permissions issue. Check that your browser has screen-recording access enabled at the operating system level, then retry the Share Screen button."
     },
     {
       "question": "Is this feature only for professionals?",
-      "answer": "No, it's designed for beginners, business professionals, and educators, so both casual and professional users can benefit."
+      "answer": "No — it works the same way for casual use, like getting help with a personal project, as it does for client-facing presentations or team demos."
     },
     {
-      "question": "How does AI factor into the screen sharing experience?",
-      "answer": "Gemini's integration with AI offers advanced features that streamline your workflow and improve collaboration during the shared session."
+      "question": "Can Gemini react to changes on my screen as I make them?",
+      "answer": "Yes, since the model processes the shared window continuously, though there's a short delay between a change and Gemini registering it, so pause briefly before asking about something you just did."
     }
   ],
-  "generatedAt": "2026-07-21T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }
