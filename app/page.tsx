@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { getCategories, getNewestTutorials } from "@/lib/data";
+import { getCategories, getFeaturedDeepTutorials } from "@/lib/data";
 import { CategoryCard } from "@/components/CategoryCard";
 import { TutorialListItem } from "@/components/TutorialListItem";
 import { SITE_NAME } from "@/lib/site";
 
 export default function Home() {
   const categories = getCategories();
-  const latest = getNewestTutorials(10);
+  const latest = getFeaturedDeepTutorials(10);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
@@ -23,7 +23,10 @@ export default function Home() {
 
       {latest.length > 0 && (
         <section id="latest" className="mt-16 scroll-mt-20">
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">Latest tutorials</h2>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">Recently updated guides</h2>
+          <p className="mt-2 max-w-2xl text-muted">
+            Rewritten with real in-app screenshots and a fuller walkthrough, across different tools.
+          </p>
           <div className="mt-6 max-w-3xl">
             {latest.map((t) => (
               <TutorialListItem key={t.video.id} tutorial={t} showCategory />

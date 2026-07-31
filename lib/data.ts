@@ -180,6 +180,42 @@ export function getDeepTutorials(): PublishedTutorial[] {
     .sort((a, b) => b.article.generatedAt.localeCompare(a.article.generatedAt));
 }
 
+/** A homepage-ready slice of `getDeepTutorials()`: recently rewritten guides
+ * spread across different tool categories rather than clustered in whichever
+ * niche happened to get the most recent batch. Round-robins one pick per
+ * category, each category's own list newest-first, until `limit` is hit. */
+export function getFeaturedDeepTutorials(limit = 10): PublishedTutorial[] {
+  const deep = getDeepTutorials();
+  const byCategory = new Map<string, PublishedTutorial[]>();
+  for (const t of deep) {
+    const key = t.video.category;
+    if (!byCategory.has(key)) byCategory.set(key, []);
+    byCategory.get(key)!.push(t);
+  }
+  // Categories ordered by their most-recently-rewritten article, so the
+  // freshest niches get first pick in the round-robin.
+  const categoryOrder = [...byCategory.keys()].sort(
+    (a, b) => byCategory.get(b)![0].article.generatedAt.localeCompare(byCategory.get(a)![0].article.generatedAt)
+  );
+
+  const out: PublishedTutorial[] = [];
+  let round = 0;
+  while (out.length < limit) {
+    let addedThisRound = false;
+    for (const category of categoryOrder) {
+      if (out.length >= limit) break;
+      const pick = byCategory.get(category)![round];
+      if (pick) {
+        out.push(pick);
+        addedThisRound = true;
+      }
+    }
+    if (!addedThisRound) break; // every category exhausted
+    round += 1;
+  }
+  return out;
+}
+
 export function getRelatedTutorials(current: PublishedTutorial, limit = 4): PublishedTutorial[] {
   return getTutorialsByCategory(current.video.category)
     .filter((t) => t.video.slug !== current.video.slug)

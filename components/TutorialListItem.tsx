@@ -14,9 +14,14 @@ export function TutorialListItem({
   showCategory?: boolean;
 }) {
   const { video, article } = tutorial;
-  // medium (320x180) is 16:9 like the container and ~10KB. Images are served
-  // unoptimised, so pick a source close to the display size rather than maxres.
+  // Deep articles get their first real in-app screenshot as the card image —
+  // it reads as genuine tutorial content rather than a video thumbnail.
+  // Everything else falls back to the YouTube thumbnail. medium (320x180) is
+  // 16:9 like the container and ~10KB; images are served unoptimised, so
+  // pick a source close to the display size rather than maxres.
+  const deepImage = article.deep ? article.steps.find((s) => s.image)?.image : undefined;
   const thumb = video.thumbnails.medium ?? video.thumbnails.maxres ?? video.thumbnails.high;
+  const imageSrc = deepImage?.file ?? thumb?.url;
   const href = `/tutorials/${video.category}/${video.slug}`;
 
   return (
@@ -30,9 +35,9 @@ export function TutorialListItem({
         tabIndex={-1}
         aria-hidden="true"
       >
-        {thumb && (
+        {imageSrc && (
           <Image
-            src={thumb.url}
+            src={imageSrc}
             alt=""
             fill
             sizes="(min-width: 640px) 224px, 100vw"
