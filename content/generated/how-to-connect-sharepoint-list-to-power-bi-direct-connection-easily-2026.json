@@ -2,18 +2,42 @@
   "slug": "how-to-connect-sharepoint-list-to-power-bi-direct-connection-easily-2026",
   "seoTitle": "How to Connect a SharePoint List to Power BI Directly",
   "metaDescription": "Learn how to set up a direct connection from a SharePoint list to Power BI so your list data flows into reports without manual exports.",
-  "intro": "If your team tracks data in a SharePoint list, you don't need to export it manually to build a Power BI report. This tutorial covers the direct connection between SharePoint and Power BI, including the settings needed on both sides.",
+  "intro": "If your team tracks data in a SharePoint list, you don't need to export it manually to build a Power BI report. Power BI has a dedicated SharePoint Online Lists connector built specifically for this, sitting right alongside the Excel and SharePoint folder options in Get Data. This tutorial covers where that connector lives, the exact fields it asks for — including a setting that trips people up if they get it wrong — and how to keep the list data flowing in without repeating the setup every time.",
   "steps": [
-    { "heading": "Review your SharePoint list", "body": "Confirm the SharePoint list you want to connect has the columns and data structure your report needs." },
-    { "heading": "Connect from Power BI", "body": "In Power BI, use the SharePoint List connector and enter the site URL where your list lives." },
-    { "heading": "Configure the connection settings", "body": "Select the specific list and fields you want to import, then set the authentication method for your organization." },
-    { "heading": "Visualize the data", "body": "Build report visuals using the imported list data, such as tracking project status or customer feedback." }
+    {
+      "heading": "Review your SharePoint list before connecting",
+      "body": "Confirm the list you want to pull in actually has the columns your report needs — status fields, dates, owners, whatever you're planning to build visuals around. It's much easier to add a missing column in SharePoint before connecting than to discover the gap after you've already built half a report in Power BI Desktop."
+    },
+    {
+      "heading": "Open Get Data and find the SharePoint connectors",
+      "body": "In Power BI Desktop, click Get Data to open the full source catalog. You'll notice SharePoint folder listed under File, but that's for document libraries — a list of files, not structured list data. What you actually want is a level down in the catalog, under Online Services, where the dedicated SharePoint Online Lists connector lives.",
+      "image": { "file": "/screenshots/NErgUe7AwC4/03.webp", "caption": "The Get Data catalog with its full connector list. SharePoint folder appears under File, but list data needs the separate SharePoint Online Lists connector." }
+    },
+    {
+      "heading": "Enter the site URL and choose the right implementation",
+      "body": "Selecting SharePoint Online Lists opens a dialog asking for the Site URL — and this is the detail most people get wrong: it wants the root URL of the SharePoint site itself, not a link to the specific list or a subfolder within it. Paste something like https://yourcompany.sharepoint.com/sites/yourteam and nothing more; adding the list path onto the end causes the connection to fail or return nothing. Below that, an Implementation setting offers 2.0 or 1.0 — leave it on 2.0 unless you have a specific reason to fall back, since it's the newer, more reliable engine.",
+      "image": { "file": "/screenshots/NErgUe7AwC4/04.webp", "caption": "The SharePoint Online Lists connector dialog — Site URL, an Implementation choice between 2.0 and 1.0, and an Advanced options section with View Mode." }
+    },
+    {
+      "heading": "Set the View Mode in Advanced options",
+      "body": "Expanding Advanced options reveals a View Mode dropdown, defaulted to \"All - Retrieve all columns from a SharePoint list.\" This pulls every column regardless of whether it's shown in any SharePoint view, which is usually what you want for a report, but it can also drag in hidden system columns you don't need. If your list has a lot of internal metadata columns, switching this to a specific view can cut down the noise and speed up your refresh."
+    },
+    {
+      "heading": "Pick the list and authenticate",
+      "body": "After confirming the site URL, Power BI's Navigator shows every list available at that site — pick the one you actually need rather than everything visible, since a busy SharePoint site can easily have a dozen lists unrelated to your report. You'll be prompted to authenticate with your organizational account if you haven't already; make sure it's an account with at least read access to that specific list, not just the site in general, since list-level permissions can be more restrictive."
+    },
+    {
+      "heading": "Build visuals and keep the connection current",
+      "body": "Once loaded, list data behaves like any other Power BI table — build status trackers, feedback summaries, or timeline visuals directly from the columns you pulled in. Publish to the Power BI service and set a scheduled refresh so changes made in the SharePoint list, like a status update or a new row, show up in the report without anyone re-running the import by hand."
+    }
   ],
   "faq": [
-    { "question": "Does this connection require any special SharePoint permissions?", "answer": "You need at least read access to the SharePoint site and list to pull the data into Power BI." },
-    { "question": "Can I refresh the data automatically after the initial connection?", "answer": "Yes, you can set up scheduled refreshes so your report reflects the latest changes made to the SharePoint list." },
-    { "question": "Will formatting or formulas in SharePoint carry over into Power BI?", "answer": "Power BI pulls in the underlying data values; visual formatting from SharePoint doesn't transfer, since you'll style visuals separately in Power BI." },
-    { "question": "Can multiple SharePoint lists be combined into one Power BI report?", "answer": "Yes, you can connect to several lists and merge or relate them within your Power BI data model." }
+    { "question": "Does this connection require any special SharePoint permissions?", "answer": "You need at least read access to the SharePoint site and specifically to the list, since list-level permissions can be more restrictive than general site access." },
+    { "question": "What URL should I enter in the SharePoint Online Lists connector?", "answer": "The root URL of the SharePoint site itself, such as https://yourcompany.sharepoint.com/sites/yourteam — not a link to the specific list or a subfolder, which is the most common reason this connection fails." },
+    { "question": "Should I use Implementation 2.0 or 1.0?", "answer": "Stick with 2.0 unless you have a specific compatibility reason to use 1.0. It's the newer, more reliable engine and is the default for good reason." },
+    { "question": "Can I refresh the data automatically after the initial connection?", "answer": "Yes, you can set up scheduled refreshes once the report is published to the Power BI service, so your report reflects the latest changes made to the SharePoint list." },
+    { "question": "Can multiple SharePoint lists be combined into one Power BI report?", "answer": "Yes, you can connect to several lists — from the same site or different ones — and merge or relate them within your Power BI data model." }
   ],
-  "generatedAt": "2026-07-21T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

@@ -2,19 +2,42 @@
   "slug": "how-to-connect-github-to-power-bi-track-repos-commits-easily-2026",
   "seoTitle": "How to Connect GitHub to Power BI for Repo Tracking",
   "metaDescription": "Learn how to connect GitHub to Power BI so you can pull repository and commit data into dashboards for tracking development activity and team output.",
-  "intro": "Engineering teams generate a huge amount of activity data in GitHub, but it rarely gets turned into something leadership can actually look at. This guide walks through connecting GitHub to Power BI so repository and commit history can feed into visual reports. It's built for developers and project managers who want clearer visibility into code contributions without manually exporting spreadsheets.",
+  "intro": "Engineering teams generate a huge amount of activity data in GitHub, but it rarely gets turned into something leadership can actually look at. Power BI doesn't ship a built-in GitHub connector, so the fastest path for most teams runs through the Power BI apps marketplace or a Web-based API connection rather than a dedicated GitHub button in Get Data. This guide walks through where that setup starts inside your Power BI workspace, how to install or build a connection for repository data, and how to turn commit history into something a manager can actually read.",
   "steps": [
-    { "heading": "Set up GitHub access", "body": "Generate the credentials Power BI needs to read your repository data, typically a personal access token with the appropriate read scopes for your GitHub account or organization." },
-    { "heading": "Connect Power BI to GitHub", "body": "In Power BI Desktop, use Get Data to start a new connection, enter your repository details, and authenticate with the token or credentials you generated." },
-    { "heading": "Import and shape the data", "body": "Pull in the repos, commits, and related fields you need through Power Query, filtering and cleaning the data so only the relevant history comes through." },
-    { "heading": "Build visuals around commit activity", "body": "Create charts and tables that track commits over time, contributor activity, or repository comparisons to surface useful development trends." },
-    { "heading": "Refresh the connection regularly", "body": "Set up scheduled refreshes so your dashboard keeps reflecting new commits and repository changes without manual re-importing." }
+    {
+      "heading": "Start from your Power BI workspace",
+      "body": "Everything begins in My workspace, the default landing page in the Power BI service where your reports, semantic models, and dashboards are listed by name, type, owner, and last refresh time. Before connecting any new source, it's worth glancing at what's already here — this is also where the GitHub-fed report will eventually live once it's built, alongside whatever other reports and dashboards your workspace already has.",
+      "image": { "file": "/screenshots/ScfYKKVCZqM/02.webp", "caption": "The Power BI service's My workspace view, listing existing reports, semantic models, and dashboards by name, type, and owner." }
+    },
+    {
+      "heading": "Generate a GitHub personal access token",
+      "body": "Since there's no native GitHub connector, authentication runs through GitHub's own token system rather than an OAuth prompt inside Power BI. In your GitHub account settings, create a personal access token scoped for read access to repositories and commits — for an organization repo, make sure the token has the right org-level permissions too, since a token that only covers your personal repos will fail silently against anything you don't directly own."
+    },
+    {
+      "heading": "Check the Power BI apps marketplace for a template",
+      "body": "From the workspace, the Apps section opens a marketplace of installable apps from Microsoft and third parties, covering everything from inventory and emissions dashboards to finance and manufacturing templates. It's worth searching this list before building a connection from scratch, since a pre-built template app can save you the work of designing the report layer yourself — though for GitHub specifically, most teams end up building their own connection rather than finding an exact match here.",
+      "image": { "file": "/screenshots/ScfYKKVCZqM/04.webp", "caption": "The Power BI apps marketplace, where you can browse and install pre-built report templates before deciding whether to build a custom GitHub connection." }
+    },
+    {
+      "heading": "Connect to the GitHub API as a Web data source",
+      "body": "Back in Power BI Desktop, use Get Data and choose Web, then point it at a GitHub REST API endpoint for the repository you want — commits, issues, or pull request data all have their own endpoints. Paste your personal access token into the HTTP request header when prompted for authentication rather than the URL itself, since embedding it in the address is both less secure and more likely to break if GitHub rotates its API format."
+    },
+    {
+      "heading": "Shape the JSON response in Power Query",
+      "body": "GitHub's API returns commit and repo data as nested JSON, which Power Query needs to expand into flat columns before it's usable in a visual — expect to click through a few Expand and Convert to Table steps to get commit author, date, and message into their own columns. Filter out any noise, like automated bot commits or merge commits, if they'd otherwise skew a chart of contributor activity."
+    },
+    {
+      "heading": "Build the activity visuals and schedule a refresh",
+      "body": "A line chart of commits over time by contributor, or a table comparing commit counts across repositories, are the two views most teams reach for first. Publish the report back to the workspace you started in, then set a scheduled refresh — GitHub API rate limits mean an hourly refresh is usually more than sufficient, and a refresh scheduled too aggressively risks hitting those limits for no real benefit."
+    }
   ],
   "faq": [
     { "question": "Do I need admin access to a GitHub repo to connect it to Power BI?", "answer": "You need at minimum read access to the repository, and a personal access token scoped for that access, though admin rights aren't strictly required for public read data." },
+    { "question": "Does Power BI have a dedicated GitHub connector?", "answer": "No. There's no GitHub connector in Power BI's Get Data catalog, so the common approach is connecting to the GitHub REST API through the Web connector, authenticated with a personal access token." },
     { "question": "Can Power BI show data from multiple GitHub repositories at once?", "answer": "Yes, you can import data from several repositories and combine or compare them within the same Power BI report." },
-    { "question": "How often does the GitHub data update in Power BI?", "answer": "Data only updates when the report is refreshed, so scheduling automatic refreshes keeps commit and repo data reasonably current." },
-    { "question": "Is a paid GitHub plan required for this integration?", "answer": "Basic repository and commit data is generally accessible through the GitHub API on free accounts, provided you have proper read permissions." }
+    { "question": "How often does the GitHub data update in Power BI?", "answer": "Data only updates when the report is refreshed, so scheduling automatic refreshes keeps commit and repo data reasonably current — hourly is usually enough and helps avoid GitHub's API rate limits." },
+    { "question": "Is a paid GitHub plan required for this integration?", "answer": "Basic repository and commit data is generally accessible through the GitHub API on free accounts, provided you have proper read permissions and a valid personal access token." }
   ],
-  "generatedAt": "2026-07-21T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

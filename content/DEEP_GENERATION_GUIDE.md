@@ -10,7 +10,12 @@ Read that file first. It is the quality bar, not just an example.
 
 ## What "deep" means
 
-- ~900-1,200 words total across `intro` + all `steps[].body`.
+- ~900-1,200 words total across `intro` + all `steps[].body` is the *aim*,
+  not a pass/fail gate. Write each step to actually teach something, then
+  stop — a well-sourced, honest 750-word article is a better result than
+  padding it to hit a number. **Write each article once and move on.** Do
+  not re-open a file you already finished to nudge its word count up;
+  once a video's file is written, treat it as done and go to the next one.
 - 5-7 steps. Not every step needs an image — the reference article has 3
   images across 5 steps, because only 3 of the extracted frames were genuine
   usable UI shots.

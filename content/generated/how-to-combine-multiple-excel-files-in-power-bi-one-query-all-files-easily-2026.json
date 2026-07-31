@@ -2,19 +2,44 @@
   "slug": "how-to-combine-multiple-excel-files-in-power-bi-one-query-all-files-easily-2026",
   "seoTitle": "How to Combine Multiple Excel Files in Power BI Easily",
   "metaDescription": "Learn how to combine multiple Excel files into one Power BI query, saving time when consolidating budgets, reports, or data from several sources.",
-  "intro": "Manually pasting together data from a dozen separate Excel files is tedious and error-prone, especially when new files keep arriving. This guide shows how to combine multiple Excel files in Power BI using a single query, so all your source files feed into one clean table. It's particularly useful for finance and operations teams consolidating reports from different departments.",
+  "intro": "Manually pasting together data from a handful of separate Excel files is tedious and error-prone, especially when new files keep arriving from different departments. This guide shows how to combine multiple Excel files in Power BI using the Folder connector's built-in Combine option, so every file in a folder feeds into one clean table through a single query. It also covers a save error that can show up midway through the process, since knowing what it means saves a lot of confused troubleshooting the first time you hit it.",
   "steps": [
-    { "heading": "Prepare your Excel files", "body": "Store the files you want to combine in a single folder, and make sure they share a consistent structure so the combination step works smoothly." },
-    { "heading": "Access the Power BI query editor", "body": "Use Get Data and choose the Folder option to point Power BI at the folder containing all your Excel files." },
-    { "heading": "Combine the files", "body": "Use the Combine & Transform option in the query editor to merge the contents of every file in the folder into a single unified table." },
-    { "heading": "Finalize data transformations", "body": "Clean up column names, remove duplicate headers, and adjust data types so the combined table is consistent and ready to use." },
-    { "heading": "Refresh as new files are added", "body": "Because the query points to the folder rather than individual files, refreshing the report will automatically pick up any new files added later." }
+    {
+      "heading": "Put your Excel files in one folder",
+      "body": "Before opening Power BI, gather the files you want to combine into a single folder — in this walkthrough that's a folder on the desktop containing EmployeeData.xlsx and SalesReport.xlsx. The files should share a reasonably consistent structure, since the combine step works by stacking each file's contents on top of the others; wildly different column layouts between files will produce a messy result even if the combine itself succeeds."
+    },
+    {
+      "heading": "Choose Excel workbook from Get Data",
+      "body": "From an open report, click Get Data to see the Common data sources list, with Excel workbook as the first option and a tooltip confirming \"Import data from a Microsoft Excel workbook.\" For combining several files at once rather than a single workbook, you'll actually want the Folder connector further down the same list, which is the one that scans an entire directory instead of asking you to pick one file.",
+      "image": { "file": "/screenshots/9w5jNPhDaG8/02.webp", "caption": "The Get Data source list, with Excel workbook highlighted — the Folder connector nearby is the one that scans a whole directory for combining." }
+    },
+    {
+      "heading": "Point the Folder connector at your files",
+      "body": "Once you select Folder and browse to the directory, Power BI lists every file it finds inside — here, EmployeeData.xlsx and SalesReport.xlsx, each with its extension, dates, and full folder path shown in a table. At the bottom of this dialog sit four buttons: Combine, Load, Transform Data, and Cancel. Combine is the one that does the actual merging work, so that's what you click next rather than Load, which would just import the file list itself as a table of metadata.",
+      "image": { "file": "/screenshots/9w5jNPhDaG8/03.webp", "caption": "The Folder connector's file list, showing every Excel file found in the folder along with its extension, dates, and path, ready to combine." }
+    },
+    {
+      "heading": "Choose Combine & Transform vs. Combine & Load",
+      "body": "Clicking Combine opens a small menu with two choices: Combine & Transform Data and Combine & Load. Combine & Transform Data routes you through Power Query first, letting you clean column names, fix data types, and remove any duplicate header rows before anything loads into your report — this is the safer default almost every time. Combine & Load skips straight to loading the merged result, which is faster but leaves you cleaning up formatting problems after the fact instead of before.",
+      "image": { "file": "/screenshots/9w5jNPhDaG8/04.webp", "caption": "The Combine menu, offering Combine & Transform Data or Combine & Load — Transform first is the safer choice for catching formatting issues early." }
+    },
+    {
+      "heading": "Recognize a save error if one shows up",
+      "body": "Occasionally, applying changes after a combine throws a Load error like the one shown here: \"Failed to save modifications to the server. Error returned: 'OLE DB or ODBC error: [Expression.Error] The key didn't match any rows in the table.'\" This typically points to a mismatch between what a query step expects and what's actually in the combined data — often because one of the source files has a renamed column or a structural difference from the others. If you hit this, go back into Power Query, check each source file's query step by step, and confirm the column names driving the combine are identical across every file before reapplying.",
+      "image": { "file": "/screenshots/9w5jNPhDaG8/05.webp", "caption": "A Load error after applying changes — a sign that one of the combined files has a structural mismatch worth checking in Power Query." }
+    },
+    {
+      "heading": "Refresh to pick up new files automatically",
+      "body": "The real payoff of connecting to a folder rather than individual files is that the query isn't tied to specific filenames — it's tied to the folder itself. Drop a new file with the same structure into that folder and hit Refresh, and Power BI picks it up and folds it into the combined table without you touching the query again. This is what makes the folder-based approach worth the initial setup over just importing each file separately."
+    }
   ],
   "faq": [
-    { "question": "Do all the Excel files need identical column structures?", "answer": "It works best when files share the same columns and layout, since mismatched structures can cause errors or missing data during the combine step." },
-    { "question": "What happens if I add a new Excel file to the folder later?", "answer": "As long as the query is connected to the folder, refreshing the report will automatically include the new file's data in the combined table." },
-    { "question": "Can I combine files from different folders?", "answer": "Power BI's folder-based combine feature works on a single folder, though you can use additional query steps to bring in files from more than one location." },
+    { "question": "Do all the Excel files need identical column structures?", "answer": "It works best when files share the same columns and layout, since mismatched structures can cause errors — including save errors like a key not matching rows in the table — or missing data during the combine step." },
+    { "question": "What happens if I add a new Excel file to the folder later?", "answer": "As long as the query is connected to the folder, refreshing the report will automatically include the new file's data in the combined table, no query changes needed." },
+    { "question": "Should I use Combine & Transform Data or Combine & Load?", "answer": "Combine & Transform Data is the safer default, since it routes you through Power Query first to clean column names and data types before anything loads. Combine & Load is faster but skips that cleanup step." },
+    { "question": "What does a 'key didn't match any rows in the table' error mean during combine?", "answer": "It usually signals a structural mismatch between one of the source files and what a query step expects — commonly a renamed or differently formatted column. Check each file's structure in Power Query before reapplying changes." },
     { "question": "Will combining large numbers of files slow down my report?", "answer": "Combining many large files can increase refresh times, so it's worth monitoring performance and considering filtering unnecessary data early in the process." }
   ],
-  "generatedAt": "2026-07-21T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

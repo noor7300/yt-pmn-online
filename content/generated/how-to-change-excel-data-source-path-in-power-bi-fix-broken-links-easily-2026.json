@@ -2,18 +2,42 @@
   "slug": "how-to-change-excel-data-source-path-in-power-bi-fix-broken-links-easily-2026",
   "seoTitle": "Fix Broken Excel Links by Changing Data Source Path",
   "metaDescription": "Learn how to change the Excel data source path in Power BI to fix broken links after a file gets moved, renamed, or shared to a new location.",
-  "intro": "Reports built on Excel data break the moment the underlying file moves, gets renamed, or is shared to a different folder path, and Power BI won't fix that on its own. This guide covers locating the current broken link and updating the data source path so your report reconnects properly. It's a short fix aimed at anyone who's opened a report to find it can't find its Excel file anymore.",
+  "intro": "Reports built on Excel data break the moment the underlying file moves, gets renamed, or is shared to a different folder path, and Power BI won't fix that on its own. This guide covers locating the current broken link and updating the data source path so your report reconnects properly, using the Data source settings dialog where the actual fix happens. It's a short fix aimed at anyone who's opened a report to find its visuals still there but the numbers refusing to refresh.",
   "steps": [
-    { "heading": "Understand why the data source path breaks", "body": "Excel-based data sources in Power BI reference an exact file path, so moving, renaming, or relocating the file to a shared drive will break the connection." },
-    { "heading": "Locate the broken link", "body": "Open the Power BI report and check for a data source error, then go to Data Source Settings to see which Excel connection is failing." },
-    { "heading": "Change the data source path", "body": "In Data Source Settings, select the affected source and use the Change Source option to point it to the file's current location." },
-    { "heading": "Ensure data consistency going forward", "body": "Consider storing the Excel file in a stable, shared location like OneDrive or SharePoint so future moves are less likely to break the connection." }
+    {
+      "heading": "Understand why the path breaks in the first place",
+      "body": "Excel-based data sources in Power BI reference an exact file path recorded at the moment you first connected — something like c:\\users\\pc\\downloads\\sample.csv. Move that file to a different folder, rename it, or push it to a shared drive, and Power BI has no way to follow it; the connection just stops resolving. This is the same reason a report can look completely fine when you open it and only fail the moment you try to refresh."
+    },
+    {
+      "heading": "Recognize the symptom in the report itself",
+      "body": "A report with a broken source usually still renders its last successful data pull, so tables and pie charts like the ones here keep showing numbers even though the connection underneath them is dead. The tell is that a manual refresh either errors out or silently does nothing — the sale figures and month breakdowns stay frozen at whatever they were the last time the file was reachable, which is easy to miss if nobody's actively watching for it.",
+      "image": { "file": "/screenshots/EXXM1TaxhOE/03.webp", "caption": "A Power BI report with tables and a pie chart built on Excel data — the visuals still render even when the underlying file connection has broken." }
+    },
+    {
+      "heading": "Open Data source settings to find the failing connection",
+      "body": "From the ribbon, go to File > Options and settings > Data source settings, which opens a dialog listing every source the current report has ever connected to — you can see the full mix here, from local downloads folders and CSV files to a OneDrive-hosted financial workbook and a web API endpoint. Each row is a separate connection, so scan for the specific Excel file causing the error rather than assuming it's the first one in the list."
+    },
+    {
+      "heading": "Use Change Source to point to the file's new location",
+      "body": "Select the broken entry and click Change Source at the bottom of the dialog. This opens a file browser where you navigate to wherever the Excel file actually lives now — a different folder, a renamed file, or a shared drive it got moved to. Confirm the selection and Power BI rewrites its stored path to match, which is the entire fix; nothing else about the report's structure changes.",
+      "image": { "file": "/screenshots/EXXM1TaxhOE/04.webp", "caption": "The Data source settings dialog, listing every connected source with Change Source, Edit Permissions, and Clear Permissions options at the bottom." }
+    },
+    {
+      "heading": "Refresh and confirm the connection holds",
+      "body": "After changing the source, trigger a manual refresh from the Home ribbon and watch for errors. If the file structure changed along with its location — different column names or a renamed sheet — you may also need to revisit the query in Power Query Editor, but a straightforward move or rename typically resolves the moment the refresh completes cleanly."
+    },
+    {
+      "heading": "Move the file to a location that won't break again",
+      "body": "A local downloads folder is the single most common source of these errors, since it's exactly where files get reorganized, renamed, or cleaned out without anyone thinking about the report depending on them. Moving the source Excel file to a stable, shared location like OneDrive or SharePoint — the way the financial sample workbook in the settings list already was — means the path stays constant even as people on the team come and go."
+    }
   ],
   "faq": [
     { "question": "Where do I fix a broken Excel data source in Power BI?", "answer": "Go to File > Options and Settings > Data Source Settings, select the broken connection, and use Change Source to update the file path." },
     { "question": "Why does my Power BI report break every time I move the Excel file?", "answer": "This happens because Power BI stores the exact file path used when the connection was first created, so any change to that path requires manually updating the source." },
-    { "question": "How can I prevent broken links to Excel files in the future?", "answer": "Storing your Excel source in a consistent shared location, like a OneDrive or SharePoint folder rather than a local drive, reduces the chances of the path changing unexpectedly." },
+    { "question": "Why do my charts still show numbers if the connection is broken?", "answer": "Power BI displays the last successfully loaded data even after a source stops resolving. The visuals won't update until you fix the path and refresh successfully, so a broken connection can go unnoticed for a while." },
+    { "question": "How can I prevent broken links to Excel files in the future?", "answer": "Storing your Excel source in a consistent shared location, like a OneDrive or SharePoint folder rather than a local downloads folder, reduces the chances of the path changing unexpectedly." },
     { "question": "Does fixing the data source path affect my existing report visuals?", "answer": "No, updating the path just reconnects Power BI to the correct file — as long as the structure of the data hasn't changed, your visuals and measures stay intact." }
   ],
-  "generatedAt": "2026-07-21T10:05:06.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

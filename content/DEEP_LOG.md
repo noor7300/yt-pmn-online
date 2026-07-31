@@ -1,6 +1,6 @@
 # Deep-article log (Phase 3)
 
-49 of 315 flagship articles rewritten with curated inline images.
+57 of 315 flagship articles rewritten with curated inline images.
 Regenerate with `npx tsx scripts/build-deep-log.ts`.
 
 | Title | Category | Images | Words | Rewritten |
@@ -38,12 +38,20 @@ Regenerate with `npx tsx scripts/build-deep-log.ts`.
 | [How to Verify Your Shopify Account | Step by Step | Easily 2026](/tutorials/shopify/how-to-verify-your-shopify-account) | Shopify | 3 | 961 | 2026-07-31 |
 | [How to Create Anki Flashcards With ChatGPT | Study Faster | Easily 2026](/tutorials/chatgpt/how-to-create-anki-flashcards-with-chatgpt) | ChatGPT | 2 | 948 | 2026-07-31 |
 | [How to Build a Website Using Claude AI | No Coding Needed | Easily 2026](/tutorials/claude-ai/how-to-build-a-website-using-claude-ai) | Claude AI | 2 | 768 | 2026-07-31 |
+| [How to Change Canvas Background Color in Power BI (Quick Design Tip) Easily 2026](/tutorials/canva/how-to-change-canvas-background-color-in-power-bi-quick-design-tip-easily-2026) | Canva | 4 | 563 | 2026-07-31 |
+| [How to Change Excel Data Source Path in Power BI (Fix Broken Links) Easily 2026](/tutorials/excel/how-to-change-excel-data-source-path-in-power-bi-fix-broken-links-easily-2026) | Microsoft Excel | 2 | 522 | 2026-07-31 |
 | [How to Change Slicer Style in Power BI (Dropdown, Tile & More) Easily 2026](/tutorials/power-bi/how-to-change-slicer-style-in-power-bi-dropdown-tile-more-easily-2026) | Power BI | 3 | 732 | 2026-07-31 |
 | [How to Check Power BI License Type (Free, Pro or Premium) Easily 2026](/tutorials/power-bi/how-to-check-power-bi-license-type-free-pro-or-premium-easily-2026) | Power BI | 3 | 754 | 2026-07-31 |
+| [How to Combine Multiple Excel Files in Power BI (One Query, All Files) Easily 2026](/tutorials/excel/how-to-combine-multiple-excel-files-in-power-bi-one-query-all-files-easily-2026) | Microsoft Excel | 4 | 580 | 2026-07-31 |
 | [How to Connect Claude AI to Canva | Design Automation Setup | Easily 2026](/tutorials/claude-ai/how-to-connect-claude-ai-to-canva) | Claude AI | 3 | 739 | 2026-07-31 |
 | [How to Connect Claude to Notion | Smarter Notes & Docs | Easily 2026](/tutorials/claude-ai/how-to-connect-claude-to-notion) | Claude AI | 3 | 709 | 2026-07-31 |
 | [How to Connect GitHub to Claude AI | Full Setup Guide | Easily 2026](/tutorials/github/how-to-connect-github-to-claude-ai) | GitHub | 4 | 723 | 2026-07-31 |
+| [How to Connect GitHub to Power BI - Track Repos & Commits Easily 2026](/tutorials/github/how-to-connect-github-to-power-bi-track-repos-commits-easily-2026) | GitHub | 2 | 525 | 2026-07-31 |
+| [How to Connect Google Drive Folder to Power BI (Cloud File Setup) Easily 2026](/tutorials/google-drive/how-to-connect-google-drive-folder-to-power-bi-cloud-file-setup-easily-2026) | Google Drive | 2 | 595 | 2026-07-31 |
 | [How to Connect Google Drive to Claude.ai | Ask Your Files Anything | Easily 2026](/tutorials/google-drive/how-to-connect-google-drive-to-claude-ai) | Google Drive | 2 | 711 | 2026-07-31 |
+| [How to Connect HubSpot With Microsoft Power BI (Sales Data Setup) Easily 2026](/tutorials/hubspot/how-to-connect-hubspot-with-microsoft-power-bi-sales-data-setup-easily-2026) | HubSpot | 3 | 564 | 2026-07-31 |
+| [How to Connect SharePoint List to Power BI (Direct Connection) Easily 2026](/tutorials/sharepoint/how-to-connect-sharepoint-list-to-power-bi-direct-connection-easily-2026) | SharePoint | 2 | 521 | 2026-07-31 |
+| [How to Connect Smartsheet to Power BI (Step-by-Step Setup) Easily 2026](/tutorials/smartsheet/how-to-connect-smartsheet-to-power-bi-step-by-step-setup-easily-2026) | Smartsheet | 3 | 621 | 2026-07-31 |
 | [How to Copy and Paste From Claude AI Without Formatting Issues Easily 2026](/tutorials/claude-ai/how-to-copy-and-paste-from-claude-ai-without-formatting-issues-easily-2026) | Claude AI | 3 | 701 | 2026-07-31 |
 | [How to Create a CRM With Google Sheets and Gemini AI | No-Code Build | Easily 2026](/tutorials/google-sheets/how-to-create-a-crm-with-google-sheets-and-gemini-ai) | Google Sheets | 2 | 795 | 2026-07-31 |
 | [How to Create a Landing Page in Power BI Dashboard (Pro First Page) Easily 2026](/tutorials/power-bi/how-to-create-a-landing-page-in-power-bi-dashboard-pro-first-page-easily-2026) | Power BI | 3 | 831 | 2026-07-31 |
