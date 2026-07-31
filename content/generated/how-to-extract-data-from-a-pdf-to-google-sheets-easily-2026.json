@@ -1,20 +1,44 @@
 {
   "slug": "how-to-extract-data-from-a-pdf-to-google-sheets-easily-2026",
   "seoTitle": "Extract Data From a PDF to Google Sheets Easily",
-  "metaDescription": "Learn how to extract data from PDF files into Google Sheets, saving time on manual entry for invoices, reports, and research documents.",
-  "intro": "Retyping information from PDFs into a spreadsheet is tedious and error-prone, especially with invoices or lengthy reports. This guide covers how to extract data from a PDF into Google Sheets efficiently. It's written for business professionals, students, and data analysts who regularly work with PDF documents that need to become usable spreadsheet data.",
+  "metaDescription": "Learn how to extract data from PDF files into Google Sheets using a Workspace add-on — install it, select the pages you need, and pull the data straight into a spreadsheet.",
+  "intro": "Retyping numbers out of an invoice or a research report is slow and it's exactly the kind of task where a stray keystroke turns into a bad total three tabs later. Google Sheets doesn't parse PDFs on its own, but the Workspace Marketplace has add-ons built specifically for this, and once one is installed the whole job becomes point-and-click instead of copy-and-paste. This guide walks through finding a PDF-to-Sheets add-on, installing it, and running it against a real PDF so the tables land in your spreadsheet ready to use. It's aimed at anyone who handles invoices, reports, or forms regularly and would rather spend that time on analysis than data entry.",
   "steps": [
-    { "heading": "Identify the tools you'll need", "body": "Decide whether you'll use a built-in Google Sheets function, an add-on, or a separate extraction tool depending on the PDF's complexity." },
-    { "heading": "Prepare the PDF for extraction", "body": "Make sure the PDF is text-based rather than a scanned image, since scanned documents may need OCR before data can be pulled out." },
-    { "heading": "Extract the data", "body": "Use your chosen method to pull the relevant tables or text from the PDF into a format Google Sheets can read." },
-    { "heading": "Import and clean the data", "body": "Bring the extracted data into Google Sheets and clean up any formatting issues, such as merged cells or misaligned columns." },
-    { "heading": "Automate repeat extractions", "body": "For recurring documents like monthly invoices, set up a repeatable process so future extractions take less manual effort." }
+    {
+      "heading": "Find a PDF extraction add-on in the Workspace Marketplace",
+      "body": "Open a spreadsheet, go to Extensions, and choose Add-ons > Get add-ons to open the Google Workspace Marketplace directly inside Sheets. Search for PDF-related tools and you'll see several options built for exactly this job, each listing what it connects to and its install count and rating. Look for one that explicitly mentions PDF-to-Sheets conversion rather than a general document tool, since those are tuned to recognize tables and page layouts. Installing is a single click, and it asks for permission to access the spreadsheet you're working in — that's normal for any add-on that needs to write data back into your sheet.",
+      "image": { "file": "/screenshots/p84JNR132Io/03.webp", "caption": "The Google Workspace Marketplace opened from inside Sheets, showing PDF and data-import add-ons with their install counts and ratings." }
+    },
+    {
+      "heading": "Open the add-on from the Extensions menu",
+      "body": "Once installed, every add-on you add lives under the same Extensions menu you used to find it — it doesn't add a new top-level menu of its own. Open the spreadsheet where you want the extracted data to land, click Extensions, and you'll see the add-on listed with its own submenu, usually with an option like \"Open\" or \"Start.\" This is also a good moment to set up the destination sheet: a blank tab with clear column headers makes it much easier to check that the extraction lined up correctly once it runs.",
+      "image": { "file": "/screenshots/p84JNR132Io/04.webp", "caption": "A fresh spreadsheet with the Extensions menu open — this is where any installed PDF add-on shows up to be launched." }
+    },
+    {
+      "heading": "Upload the PDF and select the pages to process",
+      "body": "The add-on opens its own dialog with a preview of every page in the PDF you upload, numbered and displayed as thumbnails. Click a page to select it — selected pages highlight in blue — and hold Shift to grab a run of consecutive pages at once, which matters if you're pulling data from a multi-page report rather than a single-page invoice. Take a moment here rather than selecting everything by default: processing only the pages that actually contain tables keeps the extraction clean and avoids pulling in cover pages or narrative text that Sheets has no use for.",
+      "image": { "file": "/screenshots/p84JNR132Io/05.webp", "caption": "The PDF-to-Sheets dialog with a page-by-page preview. Selected pages are highlighted in blue before you click Process Selected Pages." }
+    },
+    {
+      "heading": "Process the pages and check the output",
+      "body": "With the right pages selected, click Process Selected Pages and the add-on reads the tables and text on those pages and writes them into your spreadsheet. Well-structured tables with clear rows and columns come through cleanly; PDFs with merged cells, multi-line entries, or inconsistent spacing are more likely to need a manual fix afterward. Scroll through the new data before doing anything else with it — catching a misaligned column now is far cheaper than catching it after you've built a formula on top of it."
+    },
+    {
+      "heading": "Clean up formatting issues",
+      "body": "Extracted data rarely arrives perfectly shaped. Watch for numbers imported as text (they'll left-align instead of right-align), dates in an unexpected format, and columns that got split or merged because the PDF's layout wasn't a strict grid. Use Data > Split text to columns for anything that landed in a single cell that should be several, and reformat number columns explicitly rather than assuming Sheets guessed correctly. This cleanup step is usually faster than the manual retyping it replaces, but it's not optional — skipping it is how extraction errors turn into reporting errors."
+    },
+    {
+      "heading": "Set up the process for recurring documents",
+      "body": "If you're pulling the same kind of document — a monthly vendor invoice, a weekly export — every cycle, keep the destination sheet and column layout consistent so each new extraction drops into the same shape. Some add-ons support saving a page-selection template or watching a folder for new PDFs, which turns this from a repeated manual task into something closer to automatic. Even without that, a consistent process — same add-on, same tab layout, same cleanup checklist — cuts the time each new document takes by more than half after the first couple of runs."
+    }
   ],
   "faq": [
-    { "question": "Can Google Sheets extract data from a scanned PDF?", "answer": "Not directly — scanned PDFs typically need OCR (optical character recognition) processing before the text can be extracted." },
-    { "question": "What if the PDF data doesn't line up correctly after import?", "answer": "This is common with complex layouts; manual cleanup or column adjustment is usually needed after extraction." },
-    { "question": "Is this process beginner-friendly?", "answer": "Yes, the tutorial breaks the process into simple steps that don't require advanced technical skills." },
-    { "question": "Can this be automated for recurring reports?", "answer": "Yes, once a reliable extraction method is set up, it can be reused for similar recurring documents to save time." }
+    { "question": "Can Google Sheets extract data from a scanned PDF?", "answer": "Not on its own, and not reliably with most extraction add-ons either — a scanned PDF is really an image, so it typically needs OCR (optical character recognition) processing first before any tool can pull out real text and numbers." },
+    { "question": "Do I need to install anything to extract PDF data into Sheets?", "answer": "Yes. Google Sheets doesn't parse PDFs natively; you install a PDF-to-Sheets add-on from the Workspace Marketplace via Extensions > Add-ons > Get add-ons, and it runs from that same Extensions menu afterward." },
+    { "question": "What if the extracted data doesn't line up correctly?", "answer": "This is common with complex layouts — merged cells, multi-line fields, or inconsistent spacing in the original PDF. Use Data > Split text to columns and reformat number and date columns manually after extraction." },
+    { "question": "Can I extract just certain pages of a long PDF?", "answer": "Yes. The extraction dialog shows a thumbnail of every page; click to select individual pages or hold Shift to select a consecutive range, then process only those." },
+    { "question": "Can this be automated for recurring reports?", "answer": "Some add-ons support saved page-selection templates or folder-watching for new files. Even without that, keeping a consistent destination sheet and cleanup routine makes repeat extractions much faster after the first one." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }
