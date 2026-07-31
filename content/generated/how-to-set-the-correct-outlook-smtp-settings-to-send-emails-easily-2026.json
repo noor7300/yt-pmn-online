@@ -2,20 +2,41 @@
   "slug": "how-to-set-the-correct-outlook-smtp-settings-to-send-emails-easily-2026",
   "seoTitle": "How to Set Correct Outlook SMTP Settings for Sending",
   "metaDescription": "Learn the correct Outlook SMTP settings for sending mail in 2026, including server hostnames, port 587, STARTTLS, and the shift to OAuth 2.0 auth.",
-  "intro": "Outbound mail failures from third-party apps or website plugins usually come down to a mismatched SMTP configuration. This guide covers the exact server hostname, port, and encryption settings needed to send through Outlook, plus how Microsoft's 2026 move away from Basic Authentication affects your setup.",
+  "intro": "Outbound mail failures from third-party apps, website contact forms, or a device like a scanner usually come down to a mismatched SMTP configuration rather than anything wrong with your Outlook account itself. These settings don't live inside Outlook's own interface — they're values you type into the other application's connection screen so it can send mail through Microsoft's servers on your behalf. This guide covers the exact server hostname, port, and encryption settings needed, plus how Microsoft's 2026 move away from Basic Authentication changes what credentials that external app needs to use.",
   "steps": [
-    { "heading": "Identify your account type", "body": "Free personal accounts use smtp-mail.outlook.com, while corporate profiles require smtp.office365.com." },
-    { "heading": "Enter the server hostname", "body": "Open your external email program's connection settings, navigate to the Outgoing Mail (SMTP) section, and paste in the correct server address." },
-    { "heading": "Set the connection port", "body": "Enter the port value 587 in the connection port field." },
-    { "heading": "Enable encryption", "body": "Select STARTTLS, or check the TLS/SSL upgrade box depending on your application's wording." },
-    { "heading": "Turn on authentication", "body": "Toggle the setting that requires authentication for the outgoing server to the enabled state." },
-    { "heading": "Choose your credential method", "body": "Select OAuth 2.0 as your validation method where supported; for legacy tools that can't process modern tokens, generate a dedicated App Password from Advanced Security instead, then send a test email to confirm delivery." }
+    {
+      "heading": "Understand what SMTP settings are for",
+      "body": "SMTP stands for Simple Mail Transfer Protocol, and it's the standard a mail client, plugin, or device uses to hand off a message for delivery. You won't find an \"SMTP settings\" screen inside Outlook.com or the desktop app itself — instead, you're feeding these values into the outgoing mail configuration of whatever external tool you're connecting, whether that's a legacy email client, a WordPress contact form plugin, or an office scanner set up to email scanned documents. Outlook's own account settings, reached through the gear icon, cover things like layout and message handling rather than outbound server details.",
+      "image": { "file": "/screenshots/x_c2jVzCFjE/05.webp", "caption": "The Outlook on the web Settings panel, with Account, General, and Mail listed on the left — the account area that connects to the outbound server config living in a separate app." }
+    },
+    {
+      "heading": "Identify your account type",
+      "body": "The correct server hostname depends on whether you have a free personal account or a business account tied to a company domain. Free personal outlook.com or hotmail.com accounts use smtp-mail.outlook.com, while corporate Microsoft 365 profiles typically require smtp.office365.com instead. Using the wrong one is one of the most common reasons a connection fails outright before it even reaches an authentication error."
+    },
+    {
+      "heading": "Enter the server hostname and port",
+      "body": "Open the external application's connection or account setup dashboard, locate the Outgoing Mail (SMTP) section, and paste in the correct server address for your account type. Directly below that, set the connection port to 587 — this is the standard submission port for authenticated outgoing mail and is what Microsoft's servers expect, as opposed to older ports still used by some legacy or self-hosted mail systems."
+    },
+    {
+      "heading": "Enable STARTTLS encryption",
+      "body": "With the hostname and port set, find the encryption dropdown and select STARTTLS, or check the equivalent TLS/SSL upgrade box if your application phrases it differently. This step encrypts the connection between the app and Microsoft's mail server, and skipping it is a common cause of connections that seem correctly configured but still get silently rejected."
+    },
+    {
+      "heading": "Turn on outgoing authentication",
+      "body": "Most mail clients have a separate checkbox, often labeled something like \"My outgoing server (SMTP) requires authentication,\" that has to be explicitly enabled. Toggling this on is what tells the application to actually send your credentials along with the message rather than attempting an anonymous relay, which Microsoft's servers will reject regardless of how correct the hostname and port are."
+    },
+    {
+      "heading": "Choose the right credential method",
+      "body": "This is the step most likely to trip people up in 2026: Microsoft has retired legacy Basic Authentication for SMTP client submissions, so a plain username-and-password combination often won't work anymore. Where the application supports it, select OAuth 2.0 as the authentication method and sign in with your full email address. For older tools that can't handle modern tokens, log into your Microsoft account's Advanced Security settings and generate a dedicated App Password to paste into the password field instead — it functions like a password but is scoped specifically for that one app. For a business account, also confirm your administrator has enabled SMTP AUTH client submissions at the tenant level, since it's often disabled by default. Once everything is set, send a test email from the application to confirm it clears the handshake."
+    }
   ],
   "faq": [
-    { "question": "Can I still use a regular password for SMTP?", "answer": "Microsoft has retired legacy Basic Authentication for SMTP client submissions, so most setups now require OAuth 2.0 or a generated App Password." },
-    { "question": "What port should I use for outgoing mail?", "answer": "Port 587 with STARTTLS encryption is the standard configuration for Outlook's outgoing server." },
-    { "question": "Why does my business account fail even with correct settings?", "answer": "Your organization's administrator may need to enable SMTP AUTH client submissions at the tenant level for the connection to succeed." },
-    { "question": "How do I know if my configuration actually works?", "answer": "Send a test email from your third-party application and confirm it arrives without a server handshake error." }
+    { "question": "Can I still use a regular password for SMTP?", "answer": "Microsoft has retired legacy Basic Authentication for SMTP client submissions, so most setups now require OAuth 2.0 or a generated App Password instead of your normal account password." },
+    { "question": "What port should I use for outgoing mail?", "answer": "Port 587 with STARTTLS encryption is the standard configuration for sending through Outlook's outgoing servers." },
+    { "question": "Why does my business account fail even with correct settings?", "answer": "Your organization's administrator may need to enable SMTP AUTH client submissions at the tenant level for the connection to succeed, even when the hostname, port, and encryption are all correct." },
+    { "question": "Where do I actually enter these SMTP settings?", "answer": "Not inside Outlook itself — you enter them into the outgoing mail configuration of the external app, plugin, or device you're connecting, such as a legacy email client or a website's contact form." },
+    { "question": "How do I know if my configuration actually works?", "answer": "Send a test email from your third-party application and confirm it arrives without a server handshake or authentication error being reported back." }
   ],
-  "generatedAt": "2026-07-22T00:00:00Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

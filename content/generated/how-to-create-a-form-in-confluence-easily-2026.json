@@ -1,21 +1,44 @@
 {
   "slug": "how-to-create-a-form-in-confluence-easily-2026",
-  "seoTitle": "How to Create a Form in Confluence (2026)",
-  "metaDescription": "Build a data collection form directly inside a Confluence page using the slash command, then track responses and set up notification emails.",
-  "intro": "Instead of routing your team to a separate survey tool, Confluence lets you build a form directly on a page and collect responses without ever leaving your documentation. This guide covers building the form, setting up notification emails, and reviewing submitted responses.",
+  "seoTitle": "How to Create a Simple Form in Confluence Easily (2026)",
+  "metaDescription": "Build a lightweight data-collection form in Confluence using a table with named columns — create the page, add fields, publish, and start collecting entries.",
+  "intro": "Confluence doesn't ship with a dedicated drag-and-drop form builder the way a survey tool does, but you don't need one to collect structured input from a team — a table with clearly labeled columns does the job for most internal use cases, and it lives right inside the page your team already reads. This guide walks through building that kind of lightweight form from a blank page: setting up the field columns, publishing it, and recording an entry, plus where to look if you eventually need real conditional logic or automated notifications that a table alone can't give you.",
   "steps": [
-    { "heading": "Start the form macro", "body": "Open an active Confluence page, enter edit mode, and type the /form command." },
-    { "heading": "Create the form container", "body": "Click Create Form to establish the main framework and name your target field." },
-    { "heading": "Add your fields", "body": "Use the right-hand canvas options panel to add dropdowns, checkboxes, and radio buttons to your form." },
-    { "heading": "Set up conditional logic", "body": "Configure conditional paths to show or hide specific questions dynamically based on earlier answers." },
-    { "heading": "Configure notification emails", "body": "Move to settings and input routing email addresses so your team gets notified the moment someone submits a response." },
-    { "heading": "Publish and track responses", "body": "Save the macro block, hit publish, and use the apps dashboard to audit submissions and view live response charts." }
+    {
+      "heading": "Start a new page for your form",
+      "body": "From your space's content tree, create a new page and give it a clear, purpose-built title — \"Creating Form\" is a fine working title while you build it out, though you'll want something more specific once it's live, like \"Event RSVP\" or \"Bug Report Intake.\" The page starts blank except for the title and author byline, with the editor toolbar along the top offering formatting, tables, and other block types you'll insert next.",
+      "image": { "file": "/screenshots/kYdOW1kInTM/03.webp", "caption": "A new draft page titled \"Creating Form,\" with an empty table just inserted and the \"/ to insert\" prompt ready for the next block." }
+    },
+    {
+      "heading": "Insert a table and name your fields",
+      "body": "Type / to open the insert menu and choose a table, or use the table icon in the toolbar. This is the actual mechanism behind a Confluence \"form\" when you're not using a marketplace add-on: each column header becomes a field label, and each row underneath becomes one person's submission. Label the header row with exactly what you want to capture — Name, Email, Topics, Comments — keeping the labels short enough that the columns stay readable once real answers are typed in.",
+      "image": { "file": "/screenshots/kYdOW1kInTM/04.webp", "caption": "The table with its header row labeled Name, Email, Topics, and Comments — the field structure that stands in for a form in plain Confluence." }
+    },
+    {
+      "heading": "Test it with a sample entry",
+      "body": "Before sharing the page, fill in one row yourself to confirm the columns hold up under a real answer — long email addresses, multi-word topics, and longer comments can force awkward text wrapping if a column is too narrow. Adjust column widths as needed so the table stays scannable rather than cramped."
+    },
+    {
+      "heading": "Publish the page",
+      "body": "Click Publish once the structure and a test row look right. Confluence confirms with a \"Page successfully published\" notice and offers a Share page link and a Copy link shortcut, so you can send the page straight to whoever needs to fill it in without them hunting through the space tree. The row you tested with — a sample entry from \"Josh\" with an email, topic, and short comment — stays on the page as a working example of what a completed entry looks like, which doubles as an implicit instruction for the next person filling it in.",
+      "image": { "file": "/screenshots/kYdOW1kInTM/05.webp", "caption": "The published page with one filled-in row, plus the publish confirmation offering Share page and Copy link options." }
+    },
+    {
+      "heading": "Collect entries as new rows",
+      "body": "Once published, anyone with edit access can add their own row underneath the existing ones by clicking into the last cell and pressing Tab, or by using the row-add control at the bottom of the table. This keeps every submission visible on one page instead of scattered across separate documents, and because it's a normal Confluence table, you can sort, filter, or copy the data into a spreadsheet later without any export step."
+    },
+    {
+      "heading": "Know when you need a real form add-on instead",
+      "body": "A table works well for a small internal group filling in a handful of rows, but it breaks down once you need things a table can't do on its own — validation on required fields, conditional questions that only appear based on a previous answer, or an automatic email alert the moment someone submits. At that point, a marketplace form app built for Confluence is the better tool: it adds a proper submission dashboard, field types like checkboxes and date pickers, and notification routing that a plain table simply doesn't have."
+    }
   ],
   "faq": [
-    { "question": "Can I make a Confluence form field required?", "answer": "Yes, when structuring your fields you can mark specific questions as required so submissions can't go through without them." },
-    { "question": "Where do I see form responses after people submit them?", "answer": "You can access the specialized apps dashboard to audit submissions chronologically without cluttering the main article page." },
-    { "question": "Can I get notified by email when someone submits the form?", "answer": "Yes, the settings panel lets you input routing email addresses to trigger automatic notification alerts." },
-    { "question": "Do I need a marketplace app to build forms in Confluence?", "answer": "The /form slash command gives you native form-building tools, though marketplace apps like Forms for Confluence can add more advanced options." }
+    { "question": "Does Confluence have a native form builder?", "answer": "Not a dedicated drag-and-drop one. The built-in approach is to use a table with named columns as your fields, which works fine for simple internal data collection but lacks validation, conditional logic, and notifications." },
+    { "question": "How do people submit answers to a table-based form?", "answer": "Anyone with edit access adds a new row underneath the existing ones, filling in each column the same way the sample row was filled in. There's no separate submission screen — the page itself is the form." },
+    { "question": "Can I get notified when someone fills in the form?", "answer": "Not automatically with a plain table. For submission alerts, conditional questions, or a dedicated response dashboard, you'd need a marketplace form app rather than a manually built table." },
+    { "question": "Can I turn the collected table data into a chart?", "answer": "Yes, once the data is in a Confluence table you can copy it into a Confluence database object or export it to a spreadsheet for charting, though a plain table itself won't generate charts on its own." },
+    { "question": "What should I title a form page in Confluence?", "answer": "Something specific to what you're collecting — \"Event RSVP\" or \"Bug Report Intake\" rather than a generic working title — so it's easy to find in the space tree and obvious what it's for when shared." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

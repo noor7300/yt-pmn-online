@@ -1,20 +1,43 @@
 {
   "slug": "how-to-verify-domains-in-brevo-easily-2026",
   "seoTitle": "How to Verify Your Domain in Brevo",
-  "metaDescription": "Authenticate your sending domain in Brevo with DKIM and DMARC records to protect deliverability and meet Gmail, Yahoo, and Microsoft sender requirements.",
-  "intro": "Sender reputation and inbox deliverability depend heavily on domain authentication, and Brevo requires this to meet modern Gmail, Yahoo, and Microsoft compliance standards. Verifying your domain involves adding a few DNS records, either through Brevo's automatic sync with your provider or by mapping them manually.",
+  "metaDescription": "Authenticate your sending domain in Brevo with DKIM and a Brevo verification TXT record to protect deliverability and meet Gmail, Yahoo, and Microsoft rules.",
+  "intro": "Domain authentication is no longer optional for email marketing — Gmail, Yahoo, and Microsoft all filter or flag mail from unverified domains, and Brevo builds the whole process around adding a small set of DNS records to prove you own the domain you're sending from. The setting lives inside general account settings rather than anywhere marketing-related, and the records themselves (a Brevo ownership code plus a DKIM key) are specific enough that a typo breaks verification silently. This guide covers where to find the setting and what the underlying records actually look like, based on Brevo's own settings panel and developer documentation.",
   "steps": [
-    { "heading": "Open the senders workspace", "body": "In your Brevo account, navigate to the senders and domains settings to begin the authentication process." },
-    { "heading": "Add your sending domain", "body": "Enter your professional custom domain without a browser prefix or folder path, since raw prefixes can cause verification errors." },
-    { "heading": "Choose an automatic or manual verification path", "body": "Depending on your DNS provider, Brevo may offer an automated handshake to inject the necessary records, or you can add the Brevo code, DKIM, and DMARC records manually." },
-    { "heading": "Add the required DNS records", "body": "Copy the standard text records Brevo provides into your domain provider's DNS settings if you're not using the automatic sync option." },
-    { "heading": "Check propagation and confirm verification", "body": "DNS changes can take time to propagate, so check back until Brevo confirms your domain shows as verified and locked in." }
+    {
+      "heading": "Find domains under account settings",
+      "body": "Domain verification isn't under Campaigns or Contacts — it's filed under Settings, in the Organization settings block alongside Users, SMTP & API, and Security. Brevo's settings sidebar groups it as \"Senders, domains, IPs,\" which is easy to scroll past if you're expecting it under a marketing-labeled menu. Click into that section to reach the Domains tab where you'll add and manage your sending domains.",
+      "image": { "file": "/screenshots/Pf2DPxXN2Ok/03.webp", "caption": "The Brevo settings sidebar. Senders, domains, IPs sits in Organization settings, separate from personal profile options like Language and Individual email." }
+    },
+    {
+      "heading": "Add your domain",
+      "body": "In the Domains tab, click Add a domain and enter your root domain — just the domain itself, like yourcompany.com, with no https:// prefix and no trailing path. Save it to move into the verification options."
+    },
+    {
+      "heading": "Pick automatic or manual authentication",
+      "body": "Brevo offers two routes. Automatic Verification signs you into your domain registrar directly and lets Brevo inject the required DNS entries for you, which is faster if your registrar supports the integration. Authenticate the domain yourself instead generates the specific record values so you can add them manually through your host's DNS zone editor — useful if your registrar isn't one of the supported automatic partners, or if DNS is managed by someone else on your team."
+    },
+    {
+      "heading": "Understand what the DNS records actually contain",
+      "body": "Brevo's developer documentation shows exactly what a domain's configuration looks like once records are in place: a dkim_record entry with type TXT, a value string starting with a public key format like k=rsa;p=..., and a host name of mail._domainkey — plus a separate brevo_code entry, also a TXT record, that proves ownership of the domain to Brevo specifically. Both records report a verified and authenticated status of true or false, which is what the dashboard is checking each time you refresh the domain's status.",
+      "image": { "file": "/screenshots/Pf2DPxXN2Ok/05.webp", "caption": "Brevo's developer documentation showing a sample domain configuration response, with the DKIM record and Brevo ownership code both returned as TXT record values." }
+    },
+    {
+      "heading": "Add the TXT records at your DNS host",
+      "body": "If you went the manual route, log into whatever service manages your DNS — your registrar or a separate host — and open the zone editor. Create two new TXT records using the exact host names and values Brevo displayed (mail._domainkey for the DKIM record and the host name shown for the Brevo code record). A single missing character in the value string is enough to fail verification, so copy rather than retype where possible."
+    },
+    {
+      "heading": "Confirm the domain shows as verified",
+      "body": "DNS changes don't apply instantly — propagation can take anywhere from a few minutes to around 48 hours depending on your host and existing record TTLs. Return to the Domains tab in Brevo periodically and refresh; once both records resolve correctly, the domain's status updates and it becomes available to select as a sender for your campaigns."
+    }
   ],
   "faq": [
-    { "question": "Why do I need to verify my domain in Brevo?", "answer": "Domain verification protects your sender reputation and is required to meet current Gmail, Yahoo, and Microsoft inbox compliance standards." },
-    { "question": "What DNS records does domain verification require?", "answer": "Typically a Brevo verification code along with DKIM and DMARC records need to be added to your domain's DNS settings." },
-    { "question": "How long does DNS verification take?", "answer": "It depends on your DNS provider's propagation time, which can range from minutes to up to 48 hours in some cases." },
-    { "question": "What happens if I don't verify my domain?", "answer": "Unverified domains risk higher bounce rates and are more likely to be filtered by major email providers' security systems." }
+    { "question": "Where do I go in Brevo to verify a domain?", "answer": "Settings → Senders, domains, IPs → Domains tab. It's grouped under Organization settings, not under Campaigns or Marketing." },
+    { "question": "What DNS records does domain verification require?", "answer": "A DKIM TXT record (host name mail._domainkey) and a separate Brevo ownership code TXT record. Brevo's API returns both with a verified/authenticated true-or-false status." },
+    { "question": "What's the difference between automatic and manual verification?", "answer": "Automatic Verification signs into your domain registrar and adds the records for you. Manual verification generates the record values for you to copy into your DNS host's zone editor yourself." },
+    { "question": "How long does DNS verification take?", "answer": "It depends on your host's propagation time and existing record TTLs — anywhere from a few minutes up to roughly 48 hours." },
+    { "question": "What happens if I don't verify my domain?", "answer": "Mail from unverified domains is more likely to be filtered, bounced, or marked as spam by Gmail, Yahoo, and Microsoft, all of which now expect authenticated senders." }
   ],
-  "generatedAt": "2026-07-22T06:13:13Z"
+  "generatedAt": "2026-07-31T09:10:00Z",
+  "deep": true
 }

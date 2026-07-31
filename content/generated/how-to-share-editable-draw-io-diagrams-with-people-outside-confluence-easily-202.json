@@ -1,21 +1,44 @@
 {
   "slug": "how-to-share-editable-draw-io-diagrams-with-people-outside-confluence-easily-202",
-  "seoTitle": "Share Editable Draw.io Diagrams Outside Confluence",
-  "metaDescription": "Export a draw.io diagram from Confluence as an editable PDF, XML file, or shareable link so external clients can open and edit it freely.",
-  "intro": "When an external client or freelancer needs to edit a draw.io diagram but doesn't have Confluence access, you can still hand off a fully editable copy. This guide covers exporting a diagram in an editable format and sharing it so outside collaborators can open it in a free web-based editor.",
+  "seoTitle": "How to Share Editable Draw.io Diagrams Outside Confluence (2026)",
+  "metaDescription": "Export a draw.io diagram from Confluence as an editable PDF or XML file so people without Confluence access can open and edit it in any draw.io editor.",
+  "intro": "A draw.io diagram embedded in a Confluence page is easy for your team to edit, but a client, freelancer, or outside stakeholder without a Confluence login can't touch it at all — they'll only ever see a flattened image if you just take a screenshot. draw.io's own export options solve this: instead of a picture of the diagram, you can hand over a file that opens fully editable in any free draw.io editor, no Confluence account required. This guide covers editing the diagram inside Confluence, then exporting it in a format an outsider can actually open and modify.",
   "steps": [
-    { "heading": "Open the diagram for editing", "body": "Open your Confluence documentation page, click the pencil icon to enter edit mode, and click on your embedded draw.io diagram." },
-    { "heading": "Launch the draw.io editor", "body": "Click Edit inside the macro frame to open the full draw.io design workspace." },
-    { "heading": "Export as an editable file", "body": "Go to the File menu, select Export As, and choose the editable PDF or XML format option." },
-    { "heading": "Include editable diagram data", "body": "Check the box to include a copy of your diagram properties directly inside the exported file so it stays fully editable, not just a flat image." },
-    { "heading": "Or share a cloud link", "body": "Select the Share button in the header to generate an encrypted, external web sharing link instead of a file." },
-    { "heading": "Send it to your external stakeholder", "body": "Pass the exported file or link to your outside collaborator so they can open it inside app.diagrams.net." }
+    {
+      "heading": "Open the diagram in the full editor",
+      "body": "From inside your Confluence page, click into the embedded draw.io diagram to launch the full editing workspace — the same interface you'd get on diagrams.net directly, with a shape library down the left side (General, Misc, Advanced, Flowchart, Entity Relation, UML) and diagram properties on the right. In this example the canvas holds a simple structure: a large rectangle and two actor figures, the kind of skeleton you'd build out into a flowchart or UML diagram.",
+      "image": { "file": "/screenshots/nx0_Gj8ivoo/01.webp", "caption": "The draw.io editor opened from a Confluence page, showing the shape library on the left and a simple diagram with a rectangle and two actors on the canvas." }
+    },
+    {
+      "heading": "Finish the diagram before exporting",
+      "body": "Make whatever edits the diagram still needs — connecting shapes, adding labels, adjusting layout — before you export, since some export formats (like a flattened PDF or image) won't be editable after the fact even though the file itself opens elsewhere. Here a connector line has been drawn from the rectangle down to one of the actor figures, tying the two shapes together. The \"Unsaved changes\" banner at the top is a useful check: save inside Confluence first so the version you're about to export matches what's actually stored on the page.",
+      "image": { "file": "/screenshots/nx0_Gj8ivoo/02.webp", "caption": "The same diagram with a connector now drawn from the rectangle to an actor, with an \"Unsaved changes\" banner reminding you to save before exporting." }
+    },
+    {
+      "heading": "Open File and choose Export As",
+      "body": "From the top File menu, hover Export as to open the format submenu: PNG, JPEG, WebP, Animated GIF, SVG, PDF, HTML, XML, URL, and JSON. For sending something editable to someone outside Confluence, PDF and XML are the two that matter — PDF because most people can open it without installing anything, and XML because it's draw.io's native format and reopens with zero loss of editability in any draw.io-compatible editor.",
+      "image": { "file": "/screenshots/nx0_Gj8ivoo/03.webp", "caption": "The File > Export as submenu, with PDF highlighted among the available formats including PNG, SVG, XML, and HTML." }
+    },
+    {
+      "heading": "Export as an editable PDF",
+      "body": "Choose PDF, and look for the option to include a copy of the diagram data inside the file itself — this is what separates an editable PDF from a normal flattened one. With that box checked, the exported PDF isn't just a picture of your diagram; a recipient can open it in the free draw.io desktop app or at app.diagrams.net, and the shapes, connectors, and text remain fully editable rather than being baked into a static image."
+    },
+    {
+      "heading": "Export as XML for a lighter, native file",
+      "body": "If your recipient is comfortable opening a file directly in a draw.io editor rather than through a PDF viewer, export as XML instead. It's draw.io's own file format, so nothing is lost in translation — every shape, style, and connector comes back exactly as you left it. It's also a much smaller file than a PDF, which matters if you're emailing it rather than sharing a link."
+    },
+    {
+      "heading": "Point recipients to a free editor",
+      "body": "Once the file is exported, save it locally and send it along with a quick note pointing the recipient to app.diagrams.net, the free web-based draw.io editor — no account or paid license required to open and edit the file you send them. It's worth asking them to open it once and confirm the shapes and connectors line up correctly on their end before you consider the handoff done, since font substitutions or missing custom shape libraries can occasionally shift a layout slightly between systems."
+    }
   ],
   "faq": [
-    { "question": "Can external users edit my diagram without a Confluence account?", "answer": "Yes, exporting as an editable PDF or XML with the diagram data included lets external stakeholders open and edit it in the free app.diagrams.net editor without needing Confluence access." },
-    { "question": "What file format keeps my diagram fully editable?", "answer": "Editable PDF and XML formats both preserve the diagram's vector data, as long as you check the option to include a copy of the diagram properties during export." },
-    { "question": "Do external collaborators need to buy anything to edit the file?", "answer": "No, app.diagrams.net is a free public web editor that can open the exported files without a paid account." },
-    { "question": "Will the shapes and arrows stay aligned after export?", "answer": "They should, but it's worth testing the exported file in an independent viewport to confirm vector shapes and connectors render correctly." }
+    { "question": "Can someone without a Confluence account edit a draw.io diagram I share?", "answer": "Yes, if you export it as an editable PDF (with the diagram data included) or as XML. They can open either file in the free draw.io editor at app.diagrams.net without needing Confluence access." },
+    { "question": "What's the difference between exporting as PDF and as XML?", "answer": "An editable PDF is easier for most people to open since PDF viewers are everywhere, but it needs the \"include diagram data\" option checked to stay editable. XML is draw.io's native format — smaller, and it preserves everything with no conversion step." },
+    { "question": "Will a plain PDF export be editable?", "answer": "Not unless you include a copy of the diagram data in the export. Without that option, the PDF is just a flattened image of your diagram, the same as exporting a PNG or JPEG." },
+    { "question": "Do I need to save my Confluence page before exporting the diagram?", "answer": "Yes — if you see an \"Unsaved changes\" banner in the editor, save your edits first so the exported file matches what's actually stored on the page." },
+    { "question": "What free tool can recipients use to open the exported file?", "answer": "app.diagrams.net, the free web version of draw.io. It opens both editable PDFs and XML files without requiring an account." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

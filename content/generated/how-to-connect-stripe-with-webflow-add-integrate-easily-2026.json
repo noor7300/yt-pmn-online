@@ -1,20 +1,43 @@
 {
   "slug": "how-to-connect-stripe-with-webflow-add-integrate-easily-2026",
-  "seoTitle": "Connect Stripe With Webflow E-commerce",
-  "metaDescription": "How to link a Stripe account to your Webflow e-commerce store so checkout pages can process payments securely.",
-  "intro": "Turning a Webflow design into a functioning online store means connecting a payment processor, and Stripe is one of the most common choices. This guide walks through enabling e-commerce settings, authorizing the Stripe connection, and testing checkout before going live.",
+  "seoTitle": "Connect Stripe With Webflow Using Zapier",
+  "metaDescription": "How to bridge Stripe and Webflow with a Zapier automation, useful for sites that need to react to payments without Webflow's native Ecommerce checkout.",
+  "intro": "Webflow's own Ecommerce plan connects to Stripe directly through a payment gateway setting on the checkout page, but plenty of sites that need Stripe data don't run Webflow Ecommerce at all — a marketing site, a membership page, or a landing page selling a single product through a Stripe-hosted checkout. For those cases, the practical way to connect the two is Zapier: Stripe becomes a trigger, Webflow becomes an action, and the two systems talk without either one needing built-in support for the other. This guide walks through setting up a Stripe account for testing and wiring it to Webflow through a Zap, which is the actual mechanism worth understanding if you're not on Webflow's Ecommerce tier.",
   "steps": [
-    { "heading": "Open your E-commerce settings", "body": "Click the shopping cart icon in the left sidebar, then click Settings to reach the store setup panel." },
-    { "heading": "Start the Stripe connection", "body": "Scroll to the Payment Gateway section and click Connect next to the Stripe option." },
-    { "heading": "Authorize your account", "body": "Complete the secure Stripe Connect authorization overlay, entering your merchant credentials and two-factor verification." },
-    { "heading": "Select your business profile", "body": "Choose the correct business profile inside Stripe and click Connect to link the two platforms." },
-    { "heading": "Verify and test", "body": "Confirm Webflow shows a green Connected status, customize your checkout form fields, then use Test Mode with sandbox card details before publishing your store live." }
+    {
+      "heading": "Get your Stripe account ready",
+      "body": "Log into Stripe and you'll land on the account home screen, which in a fresh or sandbox account opens in Test mode — visible as a banner across the top warning that you're experimenting safely rather than processing real charges. Stripe also prompts you to verify your email before anything else, with Open Gmail and Resend buttons right on the dashboard. The Get Started panel below offers no-code paths for sending invoices or creating subscriptions, and further down you'll find your publishable and secret API keys, both prefixed pk_test_ and sk_test_ while you're in test mode — useful to know since those are the credentials any external tool, including Zapier, will eventually need.",
+      "image": { "file": "/screenshots/dN5AnakQmrc/02.webp", "caption": "The Stripe account home screen in test mode, showing the email verification prompt and the no-code Get Started options for invoices and subscriptions." }
+    },
+    {
+      "heading": "Create a new Zap with Stripe as the trigger",
+      "body": "In Zapier, start a new Zap and search for Stripe as the app for step one. Choosing an event here — a new charge, a successful payment, a new customer — defines exactly what has to happen in Stripe before anything fires in Webflow. This is the piece Webflow itself has no visibility into if you're not using its native Ecommerce checkout, which is exactly why the automation route exists."
+    },
+    {
+      "heading": "Add Webflow as the action app",
+      "body": "Add a second step and search for Webflow, which opens a setup panel asking for an Action event, then an Account you authorize by clicking Sign In. Webflow's available actions through Zapier typically revolve around CMS items — creating, updating, or publishing a collection item — rather than anything related to checkout, since Zapier is working through Webflow's CMS API, not its payments layer. That distinction matters: this path lets a Stripe event update your site's content, not process a card, which is a different job than Webflow's own Ecommerce Stripe gateway performs.",
+      "image": { "file": "/screenshots/dN5AnakQmrc/05.webp", "caption": "A Zap with Stripe set as the trigger app and Webflow added as the second step, waiting on an action event and an authorized account." }
+    },
+    {
+      "heading": "Authorize both accounts",
+      "body": "Click Sign In on the Webflow step to open its OAuth authorization screen and grant Zapier access to your site, the same way you'd have authorized Stripe on the trigger step. Both connections are stored securely by Zapier and can be revoked at any time from your connected accounts settings — neither app hands its credentials to the other directly."
+    },
+    {
+      "heading": "Map the fields and test",
+      "body": "Once both apps are connected, map the data from the Stripe trigger — customer email, payment amount, product name — into the corresponding fields on the Webflow action, such as a CMS collection's text or number fields. Run Zapier's test step to confirm a sample Stripe event actually produces the expected update in Webflow before you trust the automation with real traffic."
+    },
+    {
+      "heading": "Publish the Zap",
+      "body": "Once the test step comes back clean, switch the Zap from draft to Published using the control in the top right. From that point on, whatever Stripe event you chose as the trigger will automatically push through to Webflow — a useful setup for showing recent purchases, updating a member directory, or triggering a thank-you page update, all without touching Webflow's own checkout system."
+    }
   ],
   "faq": [
-    { "question": "Is my Stripe login information stored inside Webflow?", "answer": "No, the connection happens through Stripe's own secure authorization overlay rather than storing your credentials in Webflow." },
-    { "question": "How do I test checkout before real customers use it?", "answer": "Activate Test Mode and process a mock purchase using Stripe's sandbox card credentials to check how the system responds." },
-    { "question": "How do I know the connection succeeded?", "answer": "Return to your Webflow e-commerce settings and look for a green Connected status indicator next to the Stripe option." },
-    { "question": "Can I customize the checkout page design?", "answer": "Yes, the checkout page layout is a standard Webflow asset you can arrange and style like any other page element." }
+    { "question": "Does this replace Webflow's native Ecommerce Stripe integration?", "answer": "No — Webflow's Ecommerce plan connects to Stripe directly for checkout and payment processing. This Zapier approach is for sites without Ecommerce that still want to react to Stripe events, since it works through Webflow's CMS rather than its payments system." },
+    { "question": "Is my Stripe login information stored inside Zapier or Webflow?", "answer": "No — both connections use each platform's own OAuth authorization screen, so your Stripe and Webflow credentials are never entered into Zapier directly." },
+    { "question": "What can a Webflow action actually do in response to a Stripe event?", "answer": "Typically it creates, updates, or publishes a CMS collection item, since that's what Webflow exposes through its Zapier integration — it can't process a payment or modify your checkout page." },
+    { "question": "How do I test this safely before going live?", "answer": "Keep your Stripe account in Test mode, which uses pk_test_ and sk_test_ prefixed keys, and run Zapier's built-in test step on each part of the Zap before switching it on." },
+    { "question": "Why would I use this instead of Webflow's built-in Ecommerce?", "answer": "It's the right fit when your site isn't running Webflow Ecommerce at all — for example a Stripe-hosted checkout linked from a marketing page — but you still want site content to react automatically to what happens in Stripe." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

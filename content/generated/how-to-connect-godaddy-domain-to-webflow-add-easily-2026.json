@@ -1,20 +1,43 @@
 {
   "slug": "how-to-connect-godaddy-domain-to-webflow-add-easily-2026",
   "seoTitle": "How to Connect a GoDaddy Domain to Webflow",
-  "metaDescription": "Point your GoDaddy domain to Webflow using either the automated Quick Connect wizard or manual DNS record setup.",
-  "intro": "Getting your GoDaddy domain live on Webflow can be done two ways: an automated one-click connection or manual DNS record entry, and this guide walks through both. You'll learn how to protect your existing email while pointing the domain, and how to confirm SSL and propagation once it's done. It's for anyone launching a Webflow site on a domain purchased through GoDaddy.",
+  "metaDescription": "Point your GoDaddy domain to Webflow's publishing panel using a custom domain and DNS records, without breaking your existing email setup.",
+  "intro": "Pointing a domain you bought on GoDaddy at a Webflow site comes down to two connected steps: telling Webflow which domain to expect, and telling GoDaddy where to send visitors who type that domain in. Get the order or the record types wrong and you either end up with a domain that never resolves, or — worse — one that breaks the email inbox running on the same domain. This guide walks through Webflow's publish destination panel where the custom domain gets added, and the GoDaddy side where DNS actually lives, with the email-safety checks that matter most.",
   "steps": [
-    { "heading": "Open the custom domain panel in Webflow", "body": "Go to your project's site settings and find the Custom Domain publishing section." },
-    { "heading": "Choose Quick Connect or manual setup", "body": "Select the automated OAuth Quick Connect option to authorize GoDaddy directly, or choose manual setup if you prefer to edit DNS records yourself." },
-    { "heading": "Add the required DNS records", "body": "If going manual, log into GoDaddy's DNS management and add the A record pointing to Webflow's IP and a CNAME record for the www subdomain." },
-    { "heading": "Enter the TXT verification code", "body": "Copy the one-time verification string from Webflow and paste it as a TXT record in GoDaddy to prove domain ownership." },
-    { "heading": "Confirm propagation and publish", "body": "Check that your existing MX email records are untouched, run a DNS propagation check, then publish your site to the live domain." }
+    {
+      "heading": "Open the publish panel in Webflow",
+      "body": "In the Designer, click the Publish button in the top right to open the destination picker. It's split into two sections: Staging, which is your free webflow.io subdomain and is already checked by default, and Production, where you'll see an \"Add a custom domain\" link once no custom domain is attached yet. This is also where you'll see status details later — when the site was last published, and whether a domain is currently active — so it's worth bookmarking this panel mentally as your control center for anything domain-related.",
+      "image": { "file": "/screenshots/9-5uqeP1S3o/05.webp", "caption": "Webflow's Choose publish destination panel, with the Staging subdomain checked and an \"Add a custom domain\" link under Production." }
+    },
+    {
+      "heading": "Add the domain and get your DNS values",
+      "body": "Clicking Add a custom domain prompts you to type in the domain exactly as you own it — no https:// prefix, just the bare domain. Webflow then generates the specific records your DNS needs to point at it: typically an A record for the root domain, a CNAME for the www subdomain, and sometimes a TXT record used purely to verify you actually control the domain before Webflow will serve traffic on it. Copy these values somewhere you can paste from, since you'll need them on the GoDaddy side next."
+    },
+    {
+      "heading": "Log into GoDaddy and open DNS management",
+      "body": "From your GoDaddy account dashboard, go to the Domain section for the site you're connecting. This is the same account hub where you manage renewals, billing, and any hosting products tied to the domain, so make sure you're editing DNS on the correct domain if you manage more than one — a wrong edit here affects live traffic immediately, not after a review step.",
+      "image": { "file": "/screenshots/9-5uqeP1S3o/03.webp", "caption": "The GoDaddy account dashboard, with Domain and Website listed in the left sidebar alongside billing and account settings." }
+    },
+    {
+      "heading": "Add the A, CNAME, and TXT records",
+      "body": "In GoDaddy's DNS records editor, add or edit the A record so it points at the IP address Webflow gave you, add a CNAME record for www pointing at Webflow's proxy host, and add the TXT record with the verification string exactly as copied — a single mismatched character will fail verification. Before saving anything, scroll through the existing record list and confirm your MX records are untouched; those are what route your email, and they live in the same table as the records you're about to change, which is exactly how people accidentally break their inbox during a domain move."
+    },
+    {
+      "heading": "Set your default domain in Webflow",
+      "body": "Back in Webflow's domain settings, decide whether the root domain or the www version should be the canonical one that the other redirects to — search engines treat these as separate URLs unless you pick one, so leaving both live without a redirect can quietly split your SEO signals. Most sites default to the root domain, but either choice works as long as it's consistent."
+    },
+    {
+      "heading": "Check propagation and publish",
+      "body": "DNS changes don't take effect instantly — propagation can run from a few minutes up to 48 hours depending on your previous records' TTL settings. Use any DNS checker to confirm the new records are visible, then go back to the publish panel, check your new domain alongside staging, and click Publish. SSL provisions automatically once Webflow confirms the domain is correctly pointed, so if the certificate isn't active yet, that's usually a sign DNS hasn't fully propagated rather than a Webflow-side problem."
+    }
   ],
   "faq": [
-    { "question": "Will connecting my domain break my existing email?", "answer": "It shouldn't, as long as your MX records are left in place during the DNS update, which both the automated and manual methods aim to preserve." },
-    { "question": "Which method is faster, Quick Connect or manual DNS?", "answer": "Quick Connect is generally faster since it automates the record updates, while manual setup gives you more direct control over each DNS entry." },
-    { "question": "How long does it take for the domain to go live?", "answer": "DNS propagation can take anywhere from a few minutes to 48 hours depending on your provider and existing record TTLs." },
-    { "question": "Why isn't my SSL certificate showing as active?", "answer": "SSL provisioning depends on DNS fully propagating first, so give it time and recheck the domain status panel in Webflow." }
+    { "question": "Will connecting my domain break my existing email?", "answer": "It shouldn't, as long as your MX records are left untouched while you add the A, CNAME, and TXT records for Webflow — check the full record list in GoDaddy before saving any changes." },
+    { "question": "Do I need both an A record and a CNAME record?", "answer": "Typically yes — the A record points your root domain at Webflow's IP, while the CNAME handles the www subdomain, and Webflow's custom domain screen shows you the exact values to use for both." },
+    { "question": "How long does it take for the domain to go live?", "answer": "DNS propagation can take anywhere from a few minutes to 48 hours depending on your provider and the TTL on your existing records, so don't panic if it's not instant." },
+    { "question": "Why isn't my SSL certificate showing as active?", "answer": "SSL provisioning depends on DNS fully propagating first, so give it time and recheck the domain status in Webflow's publish panel before assuming something is broken." },
+    { "question": "Should I point my root domain or my www subdomain as the default?", "answer": "Either works, but pick one as canonical and let the other redirect to it — leaving both live without a redirect can split your search rankings across two URLs." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

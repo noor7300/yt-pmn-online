@@ -1,21 +1,44 @@
 {
   "slug": "how-to-add-a-signature-in-zendesk-easily-2026",
-  "seoTitle": "How to Add a Signature in Zendesk (2026 Guide)",
-  "metaDescription": "Set up a professional email signature in Zendesk for both individual agents and the whole team, so every ticket reply looks consistent and on-brand.",
-  "intro": "A missing or inconsistent email signature can make support replies feel unfinished and unprofessional. This guide covers setting up a personal signature from your Zendesk profile as well as configuring a global signature template from the Admin Center so every agent's replies carry the right branding.",
+  "seoTitle": "How to Add a Signature in Zendesk Easily (2026 Guide)",
+  "metaDescription": "Set up a global agent signature template in Zendesk Admin Center — navigate to Agent interface settings and configure the signature applied to ticket replies.",
+  "intro": "A missing or inconsistent signature on ticket replies is a small thing that quietly undermines how professional your support team looks. Zendesk handles this at the account level: instead of asking every agent to type their name and title into every reply, an admin sets a signature template once in Admin Center, and it's applied across public comments automatically. This guide walks through getting from your everyday ticket view into that setting and configuring the template so every agent's replies carry consistent, correctly formatted sign-offs.",
   "steps": [
-    { "heading": "Set your personal signature", "body": "Open your individual user profile in Zendesk Support and find the signature box in the left sidebar to enter your name, title, and contact details." },
-    { "heading": "Apply basic formatting", "body": "Use Zendesk's Markdown controls to add bold text, italics, and clickable links to your signature." },
-    { "heading": "Access the global signature settings", "body": "As an admin, open the Admin Center and go to the agent interface settings to find the common signature configuration." },
-    { "heading": "Insert dynamic placeholders", "body": "Add template placeholders in the common signature box so it fills in each agent's name and details automatically." },
-    { "heading": "Handle multiple brands", "body": "If your organization supports several brands, set up a distinct signature for each one to keep customer-facing communication consistent." },
-    { "heading": "Test the output", "body": "Open a public comment on a test ticket to confirm the signature spacing, links, and formatting render as expected." }
+    {
+      "heading": "Start from your everyday ticket workspace",
+      "body": "Signature setup lives outside the ticket view itself, but it's worth knowing where you're starting from: the standard Zendesk Support workspace, with your ticket list on the left showing status, requester, and last update, and a sidebar of AI agent status, ticket statistics, and open ticket counts on the right. Nothing here is signature-related directly, but this is the view your signature template will ultimately affect — every reply sent from a ticket like these picks up whatever template you configure.",
+      "image": { "file": "/screenshots/_TWV6fMDL-A/01.webp", "caption": "The standard Zendesk Support ticket workspace, where agent replies carrying the eventual signature template actually get sent." }
+    },
+    {
+      "heading": "Open the Support menu and go to Admin Center",
+      "body": "Click the Support dropdown in the top-left corner of the workspace. It expands into a full product switcher — Support, Knowledge, Community, Chat, Voice, Analytics, Sales, Workforce management, Quality assurance, AI agents — with Admin Center listed at the bottom. That's the entry point for any account-wide configuration, signatures included; agent-facing ticket views don't expose this setting directly.",
+      "image": { "file": "/screenshots/_TWV6fMDL-A/03.webp", "caption": "The Support product switcher, expanded to show every Zendesk product plus the Admin Center link needed to reach account-wide settings." }
+    },
+    {
+      "heading": "Navigate to Agent tools, then Agent interface",
+      "body": "Inside Admin Center, the left sidebar groups settings under Agent tools: Agent Workspace, Views, Macros, Shortcuts, Dynamic content, Cards, Layouts, Agent interface, Context panel, and more. The signature template specifically lives under Agent interface, not Agent Workspace — the two names are close enough to cause a wrong turn if you're skimming, so look for \"Agent interface\" in that list before you start searching the page for a signature box."
+    },
+    {
+      "heading": "Find and edit the Signature field",
+      "body": "On the Agent interface page, scroll to the Signature field — a text box labeled \"Template for adding a signature to all public agent comments on tickets.\" By default it may contain a placeholder token like {{agent.signature}}, which pulls in each individual agent's own configured signature rather than hardcoding one name for the whole team. You can edit this template directly, add static company boilerplate around the token, or replace it with fixed text if you want every agent's replies to look identical regardless of who's answering.",
+      "image": { "file": "/screenshots/_TWV6fMDL-A/05.webp", "caption": "The Signature field on the Agent interface settings page, showing the template box that controls the sign-off appended to every public ticket comment." }
+    },
+    {
+      "heading": "Decide between a shared template and per-agent personalization",
+      "body": "If you keep the {{agent.signature}} placeholder in the template, each agent can still personalize their own name, title, or contact line from their individual profile, while the surrounding template — company name, support hours, a standard closing line — stays consistent across the whole team. If you'd rather every reply look identical with no personalization, replace the placeholder with static text instead. Either approach is a legitimate choice; it depends on whether your team benefits more from a personal touch or from strict brand consistency."
+    },
+    {
+      "heading": "Save and verify on a real ticket",
+      "body": "Save your changes on the Agent interface page, then open or reply to a test ticket to confirm the signature appears exactly as intended — spacing, line breaks, and any placeholder text all render correctly before it goes out to real customers. It's easy to miss a stray line break or an unresolved placeholder token in the settings screen alone, so a live test reply is the only way to be sure the template looks right in an actual sent comment."
+    }
   ],
   "faq": [
-    { "question": "Can each agent customize their own signature?", "answer": "Yes, agents can edit their personal signature from their individual profile settings, in addition to any global template an admin has configured." },
-    { "question": "Does Zendesk support HTML signatures?", "answer": "Zendesk signatures primarily use Markdown formatting rather than raw HTML, so stick to bold, italics, and links for reliable rendering." },
-    { "question": "Will the signature appear on internal notes too?", "answer": "Signatures are designed for customer-facing public replies rather than internal team notes." },
-    { "question": "Can I preview my signature before it goes live?", "answer": "Yes, sending a test reply on a sample ticket is the easiest way to confirm your signature looks right before relying on it." }
+    { "question": "Where do I set up a signature for all agents in Zendesk?", "answer": "In Admin Center, under Agent tools > Agent interface, there's a Signature field that holds the template applied to public comments on tickets across your account." },
+    { "question": "What does the {{agent.signature}} placeholder do?", "answer": "It pulls in each individual agent's own personal signature into the shared template, so you can keep company-wide formatting consistent while still letting each agent's name and details show through." },
+    { "question": "Can I make every agent's signature identical with no personalization?", "answer": "Yes, replace the {{agent.signature}} placeholder with fixed text in the Agent interface Signature field, and every public reply will use that same static sign-off." },
+    { "question": "Do I need admin access to change the signature template?", "answer": "Yes, the Signature field lives in Admin Center under Agent tools, which requires admin-level access — it isn't available from the regular agent ticket workspace." },
+    { "question": "How do I confirm my signature template looks right?", "answer": "Save your changes, then open a real or test ticket and send a reply. Checking a live comment is the most reliable way to catch formatting issues that aren't obvious in the settings box." }
   ],
-  "generatedAt": "2026-07-22T00:00:00Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

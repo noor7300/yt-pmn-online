@@ -1,20 +1,39 @@
 {
   "slug": "how-to-export-webflow-code-and-host-it-online-easily-2026",
   "seoTitle": "How to Export Webflow Code and Host It Elsewhere",
-  "metaDescription": "Learn how to export clean HTML, CSS, and JavaScript from Webflow and deploy it to a free static host like Netlify or Vercel.",
-  "intro": "If your project only needs static hosting, exporting your Webflow code lets you skip ongoing CMS hosting fees while keeping your responsive design intact. This guide walks through generating the export package, uploading it to a static host, and fixing common issues like broken forms and asset paths. It's aimed at developers and agencies who want full ownership of their front-end files.",
+  "metaDescription": "Learn how to export clean HTML, CSS, and JavaScript from Webflow and deploy it to a free static host, plus what actually breaks once you leave Webflow's platform.",
+  "intro": "Exporting a Webflow project into plain HTML, CSS, and JavaScript is the escape hatch for anyone who wants their design without an ongoing Webflow hosting bill — but the export panel itself has a catch that trips up a lot of people the first time they try it. This guide walks through opening the Export Code dialog, understanding what you actually get on your current plan, and moving the result onto a static host. It also covers the two things that quietly stop working the moment you leave Webflow's platform: forms and CMS content — so you're not surprised by a broken contact form on launch day.",
   "steps": [
-    { "heading": "Trigger the code export", "body": "Open the Webflow Designer, find the Export Code option in the top toolbar, and generate your HTML, CSS, and JavaScript package." },
-    { "heading": "Download and inspect the zip", "body": "Download the static site package and review the folder structure to confirm your templates, images, and scripts are all included." },
-    { "heading": "Choose a free static host", "body": "Sign up for a service like Netlify, Vercel, or GitHub Pages that supports drag-and-drop or Git-based static deployments." },
-    { "heading": "Upload your files and connect a domain", "body": "Drag your exported folder into the hosting dashboard, then map your custom domain to the new deployment." },
-    { "heading": "Fix forms and broken assets", "body": "Since Webflow's native form handling won't work outside its platform, set up an external form endpoint and check for any broken image paths before going live." }
+    {
+      "heading": "Open the Export Code panel and check what your plan allows",
+      "body": "In the Designer, select an element or open the site-level menu to trigger Export Code, which opens a dialog with tabs for HTML, CSS, JS, and Assets. The HTML tab shows your actual markup — navigation links, class names like w-nav-link and w-button, and the structure Webflow generated from your visual layout, which is clean and semantic rather than the bloated output some visual builders produce. Read the notice below the code before you plan your workflow around it, though: on a workspace without the right plan, what you're seeing is explicitly labeled a limited preview, not the full downloadable package. The dialog spells out two upgrade paths — a Workspace plan for full code export and DevLink React components, and a Site plan for CMS, ecommerce, forms, and search — so check which one applies before assuming you can download today.",
+      "image": { "file": "/screenshots/YKwzzMljodY/03.webp", "caption": "The Export Code dialog on the HTML tab, with a notice underneath that this snippet is a limited preview and full export needs a plan upgrade." }
+    },
+    {
+      "heading": "Download the export and check the folder",
+      "body": "Once you're on a plan that supports full export, downloading gives you a zip with separate folders for CSS, JS, and images alongside your HTML pages. Open it and skim for anything obviously missing — a stylesheet that didn't generate, an image folder that's empty, a script reference pointing somewhere that doesn't exist. Catching this before you deploy saves a round of debugging on the live host later, where errors are harder to trace back to the source."
+    },
+    {
+      "heading": "Pick a static host and upload the files",
+      "body": "Any host built for static files works: Netlify, Vercel, GitHub Pages, or something simpler like a drag-and-drop uploader such as Tiiny Host, which accepts a folder or a zip and gives you a live link almost immediately. The upload screen typically shows a drop zone alongside integration shortcuts for services like GitHub or Dropbox, plus a spot to claim a custom subdomain before you go live. Whichever you choose, the workflow is the same shape — drop the exported folder in, wait for the deploy to finish, and get back a URL.",
+      "image": { "file": "/screenshots/YKwzzMljodY/05.webp", "caption": "A static hosting dashboard's upload screen — drag the exported files in, or connect GitHub or Dropbox, then publish to get a live link." }
+    },
+    {
+      "heading": "Point your custom domain at the new host",
+      "body": "Once the files are live on a temporary subdomain, add your real domain through the host's custom domain settings and update your DNS records at your registrar to match. This step is identical to pointing any domain at any new host, and it's worth doing a test deploy on the free subdomain first so you're not debugging DNS and broken assets at the same time."
+    },
+    {
+      "heading": "Replace forms and dynamic features that no longer work",
+      "body": "This is the step most people forget until launch day: Webflow's native form submissions, CMS collections, and interactions that rely on Webflow's backend do not function on exported static files, because there's no Webflow server behind them anymore. Point any forms at an external handler like Formspree or your static host's own form service, and if your site leaned on CMS collections for blog posts or products, plan to rebuild that content as static pages or wire up a headless CMS instead. Skipping this check is the single most common reason an exported site looks perfect but quietly stops taking form submissions."
+    }
   ],
   "faq": [
-    { "question": "Will my Webflow forms still work after export?", "answer": "No, native Webflow forms rely on their backend, so you'll need to point form submissions to an external service like Netlify Forms or Formspree." },
-    { "question": "Is exporting code available on every Webflow plan?", "answer": "Code export typically requires a paid site plan, so check your current plan's capabilities before relying on this workflow." },
-    { "question": "Will my responsive layout still work after export?", "answer": "Yes, the exported CSS preserves your breakpoints, so your responsive design should render the same outside Webflow." },
-    { "question": "Can I still edit the site visually after exporting?", "answer": "No, once exported the code is static and any future changes need to be made either back in Webflow and re-exported, or directly in the code." }
+    { "question": "Will my Webflow forms still work after export?", "answer": "No. Native Webflow forms rely on Webflow's own backend, so once the site is static you need to point form submissions to an external service like your host's form handler or a service such as Formspree." },
+    { "question": "Is exporting code available on every Webflow plan?", "answer": "No — the Export Code dialog itself shows a limited preview on lower-tier plans and requires a Workspace plan upgrade to download the full HTML, CSS, and JS package." },
+    { "question": "Will my responsive layout still work after export?", "answer": "Yes, the exported CSS preserves your breakpoints, so your responsive design renders the same outside Webflow." },
+    { "question": "What happens to CMS content when I export?", "answer": "It doesn't come with the export. Webflow's CMS collections rely on Webflow's own database, so dynamic content needs to be rebuilt as static pages or connected to a different backend after you move off the platform." },
+    { "question": "Can I still edit the site visually after exporting?", "answer": "No — once exported, the code is static. Future design changes need to happen back in Webflow with a fresh export, or directly in the downloaded code by hand." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

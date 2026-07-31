@@ -2,19 +2,46 @@
   "slug": "how-to-find-and-recover-deleted-messages-in-microsoft-teams-easily-2026",
   "seoTitle": "How to Recover Deleted Messages in Microsoft Teams (2026)",
   "metaDescription": "Learn how to undo a deleted Teams message, restore a deleted channel, and recover shared files from OneDrive or SharePoint recycle bins.",
-  "intro": "Accidentally deleting an important conversation or file in Teams doesn't have to mean permanent data loss, though the recovery path depends on what exactly was deleted. This guide covers catching the instant Undo banner, restoring a deleted channel as a team owner, recovering shared files from OneDrive or SharePoint recycle bins, and when to escalate to an IT admin for deeper recovery. It's written for anyone who's hit delete a little too fast.",
+  "intro": "Accidentally deleting an important conversation or file in Teams doesn't have to mean permanent data loss, though the recovery path depends heavily on what exactly was deleted and how long ago. This guide covers catching the instant inline Undo option right after a delete, restoring a deleted channel as a team owner, recovering shared files from OneDrive or SharePoint recycle bins, and when to escalate to an IT admin for deeper recovery through Purview. It's written for anyone who's hit delete a little too fast and is now staring at a blank space where a message used to be.",
   "steps": [
-    { "heading": "Catch the Undo banner", "body": "Look for the yellow Undo banner that appears right next to a message immediately after deletion, and click it within the short time window to reverse it." },
-    { "heading": "Restore a deleted channel", "body": "If the banner is gone, click the three-dot menu next to the team name, select Manage Team, open the Channels tab, and expand Deleted channels to find and restore it." },
-    { "heading": "Recover shared files", "body": "Open the Files tab in your chat window, click Open in SharePoint, then select Recycle Bin from the sidebar to restore a deleted document." },
-    { "heading": "Check the box and restore", "body": "In the Recycle Bin, check the box next to your target document and click Restore." },
-    { "heading": "Escalate if needed", "body": "For older or more complex message recovery, contact your IT department to run an eDiscovery search through Microsoft Purview." }
+    {
+      "heading": "Catch the inline Undo option immediately",
+      "body": "The moment you delete a message in a Teams chat, it doesn't just vanish — it's replaced in place by a line reading \"This message has been deleted\" with an Undo link sitting right next to it. This is your fastest and easiest recovery path, but the window doesn't stay open long, so the instinct to act fast matters more than anything else in this guide. Click Undo and the original text reappears exactly where it was, as if nothing happened."
+    },
+    {
+      "heading": "See how multiple deletions stack in a thread",
+      "body": "If you've deleted more than one message in the same conversation, each one gets its own \"This message has been deleted\" line with its own separate Undo link — they don't get merged or cleared out together. That's worth knowing if you're scrolling back through a chat trying to figure out what's recoverable: every deleted message is still marked individually, so you can restore them one at a time rather than hunting for a single bulk-recovery option.",
+      "image": { "file": "/screenshots/rc5QMOftV00/03.webp", "caption": "A Teams chat thread showing two deleted messages, each with its own inline Undo link still active." }
+    },
+    {
+      "heading": "Recover a channel a team owner deleted",
+      "body": "For a deleted channel rather than a single message, the recovery lives in team management, not chat. Click the three-dot menu next to the team's name and select Manage Team, then open the Channels tab. There's a Deleted channels section that's collapsed by default — expand it to see anything removed within roughly the last 30 days, find the one you need, and use the Restore action next to it. Only team owners can see and use this option, so if you're a regular member you'll need to ask one to do it for you."
+    },
+    {
+      "heading": "Open shared files in their real location",
+      "body": "Files sent through Teams chat aren't actually stored inside the chat itself — they live in OneDrive or SharePoint behind the scenes, and a deleted attachment follows those apps' recovery rules, not Teams' own. Open the Files tab in the relevant chat, then click Open in SharePoint to jump to the underlying document library, where the file's real folder structure and recycle bin live."
+    },
+    {
+      "heading": "Restore from the Recycle Bin",
+      "body": "Inside SharePoint, the sidebar has a Recycle Bin option. Deleted files sit there for a much longer window than a chat message does — often up to 93 days — which makes this the path to check if you deleted something days or weeks ago rather than seconds ago. Check the box next to the document you need and click Restore, and it reappears back in its original folder, still linked correctly from the chat where it was shared."
+    },
+    {
+      "heading": "See what a shared file looks like once it's back",
+      "body": "Once a file is restored, it behaves exactly like any other item shared in the conversation — hover over it and Teams shows the familiar reaction bar and options menu, and clicking it opens a preview right in the chat pane. That inline behavior is the same whether the file was just uploaded or just recovered, which is a useful sanity check that the restore actually worked and the file isn't a broken link.",
+      "image": { "file": "/screenshots/rc5QMOftV00/05.webp", "caption": "A file shared in a Teams chat, previewed inline with reaction and options controls on hover — the same behavior a restored file shows once it's back in place." }
+    },
+    {
+      "heading": "Escalate to IT for older or bulk recovery",
+      "body": "If a message or file is past its recovery window, or you need to reconstruct a whole conversation history for compliance or audit reasons, the Undo link and Recycle Bin won't help — that requires administrator-level tools. Your IT department can run an eDiscovery search through the Microsoft Purview portal, which searches the underlying Exchange data that backs Teams chat and can pull deleted content well beyond what's visible to a regular user."
+    }
   ],
   "faq": [
-    { "question": "How long do I have to undo a deleted message?", "answer": "You typically have a short window of about 5 to 10 seconds after deletion to click the Undo banner before it disappears." },
-    { "question": "Can I recover a deleted Teams channel?", "answer": "Yes, team owners can restore deleted channels within 30 days through the Manage Team menu under the Deleted channels section." },
-    { "question": "How long do deleted files stay recoverable?", "answer": "Files shared through chat can typically be restored from the OneDrive or SharePoint Recycle Bin for up to 93 days." },
-    { "question": "What if I need to recover a message older than the standard recovery window?", "answer": "Your IT department can use eDiscovery tools inside the Microsoft Purview portal to search and pull deleted chat logs at the administrative level." }
+    { "question": "How long do I have to undo a deleted message?", "answer": "The inline Undo link next to a deleted message stays clickable for only a short window right after deletion, so it's worth clicking immediately rather than continuing to scroll or type." },
+    { "question": "Can I recover a deleted Teams channel?", "answer": "Yes — team owners can restore a deleted channel within about 30 days by opening the three-dot menu on the team, selecting Manage Team, opening Channels, and expanding Deleted channels." },
+    { "question": "How long do deleted files stay recoverable?", "answer": "Files shared through chat live in OneDrive or SharePoint behind the scenes and can typically be restored from that Recycle Bin for up to 93 days, far longer than the chat's own Undo window." },
+    { "question": "What if I need to recover a message older than the standard recovery window?", "answer": "Your IT department can use eDiscovery tools inside the Microsoft Purview portal to search the underlying Exchange data and pull deleted chat content at the administrative level." },
+    { "question": "Do I need to be a team owner to restore a deleted channel?", "answer": "Yes — the Deleted channels section under Manage Team is only visible and actionable for team owners, so a regular member will need to ask an owner to perform the restore." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

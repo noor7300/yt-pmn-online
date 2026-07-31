@@ -1,21 +1,44 @@
 {
   "slug": "how-to-add-sum-calculations-in-a-confluence-table-easily-2026",
-  "seoTitle": "How to Add Sum Calculations in a Confluence Table",
-  "metaDescription": "Calculate column totals inside Confluence using the native Databases feature or the Elements Spreadsheet macro, without copying data to Excel.",
-  "intro": "Copying numbers out to an external spreadsheet just to get a total defeats the purpose of documenting them in Confluence in the first place. This guide covers two ways to add automatic sum calculations to a Confluence table — the native Databases feature and the Elements Spreadsheet macro.",
+  "seoTitle": "How to Add Sum Calculations in a Confluence Table (2026)",
+  "metaDescription": "Add real sum formulas to a Confluence page using the Elements Spreadsheets macro — enter data, reference a cell range, and get a live total.",
+  "intro": "A plain Confluence table can hold numbers, but it can't add them up on its own — there's no built-in formula bar on a standard table cell. The Elements Spreadsheets macro fixes that by embedding an actual Excel-like spreadsheet inside your page, complete with cell references, functions, and a formula bar. This guide walks through opening that macro from a Confluence page, entering a sum formula against a range of cells, and getting a live total that updates with your data, plus a note on Confluence's native Databases feature as a lighter alternative for simple running totals.",
   "steps": [
-    { "heading": "Insert a Confluence Database object", "body": "Add a Confluence Database block onto your page canvas instead of a basic static table." },
-    { "heading": "Set numeric field types", "body": "Configure the relevant columns to a Number data type and input your project data." },
-    { "heading": "Open the calculate panel", "body": "Hover below your value column and click the native Calculate button that appears." },
-    { "heading": "Select Sum", "body": "Choose the Sum option from the dropdown to instantly display the column total." },
-    { "heading": "Or use the spreadsheet macro", "body": "Launch the macro search tool and choose Elements Spreadsheet for a more Excel-like layout with sigma-based formulas." },
-    { "heading": "Publish your totals", "body": "Click the blue Publish button to push the automated totals live for your team." }
+    {
+      "heading": "Open the spreadsheet macro from your page",
+      "body": "From an existing Confluence page — in this case one already containing a Databases-style table with fields and tags — insert or open the Elements Spreadsheets macro. Confluence shows a brief loading state while the macro initializes, with an Update and Cancel option in the modal header and the underlying page (with its own \"DATA BASE\" table and tag fields like \"Not started\" and \"Done\") still visible behind it. This confirms the macro lives inside your page rather than as a separate file — the totals you calculate stay attached to the document your team already reads.",
+      "image": { "file": "/screenshots/moH4dB7rKp8/05.webp", "caption": "The Elements Spreadsheets macro loading on top of a Confluence page that already has its own data table, showing the macro opening in context." }
+    },
+    {
+      "heading": "Lay out your columns",
+      "body": "Once the macro opens, it behaves like a standard spreadsheet grid with lettered columns and numbered rows, plus its own toolbar for fonts, cell formatting, alignment, and functions. Set up your headers in row 1 — ID, Number 1, Age, Sum — and fill in the rows beneath with your actual values. Unlike a plain Confluence table, every cell here can hold either a value or a formula, which is what makes the sum calculation possible in the next step.",
+      "image": { "file": "/screenshots/moH4dB7rKp8/01.webp", "caption": "The Elements Spreadsheets grid with ID, Number 1, and Age columns filled in, and an empty Sum column ready for a formula." }
+    },
+    {
+      "heading": "Write a sum formula against the range",
+      "body": "Click into the Sum cell for a row and type an equals sign to start a formula, referencing a range of cells you want added together — for example =A2:A6 to sum every value in that column from row 2 through row 6. The formula bar shows exactly what you've typed as you build it, with red and green buttons to cancel or confirm once the range looks right. This is the core difference from a static table: the total isn't typed in by hand, it's calculated live from the cells you point it at, so editing any number in the range updates the sum automatically.",
+      "image": { "file": "/screenshots/moH4dB7rKp8/03.webp", "caption": "A sum formula referencing the range A2:A6, with confirm and cancel buttons next to the formula bar before the calculation is locked in." }
+    },
+    {
+      "heading": "Confirm and check the result",
+      "body": "Click the green checkmark to lock in the formula. The Sum cell then displays the calculated total instead of the formula text, and the underlying formula stays attached to the cell — click back into it later and you'll see =A2:A6 again rather than a hardcoded number. If you add a new row of data inside that range, the sum updates on its own the next time the sheet recalculates, which is the entire point of using a spreadsheet macro instead of manually retyping a total every time the numbers change."
+    },
+    {
+      "heading": "Update the page to save your changes",
+      "body": "Once the formula and totals look correct, click Update in the macro's modal header (visible next to Cancel while the macro loads) to save the spreadsheet back into the page, then publish the page itself if you haven't already. The macro's data is stored as part of the page content, so anyone opening it afterward sees the same live totals without needing edit access to the spreadsheet themselves."
+    },
+    {
+      "heading": "Know the lighter, native alternative",
+      "body": "If your needs are simpler — one running total on a small table rather than a full spreadsheet with multiple formulas — Confluence's native Databases feature has its own built-in Calculate option that can add a Sum to the bottom of a numeric column without embedding a separate macro at all. It's less powerful than Elements Spreadsheets (no arbitrary formulas, just aggregate functions like sum, average, and count), but it's faster to set up when a single column total is all you actually need."
+    }
   ],
   "faq": [
-    { "question": "Do I need a third-party app to sum a Confluence table?", "answer": "Not necessarily — Confluence's native Databases feature includes a built-in Calculate option, though marketplace apps like Elements Spreadsheet offer more advanced formulas." },
-    { "question": "Will the sum update automatically if I edit a value?", "answer": "Yes, since it's a live calculation, changing a number in the column should update the displayed total." },
-    { "question": "Can I calculate more than just a sum?", "answer": "The native Calculate panel offers a dropdown of options beyond just Sum, and spreadsheet-style macros support broader Excel-like functions." },
-    { "question": "Why isn't my Calculate button showing up?", "answer": "This usually means the column isn't formatted as a Number data type, which is required for the calculation tools to appear." }
+    { "question": "Can a regular Confluence table calculate a sum on its own?", "answer": "No, a plain table has no formula support. To get a real sum you need either the Elements Spreadsheets macro, which embeds a full spreadsheet in the page, or Confluence's native Databases feature, which has a simpler built-in Calculate option for aggregate totals." },
+    { "question": "How do I write a sum formula in the Elements Spreadsheets macro?", "answer": "Click into the target cell, type an equals sign followed by the cell range you want added — for example =A2:A6 — and confirm with the green checkmark in the formula bar." },
+    { "question": "Does the sum update automatically if I change the data?", "answer": "Yes, as long as the changed cells fall inside the range referenced by the formula. The formula stays attached to the cell rather than being replaced by a static number." },
+    { "question": "Do I need to publish the page after editing the spreadsheet macro?", "answer": "Yes. Click Update in the macro to save your changes back into the page content, then publish the page itself so the updated totals are visible to everyone with access." },
+    { "question": "What's the difference between Elements Spreadsheets and Confluence's native Databases Calculate option?", "answer": "Elements Spreadsheets is a full Excel-like macro supporting arbitrary formulas and functions. The native Databases Calculate option is simpler and faster to use but limited to aggregate functions like sum, average, and count on a single column." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

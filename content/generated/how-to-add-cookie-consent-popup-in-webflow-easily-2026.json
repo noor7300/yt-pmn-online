@@ -1,20 +1,48 @@
 {
   "slug": "how-to-add-cookie-consent-popup-in-webflow-easily-2026",
-  "seoTitle": "Build a Cookie Consent Popup in Webflow",
-  "metaDescription": "Design a GDPR-friendly cookie consent banner in Webflow using native elements and interactions, without a heavy third-party widget.",
-  "intro": "Third-party cookie consent widgets often slow down page speed and clash with a site's custom design. This guide shows how to build a compliance banner directly in Webflow using native container elements, interactions, and a small custom code snippet to remember user choices.",
+  "seoTitle": "How to Add a Cookie Consent Popup in Webflow (2026)",
+  "metaDescription": "Add a cookie consent banner to a Webflow site using the Apps panel's Cookie Consent marketplace app, from install through the settings that make it work.",
+  "intro": "Building a fully custom cookie banner from raw containers and interactions is possible in Webflow, but the far faster route — and the one actually shown here — is the Apps panel, where a purpose-built Cookie Consent app handles the banner, the accept and settings buttons, and the compliance logic for you. This guide walks through finding that app in the Designer, what its listing tells you before you install it, and the settings panel where you configure where the popup shows and how consent data is stored. It's aimed at anyone who wants a working GDPR-style banner without hand-building the interaction logic from scratch.",
   "steps": [
-    { "heading": "Build the banner layout", "body": "Open the Add Elements panel, drag in a container box, and set it to a fixed position for your banner." },
-    { "heading": "Add your text and buttons", "body": "Insert privacy text and create accept and settings buttons styled to match your site's branding." },
-    { "heading": "Configure the interaction", "body": "Open the Interactions panel and build a custom click trigger that smoothly hides the banner when a visitor clicks accept." },
-    { "heading": "Add a hide animation", "body": "Set up an animation sequence so the popup dismisses cleanly rather than disappearing abruptly." },
-    { "heading": "Paste the compliance script", "body": "Add your cookie consent script inside the project's custom code settings so the site remembers a visitor's choice, then test and publish." }
+    {
+      "heading": "Open the Apps panel in the Designer",
+      "body": "Inside the Webflow Designer, the left-hand rail has an Apps icon that opens a searchable panel of installable extensions, separate from the elements and layers panels you use for regular page building. A New & Noteworthy section surfaces apps like HubSpot, Google Ads for Webflow, and consent-management tools including OneTrust and Cookie Consent, so this is the natural starting point rather than trying to assemble compliance logic by hand.",
+      "image": { "file": "/screenshots/vRbPojgMznU/01.webp", "caption": "The Apps panel in the Webflow Designer, listing installable extensions including several cookie and consent-management tools." }
+    },
+    {
+      "heading": "Review the Cookie Consent app listing",
+      "body": "Searching \"cookie\" surfaces several dedicated apps — Cookie Consent, Cookie Consent Hub, Flowstar GDPR Cookie Consent, and others. Clicking one opens its detail view with screenshots of the popup, an Install on site button, a like count, and a written breakdown of what it does: customizable appearance, user control over preferences, compliance features, and a read-only versus edit-and-read access permission listed under App permissions. Reading this panel before installing tells you exactly what the app can touch in your project.",
+      "image": { "file": "/screenshots/vRbPojgMznU/02.webp", "caption": "The Cookie Consent app's detail panel, showing its preview screenshots, key features, and the access permissions it requests." }
+    },
+    {
+      "heading": "Install it onto your site",
+      "body": "Clicking Install on site adds the app to the current Webflow project. Unlike a purely visual element you'd drag onto the canvas, this app comes with its own configuration surface — you're installing a small piece of functionality plus a UI to control it, not just a styled div."
+    },
+    {
+      "heading": "Open the app's settings panel",
+      "body": "Once installed, the Cookie Consent app opens its own dialog directly over your page canvas, with tabs across the top for Settings, Scripts, Templates, License, Help, and Feedback. The Settings tab is where the real configuration happens: a Consent Storing Endpoint field for where consent data gets saved, a Consent Webhook Endpoint for real-time updates to your own server, and a Choose Regions to Show Popup field defaulting to Global.",
+      "image": { "file": "/screenshots/vRbPojgMznU/05.webp", "caption": "The Cookie Consent app's Settings tab, with fields for a storing endpoint, a webhook endpoint, and the regions where the popup should appear." }
+    },
+    {
+      "heading": "Activate the license to save your settings",
+      "body": "A visible notice inside the settings panel warns that you need to activate the license before Save settings will actually take effect — the fields can be filled in, but without an active license the configuration won't persist. This is worth checking before you spend time filling in endpoints and region rules, since a free or trial install may only let you preview the app rather than fully save a working configuration."
+    },
+    {
+      "heading": "Choose which regions see the popup",
+      "body": "The Choose Regions to Show Popup field lets you scope the banner instead of showing it to every visitor worldwide — useful if your compliance obligations are regional, such as GDPR for EU visitors, rather than global. Leaving it on Global (Default) is the safest starting point if you're not sure which regions legally require it for your traffic."
+    },
+    {
+      "heading": "Publish and verify the banner appears",
+      "body": "After saving your settings with an active license, publish the site and load it in a fresh or private browser session to confirm the popup actually appears for a new visitor and that accepting it prevents the banner from reappearing on a repeat visit. Testing from a clean session matters here, since your own browser may already have a stored consent choice from earlier testing."
+    }
   ],
   "faq": [
-    { "question": "Do I need a third-party plugin to add a cookie banner in Webflow?", "answer": "No, a native container, buttons, and interactions can handle the visual banner, paired with a small custom code script for compliance tracking." },
-    { "question": "Where does the cookie tracking script go?", "answer": "Custom code snippets are pasted inside the project settings so the site can remember whether a visitor has already responded." },
-    { "question": "Will the banner display correctly on mobile?", "answer": "Test your banner across responsive breakpoints in preview mode to confirm it reads well on smaller screens." },
-    { "question": "Can I let visitors change their cookie preferences later?", "answer": "Yes, a settings link alongside the accept button can reopen the preference options for visitors who want to adjust their choice." }
+    { "question": "Do I need a third-party app to add a cookie banner in Webflow?", "answer": "Not strictly, but the built-in route shown in the Designer is the Apps panel's Cookie Consent app, which handles the banner UI, region targeting, and consent storage without you building the interaction logic from scratch." },
+    { "question": "Where do I configure the cookie banner after installing the app?", "answer": "The app opens its own Settings panel with fields for a consent storing endpoint, a webhook endpoint, and which regions the popup should appear in." },
+    { "question": "Why won't my settings save after I configure the app?", "answer": "The app's settings panel shows a notice that you need to activate the license before Save settings will actually persist your configuration — check that first if changes aren't sticking." },
+    { "question": "Can I limit the cookie popup to specific regions?", "answer": "Yes, the Choose Regions to Show Popup field lets you scope the banner instead of showing it globally, useful if only certain regions require it for your traffic." },
+    { "question": "How do I know the banner is actually working after I publish?", "answer": "Load the published site in a fresh or private browser session, since your own browser may already have a stored consent choice from earlier testing that hides the banner." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }
