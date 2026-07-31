@@ -1,6 +1,7 @@
 import { writeFile, mkdir, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import type { CategorizedVideo, GeneratedArticle } from "../lib/types";
+import { SITE_URL } from "../lib/site";
 
 const CATS_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GEN_DIR = path.join(process.cwd(), "content", "generated");
@@ -14,6 +15,7 @@ interface LogEntry {
   category: string;
   categoryLabel: string;
   url: string;
+  liveUrl: string;
   images: number;
   words: number;
   generatedAt: string;
@@ -42,6 +44,7 @@ async function main() {
       category: video.category,
       categoryLabel: video.categoryLabel,
       url: `/tutorials/${video.category}/${slug}`,
+      liveUrl: `${SITE_URL}/tutorials/${video.category}/${slug}`,
       images: article.steps.filter((s) => s.image).length,
       words: wordCount(article),
       generatedAt: article.generatedAt,
@@ -53,7 +56,7 @@ async function main() {
   await writeFile(OUT_JSON, JSON.stringify(entries, null, 2));
 
   const rows = entries
-    .map((e) => `| [${e.title}](${e.url}) | ${e.categoryLabel} | ${e.images} | ${e.words} | ${e.generatedAt.slice(0, 10)} |`)
+    .map((e) => `| [${e.title}](${e.liveUrl}) | ${e.categoryLabel} | ${e.images} | ${e.words} | ${e.generatedAt.slice(0, 10)} |`)
     .join("\n");
   const md = `# Deep-article log (Phase 3)
 
