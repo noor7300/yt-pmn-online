@@ -2,19 +2,44 @@
   "slug": "how-to-add-a-subdomain-in-cloudflare-easily-2026",
   "seoTitle": "How to Add a Subdomain in Cloudflare (2026 Guide)",
   "metaDescription": "Create a custom subdomain like blog or shop in Cloudflare by adding an A record or CNAME alias, then decide whether to proxy it for caching and security.",
-  "intro": "A subdomain lets you carve out a separate section of your site, like shop.yoursite.com or blog.yoursite.com, without buying a new domain. This guide covers adding that subdomain in Cloudflare's DNS panel, whether you're pointing it directly to a server IP or aliasing it to another URL.",
+  "intro": "A subdomain lets you carve out a separate section of your site, like shop.yoursite.com or blog.yoursite.com, without buying a new domain. This guide covers adding that subdomain from a real Cloudflare account's DNS panel — reaching the domain's Overview screen, opening the DNS Records section, and filling in the Add record form, whether you're pointing it directly to a server IP or aliasing it to another URL.",
   "steps": [
-    { "heading": "Open your DNS Records page", "body": "From the Cloudflare dashboard, select your domain and go to the DNS Records section in the left sidebar." },
-    { "heading": "Click Add Record", "body": "Open the field configuration panel by clicking the '+ Add record' button." },
-    { "heading": "Choose A record or CNAME", "body": "Set the Type to an A record if you're pointing to a hosting IP, or CNAME if you're aliasing to another domain or platform URL." },
-    { "heading": "Enter your subdomain name", "body": "Type just the prefix, like 'blog' or 'shop', into the Name field without repeating your root domain." },
-    { "heading": "Set the proxy status and save", "body": "Decide whether to proxy the record through Cloudflare for caching and edge security, then save and verify the new address resolves correctly." }
+    {
+      "heading": "Open your domain's Overview in Cloudflare",
+      "body": "After logging in, selecting a domain from your account drops you on its Overview screen, which shows unique visitors, total requests, and cache percentage over the last 24 hours, 7 days, or 30 days, alongside a DNS panel on the right confirming your DNS Setup is Full. The left sidebar is where every other section lives — Records, AI Crawl Control, Investigate, Analytics, DNS, Email, SSL/TLS, Security, and more, all scoped to whichever domain is currently selected at the top of the page.",
+      "image": { "file": "/screenshots/u5XeIpgTiFI/02.webp", "caption": "A domain's Overview page in Cloudflare, showing traffic analytics and the DNS Setup status before opening the DNS section." }
+    },
+    {
+      "heading": "Expand DNS in the sidebar",
+      "body": "Clicking DNS in the left sidebar expands it into three sub-items: Records, Analytics, and Settings. Records is what you want for adding a subdomain — it's the actual list of every A, AAAA, CNAME, MX, and TXT entry currently configured for the domain. The same page also surfaces an Active Subscriptions panel showing your current plan (Free, in a lot of small-site setups) and an API section with your Zone ID and Account ID, which matter if you're ever scripting DNS changes instead of using the dashboard.",
+      "image": { "file": "/screenshots/u5XeIpgTiFI/03.webp", "caption": "The DNS menu expanded in the sidebar to reveal Records, Analytics, and Settings, alongside the account's Active Subscriptions and API details." }
+    },
+    {
+      "heading": "Click Add record and choose the type",
+      "body": "On the DNS records page, the Add record button opens a modal titled simply \"Add record,\" with a live description underneath that updates as you fill in the form — for example, \"[name] points to [IPv4 address] and has its traffic proxied through Cloudflare.\" The Type dropdown lists every record kind Cloudflare supports: A, AAAA, CAA, CERT, CNAME, DNSKEY, DS, HTTPS, LOC, MX, NAPTR, NS, OPENPGPKEY, and PTR among them. For a subdomain, the two you'll actually use are A, if you're pointing straight at a server's IPv4 address, or CNAME, if you're aliasing to another domain or a third-party platform's URL.",
+      "image": { "file": "/screenshots/u5XeIpgTiFI/04.webp", "caption": "The Add record modal with the Type dropdown open, listing A, AAAA, CNAME, MX, and the rest of Cloudflare's supported record types." }
+    },
+    {
+      "heading": "Fill in the name, value, and proxy status",
+      "body": "With Type set to A, the form settles into its final shape: a Name field with placeholder text reminding you to \"use @ for root\" — meaning you only type the subdomain prefix, like blog or shop, not the whole domain — an IPv4 address field below it, a Proxy status toggle defaulting to on (the orange cloud, labeled Proxied), and a TTL field set to Auto. A collapsible Record Attributes section sits below for anything more advanced you don't need for a basic subdomain.",
+      "image": { "file": "/screenshots/u5XeIpgTiFI/05.webp", "caption": "The completed Add record form for an A record, showing the Name and IPv4 address fields plus the orange Proxied toggle and Auto TTL." }
+    },
+    {
+      "heading": "Decide on proxy status before you save",
+      "body": "The Proxy status toggle is the one decision on this form worth pausing on. Orange cloud (Proxied) routes traffic through Cloudflare first, which enables caching, DDoS protection, and hides your origin server's real IP address. Gray cloud (DNS only) just resolves the name to the IP directly, with none of Cloudflare's edge features in front of it — the right choice for records like a mail server that shouldn't be proxied. For a typical web-facing subdomain like blog or shop, leaving it proxied is the standard choice."
+    },
+    {
+      "heading": "Save and confirm the record resolves",
+      "body": "Clicking Save on the modal adds the new row to your DNS records table immediately, and Cloudflare's own edge network picks up the change right away since it's authoritative for the zone. Full propagation to every DNS resolver worldwide can still take a little longer in rare cases, so give it a few minutes before assuming something's wrong if the subdomain doesn't resolve on the very first try. Once it does, your new subdomain is live and, if proxied, already benefiting from Cloudflare's caching and security layer."
+    }
   ],
   "faq": [
-    { "question": "What's the difference between an A record and a CNAME for a subdomain?", "answer": "An A record points your subdomain directly to a server's IP address, while a CNAME aliases it to another domain name, which is common when using third-party platforms." },
-    { "question": "Should I proxy my new subdomain through Cloudflare?", "answer": "Proxying (orange cloud) enables Cloudflare's caching and security features, while DNS-only mode (gray cloud) routes traffic directly to your origin without those benefits." },
-    { "question": "How long does it take for a new subdomain to start working?", "answer": "Changes inside Cloudflare's own network typically propagate almost immediately, though full global DNS propagation can occasionally take longer." },
-    { "question": "Can I add multiple subdomains to the same domain?", "answer": "Yes, you can add as many A or CNAME records as you need, each with its own unique subdomain prefix." }
+    { "question": "What's the difference between an A record and a CNAME for a subdomain?", "answer": "An A record points your subdomain directly to a server's IPv4 address, while a CNAME aliases it to another domain name, which is common when pointing at a third-party platform." },
+    { "question": "Should I proxy my new subdomain through Cloudflare?", "answer": "Proxying (orange cloud) enables Cloudflare's caching and security features. DNS-only mode (gray cloud) routes traffic directly to your origin without those benefits, which is usually right for things like mail servers." },
+    { "question": "How long does it take for a new subdomain to start working?", "answer": "Cloudflare's own edge network picks up the change almost immediately, though full global DNS propagation to every resolver can occasionally take longer." },
+    { "question": "Can I add multiple subdomains to the same domain?", "answer": "Yes. You can add as many A or CNAME records as you need from the same DNS Records page, each with its own unique subdomain prefix in the Name field." },
+    { "question": "Where do I find the Add record button?", "answer": "From your domain's Overview page, expand DNS in the left sidebar, click Records, and the Add record button sits above the existing records table." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

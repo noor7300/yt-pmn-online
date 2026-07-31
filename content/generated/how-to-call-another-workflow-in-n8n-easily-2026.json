@@ -1,20 +1,47 @@
 {
   "slug": "how-to-call-another-workflow-in-n8n-easily-2026",
   "seoTitle": "How to Call Another Workflow in n8n With Execute Workflow",
-  "metaDescription": "Learn how to use n8n's Execute Workflow node to trigger a separate workflow, pass data between them, and build modular automations.",
-  "intro": "As your n8n automations grow, splitting logic into separate, reusable workflows keeps things manageable, and the Execute Workflow node makes that possible. This guide covers adding the node, selecting a target workflow, and passing data between the parent and child pipelines.",
+  "metaDescription": "Add n8n's Execute Workflow node to trigger a separate workflow from your canvas, then configure which workflow it calls and how it passes data.",
+  "intro": "As an n8n automation grows, splitting logic into separate workflows keeps each one easier to read, test, and reuse — and the Execute Workflow node is what connects them. Instead of one sprawling canvas handling every case, a parent workflow can hand off a specific task to a child workflow and pick the result back up. This guide walks through adding that node on a real n8n canvas and what the node needs configured before it will actually run.",
   "steps": [
-    { "heading": "Add the Execute Workflow node", "body": "From your parent workflow canvas, search for and add the Execute Workflow node where you want the sub-workflow to run." },
-    { "heading": "Select your target workflow", "body": "Choose the specific child workflow you want to trigger from your list of existing workflows." },
-    { "heading": "Map your data payload", "body": "Pass any variables or JSON data the child workflow needs from the parent workflow's upstream nodes." },
-    { "heading": "Configure execution behavior", "body": "Decide whether the parent workflow should wait for the child workflow to finish and return data, or continue immediately." },
-    { "heading": "Test the connection", "body": "Run the workflow to confirm data passes correctly between the parent and child pipelines." }
+    {
+      "heading": "Find your way to the workflow list",
+      "body": "Every n8n instance starts at an Overview screen listing the workflows, credentials, and data tables you have access to, along with summary stats like production executions and failure rate across the top. A fresh or lightly used instance might show just one workflow in the list — that's normal, and it's where you'll click in to build or edit the parent workflow that's going to call another one.",
+      "image": { "file": "/screenshots/urTjVUcliOY/03.webp", "caption": "The n8n Overview screen, listing existing workflows alongside execution stats like failure rate and average run time." }
+    },
+    {
+      "heading": "Open the workflow canvas and add a trigger",
+      "body": "Inside a workflow, the canvas is where nodes connect left to right. A simple setup starts with a manual trigger — the \"When clicking 'Execute workflow'\" node — so you can run the parent workflow on demand while you're building it, before wiring it up to a real trigger like a webhook or schedule later."
+    },
+    {
+      "heading": "Add the Execute Workflow node",
+      "body": "Connect an Execute Workflow node to your trigger. On the canvas it shows up with its own icon and a \"Workflow:\" label underneath where the target gets selected — until that's set, the node displays a small warning triangle, which is exactly the state you'll see the first time you drop it in. That warning isn't a bug; it's n8n telling you the node isn't fully configured yet, since it doesn't know which workflow to call.",
+      "image": { "file": "/screenshots/urTjVUcliOY/04.webp", "caption": "An Execute Workflow node connected to a manual trigger, showing the unconfigured \"Workflow:\" field and a warning icon before a target workflow is chosen." }
+    },
+    {
+      "heading": "Point it at the workflow you want to call",
+      "body": "Click into the Execute Workflow node to open its parameters and select which existing workflow it should run — this is where your child workflow gets chosen from whatever's listed on your Overview screen. Give both the parent and the child workflow clear, descriptive names before you get very far, since \"My workflow 17\" and similar defaults become impossible to tell apart once you're jumping between several of them."
+    },
+    {
+      "heading": "Decide what data the child workflow needs",
+      "body": "A child workflow often needs specific data to do anything useful, not just a bare trigger signal. In the Execute Workflow node's parameters, you can map fields from upstream nodes in the parent workflow into the data the child workflow receives, similar to how any other node passes its output forward. Keep the payload to what the child actually needs rather than forwarding everything upstream produced, since a lean payload is easier to debug when something downstream breaks."
+    },
+    {
+      "heading": "Choose whether the parent waits for a result",
+      "body": "Execute Workflow supports running the child workflow synchronously, where the parent pauses and receives data back once the child finishes, or firing it off and continuing immediately without waiting. Pick synchronous if downstream nodes in the parent depend on something the child workflow calculates or fetches; pick fire-and-forget for side tasks — like logging or a notification — that shouldn't hold up the rest of the parent's execution."
+    },
+    {
+      "heading": "Run it and check the execution",
+      "body": "Use the manual trigger to fire the parent workflow and watch the execution path light up node by node. If the Execute Workflow node still shows an error after you've selected a target, double back into its parameters — a missing required field on the child workflow's own trigger is a common cause, since the child needs to accept whatever the parent is sending it."
+    }
   ],
   "faq": [
-    { "question": "What node do I use to call another workflow in n8n?", "answer": "The Execute Workflow node is used to trigger a separate workflow from within your current one." },
-    { "question": "Can I pass data into the workflow I'm calling?", "answer": "Yes, you can map upstream data into a JSON payload that the child workflow receives." },
-    { "question": "Does the parent workflow wait for the child to finish?", "answer": "This depends on your configuration, since you can choose whether to wait for the sub-workflow's output or continue immediately." },
-    { "question": "Why would I split workflows instead of using one big workflow?", "answer": "Splitting logic into reusable workflows makes automations easier to maintain, test, and reuse across different projects." }
+    { "question": "What node do I use to call another workflow in n8n?", "answer": "The Execute Workflow node. It sits on your parent workflow's canvas and needs a target workflow selected in its parameters before it will run." },
+    { "question": "Why does the Execute Workflow node show a warning icon?", "answer": "That triangle means no target workflow has been selected yet — it appears as soon as you add the node, before you've configured which workflow it should call." },
+    { "question": "Can I pass data into the workflow I'm calling?", "answer": "Yes. The node's parameters let you map fields from upstream nodes in the parent workflow into the data the child workflow receives." },
+    { "question": "Does the parent workflow wait for the child to finish?", "answer": "That depends on how you configure it — you can have the parent wait for the child's output, or continue immediately without waiting." },
+    { "question": "Why would I split workflows instead of using one big workflow?", "answer": "Splitting logic into separate, well-named workflows makes each piece easier to read, test, and reuse than one long canvas handling every case." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

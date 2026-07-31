@@ -1,21 +1,41 @@
 {
   "slug": "how-to-use-hubspot-api-easily-2026",
   "seoTitle": "How to Use the HubSpot API: 2026 Guide",
-  "metaDescription": "Learn how HubSpot's date-based API works, from generating Private App tokens to fetching CRM records with batch requests and handling rate limits.",
-  "intro": "HubSpot moved from numbered API versions to date-based endpoints, which changes how you structure requests if you're used to the old system. This guide covers setting up a Private App for authentication, building requests against the new endpoint paths, and handling pagination and rate limits. It's meant for developers building or maintaining integrations against HubSpot's CRM.",
+  "metaDescription": "Learn how HubSpot's date-based API works, from generating a Private App token to fetching CRM records with batch requests and handling rate limits.",
+  "intro": "HubSpot moved from numbered API versions like v3 and v4 to date-based endpoint paths such as /2026-03/, and that shift changes how you structure requests if your integration still points at the old numeric routes. This guide covers where authentication lives inside a HubSpot account, how a Private App generates the bearer token your requests need, and the batching and retry logic that keeps a CRM integration from tripping HubSpot's rate limits. It's written for developers building or maintaining a connection to HubSpot's CRM objects, not for anyone just clicking through the marketing or sales tools.",
   "steps": [
-    { "heading": "Understand the date-based versioning shift", "body": "Know that HubSpot now uses date-based endpoint paths instead of numeric versions, so older integration code may need updating." },
-    { "heading": "Set up a Private App", "body": "Go to your account settings, open Integrations, and create a Private App or configure OAuth scopes for your integration." },
-    { "heading": "Generate a bearer token", "body": "Create your Service Key or use the token endpoint to generate a bearer authentication string for your requests." },
-    { "heading": "Build your request payloads", "body": "Construct REST calls against the updated endpoint paths to pull or update objects like Contacts and Deals." },
-    { "heading": "Handle pagination and batching", "body": "Use pagination parameters and batch requests so you don't run into strict API rate limits when working with large datasets." },
-    { "heading": "Plan for rate limit errors", "body": "Set up exponential backoff retry logic to gracefully handle 429 rate limit responses." }
+    {
+      "heading": "Understand why the date-based versioning shift matters",
+      "body": "HubSpot's older API paths used simple numeric versions, like /crm/v3/objects/contacts, but the 2026 architecture replaces that with a dated segment, like /crm/objects/2026-03/. The practical effect is that a request built against a numeric path from an older tutorial or SDK example may silently break or route to deprecated behavior. Before writing any new integration code, confirm which dated version your account and any client library are actually targeting, since mixing an old numeric call with new authentication scopes is a common source of confusing errors."
+    },
+    {
+      "heading": "Create a Private App or configure OAuth scopes",
+      "body": "Authentication for a custom integration starts in your account's Settings, under the Integrations section, where you can either set up a Private App for a single-account connection or configure a full OAuth flow if you're building something that other HubSpot accounts will install. A Private App is the simpler route for most internal tooling: you name the app, then grant it only the specific object scopes it needs, like read and write access to Contacts or Deals, rather than blanket account access."
+    },
+    {
+      "heading": "Generate your bearer token",
+      "body": "Once the Private App's scopes are set, HubSpot issues a Service Key you copy once and store securely — this is the bearer token every request needs in its Authorization header. If you're building an app for OAuth instead of a Private App, the equivalent step is exchanging your authorization code at the dated token endpoint, such as /oauth/2026-03/token, to receive an access token with the same role. Either way, treat this string like a password: it's the only credential standing between the public internet and your CRM data."
+    },
+    {
+      "heading": "Build requests against the updated endpoint paths",
+      "body": "With a token in hand, a basic GET request to fetch a contact now points at the dated CRM objects path rather than a numeric one, with the bearer token injected into the request's header array. Whether you're using a plain HTTP client, an API testing tool, or a server-side SDK, the shape of the call is the same: method, dated URL, Authorization header, and a JSON body for anything beyond a simple read. Test a single-object GET request first before moving on to batch or bulk calls, so you can confirm your token's scopes actually cover the object type you're targeting."
+    },
+    {
+      "heading": "Use batch endpoints and handle pagination",
+      "body": "For anything beyond a handful of records, HubSpot's batch read endpoints let you fetch up to 100 records in a single payload, which is far more efficient than looping single-object requests. Responses beyond that limit include a paging.next.after token in the response body — pass that value into your next request's parameters to walk through the full result set page by page instead of guessing at offsets. Skipping pagination logic is one of the fastest ways to silently miss records in a large sync job."
+    },
+    {
+      "heading": "Plan for rate limit errors with exponential backoff",
+      "body": "Even with batching and pagination handled correctly, high-volume integrations will eventually hit a 429 response when they exceed HubSpot's rate limits. The standard fix is exponential backoff: catch the 429, wait a short interval, retry, and double that interval on each subsequent failure rather than hammering the endpoint at a fixed rate. Building this retry loop in from the start, rather than bolting it on after a production integration starts failing, saves a lot of debugging later."
+    }
   ],
   "faq": [
-    { "question": "What changed with HubSpot's API versioning?", "answer": "HubSpot moved from numeric versions like v3 to date-based endpoints, so integrations need to reference the correct dated path." },
-    { "question": "How do I authenticate HubSpot API requests?", "answer": "You generate a bearer token through a Private App or OAuth flow and pass it in the Authorization header of each request." },
-    { "question": "How many records can I fetch in one batch call?", "answer": "Batch endpoints typically let you fetch up to 100 records per request, which helps you stay within rate limits." },
-    { "question": "What should I do if I get a 429 error?", "answer": "Implement an exponential backoff retry strategy so your integration waits and retries instead of failing outright." }
+    { "question": "What changed with HubSpot's API versioning?", "answer": "HubSpot moved from numeric versions like v3 to date-based endpoints such as /2026-03/, so integrations need to target the correct dated path instead of an older numeric one." },
+    { "question": "How do I authenticate HubSpot API requests?", "answer": "Create a Private App in Settings under Integrations, grant it specific object scopes, and use the Service Key it issues as a bearer token in your requests' Authorization header. OAuth apps use an equivalent dated token endpoint instead." },
+    { "question": "How many records can I fetch in one batch call?", "answer": "Batch endpoints typically let you fetch up to 100 records per request, which helps you stay within rate limits compared to looping single-object calls." },
+    { "question": "What should I do if I get a 429 error?", "answer": "Implement exponential backoff: catch the 429 response, wait, retry, and increase the wait time on each subsequent failure rather than retrying at a fixed interval." },
+    { "question": "How do I paginate through large result sets?", "answer": "Read the paging.next.after token from the response body and pass it into your next request's parameters to move through results page by page." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

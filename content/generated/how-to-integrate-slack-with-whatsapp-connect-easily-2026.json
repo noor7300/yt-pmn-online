@@ -2,19 +2,44 @@
   "slug": "how-to-integrate-slack-with-whatsapp-connect-easily-2026",
   "seoTitle": "How to Integrate Slack With WhatsApp (2026 Guide)",
   "metaDescription": "Connect WhatsApp to Slack using a marketplace bridge app so customer chats route into dedicated Slack channels automatically.",
-  "intro": "Bridging customer-facing WhatsApp conversations into your internal Slack workspace helps teams respond faster without switching apps. This guide covers installing a WhatsApp connector from the Slack App Marketplace and routing chats into channels.",
+  "intro": "WhatsApp doesn't plug into Slack on its own — there's no native toggle for it because the two products were never built to talk to each other directly. What actually gets you there is a third-party connector installed from the Slack Marketplace, which relays messages between a WhatsApp Business number and a Slack channel in both directions. This guide follows that real path: finding a connector inside Slack's own Apps directory, reviewing what a listing like this actually promises and costs, and understanding what you're signing up for on the provider's own site before you commit a phone number to it.",
   "steps": [
-    { "heading": "Open the Slack App Directory", "body": "From your Slack workspace, access the Apps section to browse available marketplace connectors." },
-    { "heading": "Choose a WhatsApp bridge app", "body": "Search the directory for a certified connector, such as those built for WhatsApp Business integration, and select it." },
-    { "heading": "Install the integration", "body": "Click 'Add to Slack' to install the app, then review and approve the requested permission scopes." },
-    { "heading": "Authenticate your WhatsApp number", "body": "Follow the redirect to the connector's setup portal and scan the QR code using your WhatsApp app to link your number." },
-    { "heading": "Route chats into a channel", "body": "Map your WhatsApp threads to a specific Slack channel, then test by sending a message and replying from within Slack." }
+    {
+      "heading": "Open Tools & settings to reach the Apps section",
+      "body": "Click your workspace name in the top-left corner of Slack and go to Tools & settings from the dropdown. This flyout is also where you'd find Workflow Builder, Manage members, and Manage apps — Apps is the entry point for anything that connects an outside service into your workspace, WhatsApp included. It's worth knowing this menu exists as a shortcut, because searching \"apps\" in Slack's own search bar will also get you there, but this is the direct route.",
+      "image": { "file": "/screenshots/nYFsf742C3E/02.webp", "caption": "The workspace menu open on Tools & settings, the jumping-off point for reaching Slack's app directory." }
+    },
+    {
+      "heading": "Browse the Apps page for a WhatsApp connector",
+      "body": "The Apps page in Slack lists what's already installed in your workspace at the top, followed by a Recommended apps section and a search bar for anything else. WhatsApp isn't in the recommended row by default since it's not an official Slack partner integration the way Google Drive or Zoom are — you'll need to search for a WhatsApp-specific connector by name or open the full Slack Marketplace for a wider list. Read the category tags on any result before installing; a real WhatsApp bridge is usually tagged Customer Support or Communication, not something adjacent.",
+      "image": { "file": "/screenshots/nYFsf742C3E/03.webp", "caption": "Slack's Apps page, showing installed apps and a Recommended apps list you can search from to find a WhatsApp connector." }
+    },
+    {
+      "heading": "Review the connector's listing before adding it",
+      "body": "Third-party WhatsApp connectors run through the Slack Marketplace listing page, which shows what the app actually does, what permissions it needs, and how it's priced. In this walkthrough that's ChatArchitect.com for WhatsApp, whose description states plainly that it integrates the WhatsApp Business API into Slack and lists its features: inbound WhatsApp messages, outbound session and template messages, media support, and WhatsApp buttons — plus a starting price of roughly 15 euros a month, separate from whatever Slack itself charges. Slack's own disclaimer on these pages is worth reading too: it only does a brief review of marketplace apps and doesn't endorse or certify them, so the vetting is on you.",
+      "image": { "file": "/screenshots/nYFsf742C3E/04.webp", "caption": "A WhatsApp connector's Slack Marketplace listing, spelling out its feature list, supported languages, and monthly pricing before you add it." }
+    },
+    {
+      "heading": "Set up the connection on the provider's own site",
+      "body": "Clicking Add to Slack on one of these listings routes you off Slack entirely and onto the connector's own website to finish setup, since the actual WhatsApp Business API handshake happens there, not inside Slack. The provider's site typically restates the same feature list — inbound messages, outbound template messages, media types, buttons — often with clearer detail on account requirements and a free-trial offer before the paid tier kicks in. Treat this page as the real terms of service for the integration, since Slack is only hosting the discovery listing.",
+      "image": { "file": "/screenshots/nYFsf742C3E/05.webp", "caption": "The connector's own marketing site, restating the WhatsApp Business API features and pricing you'll actually be paying for." }
+    },
+    {
+      "heading": "Authenticate your WhatsApp number and map it to a channel",
+      "body": "From the provider's setup portal, you'll typically link your WhatsApp Business number either by scanning a QR code with your phone or by entering WhatsApp Business API credentials if you're on that tier. Once verified, the connector asks which Slack channel should receive incoming messages — pick a dedicated channel rather than a general one so customer conversations don't get lost in unrelated chatter. If you handle more than one WhatsApp number, most connectors let you map each one to its own channel so support and sales threads stay separate."
+    },
+    {
+      "heading": "Test the bridge in both directions",
+      "body": "Before relying on this for real customers, send a test message from WhatsApp to the connected number and confirm it lands in the mapped Slack channel as a formatted message or thread. Then reply from inside Slack and check that it actually arrives back on the sender's WhatsApp app — bi-directional delivery is the part that's easiest to assume works and hardest to notice when it silently doesn't. Run this test after any pricing tier change too, since some connectors gate outbound template messages behind the paid plan even when inbound messages work on the free trial."
+    }
   ],
   "faq": [
-    { "question": "Do I need WhatsApp Business API for this to work?", "answer": "A standard WhatsApp number can work with simpler connectors, but higher-volume or enterprise use typically requires the WhatsApp Business API." },
-    { "question": "Can I connect multiple WhatsApp numbers to one Slack workspace?", "answer": "Yes, most connectors support mapping several numbers to different channels to avoid mixing conversations." },
-    { "question": "Will replies from Slack show up correctly in WhatsApp?", "answer": "Yes, properly configured connectors support bi-directional messaging so your reply appears as a normal WhatsApp message." },
-    { "question": "Is this integration free?", "answer": "Pricing varies by connector, with many offering a limited free tier and paid plans for higher message volumes." }
+    { "question": "Does Slack have a native WhatsApp integration?", "answer": "No. WhatsApp and Slack don't connect natively — every integration between them runs through a third-party connector installed from the Slack Marketplace, such as a WhatsApp Business API bridge app." },
+    { "question": "Do I need WhatsApp Business API for this to work?", "answer": "It depends on the connector's tier. Some offer a simpler setup for a single number, but full features like outbound template messages typically require the WhatsApp Business API, which most connectors price separately from Slack." },
+    { "question": "Can I connect multiple WhatsApp numbers to one Slack workspace?", "answer": "Yes, most connectors support mapping several numbers to different channels so conversations from different lines don't mix together." },
+    { "question": "Will replies from Slack show up correctly in WhatsApp?", "answer": "Yes, when the bridge is configured correctly, a reply typed in the mapped Slack channel appears to the customer as a normal WhatsApp message — but always test this before going live." },
+    { "question": "Is this integration free?", "answer": "Pricing varies by connector. Many offer a free trial, but ongoing use of the WhatsApp Business API layer is typically a separate paid cost on top of whatever the Slack app itself charges." }
   ],
-  "generatedAt": "2026-07-22T12:00:00Z"
+  "generatedAt": "2026-07-31T09:00:00Z",
+  "deep": true
 }

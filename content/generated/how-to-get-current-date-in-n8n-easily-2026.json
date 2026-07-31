@@ -2,19 +2,41 @@
   "slug": "how-to-get-current-date-in-n8n-easily-2026",
   "seoTitle": "How to Get the Current Date and Time in n8n",
   "metaDescription": "Learn how to fetch and format the current date in n8n using expressions or the Date & Time node, including offsetting for future dates.",
-  "intro": "Many n8n workflows need to know today's date, whether for logging, scheduling, or comparing timestamps, and there are a couple of ways to grab it. This guide covers using simple expressions for quick access and the dedicated Date & Time node when you need more formatting control.",
+  "intro": "Almost every automation eventually needs to know what day it is — for a timestamp on a logged row, a comparison against a due date, or an expiry check on a token. n8n gives you two ways to get there: a quick inline expression you type straight into a parameter, and a dedicated Date & Time node when you need real formatting and offset control. This guide covers both, plus the ISO-timestamp habit that keeps your data consistent once it starts flowing into other systems.",
   "steps": [
-    { "heading": "Use an inline expression", "body": "Inside any parameter field, use the expression editor to call the current date directly without adding an extra node." },
-    { "heading": "Add the Date & Time node", "body": "For more control, place the Date & Time node onto your canvas where you need a formatted timestamp." },
-    { "heading": "Choose a format", "body": "Set the operation to format the date and pick the layout and timezone that fits your workflow." },
-    { "heading": "Offset the date if needed", "body": "Use the offset option to calculate a past or future date, such as tomorrow or a week from now." },
-    { "heading": "Verify the output", "body": "Check the data preview to confirm the timestamp matches what you expect before connecting it downstream." }
+    {
+      "heading": "Open your n8n workspace",
+      "body": "Start from the Overview screen of your n8n instance, where every workflow, credential, and data table you have access to is listed. This is the same screen whether you're on n8n Cloud or a self-hosted instance, and it's where you'll either open an existing workflow or click Create workflow to start a fresh canvas for testing date expressions. The stats across the top — production executions, failure rate, run time — are a useful gut check before you start adding new logic, since a spike in failures is worth investigating before you build on top of it.",
+      "image": { "file": "/screenshots/Xa_P7cq0l1s/05.webp", "caption": "The n8n Overview screen, listing every workflow in the workspace along with execution stats at the top." }
+    },
+    {
+      "heading": "Call the current date with an inline expression",
+      "body": "The fastest route is to skip adding a node entirely. Click into any parameter field on any node, switch it to expression mode, and reference the current date directly using n8n's built-in variable — no extra step in your workflow just to know what day it is. This works well for quick uses like stamping a note field or filtering records, but because it returns a raw JavaScript date object, it's not always in a shape that plays nicely with every API you send it to."
+    },
+    {
+      "heading": "Add a Date & Time node when you need formatting",
+      "body": "For anything more deliberate than a quick inline reference, drop a Date & Time node onto your canvas. Search for it from the node panel like you would any other node, and connect it after the trigger or step where you need the timestamp generated. This node exists specifically to turn a raw date into a clean, predictable string, which matters the moment that value needs to be compared, sorted, or stored somewhere outside n8n."
+    },
+    {
+      "heading": "Set the operation and pick a format",
+      "body": "Inside the node, set the operation to format a date, then choose the output layout — day-month-year, year-month-day, or whatever your downstream system expects — along with the correct timezone. Getting the timezone right here matters more than it seems: a workflow that runs fine in testing can quietly log the wrong day once it's scheduled to run at midnight in a different region."
+    },
+    {
+      "heading": "Offset the date for past or future values",
+      "body": "Most real workflows don't just want today — they want yesterday, seven days from now, or an expiry threshold thirty days out. The Date & Time node's offset option lets you add or subtract days and hours from the current timestamp to calculate exactly that kind of relative date, which is what you'll use for anything involving trial expirations, follow-up reminders, or rolling date-range filters."
+    },
+    {
+      "heading": "Check the output and standardize on ISO",
+      "body": "Before wiring the date into the rest of your workflow, open the data preview pane and confirm the value looks the way you expect — right format, right timezone, right offset. If this value is heading to an external API or a CRM, format it as a standardized ISO timestamp rather than a locale-specific string; ISO keeps the structure consistent no matter which system reads it next, which saves you from parsing errors down the line. Once it checks out, drag a connection from the node into whatever step consumes the date."
+    }
   ],
   "faq": [
-    { "question": "Can I get the current date without adding an extra node?", "answer": "Yes, you can use an inline expression inside any parameter field to reference the current date directly." },
-    { "question": "How do I format the date differently in n8n?", "answer": "The Date & Time node lets you choose a specific output format and timezone for your timestamp." },
-    { "question": "Can n8n calculate a date in the future or past?", "answer": "Yes, the Date & Time node supports offsetting by days or hours to calculate relative dates." },
-    { "question": "Why would I use a standardized ISO timestamp?", "answer": "ISO timestamps keep date formatting consistent when passing data to external APIs or databases." }
+    { "question": "Can I get the current date without adding an extra node?", "answer": "Yes, you can use an inline expression inside any parameter field to reference the current date directly, without placing a separate node on the canvas." },
+    { "question": "How do I format the date differently in n8n?", "answer": "Add a Date & Time node, set its operation to format a date, and choose the output layout and timezone you need." },
+    { "question": "Can n8n calculate a date in the future or past?", "answer": "Yes. The Date & Time node has an offset option that adds or subtracts days and hours from the current timestamp, which is how you calculate things like tomorrow or a 30-day expiry." },
+    { "question": "Why would I use a standardized ISO timestamp?", "answer": "ISO timestamps keep date formatting consistent when passing data to external APIs, CRMs, or databases, avoiding parsing errors caused by locale-specific date strings." },
+    { "question": "Does the timezone setting actually matter if I'm just testing?", "answer": "Yes — a workflow that looks correct in manual testing can log the wrong date once scheduled, especially around midnight, if the timezone in the Date & Time node doesn't match where the workflow actually needs to run." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

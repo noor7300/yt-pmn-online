@@ -1,20 +1,44 @@
 {
   "slug": "how-to-add-a-domain-in-cloudflare-easily-2026",
   "seoTitle": "How to Add a Domain in Cloudflare (2026 Guide)",
-  "metaDescription": "Onboard a new domain into Cloudflare: import existing DNS records automatically, pick the free plan, and switch nameservers at your registrar.",
-  "intro": "Getting a domain onto Cloudflare starts with letting the platform scan and import your existing DNS setup so nothing breaks in the switch. This guide walks through onboarding a domain, choosing the free plan, and pointing your registrar's nameservers to Cloudflare.",
+  "metaDescription": "Onboard a new domain into Cloudflare: import existing DNS records automatically, set AI crawler preferences, and switch nameservers at your registrar.",
+  "intro": "Getting a domain onto Cloudflare starts with letting the platform pull in your existing DNS setup so nothing breaks in the switch. The 2026 onboarding flow folds a couple of newer decisions into that same first screen — specifically, whether to import your DNS records automatically and how to treat AI crawlers hitting your site — alongside the core steps of naming your domain and eventually repointing your registrar's nameservers. This guide walks through the actual onboarding screens as they appear today.",
   "steps": [
-    { "heading": "Start onboarding a domain", "body": "From the Cloudflare dashboard, click 'Onboard a Domain' and enter your clean root domain name." },
-    { "heading": "Select the Free plan", "body": "Scroll through the plan options and choose the free tier to get started without cost." },
-    { "heading": "Review the automated DNS scan", "body": "Let Cloudflare's Quick Scan engine discover and import your existing records, then check that mail (MX) rows and hosting A or CNAME entries were captured correctly." },
-    { "heading": "Copy your assigned nameservers", "body": "Locate the unique pair of Cloudflare nameservers assigned to your account and copy them to your clipboard." },
-    { "heading": "Update nameservers at your registrar", "body": "Log into your external registrar's control panel, replace the old nameservers with Cloudflare's, and run a verification check back in Cloudflare to confirm activation." }
+    {
+      "heading": "Start from your Cloudflare Account home",
+      "body": "Logging into Cloudflare drops you on Account home, a dashboard that already gives a useful overview if you manage more than one property: a Domains card listing each site with its recent traffic, a Workers and Pages card for any deployed projects, Zero Trust security shortcuts, and an Audit logs feed showing recent account activity. A Next steps panel on this same screen nudges you toward things like enabling single sign-on or inviting teammates — worth a glance, but not required before adding a new domain.",
+      "image": { "file": "/screenshots/YjTuBI-vYZU/03.webp", "caption": "Cloudflare's Account home, listing existing Domains alongside Workers and Pages, Zero Trust, and recent Audit logs." }
+    },
+    {
+      "heading": "Open Connect your domain and enter the name",
+      "body": "From Domains in the left sidebar, starting the onboarding flow opens a screen titled \"Connect your domain\" with the subhead \"Make your site faster, more secure, and more reliable.\" It's a single required field — Domain name, with a placeholder example like example.com — plus a Continue button and a collapsed link reading \"Configure DNS records import and AI crawler preferences\" for anyone who wants to adjust the defaults before proceeding.",
+      "image": { "file": "/screenshots/YjTuBI-vYZU/04.webp", "caption": "The Connect your domain screen with an empty Domain name field and the collapsed DNS import and AI crawler preferences link." }
+    },
+    {
+      "heading": "Expand the import and AI crawler preferences",
+      "body": "Typing a domain name and expanding that preferences link reveals two decisions Cloudflare wants up front. The first, \"How should DNS records be imported?\", defaults to \"Import DNS records automatically,\" marked Recommended, which scans your domain's current records so mail and hosting entries carry over without you re-entering them by hand. The second, \"Control how AI crawlers scrape content for training,\" defaults to \"Block AI crawlers on all pages,\" with a toggle underneath for \"Instruct AI bot traffic with robots.txt\" — a newer setting reflecting how much AI training crawler traffic has grown, letting you block it site-wide from the moment your domain is connected.",
+      "image": { "file": "/screenshots/YjTuBI-vYZU/05.webp", "caption": "The expanded preferences panel, showing DNS import set to automatic and AI crawlers blocked on all pages by default, with a robots.txt toggle." }
+    },
+    {
+      "heading": "Continue and choose your plan",
+      "body": "Clicking Continue moves you into plan selection, where the Free tier sits alongside paid options. For a typical small site, the Free plan is enough to get started — it includes DNS management, proxying, and Cloudflare's baseline security features, with paid tiers adding things like advanced page rules, image optimization, and more granular analytics. Nothing about the DNS import or AI crawler choices you made on the previous screen is affected by which plan you pick here."
+    },
+    {
+      "heading": "Review the imported DNS records",
+      "body": "After the scan finishes, Cloudflare shows the records it found and imported, and this is worth actually reading rather than clicking past — check specifically that your MX records for email are present and that the A or CNAME rows pointing at your hosting are correct. An automatic import is reliable most of the time, but a record with an unusual TTL or a subdomain your provider set up manually can occasionally be missed, and it's much easier to catch that now than after your nameservers have already switched over."
+    },
+    {
+      "heading": "Switch nameservers at your registrar",
+      "body": "The last step happens outside Cloudflare entirely: it assigns your domain a unique pair of Cloudflare nameservers, and you need to log into whichever registrar your domain is actually registered with and replace the existing nameservers with those two values. Propagation after that change can take anywhere from a few minutes to about 24 hours depending on your registrar and your domain's previous DNS TTL settings, and Cloudflare's dashboard will show the domain as active once it detects the new nameservers are live."
+    }
   ],
   "faq": [
-    { "question": "Will adding my domain to Cloudflare break my existing email?", "answer": "As long as the automated DNS scan correctly imports your MX records before you switch nameservers, email routing should continue working normally." },
+    { "question": "Will adding my domain to Cloudflare break my existing email?", "answer": "As long as the automatic DNS import correctly captures your MX records before you switch nameservers, email routing should continue working normally. Double-check those rows on the review screen before proceeding." },
     { "question": "Is the free Cloudflare plan enough for a basic website?", "answer": "The free plan includes core DNS management, proxy caching, and basic security features, which is sufficient for many small sites." },
+    { "question": "What does the new AI crawler setting during onboarding do?", "answer": "It's a 2026 addition to the Connect your domain screen that defaults to blocking AI training crawlers on all pages, with an option to instead instruct them via your robots.txt file." },
     { "question": "How long does nameserver propagation take after switching to Cloudflare?", "answer": "Nameserver changes can take anywhere from a few minutes to 24 hours or more to fully propagate globally, depending on your registrar and previous DNS TTL settings." },
-    { "question": "What if the DNS scan misses some of my records?", "answer": "You can manually add any missing records directly in the DNS Records panel before or after switching your nameservers." }
+    { "question": "What if the DNS import misses some of my records?", "answer": "You can manually add any missing records directly in the DNS Records panel before or after switching your nameservers, the same way you'd add a new subdomain." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

@@ -2,20 +2,43 @@
   "slug": "how-to-connect-godaddy-to-hubspot-integrate-domain-easily-2026",
   "seoTitle": "Connect GoDaddy Domain to HubSpot: Setup Guide",
   "metaDescription": "Learn how to point a GoDaddy-hosted domain or subdomain at HubSpot by matching A and CNAME DNS records and verifying SSL activation.",
-  "intro": "If your domain is registered with GoDaddy, connecting it to HubSpot means updating your DNS zone there while HubSpot handles hosting and SSL. This guide walks through starting the domain wizard in HubSpot, generating the correct DNS values, and entering them inside GoDaddy's control panel. It finishes with verifying propagation so your site goes live without broken links.",
+  "intro": "If your domain is registered with GoDaddy, connecting it to HubSpot means starting the process from HubSpot's side, generating the DNS values it needs, and then updating your zone back in GoDaddy's control panel. HubSpot never touches your registrar directly — it hosts the content and issues the SSL certificate, but the actual DNS records live wherever your domain is registered. This guide walks through HubSpot's domain settings and connection wizard step by step, then covers what happens on the GoDaddy side to finish the handshake.",
   "steps": [
-    { "heading": "Open Domains & URLs in HubSpot", "body": "Go to Settings, then Content, and select the Domains & URLs directory." },
-    { "heading": "Start the connection wizard", "body": "Click Connect hosting domain to launch the setup screen for your GoDaddy-hosted domain." },
-    { "heading": "Enter your subdomain and content types", "body": "Specify your subdomain prefix and assign the content types, like website or landing pages, this domain will serve." },
-    { "heading": "Copy your DNS values", "body": "Review the CNAME values or A record IPs HubSpot generates for your setup." },
-    { "heading": "Update DNS in GoDaddy", "body": "Log into your GoDaddy Domain Portfolio dashboard and input the new values while removing any conflicting legacy records." },
-    { "heading": "Verify the connection", "body": "Return to HubSpot to run a live verification check and confirm SSL provisioning completes." }
+    {
+      "heading": "Open your account Settings",
+      "body": "From the HubSpot home screen, click the gear icon to open Settings, which opens on your personal Profile preferences by default — first name, last name, language, and date format. The real destination is a few clicks deeper: the left rail here groups Your Preferences at the top, then Account Management with Account & Billing, Users & Teams, and Integrations, and further down a Data Management section that holds Domains & URLs. It's easy to get stuck on this Profile screen since it's the landing tab, so look specifically for Content under Data Management rather than anything under Account Management.",
+      "image": { "file": "/screenshots/ENEFz7XAkxw/03.webp", "caption": "The Settings General tab, landing on Profile preferences. Domains & URLs lives further down, under the Content section of the left menu." }
+    },
+    {
+      "heading": "Go to Domains & URLs and review Web Hosting",
+      "body": "Inside Domains & URLs, the Domains tab splits into Web Hosting and Email Sending sub-tabs, and Web Hosting is where content-serving domains live. A fresh account already shows a default System Domain, something like a random string ending in .hs-sites-na2.com, connected and serving your website pages, blog, landing pages, and marketing email by default. Below that, a Redirected domains table lists any domain currently pointed at that system domain — this is the table your GoDaddy domain will eventually join once it's connected and verified.",
+      "image": { "file": "/screenshots/ENEFz7XAkxw/04.webp", "caption": "The Domains & URLs page under Web Hosting, showing the default system domain plus a redirected domain and the Connect hosting domain button." }
+    },
+    {
+      "heading": "Start the Connect a hosting domain wizard",
+      "body": "Clicking Connect hosting domain in the top right opens a two-step wizard, starting with Select Domain. The first screen asks \"What's the domain?\" with three separate fields for the subdomain prefix (like www or blog), the core brand name, and the extension, plus a note that this domain can host any content type available in your account — landing pages, website pages, blog, marketing email, SMS, and sales and service email tracking. An Advanced options link sits below the fields for anyone who needs to override the defaults, like assigning a non-standard content type mix.",
+      "image": { "file": "/screenshots/ENEFz7XAkxw/05.webp", "caption": "Step 1 of the Connect a hosting domain wizard, asking for the subdomain, root domain, and extension in three separate fields." }
+    },
+    {
+      "heading": "Assign content types and finish Hosting Setup",
+      "body": "After entering the domain, the wizard moves to its second step, Hosting Setup, where you confirm which content types this specific domain will serve — for example, dedicating a blog subdomain to just the blog and knowledge base rather than every content type in the account. Once confirmed, HubSpot generates the DNS values your domain needs: typically a CNAME record for a subdomain, or an A record with a specific IPv4 address if you're pointing a root domain. These values are what you'll carry over to GoDaddy in the next step, so keep this screen open or copy the values somewhere before navigating away."
+    },
+    {
+      "heading": "Update the matching records in GoDaddy",
+      "body": "With the CNAME or A record values in hand, log into your GoDaddy account and open the Domain Portfolio for the domain in question, then find its DNS management panel. Add the new record HubSpot generated, matching the type exactly — CNAME for a subdomain alias, A record with the IP for a root domain — and remove any conflicting legacy record pointing that same name somewhere else, since two records for the same host name will cause unpredictable routing. GoDaddy applies changes to its own DNS servers quickly, but full propagation across the internet's resolvers can still take anywhere from a few minutes to a few hours."
+    },
+    {
+      "heading": "Return to HubSpot and verify",
+      "body": "Back in the Domains & URLs wizard or the domain's row in the table, trigger a live verification check once you believe the DNS change has propagated. HubSpot checks that the record resolves the way it expects and, once verification passes, automatically begins provisioning an SSL certificate for the domain — no separate certificate purchase or upload required. If verification fails, double check the exact record type and value against what GoDaddy shows in the zone file, since a typo in the CNAME target or A record IP is the most common reason a connection stalls here."
+    }
   ],
   "faq": [
-    { "question": "Do I manage DNS in HubSpot or GoDaddy?", "answer": "DNS records still live in GoDaddy's control panel; HubSpot only generates the values you need to enter there." },
-    { "question": "Will my GoDaddy domain get SSL automatically?", "answer": "Yes, once verification completes, HubSpot handles automatic SSL certificate provisioning for the connected domain." },
-    { "question": "What DNS record type do I need for a subdomain?", "answer": "Subdomains like www or blog typically use a CNAME record pointing to HubSpot's servers." },
-    { "question": "How can I check if my domain propagated correctly?", "answer": "HubSpot's Domain Verification dashboard shows live propagation status so you can confirm the connection is complete." }
+    { "question": "Do I manage DNS in HubSpot or GoDaddy?", "answer": "DNS records still live in GoDaddy's control panel. HubSpot's Domains & URLs wizard only generates the CNAME or A record values you need to enter there." },
+    { "question": "Will my GoDaddy domain get SSL automatically?", "answer": "Yes. Once HubSpot's verification check passes, it automatically begins provisioning an SSL certificate for the connected domain with no separate purchase needed." },
+    { "question": "What DNS record type do I need for a subdomain?", "answer": "Subdomains like www or blog typically use a CNAME record pointing to the value HubSpot generates. A root domain instead uses an A record with a specific IPv4 address." },
+    { "question": "Where do I start the domain connection process?", "answer": "In HubSpot, open Settings, then Content, then Domains & URLs, and use the Connect hosting domain button under the Web Hosting tab." },
+    { "question": "Why is my domain not verifying after I updated GoDaddy's DNS?", "answer": "Check that the record type and value exactly match what HubSpot generated, remove any conflicting legacy record for the same host name, and allow time for propagation before retrying verification." }
   ],
-  "generatedAt": "2026-07-22T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "deep": true
 }

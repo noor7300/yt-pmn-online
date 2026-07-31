@@ -1,20 +1,45 @@
 {
   "slug": "how-to-integrate-clickup-to-google-docs-easily-2026",
-  "seoTitle": "How to Integrate ClickUp With Google Docs (2026)",
-  "metaDescription": "Connect ClickUp to Google Docs so you can embed live task cards in your documents and keep project status updated without switching tabs.",
-  "intro": "Keeping project tasks and team documentation in sync usually means constant tab-switching. This guide shows how to install the ClickUp add-on for Google Docs, authenticate your account, and embed live task cards directly inside your document text.",
+  "seoTitle": "How to Connect ClickUp and Google Docs (2026)",
+  "metaDescription": "Link ClickUp tasks to your Google Docs, use ClickUp's own Docs feature, and automate the connection with Zapier so status updates don't require manual copying.",
+  "intro": "There isn't a single official \"ClickUp for Google Docs\" add-on you install from the Extensions menu — the real connection between the two tools happens in a couple of more practical ways: pasting document links directly into ClickUp tasks, using ClickUp's own built-in Docs feature when you want everything in one workspace, and wiring the two together with an automation platform like Zapier when you need status changes to trigger something automatically. This guide walks through all three, using an actual ClickUp task as the working example, so you know which approach fits your workflow instead of hunting for a plugin that isn't there.",
   "steps": [
-    { "heading": "Open the add-ons marketplace", "body": "In your Google Doc, click Extensions in the top menu, then select Get Add-ons to open the Google Workspace Marketplace." },
-    { "heading": "Install the ClickUp integration", "body": "Search for ClickUp, select the verified app listing, and click Install to add it to your Google Workspace." },
-    { "heading": "Authorize your ClickUp account", "body": "Review the requested permissions, click Allow, and sign in to your ClickUp workspace when redirected to complete the connection." },
-    { "heading": "Embed a task inside your document", "body": "Return to Google Docs, open the ClickUp panel from the sidebar, then paste a ClickUp task URL into the text to turn it into a live smart card." },
-    { "heading": "Confirm the sync is working", "body": "Change a task's status in ClickUp and check that the embedded card in your document reflects the update." }
+    {
+      "heading": "Start from the ClickUp task itself",
+      "body": "Open the task you want to connect to your documentation — in this example, a task simply titled to match the work, sitting inside a Team Space and Project list with its status, assignees, dates, and subtasks all visible in the standard task detail panel. This panel, not a Google Docs sidebar, is where most of the actual connecting work happens, since ClickUp treats tasks as the hub and pulls documents and links into them rather than the other way around.",
+      "image": { "file": "/screenshots/c56sVfP-Kdo/02.webp", "caption": "A ClickUp task detail panel, showing status, dates, assignees, and subtasks, with the Activity feed open on the right tracking every change made to the task." }
+    },
+    {
+      "heading": "Paste your Google Doc's link straight into the task",
+      "body": "The simplest connection is also the most reliable one: copy your Google Doc's sharing URL and paste it into the ClickUp task's comment box or description field. ClickUp automatically unfurls the link, and it shows up in the Activity feed as a clickable reference tied permanently to that task, so anyone opening the task later can jump straight to the document without you maintaining any separate integration.",
+      "image": { "file": "/screenshots/c56sVfP-Kdo/04.webp", "caption": "A ClickUp task's comment box with a full Google Docs sharing URL pasted in, ready to post as a linked reference in the task's Activity feed." }
+    },
+    {
+      "heading": "Consider ClickUp's own Docs instead",
+      "body": "If you're typing a comment or description and want a full document rather than just a link, type a forward slash to open ClickUp's slash-command menu, which lists Create Doc alongside options like Create Whiteboard, Checklist, and Template. This creates a native ClickUp Doc connected to the task from the start — a real alternative worth considering if your team is already living inside ClickUp and doesn't need the file to specifically be a Google Doc.",
+      "image": { "file": "/screenshots/c56sVfP-Kdo/03.webp", "caption": "ClickUp's slash-command suggestions menu, open inside a task's comment field, listing Create Doc, Create Whiteboard, Checklist, and Template as insertable options." }
+    },
+    {
+      "heading": "Automate the connection with Zapier",
+      "body": "For anything beyond manual linking — say, automatically creating a Google Doc every time a ClickUp task hits a certain status — you need an automation platform, and Zapier is the most common one for this pairing. Inside Zapier's Zap builder, set ClickUp as your trigger app and choose the event you want to watch for, then add Google Docs as the action step underneath it. Each block in the builder needs its own event selected before the Zap can run, and Zapier flags an unfinished step with a warning icon until you do.",
+      "image": { "file": "/screenshots/c56sVfP-Kdo/05.webp", "caption": "A Zapier Zap builder with ClickUp set as the trigger app and Google Docs as the connected action step, each block waiting for its event to be selected." }
+    },
+    {
+      "heading": "Connect your ClickUp account inside Zapier",
+      "body": "When you select ClickUp as the trigger app, Zapier prompts you to choose or connect an account before you can pick a trigger event. Existing connected accounts show how many other Zaps already use them, which is worth checking before adding a new connection — reusing an existing authenticated account is simpler than creating a duplicate one for a single automation."
+    },
+    {
+      "heading": "Test before you rely on it",
+      "body": "Once both the ClickUp trigger and Google Docs action have their events configured, use Zapier's Test step feature before publishing the Zap live. This runs one sample execution so you can confirm the document gets created or updated the way you expect, rather than discovering a configuration mistake after it's already fired on real tasks."
+    }
   ],
   "faq": [
-    { "question": "Do I need a ClickUp account to use this integration?", "answer": "Yes, you need an active ClickUp workspace account to authenticate and pull in task data." },
-    { "question": "Will embedded task cards update automatically?", "answer": "Yes, once linked, the smart card reflects real-time status changes made in ClickUp." },
-    { "question": "Can I remove the integration later?", "answer": "You can uninstall the add-on anytime from the Extensions menu without affecting your existing ClickUp tasks." },
-    { "question": "Does this work with private ClickUp tasks?", "answer": "You'll need appropriate permissions in ClickUp for a task to display correctly once embedded." }
+    { "question": "Is there an official Google Docs add-on for ClickUp?", "answer": "No — the practical connections are pasting document links into ClickUp tasks, using ClickUp's own built-in Docs feature, or automating the two with a platform like Zapier." },
+    { "question": "Do pasted Google Docs links update automatically in ClickUp?", "answer": "The link itself stays static, but anyone clicking it always lands on the live, current version of the Google Doc since it's a direct link, not a copy." },
+    { "question": "What's the difference between a ClickUp Doc and a linked Google Doc?", "answer": "A ClickUp Doc, created with the slash-command Create Doc option, lives natively inside ClickUp; a linked Google Doc stays in Google Drive and is just referenced from the task." },
+    { "question": "Do I need a paid Zapier plan to connect ClickUp and Google Docs?", "answer": "Simple single-step Zaps often work on Zapier's free tier, though higher usage volumes or multi-step Zaps typically require a paid plan." },
+    { "question": "Can I test an automation before it goes live?", "answer": "Yes, Zapier's Zap builder includes a Test step for each app connection, letting you confirm the automation behaves correctly before publishing it." }
   ],
-  "generatedAt": "2026-07-22T12:00:00Z"
+  "generatedAt": "2026-07-31T00:00:00Z",
+  "deep": true
 }
