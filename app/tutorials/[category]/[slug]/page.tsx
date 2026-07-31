@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPublishedTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
 import { VideoEmbed } from "@/components/VideoEmbed";
@@ -55,11 +56,16 @@ export default async function TutorialPage({
   const related = getRelatedTutorials(tutorial);
   const shots = getScreenshots(video.id);
   const faq = faqSchema(tutorial);
+  // Declare the images the page actually shows: curated inline images on a deep
+  // page, otherwise the raw gallery frames.
+  const schemaImages = article.deep
+    ? article.steps.flatMap((s) => (s.image ? [s.image.file] : []))
+    : shots.map((s) => s.file);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <JsonLd data={videoObjectSchema(tutorial)} />
-      <JsonLd data={articleSchema(tutorial, url, shots.map((s) => s.file))} />
+      <JsonLd data={articleSchema(tutorial, url, schemaImages)} />
       {faq && <JsonLd data={faq} />}
       <JsonLd
         data={breadcrumbSchema([
@@ -91,16 +97,35 @@ export default async function TutorialPage({
 
       <p className="mt-6 text-lg text-foreground/90">{article.intro}</p>
 
-      <div className="mt-8 space-y-6">
+      <div className="mt-8 space-y-8">
         {article.steps.map((step) => (
           <section key={step.heading}>
             <h2 className="text-xl font-semibold text-foreground">{step.heading}</h2>
             <p className="mt-2 text-muted">{step.body}</p>
+            {step.image && (
+              <figure className="mt-4 overflow-hidden rounded-md border border-line bg-panel">
+                <div className="relative aspect-video w-full bg-background">
+                  <Image
+                    src={step.image.file}
+                    alt={step.image.caption}
+                    fill
+                    sizes="(min-width: 768px) 720px, 100vw"
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className="border-t border-line px-4 py-2.5 text-sm text-muted">
+                  {step.image.caption}
+                </figcaption>
+              </figure>
+            )}
           </section>
         ))}
       </div>
 
-      <ScreenshotGallery shots={shots} videoId={video.id} title={video.title} />
+      {/* Old bottom gallery only for pages not yet through the deep pass. Once
+          a page has inline step images, the labelled gallery is redundant. */}
+      {!article.deep && <ScreenshotGallery shots={shots} videoId={video.id} title={video.title} />}
 
       <FaqBlock items={article.faq} />
 
