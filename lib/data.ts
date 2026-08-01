@@ -8,6 +8,7 @@ import { articleWordCount } from "./format";
 const CATEGORIZED_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GENERATED_DIR = path.join(process.cwd(), "content", "generated");
 const SCREENSHOTS_PATH = path.join(process.cwd(), "data", "screenshots.json");
+const INDEXABLE_HISTORY_PATH = path.join(process.cwd(), "data", "indexable-history.json");
 
 export interface Screenshot {
   file: string;
@@ -84,24 +85,37 @@ export function getTutorialBySlug(slug: string): PublishedTutorial | null {
 
 let _indexableSlugs: Set<string> | null = null;
 
-/** Phased indexing: only the strongest pages are `index`ed and listed in the
- * sitemap; everything else stays `noindex, follow` so Google can still crawl
- * and discover it without indexing the whole catalogue at once.
+/** HARD RULE: a URL that has ever been indexable must stay indexable,
+ * forever. A page dropping out of the sitemap after Google has indexed it
+ * is a real, avoidable SEO cost — it already happened once (see git history
+ * around July 30, when switching the qualifying rule silently dropped 276
+ * pages) and must never happen again, even accidentally.
  *
- * The set only ever grows, never shrinks a page that was already indexable —
- * every screenshot-bearing (deep) article is included first, then the
- * remaining slots up to INDEXABLE_LIMIT are filled by view count. That
- * second part matters for continuity: before the deep pass existed, the
- * indexable set *was* "top pages by view count", and some of those already
- * got indexed by Google — dropping them just because they don't have
- * screenshots yet would pull already-indexed URLs out of the sitemap for no
- * reason. Once submitted, a URL stays submitted. */
+ * data/indexable-history.json is the enforcement mechanism: a committed,
+ * append-only file that is the *floor* for this function, independent of
+ * whatever the "current qualifying set" logic below computes. Even if a
+ * future change to that logic (different criteria, view counts refreshed,
+ * INDEXABLE_LIMIT lowered, a bug) would otherwise shrink the set, the
+ * history file guarantees every previously-locked-in slug stays indexable.
+ *
+ * This function unions that history with the current qualifying set (every
+ * screenshot-bearing/deep article, plus the next highest-viewed tutorials up
+ * to INDEXABLE_LIMIT) so newly-qualifying pages are indexable immediately —
+ * but the history file itself only gets updated by deliberately running
+ * `npx tsx scripts/sync-indexable-history.ts` and committing the result,
+ * which is what actually locks new pages in permanently. Never edit or
+ * regenerate that file any other way, and never remove entries from it. */
 function getIndexableSlugs(): Set<string> {
   if (!_indexableSlugs) {
+    const history: string[] = existsSync(INDEXABLE_HISTORY_PATH)
+      ? JSON.parse(readFileSync(INDEXABLE_HISTORY_PATH, "utf-8"))
+      : [];
+    const slugs = new Set(history);
+
     const all = getPublishedTutorials(); // already sorted by view count, descending
-    const slugs = new Set(
-      all.filter((t) => getScreenshots(t.video.id).length > 0).map((t) => t.video.slug)
-    );
+    for (const t of all) {
+      if (getScreenshots(t.video.id).length > 0) slugs.add(t.video.slug);
+    }
     for (const t of all) {
       if (slugs.size >= INDEXABLE_LIMIT) break;
       slugs.add(t.video.slug);
