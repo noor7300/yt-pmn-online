@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { PublishedTutorial } from "@/lib/data";
-import { formatDate, excerpt } from "@/lib/format";
+import { excerpt } from "@/lib/format";
 import { SITE_OWNER } from "@/lib/site";
 
 /** Blog-style listing row: thumbnail, title, byline, excerpt. Used on category
@@ -55,8 +55,6 @@ export function TutorialListItem({
 
         <p className="mt-1.5 font-mono text-xs text-muted">
           By {SITE_OWNER}
-          <span aria-hidden="true"> · </span>
-          <time dateTime={video.publishedAt.slice(0, 10)}>{formatDate(video.publishedAt)}</time>
           {showCategory && (
             <>
               <span aria-hidden="true"> · </span>

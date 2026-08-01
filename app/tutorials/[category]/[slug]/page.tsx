@@ -10,7 +10,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { videoObjectSchema, articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, SITE_OWNER } from "@/lib/site";
-import { formatDate, toParagraphs } from "@/lib/format";
+import { toParagraphs } from "@/lib/format";
 
 export function generateStaticParams() {
   return getPublishedTutorials().map((t) => ({ category: t.video.category, slug: t.video.slug }));
@@ -85,15 +85,7 @@ export default async function TutorialPage({
 
       <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground">{video.title}</h1>
 
-      <p className="mt-3 font-mono text-xs text-muted">
-        By {SITE_OWNER}
-        <span aria-hidden="true"> · </span>
-        <time dateTime={video.publishedAt.slice(0, 10)}>{formatDate(video.publishedAt)}</time>
-        <span aria-hidden="true"> · </span>
-        <a href="#video-walkthrough" className="text-accent hover:underline">
-          Prefer to watch? Jump to the video ↓
-        </a>
-      </p>
+      <p className="mt-3 font-mono text-xs text-muted">By {SITE_OWNER}</p>
 
       <div className="mt-6 space-y-4 text-lg text-foreground/90">
         {toParagraphs(article.intro).map((p, i) => (
