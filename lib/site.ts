@@ -11,7 +11,12 @@ export const SITE_EMAIL = "imp.mn007@gmail.com";
  * screenshot-bearing (deep) tutorial plus, filling the remaining room, the
  * next highest-viewed tutorials overall (see getIndexableSlugs in
  * lib/data.ts) — the set only grows, it never drops a page that was already
- * indexable. Currently 315 tutorials have screenshots; 400 leaves some
- * headroom for older top-viewed pages without opening up the full
- * 3,066-page catalogue. */
-export const INDEXABLE_LIMIT = 400;
+ * indexable.
+ *
+ * 600 is deliberate, not round-number-for-its-own-sake: the very first
+ * sitemap (before the deep pass existed) indexed the top 300 pages by view
+ * count. 315 tutorials now have screenshots, and only 24 of those overlap
+ * with that original 300 — so covering both sets in full takes a union of
+ * 591. 600 leaves a little headroom without opening up the full 3,066-page
+ * catalogue. */
+export const INDEXABLE_LIMIT = 600;
