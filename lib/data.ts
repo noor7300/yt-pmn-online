@@ -88,15 +88,25 @@ let _indexableSlugs: Set<string> | null = null;
  * sitemap; everything else stays `noindex, follow` so Google can still crawl
  * and discover it without indexing the whole catalogue at once.
  *
- * "Strongest" now means *has step screenshots* rather than *has the most
- * views* — a page with real captioned screenshots is substantially more
- * useful than a text-only one, whatever its view count. INDEXABLE_LIMIT
- * stays as a safety cap so this can't suddenly open the floodgates if
- * screenshots later get extracted for the whole catalogue. */
+ * The set only ever grows, never shrinks a page that was already indexable —
+ * every screenshot-bearing (deep) article is included first, then the
+ * remaining slots up to INDEXABLE_LIMIT are filled by view count. That
+ * second part matters for continuity: before the deep pass existed, the
+ * indexable set *was* "top pages by view count", and some of those already
+ * got indexed by Google — dropping them just because they don't have
+ * screenshots yet would pull already-indexed URLs out of the sitemap for no
+ * reason. Once submitted, a URL stays submitted. */
 function getIndexableSlugs(): Set<string> {
   if (!_indexableSlugs) {
-    const withShots = getPublishedTutorials().filter((t) => getScreenshots(t.video.id).length > 0);
-    _indexableSlugs = new Set(withShots.slice(0, INDEXABLE_LIMIT).map((t) => t.video.slug));
+    const all = getPublishedTutorials(); // already sorted by view count, descending
+    const slugs = new Set(
+      all.filter((t) => getScreenshots(t.video.id).length > 0).map((t) => t.video.slug)
+    );
+    for (const t of all) {
+      if (slugs.size >= INDEXABLE_LIMIT) break;
+      slugs.add(t.video.slug);
+    }
+    _indexableSlugs = slugs;
   }
   return _indexableSlugs;
 }

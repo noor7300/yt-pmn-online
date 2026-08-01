@@ -7,9 +7,11 @@ export const SITE_DESCRIPTION =
 export const SITE_OWNER = "Impran M N";
 export const SITE_EMAIL = "imp.mn007@gmail.com";
 
-/** Safety cap on the phased indexing rollout. Indexable pages are the ones
- * carrying step screenshots (see getIndexableSlugs in lib/data.ts); this cap
- * just stops that set from growing without a deliberate decision. Currently
- * 315 tutorials have screenshots, so 400 leaves headroom without opening up
- * the full 3,066-page catalogue. */
+/** Safety cap on the phased indexing rollout. Indexable pages are every
+ * screenshot-bearing (deep) tutorial plus, filling the remaining room, the
+ * next highest-viewed tutorials overall (see getIndexableSlugs in
+ * lib/data.ts) — the set only grows, it never drops a page that was already
+ * indexable. Currently 315 tutorials have screenshots; 400 leaves some
+ * headroom for older top-viewed pages without opening up the full
+ * 3,066-page catalogue. */
 export const INDEXABLE_LIMIT = 400;
