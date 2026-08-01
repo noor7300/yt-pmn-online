@@ -83,28 +83,38 @@ export default async function TutorialPage({
         ]}
       />
 
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground">{video.title}</h1>
+      <span className="mt-5 block text-xs font-semibold uppercase tracking-wide text-accent-strong">
+        {video.categoryLabel}
+      </span>
+      <h1 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
+        {video.title}
+      </h1>
 
-      <p className="mt-3 font-mono text-xs text-muted">By {SITE_OWNER}</p>
+      <p className="mt-4 text-sm text-muted">By {SITE_OWNER}</p>
 
-      <div className="mt-6 space-y-4 text-lg text-foreground/90">
+      <div className="mt-7 space-y-4 text-lg leading-relaxed text-foreground/90">
         {toParagraphs(article.intro).map((p, i) => (
           <p key={i}>{p}</p>
         ))}
       </div>
 
-      <div className="mt-8 space-y-8">
-        {article.steps.map((step) => (
+      <div className="mt-10 space-y-10">
+        {article.steps.map((step, i) => (
           <section key={step.heading}>
-            <h2 className="text-xl font-semibold text-foreground">{step.heading}</h2>
-            <div className="mt-2 space-y-3 text-muted">
+            <h2 className="flex items-baseline gap-3 text-xl font-bold tracking-tight text-foreground">
+              <span className="gradient-text shrink-0 font-mono text-base font-semibold">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {step.heading}
+            </h2>
+            <div className="mt-3 space-y-3 text-[15px] leading-relaxed text-muted">
               {toParagraphs(step.body).map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
             {step.image && (
-              <figure className="mt-4 overflow-hidden rounded-md border border-line bg-panel">
-                <div className="relative aspect-video w-full bg-background">
+              <figure className="mt-5 overflow-hidden rounded-xl border border-line shadow-sm shadow-black/5">
+                <div className="relative aspect-video w-full bg-panel-2">
                   <Image
                     src={step.image.file}
                     alt={step.image.caption}
@@ -114,7 +124,7 @@ export default async function TutorialPage({
                     loading="lazy"
                   />
                 </div>
-                <figcaption className="border-t border-line px-4 py-2.5 text-sm text-muted">
+                <figcaption className="border-t border-line bg-panel-2 px-4 py-2.5 text-sm text-muted">
                   {step.image.caption}
                 </figcaption>
               </figure>
@@ -129,12 +139,12 @@ export default async function TutorialPage({
 
       <FaqBlock items={article.faq} />
 
-      <section id="video-walkthrough" className="mt-12 scroll-mt-20">
-        <h2 className="text-xl font-semibold text-foreground">Watch the full walkthrough</h2>
+      <section id="video-walkthrough" className="mt-14 scroll-mt-20 border-t border-line pt-10">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground">Watch the full walkthrough</h2>
         <p className="mt-2 text-sm text-muted">
           The same steps, demonstrated on screen from start to finish.
         </p>
-        <div className="mt-4">
+        <div className="mt-5">
           {thumb && <VideoEmbed videoId={video.id} title={video.title} thumbnailUrl={thumb.url} />}
         </div>
       </section>

@@ -4,34 +4,30 @@ import type { PublishedTutorial } from "@/lib/data";
 
 export function TutorialCard({ tutorial }: { tutorial: PublishedTutorial }) {
   const { video, article } = tutorial;
+  const deepImage = article.deep ? article.steps.find((s) => s.image)?.image : undefined;
   const thumb = video.thumbnails.medium ?? video.thumbnails.maxres ?? video.thumbnails.high;
+  const imageSrc = deepImage?.file ?? thumb?.url;
   const href = `/tutorials/${video.category}/${video.slug}`;
 
   return (
-    <Link
-      href={href}
-      className="group flex flex-col overflow-hidden rounded-md border border-line bg-panel transition hover:border-accent"
-    >
-      <div className="relative aspect-video w-full overflow-hidden bg-background">
-        {thumb && (
+    <Link href={href} className="group flex flex-col">
+      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-panel-2">
+        {imageSrc && (
           <Image
-            src={thumb.url}
+            src={imageSrc}
             alt={video.title}
             fill
             sizes="(min-width: 1024px) 320px, 50vw"
-            className="object-cover transition group-hover:scale-[1.02]"
+            className="object-cover transition duration-300 group-hover:scale-[1.04]"
           />
         )}
-        <span className="absolute bottom-2 left-2 rounded bg-background/90 px-1.5 py-0.5 font-mono text-xs font-medium uppercase tracking-wide text-accent">
-          {video.categoryLabel}
-        </span>
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="line-clamp-2 text-sm font-semibold text-foreground group-hover:text-accent">
-          {article.seoTitle}
-        </h3>
-        <p className="line-clamp-2 text-xs text-muted">{article.metaDescription}</p>
-      </div>
+      <span className="mt-3 text-xs font-semibold uppercase tracking-wide text-accent-strong">
+        {video.categoryLabel}
+      </span>
+      <h3 className="mt-1 line-clamp-2 text-[15px] font-semibold leading-snug text-foreground group-hover:text-accent-strong">
+        {article.seoTitle}
+      </h3>
     </Link>
   );
 }

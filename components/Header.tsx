@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getGroups } from "@/lib/data";
 import { NavCategoryDropdown } from "@/components/NavCategoryDropdown";
 import { NavMoreDropdown } from "@/components/NavMoreDropdown";
+import { NavScrollShell } from "@/components/NavScrollShell";
 import { SITE_NAME } from "@/lib/site";
 
 // Highest-volume groups get a direct nav slot with a short label; everything
@@ -25,18 +26,17 @@ export function Header() {
   const restGroups = groups.filter((g) => !topSlugs.has(g.slug));
 
   return (
-    <header className="border-b border-line bg-background/90 backdrop-blur sticky top-0 z-30">
-      <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-4 sm:px-6">
-        <Link href="/" className="shrink-0 text-lg font-semibold tracking-tight text-foreground">
+    <NavScrollShell>
+      <div className="mx-auto flex max-w-6xl items-center gap-7 px-4 py-4 sm:px-6">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5 text-[15px] font-semibold tracking-tight text-foreground">
+          <span className="gradient-brand h-6 w-6 rounded-md" aria-hidden="true" />
           {SITE_NAME}
         </Link>
-        <nav
-          className="flex flex-1 items-center gap-6 overflow-x-auto font-mono text-xs font-medium uppercase tracking-wide text-muted [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          <Link href="/#categories" className="shrink-0 hover:text-accent">
+        <nav className="flex flex-1 items-center gap-6 overflow-x-auto text-[13.5px] font-medium text-muted [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <Link href="/#categories" className="shrink-0 hover:text-foreground">
             Categories
           </Link>
-          <Link href="/#latest" className="shrink-0 hover:text-accent">
+          <Link href="/#latest" className="shrink-0 hover:text-foreground">
             Latest
           </Link>
           {topGroups.map((group) => (
@@ -44,7 +44,13 @@ export function Header() {
           ))}
           {restGroups.length > 0 && <NavMoreDropdown groups={restGroups} />}
         </nav>
+        <Link
+          href="/#latest"
+          className="gradient-brand hidden shrink-0 rounded-lg px-4 py-2 text-[13px] font-semibold text-on-accent transition-transform hover:-translate-y-0.5 sm:inline-block"
+        >
+          Browse tutorials
+        </Link>
       </div>
-    </header>
+    </NavScrollShell>
   );
 }

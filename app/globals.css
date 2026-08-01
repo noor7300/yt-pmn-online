@@ -1,22 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3f1ec;
-  --foreground: #16191c;
+  --background: #fafafe;
+  --foreground: #14121f;
   --panel: #ffffff;
-  --accent: #b8791f;
-  --line: #dedad0;
-  --muted: #6b6f73;
+  --panel-2: #f1effb;
+  --accent: #6552e8;
+  --accent-2: #c44fd1;
+  --accent-strong: #4e3dc7;
+  --on-accent: #ffffff;
+  --line: rgba(20, 18, 31, 0.09);
+  --line-strong: rgba(20, 18, 31, 0.15);
+  --muted: #57536b;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0e1113;
-    --foreground: #e8e6e1;
-    --panel: #181b1e;
-    --accent: #d9a441;
-    --line: #2a2e31;
-    --muted: #8b9096;
+    --background: #0b0a14;
+    --foreground: #f2f0fa;
+    --panel: #14121f;
+    --panel-2: #1b1830;
+    --accent: #8b7cf6;
+    --accent-2: #e17ee8;
+    --accent-strong: #a89bff;
+    --on-accent: #0b0a14;
+    --line: rgba(242, 240, 250, 0.09);
+    --line-strong: rgba(242, 240, 250, 0.16);
+    --muted: #a9a4c4;
   }
 }
 
@@ -24,8 +34,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-strong: var(--accent-strong);
+  --color-on-accent: var(--on-accent);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -34,4 +49,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+.gradient-brand {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

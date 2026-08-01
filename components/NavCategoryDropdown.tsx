@@ -50,7 +50,7 @@ export function NavCategoryDropdown({ label, categories }: { label: string; cate
         type="button"
         onClick={() => (open ? setOpen(false) : openMenu())}
         aria-expanded={open}
-        className="flex shrink-0 items-center gap-1 whitespace-nowrap hover:text-accent"
+        className="flex shrink-0 items-center gap-1 whitespace-nowrap hover:text-foreground"
       >
         {label}
         <span aria-hidden="true" className={`text-[10px] transition-transform ${open ? "rotate-180" : ""}`}>
@@ -63,14 +63,14 @@ export function NavCategoryDropdown({ label, categories }: { label: string; cate
           <div
             ref={panelRef}
             style={{ position: "fixed", top: pos.top, left: pos.left }}
-            className="z-50 min-w-44 rounded-md border border-line bg-panel py-1.5 normal-case shadow-lg"
+            className="z-50 min-w-44 rounded-xl border border-line bg-panel py-1.5 shadow-lg shadow-black/5"
           >
             {categories.map((c) => (
               <Link
                 key={c.slug}
                 href={`/tutorials/${c.slug}`}
                 onClick={() => setOpen(false)}
-                className="block px-3 py-1.5 font-mono text-xs text-muted hover:bg-background hover:text-accent"
+                className="block px-3.5 py-2 text-sm text-muted hover:bg-panel-2 hover:text-accent-strong"
               >
                 {c.label}
               </Link>

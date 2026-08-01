@@ -58,7 +58,7 @@ export function NavMoreDropdown({ groups }: { groups: Group[] }) {
         type="button"
         onClick={() => (open ? close() : openMenu())}
         aria-expanded={open}
-        className="flex shrink-0 items-center gap-1 whitespace-nowrap hover:text-accent"
+        className="flex shrink-0 items-center gap-1 whitespace-nowrap hover:text-foreground"
       >
         More
         <span aria-hidden="true" className={`text-[10px] transition-transform ${open ? "rotate-180" : ""}`}>
@@ -71,7 +71,7 @@ export function NavMoreDropdown({ groups }: { groups: Group[] }) {
           <div
             ref={panelRef}
             style={{ position: "fixed", top: pos.top, left: pos.left }}
-            className="z-50 max-h-[70vh] w-60 overflow-y-auto rounded-md border border-line bg-panel py-1.5 normal-case shadow-lg"
+            className="z-50 max-h-[70vh] w-60 overflow-y-auto rounded-xl border border-line bg-panel py-1.5 shadow-lg shadow-black/5"
           >
             {groups.map((group) => {
               const isExpanded = expandedGroup === group.slug;
@@ -81,7 +81,7 @@ export function NavMoreDropdown({ groups }: { groups: Group[] }) {
                     type="button"
                     onClick={() => setExpandedGroup(isExpanded ? null : group.slug)}
                     aria-expanded={isExpanded}
-                    className="flex w-full items-center justify-between px-3 py-1.5 text-left font-mono text-xs text-muted hover:bg-background hover:text-accent"
+                    className="flex w-full items-center justify-between px-3.5 py-2 text-left text-sm text-muted hover:bg-panel-2 hover:text-accent-strong"
                   >
                     {group.label}
                     <span
@@ -92,13 +92,13 @@ export function NavMoreDropdown({ groups }: { groups: Group[] }) {
                     </span>
                   </button>
                   {isExpanded && (
-                    <div className="border-y border-line/50 bg-background/60 py-1">
+                    <div className="border-y border-line/60 bg-panel-2/60 py-1">
                       {group.categories.map((c) => (
                         <Link
                           key={c.slug}
                           href={`/tutorials/${c.slug}`}
                           onClick={close}
-                          className="block px-6 py-1.5 font-mono text-xs text-muted hover:text-accent"
+                          className="block px-6 py-1.5 text-sm text-muted hover:text-accent-strong"
                         >
                           {c.label}
                         </Link>

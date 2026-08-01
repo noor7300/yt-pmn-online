@@ -4,8 +4,8 @@ import type { PublishedTutorial } from "@/lib/data";
 import { excerpt } from "@/lib/format";
 import { SITE_OWNER } from "@/lib/site";
 
-/** Blog-style listing row: thumbnail, title, byline, excerpt. Used on category
- * pages and the homepage "latest" strip. */
+/** Editorial feed row: thumbnail, title, byline, excerpt. Used on category
+ * pages and the homepage "latest" feed. */
 export function TutorialListItem({
   tutorial,
   showCategory = false,
@@ -25,13 +25,13 @@ export function TutorialListItem({
   const href = `/tutorials/${video.category}/${video.slug}`;
 
   return (
-    <article className="flex flex-col gap-4 border-b border-line py-6 first:pt-0 sm:flex-row sm:gap-6">
+    <article className="group flex flex-col gap-4 border-b border-line py-6 first:pt-0 sm:flex-row sm:items-center sm:gap-6">
       <Link
         href={href}
         // sm:self-start stops the flex row stretching this to the text column's
         // height — that stretch beats aspect-video and made object-cover crop
         // the thumbnail's left and right edges.
-        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-panel sm:w-56 sm:self-start"
+        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-xl bg-panel-2 sm:w-48 sm:self-center"
         tabIndex={-1}
         aria-hidden="true"
       >
@@ -40,38 +40,32 @@ export function TutorialListItem({
             src={imageSrc}
             alt=""
             fill
-            sizes="(min-width: 640px) 224px, 100vw"
-            className="object-cover transition hover:scale-[1.02]"
+            sizes="(min-width: 640px) 192px, 100vw"
+            className="object-cover transition duration-300 group-hover:scale-[1.04]"
           />
         )}
       </Link>
 
       <div className="flex flex-1 flex-col">
-        <h2 className="text-lg font-semibold leading-snug text-foreground">
-          <Link href={href} className="hover:text-accent">
+        <h2 className="text-[16.5px] font-semibold leading-snug text-foreground">
+          <Link href={href} className="group-hover:text-accent-strong">
             {article.seoTitle}
           </Link>
         </h2>
 
-        <p className="mt-1.5 font-mono text-xs text-muted">
+        <p className="mt-2 text-xs text-muted">
           By {SITE_OWNER}
           {showCategory && (
             <>
               <span aria-hidden="true"> · </span>
-              <Link href={`/tutorials/${video.category}`} className="text-accent hover:underline">
+              <Link href={`/tutorials/${video.category}`} className="text-accent-strong hover:underline">
                 {video.categoryLabel}
               </Link>
             </>
           )}
         </p>
 
-        <p className="mt-2.5 text-sm leading-relaxed text-muted">{excerpt(article.intro)}</p>
-
-        <p className="mt-3">
-          <Link href={href} className="text-sm font-medium text-accent hover:underline">
-            Read the guide →
-          </Link>
-        </p>
+        <p className="mt-2.5 line-clamp-2 text-sm leading-relaxed text-muted">{excerpt(article.intro)}</p>
       </div>
     </article>
   );

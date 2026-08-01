@@ -24,7 +24,7 @@ function pageWindow(current: number, total: number): (number | "gap")[] {
 }
 
 const linkBase =
-  "inline-flex h-9 min-w-9 items-center justify-center rounded-md border px-3 font-mono text-sm tabular-nums transition";
+  "inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-3 font-mono text-sm tabular-nums transition";
 
 export function Pagination({
   basePath,

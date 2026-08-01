@@ -22,19 +22,19 @@ export function ScreenshotGallery({
   if (!shots.length) return null;
 
   return (
-    <section aria-labelledby="screenshots-heading" className="mt-12">
-      <h2 id="screenshots-heading" className="text-xl font-semibold text-foreground">
+    <section aria-labelledby="screenshots-heading" className="mt-14 border-t border-line pt-10">
+      <h2 id="screenshots-heading" className="text-2xl font-bold tracking-tight text-foreground">
         Screenshots from the walkthrough
       </h2>
       <p className="mt-2 text-sm text-muted">
         Stills captured at each stage of the video, in order.
       </p>
 
-      <ol className="mt-5 flex flex-col gap-6">
+      <ol className="mt-6 flex flex-col gap-6">
         {shots.map((shot, i) => (
           <li key={shot.file}>
-            <figure className="overflow-hidden rounded-md border border-line bg-panel">
-              <div className="relative aspect-video w-full bg-background">
+            <figure className="overflow-hidden rounded-xl border border-line shadow-sm shadow-black/5">
+              <div className="relative aspect-video w-full bg-panel-2">
                 <Image
                   src={shot.file}
                   alt={
@@ -48,12 +48,12 @@ export function ScreenshotGallery({
                   loading={i === 0 ? "eager" : "lazy"}
                 />
               </div>
-              <figcaption className="flex items-baseline gap-3 border-t border-line px-4 py-2.5">
+              <figcaption className="flex items-baseline gap-3 border-t border-line bg-panel-2 px-4 py-2.5">
                 <a
                   href={`https://www.youtube.com/watch?v=${videoId}&t=${shot.atSeconds}s`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 font-mono text-xs text-accent hover:underline"
+                  className="shrink-0 font-mono text-xs text-accent-strong hover:underline"
                 >
                   {timecode(shot.atSeconds)}
                 </a>
