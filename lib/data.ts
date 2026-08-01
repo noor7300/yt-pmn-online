@@ -180,40 +180,16 @@ export function getDeepTutorials(): PublishedTutorial[] {
     .sort((a, b) => b.article.generatedAt.localeCompare(a.article.generatedAt));
 }
 
-/** A homepage-ready slice of `getDeepTutorials()`: recently rewritten guides
- * spread across different tool categories rather than clustered in whichever
- * niche happened to get the most recent batch. Round-robins one pick per
- * category, each category's own list newest-first, until `limit` is hit. */
-export function getFeaturedDeepTutorials(limit = 10): PublishedTutorial[] {
-  const deep = getDeepTutorials();
-  const byCategory = new Map<string, PublishedTutorial[]>();
-  for (const t of deep) {
-    const key = t.video.category;
-    if (!byCategory.has(key)) byCategory.set(key, []);
-    byCategory.get(key)!.push(t);
-  }
-  // Categories ordered by their most-recently-rewritten article, so the
-  // freshest niches get first pick in the round-robin.
-  const categoryOrder = [...byCategory.keys()].sort(
-    (a, b) => byCategory.get(b)![0].article.generatedAt.localeCompare(byCategory.get(a)![0].article.generatedAt)
-  );
+export const HOME_PAGE_SIZE = 7;
 
-  const out: PublishedTutorial[] = [];
-  let round = 0;
-  while (out.length < limit) {
-    let addedThisRound = false;
-    for (const category of categoryOrder) {
-      if (out.length >= limit) break;
-      const pick = byCategory.get(category)![round];
-      if (pick) {
-        out.push(pick);
-        addedThisRound = true;
-      }
-    }
-    if (!addedThisRound) break; // every category exhausted
-    round += 1;
-  }
-  return out;
+/** Paginated view over every deep-rewritten guide, newest-rewritten first —
+ * the homepage's "Recently updated guides" feed. */
+export function getDeepTutorialsPaged(page: number): PagedTutorials {
+  const all = getDeepTutorials();
+  const totalPages = Math.max(1, Math.ceil(all.length / HOME_PAGE_SIZE));
+  const currentPage = Math.min(Math.max(1, page), totalPages);
+  const start = (currentPage - 1) * HOME_PAGE_SIZE;
+  return { items: all.slice(start, start + HOME_PAGE_SIZE), currentPage, totalPages };
 }
 
 export function getRelatedTutorials(current: PublishedTutorial, limit = 4): PublishedTutorial[] {

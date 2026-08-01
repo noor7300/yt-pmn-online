@@ -42,7 +42,7 @@ export function CategoryTutorialGrid({ categorySlug, page }: { categorySlug: str
         ))}
       </div>
 
-      <Pagination categorySlug={category.slug} currentPage={currentPage} totalPages={totalPages} />
+      <Pagination basePath={`/tutorials/${category.slug}`} currentPage={currentPage} totalPages={totalPages} />
     </div>
   );
 }
