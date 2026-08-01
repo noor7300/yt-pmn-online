@@ -1,20 +1,47 @@
 {
   "slug": "how-to-calculate-project-level-percent-complete-in-smartsheet-easily-2026",
   "seoTitle": "Calculate Project Percent Complete in Smartsheet",
-  "metaDescription": "Roll up task progress into a single project completion percentage in Smartsheet using parent-child hierarchies, weighted formulas, and Sheet Summary.",
-  "intro": "Manually tracking overall project completion is error-prone once you have dozens of subtasks. This guide covers structuring percent columns, using parent-child hierarchies with rollup formulas, and displaying a single master completion percentage in the Sheet Summary panel.",
+  "metaDescription": "Roll up task progress into a single project completion percentage in Smartsheet using percent columns, parent-child hierarchies, and rollup formulas.",
+  "intro": "Manually tracking overall project completion gets unreliable fast once you have dozens of subtasks each moving at their own pace. This guide covers formatting your % Complete column correctly, structuring tasks into parent-child rows so progress can roll up cleanly, and using conditional criteria to flag which tasks have actually hit 100%, so your project-level number reflects reality instead of a guess.",
   "steps": [
-    { "heading": "Format your percent columns", "body": "Ensure the columns you're tracking are properly formatted as percent data types." },
-    { "heading": "Build parent-child hierarchies", "body": "Establish project phases and their corresponding subtask rows using indentation." },
-    { "heading": "Write rollup formulas", "body": "Use functions like CHILDREN and AVGW to automatically summarize task progress into parent rows." },
-    { "heading": "Use the Dependencies Engine for duration-based rollups", "body": "Smartsheet can calculate progress natively through automated Duration column mappings in the Dependencies Engine settings." },
-    { "heading": "Display a master completion card", "body": "Use the Sheet Summary panel to isolate and show a single project-level completion percentage." }
+    {
+      "heading": "Set up your % Complete column",
+      "body": "Open your schedule sheet and confirm the % Complete column sits next to your core tracking fields, Task Name, Start Date, End Date, and Priority. Each task row carries its own individual percentage, like 100% for a finished Design Phase or 50% for a Development Phase still underway, and this per-row number is the raw material every rollup calculation later depends on. If the column isn't formatted as a percent type, fix that first, since a plain number column won't display or calculate the way you expect.",
+      "image": { "file": "/screenshots/hwiw39w-j6Q/01.webp", "caption": "A project schedule with the % Complete column populated per task, alongside Start Date, End Date, and Priority, feeding into the Gantt view on the right." }
+    },
+    {
+      "heading": "Organize tasks into parent-child rows",
+      "body": "Group related tasks under a parent row, such as nesting Design Phase, Development Phase, Testing Phase, and Deployment Phase underneath a Website Project parent. This hierarchy isn't just visual organization, it's what a rollup formula reads to know which child rows belong to which parent when it calculates an aggregate percentage. Working further down the sheet and extending or adjusting a task's bar in the Gantt view is a normal part of this step, since the dates and hierarchy usually get refined together.",
+      "image": { "file": "/screenshots/hwiw39w-j6Q/04.webp", "caption": "The schedule scrolled further along the timeline, with a task row selected while its Gantt bar is being adjusted." }
+    },
+    {
+      "heading": "Write a rollup formula on the parent row",
+      "body": "In the parent row's % Complete cell, use a function like CHILDREN to reference its subtasks, or AVGW if you want to weight some tasks more heavily than others rather than averaging them all equally. A straight average treats a five-minute task the same as a two-week one, so weighting by duration or effort usually gives a more honest project-level number."
+    },
+    {
+      "heading": "Let the Dependencies Engine handle duration-based rollups",
+      "body": "If your sheet has the Dependencies Engine enabled, Smartsheet can calculate progress natively through its automated Duration column mappings instead of you writing every formula by hand. This is worth turning on if your schedule already tracks durations and predecessors, since it keeps the rollup consistent with the same engine that's managing your timeline."
+    },
+    {
+      "heading": "Flag completed work with a condition",
+      "body": "Open Conditional Formatting, select the % Complete column, and set a condition so rows hitting 100% are visually flagged, separate from the ones still at 25%, 50%, or 75%. Seeing which tasks are genuinely finished versus still in progress at a glance makes it much faster to sanity-check a rollup number before you present it, since a project that reports 80% complete should have a matching cluster of tasks actually sitting at 100%.",
+      "image": { "file": "/screenshots/hwiw39w-j6Q/05.webp", "caption": "The Set Condition dialog, filtering the % Complete column down to rows where the value equals 100%." }
+    },
+    {
+      "heading": "Display the master number in Sheet Summary",
+      "body": "Use the Sheet Summary panel to isolate a single project-level completion percentage as its own summary field, separate from the row-by-row detail in the grid. This is the number worth pinning to a dashboard or reporting up the chain, since it's the one figure that answers \"where are we\" without anyone needing to open the full sheet."
+    },
+    {
+      "heading": "Handle blanks and zero-day milestones",
+      "body": "Watch for blank cells in child rows, since an empty % Complete value can throw off an average instead of counting as zero the way you'd expect. Zero-duration milestone rows can behave oddly in weighted formulas too, so it's worth testing your rollup formula against a task list that includes at least one blank and one milestone before trusting the number in a real report."
+    }
   ],
   "faq": [
-    { "question": "How do I roll subtask progress up to a project-level percentage?", "answer": "Use rollup formulas like CHILDREN and AVGW on parent rows, or enable the Dependencies Engine's automated duration-based calculation." },
-    { "question": "Can I weight some tasks more heavily than others?", "answer": "Yes, weighted rollup formulas such as AVGW let you factor task weight into the overall completion calculation." },
-    { "question": "Where can I see the overall project completion number?", "answer": "The Sheet Summary panel can display a single master card showing your project-level completion percentage." },
-    { "question": "What happens if some cells are blank?", "answer": "Blank cells and zero-day milestones can cause formula errors, so it's worth troubleshooting and handling them explicitly in your rollup formulas." }
+    { "question": "How do I roll subtask progress up to a project-level percentage?", "answer": "Use rollup formulas like CHILDREN and AVGW on parent rows, or enable the Dependencies Engine's automated duration-based calculation if your schedule already tracks durations." },
+    { "question": "Can I weight some tasks more heavily than others?", "answer": "Yes, weighted rollup formulas such as AVGW let you factor task weight or duration into the overall completion calculation instead of averaging every task equally." },
+    { "question": "Where can I see the overall project completion number?", "answer": "The Sheet Summary panel can display a single master field showing your project-level completion percentage, separate from the row-by-row detail." },
+    { "question": "What happens if some cells are blank?", "answer": "Blank cells and zero-duration milestones can throw off rollup formulas, so it's worth testing your formula against real edge cases before relying on the result." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

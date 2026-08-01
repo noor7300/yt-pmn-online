@@ -1,20 +1,44 @@
 {
   "slug": "how-to-add-google-calendar-to-notion-link-import-embed-in-page-dashboard-databas",
   "seoTitle": "How to Add Google Calendar to Notion (Embed & Link)",
-  "metaDescription": "Learn how to embed Google Calendar in a Notion page, link it to a database, and import events so scheduling and tasks live in one dashboard.",
-  "intro": "If you plan your day in Google Calendar but manage projects in Notion, keeping the two in sync can save you a lot of tab-switching. This guide walks through embedding your Google Calendar directly inside a Notion page or dashboard and connecting it to a database so your events and tasks stay visible in one place.",
+  "metaDescription": "Embed Google Calendar in a Notion page by grabbing the embed code from Calendar settings and pasting it into Notion's embed block.",
+  "intro": "If you plan your day in Google Calendar but manage projects in Notion, keeping the two in sync can save a lot of tab-switching. Notion doesn't have a native Google Calendar integration — instead, you generate an embed link from Google Calendar's own settings and drop it into a Notion embed block, which renders your live calendar right inside the page. This guide follows that exact path: pulling the embed code from Google Calendar, pasting it into Notion, and placing it somewhere useful alongside your tasks.",
   "steps": [
-    { "heading": "Get your Google Calendar's embed link", "body": "Open Google Calendar settings and grab the public or shareable embed URL for the calendar you want to bring into Notion." },
-    { "heading": "Embed the calendar in a Notion page", "body": "Use Notion's embed block and paste the Google Calendar link so the calendar view appears live inside your page." },
-    { "heading": "Add the embed to your dashboard", "body": "Place the embedded calendar alongside your other dashboard widgets so scheduling is visible next to your tasks and projects." },
-    { "heading": "Link events to a Notion database", "body": "Connect relevant events to entries in a Notion database so tasks and deadlines reference the same dates shown on your calendar." },
-    { "heading": "Import recurring events as needed", "body": "For events you want to track as database items rather than just view, manually add them as rows so they carry properties like status or owner." }
+    {
+      "heading": "Open the Google Calendar you want to bring in",
+      "body": "Start in Google Calendar itself and confirm which calendar you're embedding — the sidebar lists \"My calendars\" (a primary calendar, Birthdays, Tasks) plus any \"Other calendars\" you've subscribed to, like a regional holiday calendar. Each one has its own separate embed link, so pick the specific calendar whose events you actually want visible in Notion rather than assuming one link covers everything you see on screen.",
+      "image": { "file": "/screenshots/aA9n9KEMqkE/02.webp", "caption": "Google Calendar's week view with the calendar list in the sidebar — each calendar listed here has its own separate embed link." }
+    },
+    {
+      "heading": "Get the embed code from Calendar settings",
+      "body": "Open Settings for that specific calendar and scroll to Integrate calendar in the left-hand settings menu, alongside Calendar settings, Shared with, Access permissions, and Event notifications. This section shows the Calendar ID, a Public URL to the calendar for browser access, and a full Embed code containing an iframe src link — it's that iframe's URL, not the whole HTML tag, that you'll actually paste into Notion. A Customize button next to the embed code also lets you adjust the calendar's default view and size before you copy it.",
+      "image": { "file": "/screenshots/aA9n9KEMqkE/05.webp", "caption": "The Integrate calendar settings page, showing the Calendar ID, the public embed URL, and the full iframe embed code." }
+    },
+    {
+      "heading": "Create an embed block in Notion",
+      "body": "In Notion, open the page where you want the calendar to live and type a forward slash, or just paste — Notion recognizes a pasted link and offers to embed it directly. A blank page shows an \"Embed anything (PDFs, Google Docs, Google Maps, Spotify...)\" placeholder block by default, which is exactly the block type you want here; click it and paste the calendar's public embed URL from the previous step into the field it opens.",
+      "image": { "file": "/screenshots/aA9n9KEMqkE/04.webp", "caption": "Notion's embed placeholder block, which accepts a pasted link for Google Calendar, Google Docs, Google Maps, and similar embeddable sources." }
+    },
+    {
+      "heading": "Resize and position the embedded calendar",
+      "body": "Once the calendar renders, drag its corner handles to resize the block so a useful range of the week or month is visible without forcing the reader to scroll inside a tiny window. Move it like any other Notion block — drag it above or below your task database, or into a column next to one, so the calendar and your project tracker sit side by side on the same page."
+    },
+    {
+      "heading": "Add the embed to a dashboard alongside your tasks",
+      "body": "For a real dashboard setup, place the calendar embed in a column next to a linked view of your task database, so deadlines from Google Calendar and open tasks from Notion are visible in the same glance. This works well because the embed is read-only and live — any change made in Google Calendar shows up here automatically, with nothing to manually refresh or resync."
+    },
+    {
+      "heading": "Reference calendar events from a Notion database manually",
+      "body": "Because the embed can't write data back into Notion, an event on your calendar doesn't automatically become a row in a task database — if you want a specific event tracked with a status, owner, or notes, you'll need to add it as a database entry yourself with a matching date. This is the tradeoff of the embed approach: it's zero-setup and always current, but linking specific events to specific tasks is still a manual step rather than an automatic sync."
+    }
   ],
   "faq": [
-    { "question": "Does the embedded calendar update automatically?", "answer": "Yes, since it's an embed of your live Google Calendar, changes you make in Google Calendar reflect in the Notion embed automatically." },
-    { "question": "Can I edit events directly from Notion?", "answer": "No, the embed is a view-only window into Google Calendar; you'll need to open Google Calendar itself to edit events." },
-    { "question": "Is this integration free?", "answer": "Yes, embedding a Google Calendar link into Notion doesn't require any paid app or plugin." },
-    { "question": "Can I embed multiple calendars in one dashboard?", "answer": "Yes, you can add multiple embed blocks, one for each calendar, anywhere on your Notion dashboard." }
+    { "question": "Does the embedded calendar update automatically?", "answer": "Yes — since it's an embed of your live Google Calendar via its public iframe URL, any change you make in Google Calendar reflects in the Notion embed automatically, with no re-syncing needed." },
+    { "question": "Can I edit events directly from Notion?", "answer": "No. The embed block is a view-only window into Google Calendar; to add or edit an event, you need to open Google Calendar itself." },
+    { "question": "Is this integration free?", "answer": "Yes — embedding a Google Calendar's public link into Notion uses features built into both products, with no paid app or plugin required." },
+    { "question": "Can I embed multiple calendars in one dashboard?", "answer": "Yes. Each calendar in your Google Calendar sidebar has its own separate embed link under its own Integrate calendar settings, so you can add one embed block per calendar anywhere on a Notion page." },
+    { "question": "Why does my embed link require making the calendar public?", "answer": "Google Calendar's embed code is built from the calendar's public sharing URL, so the calendar (or at least the specific events you want visible) needs public or \"shared with anyone\" access for the embed to render for anyone viewing the Notion page." }
   ],
-  "generatedAt": "2026-07-24T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00Z",
+  "deep": true
 }

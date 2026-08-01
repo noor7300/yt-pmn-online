@@ -2,19 +2,43 @@
   "slug": "how-to-connect-namecheap-domain-to-blogger-blog-website-solve-404-error-easily-2",
   "seoTitle": "Connect Namecheap Domain to Blogger & Fix 404 Error",
   "metaDescription": "Connecting a Namecheap domain to Blogger? Learn the correct DNS records to set and how to fix the common 404 error after connecting your custom domain.",
-  "intro": "Connecting a Namecheap domain to a Blogger blog gives your site a professional, branded web address, but it commonly runs into a 404 error if the DNS records aren't set up exactly right. This guide walks through the DNS setup in Namecheap and the Blogger configuration needed to avoid that error.",
+  "intro": "Connecting a Namecheap domain to a Blogger blog gives your site a professional, branded web address, but it commonly runs into a 404 error if the DNS records aren't set up exactly right. The two sides of this — Blogger's Custom domain field and Namecheap's Advanced DNS records — have to agree with each other precisely, and a single missing CNAME record is usually the whole story behind the error. This guide walks through both panels so you can see exactly what needs to match.",
   "steps": [
-    { "heading": "Get the DNS records from Blogger", "body": "In Blogger's custom domain settings, find the CNAME records Google requires for domain verification and connection." },
-    { "heading": "Add the required records in Namecheap", "body": "Log in to Namecheap, open Advanced DNS for your domain, and add the CNAME records exactly as provided by Blogger." },
-    { "heading": "Set up the domain in Blogger settings", "body": "Enter your custom domain in Blogger's settings so it recognizes the domain once the DNS records are verified." },
-    { "heading": "Troubleshoot the 404 error", "body": "If a 404 error appears after connecting, double-check that the CNAME records match exactly and that there are no conflicting records left over in Namecheap." },
-    { "heading": "Confirm the blog loads on the custom domain", "body": "Once records propagate, visit your custom domain to confirm your Blogger blog loads correctly without the 404 error." }
+    {
+      "heading": "Set your custom domain in Blogger",
+      "body": "In Blogger, open Settings and find Publishing, where your blog currently shows its default blogspot.com address. Click Custom domain and type the domain you want to use, including the www prefix — for example www.yourdomain.com rather than the bare root domain, since Blogger's setup is built around the www subdomain by default. Hit Save, and Blogger will immediately try to verify the domain; at this point it will fail, because Namecheap doesn't yet have the DNS records Blogger needs. That's expected — this step just tells Blogger what to look for.",
+      "image": { "file": "/screenshots/oolcyteHgDU/03.webp", "caption": "Blogger's Custom domain dialog under Settings → Publishing, with a www subdomain entered before the matching DNS records exist." }
+    },
+    {
+      "heading": "Log in to Namecheap and open your domain list",
+      "body": "Sign in to your Namecheap account and go to Domain List, where every domain you've registered is shown alongside its expiration date and a Manage button. Find the domain you just entered into Blogger and click Manage to open its settings. This is also a good moment to note the domain's expiration date while you're there — a domain about to lapse is a separate problem from a 404 error, but it's an easy thing to miss if you're only focused on DNS.",
+      "image": { "file": "/screenshots/oolcyteHgDU/04.webp", "caption": "The Namecheap dashboard's Domain List, showing an active domain and its Manage button." }
+    },
+    {
+      "heading": "Add the CNAME records Blogger requires",
+      "body": "Inside the domain's management page, open the Advanced DNS tab and use Add New Record. Blogger's verification step (or its help documentation) gives you two CNAME records to add: one for the www host pointing to ghs.google.com, and a second, longer verification CNAME with a unique host and value that Blogger generates specifically for your domain. Set the record type to CNAME, fill in the host and value exactly as shown — no typos, no trailing dots added by hand — and leave TTL on Automatic. Click the checkmark to save each record, then Save All Changes at the bottom of the list.",
+      "image": { "file": "/screenshots/oolcyteHgDU/05.webp", "caption": "Namecheap's Advanced DNS panel with a CNAME record mapping the www host to ghs.google.com, alongside an existing TXT record." }
+    },
+    {
+      "heading": "Remove conflicting records",
+      "body": "A 404 error after adding the right records is very often caused by leftover records that conflict with them — most commonly an old A record, URL redirect record, or parking-page CNAME still pointed at Namecheap's default hosting on the same host (www or @). DNS only resolves one way for a given host, so if Namecheap is still serving its own placeholder page for www while a CNAME also points www at Google, the result is inconsistent or wrong. Scan the Advanced DNS list for anything else touching the www host or the root, and delete it."
+    },
+    {
+      "heading": "Wait for propagation, then verify in Blogger",
+      "body": "DNS changes don't apply instantly — propagation across the internet's resolvers can take anywhere from a few minutes to a couple of days, though it's usually much faster. Once you've given it some time, go back to Blogger's Custom domain field and save it again (or just check your site) to trigger a fresh verification. If it still 404s after a reasonable wait, go back through the CNAME values character by character — a single wrong character in the verification record's host or value is the most common reason this drags on."
+    },
+    {
+      "heading": "Confirm both www and non-www versions work",
+      "body": "Once your domain loads correctly, test both www.yourdomain.com and the bare yourdomain.com in a browser. Blogger typically needs a redirect setting enabled so visitors who type the root domain get forwarded to the www version automatically — check the Redirect domain option in Blogger's Publishing settings if the non-www version isn't resolving. Getting both to work means links and bookmarks people already have won't break no matter which version they use."
+    }
   ],
   "faq": [
-    { "question": "Why do I get a 404 error after connecting my domain to Blogger?", "answer": "This is usually caused by incorrect or incomplete CNAME records in Namecheap that don't exactly match what Blogger requires." },
-    { "question": "Do I need to change nameservers to connect to Blogger?", "answer": "No, you typically just add specific CNAME records in Namecheap's DNS settings rather than changing nameservers entirely." },
+    { "question": "Why do I get a 404 error after connecting my domain to Blogger?", "answer": "This is usually caused by incorrect, missing, or leftover CNAME records in Namecheap's Advanced DNS that don't exactly match what Blogger's custom domain verification requires." },
+    { "question": "Do I need to change nameservers to connect to Blogger?", "answer": "No, you typically just add specific CNAME records in Namecheap's Advanced DNS panel rather than changing nameservers entirely." },
     { "question": "How long until my custom domain works on Blogger?", "answer": "It depends on DNS propagation, which can take anywhere from a few minutes up to 24-48 hours in some cases." },
-    { "question": "Can I use a subdomain instead of the root domain for Blogger?", "answer": "Yes, Blogger supports connecting a subdomain, which can be simpler to set up than the root domain in some DNS configurations." }
+    { "question": "Can I use a subdomain instead of the root domain for Blogger?", "answer": "Yes, Blogger supports connecting a subdomain, which can be simpler to set up since it avoids some of the root-domain redirect configuration." },
+    { "question": "Why does Blogger ask me to enter www in front of my domain?", "answer": "Blogger's custom domain setup is built around a www CNAME pointing to ghs.google.com, so the www version is the primary address, with the root domain optionally redirecting to it." }
   ],
-  "generatedAt": "2026-07-24T00:12:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

@@ -2,19 +2,44 @@
   "slug": "how-to-add-subscribe-newsletter-form-in-elementor-for-free-with-fluent-forms-flu",
   "seoTitle": "Add a Newsletter Form in Elementor for Free",
   "metaDescription": "Learn how to add a free newsletter signup form in Elementor using Fluent Forms and connect it to FluentCRM, without needing Elementor Pro.",
-  "intro": "Collecting email subscribers directly on your Elementor pages doesn't require Elementor Pro if you use Fluent Forms alongside FluentCRM. This guide covers creating the form, embedding it inside Elementor, and connecting submissions to your CRM for follow-up.",
+  "intro": "Elementor Pro sells a Forms widget as one of its premium features, but you don't actually need it to put a working, CRM-connected signup form on an Elementor page. Fluent Forms builds the form for free, FluentCRM stores the subscribers, and Elementor's own free widget set is enough to embed the result and style it to match your page. This guide covers the plugin setup, building the form itself, wiring it to FluentCRM, dropping it into a container inside Elementor, and the specific fix for when the form embeds but doesn't actually appear on the front end.",
   "steps": [
-    {"heading": "Create the newsletter form in Fluent Forms", "body": "Use Fluent Forms' free builder to design a simple subscription form with the fields you want visitors to fill out."},
-    {"heading": "Embed the form inside Elementor", "body": "Add Fluent Forms' shortcode or widget into an Elementor page or section, no coding or premium widgets required."},
-    {"heading": "Connect Fluent Forms to FluentCRM", "body": "Link the form to FluentCRM so every new subscriber is automatically added to your email list for future campaigns."},
-    {"heading": "Style the form to match your page", "body": "Adjust the form's appearance within Elementor's editor so it fits naturally with the rest of your page design."},
-    {"heading": "Test the form before publishing", "body": "Submit a test entry to confirm subscribers land correctly in FluentCRM before making the page live."}
+    {
+      "heading": "Confirm all three plugins are installed and active",
+      "body": "This workflow depends on three separate plugins working together: Elementor for the page layout, Fluent Forms for the form itself, and FluentCRM for storing subscribers. Check Plugins in your WordPress admin and confirm all three show as active — it's easy to install Fluent Forms and forget FluentCRM, since Fluent Forms works standalone without it and won't complain about the missing connection until you go looking for the integration option.",
+      "image": { "file": "/screenshots/EPcMTIzfotQ/02.webp", "caption": "Elementor, Fluent Forms, and FluentCRM all active in the Plugins list — all three need to be installed for the embed-and-connect workflow to work end to end." }
+    },
+    {
+      "heading": "Build the newsletter form",
+      "body": "In Fluent Forms, click to create a new form and you'll get a choice between a blank form, a pre-made template, or a conversational form that asks one question at a time. For a straightforward newsletter signup, a blank form with just an email field (optionally a name field) is usually faster to configure than adapting a template built for something else. Give the form a clear internal name — you'll need to find it again in a dropdown list when you embed it in Elementor, and a vague name like \"Form 1\" gets confusing once you have several.",
+      "image": { "file": "/screenshots/EPcMTIzfotQ/03.webp", "caption": "Fluent Forms' Create A New Form screen — New Blank Form, Choose a Template, or Create Conversational Form. A blank form is the quickest route to a simple email signup." }
+    },
+    {
+      "heading": "Add a FluentCRM integration feed",
+      "body": "Open the form's settings and go to Configure Integrations, then add a new FluentCRM Integration Feed. Name the feed something recognizable, pick the FluentCRM list the subscriber should join, and map each form field to its FluentCRM counterpart — Email Address is required, while First Name, Last Name, and Full Name are optional but worth mapping if your form collects them. This mapping step is what actually moves a submission out of Fluent Forms' own entries table and into FluentCRM as a real contact; skipping it means the form works but nobody ends up on your list.",
+      "image": { "file": "/screenshots/EPcMTIzfotQ/04.webp", "caption": "Adding a FluentCRM Integration Feed to the form. The Email Address field mapping is required — First Name, Last Name, and Full Name are optional but useful for personalized emails later." }
+    },
+    {
+      "heading": "Embed the form in an Elementor container",
+      "body": "Open the page in Elementor and drag a Fluent Forms widget into the container where you want the signup form to appear. In the widget's settings, select the form you built by name from the dropdown — this is the moment a vague form name becomes a real problem, so double-check you're picking the right one if you've built more than one form. The form renders live in the editor immediately, letting you see the actual field and button styling before you publish.",
+      "image": { "file": "/screenshots/EPcMTIzfotQ/05.webp", "caption": "A Fluent Forms newsletter signup embedded inside an Elementor container, with the container's own layout settings — Content Width, Width — visible in the left panel." }
+    },
+    {
+      "heading": "Style the form to match the page",
+      "body": "Elementor's own container and widget styling controls the space around the form — background, padding, and alignment — while the form's own fields, colors, and button styling are set inside Fluent Forms itself, either in the form editor's Style tab or the widget's own settings panel. Keep the two separate in your head: resizing the container won't change how wide the email field looks if the field's own width setting is fixed, and changing Fluent Forms' theme won't fix a container that's too narrow around it. Adjust both and preview the page at desktop and mobile sizes before publishing."
+    },
+    {
+      "heading": "Fix a form that embeds but doesn't show",
+      "body": "If the widget is on the page in the editor but the form is blank or missing on the live site, caching is the most common cause — clear any caching plugin and your host's server-side cache, then reload the page in a private browser window. The next most common cause is the form actually being unpublished or deleted in Fluent Forms while the Elementor widget still references its old ID, which shows as an empty space where the form should be; re-selecting the form in the widget's dropdown resolves it. If neither fixes it, check the browser console for a JavaScript error, since a conflicting plugin script can occasionally block Fluent Forms' own scripts from loading."
+    }
   ],
   "faq": [
-    {"question": "Can I add this form without Elementor Pro?", "answer": "Yes, Fluent Forms integrates into Elementor's free version using its shortcode or widget, so Elementor Pro isn't required."},
-    {"question": "Is FluentCRM free to use?", "answer": "FluentCRM offers a free tier suitable for basic email list management and automation, alongside paid plans for advanced features."},
-    {"question": "Why isn't my newsletter form showing up in Elementor?", "answer": "This is usually caused by the shortcode not being pasted correctly or a caching issue — clearing cache and re-checking the shortcode placement often resolves it."},
-    {"question": "Can I customize the form's design in Elementor?", "answer": "Yes, once embedded, you can adjust spacing, colors, and layout around the form using Elementor's standard styling tools."}
+    {"question": "Can I add this form without Elementor Pro?", "answer": "Yes, Fluent Forms provides its own free Elementor widget that works in the free version of Elementor, so Elementor Pro's paid Forms widget isn't needed."},
+    {"question": "Is FluentCRM free to use?", "answer": "FluentCRM offers a free tier suitable for basic email list management and tagging, with paid plans unlocking advanced automation and reporting."},
+    {"question": "Why isn't my newsletter form showing up in Elementor?", "answer": "Usually a caching issue — clear your caching plugin and reload in a private window. If that doesn't fix it, the Elementor widget may still be pointing at a form that was renamed or deleted; re-select the form from the widget's dropdown."},
+    {"question": "Can I customize the form's design in Elementor?", "answer": "Yes — Elementor's container and widget settings control spacing and alignment around the form, while the fields, colors, and button styling are configured inside Fluent Forms itself."},
+    {"question": "Do I need to map every field to FluentCRM?", "answer": "No, only Email Address is required in the FluentCRM Integration Feed. Mapping First Name and Last Name is optional but lets you personalize future email campaigns."}
   ],
-  "generatedAt": "2026-07-24T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

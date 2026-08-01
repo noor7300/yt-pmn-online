@@ -1,20 +1,47 @@
 {
   "slug": "how-to-link-data-from-cells-in-different-sheets-in-smartsheet-easily-2026",
   "seoTitle": "Link Cell Data Between Sheets in Smartsheet",
-  "metaDescription": "Set up live cell links between Smartsheet sheets so master portfolios and summaries update automatically without manual copy-pasting.",
-  "intro": "Copy-pasting data between sheets breaks the moment the source changes. Smartsheet's cell linking feature keeps a live connection instead, so your summary or portfolio sheet updates automatically. This guide covers setting up that link and reading the visual indicators once it's active.",
+  "metaDescription": "Set up live cell links between Smartsheet sheets using Link from Cell in Other Sheet, so master portfolios update automatically without copy-pasting.",
+  "intro": "Copy-pasting data between sheets breaks the moment the source changes, leaving you with a summary that quietly goes stale. Smartsheet's cell linking feature keeps a live connection instead, pulling task names, dates, and completion percentages from a source sheet into a destination one so they update on their own. This guide covers preparing a destination sheet, opening the Link from Cell in Other Sheet wizard, and confirming the link actually took once you're back in your own grid.",
   "steps": [
-    { "heading": "Understand live links vs. copy-paste", "body": "A live cell link keeps data synced with its source, unlike a static copy-paste that never updates again." },
-    { "heading": "Start the link from your destination cell", "body": "Select the target cell and use the Link from Cell in Other Sheet feature to begin the connection." },
-    { "heading": "Select your source sheet", "body": "Navigate your workspace directory inside the link wizard to locate and choose the sheet you want to pull data from." },
-    { "heading": "Bulk-link a range of cells", "body": "Select multi-row data blocks or full status ranges to pull rolled-up metrics without breaking your layout." },
-    { "heading": "Read the link direction indicators", "body": "Look for the blue arrow icons that show whether a cell is receiving an inbound feed or sending an outbound one." }
+    {
+      "heading": "Understand what a live link actually does",
+      "body": "A standard copy-paste captures a snapshot: the data lands in your sheet and then sits there, disconnected from wherever it came from. A cell link is different, it keeps a running connection to the source cell, so if that source value changes later, the linked cell updates too, without you touching it again. That distinction matters most for portfolio or summary sheets that are supposed to reflect the current state of several project sheets at once."
+    },
+    {
+      "heading": "Prepare your destination sheet",
+      "body": "Set up the sheet that will receive the linked data, giving its Primary Column a clear label so it's obvious later what the pulled-in values represent. A short heading like the one shown here keeps the destination sheet self-explanatory even after you've forgotten the exact source it's pulling from.",
+      "image": { "file": "/screenshots/lM5PEU2cv6I/03.webp", "caption": "A destination sheet with its Primary Column labeled, ready to receive linked data from another sheet." }
+    },
+    {
+      "heading": "Open Link from Cell in Other Sheet",
+      "body": "Select the cell where you want the incoming data to land, then use the Link from Cell in Other Sheet feature to launch the wizard. It opens with a workspace directory on the left, listing every sheet you have access to, and a live preview of the currently selected source sheet on the right. In the example here, the source is a project schedule with columns for Task Name, % Complete, Start Date, End Date, Priority, and a Completion % field, with row numbers along the left edge for precise selection.",
+      "image": { "file": "/screenshots/lM5PEU2cv6I/04.webp", "caption": "The Link from Cell in Other Sheet wizard, with the source sheet's directory on the left and a live data preview, including task names and completion percentages, on the right." }
+    },
+    {
+      "heading": "Select your source cells and confirm",
+      "body": "Click the specific cell or drag across a range in the preview grid to choose exactly what feeds into your destination sheet. You can link a single value, like one task's completion percentage, or select a full column of task names to bulk-link an entire block at once, which is faster than repeating the wizard row by row when you're building out a summary sheet."
+    },
+    {
+      "heading": "Check the result in your destination sheet",
+      "body": "Back in your own sheet, the linked cells now display the pulled-in values, in this case a full list of task names from the source project schedule, each with a small link indicator next to it. That indicator is your visual confirmation the cell is live rather than static text, and it's what you'd look for later if you're auditing which fields on a sheet are actually connected versus manually typed.",
+      "image": { "file": "/screenshots/lM5PEU2cv6I/05.webp", "caption": "The destination sheet after linking, showing task names pulled in from the source schedule with link indicators next to each row." }
+    },
+    {
+      "heading": "Read the link direction indicators",
+      "body": "Smartsheet marks linked cells with directional arrow icons, distinguishing cells receiving an inbound feed from cells sending data out to another sheet. Getting comfortable reading these at a glance saves you from second-guessing whether a number on a dashboard sheet is the source of truth or just a mirror of one."
+    },
+    {
+      "heading": "Preserve links when you restructure",
+      "body": "Cell links can break if you delete the source row, rename the source sheet in a way that orphans the reference, or otherwise restructure columns without checking what's connected to them first. Before doing any major cleanup on a sheet you know feeds other sheets, it's worth a quick check of what's linked to it so you don't quietly break a portfolio dashboard three clicks away."
+    }
   ],
   "faq": [
-    { "question": "What's the difference between linking cells and copy-pasting?", "answer": "A cell link stays live and updates automatically when the source changes, while copy-pasting only captures a static snapshot." },
-    { "question": "Can I link a whole range of cells at once?", "answer": "Yes, you can bulk-select multi-row data blocks or status ranges to link them together in one step." },
-    { "question": "How do I tell if a cell is linked?", "answer": "Blue arrow icons indicate the link direction, showing whether the cell is receiving data or sending it elsewhere." },
-    { "question": "Will restructuring my columns break the link?", "answer": "It can, so it's best practice to preserve cell links carefully when renaming templates or archiving rows." }
+    { "question": "What's the difference between linking cells and copy-pasting?", "answer": "A cell link stays live and updates automatically when the source changes, while copy-pasting only captures a static snapshot at the moment you pasted it." },
+    { "question": "Can I link a whole range of cells at once?", "answer": "Yes, you can select or drag across multiple rows in the source preview to bulk-link a data block in one pass through the wizard." },
+    { "question": "How do I tell if a cell is linked?", "answer": "Linked cells display a small directional arrow icon showing whether the cell is receiving data from another sheet or sending it out." },
+    { "question": "Will restructuring my columns break the link?", "answer": "It can, especially if you delete the source row or rename the sheet, so it's best practice to check what's linked before making structural changes." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

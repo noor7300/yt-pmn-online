@@ -1,20 +1,48 @@
 {
   "slug": "how-to-transfer-domain-from-namecheap-to-squarespace-easily-2026",
   "seoTitle": "Transfer a Domain from Namecheap to Squarespace",
-  "metaDescription": "Move your domain fully into Squarespace for easier billing and management. Learn how to unlock it, get the EPP/Auth code, and complete the transfer.",
-  "intro": "Rather than just connecting a Namecheap domain to Squarespace via DNS, you can transfer it entirely into Squarespace for simpler billing and management. This guide covers unlocking the domain, getting the EPP/Auth code, and completing the transfer process.",
+  "metaDescription": "Move your domain fully into Squarespace for easier billing and management. Learn how to unlock it, request the Auth Code, and complete the transfer.",
+  "intro": "Rather than just pointing a Namecheap domain at Squarespace via DNS, you can transfer the registration itself into Squarespace so both your site and your domain are managed and billed in one place. The process runs through Namecheap's Sharing & Transfer tab, where the Auth Code that authorizes the move actually lives, and finishes inside Squarespace once that code is entered. This guide covers both sides, including the honest timeline you should expect.",
   "steps": [
-    { "heading": "Unlock your domain in Namecheap", "body": "Log in to Namecheap and disable the domain lock so it becomes eligible for transfer to another registrar." },
-    { "heading": "Locate and copy the EPP/Auth code", "body": "Retrieve the EPP or Auth code from Namecheap, which Squarespace will need to verify and authorize the transfer." },
-    { "heading": "Start the transfer inside Squarespace", "body": "In Squarespace, begin the domain transfer process and enter your domain name along with the EPP/Auth code." },
-    { "heading": "Complete the verification email step", "body": "Check your email for a transfer confirmation request and approve it to keep the process moving." },
-    { "heading": "Monitor the transfer until it completes", "body": "Domain transfers take some time to finalize, so check the status periodically until Squarespace confirms it's complete." }
+    {
+      "heading": "Open your domain's Sharing & Transfer tab",
+      "body": "In Namecheap, go to Domain List, click the domain you want to move, and open its Details page. Alongside Domain, Products, and Advanced DNS sits a Sharing & Transfer tab — this is specifically where outbound transfers to another registrar are managed, separate from the DNS settings you'd touch for a simple domain connection. Click into it to reach the transfer-out options for that domain.",
+      "image": { "file": "/screenshots/rtKaRBVwgQU/03.webp", "caption": "A domain's Details page in Namecheap, with Sharing & Transfer selected alongside Domain, Products, and Advanced DNS." }
+    },
+    {
+      "heading": "Unlock the domain",
+      "body": "Domains are locked by default to prevent unauthorized transfers, and Squarespace can't pull in a locked domain. On the Sharing & Transfer tab, find the domain lock toggle and switch it off. This alone doesn't start anything moving — it just removes the block so the transfer request Squarespace sends later won't be rejected outright."
+    },
+    {
+      "heading": "Request the Auth Code",
+      "body": "Still on that same tab, use the Auth Code button to open the Get Auth Code dialog. Namecheap asks why you're transferring out — a simple dropdown reason like Pricing — plus an optional comment, and a checkbox for follow-up contact. Submitting sends the code by email to the registrant address on file for the domain rather than displaying it on screen directly, which is a deliberate security step since this code is what authorizes moving the domain entirely.",
+      "image": { "file": "/screenshots/rtKaRBVwgQU/04.webp", "caption": "Namecheap's Get Auth Code dialog, asking the reason for transferring out before emailing the code to the registrant address." }
+    },
+    {
+      "heading": "Start the transfer from your Squarespace dashboard",
+      "body": "In Squarespace, go to Domains (or into the specific site's domain settings if you're attaching it to an existing site) and choose to transfer in a domain you already own. You'll be asked for the domain name and the Auth Code you just received by email. Your Squarespace Dashboard — which lists each site along with its trial or subscription status — is also where you'll confirm which site the domain should ultimately connect to once the transfer finishes.",
+      "image": { "file": "/screenshots/rtKaRBVwgQU/05.webp", "caption": "The Squarespace Dashboard, listing existing sites — the transfer needs to be tied to one of these once it completes." }
+    },
+    {
+      "heading": "Approve the verification email",
+      "body": "After submitting the Auth Code on the Squarespace side, ICANN rules require a confirmation email be sent to the registrant address, asking you to approve the transfer. This is separate from the Auth Code email — don't skip it thinking the process is already moving, since an unapproved transfer request will simply expire after several days without completing."
+    },
+    {
+      "heading": "Wait out the transfer window",
+      "body": "Domain transfers between registrars commonly take about five to seven days to finalize, even after everything on your end is submitted correctly, since the losing registrar (Namecheap) has a window to acknowledge or contest the request. During this period, avoid making further changes to the domain's lock status or contact details, as that can reset or complicate the transfer in progress."
+    },
+    {
+      "heading": "Confirm the domain lands in Squarespace",
+      "body": "Once complete, the domain shows up under Domains in your Squarespace account, connected to the site you specified. Your site itself shouldn't go offline during this process, since a registrar transfer changes who administers the domain rather than immediately altering where it points — but it's still worth checking that the site loads correctly on the domain once the transfer confirms, along with verifying SSL is active."
+    }
   ],
   "faq": [
-    { "question": "Why do I need to unlock my domain first?", "answer": "A locked domain can't be transferred to a new registrar, so unlocking it in Namecheap is a required first step." },
-    { "question": "What's the expected transfer timeline?", "answer": "Domain transfers commonly take about five to seven days, though the exact timing can vary by domain extension." },
-    { "question": "Do I need to cancel my Namecheap hosting separately?", "answer": "Domain transfer and hosting are usually separate, so if you have hosting elsewhere with Namecheap, that would need to be handled independently." },
-    { "question": "Will my site go offline during the transfer?", "answer": "Typically not, since domain transfers focus on registrar ownership rather than immediately changing where your site is hosted." }
+    { "question": "Why do I need to unlock my domain first?", "answer": "A locked domain can't be transferred to a new registrar, so switching off the domain lock toggle on the Sharing & Transfer tab is a required first step in Namecheap." },
+    { "question": "What's the expected transfer timeline?", "answer": "Domain transfers commonly take about five to seven days, though the exact timing can vary by domain extension and how quickly you approve the verification email." },
+    { "question": "Do I need to cancel my Namecheap hosting separately?", "answer": "Domain transfer and hosting are usually separate, so if you have hosting elsewhere with Namecheap, that would need to be handled independently of the domain move." },
+    { "question": "Will my site go offline during the transfer?", "answer": "Typically not, since domain transfers focus on registrar ownership rather than immediately changing where your site is hosted or how it resolves." },
+    { "question": "Where does Namecheap send my Auth Code?", "answer": "It's emailed to the registrant address on file for the domain rather than shown directly in the dashboard, as a security measure since the code authorizes the transfer." }
   ],
-  "generatedAt": "2026-07-24T00:18:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

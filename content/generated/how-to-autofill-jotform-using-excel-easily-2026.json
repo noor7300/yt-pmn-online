@@ -1,20 +1,43 @@
 {
   "slug": "how-to-autofill-jotform-using-excel-easily-2026",
   "seoTitle": "How to Autofill Jotform Fields Using Excel Data",
-  "metaDescription": "Learn how to use the Jotform Spreadsheet to Form widget in 2026 to pre-populate form fields from an Excel file using a unique access code.",
-  "intro": "Manually re-entering client details or order history into a form frustrates users and slows things down, but Jotform's Spreadsheet to Form widget can autofill fields from your existing Excel data. This guide covers preparing your spreadsheet with an access code column, uploading it to the widget, and mapping the columns to your form fields.",
+  "metaDescription": "Use Jotform's Spreadsheet to Form widget to pre-populate form fields from an Excel file with a unique access code, cutting manual data entry for users.",
+  "intro": "Asking a returning customer to retype their name, address, and order history into a form every single time is friction nobody needs, especially when that data already sits in a spreadsheet you maintain. Jotform's Spreadsheet to Form widget closes that gap by letting a form field autofill from an uploaded Excel file the moment a user enters a matching access code. This guide follows the real path through the Form Builder — opening the widgets panel, finding the widget by search, and what it takes to prepare the spreadsheet behind it.",
   "steps": [
-    { "heading": "Structure your Excel spreadsheet", "body": "Add a unique access code identifier column to your spreadsheet so each row can be matched cleanly to a form field lookup." },
-    { "heading": "Add the widget to your form", "body": "Open the widgets sidebar in your form builder and add the Spreadsheet to Form widget to your canvas." },
-    { "heading": "Upload your Excel file", "body": "Upload your prepared .xlsx file directly into the widget's configuration panel." },
-    { "heading": "Set the access code column and map fields", "body": "Set the primary access code column parameter, then map spreadsheet column headers to the corresponding form input fields." },
-    { "heading": "Customize and test the autofill flow", "body": "Adjust the access code input box and verification button design, then test the live autofill sequence on both desktop and mobile." }
+    {
+      "heading": "Open your form in the Form Builder",
+      "body": "Start from an existing form — in this walkthrough, a Product Order Form with Full Name and E-mail fields already laid out — and make sure you're on the BUILD tab rather than Settings or Publish. The Add Element control sits in the top-left corner of the canvas; that's the entry point for adding any new field or widget, including the one that handles autofill.",
+      "image": { "file": "/screenshots/2HOzQm-mb8M/04.webp", "caption": "The Form Builder's BUILD tab open on a Product Order Form, with Add Element in the top-left ready to bring in a new field or widget." }
+    },
+    {
+      "heading": "Search the Widgets tab for Spreadsheet to Form",
+      "body": "Clicking Add Element opens the Form Elements panel, split into Basic, Payments, and Widgets tabs. Switch to Widgets and type into the search box — searching \"spread\" surfaces Spreadsheet, Spreadsheet to Form, and Rss Reader as matches. Spreadsheet to Form is the one built specifically for this use case: it reads an uploaded file and uses it to populate other fields on the same form based on a lookup value.",
+      "image": { "file": "/screenshots/2HOzQm-mb8M/05.webp", "caption": "The Widgets tab searched for \"spread,\" showing Spreadsheet, Spreadsheet to Form, and Rss Reader as the matching results." }
+    },
+    {
+      "heading": "Prepare your Excel file with an access code column",
+      "body": "Before uploading anything, structure your spreadsheet so one column holds a unique identifier per row — an order number, a customer ID, a code you've already issued — since this is what a user will type in to trigger the lookup. Every other column becomes a candidate for autofilling a form field: name, address, phone number, order details, whatever your form needs pre-populated. A spreadsheet without a clean, unique key column won't map reliably, so get this structure right before uploading."
+    },
+    {
+      "heading": "Add the widget and upload the spreadsheet",
+      "body": "Clicking Spreadsheet to Form from the search results drops it onto your form canvas and opens its configuration panel. From there you upload the prepared .xlsx file directly — the widget reads the column headers from the file so you can reference them in the next step. Keep the file's header row clean and consistent, since those exact header labels are what you'll be mapping shortly."
+    },
+    {
+      "heading": "Set the access code column and map the rest",
+      "body": "In the widget's settings, designate which uploaded column is the access code — the lookup key — and then map the remaining spreadsheet columns to the corresponding fields already on your form, like matching an \"Email\" column header to the form's E-mail field. This mapping step is what actually connects a spreadsheet row to specific inputs on the page; get a mapping wrong and that field will either populate with the wrong data or stay empty."
+    },
+    {
+      "heading": "Customize the access code prompt and test it live",
+      "body": "The widget adds a front-end input box where users type their access code, along with a verification button — both are customizable, so you can adjust the label text and button styling to match your form's design rather than leaving Jotform's defaults. Once configured, preview the form and test the flow end to end: enter a code from your spreadsheet and confirm every mapped field populates correctly, then repeat the check on a mobile viewport, since form layouts often behave differently at narrow widths."
+    }
   ],
   "faq": [
-    { "question": "What file formats does the Spreadsheet to Form widget accept?", "answer": "The widget is built around Excel spreadsheet files, so preparing your data as a properly structured .xlsx file is the standard approach." },
-    { "question": "Can users autofill multiple fields with one access code?", "answer": "Yes, entering a single unique access code can populate several mapped fields at once, such as name, address, and order history." },
-    { "question": "Does this widget work on mobile forms?", "answer": "Yes, testing the live autofill sequence on both desktop and mobile is a recommended step to confirm it renders correctly everywhere." },
-    { "question": "What happens if a user enters an access code that isn't in the spreadsheet?", "answer": "The widget won't find a matching row, so the autofill fields simply won't populate, and the form typically remains fillable manually." }
+    { "question": "What file formats does the Spreadsheet to Form widget accept?", "answer": "The widget is built around Excel files, so preparing your data as a properly structured .xlsx file with clean column headers is the standard approach." },
+    { "question": "Can one access code fill in multiple fields at once?", "answer": "Yes. Once a spreadsheet column is mapped to a form field, entering the matching access code populates every mapped field from that row in one action." },
+    { "question": "Does this widget work on mobile forms?", "answer": "Yes, but test the live autofill flow on both desktop and mobile after setup, since layout and input behavior can differ at narrow widths." },
+    { "question": "What happens if a user enters an access code that isn't in the spreadsheet?", "answer": "The widget won't find a matching row, so the mapped fields won't populate — the form typically remains fillable manually in that case." },
+    { "question": "Where do I add the Spreadsheet to Form widget?", "answer": "Click Add Element in the Form Builder, switch to the Widgets tab, and search for \"spreadsheet\" — Spreadsheet to Form appears alongside related results." }
   ],
-  "generatedAt": "2026-07-24T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00Z",
+  "deep": true
 }

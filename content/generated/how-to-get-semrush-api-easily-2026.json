@@ -2,46 +2,47 @@
   "slug": "how-to-get-semrush-api-easily-2026",
   "seoTitle": "How to Get Semrush API Access and Generate Your Key",
   "metaDescription": "Learn how to get Semrush API access, which plans include API units, and how to generate your API key for keyword, traffic, and backlink data.",
-  "intro": "Pulling Semrush data programmatically opens the door to custom dashboards and automated reporting, but you need to know where API access lives and how it's billed. This guide explains which Semrush plans include API credits, how to generate your API key, and how usage limits work. It's written for developers and SEO professionals who want to move beyond the standard dashboard.",
+  "intro": "Pulling Semrush data programmatically opens the door to custom dashboards and automated reporting, but API access isn't bundled into every plan the way the dashboard tools are — it has its own subscription requirement and its own unit-based pricing. This guide covers confirming whether your plan qualifies, understanding the three-step path Semrush lays out for getting started, and finding the account screen where your actual API key and unit balance live.",
   "steps": [
     {
-      "heading": "Confirm your plan includes API access",
-      "body": "Check your Semrush subscription details to see whether API credits are included, since access typically depends on your plan tier."
+      "heading": "Search for Semrush and confirm the official site",
+      "body": "A plain search for \"semrush\" is the safest starting point — Google often surfaces extra context alongside the listing, including SEO Difficulty scores and quick actions to run an SEO report through tools like ChatGPT, Claude, Gemini, or Deepseek if you have an SEO browser extension installed. None of that is required for API access, but it's a reminder that the official semrush.com domain is where account and billing settings actually live, not a third-party tool.",
+      "image": { "file": "/screenshots/wXZmcUyYekE/02.webp", "caption": "A Google search for Semrush, with an SEO browser extension showing extra metrics and quick-report options alongside the listing." }
     },
     {
-      "heading": "Check your available API units",
-      "body": "Review how many API units your plan provides, as this determines how much data you can pull before hitting limits."
+      "heading": "Check your subscription for API access",
+      "body": "Open your account icon and go to Subscription Info to see your current plan's toolkit breakdown. API access is typically listed as a feature of higher tiers — in the SEO Toolkit comparison, it shows up under a Guru-level plan alongside things like Extended limits and Migration from third-party tools, while a lower Pro plan includes Position Tracking, Backlink Analysis, and Site Audit but not API access on its own. Confirm this against your specific plan before assuming you're covered.",
+      "image": { "file": "/screenshots/wXZmcUyYekE/03.webp", "caption": "The Subscription Info page comparing SEO Toolkit tiers, with API access listed among the higher-tier features." }
     },
     {
-      "heading": "Generate your API key",
-      "body": "Head to your Semrush account settings to locate and generate the API key you'll use to authenticate requests."
+      "heading": "Follow the official three-step path to API access",
+      "body": "Semrush lays this out plainly: upgrade to a Business-level subscription plan, purchase an API package sized to your needs, then get your API key. It's worth reading in this order because skipping straight to \"get a key\" without the right plan or a purchased unit package just leads to a key that can't actually pull data yet.",
+      "image": { "file": "/screenshots/wXZmcUyYekE/04.webp", "caption": "Semrush's own \"Start using Semrush API in just 3 steps\" guide — upgrade plan, purchase units, get your key." }
     },
     {
-      "heading": "Understand how API units and limits work",
-      "body": "Different types of requests consume different amounts of units, so review Semrush's documentation to plan your usage efficiently."
+      "heading": "Buy an API unit package sized to your usage",
+      "body": "Head to Subscription Info and open the API Units tab, where your current balance and available packages are listed together — options here typically range from a 2 million unit package up to 20 million, each with its own monthly cost. Different request types consume different amounts of units, so a rough estimate of your expected call volume before buying saves you from either running out mid-project or overpaying for headroom you won't use.",
+      "image": { "file": "/screenshots/wXZmcUyYekE/05.webp", "caption": "The API Units tab under Subscription Info, listing available unit packages and the account's API key section below." }
     },
     {
-      "heading": "Make a basic API request",
-      "body": "Use your API key to pull a simple dataset, like keyword or traffic data, to confirm everything is set up correctly before building out more complex integrations."
+      "heading": "Copy your API key",
+      "body": "Underneath the unit packages on that same API Units tab is the API key itself, partially masked with a Copy button next to it. This is the credential you'll pass with every request to authenticate against Semrush's Traffic Analytics, Keyword, and other APIs — treat it like a password, since anyone with the key can draw down your purchased units."
+    },
+    {
+      "heading": "Make a basic test request",
+      "body": "Before building anything complex, send one simple request — a keyword overview or domain summary call is a good first test — using your API key to confirm authentication works and units are deducting as expected. Semrush's documentation covers the exact endpoint structure and parameters for each report type once you're past this initial check."
+    },
+    {
+      "heading": "Monitor your remaining units",
+      "body": "Return to the API Units tab periodically to watch your balance, especially if you're running scheduled jobs rather than one-off pulls. Running out mid-cycle means requests start failing until you buy more units or your plan's allocation refreshes, so it's worth building a usage buffer into whatever you're automating rather than cutting it close to the limit."
     }
   ],
   "faq": [
-    {
-      "question": "Do all Semrush plans include API access?",
-      "answer": "No, API access and the number of included units typically vary by plan, so you'll want to confirm this with your specific subscription."
-    },
-    {
-      "question": "What can I do with the Semrush API?",
-      "answer": "The API lets you pull data like keyword research, traffic analytics, and backlink analysis programmatically for use in custom dashboards or reports."
-    },
-    {
-      "question": "What happens if I run out of API units?",
-      "answer": "Once you exhaust your available API units, you'll typically need to purchase additional units or wait for your plan's allocation to refresh."
-    },
-    {
-      "question": "Is coding experience required to use the Semrush API?",
-      "answer": "Yes, some technical or development knowledge is needed to send API requests and work with the returned data effectively."
-    }
+    { "question": "Do all Semrush plans include API access?", "answer": "No, API access and the number of included units typically vary by plan, so you'll want to confirm this with your specific subscription under Subscription Info." },
+    { "question": "What can I do with the Semrush API?", "answer": "The API lets you pull data like keyword research, traffic analytics, and backlink analysis programmatically for use in custom dashboards or reports." },
+    { "question": "What happens if I run out of API units?", "answer": "Once you exhaust your available API units, you'll typically need to purchase additional units from the API Units tab or wait for your plan's allocation to refresh." },
+    { "question": "Is coding experience required to use the Semrush API?", "answer": "Yes, some technical or development knowledge is needed to send API requests and work with the returned data effectively." }
   ],
-  "generatedAt": "2026-07-24T00:00:00.000Z"
+  "generatedAt": "2026-08-01T12:00:00Z",
+  "deep": true
 }

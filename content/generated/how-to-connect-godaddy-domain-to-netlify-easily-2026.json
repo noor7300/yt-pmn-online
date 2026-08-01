@@ -1,43 +1,44 @@
 {
   "slug": "how-to-connect-godaddy-domain-to-netlify-easily-2026",
-  "seoTitle": "How to Connect a GoDaddy Domain to Netlify Quickly",
-  "metaDescription": "Connect your GoDaddy domain to a Netlify site by updating the CNAME and A DNS records, verifying the connection, and fixing common domain errors.",
-  "intro": "If your domain lives at GoDaddy but your site is hosted on Netlify, connecting the two just takes a few DNS changes. This guide walks through adding your custom domain in Netlify, updating the CNAME and A records at GoDaddy, and verifying the connection is live. It works for any site type, whether it's built with plain HTML, React, or another static framework.",
+  "seoTitle": "How to Connect a GoDaddy Domain to Netlify (2026)",
+  "metaDescription": "Connect a GoDaddy domain to Netlify by adding it to Netlify DNS, updating the nameservers at GoDaddy, and waiting for the switch to activate.",
+  "intro": "If your domain is registered at GoDaddy and your site is deployed on Netlify, the cleanest way to connect them is to hand DNS management over to Netlify entirely, rather than editing individual records one at a time. Netlify's onboarding wizard walks you through choosing the domain, generating the DNS records it needs, and activating Netlify DNS — but the piece that actually makes it live happens back at GoDaddy, where you point the domain's nameservers at Netlify instead of GoDaddy's own. This guide follows that flow screen by screen: starting the setup in Netlify, finding the domain in your GoDaddy account, and switching its nameservers so the change can take effect.",
   "steps": [
     {
-      "heading": "Add your custom domain in Netlify",
-      "body": "Start by adding your GoDaddy domain as a custom domain inside your Netlify site settings."
+      "heading": "Start the domain setup inside Netlify",
+      "body": "From your Netlify team dashboard, open Domains and choose to add a domain to Netlify DNS. The wizard lays out three stages up front — Choose domain, Add DNS records, and Activate Netlify DNS — so you always know where you are in the process. Type the domain you registered at GoDaddy into the \"Domain or subdomain\" field and click Verify; Netlify checks that the domain exists and isn't already managed somewhere else before letting you continue.",
+      "image": { "file": "/screenshots/ZSYh3XScAV4/02.webp", "caption": "Netlify's \"Add a domain to Netlify DNS\" wizard, showing the three-stage process and the field for entering your existing domain." }
     },
     {
-      "heading": "Update DNS records at GoDaddy",
-      "body": "Log into GoDaddy and update the CNAME and A records so they point to Netlify's hosting infrastructure."
+      "heading": "Find the domain in your GoDaddy account",
+      "body": "Switch over to GoDaddy and open your account overview, where each domain and website you own is listed as its own card along with quick DNS and Manage buttons. Locate the domain you just added in Netlify — in a multi-domain account it's easy to click into the wrong one, so match the exact domain name before continuing. Clicking DNS on that domain's card is what takes you into the settings you actually need to change.",
+      "image": { "file": "/screenshots/ZSYh3XScAV4/03.webp", "caption": "The GoDaddy account overview, listing each domain as its own card with DNS and Manage buttons." }
     },
     {
-      "heading": "Verify the connection in Netlify",
-      "body": "Return to Netlify and check the domain's verification status to confirm the DNS changes have been recognized."
+      "heading": "Switch the domain's nameservers to Netlify",
+      "body": "Inside DNS Management, go to the Nameservers tab rather than DNS Records — this is the key difference from editing individual CNAME and A records yourself. Choose to use custom nameservers and enter the ones Netlify provided during setup. Once you save the change, GoDaddy shows a status message confirming it's updating your nameservers, since this isn't an instant swap; GoDaddy has to register the new nameserver assignment with the domain's registry record before Netlify can start answering DNS queries for it.",
+      "image": { "file": "/screenshots/ZSYh3XScAV4/05.webp", "caption": "GoDaddy's Nameservers tab confirming the update is in progress after switching to Netlify's nameservers." }
     },
     {
-      "heading": "Fix domain not working or not verified errors",
-      "body": "If verification fails or the domain isn't loading, recheck the DNS records for typos or propagation delays before trying again."
+      "heading": "Wait out the propagation window",
+      "body": "Nameserver changes propagate more slowly than a single DNS record edit, because every resolver on the internet has to notice the domain now points to a different set of nameservers entirely, not just a changed value. This can take anywhere from a few minutes to several hours depending on caching, so refreshing GoDaddy's status message repeatedly won't speed it up — it's genuinely a waiting game at this stage."
+    },
+    {
+      "heading": "Activate Netlify DNS and confirm your site is live",
+      "body": "Back in Netlify, the wizard's third stage — Activate Netlify DNS — becomes available once it detects the nameservers have switched over. Netlify then provisions DNS records and SSL certificates automatically, including for any subdomains, so you don't need to add a certificate step separately. Once activation completes, load your domain in a browser to confirm it's serving your Netlify site rather than a GoDaddy parking page."
+    },
+    {
+      "heading": "Troubleshoot a domain that still isn't working",
+      "body": "If the domain shows as unverified in Netlify well after you'd expect propagation to finish, go back to GoDaddy's Nameservers tab and confirm the values actually saved — a page refresh right after saving can make it look like nothing changed even though it did. Also check that you didn't leave the domain on GoDaddy's default nameservers by mistake, since choosing custom nameservers and then not saving is a common way this step silently fails."
     }
   ],
   "faq": [
-    {
-      "question": "Do I need to change my domain registrar to use Netlify?",
-      "answer": "No, you can keep your domain registered at GoDaddy and just update its DNS records to point to Netlify."
-    },
-    {
-      "question": "How long does it take for DNS changes to work?",
-      "answer": "DNS changes can take some time to propagate, which is a common reason a domain shows as not working right after updating records."
-    },
-    {
-      "question": "What DNS records do I need to update?",
-      "answer": "You'll typically update the CNAME and A records at GoDaddy so they point to Netlify's hosting."
-    },
-    {
-      "question": "Does this work for React or other static site frameworks?",
-      "answer": "Yes, the same domain connection process works for HTML, React, or any static framework hosted on Netlify."
-    }
+    { "question": "Do I need to change my domain registrar to use Netlify?", "answer": "No — you can keep the domain registered at GoDaddy and simply point its nameservers at Netlify, which is what lets Netlify manage DNS for the domain without transferring the registration itself." },
+    { "question": "How long does it take for the nameserver change to work?", "answer": "It varies, from a few minutes to several hours, because a nameserver change has to propagate across every DNS resolver that has the domain cached, not just update one record." },
+    { "question": "What DNS records do I need to update at GoDaddy?", "answer": "With the Netlify DNS approach, you don't edit individual CNAME or A records at GoDaddy at all — you switch the domain's Nameservers tab to Netlify's nameservers, and Netlify provisions the actual DNS records on its side." },
+    { "question": "Does this work for React or other static site frameworks?", "answer": "Yes — the domain connection process is the same regardless of what the site is built with, since it happens at the DNS layer, above whatever framework generated the deployed site." },
+    { "question": "Why does my domain still show a GoDaddy parking page after I switched nameservers?", "answer": "The switch likely hasn't propagated yet, or the nameserver change didn't actually save — recheck the Nameservers tab in GoDaddy to confirm it lists Netlify's nameservers before assuming something else is wrong." }
   ],
-  "generatedAt": "2026-07-21T05:37:22Z"
+  "generatedAt": "2026-08-01T00:00:00Z",
+  "deep": true
 }

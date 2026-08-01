@@ -2,33 +2,39 @@
   "slug": "how-to-recover-deleted-user-account-in-google-workspace-easily-2026",
   "seoTitle": "How to Recover a Deleted User in Google Workspace",
   "metaDescription": "Learn how Google Workspace admins can recover a deleted user account and its data, and how long you have to act before it's gone for good.",
-  "intro": "Accidentally deleting a user account can feel like a crisis, especially if it happened before you had a chance to back up their data. This guide walks through how Google Workspace admins can recover a deleted account and restore access.",
+  "intro": "Accidentally deleting a user account can feel like a crisis, especially if it happened before anyone thought to back up their data. Google Workspace doesn't erase a deleted account the instant you click delete — it holds it in a recovery state for a limited window, and a super admin can pull it back from the same Admin Console screen used to manage every other user. This guide covers where that recovery list actually lives, what the countdown means in practice, and the cleanup steps worth doing once the account is back.",
   "steps": [
     {
       "heading": "Act quickly after deletion",
-      "body": "Google Workspace only allows recovery of a deleted user within a limited window, so the sooner you start the process the better your chances of getting everything back."
+      "body": "Google Workspace only allows recovery of a deleted user within a limited window, so the sooner you start the process the better your chances of getting everything back intact. The clock starts the moment the account is deleted, not when someone notices it's missing, so if a user reports being locked out unexpectedly, checking the deleted-users list should be one of the first things you do rather than a last resort."
     },
     {
-      "heading": "Open the Admin Console's deleted users list",
-      "body": "Super admins can find recently deleted accounts in a dedicated section of the Admin Console rather than the regular Users list."
+      "heading": "Open the Admin Console dashboard",
+      "body": "Sign in with a super admin account and land on the Admin Console home screen, where the \"Manage Workspace\" section gives you shortcut cards for Users, Billing, Groups, and Support. The Users card itself has quick links to Add a user, Delete a user, and Reset password, but recovering a deleted account isn't one of the shortcuts here — you have to go into the full Users list and filter for it, which is the next step.",
+      "image": { "file": "/screenshots/shfJ9m7xn_k/04.webp", "caption": "The Admin Console home screen, with the Users card offering shortcuts to add, delete, or reset a user's password." }
+    },
+    {
+      "heading": "Filter the Users list for recently deleted accounts",
+      "body": "From Directory → Users, apply the \"Recently deleted\" filter and the list changes to show only accounts in the recovery window, each with a \"Days to deletion\" column counting down how much time is left before that account is gone for good. This countdown is the single most important number on the whole page — an account with a handful of days left needs immediate action, while one that just entered the list gives you more breathing room to confirm with the user before restoring it.",
+      "image": { "file": "/screenshots/shfJ9m7xn_k/05.webp", "caption": "The Users list filtered to \"Recently deleted,\" showing each account's email address alongside how many days are left to recover it." }
     },
     {
       "heading": "Restore the account",
-      "body": "Select the deleted user and choose the restore option, which brings back the account along with associated data where still available."
+      "body": "Click into the deleted account from that filtered list and choose the restore option. Google Workspace brings the account itself back along with its associated data — Gmail, Drive, and Calendar content — as long as none of it has already been purged by the recovery deadline or a separate retention policy. The account typically comes back with the same email address and settings it had before deletion, which matters if other services or shared documents were referencing that address."
     },
     {
       "heading": "Verify data and access",
-      "body": "After restoring, check that Gmail, Drive, and Calendar data are intact and that the user can log back in normally."
+      "body": "After restoring, don't just assume everything reconnected — check that Gmail, Drive, and Calendar data are actually intact and that the user can sign back in normally. It's worth having the user themselves confirm they can see their old emails and files, since some group memberships, shared drive access, or delegated permissions occasionally need to be reattached manually even after a successful restore."
     },
     {
       "heading": "Update passwords and permissions",
-      "body": "As a security step, reset the recovered account's password and review its group memberships and permissions before handing it back to the user."
+      "body": "As a final security step, reset the recovered account's password rather than leaving whatever it was before deletion, since you don't know why the account was deleted in the first place or whether the old password was compromised. Review the account's group memberships, organizational unit, and any admin roles it held before handing it back, so the user returns to exactly the access they're supposed to have — no more, no less."
     }
   ],
   "faq": [
     {
       "question": "How long do I have to recover a deleted Google Workspace user?",
-      "answer": "Google Workspace generally gives admins about 20 days after deletion to restore an account, though this window can vary by plan."
+      "answer": "Google Workspace generally gives admins about 20 days after deletion to restore an account, and the Recently Deleted filter shows the exact days remaining for each one so you're never guessing."
     },
     {
       "question": "Will all the user's emails and files come back after recovery?",
@@ -36,12 +42,13 @@
     },
     {
       "question": "Can a regular user recover their own deleted account?",
-      "answer": "No, account recovery for deleted users has to be initiated by a super admin through the Admin Console."
+      "answer": "No, account recovery for deleted users has to be initiated by a super admin through the Admin Console's Users list, not by the affected user themselves."
     },
     {
       "question": "What happens if I don't recover the account in time?",
-      "answer": "Once the recovery window closes, the account and its data are permanently removed and cannot be restored."
+      "answer": "Once the recovery window closes, the account and its data are permanently removed and cannot be restored, which is why the days-remaining countdown is worth checking regularly."
     }
   ],
-  "generatedAt": "2026-07-24T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

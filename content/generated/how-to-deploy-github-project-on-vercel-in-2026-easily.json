@@ -2,19 +2,59 @@
   "slug": "how-to-deploy-github-project-on-vercel-in-2026-easily",
   "seoTitle": "How to Deploy a GitHub Project on Vercel for Free Hosting",
   "metaDescription": "Follow this step-by-step guide to deploy a GitHub project on Vercel for free, from uploading files to GitHub through to a live, hosted site.",
-  "intro": "Vercel makes it possible to take a project sitting in a GitHub repository and turn it into a live, hosted website in just a few clicks, with no backend required. This guide walks through uploading a project to GitHub, connecting it to Vercel, and configuring the deployment settings, using a simple to-do list app as the example. It applies just as well to React apps, Next.js projects, or any static site you want hosted for free.",
+  "intro": "Vercel makes it possible to take a project sitting in a GitHub repository and turn it into a live, hosted website in just a few clicks, with no backend required. This guide walks through uploading a project to GitHub, connecting it to Vercel, and configuring the deployment settings, using a simple to-do list app as the example. It applies just as well to React apps, Next.js projects, or any static site you want hosted for free, and by the end you'll have both a live URL and a dashboard for managing future deploys.",
   "steps": [
-    { "heading": "Upload your project to GitHub", "body": "Create a new GitHub repository, then upload your project files, such as an index.html file, and commit the changes." },
-    { "heading": "Connect GitHub to Vercel", "body": "Go to Vercel, start deploying, and continue with GitHub to authenticate and link your GitHub account." },
-    { "heading": "Import your repository", "body": "Choose to grant Vercel access to specific repositories, select the one you just created, and install the connection." },
-    { "heading": "Configure your project settings", "body": "Set the project name and choose the correct framework preset, such as Other for a plain HTML project, before clicking Deploy." },
-    { "heading": "View and manage your deployed site", "body": "Once deployment finishes, visit your live project URL, and use the Vercel dashboard to manage logs, domains, and future deployments." }
+    {
+      "heading": "Upload your project to GitHub",
+      "body": "Before Vercel enters the picture, your code needs to live in a GitHub repository. Create a new repo, name it something descriptive like \"to-do,\" and use the Quick Setup screen's \"Upload files\" option to add your project directly from your file manager rather than dragging and dropping — for a simple static project this can be as small as a single index.html file. Commit the changes, and your code is now live on GitHub and ready to be connected to a hosting platform."
+    },
+    {
+      "heading": "Start deploying from Vercel",
+      "body": "Head to vercel.com, a platform widely used for free hosting of GitHub projects, especially for front-end developers and static or JAMstack apps. Click Start Deploying from the homepage, then continue with GitHub to authenticate — if you're already signed into GitHub in another tab, Vercel typically detects and links the account automatically without asking you to log in twice.",
+      "image": { "file": "/screenshots/NWl9w1JHOx8/01.webp", "caption": "Vercel's homepage, with the Start Deploying button that kicks off the GitHub authentication and import flow." }
+    },
+    {
+      "heading": "Import your repository and grant access",
+      "body": "After authenticating, click Import Git Repository. Vercel gives you a choice between granting access to all of your GitHub repositories or just specific ones — selecting only the specific repository you're deploying is the safer option, since it means Vercel never sees the rest of your GitHub account. Select the repo (to-do in this example) and click Install to finish linking it."
+    },
+    {
+      "heading": "Configure the project and deploy",
+      "body": "Vercel's New Project screen shows exactly what it's importing — the repository name and branch (pmnonline/to-do on main, for instance) — plus a form for the Vercel Team, Project Name, Framework Preset, and Root Directory. For a plain HTML project with no framework, set the Framework Preset to \"Other\" rather than guessing at a specific framework; Build and Output Settings and Environment Variables stay collapsed and can be left alone for a simple static site. Click Deploy once everything looks right.",
+      "image": { "file": "/screenshots/NWl9w1JHOx8/03.webp", "caption": "The New Project screen, importing from GitHub with the project name, Framework Preset set to Other, and Root Directory left at the default." }
+    },
+    {
+      "heading": "Confirm the deployment finished",
+      "body": "When the build completes, Vercel shows a Next Steps panel with shortcuts for what to do now that the site is live: push a new branch for Instant Previews, add a custom domain, or enable Speed Insights to track how real users experience the site over time. None of these are required to have a working deployment — they're the next layer of polish once the basic hosting is confirmed working. Click Continue to Dashboard when you're ready to move on.",
+      "image": { "file": "/screenshots/NWl9w1JHOx8/04.webp", "caption": "The post-deployment Next Steps screen, offering Instant Previews, Add Domain, and Enable Speed Insights before continuing to the dashboard." }
+    },
+    {
+      "heading": "View and manage your deployed site",
+      "body": "The Vercel dashboard's Production Deployment view is where everything about the live site comes together: the generated deployment URL, any custom domains attached, the current status (Ready, in this case), who deployed it and when, and which commit it was built from. From here you can also open Build Logs and Runtime Logs, or use Instant Rollback if a future deploy breaks something and you need to revert to this working version quickly.",
+      "image": { "file": "/screenshots/NWl9w1JHOx8/05.webp", "caption": "The Vercel dashboard's Production Deployment page, showing the live domain, deployment status, and the commit it was built from." }
+    },
+    {
+      "heading": "Let future pushes redeploy automatically",
+      "body": "The real payoff of connecting GitHub to Vercel rather than uploading files manually is that any future push to the connected branch triggers an automatic redeployment — you edit code locally, push to GitHub, and the live site updates on its own within a minute or two. That makes this setup genuinely suited to ongoing projects, not just a one-time publish, whether it's a static HTML site, a React app, or a full Next.js project."
+    }
   ],
   "faq": [
-    { "question": "Is deploying a GitHub project on Vercel really free?", "answer": "Yes, Vercel offers free hosting for personal and small projects deployed directly from GitHub." },
-    { "question": "Does Vercel automatically update my site when I push new code?", "answer": "Yes, once connected, any push to your GitHub repository triggers an automatic redeployment on Vercel." },
-    { "question": "Can I deploy a React or Next.js project the same way?", "answer": "Yes, the same GitHub-to-Vercel connection process works for React, Next.js, and other front-end frameworks, just with a different framework preset selected." },
-    { "question": "Can I add a custom domain to my Vercel deployment?", "answer": "Yes, custom domain settings are available from the Vercel project dashboard after your site is deployed." }
+    {
+      "question": "Is deploying a GitHub project on Vercel really free?",
+      "answer": "Yes, Vercel offers free hosting for personal and small projects deployed directly from GitHub, under its Hobby plan."
+    },
+    {
+      "question": "Does Vercel automatically update my site when I push new code?",
+      "answer": "Yes, once connected, any push to your GitHub repository triggers an automatic redeployment on Vercel, which is what makes the GitHub integration more useful than a manual upload."
+    },
+    {
+      "question": "Can I deploy a React or Next.js project the same way?",
+      "answer": "Yes, the same GitHub-to-Vercel connection process works for React, Next.js, and other front-end frameworks — just choose the matching Framework Preset instead of \"Other\" during setup."
+    },
+    {
+      "question": "Can I add a custom domain to my Vercel deployment?",
+      "answer": "Yes, custom domain settings are available from the Vercel project dashboard's Domains tab, and Vercel also surfaces an Add Domain shortcut right after your first deployment finishes."
+    }
   ],
-  "generatedAt": "2026-07-21T05:37:24Z"
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "deep": true
 }

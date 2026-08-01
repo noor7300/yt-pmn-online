@@ -1,10 +1,79 @@
 # Deep-article log (Phase 3)
 
-246 of 315 flagship articles rewritten with curated inline images.
+315 of 315 flagship articles rewritten with curated inline images.
 Regenerate with `npx tsx scripts/build-deep-log.ts`.
 
 | Title | Category | Images | Words | Rewritten |
 | --- | --- | --- | --- | --- |
+| [How to Add a Hyperlink in Jotform Easily 2026](https://easytechtuts.shop/tutorials/jotform/how-to-add-a-hyperlink-in-jotform-easily-2026) | Jotform | 3 | 514 | 2026-08-01 |
+| [How to Add Dynamic Dropdown to Jotform Easily 2026](https://easytechtuts.shop/tutorials/jotform/how-to-add-dynamic-dropdown-to-jotform-easily-2026) | Jotform | 3 | 640 | 2026-08-01 |
+| [How To Buy a Hostinger Domain, Register Hostinger Domain with Cheap Prices & Coupons Easily 2026](https://easytechtuts.shop/tutorials/hostinger/how-to-buy-a-hostinger-domain-register-hostinger-domain-with-cheap-prices-coupon) | Hostinger | 3 | 450 | 2026-08-01 |
+| [How to Check Keyword Ranking in Semrush Easily 2026](https://easytechtuts.shop/tutorials/semrush/how-to-check-keyword-ranking-in-semrush-easily-2026) | Semrush | 3 | 519 | 2026-08-01 |
+| [How to Connect Hostinger Domain to Shopify Easily 2026](https://easytechtuts.shop/tutorials/hostinger/how-to-connect-hostinger-domain-to-shopify-easily-2026) | Hostinger | 3 | 519 | 2026-08-01 |
+| [How to Get Semrush API Easily 2026](https://easytechtuts.shop/tutorials/semrush/how-to-get-semrush-api-easily-2026) | Semrush | 4 | 530 | 2026-08-01 |
+| [How to Get Semrush Pro for Free Easily 2026](https://easytechtuts.shop/tutorials/semrush/how-to-get-semrush-pro-for-free-easily-2026) | Semrush | 3 | 591 | 2026-08-01 |
+| [How to Remove Jotform Branding From a Website Easily 2026](https://easytechtuts.shop/tutorials/jotform/how-to-remove-jotform-branding-from-a-website-easily-2026) | Jotform | 2 | 458 | 2026-08-01 |
+| [How to Add 3 Indicators in TradingView Easily 2026](https://easytechtuts.shop/tutorials/tradingview/how-to-add-3-indicators-in-tradingview-easily-2026) | TradingView | 3 | 531 | 2026-08-01 |
+| [How to Add Dow Jones in TradingView Easily 2026](https://easytechtuts.shop/tutorials/tradingview/how-to-add-dow-jones-in-tradingview-easily-2026) | TradingView | 4 | 556 | 2026-08-01 |
+| [How to Find Competitors Backlinks in Semrush Easily 2026](https://easytechtuts.shop/tutorials/semrush/how-to-find-competitors-backlinks-in-semrush-easily-2026) | Semrush | 3 | 656 | 2026-08-01 |
+| [How to Fix Wordpress SSL Error: "This Site Can’t Provide a Secure Connection" 2026](https://easytechtuts.shop/tutorials/wordpress/how-to-fix-wordpress-ssl-error-this-site-can-t-provide-a-secure-connection-2026) | WordPress | 0 | 668 | 2026-08-01 |
+| [How to Hide Indicator Name in Tradingview Easily 2026](https://easytechtuts.shop/tutorials/tradingview/how-to-hide-indicator-name-in-tradingview-easily-2026) | TradingView | 3 | 461 | 2026-08-01 |
+| [How to Reset TradingView Account Easily 2026](https://easytechtuts.shop/tutorials/tradingview/how-to-reset-tradingview-account-easily-2026) | TradingView | 3 | 574 | 2026-08-01 |
+| [How to Set 20 EMA in TradingView Easily 2026](https://easytechtuts.shop/tutorials/tradingview/how-to-set-20-ema-in-tradingview-easily-2026) | TradingView | 2 | 519 | 2026-08-01 |
+| [How To Transfer From Binance To PayPal, Send Money, Crypto, Bitcoin, USDT, FIAT for US, Non-USA 2026](https://easytechtuts.shop/tutorials/binance/how-to-transfer-from-binance-to-paypal-send-money-crypto-bitcoin-usdt-fiat-for-u) | Binance | 3 | 559 | 2026-08-01 |
+| [How can I Block a Buyer on ebay on site, app, from purchasing 2026 Easily](https://easytechtuts.shop/tutorials/ebay/how-can-i-block-a-buyer-on-ebay-on-site-app-from-purchasing-2026-easily) | eBay | 1 | 480 | 2026-08-01 |
+| [How to Add Calendar to Notion, Embed on Page, Dashboard, Database Easily 2026](https://easytechtuts.shop/tutorials/notion/how-to-add-calendar-to-notion-embed-on-page-dashboard-database-easily-2026) | Notion | 3 | 544 | 2026-08-01 |
+| [How to Add Google Calendar to Notion, Link, Import & Embed in Page, Dashboard Database Easily 2026](https://easytechtuts.shop/tutorials/notion/how-to-add-google-calendar-to-notion-link-import-embed-in-page-dashboard-databas) | Notion | 3 | 534 | 2026-08-01 |
+| [How to Associate Google Account With a Device in Laptop, PC, Android, Windows, iPhone, Macbook 2026](https://easytechtuts.shop/tutorials/google-workspace/how-to-associate-google-account-with-a-device-in-laptop-pc-android-windows-iphon) | Google Workspace | 2 | 603 | 2026-08-01 |
+| [How to Autofill Jotform Using Excel Easily 2026](https://easytechtuts.shop/tutorials/jotform/how-to-autofill-jotform-using-excel-easily-2026) | Jotform | 2 | 533 | 2026-08-01 |
+| [How To Automate Stripe Payment Notifications With Zapier Easily 2026](https://easytechtuts.shop/tutorials/stripe/how-to-automate-stripe-payment-notifications-with-zapier-easily-2026) | Stripe | 3 | 587 | 2026-08-01 |
+| [How to Cancel & Delete Google Workspace Subscription & Account in 2026 Without Charges & Losing Data](https://easytechtuts.shop/tutorials/google-workspace/how-to-cancel-delete-google-workspace-subscription-account-in-2026-without-charg) | Google Workspace | 2 | 551 | 2026-08-01 |
+| [How to Cancel Domain and Get Refund From Godaddy 2026 Easily](https://easytechtuts.shop/tutorials/godaddy/how-to-cancel-domain-and-get-refund-from-godaddy-2026-easily) | GoDaddy | 3 | 609 | 2026-08-01 |
+| [How to Cancel Hostinger Vps Subscription, Delete Cloud & Shared hosting Easily 2026](https://easytechtuts.shop/tutorials/hostinger/how-to-cancel-hostinger-vps-subscription-delete-cloud-shared-hosting-easily-2026) | Hostinger | 2 | 564 | 2026-08-01 |
+| [How to Cancel Offer on Ebay, Delete the bidding offer or Retract it Easily 2026](https://easytechtuts.shop/tutorials/ebay/how-to-cancel-offer-on-ebay-delete-the-bidding-offer-or-retract-it-easily-2026) | eBay | 4 | 481 | 2026-08-01 |
+| [How to Change Country on Ebay or Change Region in Shipping, Ship from, Return Address 2026 Easily](https://easytechtuts.shop/tutorials/ebay/how-to-change-country-on-ebay-or-change-region-in-shipping-ship-from-return-addr) | eBay | 4 | 578 | 2026-08-01 |
+| [How To Connect Asana to Notion Easily 2026](https://easytechtuts.shop/tutorials/asana/how-to-connect-asana-to-notion-easily-2026) | Asana | 3 | 573 | 2026-08-01 |
+| [How to Connect Godaddy Domain to Gohighlevel 2026 Easily](https://easytechtuts.shop/tutorials/godaddy/how-to-connect-godaddy-domain-to-gohighlevel-2026-easily) | GoDaddy | 4 | 694 | 2026-08-01 |
+| [How to Connect Godaddy Domain to Netlify Easily 2026](https://easytechtuts.shop/tutorials/godaddy/how-to-connect-godaddy-domain-to-netlify-easily-2026) | GoDaddy | 3 | 558 | 2026-08-01 |
+| [How to Connect WordPress to Github Easily 2026](https://easytechtuts.shop/tutorials/wordpress/how-to-connect-wordpress-to-github-easily-2026) | WordPress | 3 | 776 | 2026-08-01 |
+| [How to Contact Stripe Support by Email, Live Chat Easily 2026](https://easytechtuts.shop/tutorials/stripe/how-to-contact-stripe-support-by-email-live-chat-easily-2026) | Stripe | 3 | 541 | 2026-08-01 |
+| [How To Create Asana Task From Email Easily 2026](https://easytechtuts.shop/tutorials/asana/how-to-create-asana-task-from-email-easily-2026) | Asana | 1 | 532 | 2026-08-01 |
+| [How to Do a Subitem Rollup in Monday.com Easily 2026](https://easytechtuts.shop/tutorials/monday/how-to-do-a-subitem-rollup-in-monday-com-easily-2026) | Monday.com | 4 | 607 | 2026-08-01 |
+| [How to Generate Reports in Monday.com Easily 2026](https://easytechtuts.shop/tutorials/monday/how-to-generate-reports-in-monday-com-easily-2026) | Monday.com | 4 | 634 | 2026-08-01 |
+| [How to Get Monday.com API Key Easily 2026](https://easytechtuts.shop/tutorials/monday/how-to-get-monday-com-api-key-easily-2026) | Monday.com | 2 | 643 | 2026-08-01 |
+| [How To Master Subitems in Monday.com Easily 2026](https://easytechtuts.shop/tutorials/monday/how-to-master-subitems-in-monday-com-easily-2026) | Monday.com | 3 | 563 | 2026-08-01 |
+| [How to Put Image in Table in Notion, Add Image to Table Database Easily 2025](https://easytechtuts.shop/tutorials/notion/how-to-put-image-in-table-in-notion-add-image-to-table-database-easily-2025) | Notion | 2 | 504 | 2026-08-01 |
+| [How to Renew Hostinger Domain, Price of Renewal Expired Domains 2026 Easily](https://easytechtuts.shop/tutorials/hostinger/how-to-renew-hostinger-domain-price-of-renewal-expired-domains-2026-easily) | Hostinger | 4 | 610 | 2026-08-01 |
+| [How to Upgrade Hostinger Plan Easily & Adjust Paid Balance in New Plan Easily 2026](https://easytechtuts.shop/tutorials/hostinger/how-to-upgrade-hostinger-plan-easily-adjust-paid-balance-in-new-plan-easily-2026) | Hostinger | 3 | 553 | 2026-08-01 |
+| [What Happens When You Block a Buyer on eBay & Can You Block Buyers on eBay? ANSWERED 2026](https://easytechtuts.shop/tutorials/ebay/what-happens-when-you-block-a-buyer-on-ebay-can-you-block-buyers-on-ebay-answere) | eBay | 3 | 637 | 2026-08-01 |
+| [(2026 Update) How to Delete Namecheap Account, Permanently Delete & Cancel it Easily](https://easytechtuts.shop/tutorials/namecheap/2026-update-how-to-delete-namecheap-account-permanently-delete-cancel-it-easily) | Namecheap | 2 | 503 | 2026-08-01 |
+| [Can Smartsheet Send Automated Emails Easily 2026](https://easytechtuts.shop/tutorials/smartsheet/can-smartsheet-send-automated-emails-easily-2026) | Smartsheet | 4 | 531 | 2026-08-01 |
+| [Fluent Forms & Fluent CRM Tutorial for How to Add Subscribe Newsletter & Signup Form for free in WP](https://easytechtuts.shop/tutorials/wordpress/fluent-forms-fluent-crm-tutorial-for-how-to-add-subscribe-newsletter-signup-form) | WordPress | 4 | 652 | 2026-08-01 |
+| [How to Add Bulk Users in Google Workspace 2026 Easily](https://easytechtuts.shop/tutorials/google-workspace/how-to-add-bulk-users-in-google-workspace-2026-easily) | Google Workspace | 3 | 585 | 2026-08-01 |
+| [How to Add Google Maps in Elementor, Integrate Google Maps API Easily 2026](https://easytechtuts.shop/tutorials/elementor/how-to-add-google-maps-in-elementor-integrate-google-maps-api-easily-2026) | Elementor | 3 | 616 | 2026-08-01 |
+| [How to Add Grammarly to Google Docs Easily 2026](https://easytechtuts.shop/tutorials/grammarly/how-to-add-grammarly-to-google-docs-easily-2026-abZ7yv) | Grammarly | 3 | 513 | 2026-08-01 |
+| [How To Add Subscribe Newsletter Form In Elementor for Free with Fluent Forms & FluentCRM 2026](https://easytechtuts.shop/tutorials/elementor/how-to-add-subscribe-newsletter-form-in-elementor-for-free-with-fluent-forms-flu) | Elementor | 4 | 662 | 2026-08-01 |
+| [How to Block a Domain Using Google Workspace, Block Sender in Gmail Easily 2026](https://easytechtuts.shop/tutorials/google-workspace/how-to-block-a-domain-using-google-workspace-block-sender-in-gmail-easily-2026) | Google Workspace | 1 | 536 | 2026-08-01 |
+| [How to Calculate Project Level Percent Complete In Smartsheet Easily 2026](https://easytechtuts.shop/tutorials/smartsheet/how-to-calculate-project-level-percent-complete-in-smartsheet-easily-2026) | Smartsheet | 3 | 542 | 2026-08-01 |
+| [How To Clear Elementor Cache In WordPress, Delete Cache, Solve Error 500 Easily 2026](https://easytechtuts.shop/tutorials/elementor/how-to-clear-elementor-cache-in-wordpress-delete-cache-solve-error-500-easily-20) | Elementor | 3 | 560 | 2026-08-01 |
+| [How to Connect Binance to TradingView and Trade, Buy, Sell Directly 2026 Easily](https://easytechtuts.shop/tutorials/binance/how-to-connect-binance-to-tradingview-and-trade-buy-sell-directly-2026-easily) | Binance | 4 | 490 | 2026-08-01 |
+| [How To Connect Namecheap Domain To Blogger Blog Website, Solve 404 Error Easily 2026](https://easytechtuts.shop/tutorials/namecheap/how-to-connect-namecheap-domain-to-blogger-blog-website-solve-404-error-easily-2) | Namecheap | 3 | 623 | 2026-08-01 |
+| [How To Connect Namecheap Domain To Squarespace Easily 2026](https://easytechtuts.shop/tutorials/namecheap/how-to-connect-namecheap-domain-to-squarespace-easily-2026) | Namecheap | 4 | 537 | 2026-08-01 |
+| [How to Copy From Google Slides to Google Docs Easily 2026](https://easytechtuts.shop/tutorials/google-slides/how-to-copy-from-google-slides-to-google-docs-easily-2026) | Google Slides | 2 | 475 | 2026-08-01 |
+| [How to Create Project Schedule In Smartsheet Easily 2026](https://easytechtuts.shop/tutorials/smartsheet/how-to-create-project-schedule-in-smartsheet-easily-2026) | Smartsheet | 3 | 498 | 2026-08-01 |
+| [How To Deploy GitHub Project on Vercel in 2026 Easily](https://easytechtuts.shop/tutorials/github/how-to-deploy-github-project-on-vercel-in-2026-easily) | GitHub | 4 | 607 | 2026-08-01 |
+| [How To Generate CSR & Activate SSL On Namecheap Domain Easily 2026](https://easytechtuts.shop/tutorials/namecheap/how-to-generate-csr-activate-ssl-on-namecheap-domain-easily-2026) | Namecheap | 4 | 715 | 2026-08-01 |
+| [How to import eBay Reviews & DSers Reviews to Shopify for Free Easily 2026](https://easytechtuts.shop/tutorials/ebay/how-to-import-ebay-reviews-dsers-reviews-to-shopify-for-free-easily-2026) | eBay | 4 | 606 | 2026-08-01 |
+| [How to Import Etsy Reviews & Temu Reviews to Shopify Easily 2026 for Free](https://easytechtuts.shop/tutorials/etsy/how-to-import-etsy-reviews-temu-reviews-to-shopify-easily-2026-for-free) | Etsy | 3 | 637 | 2026-08-01 |
+| [How to Install Elementor in WordPress Localhost, Use WP Elementor Locally 2026](https://easytechtuts.shop/tutorials/elementor/how-to-install-elementor-in-wordpress-localhost-use-wp-elementor-locally-2026) | Elementor | 3 | 599 | 2026-08-01 |
+| [How To Link Data From Cells In Different Sheets In Smartsheet Easily 2026](https://easytechtuts.shop/tutorials/smartsheet/how-to-link-data-from-cells-in-different-sheets-in-smartsheet-easily-2026) | Smartsheet | 3 | 547 | 2026-08-01 |
+| [How to Make Container Full Width in Elementor Easily 2026](https://easytechtuts.shop/tutorials/elementor/how-to-make-container-full-width-in-elementor-easily-2026) | Elementor | 3 | 622 | 2026-08-01 |
+| [How to Recover Deleted User Account in Google Workspace Easily 2026](https://easytechtuts.shop/tutorials/google-workspace/how-to-recover-deleted-user-account-in-google-workspace-easily-2026) | Google Workspace | 2 | 541 | 2026-08-01 |
+| [How to Save, Import & Export Templates in WordPress Using Elementor 2026 Easily](https://easytechtuts.shop/tutorials/wordpress/how-to-save-import-export-templates-in-wordpress-using-elementor-2026-easily) | WordPress | 3 | 572 | 2026-08-01 |
+| [How to Transfer Domain from Namecheap to Squarespace Easily 2026](https://easytechtuts.shop/tutorials/namecheap/how-to-transfer-domain-from-namecheap-to-squarespace-easily-2026) | Namecheap | 3 | 537 | 2026-08-01 |
+| [How to Turn Off Grammarly on Google Docs Easily 2026](https://easytechtuts.shop/tutorials/grammarly/how-to-turn-off-grammarly-on-google-docs-easily-2026) | Grammarly | 3 | 430 | 2026-08-01 |
+| [How to Use Grammarly in Google Docs Easily 2026](https://easytechtuts.shop/tutorials/grammarly/how-to-use-grammarly-in-google-docs-easily-2026) | Grammarly | 3 | 583 | 2026-08-01 |
+| [How to Withdraw Money From Stripe Easily 2026](https://easytechtuts.shop/tutorials/stripe/how-to-withdraw-money-from-stripe-easily-2026) | Stripe | 3 | 595 | 2026-08-01 |
 | [How to Add Claude AI to Slack | Team Workflow Setup | Easily 2026](https://easytechtuts.shop/tutorials/claude-ai/how-to-add-claude-ai-to-slack) | Claude AI | 2 | 855 | 2026-07-31 |
 | [How to Block Gambling Sites in Google Chrome (Protect Your Browsing) Easily 2026](https://easytechtuts.shop/tutorials/chrome/how-to-block-gambling-sites-in-google-chrome-protect-your-browsing-easily-2026) | Google Chrome | 4 | 811 | 2026-07-31 |
 | [How to Connect Figma to Claude AI | Design-to-Code Workflow | Easily 2026](https://easytechtuts.shop/tutorials/figma/how-to-connect-figma-to-claude-ai) | Figma | 4 | 823 | 2026-07-31 |

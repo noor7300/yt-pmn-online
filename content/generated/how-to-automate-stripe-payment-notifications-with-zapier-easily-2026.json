@@ -1,21 +1,44 @@
 {
   "slug": "how-to-automate-stripe-payment-notifications-with-zapier-easily-2026",
   "seoTitle": "Automate Stripe Payment Notifications with Zapier",
-  "metaDescription": "Route Stripe charge and payment events to Slack, Teams, or SMS with Zapier so your team knows about revenue events in real time.",
-  "intro": "Checking a payment dashboard constantly to catch new sales or failed charges isn't efficient. This guide shows how to connect Stripe to Zapier so events like new charges, subscriptions, or failed payments automatically post to Slack, Microsoft Teams, or SMS with formatted, dynamic details.",
+  "metaDescription": "Connect Stripe to Zapier so new payment events automatically send a formatted email alert, without checking your Stripe dashboard manually.",
+  "intro": "Checking a Stripe dashboard repeatedly to catch new sales is a habit worth automating away. Zapier can watch your Stripe account for payment events and immediately fire off a notification through another app the moment one happens, so your team hears about revenue in real time instead of on a refresh cycle. This guide walks through building that Zap from scratch — choosing Stripe as the trigger, connecting the account, and wiring up an action step that sends the alert.",
   "steps": [
-    { "heading": "Create a new Zap with Stripe as trigger", "body": "Start a new Zap and select Stripe as your trigger application." },
-    { "heading": "Authenticate your Stripe account", "body": "Connect your Stripe account securely and grant the necessary webhook permissions." },
-    { "heading": "Choose your trigger event", "body": "Select the event you want to track, such as New Charge, New Subscription, or Failed Payment." },
-    { "heading": "Test the trigger", "body": "Fetch fresh test payload data from Stripe to safely map customer and currency variables." },
-    { "heading": "Add your notification action", "body": "Connect Slack, Teams, or SMS as the action step to route your payment alerts." },
-    { "heading": "Format your message", "body": "Map dynamic data tokens to format currency amounts and customer details, handling multiple currencies as needed." }
+    {
+      "heading": "Start a new Zap and choose Stripe as the trigger",
+      "body": "From the Zaps builder, the first step block is labeled \"1. New Payment\" once you've selected Stripe as the App and New Payment as the Trigger event. The setup panel on the right lists the App, Trigger event, and Account fields in order — each one has to be filled before you can move to testing. This is also where Zapier offers a Copilot option to configure the whole workflow automatically, but working through each step manually gives you more control over exactly what triggers the automation.",
+      "image": { "file": "/screenshots/zGxfGcIknbM/03.webp", "caption": "The Zap builder with Stripe selected as the trigger app and New Payment chosen as the trigger event, ready to connect an account." }
+    },
+    {
+      "heading": "Connect your Stripe account",
+      "body": "Click Sign In next to the Account field to authenticate. Zapier explains right on the panel that Stripe is a secure partner — your credentials are encrypted, can be removed at any time, and all connected accounts are manageable from one place. Once connected, this Stripe account becomes the source Zapier watches for the New Payment event you selected, and you won't need to reauthenticate it for other Zaps built on the same account."
+    },
+    {
+      "heading": "Add an action step and pick the app",
+      "body": "Below the Stripe trigger, click the action block to choose what happens next. In this build, Gmail is selected as the action app, and clicking into the Action event field opens a searchable list of everything Gmail can do — Add Label to Email, Archive Email, Create Draft, Create Draft Reply, Create Label, and more, scrollable in a dropdown. The Stripe payment event supplies the data; the action step decides where that data goes and in what form.",
+      "image": { "file": "/screenshots/zGxfGcIknbM/04.webp", "caption": "Choosing an action event for the Gmail step — a searchable dropdown listing options like Add Label to Email, Archive Email, and Create Draft." }
+    },
+    {
+      "heading": "Configure Send Email as the action",
+      "body": "Selecting Send Email from that list sets Gmail's action event and moves the step into a Configure stage, visible in the tab row above the setup panel: Setup, Configure, Test. The account shown is already connected — the same Gmail credentials Zapier uses across other Zaps tied to that inbox — so there's no separate sign-in needed here if you've authenticated Gmail before. From this point the Configure tab is where you'd build the actual message using data pulled from the Stripe trigger.",
+      "image": { "file": "/screenshots/zGxfGcIknbM/05.webp", "caption": "The Gmail action step set to Send Email, with the connected Gmail account shown and Setup marked complete ahead of the Configure stage." }
+    },
+    {
+      "heading": "Map Stripe's payment data into the message",
+      "body": "The Configure stage is where the notification actually takes shape — you pull fields from the Stripe trigger's test data, such as the customer's name, the charge amount, and the currency, and drop them into the email's subject and body as dynamic tokens. Because these are live references back to the trigger step rather than typed-in text, every new payment event fills in its own values automatically when the Zap runs for real. Keep the subject line short and specific, like a customer name and amount, since that's what someone will see first in a notification."
+    },
+    {
+      "heading": "Test the trigger with real Stripe data before publishing",
+      "body": "Before publishing, run a test on the Stripe trigger step to fetch a genuine payload from your account — Zapier needs at least one real or recent payment event to pull sample data from, which is also what lets you confirm the field names you're mapping actually match what Stripe sends. Testing the full Zap end to end, not just the trigger, catches formatting problems — like a currency showing as a raw number instead of a formatted amount — before a live customer payment triggers a broken-looking alert."
+    }
   ],
   "faq": [
-    { "question": "Can I get notified about failed payments too?", "answer": "Yes, you can choose Failed Payment as a trigger event so your team is alerted to declined transactions in real time." },
-    { "question": "Where can the notifications be sent?", "answer": "The tutorial covers routing alerts to Slack, Microsoft Teams, or SMS depending on your team's preference." },
-    { "question": "Does this handle different currencies?", "answer": "Yes, best practices for handling multiple currencies are covered when formatting the payment amount." },
-    { "question": "Can I include a link to the invoice in the alert?", "answer": "Yes, dynamic data tokens like invoice links can be included when formatting your automated notification message." }
+    { "question": "Does this only work with Slack or Teams for notifications?", "answer": "No — the action step can be any app Zapier supports. This build uses Gmail's Send Email action, but the same Stripe trigger works with Slack, Teams, SMS, or any other notification app you connect as the action step." },
+    { "question": "How do I include the payment amount in the notification?", "answer": "Map the amount field from the Stripe trigger's test data into your action step as a dynamic token, so each new payment fills in its own value automatically rather than showing static text." },
+    { "question": "Do I need to test the Zap before turning it on?", "answer": "Yes. Testing the Stripe trigger pulls a real payload so you can confirm your field mappings are correct, and testing the full Zap catches formatting issues before a live payment triggers a broken alert." },
+    { "question": "Is my Stripe account data secure when connected to Zapier?", "answer": "Zapier states that credentials are encrypted, can be removed at any time, and connected accounts can be managed centrally from your Zapier account settings." },
+    { "question": "Can I trigger notifications for failed payments instead of successful ones?", "answer": "Yes, Stripe exposes different trigger events beyond New Payment, including failed payment events, which you can select from the same Trigger event dropdown when setting up the first step." }
   ],
-  "generatedAt": "2026-07-23T00:00:00.000Z"
+  "generatedAt": "2026-08-01T00:00:00Z",
+  "deep": true
 }
