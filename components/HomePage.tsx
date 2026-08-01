@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategories, getDeepTutorialsPaged } from "@/lib/data";
+import { getCategories, getDeepTutorialsPaged, getFeaturedTutorials, getDeepDiveGuides } from "@/lib/data";
 import { CategoryCard } from "@/components/CategoryCard";
 import { TutorialListItem } from "@/components/TutorialListItem";
+import { FeaturedStart } from "@/components/FeaturedStart";
+import { FeaturedGuides } from "@/components/FeaturedGuides";
 import { Pagination } from "@/components/Pagination";
 import { SITE_NAME } from "@/lib/site";
 
@@ -13,6 +15,13 @@ export function HomePage({ page }: { page: number }) {
   const totalGuides = categories.reduce((sum, c) => sum + c.count, 0);
   const { items, currentPage, totalPages } = getDeepTutorialsPaged(page);
   if (items.length === 0) notFound();
+
+  // "Featured" sections only make sense on the actual homepage — page 2+ of
+  // the latest feed is just more of the same list, not a fresh front page.
+  const recentIds = new Set(page === 1 ? items.map((t) => t.video.id) : []);
+  const featured = page === 1 ? getFeaturedTutorials(4, recentIds) : [];
+  const featuredIds = new Set(featured.map((t) => t.video.id));
+  const deepDives = page === 1 ? getDeepDiveGuides(2, new Set([...recentIds, ...featuredIds])) : [];
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -51,6 +60,8 @@ export function HomePage({ page }: { page: number }) {
         </div>
       </section>
 
+      <FeaturedStart tutorials={featured} />
+
       <section id="latest" className="scroll-mt-20 border-b border-line py-14">
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -72,6 +83,8 @@ export function HomePage({ page }: { page: number }) {
           <Pagination basePath="" currentPage={currentPage} totalPages={totalPages} />
         </div>
       </section>
+
+      <FeaturedGuides tutorials={deepDives} />
 
       <section id="categories" className="scroll-mt-20 py-14">
         <span className="text-xs font-semibold uppercase tracking-wide text-accent-strong">Discover</span>

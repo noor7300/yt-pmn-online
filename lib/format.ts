@@ -9,6 +9,12 @@ export function formatDate(iso: string): string {
   });
 }
 
+/** Word count of a deep article's readable text (intro + all step bodies). */
+export function articleWordCount(article: { intro: string; steps: { body: string }[] }): number {
+  const text = [article.intro, ...article.steps.map((s) => s.body)].join(" ");
+  return text.split(/\s+/).filter(Boolean).length;
+}
+
 /** Trim prose to a whole word near `max` characters, adding an ellipsis. */
 export function excerpt(text: string, max = 180): string {
   if (text.length <= max) return text;

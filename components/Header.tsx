@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getGroups } from "@/lib/data";
 import { NavCategoryDropdown } from "@/components/NavCategoryDropdown";
 import { NavMoreDropdown } from "@/components/NavMoreDropdown";
@@ -28,8 +29,8 @@ export function Header() {
   return (
     <NavScrollShell>
       <div className="mx-auto flex max-w-6xl items-center gap-7 px-4 py-4 sm:px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5 text-[15px] font-semibold tracking-tight text-foreground">
-          <span className="gradient-brand h-6 w-6 rounded-md" aria-hidden="true" />
+        <Link href="/" className="flex shrink-0 items-center gap-2 text-[15px] font-semibold tracking-tight text-foreground">
+          <Image src="/logo-mark.webp" alt="" width={31} height={28} className="h-7 w-auto" priority />
           {SITE_NAME}
         </Link>
         <nav className="flex flex-1 items-center gap-6 overflow-x-auto text-[13.5px] font-medium text-muted [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">

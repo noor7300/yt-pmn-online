@@ -3,6 +3,7 @@ import path from "node:path";
 import type { CategorizedVideo, GeneratedArticle } from "./types";
 import { TAXONOMY } from "./taxonomy";
 import { INDEXABLE_LIMIT } from "./site";
+import { articleWordCount } from "./format";
 
 const CATEGORIZED_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GENERATED_DIR = path.join(process.cwd(), "content", "generated");
@@ -178,6 +179,35 @@ export function getDeepTutorials(): PublishedTutorial[] {
   return getPublishedTutorials()
     .filter((t) => t.article.deep)
     .sort((a, b) => b.article.generatedAt.localeCompare(a.article.generatedAt));
+}
+
+/** Deep tutorials that actually kept at least one real inline screenshot —
+ * a handful of deep articles ended up with zero usable frames (every
+ * candidate was junk) and fall back to the YouTube thumbnail on their own
+ * page, which is fine there but wrong for a section explicitly featuring
+ * "real screenshot" guides. */
+function withInlineImage(tutorials: PublishedTutorial[]): PublishedTutorial[] {
+  return tutorials.filter((t) => t.article.steps.some((s) => s.image));
+}
+
+/** Homepage "Featured — Start here" picks: the deep-rewritten, real-screenshot
+ * guides with the most real viewer demand, highest view count first. */
+export function getFeaturedTutorials(limit = 4, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
+  return withInlineImage(getDeepTutorials())
+    .filter((t) => !excludeIds.has(t.video.id))
+    .sort((a, b) => b.video.viewCount - a.video.viewCount)
+    .slice(0, limit);
+}
+
+/** Homepage "Featured guides — Deep dives worth your time" picks: the
+ * longest, most thorough deep-rewritten guides with real screenshots,
+ * excluding anything already used in the "Start here" picks so the two
+ * sections don't repeat. */
+export function getDeepDiveGuides(limit = 2, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
+  return withInlineImage(getDeepTutorials())
+    .filter((t) => !excludeIds.has(t.video.id))
+    .sort((a, b) => articleWordCount(b.article) - articleWordCount(a.article))
+    .slice(0, limit);
 }
 
 export const HOME_PAGE_SIZE = 7;
