@@ -1,4 +1,9 @@
-export const SITE_URL = "https://easytechtuts.shop";
+// The apex domain 308-redirects to www (configured in Vercel's domain
+// settings, not in this codebase) — www is the actual canonical host. Every
+// URL this site generates (sitemap, canonical tags, JSON-LD, OG, robots.txt)
+// must point straight at it; pointing at the apex would mean every crawl
+// costs an extra redirect hop instead of a direct 200.
+export const SITE_URL = "https://www.easytechtuts.shop";
 export const SITE_NAME = "Easy Tech Tuts";
 export const SITE_TAGLINE = "Step-by-Step Software Guides";
 export const SITE_DESCRIPTION =
