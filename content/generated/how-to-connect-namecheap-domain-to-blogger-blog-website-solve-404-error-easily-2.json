@@ -7,17 +7,26 @@
     {
       "heading": "Set your custom domain in Blogger",
       "body": "In Blogger, open Settings and find Publishing, where your blog currently shows its default blogspot.com address. Click Custom domain and type the domain you want to use, including the www prefix — for example www.yourdomain.com rather than the bare root domain, since Blogger's setup is built around the www subdomain by default. Hit Save, and Blogger will immediately try to verify the domain; at this point it will fail, because Namecheap doesn't yet have the DNS records Blogger needs. That's expected — this step just tells Blogger what to look for.",
-      "image": { "file": "/screenshots/oolcyteHgDU/03.webp", "caption": "Blogger's Custom domain dialog under Settings → Publishing, with a www subdomain entered before the matching DNS records exist." }
+      "image": {
+        "file": "/screenshots/oolcyteHgDU/03.webp",
+        "caption": "Blogger's Custom domain dialog under Settings → Publishing, with a www subdomain entered before the matching DNS records exist."
+      }
     },
     {
       "heading": "Log in to Namecheap and open your domain list",
       "body": "Sign in to your Namecheap account and go to Domain List, where every domain you've registered is shown alongside its expiration date and a Manage button. Find the domain you just entered into Blogger and click Manage to open its settings. This is also a good moment to note the domain's expiration date while you're there — a domain about to lapse is a separate problem from a 404 error, but it's an easy thing to miss if you're only focused on DNS.",
-      "image": { "file": "/screenshots/oolcyteHgDU/04.webp", "caption": "The Namecheap dashboard's Domain List, showing an active domain and its Manage button." }
+      "image": {
+        "file": "/screenshots/oolcyteHgDU/04.webp",
+        "caption": "The Namecheap dashboard's Domain List, showing an active domain and its Manage button."
+      }
     },
     {
       "heading": "Add the CNAME records Blogger requires",
       "body": "Inside the domain's management page, open the Advanced DNS tab and use Add New Record. Blogger's verification step (or its help documentation) gives you two CNAME records to add: one for the www host pointing to ghs.google.com, and a second, longer verification CNAME with a unique host and value that Blogger generates specifically for your domain. Set the record type to CNAME, fill in the host and value exactly as shown — no typos, no trailing dots added by hand — and leave TTL on Automatic. Click the checkmark to save each record, then Save All Changes at the bottom of the list.",
-      "image": { "file": "/screenshots/oolcyteHgDU/05.webp", "caption": "Namecheap's Advanced DNS panel with a CNAME record mapping the www host to ghs.google.com, alongside an existing TXT record." }
+      "image": {
+        "file": "/screenshots/oolcyteHgDU/05.webp",
+        "caption": "Namecheap's Advanced DNS panel with a CNAME record mapping the www host to ghs.google.com, alongside an existing TXT record."
+      }
     },
     {
       "heading": "Remove conflicting records",
@@ -33,12 +42,27 @@
     }
   ],
   "faq": [
-    { "question": "Why do I get a 404 error after connecting my domain to Blogger?", "answer": "This is usually caused by incorrect, missing, or leftover CNAME records in Namecheap's Advanced DNS that don't exactly match what Blogger's custom domain verification requires." },
-    { "question": "Do I need to change nameservers to connect to Blogger?", "answer": "No, you typically just add specific CNAME records in Namecheap's Advanced DNS panel rather than changing nameservers entirely." },
-    { "question": "How long until my custom domain works on Blogger?", "answer": "It depends on DNS propagation, which can take anywhere from a few minutes up to 24-48 hours in some cases." },
-    { "question": "Can I use a subdomain instead of the root domain for Blogger?", "answer": "Yes, Blogger supports connecting a subdomain, which can be simpler to set up since it avoids some of the root-domain redirect configuration." },
-    { "question": "Why does Blogger ask me to enter www in front of my domain?", "answer": "Blogger's custom domain setup is built around a www CNAME pointing to ghs.google.com, so the www version is the primary address, with the root domain optionally redirecting to it." }
+    {
+      "question": "Why do I get a 404 error after connecting my domain to Blogger?",
+      "answer": "This is usually caused by incorrect, missing, or leftover CNAME records in Namecheap's Advanced DNS that don't exactly match what Blogger's custom domain verification requires."
+    },
+    {
+      "question": "Do I need to change nameservers to connect to Blogger?",
+      "answer": "No, you typically just add specific CNAME records in Namecheap's Advanced DNS panel rather than changing nameservers entirely."
+    },
+    {
+      "question": "How long until my custom domain works on Blogger?",
+      "answer": "It depends on DNS propagation, which can take anywhere from a few minutes up to 24-48 hours in some cases."
+    },
+    {
+      "question": "Can I use a subdomain instead of the root domain for Blogger?",
+      "answer": "Yes, Blogger supports connecting a subdomain, which can be simpler to set up since it avoids some of the root-domain redirect configuration."
+    },
+    {
+      "question": "Why does Blogger ask me to enter www in front of my domain?",
+      "answer": "Blogger's custom domain setup is built around a www CNAME pointing to ghs.google.com, so the www version is the primary address, with the root domain optionally redirecting to it."
+    }
   ],
-  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

@@ -7,22 +7,34 @@
     {
       "heading": "Start a new workflow",
       "body": "From your n8n Overview screen, click Create workflow to open a blank canvas. You'll land on an empty editor with two options in the center: Add first step manually, or let n8n's Build with AI assistant scaffold something for you. For a WhatsApp integration where you want full control over credentials and trigger behavior, adding the first step manually is the more predictable route.",
-      "image": { "file": "/screenshots/jzUs5ZAQwkc/02.webp", "caption": "A brand-new, empty n8n workflow canvas with the option to add a first step manually or build with AI." }
+      "image": {
+        "file": "/screenshots/jzUs5ZAQwkc/02.webp",
+        "caption": "A brand-new, empty n8n workflow canvas with the option to add a first step manually or build with AI."
+      }
     },
     {
       "heading": "Search for the WhatsApp node",
       "body": "Click Add first step and type \"whatsapp\" into the trigger search. n8n surfaces the official WhatsApp Business Cloud trigger at the top of the list, followed by a long tail of community-built alternatives — Z-API, SyncMate, AllSign, YCloud, Hyperflow, GREEN-API, and others, each with different setup requirements and pricing outside of n8n itself. Unless you have a specific reason to use one of the third-party options, the official WhatsApp Business Cloud node is the one to pick, since it talks directly to Meta's API rather than through an intermediary service.",
-      "image": { "file": "/screenshots/jzUs5ZAQwkc/03.webp", "caption": "Searching \"whatsapp\" in the trigger picker surfaces the official WhatsApp Business Cloud node plus several third-party alternatives underneath it." }
+      "image": {
+        "file": "/screenshots/jzUs5ZAQwkc/03.webp",
+        "caption": "Searching \"whatsapp\" in the trigger picker surfaces the official WhatsApp Business Cloud node plus several third-party alternatives underneath it."
+      }
     },
     {
       "heading": "Configure the WhatsApp Trigger node",
       "body": "Once it's on the canvas, open the WhatsApp Trigger node's parameters. You'll set Trigger On to Messages so the workflow fires whenever a new inbound chat arrives, and there's a webhook URL section you'll need when registering the trigger with Meta's side of the integration. n8n flags one important limitation directly in the node: due to Facebook API restrictions, you can only run one WhatsApp trigger per connected Facebook App, so plan your workflow structure around that constraint rather than discovering it mid-build.",
-      "image": { "file": "/screenshots/jzUs5ZAQwkc/04.webp", "caption": "The WhatsApp Trigger node's settings, with Trigger On set to Messages and a note about the one-trigger-per-app limitation." }
+      "image": {
+        "file": "/screenshots/jzUs5ZAQwkc/04.webp",
+        "caption": "The WhatsApp Trigger node's settings, with Trigger On set to Messages and a note about the one-trigger-per-app limitation."
+      }
     },
     {
       "heading": "Set up your credential",
       "body": "Click Set up credential to open the WhatsApp OAuth account dialog. This requires a Client ID and Client Secret rather than a simple API key — both come from the app you register in Meta's developer console, so you'll need that app created and configured on Meta's side before you can finish this step in n8n. Enterprise-plan users have the option to pull these credentials from an external vault instead of pasting them directly, which is worth using if you're managing multiple environments.",
-      "image": { "file": "/screenshots/jzUs5ZAQwkc/05.webp", "caption": "The WhatsApp OAuth credential dialog, requiring a Client ID and Client Secret from your Meta developer app." }
+      "image": {
+        "file": "/screenshots/jzUs5ZAQwkc/05.webp",
+        "caption": "The WhatsApp OAuth credential dialog, requiring a Client ID and Client Secret from your Meta developer app."
+      }
     },
     {
       "heading": "Add an outbound WhatsApp node for replies or notifications",
@@ -34,12 +46,27 @@
     }
   ],
   "faq": [
-    { "question": "Do I need a WhatsApp Business account to use this integration?", "answer": "Yes, you need a Meta developer app connected to a WhatsApp Business Cloud API setup, which supplies the Client ID and Client Secret n8n's OAuth credential requires." },
-    { "question": "Can I send free-form messages to any customer?", "answer": "Generally you can only send free-form replies within a limited response window after a customer messages you first; outside that window you need an approved message template." },
-    { "question": "How do I trigger a workflow from an incoming WhatsApp message?", "answer": "Add the official WhatsApp Trigger node, set Trigger On to Messages, and connect its credential — it fires automatically whenever a new inbound chat arrives." },
-    { "question": "Can I have more than one WhatsApp trigger running?", "answer": "Not on the same Facebook App. n8n notes directly in the trigger node that Facebook API limitations allow only one WhatsApp trigger per connected app." },
-    { "question": "Should I test with my own number before going live?", "answer": "Yes. Testing the full send-and-receive path with a personal number first catches credential or formatting problems before you run a broadcast to real customers." }
+    {
+      "question": "Do I need a WhatsApp Business account to use this integration?",
+      "answer": "Yes, you need a Meta developer app connected to a WhatsApp Business Cloud API setup, which supplies the Client ID and Client Secret n8n's OAuth credential requires."
+    },
+    {
+      "question": "Can I send free-form messages to any customer?",
+      "answer": "Generally you can only send free-form replies within a limited response window after a customer messages you first; outside that window you need an approved message template."
+    },
+    {
+      "question": "How do I trigger a workflow from an incoming WhatsApp message?",
+      "answer": "Add the official WhatsApp Trigger node, set Trigger On to Messages, and connect its credential — it fires automatically whenever a new inbound chat arrives."
+    },
+    {
+      "question": "Can I have more than one WhatsApp trigger running?",
+      "answer": "Not on the same Facebook App. n8n notes directly in the trigger node that Facebook API limitations allow only one WhatsApp trigger per connected app."
+    },
+    {
+      "question": "Should I test with my own number before going live?",
+      "answer": "Yes. Testing the full send-and-receive path with a personal number first catches credential or formatting problems before you run a broadcast to real customers."
+    }
   ],
-  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

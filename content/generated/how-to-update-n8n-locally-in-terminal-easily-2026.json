@@ -11,17 +11,26 @@
     {
       "heading": "Run the standard update command",
       "body": "For a global npm installation, the update itself is a single line: npm update -g n8n. Running it pulls the latest compatible version of the package and its dependencies. Expect a wall of npm warn lines about peer dependency conflicts — things like conflicting openai or langchain package versions are common and, on their own, don't mean the update failed. What matters is the summary line at the end confirming packages were removed, added, or changed.",
-      "image": { "file": "/screenshots/JgKZ6kXk218/02.webp", "caption": "A terminal window running npm update -g n8n, showing the peer-dependency warnings that typically scroll by during the process." }
+      "image": {
+        "file": "/screenshots/JgKZ6kXk218/02.webp",
+        "caption": "A terminal window running npm update -g n8n, showing the peer-dependency warnings that typically scroll by during the process."
+      }
     },
     {
       "heading": "Use npm install for the next channel instead",
       "body": "If you specifically want the newest pre-release build rather than the latest stable version, the command changes to npm install -g n8n@next. This targets the next tag on npm, which ships features and fixes ahead of the stable release but carries more risk of breaking changes. Stick with the plain update command above unless you have a specific reason to track the bleeding edge.",
-      "image": { "file": "/screenshots/JgKZ6kXk218/04.webp", "caption": "Running npm install -g n8n@next in the terminal, which installs the pre-release build rather than the current stable version." }
+      "image": {
+        "file": "/screenshots/JgKZ6kXk218/04.webp",
+        "caption": "Running npm install -g n8n@next in the terminal, which installs the pre-release build rather than the current stable version."
+      }
     },
     {
       "heading": "Let the install finish and read the summary",
       "body": "Either command can take a few minutes, since npm is resolving and rewriting a large dependency tree — don't assume it's frozen just because the terminal goes quiet for a stretch. When it completes, npm prints a summary like packages added, removed, and changed, along with a count of total packages scanned. That summary line is your real confirmation the update went through, independent of how many warnings scrolled past above it.",
-      "image": { "file": "/screenshots/JgKZ6kXk218/05.webp", "caption": "The completed install, with npm's summary line reporting the packages added, removed, and changed." }
+      "image": {
+        "file": "/screenshots/JgKZ6kXk218/05.webp",
+        "caption": "The completed install, with npm's summary line reporting the packages added, removed, and changed."
+      }
     },
     {
       "heading": "Restart n8n and confirm the new version",
@@ -33,12 +42,27 @@
     }
   ],
   "faq": [
-    { "question": "Do I need to stop n8n before updating it locally?", "answer": "Yes, stopping the running process first helps avoid port conflicts and file lock issues while npm rewrites the installed package." },
-    { "question": "What command updates a local npm installation of n8n?", "answer": "Run npm update -g n8n for the current stable release, or npm install -g n8n@next if you specifically want the pre-release next channel." },
-    { "question": "Are the npm warn messages during the update a problem?", "answer": "Usually not. Peer dependency warnings about conflicting package versions are common noise during npm updates and don't necessarily mean the update failed — check the final summary line instead." },
-    { "question": "Will updating n8n affect my existing workflows?", "answer": "Your workflow data is generally preserved through a database migration on first restart, but it's worth running one workflow manually afterward to confirm nothing behaves differently." },
-    { "question": "How do I confirm the update worked?", "answer": "Restart n8n, open your local dashboard in the browser, and check that the displayed version number matches the version you just installed." }
+    {
+      "question": "Do I need to stop n8n before updating it locally?",
+      "answer": "Yes, stopping the running process first helps avoid port conflicts and file lock issues while npm rewrites the installed package."
+    },
+    {
+      "question": "What command updates a local npm installation of n8n?",
+      "answer": "Run npm update -g n8n for the current stable release, or npm install -g n8n@next if you specifically want the pre-release next channel."
+    },
+    {
+      "question": "Are the npm warn messages during the update a problem?",
+      "answer": "Usually not. Peer dependency warnings about conflicting package versions are common noise during npm updates and don't necessarily mean the update failed — check the final summary line instead."
+    },
+    {
+      "question": "Will updating n8n affect my existing workflows?",
+      "answer": "Your workflow data is generally preserved through a database migration on first restart, but it's worth running one workflow manually afterward to confirm nothing behaves differently."
+    },
+    {
+      "question": "How do I confirm the update worked?",
+      "answer": "Restart n8n, open your local dashboard in the browser, and check that the displayed version number matches the version you just installed."
+    }
   ],
-  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

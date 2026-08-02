@@ -7,12 +7,18 @@
     {
       "heading": "Start from the Power Automate home screen",
       "body": "Power Automate's home page is built around Copilot now — a prompt box invites you to describe an automation in plain language, with a few one-click examples above it like copying Excel rows between files or emailing you when a SharePoint item is created. You can absolutely try typing your own request here, but for this flow it's worth building it manually the first time so you understand each connector and can troubleshoot it later. The left-hand rail has Create, Templates, My flows, and Automation center, which is where you'll come back to check run history once the flow is live.",
-      "image": { "file": "/screenshots/fuKxqUywSiw/01.webp", "caption": "The Power Automate home screen, now built around a Copilot prompt box for describing automations in plain language." }
+      "image": {
+        "file": "/screenshots/fuKxqUywSiw/01.webp",
+        "caption": "The Power Automate home screen, now built around a Copilot prompt box for describing automations in plain language."
+      }
     },
     {
       "heading": "Build a new automated cloud flow and pick the Forms trigger",
       "body": "Click Create, then choose Automated cloud flow to open the trigger picker. Give the flow a descriptive name — something like \"Forms to Excel and Email\" — so you can find it later among dozens of others. In the trigger search list, look for \"When a new response is submitted,\" the Microsoft Forms trigger, sitting alongside other common starters like SharePoint's \"When an item is created.\" Selecting it and hitting Create opens the flow designer with that trigger already on the canvas, ready to be pointed at your specific form.",
-      "image": { "file": "/screenshots/fuKxqUywSiw/04.webp", "caption": "The trigger picker for a new automated cloud flow, with \"When a new response is submitted\" (Microsoft Forms) listed among the built-in triggers." }
+      "image": {
+        "file": "/screenshots/fuKxqUywSiw/04.webp",
+        "caption": "The trigger picker for a new automated cloud flow, with \"When a new response is submitted\" (Microsoft Forms) listed among the built-in triggers."
+      }
     },
     {
       "heading": "Add Get response details and pull the submission data",
@@ -25,7 +31,10 @@
     {
       "heading": "Map form fields into the Excel table with Add a Row",
       "body": "Back in the flow, add the \"Add a row into a table\" action, pick the Excel file's location, the workbook, and the table you just created. Power Automate reads the table's column headers and gives you one input field per column — click into each one and insert the matching dynamic content token from the Get response details step, so the submitter's name lands under Name, their email under Email, and so on. Getting this mapping right the first time is the single most common source of blank or misaligned rows, so double-check each field before moving on.",
-      "image": { "file": "/screenshots/fuKxqUywSiw/02.webp", "caption": "An Excel Online table with headers for Submission Time, Name, email address, and instructor and overall-impression ratings — ready to receive mapped form responses." }
+      "image": {
+        "file": "/screenshots/fuKxqUywSiw/02.webp",
+        "caption": "An Excel Online table with headers for Submission Time, Name, email address, and instructor and overall-impression ratings — ready to receive mapped form responses."
+      }
     },
     {
       "heading": "Add the Outlook notification email",
@@ -34,16 +43,34 @@
     {
       "heading": "Save, run a test, and confirm both outputs",
       "body": "Save the flow, then submit a real test response to your form. Power Automate's run history shows each step lighting up green as it executes — the trigger firing, the response details being pulled, then the Excel and Outlook actions completing in sequence, similar to how the flow designer displays each connected block with its own configuration panel underneath the trigger. Open your Excel table to confirm the new row landed in the right columns, and check the inbox for the notification email. If either one is missing or misaligned, it's almost always a dynamic-content mapping to fix rather than a broken connector.",
-      "image": { "file": "/screenshots/fuKxqUywSiw/05.webp", "caption": "The flow designer showing the Microsoft Forms trigger connected to a downstream action, with dynamic content like \"List of response notifications\" available to map into later steps." }
+      "image": {
+        "file": "/screenshots/fuKxqUywSiw/05.webp",
+        "caption": "The flow designer showing the Microsoft Forms trigger connected to a downstream action, with dynamic content like \"List of response notifications\" available to map into later steps."
+      }
     }
   ],
   "faq": [
-    { "question": "Do I need a paid Power Automate license to do this?", "answer": "Basic flows like this one typically work within the Power Automate license bundled with many Microsoft 365 plans, though premium connectors can require an upgraded plan." },
-    { "question": "Can I send the notification to more than one person?", "answer": "Yes, you can add multiple recipients in the Send an Email action or route different fields to different people based on the form data." },
-    { "question": "What happens if the Excel file is open when the flow runs?", "answer": "Excel Online generally handles automated row additions fine even while the file is open, but it's still good practice to avoid heavy manual editing at the same time." },
-    { "question": "Why isn't my form data showing up in Excel?", "answer": "This is usually a field mapping issue — double-check that each dynamic content token in the Add a Row action matches the correct form question, and confirm the destination range is actually formatted as a table." },
-    { "question": "Can I use Copilot to build this flow instead of doing it manually?", "answer": "Yes — the Power Automate home screen lets you describe the automation in plain language and generate a starting flow, but reviewing and adjusting each step manually still helps when you need to troubleshoot field mappings later." }
+    {
+      "question": "Do I need a paid Power Automate license to do this?",
+      "answer": "Basic flows like this one typically work within the Power Automate license bundled with many Microsoft 365 plans, though premium connectors can require an upgraded plan."
+    },
+    {
+      "question": "Can I send the notification to more than one person?",
+      "answer": "Yes, you can add multiple recipients in the Send an Email action or route different fields to different people based on the form data."
+    },
+    {
+      "question": "What happens if the Excel file is open when the flow runs?",
+      "answer": "Excel Online generally handles automated row additions fine even while the file is open, but it's still good practice to avoid heavy manual editing at the same time."
+    },
+    {
+      "question": "Why isn't my form data showing up in Excel?",
+      "answer": "This is usually a field mapping issue — double-check that each dynamic content token in the Add a Row action matches the correct form question, and confirm the destination range is actually formatted as a table."
+    },
+    {
+      "question": "Can I use Copilot to build this flow instead of doing it manually?",
+      "answer": "Yes — the Power Automate home screen lets you describe the automation in plain language and generate a starting flow, but reviewing and adjusting each step manually still helps when you need to troubleshoot field mappings later."
+    }
   ],
-  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

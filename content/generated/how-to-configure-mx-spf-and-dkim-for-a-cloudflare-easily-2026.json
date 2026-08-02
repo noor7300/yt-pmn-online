@@ -7,12 +7,18 @@
     {
       "heading": "Find your domain in the Cloudflare dashboard",
       "body": "Log into Cloudflare and land on the Domains page, which lists every site connected to the account with its status, security insights, and plan. If you manage more than one domain, this is where you confirm you're about to edit DNS for the right one — a status of anything other than \"Active\" (like \"Invalid nameservers\") means DNS changes won't take effect until that's resolved first. Click the domain you need to configure mail for to open its overview.",
-      "image": { "file": "/screenshots/39Iozp0YkuY/03.webp", "caption": "The Domains list in Cloudflare, showing each connected site's status and plan. Click through to the domain you're setting up mail for." }
+      "image": {
+        "file": "/screenshots/39Iozp0YkuY/03.webp",
+        "caption": "The Domains list in Cloudflare, showing each connected site's status and plan. Click through to the domain you're setting up mail for."
+      }
     },
     {
       "heading": "Open the domain overview and jump to DNS",
       "body": "The domain's Overview page shows traffic and request stats at a glance, but what you actually need is in the right-hand column: a DNS Setup indicator and a DNS Records link. That's the entry point for every record you're about to add. The left sidebar also has a dedicated DNS section further down if you'd rather navigate there directly instead of using the shortcut link.",
-      "image": { "file": "/screenshots/39Iozp0YkuY/04.webp", "caption": "A domain's Overview page in Cloudflare. The DNS Records link in the top-right panel is the fastest way into the records editor." }
+      "image": {
+        "file": "/screenshots/39Iozp0YkuY/04.webp",
+        "caption": "A domain's Overview page in Cloudflare. The DNS Records link in the top-right panel is the fastest way into the records editor."
+      }
     },
     {
       "heading": "Add the MX record for your mail host",
@@ -36,12 +42,27 @@
     }
   ],
   "faq": [
-    { "question": "Why do my mail records need to stay on 'DNS Only' instead of proxied?", "answer": "Cloudflare's proxy is built for web traffic; mail-related records like MX, SPF, and DKIM need to resolve directly (DNS Only) so mail servers can read them correctly." },
-    { "question": "What happens if I skip SPF or DKIM?", "answer": "Without SPF and DKIM, your outgoing email is more likely to be flagged as spam or rejected outright by receiving mail servers that check for sender authentication." },
-    { "question": "Can I have more than one MX record?", "answer": "Yes, many mail setups use multiple MX records with different priority values as backups in case the primary mail server is unavailable." },
-    { "question": "Where do I get the DKIM key values to paste into Cloudflare?", "answer": "Your email service provider (such as Google Workspace or Microsoft 365) generates the DKIM selector and public key, which you then copy into a TXT record in Cloudflare." },
-    { "question": "How long does it take for new MX, SPF, or DKIM records to start working?", "answer": "Cloudflare usually applies DNS changes within minutes, but full propagation across every mail server that queries your domain can take a few hours, so wait before troubleshooting a failed test." }
+    {
+      "question": "Why do my mail records need to stay on 'DNS Only' instead of proxied?",
+      "answer": "Cloudflare's proxy is built for web traffic; mail-related records like MX, SPF, and DKIM need to resolve directly (DNS Only) so mail servers can read them correctly."
+    },
+    {
+      "question": "What happens if I skip SPF or DKIM?",
+      "answer": "Without SPF and DKIM, your outgoing email is more likely to be flagged as spam or rejected outright by receiving mail servers that check for sender authentication."
+    },
+    {
+      "question": "Can I have more than one MX record?",
+      "answer": "Yes, many mail setups use multiple MX records with different priority values as backups in case the primary mail server is unavailable."
+    },
+    {
+      "question": "Where do I get the DKIM key values to paste into Cloudflare?",
+      "answer": "Your email service provider (such as Google Workspace or Microsoft 365) generates the DKIM selector and public key, which you then copy into a TXT record in Cloudflare."
+    },
+    {
+      "question": "How long does it take for new MX, SPF, or DKIM records to start working?",
+      "answer": "Cloudflare usually applies DNS changes within minutes, but full propagation across every mail server that queries your domain can take a few hours, so wait before troubleshooting a failed test."
+    }
   ],
-  "generatedAt": "2026-07-31T00:00:00.000Z",
+  "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }
