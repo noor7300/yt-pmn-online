@@ -49,6 +49,9 @@ function parseArgs() {
   return {
     limit: get("--limit") ? Number(get("--limit")) : undefined,
     category: get("--category"),
+    /** Newline-delimited slug list — extract exactly these instead of using
+     * the flagship (5-newest-per-category) heuristic. */
+    slugsFile: get("--slugs-file"),
     force: a.includes("--force"),
     noCrop: a.includes("--no-crop"),
   };
@@ -217,32 +220,50 @@ async function processVideo(video: RawVideo, crop: boolean): Promise<Shot[]> {
 }
 
 async function main() {
-  const { limit, category, force, noCrop } = parseArgs();
+  const { limit, category, slugsFile, force, noCrop } = parseArgs();
 
   const raw: RawVideo[] = JSON.parse(await readFile(RAW_PATH, "utf-8"));
   const cats: CategorizedVideo[] = JSON.parse(await readFile(CAT_PATH, "utf-8"));
   const rawById = new Map(raw.map((v) => [v.id, v]));
 
-  const byCategory = new Map<string, CategorizedVideo[]>();
-  for (const v of cats) {
-    if (category && v.category !== category) continue;
-    const list = byCategory.get(v.category) ?? [];
-    list.push(v);
-    byCategory.set(v.category, list);
+  let flagship: CategorizedVideo[] = [];
+
+  if (slugsFile) {
+    // Explicit target list wins over the flagship heuristic.
+    const wanted = (await readFile(slugsFile, "utf-8"))
+      .split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const bySlug = new Map(cats.map((v) => [v.slug, v]));
+    const missing: string[] = [];
+    for (const slug of wanted) {
+      const v = bySlug.get(slug);
+      if (v) flagship.push(v);
+      else missing.push(slug);
+    }
+    if (missing.length) console.warn(`  (${missing.length} slug(s) not found in categorized data)`);
+  } else {
+    const byCategory = new Map<string, CategorizedVideo[]>();
+    for (const v of cats) {
+      if (category && v.category !== category) continue;
+      const list = byCategory.get(v.category) ?? [];
+      list.push(v);
+      byCategory.set(v.category, list);
+    }
+
+    for (const list of byCategory.values()) {
+      flagship.push(
+        ...[...list]
+          .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+          .slice(0, FLAGSHIP_PER_CATEGORY)
+      );
+    }
+    flagship.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
   }
 
-  let flagship: CategorizedVideo[] = [];
-  for (const list of byCategory.values()) {
-    flagship.push(
-      ...[...list]
-        .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-        .slice(0, FLAGSHIP_PER_CATEGORY)
-    );
-  }
-  flagship.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
   if (limit) flagship = flagship.slice(0, limit);
 
-  console.log(`Extracting screenshots for ${flagship.length} flagship videos…`);
+  console.log(`Extracting screenshots for ${flagship.length} videos…`);
 
   const manifest: ScreenshotManifest = existsSync(MANIFEST)
     ? JSON.parse(await readFile(MANIFEST, "utf-8"))
