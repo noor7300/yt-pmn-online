@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProsePage } from "@/components/ProsePage";
-import { getCategories, getPublishedTutorials } from "@/lib/data";
+import { getCategories, getVisibleTutorials } from "@/lib/data";
 import { SITE_NAME, SITE_OWNER, SITE_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const categoryCount = getCategories().length;
-  const tutorialCount = getPublishedTutorials().length;
+  const tutorialCount = getVisibleTutorials().length;
 
   return (
     <ProsePage

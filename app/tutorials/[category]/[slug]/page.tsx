@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getPublishedTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
+import { getVisibleTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { FaqBlock } from "@/components/FaqBlock";
 import { RelatedTutorials } from "@/components/RelatedTutorials";
@@ -13,7 +13,8 @@ import { SITE_URL, SITE_OWNER } from "@/lib/site";
 import { toParagraphs } from "@/lib/format";
 
 export function generateStaticParams() {
-  return getPublishedTutorials().map((t) => ({ category: t.video.category, slug: t.video.slug }));
+  // Only visible tutorials get built; hidden (not-yet-deep) ones 404.
+  return getVisibleTutorials().map((t) => ({ category: t.video.category, slug: t.video.slug }));
 }
 
 export async function generateMetadata({

@@ -79,8 +79,10 @@ export function getPublishedTutorials(): PublishedTutorial[] {
   return out;
 }
 
+/** Resolves only *visible* tutorials, so a hidden page 404s on direct access
+ * rather than rendering an unlinked thin article. */
 export function getTutorialBySlug(slug: string): PublishedTutorial | null {
-  return getPublishedTutorials().find((t) => t.video.slug === slug) ?? null;
+  return getVisibleTutorials().find((t) => t.video.slug === slug) ?? null;
 }
 
 let _indexableSlugs: Set<string> | null = null;
@@ -129,8 +131,39 @@ export function isIndexable(tutorial: PublishedTutorial): boolean {
   return getIndexableSlugs().has(tutorial.video.slug);
 }
 
+/** Content-quality gate: a generated article is only *reachable* on the site
+ * once it clears the same bar as isIndexable() — in practice, once it has
+ * been through the deep rewrite (real in-app screenshots and a full
+ * walkthrough) or is an established page that was already earning traffic.
+ * Everything else stays written to disk but unlinked, unbuilt, and 404 on
+ * direct access.
+ *
+ * A hidden page comes back when its *content* is improved — run the deep
+ * rewrite on it and it reappears automatically on the next build. This is
+ * deliberately not tied to any external event or date; there is no "restore
+ * everything" switch, because a page that isn't good enough to show a reader
+ * today isn't good enough to show one next month either.
+ *
+ * Wiring visibility to the same set as indexability keeps the site to exactly
+ * one coherent page set: everything reachable is in the sitemap, nothing in
+ * the sitemap 404s, and no already-indexed URL ever disappears (see the hard
+ * rule on getIndexableSlugs above). */
+export function isVisible(tutorial: PublishedTutorial): boolean {
+  return isIndexable(tutorial);
+}
+
+let _visible: PublishedTutorial[] | null = null;
+
+/** The tutorials the site actually renders and links to. Prefer this over
+ * getPublishedTutorials() everywhere user-facing; the unfiltered set is for
+ * indexing bookkeeping only. */
+export function getVisibleTutorials(): PublishedTutorial[] {
+  if (!_visible) _visible = getPublishedTutorials().filter(isVisible);
+  return _visible;
+}
+
 export function getCategories(): CategorySummary[] {
-  const tutorials = getPublishedTutorials();
+  const tutorials = getVisibleTutorials();
   const map = new Map<string, CategorySummary>();
 
   for (const t of tutorials) {
@@ -157,7 +190,7 @@ export function getCategory(slug: string): CategorySummary | null {
 
 /** Category listing order, view-count descending — used for "related" picks. */
 export function getTutorialsByCategory(categorySlug: string): PublishedTutorial[] {
-  return getPublishedTutorials().filter((t) => t.video.category === categorySlug);
+  return getVisibleTutorials().filter((t) => t.video.category === categorySlug);
 }
 
 /** Newest first, by the video's real YouTube publish date. This is the order
@@ -171,7 +204,7 @@ export function getTutorialsByCategoryNewest(categorySlug: string): PublishedTut
 let _newest: PublishedTutorial[] | null = null;
 export function getNewestTutorials(limit?: number): PublishedTutorial[] {
   if (!_newest) {
-    _newest = [...getPublishedTutorials()].sort((a, b) =>
+    _newest = [...getVisibleTutorials()].sort((a, b) =>
       b.video.publishedAt.localeCompare(a.video.publishedAt)
     );
   }
@@ -200,7 +233,7 @@ export function getTutorialsByCategoryPaged(categorySlug: string, page: number):
  * the page template checks, so it can never drift from what's actually
  * live. Use this to feature these guides on the homepage or elsewhere. */
 export function getDeepTutorials(): PublishedTutorial[] {
-  return getPublishedTutorials()
+  return getVisibleTutorials()
     .filter((t) => t.article.deep)
     .sort((a, b) => b.article.generatedAt.localeCompare(a.article.generatedAt));
 }
