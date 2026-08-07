@@ -2,46 +2,57 @@
   "slug": "how-to-transfer-squarespace-domain-to-hostinger-2026-easy-guide",
   "seoTitle": "Transfer a Squarespace Domain to Hostinger (2026)",
   "metaDescription": "Move your domain from Squarespace to Hostinger for better hosting performance, lower costs, and more DNS control — full step-by-step guide.",
-  "intro": "If you bought your domain through Squarespace but want to host elsewhere, moving it to Hostinger gives you more control over DNS and often lower costs. This guide covers unlocking your domain, getting your authorization code, and finishing the transfer without downtime.",
+  "intro": "If you bought your domain through Squarespace but want to host your site elsewhere, moving it to Hostinger gives you more control over DNS and often a lower renewal cost. The transfer itself happens in two places — first unlocking and starting the move from Squarespace's Domains panel, then choosing how Hostinger should handle your name servers on the receiving end. This guide covers both sides of that handoff, including the one DNS decision that determines whether your site stays online during the switch or goes dark.",
   "steps": [
     {
-      "heading": "Unlock your domain in Squarespace",
-      "body": "Before a transfer can start, your domain needs to be unlocked in your Squarespace domain settings."
+      "heading": "Find your domain in Squarespace's Domains panel",
+      "body": "Log in to Squarespace and open Domains from the top navigation. You'll see every domain on the account listed with its status, current provider, and expiration date. Locate the one you're moving, confirm its status shows Active, and note the expiration date — most registrars, Squarespace included, won't let you transfer a domain within a certain window of when it was registered or last transferred, so check this before going further.",
+      "image": { "file": "/screenshots/zOfx-3TazS4/01.webp", "caption": "The Squarespace Domains panel, listing an active domain with its provider and expiration date, and a Transfer a Domain button in the top right." }
     },
     {
-      "heading": "Find your EPP/authorization code",
-      "body": "Locate the EPP or authorization code in Squarespace's domain settings — Hostinger will need this to verify the transfer."
+      "heading": "Unlock the domain and get the authorization code",
+      "body": "Domains are locked by default to prevent unauthorized transfers, so open the domain's settings in Squarespace and turn off transfer lock before starting anything on the Hostinger side. From the same settings area, request the EPP or authorization code — Squarespace typically emails this to the account holder rather than displaying it directly on screen, so check your inbox after requesting it. Hostinger will ask for this exact code to verify you're authorized to move the domain."
     },
     {
-      "heading": "Start the transfer in Hostinger",
-      "body": "In your Hostinger account, begin the domain transfer process and enter your domain along with the authorization code."
+      "heading": "Start the transfer request in Hostinger",
+      "body": "In your Hostinger account, begin a domain transfer and enter the domain name along with the authorization code from Squarespace. Hostinger will confirm the domain is eligible and unlocked before proceeding — if it isn't, you'll get an error pointing back to whichever step in Squarespace still needs to be completed, usually the lock status or a mismatched code."
     },
     {
-      "heading": "Update your DNS settings",
-      "body": "Once the transfer is initiated, update your DNS records in Hostinger so your website and email keep working during the switch."
+      "heading": "Choose how Hostinger should handle your name servers",
+      "body": "Partway through the transfer, Hostinger presents two options for name servers: \"Use existing name servers,\" which keeps DNS zone management wherever it currently lives — useful if you have hosting or email at another provider, or you use a CDN like Cloudflare — or \"Use Hostinger's name servers and keep existing DNS records,\" which switches your name servers to Hostinger while copying over your current DNS records. Hostinger also recommends turning off DNSSEC before transferring, since an active DNSSEC configuration can cause the transfer to fail or your domain to briefly stop resolving.",
+      "image": { "file": "/screenshots/zOfx-3TazS4/05.webp", "caption": "Hostinger's name server choice during transfer — keep DNS management at your current provider, or switch to Hostinger's name servers while preserving existing records." }
     },
     {
-      "heading": "Verify the transfer and check for downtime",
-      "body": "Confirm the domain has moved successfully, and monitor your site to catch any propagation delays before they affect visitors."
+      "heading": "Pick the option that matches your setup",
+      "body": "If your website and email are staying exactly where they are and you're only moving domain registration for cost or convenience, \"Use existing name servers\" is the safer choice since nothing about your live DNS changes. If you're also moving hosting to Hostinger and want everything managed in one place going forward, choose the Hostinger name servers option — just confirm your existing DNS records look correct once they've copied over, since a missed record here is the most common cause of email or site downtime after a domain transfer."
+    },
+    {
+      "heading": "Confirm the transfer and watch for the approval email",
+      "body": "Click Transfer domain to submit the request. Domain transfers aren't instant — expect an approval email from your current registrar (or an automatic approval after a few days if you don't respond) before the move completes, plus additional time for DNS propagation if you switched name servers. Keep an eye on both your Squarespace and Hostinger dashboards during this window, and avoid making further DNS changes at the old provider until Hostinger confirms the transfer has finished."
     }
   ],
   "faq": [
     {
       "question": "Why transfer a domain from Squarespace to Hostinger?",
-      "answer": "Common reasons include better hosting performance, lower costs, and more control over DNS settings than Squarespace offers by default."
+      "answer": "Common reasons include lower renewal costs, hosting performance, and more direct control over DNS settings than Squarespace offers by default."
     },
     {
       "question": "What is an EPP code and why do I need it?",
-      "answer": "It's an authorization code that proves you own the domain and authorizes the new registrar to accept the transfer."
+      "answer": "It's an authorization code that proves you own the domain and authorizes the new registrar to accept the transfer. Squarespace typically sends it by email once you request it from the domain's settings."
     },
     {
       "question": "Will my website go down during the transfer?",
-      "answer": "Not necessarily — updating DNS settings correctly and timing the switch carefully helps avoid downtime, though some propagation delay is normal."
+      "answer": "Not necessarily. Choosing \"Use existing name servers\" during the Hostinger transfer keeps your current DNS setup untouched, which is the safest option if your site and email are staying where they are."
+    },
+    {
+      "question": "Should I turn off DNSSEC before transferring?",
+      "answer": "Yes — Hostinger explicitly recommends disabling DNSSEC before the transfer, since an active DNSSEC configuration can cause the transfer to fail or briefly break domain resolution."
     },
     {
       "question": "How long does a domain transfer usually take?",
-      "answer": "Domain transfers commonly take a few days to complete, plus additional time for DNS propagation once it's finished."
+      "answer": "Domain transfers commonly take a few days to complete once approved, plus additional time for DNS propagation if you switched to Hostinger's name servers."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

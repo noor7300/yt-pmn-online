@@ -2,42 +2,58 @@
   "slug": "how-to-get-multiple-stripe-accounts-with-one-llc-easily-2026",
   "seoTitle": "How to Get Multiple Stripe Accounts With One LLC",
   "metaDescription": "Learn how to add extra Stripe accounts under a single LLC, keep payouts and API keys organized, and avoid mistakes that trigger account restrictions.",
-  "intro": "Running several brands or stores under one legal entity doesn't mean you're stuck with a single Stripe account. This guide explains how to add additional accounts linked to the same LLC, what business and banking information you'll need, and best practices for keeping payouts, transactions, and API keys separated per store.",
+  "intro": "Running several brands or stores under one legal entity doesn't mean you're stuck processing all their payments through a single Stripe account. Stripe supports multiple accounts tied to the same business, and the option to add one lives right inside the dashboard you're already using — no new sign-up, no separate LLC required. This guide walks through creating a second account from your existing Stripe dashboard, filling in the details Stripe asks for, and understanding how the account switcher keeps each store's data, API keys, and payouts separate once you're done.",
   "steps": [
     {
-      "heading": "Gather the requirements for an extra account",
-      "body": "Before adding a new account, make sure you have the business and banking details Stripe will ask for, since incomplete information is a common cause of delays."
+      "heading": "Open the account switcher and start a new account",
+      "body": "From inside your existing Stripe dashboard, click the business name in the top-left corner to open the account switcher, then choose the option to create a new account. A \"Create a new account\" dialog appears asking for a Name and a Country of operation. The name field is just a label for the dashboard — you can rename it later — but it's worth naming it after the actual brand or store it represents right away, since you'll be picking between accounts by this name every time you switch.",
+      "image": { "file": "/screenshots/JH1ZN1mazAc/03.webp", "caption": "The Create a new account dialog, asking for a name and country of operation. This is the entry point for adding a second account under the same login." }
     },
     {
-      "heading": "Add a new account from your Stripe dashboard",
-      "body": "Stripe allows multiple accounts tied to the same business entity, and you can add them from within your existing dashboard."
+      "heading": "Fill in the business details for the new account",
+      "body": "After creating the account shell, Stripe walks you through a short \"Welcome to Stripe\" setup screen asking for your business name and, optionally, a business website. This is where the new account starts to separate itself from your first one — it gets its own business profile, and Stripe uses the website field to tailor setup recommendations like which payment methods to enable. You can skip the website for now and add it later if the new store isn't live yet, but filling in an accurate business name here matters since it's what shows up on customer statements for that account.",
+      "image": { "file": "/screenshots/JH1ZN1mazAc/04.webp", "caption": "The Welcome to Stripe screen for a newly created account, asking for the business name and an optional website before the account is fully set up." }
     },
     {
-      "heading": "Manage payouts and API keys separately",
-      "body": "Keep each account's payouts and API keys distinct so transactions from different stores don't get mixed up or misattributed."
+      "heading": "Confirm the account is separated in the switcher",
+      "body": "Once setup finishes, click the account name in the top-left again and you'll see your accounts listed together under an \"Other accounts\" section, letting you jump between them without logging out. Each account carries its own dashboard: its own balance, its own transaction history, and — visible under Developers — its own publishable and secret API keys. That last part is the piece that actually matters for running separate stores cleanly, since it means the checkout code for one brand can never accidentally charge through another brand's account.",
+      "image": { "file": "/screenshots/JH1ZN1mazAc/05.webp", "caption": "The dashboard for a newly created account, with the account switcher open and separate API keys listed under Developers for this account specifically." }
     },
     {
-      "heading": "Follow best practices to avoid restrictions",
-      "body": "Stripe monitors for unusual account patterns, so following their policies closely when setting up multiple accounts helps you avoid holds or restrictions."
+      "heading": "Gather the requirements before you add more accounts",
+      "body": "Each additional account still needs its own business verification details — legal business information, a bank account for payouts, and identity details for whoever's listed as the account representative. If every store shares the same LLC, most of the legal business information will be identical across accounts, but the bank account and website can differ per store. Have these ready before you start the next account so you're not stuck mid-setup waiting on a document."
+    },
+    {
+      "heading": "Keep payouts and API keys separate by design, not by habit",
+      "body": "Because each account has its own bank payout settings and its own API keys, the separation Stripe gives you is structural rather than something you have to maintain manually. Still, it's worth double-checking that each storefront's code is pointed at the correct account's keys before going live — pasting the wrong secret key into a new store's checkout is the most common way transactions end up misattributed to the wrong brand."
+    },
+    {
+      "heading": "Follow Stripe's policies to avoid restrictions",
+      "body": "Stripe does monitor for patterns that look like an attempt to evade a restriction on one account by opening another, so accuracy matters more than speed here — use consistent, truthful business information across accounts rather than varying it to look like unrelated entities. If one account under your LLC gets flagged or restricted, mismatched details on a sibling account can draw scrutiny to both, so keep your business name, address, and ownership details consistent everywhere they're asked for."
     }
   ],
   "faq": [
     {
       "question": "Can I really have more than one Stripe account under a single LLC?",
-      "answer": "Yes, Stripe allows multiple accounts linked to the same registered business entity, which is useful for owners managing several brands or stores."
+      "answer": "Yes, Stripe allows multiple accounts linked to the same registered business entity, and you add them directly from the account switcher in your existing dashboard."
     },
     {
       "question": "Do I need separate banking details for each Stripe account?",
-      "answer": "You'll want to review Stripe's requirements per account, and keeping payouts organized separately per store is recommended even if some banking details overlap."
+      "answer": "You can use the same bank account across multiple Stripe accounts, but keeping payouts organized per store — even with the same bank — makes reconciliation much easier."
     },
     {
       "question": "What causes Stripe to restrict multiple accounts?",
-      "answer": "Restrictions often stem from mismatched business information or patterns that look inconsistent across accounts, so accuracy and consistency matter."
+      "answer": "Restrictions often stem from mismatched or inconsistent business information across accounts, so keeping your legal name, address, and ownership details identical everywhere matters."
+    },
+    {
+      "question": "Are the API keys different for each account?",
+      "answer": "Yes, every account gets its own publishable and secret API keys, visible under Developers in that account's dashboard, so each store's integration stays isolated from the others."
     },
     {
       "question": "Who is this setup useful for?",
-      "answer": "It's aimed at e-commerce owners, agency owners, and anyone running multiple online ventures under one company."
+      "answer": "It's aimed at e-commerce owners, agency owners, and anyone running multiple online ventures under one company who wants clean, separate reporting per brand."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

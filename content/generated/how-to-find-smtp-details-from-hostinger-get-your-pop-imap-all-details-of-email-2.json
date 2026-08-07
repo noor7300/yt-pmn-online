@@ -2,18 +2,43 @@
   "slug": "how-to-find-smtp-details-from-hostinger-get-your-pop-imap-all-details-of-email-2",
   "seoTitle": "How to Find SMTP, POP & IMAP Details in Hostinger",
   "metaDescription": "Locate your Hostinger email's SMTP, POP, and IMAP settings so you can configure Gmail, Outlook, or any custom app correctly.",
-  "intro": "Setting up your Hostinger email in a third-party app like Gmail or Outlook depends on having the exact SMTP, POP, and IMAP details, which aren't always easy to find on your own. This guide shows where to locate these settings in your control panel and how to use them in your preferred email client.",
+  "intro": "Connecting a Hostinger mailbox to Gmail, Outlook, or a custom app depends on getting four things exactly right: the server hostname, the port, the encryption type, and which protocol you're using. Hostinger keeps all of this on one Configuration Settings screen once you drill into a specific mailbox, but finding that screen means navigating through Emails, then a domain's Mailboxes list, then the mailbox itself. This guide walks that path end to end so you can copy the correct SMTP, IMAP, and POP details on the first try instead of guessing at ports.",
   "steps": [
-    { "heading": "Open your Hostinger email settings", "body": "Go to the email section of your Hostinger control panel where your mailbox configuration details are listed." },
-    { "heading": "Find your SMTP, POP, and IMAP details", "body": "Locate the exact server addresses, ports, and encryption type needed to connect your email client." },
-    { "heading": "Copy the settings into your email client", "body": "Enter these details into Gmail, Outlook, or another app to connect your Hostinger mailbox." },
-    { "heading": "Troubleshoot configuration issues", "body": "If email isn't sending or receiving correctly, double-check the ports and encryption settings against what Hostinger provides." }
+    {
+      "heading": "Open the Emails section in hPanel",
+      "body": "From your Hostinger dashboard, click Emails in the left sidebar. This shows every domain with an active email plan, listed with its expiration date and auto-renewal status, and a Mailboxes button plus a Manage button next to each one. If you manage several domains, this is the fastest way to confirm you're about to configure the correct one before digging further.",
+      "image": { "file": "/screenshots/WG9L0bXTKAI/03.webp", "caption": "The Emails overview in hPanel, listing each domain's email plan with Mailboxes and Manage buttons on the right." }
+    },
+    {
+      "heading": "Open the specific mailbox",
+      "body": "Click Mailboxes next to the domain you want, and you'll land on a list of every address under that domain, each showing its status and storage usage. Click the three-dot menu or the mailbox itself to drill into that address specifically — the SMTP, IMAP, and POP configuration details are scoped per mailbox, not per domain, so you need to be inside the individual address, not just the domain-level list.",
+      "image": { "file": "/screenshots/WG9L0bXTKAI/04.webp", "caption": "The Mailboxes list for a domain, showing an active address with its usage and a Webmail link — click into it to reach the configuration details." }
+    },
+    {
+      "heading": "Find the Configuration Settings panel",
+      "body": "Inside the mailbox's settings, scroll to the section labeled Configuration Settings, under the heading \"Configure your email client using email server.\" This table lists three protocols side by side: Incoming server (IMAP), Outgoing server (SMTP), and Incoming server (POP), each with its own hostname, port number, and a checkmark confirming SSL/TLS is required. A copy icon sits next to each hostname so you can paste it directly into your email client without retyping it.",
+      "image": { "file": "/screenshots/WG9L0bXTKAI/05.webp", "caption": "The Configuration Settings table, listing IMAP on port 993, SMTP on port 465, and POP on port 995, all with SSL/TLS checked." }
+    },
+    {
+      "heading": "Match the protocol to what your email client asks for",
+      "body": "Gmail, Outlook, and most desktop or mobile mail apps will ask you to set up both an incoming and an outgoing server. Use the IMAP hostname and port for incoming mail if you want your mailbox to stay in sync across multiple devices, or POP if you prefer messages downloaded to a single device. Either way, the SMTP hostname and port handle outgoing mail — you'll need both an incoming protocol and SMTP configured before the account will send and receive correctly."
+    },
+    {
+      "heading": "Enable SSL/TLS in your client's settings",
+      "body": "Hostinger's table shows a checkmark under SSL/TLS for all three protocols, meaning encryption is required, not optional, on these ports. If your email client has a separate dropdown for encryption type, choose SSL/TLS rather than leaving it on \"None\" or \"Auto\" — a mismatched encryption setting is one of the most common reasons a mailbox that's configured with the right hostname and port still fails to connect."
+    },
+    {
+      "heading": "Use your full email address and password as login credentials",
+      "body": "When your client asks for a username, enter the full email address, not just the local part before the @ symbol, and use the mailbox's password rather than your Hostinger account password — they're separate credentials. If authentication still fails after matching the hostname, port, and encryption exactly, double-check you're not accidentally using your hPanel login instead of the mailbox-specific one."
+    }
   ],
   "faq": [
-    { "question": "Where do I find my Hostinger SMTP settings?", "answer": "They're located in the email configuration section of your Hostinger control panel, alongside your POP and IMAP details." },
-    { "question": "Can I use these details in Gmail or Outlook?", "answer": "Yes, once you have the correct settings you can add your Hostinger email to Gmail, Outlook, or another client." },
-    { "question": "Why isn't my email working after adding it to an app?", "answer": "It's often due to an incorrect port or encryption setting, so it helps to recheck the exact values from Hostinger." },
-    { "question": "What's the difference between POP and IMAP?", "answer": "Both are ways to retrieve mail, and the guide covers finding both sets of details so you can choose what suits your setup." }
+    { "question": "Where do I find my Hostinger SMTP settings?", "answer": "Go to Emails in hPanel, open Mailboxes for your domain, click into the specific mailbox, and scroll to Configuration Settings — SMTP is listed there alongside IMAP and POP." },
+    { "question": "Can I use these details in Gmail or Outlook?", "answer": "Yes, once you have the correct hostname, port, and SSL/TLS setting you can add your Hostinger email to Gmail, Outlook, or another client." },
+    { "question": "Why isn't my email working after adding it to an app?", "answer": "It's most often an incorrect port or a missing SSL/TLS setting, or using your hPanel password instead of the mailbox's own password — recheck all three against Hostinger's Configuration Settings table." },
+    { "question": "What's the difference between POP and IMAP?", "answer": "IMAP keeps your mailbox synced across every device you check it from, while POP downloads messages to a single device. Hostinger lists hostnames and ports for both so you can choose based on how you check email." },
+    { "question": "What ports does Hostinger use for email?", "answer": "IMAP uses port 993, SMTP uses port 465, and POP uses port 995 — all three require SSL/TLS encryption." }
   ],
-  "generatedAt": "2026-07-24T02:46:52Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

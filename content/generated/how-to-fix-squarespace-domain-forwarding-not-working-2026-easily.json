@@ -2,46 +2,58 @@
   "slug": "how-to-fix-squarespace-domain-forwarding-not-working-2026-easily",
   "seoTitle": "Fix Squarespace Domain Forwarding That's Not Working",
   "metaDescription": "Troubleshoot a Squarespace domain forwarding rule that isn't redirecting yet, from cache issues to leftover DNS records.",
-  "intro": "Domain forwarding in Squarespace isn't instant — it can take anywhere from a few minutes to 48 hours to fully propagate, especially with SSL enabled. If your redirect still isn't working after a while, this guide walks through the most common causes and fixes.",
+  "intro": "Domain forwarding in Squarespace isn't instant — it can take anywhere from a few minutes to 48 hours to fully propagate, especially with SSL enabled, and in the meantime your domain can throw a browser error that looks far more broken than it actually is. If your redirect still isn't working after a while, this guide walks through what a correctly configured forwarding rule looks like, what the failure actually looks like in the browser, and the DNS records worth double-checking before you assume something is wrong.",
   "steps": [
     {
-      "heading": "Give it time first",
-      "body": "Squarespace notes that forwarding with SSL can take up to 48 hours to propagate, though most cases resolve within 1-2 hours."
+      "heading": "Confirm the forwarding rule itself is set up correctly",
+      "body": "In your Squarespace domain settings, scroll to the Domain Forwarding section and check the rule against what you intended: the From field is your domain, the To field is the exact destination URL, Redirect Type shows Permanent redirect (the standard choice), and Forwarding Over SSL is switched on. A Last Updated timestamp confirms when the rule was actually saved — if it's older than you expect, your most recent edit may not have gone through.",
+      "image": { "file": "/screenshots/bbi41ODIlTU/01.webp", "caption": "A Domain Forwarding rule in Squarespace, showing the From and To domains, Permanent redirect as the type, and SSL forwarding switched on." }
     },
     {
-      "heading": "Clear your browser cache",
-      "body": "Your browser may be holding old DNS or page data. Try an incognito tab or clear your cache and reload."
+      "heading": "Recognize what a still-propagating redirect looks like",
+      "body": "Visiting the domain before forwarding has finished propagating typically shows a browser error like \"This site can't be reached\" with a DNS_PROBE_FINISHED_NXDOMAIN message, rather than a broken-looking Squarespace page. That specific error means the browser couldn't resolve the domain to any address yet — it's a DNS propagation symptom, not evidence that your forwarding rule is misconfigured. Seeing this right after saving a new rule is expected, not alarming.",
+      "image": { "file": "/screenshots/bbi41ODIlTU/02.webp", "caption": "The \"This site can't be reached\" browser error with a DNS_PROBE_FINISHED_NXDOMAIN code — the typical symptom of forwarding that hasn't propagated yet, not a misconfigured rule." }
     },
     {
-      "heading": "Test on another network or device",
-      "body": "If the redirect works on mobile or a different network, your local DNS is likely still catching up."
+      "heading": "Give it time before troubleshooting further",
+      "body": "Squarespace states that forwarding changes, especially with SSL enabled, can take up to 48 hours to fully propagate across the internet, though most cases resolve within one to two hours. If it's only been thirty minutes since you saved the rule, the NXDOMAIN error from the previous step is very likely just DNS still catching up — wait before assuming something needs fixing."
     },
     {
-      "heading": "Check DNS records for leftovers",
-      "body": "Go to Settings, Domains, DNS Settings, and make sure there are no leftover A records or CNAMEs for the subdomain you're forwarding."
+      "heading": "Clear your browser cache or test elsewhere",
+      "body": "If it's been over an hour and the redirect still isn't working, your browser may be holding onto old DNS or page data. Open the domain in an incognito or private window, or clear your browser's cache and reload. If it still fails, try the domain on a completely different network — your phone on cellular data, for instance. If it works there but not on your usual connection, the issue is local DNS caching on your network, not your Squarespace setup."
     },
     {
-      "heading": "Confirm your rule and re-add if needed",
-      "body": "Verify the forwarding rule is saved correctly in Website, Forwarding, with the right URL and SSL enabled. If it's still not working, remove and re-add the rule."
+      "heading": "Check DNS Settings for leftover records",
+      "body": "Go to Settings, Domains, and open DNS Settings for the domain. This page lists every DNS record grouped by the service that created it — a Squarespace Domain Connect CNAME record, MX records for an email provider like Google Workspace, and so on. Look specifically for a leftover A record or CNAME on the same subdomain you're forwarding, like www — even a single stale record here can override the forwarding rule and stop the redirect from firing.",
+      "image": { "file": "/screenshots/bbi41ODIlTU/05.webp", "caption": "The DNS Settings page, showing the Squarespace Domain Connect CNAME record alongside a separate block of Google Workspace MX records for the same domain." }
+    },
+    {
+      "heading": "Remove and re-add the rule as a last resort",
+      "body": "If you've waited a reasonable amount of time, cleared your cache, and confirmed there's no conflicting DNS record, delete the forwarding rule using the trash icon next to it, save, wait a minute, and then re-add it from scratch with the same From, To, and SSL settings. This resets the underlying configuration and resolves the rare cases where a rule looks correctly saved in the interface but isn't actually being applied."
     }
   ],
   "faq": [
     {
       "question": "How long should I wait before troubleshooting forwarding?",
-      "answer": "Give it at least an hour or two, since propagation with SSL can take up to 48 hours in some cases."
+      "answer": "Give it at least an hour or two, since propagation with SSL can take up to 48 hours in some cases, though most rules resolve within one to two hours."
     },
     {
       "question": "Why does clearing my cache help?",
       "answer": "Your browser may still be showing an old cached version of the page or DNS lookup, which an incognito window or cache clear resolves."
     },
     {
+      "question": "What does the DNS_PROBE_FINISHED_NXDOMAIN error actually mean?",
+      "answer": "It means the browser couldn't resolve your domain to any address at that moment — usually a sign that DNS for the new forwarding rule hasn't finished propagating yet, not that the rule itself is broken."
+    },
+    {
       "question": "What if a leftover DNS record is causing the issue?",
-      "answer": "Even one leftover A record or CNAME on the forwarded subdomain can block the redirect from working — remove it in DNS Settings."
+      "answer": "Even one leftover A record or CNAME on the forwarded subdomain can block the redirect from working — remove it in DNS Settings, being careful not to touch records for unrelated services like email."
     },
     {
       "question": "Does removing and re-adding the rule actually help?",
       "answer": "Yes, it can reset the redirect configuration and resolve cases where the rule appears saved but isn't functioning."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

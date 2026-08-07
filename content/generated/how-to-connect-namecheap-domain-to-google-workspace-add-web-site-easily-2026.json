@@ -2,27 +2,33 @@
   "slug": "how-to-connect-namecheap-domain-to-google-workspace-add-web-site-easily-2026",
   "seoTitle": "How to Connect a Namecheap Domain to Google Workspace",
   "metaDescription": "Learn how to connect your Namecheap domain to Google Workspace and get your website and business email live under your own domain in 2026.",
-  "intro": "If your domain is registered with Namecheap and you want to use it with Google Workspace for email and a website, the two need to be linked through your DNS settings. This guide walks through connecting them step by step.",
+  "intro": "Buying a domain through Namecheap and running your business on Google Workspace are two separate accounts that don't talk to each other automatically — the link between them is built entirely through DNS records you add yourself. Get this wrong and email either bounces or never arrives, so it's worth doing carefully the first time rather than troubleshooting delivery problems later. This guide walks through the whole path: starting from your Namecheap dashboard, moving into the Google Admin console to manage the domain, and finishing with the DNS changes that make both email and your website resolve under your own name. None of it requires a developer, but it does require patience while DNS changes propagate.",
   "steps": [
     {
-      "heading": "Set up your Google Workspace account",
-      "body": "Sign up for Workspace and enter your Namecheap domain name during setup so Google knows which domain to associate with your account."
+      "heading": "Confirm your domain in the Namecheap dashboard",
+      "body": "Log in to Namecheap and land on the dashboard, where \"Recently Active in Your Account\" lists the domains tied to your login along with their expiration date and a Manage button. Before touching Google Workspace, confirm you're looking at the exact domain you intend to connect — it's easy to have several similar-looking domains registered and edit the wrong one's DNS. Click Manage next to the correct domain to open its settings, since that's also where the Advanced DNS tab lives, the tab you'll come back to a few steps from now to actually add records.",
+      "image": { "file": "/screenshots/S_RSAAEH5A0/02.webp", "caption": "The Namecheap dashboard with an active domain listed under Recently Active in Your Account. The Manage button opens that domain's DNS settings." }
     },
     {
-      "heading": "Verify domain ownership",
-      "body": "Google provides a verification code or DNS record that you'll add in your Namecheap account to prove you control the domain."
+      "heading": "Start domain setup in Google Workspace",
+      "body": "In a separate tab, sign up for or sign in to Google Workspace and enter the same Namecheap domain name when it asks which domain you want to use. Google treats this as the anchor for the whole account — every user's email address and every service tied to Workspace will live under this domain, so double-check the spelling matches exactly what you registered in Namecheap. If you're adding Workspace to a domain you already use for something else, Google will still walk you through the same setup flow rather than skipping steps."
     },
     {
-      "heading": "Update DNS records in Namecheap",
-      "body": "Log in to Namecheap and add the required MX and verification records under the domain's Advanced DNS settings so Workspace services connect properly."
+      "heading": "Verify ownership with a TXT record",
+      "body": "Google won't activate anything on a domain it can't confirm you own, so it generates a verification method — usually a TXT record — that only the domain's actual owner could add. Copy the exact value Google gives you; a single missing character means verification fails and you have to start the check again. This step exists purely to stop someone else from claiming your domain inside Google Workspace, so there's no way to skip it even on a brand-new account."
     },
     {
-      "heading": "Add your website to Google Workspace",
-      "body": "Once the domain is verified, connect it to your website hosting or Google Sites setup so your site is reachable under the same domain."
+      "heading": "Add the verification and MX records in Namecheap",
+      "body": "Back in Namecheap, open Advanced DNS for the domain and add a new TXT record with the exact value Google provided, then add the MX records Google lists for Gmail delivery — these have specific priority numbers that need to match what Google shows, not a guess. Leave any existing records alone unless Google's instructions say to remove them, since deleting the wrong record can take down a working website or inbox. Save the changes, then return to Google Workspace and click Verify; if it doesn't pass immediately, wait rather than repeatedly editing the record, since DNS changes take time to spread across the internet's servers."
     },
     {
-      "heading": "Confirm everything is working",
-      "body": "Test that email delivery and your website both resolve correctly under the Namecheap domain before considering the setup complete."
+      "heading": "Manage the domain from the Google Admin console",
+      "body": "Once verified, the domain shows up in the Google Admin console under Account settings, on the Manage domains screen alongside any domain aliases and a separate Allowlisted domains panel for external domains you want limited access for. This is the control center for the domain going forward — it's where you'd add a second domain alias later, or check that your primary domain is still marked correctly. Bookmark this screen, since it's also the fastest way to confirm Google's side agrees the domain is verified without digging through settings menus.",
+      "image": { "file": "/screenshots/S_RSAAEH5A0/04.webp", "caption": "The Google Admin console's Manage domains screen, showing the verified domain alongside an Allowlisted domains panel for external access." }
+    },
+    {
+      "heading": "Connect your website and confirm delivery",
+      "body": "If you're building the actual website in Google Sites or another Google-connected tool, add the site's CNAME or A record the same way you added the MX records, following whatever Google specifies for that product. Once both sets of records are live, test both halves of the setup: send a real email to an address on the domain and check it lands in Gmail, then load the domain in a browser to confirm the site resolves. Give DNS up to 48 hours if either check fails right away — most \"it's not working\" reports are really just propagation still in progress rather than a misconfigured record."
     }
   ],
   "faq": [
@@ -40,8 +46,13 @@
     },
     {
       "question": "What if verification fails in Google Workspace?",
-      "answer": "Double-check that the exact verification record was added in Namecheap's DNS settings and give it time to propagate before trying again."
+      "answer": "Double-check that the exact verification record was added in Namecheap's DNS settings and give it time to propagate before trying again — repeatedly re-adding the record without waiting usually just resets the propagation clock."
+    },
+    {
+      "question": "Where do I manage the domain once it's connected?",
+      "answer": "Inside the Google Admin console, under Account settings → Domains → Manage domains, which lists every domain and domain alias tied to your Workspace account."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

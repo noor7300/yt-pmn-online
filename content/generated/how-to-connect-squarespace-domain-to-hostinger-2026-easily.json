@@ -1,34 +1,41 @@
 {
   "slug": "how-to-connect-squarespace-domain-to-hostinger-2026-easily",
   "seoTitle": "How to Connect a Squarespace Domain to Hostinger",
-  "metaDescription": "Point a domain purchased through Squarespace to Hostinger hosting by updating DNS nameservers, then enable SSL for a secure site.",
-  "intro": "If you bought your domain through Squarespace but want to host your site on Hostinger, you don't need to buy a new domain — you just need to update your nameservers. This guide covers accessing Squarespace's DNS settings, pointing to Hostinger, and verifying the connection.",
+  "metaDescription": "Point a domain purchased through Squarespace to Hostinger hosting by updating nameservers in Squarespace's DNS settings, then confirm the connection in Hostinger.",
+  "intro": "If you bought your domain through Squarespace but want to host your actual website on Hostinger, you don't need to buy a second domain or move the registration anywhere — you just need to change which nameservers the domain points to. This guide walks through both sides of that swap: finding the domain inside Squarespace where its DNS lives, and confirming on the Hostinger side that the connection actually took, since Hostinger will tell you plainly when a domain still isn't linked to your site.",
   "steps": [
     {
-      "heading": "Access Squarespace DNS settings",
-      "body": "Log in to Squarespace and open your domain's DNS settings, where nameservers are managed."
+      "heading": "Open the domain in Squarespace",
+      "body": "Log in to Squarespace and go to Domains, then select the domain you want to move. The overview page shows the domain's status as Active, its provider (Squarespace, in this case, since it was purchased there), and its expiration date, along with a left-hand menu that includes Overview, DNS, Website, Email, Activity, Permissions, and Billing. The DNS tab in that sidebar is where nameservers actually get changed, so note its location now — you'll come back to it in a few steps.",
+      "image": { "file": "/screenshots/VBNb5uzIXNU/03.webp", "caption": "The Squarespace Domains overview for an active domain, showing its expiration date and a left-hand menu that includes a dedicated DNS tab." }
     },
     {
-      "heading": "Find your Hostinger nameservers",
-      "body": "Log in to Hostinger and locate the nameserver addresses you'll need to point your domain to."
+      "heading": "Log in to Hostinger and find your nameservers",
+      "body": "In a separate tab, sign in to your Hostinger account, which opens on a dashboard with a sidebar for Websites, Domains, Horizons, Emails, VPS, and Billing. Hostinger's nameserver addresses are what you'll paste into Squarespace, and they're listed under the Domains section of this same sidebar rather than anywhere in the website-building tools — if your Hostinger plan came with a free-trial builder or Horizons prompt, that's unrelated to this step and can be dismissed.",
+      "image": { "file": "/screenshots/VBNb5uzIXNU/01.webp", "caption": "The Hostinger dashboard home, with Domains listed in the left-hand sidebar below Websites — the section that holds the nameserver addresses." }
     },
     {
-      "heading": "Update nameservers in Squarespace",
-      "body": "Replace the existing nameservers in your Squarespace domain settings with the Hostinger nameservers you found."
+      "heading": "Replace the nameservers in Squarespace",
+      "body": "Back in Squarespace, open the DNS tab you noted earlier and look for the nameserver settings, which by default point to Squarespace's own servers. Switch this to custom nameservers and enter the Hostinger addresses exactly as shown, without extra spaces or missing characters — a single wrong character here is the most common reason this whole process stalls. Save the change; Squarespace will typically warn you that anything hosted through its own site-building tools will stop resolving once custom nameservers are active, which is expected since you're intentionally moving hosting elsewhere."
     },
     {
-      "heading": "Verify the connection",
-      "body": "Check that your domain is successfully pointing to Hostinger — this can take some time as DNS changes propagate."
+      "heading": "Give the change time to propagate",
+      "body": "Nameserver changes don't take effect instantly — the update has to spread across DNS servers worldwide, which can take anywhere from a few minutes to 24-48 hours depending on your domain and previous settings. Avoid repeatedly re-saving the nameserver fields during this window; it doesn't speed anything up and can occasionally reset the propagation clock."
     },
     {
-      "heading": "Enable SSL",
-      "body": "Once verified, enable SSL on Hostinger so your website loads securely over HTTPS."
+      "heading": "Check the connection status in Hostinger",
+      "body": "Open your website's dashboard in Hostinger and look near the top for a status banner — while the domain is still pointing elsewhere, Hostinger displays a clear red notice reading \"Domain isn't connected to your website,\" along with a Check guide link and a Domain card marked \"Action required.\" This banner is the most reliable signal you have; once the nameserver change has fully propagated, it clears and the Domain card should reflect that the connection is live.",
+      "image": { "file": "/screenshots/VBNb5uzIXNU/04.webp", "caption": "The Hostinger website dashboard showing the \"Domain isn't connected to your website\" warning, which clears once the nameserver change finishes propagating." }
+    },
+    {
+      "heading": "Enable SSL once the domain connects",
+      "body": "As soon as the connection banner clears, go into Hostinger's SSL settings for the site and make sure a certificate is issued and active — most Hostinger plans provision this automatically shortly after the domain resolves, but it's worth confirming rather than assuming. Load your domain in a browser and check for the padlock icon before calling the migration finished; a site that loads but throws a certificate warning still needs this step completed."
     }
   ],
   "faq": [
     {
       "question": "Will my site go down while I switch nameservers?",
-      "answer": "There can be a period of DNS propagation, but following the steps in order and verifying the connection helps minimize downtime."
+      "answer": "There can be a period of DNS propagation where the domain briefly points nowhere useful, but following the steps in order and checking Hostinger's connection banner helps you confirm the switch quickly rather than guessing."
     },
     {
       "question": "How long does DNS propagation take?",
@@ -36,12 +43,17 @@
     },
     {
       "question": "Do I need to buy a new domain to switch hosts?",
-      "answer": "No, you can keep your domain registered with Squarespace and simply point its nameservers to Hostinger."
+      "answer": "No, you can keep your domain registered with Squarespace and simply point its nameservers to Hostinger from the domain's DNS tab."
+    },
+    {
+      "question": "How do I know if the domain actually connected to Hostinger?",
+      "answer": "Open the website's dashboard in Hostinger — a red \"Domain isn't connected to your website\" banner means it hasn't finished propagating yet; once that banner disappears, the connection is live."
     },
     {
       "question": "Do I need to set up SSL manually on Hostinger?",
-      "answer": "Yes, after your domain is connected, you'll need to enable SSL on Hostinger to ensure secure browsing."
+      "answer": "Usually Hostinger issues a certificate automatically once the domain connects, but confirm it in the SSL settings and check for the padlock in your browser before considering the setup complete."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

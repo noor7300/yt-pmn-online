@@ -1,47 +1,60 @@
 {
   "slug": "how-to-resend-google-workspace-invite-easily-2026",
   "seoTitle": "How to Resend a Google Workspace Invite (2026)",
-  "metaDescription": "Learn how to resend a Google Workspace invitation to a user who missed the original email, without deleting or recreating their account.",
-  "intro": "New users sometimes miss their original Google Workspace invitation email or the link expires before they act on it. This guide shows admins how to resend the invite quickly without having to delete and recreate the account.",
+  "metaDescription": "Learn how to get a new Google Workspace user back into their account by resetting their password and emailing them a fresh sign-in link from the Admin console.",
+  "intro": "New users sometimes miss their original Google Workspace welcome email, or the link inside it goes stale before they get around to clicking it. Google Workspace doesn't have a single \"resend invite\" button sitting on the user's profile — the practical fix admins actually use is resetting the user's password from the Admin console and emailing them the new sign-in details, which gets a stuck account moving again without deleting or recreating anything. This guide walks through that exact flow: finding the user, resetting their password, and sending it to their recovery email so they can get in.",
   "steps": [
     {
-      "heading": "Locate the pending user",
-      "body": "In the Admin Console's Users section, find the account that shows a pending or unaccepted invitation status."
+      "heading": "Open the Admin console and find Users",
+      "body": "Sign in to admin.google.com and land on the home dashboard, where the Manage Workspace section groups your core admin tasks — Users on one side with Add a user, Delete a user, and Reset password shortcuts, and Billing on the other. Click Manage under Users, or Users in the left-hand Directory menu, to get to the full list of accounts in your organization.",
+      "image": { "file": "/screenshots/gWhlqXX7nL4/02.webp", "caption": "The Admin console home screen, with Manage Workspace showing quick links for Users and Billing side by side." }
     },
     {
-      "heading": "Check the invite status",
-      "body": "Confirm the user hasn't already activated the account under a different email or device before resending."
+      "heading": "Open the specific user's account",
+      "body": "Search or scroll to the user who hasn't activated their account and click their name to open their profile. The panel across the top shows whether the account is Active, when they last signed in, and when it was created — a user who's never signed in despite the account existing days or weeks ago is your clearest sign the original invite email never landed. From here, the left-hand list of actions includes Reset Password, Update User, and Suspend User."
     },
     {
-      "heading": "Resend the invitation",
-      "body": "Select the option to resend the activation email, which sends a fresh link to the user's registered address."
+      "heading": "Reset the user's password",
+      "body": "Click Reset Password to open the reset dialog for that user. You get two options: let Google automatically generate a password you can view and copy in the next screen, or set one yourself with Create Password. For a user who's stuck outside their account, the automatic option is simpler — you don't need to coordinate a password with them, since the next step sends it directly.",
+      "image": { "file": "/screenshots/gWhlqXX7nL4/03.webp", "caption": "The Reset password dialog for a user account, offering a choice between an automatically generated password and a custom one." }
     },
     {
-      "heading": "Confirm delivery and troubleshoot if needed",
-      "body": "If the user still doesn't receive it, check for typos in their email address or spam filtering issues on their end."
+      "heading": "Confirm the reset and copy the password",
+      "body": "After confirming, a green \"Reset password successful\" banner appears with the new password shown in a masked field you can reveal or copy. This is also the screen with the Email Password button, which is the step that actually gets the user unstuck — copying the password here only helps if you're relaying it to them yourself through another channel.",
+      "image": { "file": "/screenshots/gWhlqXX7nL4/04.webp", "caption": "The confirmation screen after a successful password reset, with options to copy the password or email it directly to the user." }
     },
     {
-      "heading": "Help the user activate their account",
-      "body": "Once they receive the resent invite, guide them through clicking the link and setting up their password to complete activation."
+      "heading": "Email the new password to the user",
+      "body": "Clicking Email Password opens a dialog pre-filled with the user's secondary or recovery email address, plus a preview of the message they'll receive: a note that their administrator reset the account's password, a reset button, and a line warning that the reset link expires after 48 hours. Double-check the email address in the field before sending — if it's wrong or outdated, this ends up being the same delivery problem as the original invite, just with a different message.",
+      "image": { "file": "/screenshots/gWhlqXX7nL4/05.webp", "caption": "The Email new password dialog, showing the recovery email address, the message the user will receive, and the 48-hour link expiry warning." }
+    },
+    {
+      "heading": "Walk the user through activation",
+      "body": "Once the email lands, the user clicks the reset link, sets a password they'll actually remember, and signs in — at that point their account status flips to Active with a real \"last sign-in\" timestamp, which you can verify by reopening their profile in the Admin console. If they still don't receive it, check the recovery email for typos, ask them to check spam, and remember the link expires in 48 hours, so don't wait too long to confirm it worked before sending another."
     }
   ],
   "faq": [
     {
-      "question": "How long does a Google Workspace invite remain valid?",
-      "answer": "Invitation links typically remain valid for a limited window, often a few days to a couple of weeks, before they expire and need to be resent."
+      "question": "Is there a dedicated \"resend invite\" button in Google Workspace?",
+      "answer": "Not as a standalone action on the user's profile. The practical equivalent admins use is resetting the user's password from the Admin console and emailing it to them, which sends a fresh link the user can act on."
     },
     {
-      "question": "Can I resend an invite without deleting the user account?",
-      "answer": "Yes, resending an invite doesn't require deleting or recreating the account — it simply sends a new activation email to the same pending user."
+      "question": "How long does the reset password link stay valid?",
+      "answer": "The email Google Workspace sends states the reset link expires after 48 hours, so send it when the user is ready to act rather than well ahead of time."
     },
     {
-      "question": "Why might a user not receive their Google Workspace invite?",
-      "answer": "Common causes include a typo in the email address, the message landing in spam, or the original link having expired before they clicked it."
+      "question": "Can I resend access without deleting the user account?",
+      "answer": "Yes. Resetting the password and emailing it doesn't touch the account itself — it simply issues a new password and a new link, leaving the user's data, groups, and settings untouched."
     },
     {
-      "question": "Is resending an invite different for a school or business account?",
-      "answer": "The process is largely the same across account types, though education accounts may have slightly different default settings for invite expiration."
+      "question": "Why might a user not receive the reset email?",
+      "answer": "Common causes include a typo in their secondary email address, the message landing in spam, or the 48-hour link having expired before they clicked it."
+    },
+    {
+      "question": "How do I confirm the reset actually worked?",
+      "answer": "Reopen the user's profile in the Admin console — an account that's successfully signed in shows Active status with a recent \"Last sign-in\" timestamp instead of a blank one."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

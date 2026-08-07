@@ -1,47 +1,58 @@
 {
   "slug": "how-to-use-gemini-ai-with-google-workspace-with-2-5-pro-veo-3-vidoes-2026-easily",
   "seoTitle": "How to Use Gemini AI with Google Workspace (2026)",
-  "metaDescription": "See how to integrate Gemini AI's 2.5 Pro and Veo 3 video features into Google Workspace to speed up everyday tasks across Docs, Sheets, and Gmail.",
-  "intro": "Gemini AI is now built into Google Workspace, giving you AI assistance without leaving Docs, Sheets, or Gmail. This guide covers how to set up Gemini and start using its 2.5 Pro and Veo 3 video capabilities to support your daily workflow.",
+  "metaDescription": "See how to turn on Gemini AI inside Google Workspace's Admin console, control who can access it, and start using its 2.5 Pro and Veo 3 features.",
+  "intro": "Gemini shows up as an app icon next to Gmail and Docs in every Workspace account, but whether it actually works for your users depends on a setting most people never open: the Gemini app controls inside the Google Admin console. This guide covers the real path to turning it on — from the Google apps launcher where Gemini first appears, into the Admin console where an administrator sets service status and user access, and out the other side to actually using the 2.5 Pro model and Veo 3 video generation day to day. If Gemini looks greyed out or missing for some of your team, this is almost always where the fix lives.",
   "steps": [
     {
-      "heading": "Understand what Gemini AI offers",
-      "body": "Gemini AI brings generative writing, summarization, and now video generation through Veo 3 directly into the Workspace apps you already use."
+      "heading": "Find Gemini in the Google apps launcher",
+      "body": "Gemini sits in the grid you get from the nine-dot apps launcher in the top corner of any Google page, right alongside Drive, Docs, Sheets, and — for admins — the Admin console itself. This is the fastest way to jump between the consumer-facing Gemini app and the Workspace admin tools without hunting through bookmarks. If you don't see Gemini in that grid at all, that's the first sign it hasn't been turned on for your account yet, which is exactly what the next steps fix.",
+      "image": { "file": "/screenshots/sMoVuawfsww/03.webp", "caption": "The Google apps launcher open on google.com, showing Gemini listed alongside Admin, Gmail, Drive, Docs, and Sheets." }
     },
     {
-      "heading": "Set up Gemini in your Workspace account",
-      "body": "Depending on your plan, Gemini may need to be enabled by an admin or added as an add-on before it appears inside your apps."
+      "heading": "Open Generative AI settings in the Admin console",
+      "body": "From the launcher, admins go into Admin, then find Generative AI in the left-hand navigation — it expands into Gemini app, Gemini for Workspace, NotebookLM, and Gemini reports. Gemini app specifically controls the standalone gemini.google.com experience, while Gemini for Workspace governs the AI features embedded inside Docs, Sheets, and Gmail; they're configured separately, so check both if something works in one place but not the other."
     },
     {
-      "heading": "Explore the 2.5 Pro features",
-      "body": "The 2.5 Pro model handles more complex requests — like drafting longer documents or analyzing data in Sheets — with improved accuracy over earlier versions."
+      "heading": "Check the service status",
+      "body": "The Gemini app settings page opens on a Status panel that reads either \"ON for everyone\" or something more restricted, with a Service status section just below it that repeats and expands on that same toggle. This is the master switch — if it's off, nothing else on the page matters, since no user in the organization can reach Gemini regardless of their individual permissions. Flipping it on is usually the single fix when a whole team reports Gemini missing at once.",
+      "image": { "file": "/screenshots/sMoVuawfsww/04.webp", "caption": "The Gemini app settings screen in the Google Admin console, showing service status set to ON for everyone and a User access panel below it." }
     },
     {
-      "heading": "Try Veo 3 for video generation",
-      "body": "Veo 3 lets you generate short video content from text prompts, which can be useful for presentations, marketing material, or internal communications."
+      "heading": "Set user access below the service status",
+      "body": "Below Service status, the User access panel is where per-organization rules live — the setting shown here has \"Allow all users to access the Gemini app, regardless of licence\" turned off and applied at a specific organizational unit, which means access is being gated by license rather than opened to everyone. If certain users can't reach Gemini even though the service is on overall, this is the setting to check next, since it's common to restrict a new AI feature to a pilot group before rolling it out company-wide."
     },
     {
-      "heading": "Combine Gemini with your existing Workspace tools",
-      "body": "Use Gemini alongside Docs, Sheets, and Gmail to draft content, summarize threads, and speed up repetitive tasks without switching apps."
+      "heading": "Separate the licence question from the access toggle",
+      "body": "Because access here is tied to licence, confirm which Workspace edition each user is on before assuming the toggle is broken — some plans include Gemini by default, while others need it added as a separate SKU before the access setting has anything to grant. An admin flipping User access to 'on' for a user without the right licence attached won't produce a working Gemini app for that person; the licence has to be assigned first."
+    },
+    {
+      "heading": "Put 2.5 Pro and Veo 3 to work",
+      "body": "Once access is confirmed, Gemini's 2.5 Pro model handles the heavier lifting — drafting longer documents in Docs, summarizing long email threads in Gmail, or working through more involved data questions in Sheets — with noticeably better follow-through on multi-step requests than earlier Gemini versions. Veo 3 is the video-generation side of the same Gemini interface, turning a text prompt into a short clip you can drop into a presentation or an internal update without leaving your Google account. Both are reached from the same Gemini entry point you just unlocked, so there's no separate setup once the app itself is turned on and licensed correctly."
     }
   ],
   "faq": [
     {
       "question": "Is Gemini AI included in all Google Workspace plans?",
-      "answer": "Availability depends on your specific Workspace edition — some plans include Gemini by default while others require it as an add-on."
+      "answer": "Availability depends on your specific Workspace edition — some plans include Gemini by default while others require it as an add-on, and the Admin console's User access setting can further restrict it even on a licensed plan."
     },
     {
       "question": "What's the difference between Gemini 2.5 Pro and earlier versions?",
-      "answer": "2.5 Pro is built to handle more complex, multi-step requests with greater accuracy compared to earlier Gemini models."
+      "answer": "2.5 Pro is built to handle more complex, multi-step requests — like drafting longer documents or working through data in Sheets — with greater accuracy compared to earlier Gemini models."
     },
     {
       "question": "Can I use Veo 3 to create videos directly inside Workspace apps?",
-      "answer": "Veo 3's video generation is accessed through Gemini's interface within Workspace, letting you create short clips from text prompts."
+      "answer": "Veo 3's video generation is accessed through Gemini's interface, the same app you enable in the Admin console, letting you create short clips from text prompts once access is turned on."
+    },
+    {
+      "question": "Why can't some users see Gemini even though it's turned on?",
+      "answer": "Check the User access panel under Generative AI → Gemini app in the Admin console — access can be scoped to a specific organizational unit or gated by licence rather than opened to everyone by default."
     },
     {
       "question": "Do I need any special training to use Gemini in Workspace?",
-      "answer": "No special training is required — Gemini is designed to work through natural prompts inside the apps you already use daily."
+      "answer": "No special training is required once access is enabled — Gemini is designed to work through natural prompts inside the apps you already use daily."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

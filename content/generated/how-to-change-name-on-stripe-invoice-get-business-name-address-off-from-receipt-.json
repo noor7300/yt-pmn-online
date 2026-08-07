@@ -1,47 +1,59 @@
 {
   "slug": "how-to-change-name-on-stripe-invoice-get-business-name-address-off-from-receipt-",
   "seoTitle": "How to Change the Name on a Stripe Invoice",
-  "metaDescription": "Update the business name and address shown on Stripe invoices and receipts by adjusting your account's branding settings.",
-  "intro": "The name and address shown on your Stripe invoices and receipts should reflect exactly how you want your business to appear to customers. This guide walks through where to find Stripe's branding settings and how to update or remove business details on your receipts.",
+  "metaDescription": "Update the business name, public descriptor, and contact details shown on Stripe invoices and receipts through the Invoices and Business settings pages.",
+  "intro": "The name a customer sees on a Stripe invoice or receipt doesn't come from one single field — it's pulled from your account's business information and public details, which live in a different corner of the Dashboard than the invoice itself. This guide follows the real path: starting from the Dashboard home, into the Invoices settings where Stripe links out to Branding and Business information, and finally into the Business details panel where the actual name, website, and support address get edited. Get this right and every invoice generated afterward reflects the change automatically.",
   "steps": [
     {
-      "heading": "Open your Stripe account settings",
-      "body": "Log into Stripe and navigate to the branding or business settings section."
+      "heading": "Start from the Stripe Dashboard home",
+      "body": "Log in and land on the Dashboard home, with the left-hand navigation showing Home, Balances, Transactions, Customers, and Product catalog, plus a Products section further down for Payments, Billing, and Reporting. If your account shows a banner like \"Payments and payouts paused until requirements met,\" it's worth clicking through and resolving that first — an account with unmet requirements can also be missing the business details that show up on invoices, so the two are often connected.",
+      "image": { "file": "/screenshots/ytK4yX9_-uw/03.webp", "caption": "The Stripe Dashboard home, with the left-hand menu showing Home, Balances, Transactions, Customers, and a warning banner about paused payouts." }
     },
     {
-      "heading": "Find the invoice and receipt customization options",
-      "body": "Locate the specific settings that control what name and address details appear on generated invoices and receipts."
+      "heading": "Open Invoices under Billing",
+      "body": "In the left menu, expand Billing and select Invoices, which opens on a General tab covering Appearance, customer notifications, payment methods, and templates. Right at the top, two lines point you exactly where you need to go: \"Change how your invoice emails, receipts, and payment page look in Branding settings,\" and \"Change the contact information that shows up on your invoices and receipts in Business settings.\" The name and address live in Business settings — Branding controls the visual look, like your logo and color, not the text of your name or address.",
+      "image": { "file": "/screenshots/ytK4yX9_-uw/04.webp", "caption": "The Invoices General settings tab, with links to Branding settings for appearance and Business settings for the contact information on invoices." }
     },
     {
-      "heading": "Update the business name",
-      "body": "Edit the business name field so it displays exactly what you want customers to see on receipts."
+      "heading": "Click through to Business settings",
+      "body": "Following the Business settings link takes you to your account's Business details page, which lists your registered business name, a Public details section, and a Management and ownership section further down. This is the page Stripe treats as the source of truth for anything customer-facing — changes made here are what actually propagate out to invoices, receipts, and payment pages, rather than being a separate editable field on each document."
     },
     {
-      "heading": "Edit or remove the address",
-      "body": "Adjust or remove the address details shown, depending on what information you want to keep visible."
+      "heading": "Edit the public details customers see",
+      "body": "Within Business details, opening the public details editor brings up an \"Add public details for customers\" panel with fields for Customer support URL, Business website, Privacy Policy URL, and Terms Of Service URL, alongside the Public descriptor — the short label Stripe shows on customer statements and invoices instead of your full legal business name. This descriptor is usually the actual fix people are looking for when they say a Stripe invoice shows the wrong or overly formal name: it's a separate field from your legal business name and can be shortened to something more recognizable to customers.",
+      "image": { "file": "/screenshots/ytK4yX9_-uw/05.webp", "caption": "The \"Add public details for customers\" panel, with fields for Customer support URL, Business website, Privacy Policy URL, and Terms Of Service URL." }
     },
     {
-      "heading": "Preview and save your changes",
-      "body": "Preview a sample invoice or receipt to confirm the updated details display correctly before saving."
+      "heading": "Adjust or remove the address details",
+      "body": "The Business details page also holds your support address and public descriptor as separate fields — some of these are required for compliance in certain regions and can't simply be deleted, while others, like the exact support address shown to customers, may have more flexibility depending on your account's country and business type. Where Stripe allows it, edit the field directly; where it's greyed out or flagged as required, that's a regulatory constraint rather than a settings bug."
+    },
+    {
+      "heading": "Save and check a real invoice",
+      "body": "After saving changes to the business name, public descriptor, or contact fields, generate or send a test invoice and check that the header, footer, and payment page all reflect the update — Stripe pulls these fields live, so a saved change should show immediately on any invoice created afterward. Past invoices that were already sent keep whatever information was on them at the time; only new documents pick up the change."
     }
   ],
   "faq": [
     {
       "question": "Can I completely remove my address from Stripe receipts?",
-      "answer": "Depending on your account settings and regional requirements, you may be able to remove or minimize the address shown on receipts."
+      "answer": "It depends on your account's country and business type — some contact fields are required for compliance and can't be deleted, while others in the public details panel can be edited or left blank."
     },
     {
       "question": "Will changing the business name affect past invoices?",
-      "answer": "Typically, past invoices remain unchanged, and the update only affects newly generated invoices and receipts going forward."
+      "answer": "No, past invoices keep the information that was on them when they were sent — the update only affects newly generated invoices and receipts going forward."
     },
     {
-      "question": "Where exactly are these branding settings located?",
-      "answer": "They're generally found within your Stripe account's business or branding settings, separate from individual payment settings."
+      "question": "Where exactly are these settings located?",
+      "answer": "Go to Billing → Invoices in the Dashboard, then follow the \"Business settings\" link at the top of the General tab to reach the Business details page where the name and contact fields live."
     },
     {
       "question": "Is this the same as changing my legal business name with Stripe?",
-      "answer": "No, updating your display name for receipts is different from updating your legal business information tied to your Stripe account verification."
+      "answer": "No — the Public descriptor is a separate, shorter label shown to customers on invoices and statements, distinct from your registered legal business name tied to account verification."
+    },
+    {
+      "question": "What's the difference between Branding settings and Business settings?",
+      "answer": "Branding settings control the visual appearance of invoices and receipts, like your logo and colors. Business settings control the actual text — your name, address, and contact links — that appears on them."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }
