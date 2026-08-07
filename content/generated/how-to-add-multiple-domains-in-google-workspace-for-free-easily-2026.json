@@ -2,42 +2,57 @@
   "slug": "how-to-add-multiple-domains-in-google-workspace-for-free-easily-2026",
   "seoTitle": "How to Add Multiple Domains to Google Workspace Free",
   "metaDescription": "Add multiple domains to Google Workspace for free using the Admin Console, covering primary domains, secondary domains, and domain aliases for one account.",
-  "intro": "Managing several brands or business units under one Google Workspace account is possible without paying extra, as long as you stay on the same subscription. This guide explains the difference between primary domains, secondary domains, and domain aliases, and walks through verifying and connecting each type. It's built for entrepreneurs and IT admins who want one login managing email across multiple properties.",
+  "intro": "If your business runs more than one brand, storefront, or side project, you don't need a separate Workspace subscription for each one. Google lets you attach extra domains to a single account at no additional cost, as long as you understand which of the three domain types you actually need. This guide walks through where that setting lives in the Admin Console, how to tell a secondary domain apart from an alias, and what to check with DNS and user email so nobody ends up locked out or confused about which address to use.",
   "steps": [
     {
-      "heading": "Understand domain types in Workspace",
-      "body": "Know the difference between a primary domain, secondary domains, and domain aliases before adding anything, since each behaves differently for email and login."
+      "heading": "Open the Admin Console from your Google account",
+      "body": "You don't need a bookmark for this — from any signed-in Google page, click the grid of apps in the top-right corner and look for the Admin icon among Gmail, Drive, and Calendar. It only appears for accounts with admin privileges on a Workspace organization, so if you don't see it, you're signed into the wrong account or don't have admin rights yet. Clicking it drops you straight into the console where domain management, users, and billing all live.",
+      "image": { "file": "/screenshots/CVgPnNLV80Q/04.webp", "caption": "The Google apps grid with Admin sitting alongside Gmail and Drive — this is the fastest way into the console if you don't have it bookmarked." }
     },
     {
-      "heading": "Add a domain in the Admin Console",
-      "body": "Use the Google Admin Console to add a new secondary domain or alias to your existing Workspace subscription without extra cost."
+      "heading": "Find Domains in the left-hand menu",
+      "body": "Inside the Admin Console, open Account in the left sidebar and expand Domains underneath it. This reveals three sub-items: Overview, Manage domains, and Allowlisted domains. Manage domains is where you'll spend the next several minutes — it lists every domain currently attached to your organization and is also where the \"Add a domain\" button lives. Overview is worth a glance too, since it summarizes verification status for each domain at a glance.",
+      "image": { "file": "/screenshots/CVgPnNLV80Q/05.webp", "caption": "The Admin Console's Account section with Domains expanded, showing Overview, Manage domains, and Allowlisted domains." }
     },
     {
-      "heading": "Verify domain ownership and set up DNS",
-      "body": "Complete domain verification and update the required DNS records so Google recognizes the new domain as connected to your account."
+      "heading": "Know the difference before you click Add",
+      "body": "Google Workspace recognizes three kinds of domains, and picking the wrong one causes headaches later. Your primary domain is the one you signed up with and can't easily change. A secondary domain is a fully separate domain name that functions almost like its own mini-organization inside your account — useful when you run distinct brands that each need their own identity. A domain alias, by contrast, mirrors your primary domain's settings and just gives users an extra address; it's the simpler option when you only want user@brandtwo.com to land in the same inbox as user@brandone.com. Decide which one fits before you start clicking Add, since converting between them isn't straightforward once users are attached."
     },
     {
-      "heading": "Manage email addresses across domains",
-      "body": "Set up user email addresses like user@domain1.com and user@domain2.com, and review routing and branding to avoid login confusion between accounts."
+      "heading": "Add and verify the new domain",
+      "body": "From Manage domains, add the domain name and choose whether it's a secondary domain or an alias. Google will ask you to prove ownership, typically by adding a TXT record through your domain registrar's DNS settings — the same verification method used for Search Console. This step can take anywhere from a few minutes to a few hours depending on how quickly your registrar's DNS propagates, so don't panic if it doesn't verify instantly; check back rather than repeating the process."
+    },
+    {
+      "heading": "Point MX records so mail actually arrives",
+      "body": "Verification alone doesn't route email. Each domain you add — secondary or alias — needs its own MX records pointed at Google's mail servers before messages to that domain land in Workspace inboxes instead of bouncing or disappearing. If you're migrating a domain that previously used a different email provider, plan for a short overlap window and confirm the old MX records are fully replaced, not just supplemented, to avoid split delivery."
+    },
+    {
+      "heading": "Create addresses across your domains",
+      "body": "Once a domain is verified and routed, existing users can be given an additional address on it from their user profile in the Admin Console, and new users can be created directly under whichever domain fits their role. This is how you end up with something like user@domain1.com and user@domain2.com both delivering to the same person, or entirely separate users per brand if you went the secondary-domain route instead."
+    },
+    {
+      "heading": "Set branding and routing to avoid confusion",
+      "body": "The last mile is making sure people don't get lost. If several domains route to shared inboxes, set clear signature and reply-from defaults so replies go out from the address a customer actually emailed, not always the primary one. For secondary domains running as separate brands, keep their admin-assigned organizational units distinct so policies, groups, and sharing settings don't bleed across brands by accident. A few minutes spent here up front saves a lot of \"why did this email come from the wrong address\" tickets later."
     }
   ],
   "faq": [
     {
       "question": "Does adding a second domain to Google Workspace cost extra?",
-      "answer": "No, additional domains can be added for free as long as you're using the same Workspace subscription."
+      "answer": "No, additional domains can be added for free as long as you're using the same Workspace subscription — you're not billed per domain, only per user license."
     },
     {
       "question": "What's the difference between a secondary domain and a domain alias?",
-      "answer": "A secondary domain functions more independently while a domain alias mirrors the primary domain's settings; both let you use multiple domain names for email."
+      "answer": "A secondary domain functions more independently, with its own users and settings, while a domain alias mirrors the primary domain's settings and mainly adds extra email addresses for existing users."
     },
     {
       "question": "Do I need to verify each new domain?",
-      "answer": "Yes, domain verification and DNS setup are required before Google Workspace will recognize and activate a new domain."
+      "answer": "Yes, domain verification through a DNS TXT record is required before Google Workspace will activate a new domain, and you'll also need to add MX records separately for mail to actually be delivered."
     },
     {
       "question": "Can users get confused logging in with multiple domains?",
-      "answer": "It can happen, which is why following best practices for email routing and branding helps avoid login confusion."
+      "answer": "It can happen, especially with reply-from addresses and shared inboxes, which is why setting default routing and keeping organizational units distinct per brand helps avoid confusion."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:22Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

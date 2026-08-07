@@ -2,13 +2,30 @@
   "slug": "how-to-take-partial-profit-in-tradingview-close-part-position-only-2026",
   "seoTitle": "How to Take a Partial Profit on a TradingView Position",
   "metaDescription": "Learn how to take a partial profit in TradingView by closing part of an open position, using the paper trading feature to practice locking in gains.",
-  "intro": "Locking in some gains while letting the rest of a trade run is a core risk management move, and TradingView makes it possible directly from an open position. This guide shows how to use TradingView's paper trading feature to practice closing part of a position without touching the whole trade. It's aimed at traders who want to secure profit on a winner while still capturing further upside.",
+  "intro": "Closing an entire trade the moment it turns green means giving up any further upside if the move keeps running. TradingView's partial close option splits the difference: it lets you bank profit on a slice of a position while leaving the rest open to capture more of the trend. This guide walks through the exact clicks using TradingView's paper trading feature, so you can practice the workflow on a simulated BTCUSD trade before you ever touch a live account. By the end you'll know where the partial close toggle lives, how the unit input works, and what to check before you confirm.",
   "steps": [
-    { "heading": "Open your chart and positions panel", "body": "Log in to TradingView, load your chart, and click Paper Trading to practice trades without financial risk." },
-    { "heading": "Select the position you want to partially close", "body": "Click Positions to view your active trades, then choose the specific position you want to lock in profit on." },
-    { "heading": "Find the partial close option", "body": "Click on the position to bring up its menu, then look for the partial close option under the order actions." },
-    { "heading": "Set how much of the position to close", "body": "Toggle partial close and enter the portion of the trade you want to exit, keeping the rest open based on your risk management plan." },
-    { "heading": "Confirm the partial close", "body": "Click Partially Close to secure that portion of your profit while the remaining position stays open to capture further movement." }
+    {
+      "heading": "Open a chart and watch your open position",
+      "body": "Once you're logged in and a chart is loaded, an open position shows up directly on the price axis — you'll see the SELL and BUY price buttons on the left plus a small TP/SL tag tracking your live profit or loss in the account's quote currency. In the example here, a short position on BITSTAMP:BTCUSD is running at a loss of a few hundred dollars as price chops around the 118,000 level. This on-chart view is useful for watching a trade, but it isn't where you'll find the partial close control — for that you need to open the account panel underneath the chart."
+    },
+    {
+      "heading": "Switch to Paper Trading and open your positions",
+      "body": "Click Paper Trading in the tab row above the chart (alongside Pine Editor, Strategy Tester, and Replay Trading) to expand the account panel. This gives you Account Balance, Equity, Realized and Unrealized P&L, and Available funds across the top, with a Positions tab below listing every open trade with its symbol, side, quantity, and live P&L. Paper trading mirrors the real order flow without risking money, which makes it the right place to rehearse a partial close before doing it on a funded account.",
+      "image": { "file": "/screenshots/6hID5ZxxQgQ/03.webp", "caption": "The Paper Trading panel expanded beneath the chart, showing account balance, equity, and the Positions tab where open trades are listed." }
+    },
+    {
+      "heading": "Click into the position you want to trim",
+      "body": "From the Positions list, click the row for the trade you want to partially close — here, the short position of 6 units on BTCUSD. Clicking a position (or its on-chart marker) brings up the position's action menu rather than immediately closing anything, so there's no risk of accidentally flattening the whole trade with a stray click. This is also a good moment to glance at the Unrealized P&L column one more time and confirm you're about to act on the right symbol, especially if you're running more than one position at once."
+    },
+    {
+      "heading": "Toggle Partial close and set the amount",
+      "body": "The Close position dialog opens with the position's details at the top — symbol, side, size, and entry price — and a Partial close checkbox just below. Checking it swaps the simple Cancel/Close position choice for a quantity field showing how many units you're closing \"of\" the total position size. Type or use the up/down arrows to pick the portion you want to exit; leaving it at the full amount closes everything, so the number you enter here is what determines how much stays open afterward.",
+      "image": { "file": "/screenshots/6hID5ZxxQgQ/05.webp", "caption": "The Close position dialog with Partial close checked, showing a quantity field set to a portion of the total position size." }
+    },
+    {
+      "heading": "Confirm and check the position afterward",
+      "body": "With the quantity set the way you want, click Close position to execute. TradingView immediately reduces the position size and books the realized P&L on the closed portion, while the remainder stays open under the same entry and stop levels unless you adjust them. Head back to the Positions tab to confirm the new, smaller size is showing correctly and that your stop loss still makes sense relative to the reduced quantity — a stop sized for the original position can leave you over- or under-hedged once part of the trade is gone."
+    }
   ],
   "faq": [
     { "question": "Can I take partial profit on a live TradingView trade, not just paper trading?", "answer": "The same partial close option is available on connected live broker accounts, though the paper trading feature is the safest way to practice the steps first." },
@@ -16,5 +33,6 @@
     { "question": "Does partially closing a position cost extra fees?", "answer": "Any fees depend on your connected broker's commission structure, since TradingView itself doesn't charge separately for the partial close action." },
     { "question": "What happens to my stop loss after I partially close a position?", "answer": "Your existing stop loss typically still applies to the remaining open portion, though you may want to adjust it manually to match your new position size." }
   ],
-  "generatedAt": "2026-07-21T05:37:24Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

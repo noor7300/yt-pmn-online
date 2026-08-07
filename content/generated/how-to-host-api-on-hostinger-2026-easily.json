@@ -2,46 +2,62 @@
   "slug": "how-to-host-api-on-hostinger-2026-easily",
   "seoTitle": "How to Host a PHP API on Hostinger's Shared Hosting",
   "metaDescription": "Learn how to host a PHP API on Hostinger shared hosting, from uploading files to public_html to connecting a database and securing it with SSL.",
-  "intro": "Hostinger's shared hosting supports PHP by default, which makes it a straightforward option for hosting a simple API alongside a website. This guide covers logging into the hPanel dashboard, uploading your API files to the public_html folder, and connecting a database using the credentials Hostinger provides. It also covers activating SSL and testing your live endpoint before calling it done.",
+  "intro": "Hostinger's shared hosting supports PHP by default, which makes it a practical option for hosting a lightweight API without paying for a separate VPS. This guide covers logging into hPanel, finding your way to the File manager and public_html folder, organizing your API files, and wiring up a database with the credentials Hostinger gives you. It closes with the SSL and testing steps that turn an uploaded folder of PHP files into a working, secured endpoint.",
   "steps": [
     {
-      "heading": "Log in and open the hPanel dashboard",
-      "body": "Sign in to your Hostinger account and open the hPanel, which serves as the central hub for managing your websites, files, and domains."
+      "heading": "Log in and open hPanel",
+      "body": "Sign in at hostinger.com and you're dropped into hPanel, Hostinger's control panel and the hub for everything covered in this guide. The main menu lists Home, Websites, Domains, Horizons, Emails, Email marketing, VPS, Dark web monitoring, and Billing — Websites is the one you want, since that's where each site's individual dashboard, file manager, and database tools live.",
+      "image": { "file": "/screenshots/HbGY0tELMDI/02.webp", "caption": "hPanel's main menu, with Websites, Domains, and VPS listed alongside account-level sections like Billing and Emails." }
     },
     {
-      "heading": "Upload your API files to public_html",
-      "body": "Place your PHP API files inside the public_html folder, optionally in a dedicated subfolder like 'API', so your endpoint follows a path such as yourdomain.com/api/user.php."
+      "heading": "Open your website's dashboard",
+      "body": "Click into a specific site from Websites and you land on its dashboard — this example shows pmntechfix.nl, with status cards for Domain, Hosting, Free Email, and Backups across the top. Below that sit the two tools that matter most for an API: File manager, for uploading and organizing your PHP files, and Databases, for creating and managing the MySQL database your API will connect to. A \"Website is safe / No malware found\" indicator also lives here, which is worth a glance before you start uploading anything.",
+      "image": { "file": "/screenshots/HbGY0tELMDI/03.webp", "caption": "A website's hPanel dashboard, with File manager and Databases sitting right below the domain and hosting status cards." }
+    },
+    {
+      "heading": "Navigate to public_html and set up a folder for your API",
+      "body": "Open File manager and go to public_html — this is the web root, the folder Hostinger actually serves to visitors. You can drop your PHP files straight in here, but it's cleaner to create a dedicated subfolder, for example one named api, and upload your files there instead. Doing this keeps your API separate from any website files already living in public_html and gives you a predictable, organized path for every endpoint you add.",
+      "image": { "file": "/screenshots/HbGY0tELMDI/04.webp", "caption": "File manager open to public_html/api, ready to receive uploaded PHP files, with storage and inode usage tracked in the sidebar." }
+    },
+    {
+      "heading": "Upload your PHP files",
+      "body": "Upload your API's PHP files into that folder, either by dragging them into File manager or connecting over FTP with a client like FileZilla using the host, username, and password hPanel provides under its FTP section. Whatever you name a file determines its URL — a file called user.php inside the api folder becomes reachable at yourdomain.com/api/user.php, so plan your filenames as you would plan route names in any other API framework."
     },
     {
       "heading": "Connect your database",
-      "body": "If your API uses a database, find the database name, username, and password in the hPanel's databases section and use them in your connection settings."
+      "body": "If your API reads or writes data, create a MySQL database from the Databases section of hPanel first. It hands you a database name, a username, and a password — plug those three values into your PHP connection code exactly as shown, since Hostinger's database host is typically localhost on shared hosting rather than an external address. Double-check the credentials match before you upload, since a typo here is the most common reason a freshly uploaded API returns a blank page instead of data."
     },
     {
-      "heading": "Secure your API with SSL",
-      "body": "Activate the free SSL certificate Hostinger provides for your domain, and make sure you validate and sanitize user input to keep your API safe."
+      "heading": "Turn on SSL and sanitize your inputs",
+      "body": "Before calling the API done, activate the free SSL certificate Hostinger provides for your domain from the SSL section of hPanel — an API serving data over plain HTTP is a bad idea even for a personal project. Just as important on the code side: validate and sanitize every piece of user input your PHP files accept, whether it comes from a query string, POST body, or header, so the API isn't an open door into your database."
     },
     {
-      "heading": "Test your live endpoint",
-      "body": "Open your API URL in a browser or use a tool like Postman to confirm it returns the expected result before considering it live."
+      "heading": "Test the live endpoint",
+      "body": "Once SSL is active and your files are in place, open the endpoint URL directly in a browser for a quick sanity check, then move to a tool like Postman for anything that needs a specific HTTP method, headers, or a request body. Confirm the response matches what your code expects before pointing any real application at it — catching a malformed response now is far cheaper than debugging it from the consuming app later."
     }
   ],
   "faq": [
     {
       "question": "Can I host an API on Hostinger's shared hosting plan?",
-      "answer": "Yes, all Hostinger shared hosting plans support PHP, which is enough to run a PHP-based API."
+      "answer": "Yes, all Hostinger shared hosting plans support PHP, which is enough to run a PHP-based API without upgrading to a VPS."
     },
     {
       "question": "Where do I upload my API files on Hostinger?",
-      "answer": "Upload your files into the public_html folder, or a subfolder inside it if you want to keep the API organized separately from your site."
+      "answer": "Upload your files into the public_html folder, or better, a dedicated subfolder inside it like api, so your API stays organized separately from any website files."
     },
     {
       "question": "Does Hostinger provide a free SSL certificate for my API?",
-      "answer": "Yes, Hostinger offers a free SSL certificate you can activate from the hPanel dashboard to secure your API's domain."
+      "answer": "Yes, Hostinger offers a free SSL certificate you can activate from hPanel's SSL section to secure your API's domain over HTTPS."
     },
     {
       "question": "How do I test that my API is working after uploading it?",
-      "answer": "Open the API's URL directly in a browser or use a tool like Postman to check that it returns the expected response."
+      "answer": "Open the API's URL directly in a browser for a quick check, or use a tool like Postman when you need to test specific HTTP methods, headers, or request bodies."
+    },
+    {
+      "question": "Where do I find my database credentials on Hostinger?",
+      "answer": "The Databases section of hPanel shows the database name, username, and password for each MySQL database you create, along with the host to use in your connection code."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:22Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

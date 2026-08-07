@@ -2,46 +2,58 @@
   "slug": "how-to-create-stripe-sandbox-account-test-account-easily-2026",
   "seoTitle": "How to Create a Stripe Sandbox Account for Testing",
   "metaDescription": "Set up a Stripe Sandbox and test account to try payments, API keys, and integrations safely before switching your store over to live payment mode.",
-  "intro": "Testing payments before going live is essential for developers and store owners, and Stripe's sandbox tools make that possible without touching real money. This guide covers registering for a free Stripe account, enabling Test Mode, and generating test API keys and sample transactions. It finishes by showing how to switch between Test and Live modes once your integration is ready.",
+  "intro": "Testing payments before going live is essential for developers and store owners, and Stripe's sandbox tools make that possible without touching real money. This guide covers registering for a free Stripe account, landing in your sandbox dashboard, and generating the test keys and test cards you need to build a payment flow safely. It finishes by showing where the switch to live payments actually lives once your integration checks out.",
   "steps": [
     {
-      "heading": "Register for a free Stripe account",
-      "body": "Sign up for a Stripe account, which is free and gives you access to both live and sandbox testing features."
+      "heading": "Start from the Stripe sign-in page",
+      "body": "Go to stripe.com and click through to sign in. If you've never used Stripe before, don't hunt for a separate registration page — the sign-in screen itself offers passkey and SSO options up top, and beneath them a plain link reading \"New to Stripe? Create account.\" That link is your entry point into the whole setup, so click it rather than trying to sign in with credentials you don't have yet.",
+      "image": { "file": "/screenshots/o0h06zGdbIY/02.webp", "caption": "The bottom of Stripe's sign-in screen, with passkey and SSO options above a plain \"New to Stripe? Create account\" link for first-time users." }
     },
     {
-      "heading": "Enable Test Mode",
-      "body": "Switch on Test Mode within your Stripe dashboard to unlock sandbox features that don't involve real transactions."
+      "heading": "Fill out the account creation form",
+      "body": "The signup form asks for your country before anything else, since Stripe's available features and payout rules vary by region — double-check this is set correctly, because it's not trivial to change later. From there you can either fill in an email and password directly or use the \"Sign up with Google\" shortcut to skip typing a new password entirely. Either path creates a free account with no payment details required up front.",
+      "image": { "file": "/screenshots/o0h06zGdbIY/03.webp", "caption": "The account creation form: a country selector, the Create account button, and a Sign up with Google shortcut underneath." }
     },
     {
-      "heading": "Generate test API keys and products",
-      "body": "Create test API keys and test products so you can build and run your integration without processing real payments."
+      "heading": "Confirm your email and skip the business details for now",
+      "body": "Stripe sends a verification email immediately after signup, and clicking it activates the account. You'll also be prompted for business details like a legal entity name and bank account — none of that is required to start testing, so it's fine to dismiss or defer those prompts until you're actually ready to accept real payments. Everything covered in the rest of this guide works on an account that hasn't finished business verification."
     },
     {
-      "heading": "Run sample transactions with test cards",
-      "body": "Use Stripe's test cards to run sample transactions and confirm your payment flow behaves as expected."
+      "heading": "Land in your sandbox dashboard",
+      "body": "Once you're in, the dashboard makes it obvious you're not touching real money: a banner across the top reads \"You're testing in a sandbox. Changes you make here don't affect your live account.\" The left-hand menu is the same one you'll use in production — Payments, Billing, Reporting, and a More section holding Connect, Identity, Atlas, Issuing, and other add-on products — so anything you learn to navigate here transfers directly once you go live. A Setup guide panel sits in the corner, walking through Set up payments, Verify your business, and Go live as sequential checklist sections.",
+      "image": { "file": "/screenshots/o0h06zGdbIY/05.webp", "caption": "The sandbox dashboard with its testing banner, the standard Payments/Billing/Reporting navigation, and a Setup guide panel tracking progress toward Go live." }
     },
     {
-      "heading": "Switch from Test Mode to Live Mode",
-      "body": "Once your integration is verified, toggle from Test Mode to Live Mode so you can begin accepting real payments."
+      "heading": "Generate test API keys",
+      "body": "Under Developers in the dashboard, Stripe issues a separate pair of publishable and secret keys specifically for the sandbox environment — these are the keys your code should use while building. They're clearly labeled as test keys and start with pk_test_ and sk_test_ prefixes, which makes it hard to accidentally wire a test key into a production deploy. Keep them out of version control the same way you would live keys, even though no real charges can happen with them."
+    },
+    {
+      "heading": "Create a test product and run a sample charge",
+      "body": "Add a product under Product catalog exactly as you would for a real item, then use one of Stripe's published test card numbers to run a transaction against it. These test cards simulate specific outcomes — a successful charge, a decline, a card requiring extra authentication — so you can confirm your checkout handles each case gracefully before a real customer ever sees it. Any transaction here shows up in the sandbox's own Gross volume chart, completely separate from live figures."
+    },
+    {
+      "heading": "Move to Go live when you're ready",
+      "body": "The same Setup guide panel that tracked your sandbox progress has a Go live section — that's where you complete business verification and switch the account over to accepting real payments. Nothing you built in the sandbox needs to be redone; the same product catalog structure and integration code carry over, you're just pointing your app at live keys instead of test ones once this final section is checked off."
     }
   ],
   "faq": [
     {
       "question": "Is a Stripe Sandbox account free to create?",
-      "answer": "Yes, registering for a Stripe account and enabling Test Mode doesn't cost anything."
+      "answer": "Yes, registering for a Stripe account and using its sandbox environment doesn't cost anything, and no payment details are required to start testing."
     },
     {
       "question": "Can I test payments without using real money?",
-      "answer": "Yes, Test Mode and test API keys let you simulate transactions using Stripe's test cards instead of real funds."
+      "answer": "Yes, the sandbox dashboard and test API keys let you simulate transactions using Stripe's published test card numbers instead of real funds."
     },
     {
       "question": "How do I switch from testing to accepting real payments?",
-      "answer": "You switch from Test Mode to Live Mode in your Stripe dashboard once your integration is confirmed to be working."
+      "answer": "Complete the Go live section in the dashboard's Setup guide, which includes business verification, then swap your test API keys for live ones in your integration."
     },
     {
       "question": "Do test transactions show up in my real Stripe balance?",
-      "answer": "No, transactions created in Test Mode are separate from live mode and don't affect your real balance."
+      "answer": "No, the sandbox environment is fully separate — its Gross volume, balance, and payouts are all independent from your live account and never mix with real figures."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:22Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

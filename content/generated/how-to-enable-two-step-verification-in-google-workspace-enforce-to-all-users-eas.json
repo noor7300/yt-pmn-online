@@ -2,19 +2,47 @@
   "slug": "how-to-enable-two-step-verification-in-google-workspace-enforce-to-all-users-eas",
   "seoTitle": "How to Enforce Two-Step Verification in Google Workspace",
   "metaDescription": "Learn how to enable and enforce two-step verification for every user in Google Workspace using the Admin Console's security settings and policies.",
-  "intro": "Two-step verification adds a critical layer of security to Google Workspace by requiring a second identity check beyond just a password. This guide covers turning on 2SV through the Admin Console's Security settings and enforcing it across all users, either immediately or after a grace period. It's meant for IT admins, school administrators, and business owners who need to protect Gmail, Drive, and other Workspace services from unauthorized access.",
+  "intro": "A single stolen password is enough to compromise a Google Workspace account, unless you've added a second check that a stolen password alone can't satisfy. Two-step verification (2SV) closes that gap by requiring users to confirm their identity through a phone prompt, code, or security key on top of their password, and Google Workspace lets admins turn it on for the whole organization from one settings page. This guide walks through the actual Security Settings screen where 2SV lives, the difference between allowing it and enforcing it, and the enrollment and frequency options that determine how much friction your users feel day to day.",
   "steps": [
-    { "heading": "Open the Security settings in Admin Console", "body": "Log in as an admin and navigate to the Security section where two-step verification controls live." },
-    { "heading": "Turn on two-step verification for your domain", "body": "Enable 2SV as an option so users in your organization can start setting it up on their accounts." },
-    { "heading": "Set an enforcement policy", "body": "Choose whether to require 2SV immediately or allow a grace period so users have time to set up their second verification method." },
-    { "heading": "Guide users through setting up their devices", "body": "Let users know they'll need to register a phone or authentication method, since this is required once enforcement takes effect." },
-    { "heading": "Plan for recovery options", "body": "Set up backup codes and recovery paths in advance for users who might lose access to their second verification method." }
+    {
+      "heading": "Sign in to your admin account",
+      "body": "Two-step verification policy lives at the organization level, so you need to sign in with an account that has admin rights before the Security section is even visible. Google's sign-in flow asks for your password on its own screen — a familiar step, but worth doing from a trusted device since you're about to change a security policy that affects every user in the domain.",
+      "image": { "file": "/screenshots/E271-JvkM44/02.webp", "caption": "The standard Google sign-in screen, asking an admin to confirm their password before continuing into the console." }
+    },
+    {
+      "heading": "Open Security settings from the Admin Console",
+      "body": "From the Admin Console's left-hand menu, expand Security to reveal Overview, Security advisor, Alert centre, Authentication, and Access and data control. Two-step verification sits under Authentication. Security advisor, listed right above it and marked \"NEW\" in the console, is worth a glance too since it often flags accounts without 2SV enabled as a specific risk before you even get to the enforcement settings.",
+      "image": { "file": "/screenshots/E271-JvkM44/04.webp", "caption": "The Security section of the Admin Console menu, expanded to show Security advisor and the Authentication submenu where 2-step verification lives." }
+    },
+    {
+      "heading": "Allow 2-Step Verification for your organizational unit",
+      "body": "On the 2-step verification screen, the first checkbox — \"Allow users to turn on 2-Step Verification\" — simply makes the option available; it doesn't force anyone to use it yet. This setting applies per organizational unit, shown on the left as a tree starting from your top-level org, so you can turn it on for the whole company or roll it out to one department first as a test.",
+      "image": { "file": "/screenshots/E271-JvkM44/05.webp", "caption": "The 2-step verification panel, showing the Enforcement options: Off, On, and On from a specific date, plus device trust and enrollment settings below." }
+    },
+    {
+      "heading": "Choose an enforcement option",
+      "body": "Below the allow checkbox is the setting that actually matters for security: Enforcement, with three choices — Off, On, and On from a specific date. Off just leaves 2SV available for anyone who wants to opt in voluntarily. On requires it starting the next time each user's device forces re-authentication. On from lets you pick a future date, which is the option most admins should use for a company-wide rollout, since it gives people advance notice instead of locking them out mid-workday."
+    },
+    {
+      "heading": "Set a new user enrollment period",
+      "body": "The \"New user enrolment period\" dropdown, set to None by default, controls how much time a newly enforced user gets to set up their second verification method before they're blocked from signing in. Leaving it at None means enforcement is immediate and unforgiving; setting it to a window of a few days gives users breathing room to register a phone or authentication app without a support ticket landing in your queue on day one."
+    },
+    {
+      "heading": "Decide how often trusted devices re-verify",
+      "body": "The Frequency section includes an \"Allow the user to trust the device\" checkbox, which, when enabled, lets users skip repeated 2SV prompts on devices they've already verified. This is a real usability trade-off: leaving it checked keeps day-to-day friction low on known laptops and phones, while unchecking it means every sign-in gets a fresh verification challenge regardless of device history."
+    },
+    {
+      "heading": "Prepare recovery options before enforcement kicks in",
+      "body": "Before your enforcement date arrives, make sure backup codes and alternate verification methods are part of your rollout communication to users. A lost phone shouldn't mean a locked-out account — admins can reset a user's 2SV enrollment from the same Authentication section if someone does get stuck, but having backup codes generated in advance avoids that scramble entirely."
+    }
   ],
   "faq": [
-    { "question": "What happens if a user loses their two-step verification device?", "answer": "Admins can help them regain access using backup codes or by resetting their 2SV enrollment from the Admin Console." },
-    { "question": "Can I enforce two-step verification gradually instead of all at once?", "answer": "Yes, Google Workspace lets you set a grace period so users have time to enroll before enforcement becomes mandatory." },
-    { "question": "Does two-step verification protect all Workspace apps or just Gmail?", "answer": "It protects the entire Google Workspace login, which covers Gmail, Drive, Calendar, and other connected services under one sign-in." },
-    { "question": "Are backup codes required for two-step verification?", "answer": "They're not strictly required to enable 2SV, but Google recommends setting them up as a recovery option in case a user's primary method is unavailable." }
+    { "question": "What happens if a user loses their two-step verification device?", "answer": "Admins can help them regain access using backup codes if the user set them up in advance, or by resetting the user's 2SV enrollment from the Authentication section of Security settings in the Admin Console." },
+    { "question": "Can I enforce two-step verification gradually instead of all at once?", "answer": "Yes. The \"On from\" enforcement option lets you set a future date, and the new user enrollment period gives freshly enforced users a grace window to set up their method before they're blocked at sign-in." },
+    { "question": "Does two-step verification protect all Workspace apps or just Gmail?", "answer": "It protects the entire Google account sign-in, which covers Gmail, Drive, Calendar, and every other connected Workspace service under one authentication check." },
+    { "question": "Are backup codes required for two-step verification?", "answer": "They're not required to enable 2SV, but Google recommends setting them up as a recovery option so a user isn't locked out entirely if their primary method — phone or security key — becomes unavailable." },
+    { "question": "Can I apply different 2SV rules to different teams?", "answer": "Yes. The 2-step verification setting applies per organizational unit, so you can enforce it for one department while leaving it optional for another, using the org unit tree on the left of the Security Settings page." }
   ],
-  "generatedAt": "2026-07-21T05:37:24Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

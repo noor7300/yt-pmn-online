@@ -2,42 +2,62 @@
   "slug": "how-to-remove-domain-from-google-workspace-can-you-remove-or-change-primary-doma",
   "seoTitle": "How to Remove or Change a Domain in Google Workspace",
   "metaDescription": "Find out how to remove a secondary domain from Google Workspace, handle users and DNS cleanup, and whether you can change your primary domain.",
-  "intro": "Restructuring your organization's email setup sometimes means removing a domain you no longer need, or wondering whether you can swap your primary domain entirely. This guide walks through the correct way to delete secondary or unused domains in Google Workspace, including how to handle affected users, email aliases, and DNS cleanup. It also answers directly whether changing your primary domain is possible.",
+  "intro": "Restructuring your organization's email setup sometimes means removing a domain you no longer need, or wondering whether you can swap your primary domain entirely. This guide walks through the correct way to delete a secondary or unused domain in Google Workspace, including exactly what Google warns you about before the deletion happens, and closes with a direct answer on whether the primary domain itself can be changed.",
   "steps": [
     {
-      "heading": "Decide which domain needs to be removed",
-      "body": "Confirm whether you're removing a secondary domain or trying to change the primary domain, since Google Workspace treats these differently."
+      "heading": "Open Domains in the Admin Console",
+      "body": "From the Admin Console, open Account in the left sidebar and expand Domains to reveal Overview, Manage domains, and Allowlisted domains. Manage domains lists every domain attached to your organization and is where every action in this guide happens — there's no separate \"delete domain\" tool hiding elsewhere in the console.",
+      "image": { "file": "/screenshots/sTCswtlg_l0/03.webp", "caption": "The Admin Console's Account section with Domains expanded, showing Overview, Manage domains, and Allowlisted domains." }
     },
     {
-      "heading": "Handle users tied to the domain",
-      "body": "Reassign or transfer users and email aliases connected to the domain before removing it, so nobody loses access unexpectedly."
+      "heading": "Confirm you're removing a secondary domain, not the primary",
+      "body": "Google Workspace only lets you remove secondary domains and domain aliases — the primary domain, the one your organization was originally set up with, cannot simply be deleted from this screen. If the domain you're looking at is the primary one, deletion isn't the tool you want; skip ahead to the last step of this guide, which covers what changing a primary domain actually requires."
     },
     {
-      "heading": "Remove the domain in Admin Console",
-      "body": "Delete the secondary or unused domain through the Google Admin Console once affected users and aliases have been handled."
+      "heading": "Reassign users and aliases first",
+      "body": "Before removing a secondary domain, check whether any users have addresses on it. Each domain listed in Manage domains has an Add users link next to it, which doubles as your reminder to review who's currently using addresses on that domain — anyone with a primary or alias address there needs to be moved to a different domain before you proceed, since removing the domain removes their ability to receive mail at that address."
     },
     {
-      "heading": "Clean up DNS records",
-      "body": "Update or remove the DNS records tied to the domain you removed to avoid leftover configuration issues."
+      "heading": "Find the domain's action links",
+      "body": "Each domain row exposes a small set of actions: Set up redirect, Add users, Remove, and Deactivate. Set up redirect is worth considering instead of an outright removal if you want the domain to keep forwarding traffic or mail somewhere else rather than disappearing entirely. Deactivate is the softer option — it disables the domain without permanently deleting its configuration, which is safer if you're not fully certain you want it gone for good.",
+      "image": { "file": "/screenshots/sTCswtlg_l0/04.webp", "caption": "The action links available per domain: Set up redirect, Add users, Remove, and Deactivate." }
+    },
+    {
+      "heading": "Read the Remove domain warning before confirming",
+      "body": "Clicking Remove opens a confirmation dialog that spells out exactly what breaks. Google will no longer accept mail to addresses at that domain — incoming messages bounce back to the sender — and you won't be able to create new users or aliases on it going forward. If any Google Sites were built on that domain, the dialog states plainly that those sites will be deleted, not migrated. The dialog also flags that you should update your MX records first so mail stops routing to Google before you pull the domain out from under it, and notes the change itself can take up to 30 minutes to fully take effect.",
+      "image": { "file": "/screenshots/sTCswtlg_l0/05.webp", "caption": "The Remove domain confirmation dialog, warning that mail will bounce, sites will be deleted, and MX records should be updated first." }
+    },
+    {
+      "heading": "Clean up DNS after removal",
+      "body": "Once the domain is removed from Workspace, go back to your domain registrar or DNS host and clear out any records that were only there to support the integration — the MX records pointing at Google, any TXT records used for verification, and CNAME records tied to Workspace services you no longer need. Leftover DNS pointing at a service you've disconnected is a common source of confusing, hard-to-diagnose mail issues months later."
+    },
+    {
+      "heading": "If you actually need to change your primary domain",
+      "body": "Google Workspace doesn't offer a direct \"swap primary domain\" button, because the primary domain is tied to how your organization's account was originally created. If your real goal is to make a different domain the main one, the practical path is to add the new domain as a secondary domain first, migrate users and settings over to it, and then work with Google Workspace support on transferring primary status — this is a support-assisted process rather than a self-service admin console action, so budget time for it rather than expecting an instant switch."
     }
   ],
   "faq": [
     {
       "question": "Can I remove a secondary domain from Google Workspace?",
-      "answer": "Yes, secondary or unused domains can be deleted through the Google Admin Console after reassigning affected users."
+      "answer": "Yes, secondary domains can be deleted through Manage domains in the Admin Console after reassigning any users or aliases tied to it."
     },
     {
       "question": "Can you change the primary domain in Google Workspace?",
-      "answer": "Changing the primary domain directly isn't straightforward in Google Workspace, and the guide covers what to do if it isn't allowed."
+      "answer": "Not directly through the Admin Console — changing a primary domain requires adding the new domain as secondary, migrating users, and working with Google Workspace support to transfer primary status."
     },
     {
-      "question": "What happens to users when I remove a domain?",
-      "answer": "Users and email aliases tied to that domain need to be handled or transferred before the domain can be safely removed."
+      "question": "What happens to email when I remove a domain?",
+      "answer": "Google stops accepting mail for that domain immediately after removal, and incoming messages bounce back to the sender, so update MX records and move affected users before removing it."
     },
     {
-      "question": "Do I need to update DNS after removing a domain?",
-      "answer": "Yes, cleaning up the related DNS records helps avoid leftover configuration problems after the domain is removed."
+      "question": "Will removing a domain delete my Google Sites?",
+      "answer": "Yes, the Remove domain dialog explicitly warns that any Google Sites built on that domain will be deleted, not migrated, so move them to another domain first if you want to keep them."
+    },
+    {
+      "question": "Is there a safer alternative to removing a domain outright?",
+      "answer": "Yes, Deactivate disables the domain without permanently deleting its configuration, and Set up redirect lets you forward it elsewhere instead of removing it entirely."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:22Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

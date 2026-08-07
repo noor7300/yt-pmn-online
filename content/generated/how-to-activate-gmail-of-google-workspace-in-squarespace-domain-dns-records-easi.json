@@ -2,54 +2,59 @@
   "slug": "how-to-activate-gmail-of-google-workspace-in-squarespace-domain-dns-records-easi",
   "seoTitle": "Activate Gmail for Google Workspace on a Squarespace Domain",
   "metaDescription": "Set up Gmail through Google Workspace using your Squarespace domain by updating MX, SPF, and DKIM records correctly for reliable email delivery.",
-  "intro": "If you bought your domain through Squarespace and subscribed to Google Workspace, getting Gmail working means correctly updating your domain's DNS records. This guide walks through adding the required MX records, verifying domain ownership, and setting up SPF and DKIM for better deliverability. It's aimed at business owners and freelancers who want a professional email address without getting lost in DNS settings.",
+  "intro": "If you bought your domain through Squarespace and subscribed to Google Workspace, getting Gmail working means correctly updating your domain's DNS records in two different dashboards at once. This guide walks through the actual Google Workspace setup checklist and the matching Squarespace DNS panel, showing where the verification and MX records need to land. It's aimed at business owners and freelancers who want a professional email address without getting lost jumping between two admin consoles.",
   "steps": [
     {
-      "heading": "Access your Squarespace DNS settings",
-      "body": "Start by logging into Squarespace and navigating to the domain's DNS settings, which is where all the records for Google Workspace will be added."
+      "heading": "Start from the Google Workspace admin console",
+      "body": "Once you've subscribed, the Google Workspace marketing site's Admin console link is your entry point into the actual setup tools — Contact sales sits right next to it but isn't what you want here. Clicking through takes you out of the marketing pages and into the real admin dashboard, which is where domain verification and mail routing both get configured. Keep this tab open separately from your Squarespace domain settings, since you'll be copying values back and forth between the two.",
+      "image": { "file": "/screenshots/PZhaIX7r1BQ/02.webp", "caption": "The Google Workspace admin console entry point, sitting next to Contact sales — this is the link that takes you into the real setup tools rather than more marketing pages." }
     },
     {
-      "heading": "Get the MX records from Google Workspace",
-      "body": "Google Workspace provides a specific set of MX records needed to route your domain's email through Gmail, so retrieve these from your Workspace admin setup before editing DNS."
+      "heading": "Work through the domain setup checklist",
+      "body": "Google Workspace lays the process out as two timed steps: verifying you own the domain (about 4 minutes) and starting to use Gmail with that domain (about 10 minutes). The verification step unlocks the rest of Workspace's advanced features once it passes, and the Gmail step explicitly warns that every address already receiving mail on your domain needs to be included, or those addresses will stop working. Clicking Get started on the first item is what generates the actual DNS values you'll need to paste into Squarespace.",
+      "image": { "file": "/screenshots/PZhaIX7r1BQ/03.webp", "caption": "Google Workspace's domain setup checklist — verify ownership first, then a separate step to start routing Gmail through the domain, each with its own time estimate." }
     },
     {
-      "heading": "Add the MX records in Squarespace",
-      "body": "Enter the MX records into your Squarespace DNS panel exactly as provided by Google, since incorrect priority values or typos are a common source of setup failures."
+      "heading": "Open your domain's DNS settings in Squarespace",
+      "body": "Switch to the Squarespace side and go to Domains, select the domain in question, then open the DNS tab in the left sidebar next to Website, Email, Activity, and Permissions. This is the only screen in Squarespace where Google's records actually get entered — Website and Email settings elsewhere in the same sidebar don't touch DNS. Confirm you're looking at the correct domain here, especially if the account manages more than one, since pasting Google's records onto the wrong domain won't verify anything and just adds confusing clutter to fix later.",
+      "image": { "file": "/screenshots/PZhaIX7r1BQ/04.webp", "caption": "The Squarespace Domains panel for a specific domain, with DNS selected in the sidebar — this is where every record Google Workspace hands you actually gets added." }
     },
     {
-      "heading": "Verify your domain in Google Workspace",
-      "body": "After adding the records, return to Google Workspace to confirm domain ownership, which Google checks against the DNS entries you just created."
+      "heading": "Add the verification TXT record",
+      "body": "Back in Google Workspace, the verification step provides a TXT record: a Host value (usually left at its default), a long Data string starting with google-site-verification=, and a TTL you can leave at the default or lowest setting. Copy that Data value exactly — Google also offers an alternative CNAME record if you'd rather verify that way, but most people stick with TXT since it's the default path. Paste the values into a new TXT record on the Squarespace DNS page, save, then return to Google Workspace and check verification; it can take a few minutes to a few hours to register depending on DNS propagation.",
+      "image": { "file": "/screenshots/PZhaIX7r1BQ/05.webp", "caption": "The TXT record details for domain verification — Host, Data, and TTL fields, plus a CNAME alternative if you'd rather verify that way." }
     },
     {
-      "heading": "Set up SPF and DKIM for email security",
-      "body": "Add SPF and DKIM TXT records to improve email deliverability and reduce the chance your outgoing mail gets flagged as spam."
+      "heading": "Add the MX records so Gmail can receive mail",
+      "body": "After verification passes, the \"Start using Gmail with your domain\" step generates the MX records that actually route incoming mail to Gmail's servers instead of wherever it was going before. Add these as MX records on the same Squarespace DNS page, matching the priority values Google provides exactly — getting the priority order wrong is one of the most common reasons mail stops arriving after switching. If your domain already has addresses receiving email elsewhere, make sure Google Workspace has a matching mailbox or forwarding rule set up for each one before you finish this step, since the old routing stops working the moment the new MX records take effect."
     },
     {
-      "heading": "Run final checks and confirm activation",
-      "body": "Double-check all records are saved and propagated, then confirm Gmail is active and able to send and receive mail through your custom domain."
+      "heading": "Set up SPF and DKIM, then confirm activation",
+      "body": "With mail routing in place, add the SPF TXT record Google Workspace provides so receiving mail servers trust that Google is allowed to send on your domain's behalf, and enable DKIM signing from the admin console, which adds a second TXT record for cryptographic verification. Neither is required for Gmail to technically work, but skipping them makes your outgoing mail far more likely to land in spam. Once all the records are saved and have had time to propagate, send a test email to and from an outside address to confirm everything is routing correctly before you rely on the address for real business."
     }
   ],
   "faq": [
     {
       "question": "How long does it take for MX records to activate Gmail?",
-      "answer": "DNS changes can take some time to propagate, so it's normal for activation to not be instant even after entering the records correctly."
+      "answer": "DNS changes can take anywhere from a few minutes to a few hours to propagate, so it's normal for Gmail activation to not be instant even after entering the records correctly."
     },
     {
       "question": "Do I need SPF and DKIM records for Gmail to work?",
-      "answer": "They aren't strictly required to receive mail, but they significantly improve deliverability and security, so setting them up is recommended."
+      "answer": "They aren't strictly required to receive mail, but they significantly improve deliverability and reduce the chance your outgoing mail is flagged as spam, so setting them up is recommended."
     },
     {
       "question": "What happens if I enter the wrong MX records?",
-      "answer": "Incorrect MX records will prevent email from routing to Gmail properly, so it's important to copy them exactly as Google Workspace provides them."
+      "answer": "Incorrect MX records or priority values will prevent email from routing to Gmail properly, so copy them exactly as Google Workspace provides them rather than retyping from memory."
     },
     {
       "question": "Can I use Gmail with a domain bought outside Squarespace?",
-      "answer": "This particular guide is focused on Squarespace-purchased domains, since the DNS panel steps are specific to how Squarespace manages records."
+      "answer": "Yes — the Google Workspace side of the process is identical. Only the DNS panel steps shown here are specific to how Squarespace organizes its Domains and DNS settings."
     },
     {
       "question": "Why does domain verification fail in Google Workspace?",
-      "answer": "Verification typically fails when the required DNS records haven't fully propagated yet or weren't entered correctly, so re-checking the DNS panel is the first step."
+      "answer": "Verification typically fails when the TXT record hasn't fully propagated yet, was added to the wrong domain, or the Data value was copied incorrectly — recheck the Squarespace DNS panel against what Google Workspace is asking for."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:16Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

@@ -1,47 +1,63 @@
 {
   "slug": "how-to-transfer-email-from-one-google-workspace-account-to-another-with-data-mig",
   "seoTitle": "Transfer Email Between Google Workspace Accounts",
-  "metaDescription": "Migrating email between Google Workspace accounts? Compare Data Migration Tool, forwarding, and routing rules to move mail without losing data.",
-  "intro": "Whether you're switching domains, consolidating teams, or restructuring your business, moving email between Google Workspace accounts requires choosing the right method for your situation. This guide compares three reliable options — the Data Migration Tool, email forwarding, and Gmail routing rules — so you can transfer mail without losing anything important. It's built for Workspace admins and users who need a seamless transition.",
+  "metaDescription": "Migrating email between Google Workspace accounts? Use the built-in Data Migration Tool, forwarding, or routing rules to move mail without losing data.",
+  "intro": "Whether you're switching domains, consolidating teams, or restructuring your business, moving email between Google Workspace accounts requires choosing the right method for your situation. This guide walks through the Admin Console's built-in Data Migration Tool step by step, then covers forwarding and routing rules as the alternatives to reach for when a one-time copy isn't what you actually need. It's built for Workspace admins and anyone with super admin access on both the source and target accounts.",
   "steps": [
     {
-      "heading": "Use the Data Migration Tool for full inbox transfer",
-      "body": "This tool moves entire inboxes, sent mail, and folders from the old account to the new one, making it the most complete option when you need everything carried over."
+      "heading": "Sign in to the Google Admin Console",
+      "body": "Everything here happens at admin.google.com, not in regular Gmail. Once you're signed in with an administrator account, the Home screen shows a \"Manage Workspace\" section with Users and Billing cards front and center, plus a left-hand sidebar covering Directory, Devices, Apps, Security, and Data. The migration tool lives under Data, which is easy to miss the first time since it's nested a few levels deep rather than sitting on the dashboard itself."
     },
     {
-      "heading": "Set up email forwarding for ongoing mail",
-      "body": "Email forwarding automatically sends incoming mail from the old account to the new one, which is useful for catching messages that arrive after the migration."
+      "heading": "Navigate to Data migration under Data import and export",
+      "body": "Expand Data in the left sidebar, then Data import and export, and you'll find Data migration (new) alongside Data Export and Google Takeout. These three are easy to confuse: Data migration copies mail between Workspace accounts, Data Export pulls a full archive of your own organization's data, and Google Takeout is the consumer-facing personal-download tool. For an account-to-account email transfer, Data migration (new) is the one you want.",
+      "image": { "file": "/screenshots/atmy-iU7PTw/03.webp", "caption": "The Data section expanded in the Admin Console sidebar, with Data migration (new) sitting alongside Data Export and Google Takeout." }
     },
     {
-      "heading": "Configure Gmail routing rules for domain-wide moves",
-      "body": "Routing rules set up in the Google Admin Console handle domain-wide mail routing, which is especially useful when migrating multiple users at once."
+      "heading": "Connect to the source Google Workspace account",
+      "body": "Opening Google Workspace email migration drops you into a three-step wizard. Step 1 asks for the email address of a super admin on the source organization — the account you're copying mail from — and a \"Request authorisation\" button that kicks off an OAuth-style consent flow between the two Workspace domains. Nothing gets copied until that authorization is granted, so this step effectively confirms both sides agree to the transfer before any data moves.",
+      "image": { "file": "/screenshots/atmy-iU7PTw/04.webp", "caption": "The Google Workspace email migration wizard: Step 1 connects to the source account by super admin email, with migration maps and settings as Steps 2 and 3." }
     },
     {
-      "heading": "Run pre-checks before migrating",
-      "body": "Review key settings and account details ahead of time to avoid mail delivery issues once the migration or forwarding setup goes live."
+      "heading": "Upload a migration map to pair source and target users",
+      "body": "Step 2 is where you tell Google which mailbox on the old account goes to which mailbox on the new one. Rather than clicking through user by user, you upload a CSV with two columns — Source GUser and Target GUser — one row per person, for example terry@altostrat.com mapped to terry@cymbalgroup.com. Google provides a downloadable sample CSV in this exact format, which is worth using as your starting template even for a handful of users, since a malformed header row is a common reason the upload gets rejected.",
+      "image": { "file": "/screenshots/atmy-iU7PTw/05.webp", "caption": "The migration map upload, showing the required Source GUser / Target GUser CSV columns with a sample mapping." }
+    },
+    {
+      "heading": "Configure migration settings and start the transfer",
+      "body": "Step 3 lets you set an email start date, so you can migrate everything or limit the transfer to messages received after a specific point — useful if the old account has years of mail you don't need duplicated. Review the settings, then hit Start migration. Larger mailboxes can take hours to fully copy, and you can leave the page; Google processes the job in the background and the migration status page shows progress per user."
+    },
+    {
+      "heading": "Use forwarding or routing rules instead, when a copy isn't the goal",
+      "body": "The Data Migration Tool is built for a one-time historical copy, not ongoing mail flow — if you need messages sent to the old address to keep landing in the new one indefinitely, set up email forwarding in that user's Gmail settings instead. For a domain-wide change affecting many users at once, such as consolidating two company domains permanently, Gmail routing rules configured in the Admin Console handle it at the domain level rather than per mailbox, which scales far better than forwarding each account individually."
+    },
+    {
+      "heading": "Run pre-checks before you rely on any of these",
+      "body": "Before starting a migration or turning on forwarding, confirm both accounts have available storage for the incoming mail, that the target address is fully provisioned and not still pending setup, and that any existing filters or forwarding rules on the target won't conflict with what you're about to add. A quick test with one mailbox before running the full migration map catches formatting problems in your CSV long before they affect everyone on the list."
     }
   ],
   "faq": [
     {
       "question": "Which method should I use to move email between Workspace accounts?",
-      "answer": "It depends on your needs — the Data Migration Tool moves full inbox history, forwarding handles ongoing mail, and routing rules work best for domain-wide changes."
+      "answer": "For a one-time copy of existing mail history, use the Data Migration Tool in the Admin Console. For ongoing mail that keeps arriving at the old address, use forwarding. For a domain-wide, permanent change affecting many users, use Gmail routing rules instead."
     },
     {
       "question": "Will I lose old emails during the transfer?",
-      "answer": "Using the Data Migration Tool specifically transfers entire inboxes, sent mail, and folders, so following that method helps preserve your email history."
+      "answer": "The Data Migration Tool is designed to copy rather than move messages, and its Step 3 settings let you choose an email start date, so nothing on the source account is deleted as part of the process."
+    },
+    {
+      "question": "What format does the migration map need to be in?",
+      "answer": "A CSV with two columns, Source GUser and Target GUser, one row per user pair you're migrating. Google provides a downloadable sample CSV in Step 2 of the migration wizard that matches the exact format expected."
     },
     {
       "question": "Can I forward mail without moving everything at once?",
-      "answer": "Yes, setting up email forwarding lets incoming mail automatically flow from the old account to the new one without a full migration."
+      "answer": "Yes — setting up email forwarding in Gmail settings on the source account sends new incoming mail to the new address automatically, without touching the historical mail a full migration would copy."
     },
     {
       "question": "Who can set up domain-wide routing rules?",
-      "answer": "This is done by a Google Workspace admin through the Google Admin Console, since routing rules apply at the domain level."
-    },
-    {
-      "question": "What should I check before starting the migration?",
-      "answer": "Reviewing key account settings and pre-checks beforehand helps avoid mail delivery issues once the migration or forwarding is active."
+      "answer": "Only a super admin, through the Admin Console. Routing rules apply at the domain level, which is why they need broader access than an individual user's forwarding settings do."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:16Z"
+  "generatedAt": "2026-08-06T09:00:00Z",
+  "deep": true
 }

@@ -1,20 +1,44 @@
 {
   "slug": "how-to-export-data-from-tradingview-to-excel-not-free-requires-upgrade-2026-easi",
-  "seoTitle": "How to Export TradingView Data to Excel (Paid Feature)",
-  "metaDescription": "Find out what TradingView's Excel export actually requires an upgrade for, plus free workarounds like copy-paste and third-party tools instead.",
-  "intro": "TradingView's direct export-to-Excel feature is locked behind a paid plan, which surprises a lot of free-account users trying to pull chart or indicator data. This guide explains what's actually gated behind an upgrade and covers workaround options like copy-paste, screenshots, and third-party tools for free accounts. It's useful for traders and analysts who rely on Excel or Google Sheets for backtesting and deeper analysis.",
+  "seoTitle": "How to Export TradingView Chart Data to Excel",
+  "metaDescription": "See exactly where TradingView's Export chart data option lives, what it saves as a CSV, and how plan level affects who can use it.",
+  "intro": "TradingView doesn't export straight into an .xlsx file — it saves chart data to CSV, which Excel or Google Sheets can then open directly. That distinction trips people up as much as the plan restriction does. This guide shows exactly where the export option is tucked away in the layout menu, walks through the export dialog's two settings, and explains what actually lands in the file once you click Export, so you know what to expect before relying on it for backtesting or record-keeping.",
   "steps": [
-    { "heading": "Check TradingView's export options", "body": "Look for the built-in export feature on your chart or data panel to see whether it's available or shows a requires-upgrade notice." },
-    { "heading": "Understand the free vs. paid limitations", "body": "Recognize that direct data export is typically restricted to paid plans, while free accounts see the upgrade prompt instead." },
-    { "heading": "Try copy-paste or screenshot workarounds", "body": "For free accounts, manually copying values or screenshotting chart data is a basic workaround for getting information into Excel." },
-    { "heading": "Explore third-party extensions", "body": "Some third-party browser extensions or tools can help pull TradingView data where the native export is unavailable." },
-    { "heading": "Decide if upgrading is worth it", "body": "If you frequently need clean data exports for backtesting or analysis, weigh the cost of a paid plan against the time spent on manual workarounds." }
+    {
+      "heading": "Open the layout menu on your chart",
+      "body": "With a chart loaded, click the layout options icon in the top toolbar — the same menu that holds Save layout, Autosave, Sharing, Make a copy, and Rename. Export chart data sits in that list alongside Create new layout, which is easy to miss if you're used to looking for export controls near the chart itself rather than in the layout management menu."
+    },
+    {
+      "heading": "Choose Export chart data",
+      "body": "Clicking Export chart data opens a small dialog explaining plainly what you're about to get: all information from the selected chart, including the symbol and any indicators applied, saved to a CSV file. That wording matters — it's a data export of OHLC values and indicator readings, not a formatted spreadsheet with charts or styling, so temper expectations if you were picturing a polished Excel workbook coming out the other end.",
+      "image": { "file": "/screenshots/QnhfWD0dh_k/03.webp", "caption": "The layout menu, with Export chart data listed between Sharing controls and Create new layout." }
+    },
+    {
+      "heading": "Confirm the chart and pick a time format",
+      "body": "The dialog auto-fills the Chart field with your currently loaded symbol and timeframe — CAPITALCOM:US30 on the daily in this case — and offers a dropdown if you want to switch which chart's data gets exported. Below that, the Time format field defaults to a readable option but can be switched to UNIX timestamp, which matters if you're feeding the CSV into a script or spreadsheet formula that expects raw epoch time rather than a formatted date string.",
+      "image": { "file": "/screenshots/QnhfWD0dh_k/04.webp", "caption": "The Export chart data dialog, with the Chart field showing the currently loaded symbol and an autocomplete dropdown for switching charts." }
+    },
+    {
+      "heading": "Set the time format and export",
+      "body": "Once the chart and time format are set the way you want — UNIX timestamp selected here — click Export to download the CSV. From there, opening it in Excel is just a normal file-open: Excel reads CSV natively, so there's no import wizard or conversion step required, only some light cleanup if you picked UNIX timestamps and want readable dates in your sheet.",
+      "image": { "file": "/screenshots/QnhfWD0dh_k/05.webp", "caption": "The same dialog with UNIX timestamp selected as the time format and the Export button ready to download the CSV." }
+    },
+    {
+      "heading": "Know what plan level you need",
+      "body": "Chart data export has historically been a feature TradingView reserves for paid tiers rather than the free plan, and free-account users sometimes hit an upgrade prompt instead of this dialog. Plan requirements shift over time, so if you're on a free account and don't see Export chart data in your layout menu at all, that's the likely explanation rather than a bug — check your current plan's feature list before assuming something's broken."
+    },
+    {
+      "heading": "Use free workarounds if you're not ready to upgrade",
+      "body": "Short of a paid plan, you can still get data out manually: copy visible values off the chart or watch list by hand, take a screenshot of a specific range for reference, or use a third-party browser extension built for scraping TradingView data — though you should vet any extension's permissions before connecting it to an account you trade on. None of these match the one-click CSV export for volume or accuracy, but they cover occasional, small-scale needs without a subscription."
+    }
   ],
   "faq": [
-    { "question": "Is exporting TradingView data to Excel completely free?", "answer": "No, TradingView's direct export tools are generally gated behind a paid subscription, with free accounts seeing an upgrade prompt instead." },
-    { "question": "What can I still do with a free TradingView account?", "answer": "Free users can typically view and manually copy data or take screenshots, even without access to the built-in export feature." },
-    { "question": "Can I export TradingView data to Google Sheets instead of Excel?", "answer": "The same upgrade limitations generally apply, since the restriction is on TradingView's export feature rather than the destination file format." },
+    { "question": "Is exporting TradingView data to Excel completely free?", "answer": "TradingView's built-in Export chart data tool is generally gated behind a paid subscription; free accounts often see an upgrade prompt where this dialog would otherwise appear." },
+    { "question": "Does TradingView export directly to an Excel file?", "answer": "No — it saves a CSV file, which Excel and Google Sheets both open natively. There's no native .xlsx export." },
+    { "question": "What can I still do with a free TradingView account?", "answer": "Free users can typically view and manually copy data or take screenshots, even without access to the built-in Export chart data feature." },
+    { "question": "Should I use UTC or UNIX timestamp when exporting?", "answer": "Use the readable UTC time format for manual analysis in Excel; switch to UNIX timestamp if you're feeding the CSV into a script or formula that expects raw epoch values." },
     { "question": "Are there safe third-party tools for pulling TradingView data?", "answer": "Some exist, but it's worth checking their reviews and permissions carefully before connecting them to your TradingView account." }
   ],
-  "generatedAt": "2026-07-21T05:37:24Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

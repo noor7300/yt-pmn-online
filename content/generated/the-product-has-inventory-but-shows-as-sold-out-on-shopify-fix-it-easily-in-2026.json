@@ -1,55 +1,64 @@
 {
   "slug": "the-product-has-inventory-but-shows-as-sold-out-on-shopify-fix-it-easily-in-2026",
   "seoTitle": "Fix Shopify Product Showing Sold Out With Stock Left",
-  "metaDescription": "Shopify product has inventory but still shows Sold Out? Fix location mismatches, variant issues, and sales channel settings causing the display bug.",
-  "intro": "It's a common and confusing Shopify problem: your product has stock available, but the storefront still shows it as \"Sold Out\" or \"Unavailable.\" This usually comes down to inventory settings, fulfillment location mismatches, unpublished sales channels, or app sync issues rather than an actual stock shortage. This guide walks through the possible causes and fixes so your inventory displays accurately to customers.",
+  "metaDescription": "Shopify product has inventory but still shows Sold Out? Fix location mismatches, variant quantities, and sales channel settings causing the display bug.",
+  "intro": "It's a common and confusing Shopify problem: your product has stock available, but the storefront still shows it as \"Sold Out\" or \"Unavailable.\" This usually comes down to inventory settings, fulfillment location mismatches, unpublished sales channels, or a variant with its quantity left at zero rather than an actual stock shortage. This guide walks through the exact admin screens where these mismatches hide, so you can find and fix the real cause instead of guessing.",
   "steps": [
     {
-      "heading": "Check inventory settings and stock tracking",
-      "body": "Start by confirming that inventory tracking is enabled correctly on the product and that stock quantities are entered as expected."
+      "heading": "Confirm the product's real stock in the Products list",
+      "body": "Start in Products, where the list view shows Status, Inventory, Category, Channels, and Catalogs columns side by side for every item. A product marked Active with \"2 in stock\" or \"35 in stock for 24 variants\" clearly has inventory on paper — if the storefront still shows it as sold out, the mismatch is in how that stock is assigned or published, not in whether it exists.",
+      "image": { "file": "/screenshots/y3S-wCECAu8/02.webp", "caption": "The Products list, showing Active items with their in-stock counts, category, channel count, and catalog count in one view." }
     },
     {
-      "heading": "Fix fulfillment location mismatches",
-      "body": "If inventory is assigned to the wrong fulfillment location, Shopify can show the product as sold out even though stock exists elsewhere, so verify the correct location is selected."
+      "heading": "Open the product and check the Inventory panel",
+      "body": "Click into the product itself and scroll to the Inventory section. This panel breaks stock down by Locations, with separate columns for Unavailable, Committed, Available, and On hand at each fulfillment location — in a single-location setup you might see a location like \"Talborjt\" with 2 Available and 2 On hand. If Available reads 0 while On hand shows stock, that gap is usually the direct cause of a sold-out display, since Shopify sells from Available, not from the raw On hand count.",
+      "image": { "file": "/screenshots/y3S-wCECAu8/05.webp", "caption": "The Inventory panel on a product page: Locations, Unavailable, Committed, Available, and On hand columns, plus the \"Sell when out of stock\" toggle below." }
     },
     {
-      "heading": "Review multiple product variants",
-      "body": "Products with several variants can show \"Out of Stock\" for individual options if quantities aren't set correctly across each variant, so check each one."
+      "heading": "Check \"Sell when out of stock\" and inventory tracking",
+      "body": "Just below the Locations table sit the SKU, Barcode, and a \"Sell when out of stock\" toggle. If Inventory tracked is switched on but the Available count has genuinely hit zero and this toggle is off, Shopify will correctly show the product as sold out — which is expected behavior, not a bug. If the count is wrong rather than zero, the fix is correcting quantities in the next step rather than flipping this toggle."
     },
     {
-      "heading": "Confirm active sales channels and publishing",
-      "body": "A product can appear sold out if it isn't properly published to the sales channel a customer is viewing, so verify publishing status across channels."
+      "heading": "Fix quantities across variants and locations",
+      "body": "Products with multiple variants are the most common source of this issue, because a parent product can look fully stocked while individual variants sit at zero. From the variants list, select the affected variants and use Edit quantities to apply a corrected available quantity at the right location in one pass — the dialog shows the location by name and lets you set the same number across every variant you've selected, which is far faster than editing each one individually.",
+      "image": { "file": "/screenshots/y3S-wCECAu8/04.webp", "caption": "The Edit quantities dialog, setting an available quantity at a specific fulfillment location across multiple selected variants at once." }
     },
     {
-      "heading": "Check theme and app conflicts",
-      "body": "Some sold-out displays are caused by theme-level logic or dropshipping apps like DSers, Zendrop, or AliExpress that need to be re-synced."
+      "heading": "Confirm the product is included in the right catalogs and channels",
+      "body": "A product can carry correct stock and still appear unavailable if it isn't published everywhere it needs to be. The \"Include in catalogs\" dialog lists your available catalogs — for example an International catalog alongside a country-specific one like Russia — with checkboxes for which ones include this product. If a customer is browsing through a catalog or market the product isn't checked into, they'll see it as unavailable regardless of how correct the inventory numbers are.",
+      "image": { "file": "/screenshots/y3S-wCECAu8/03.webp", "caption": "The \"Include product in catalogs\" dialog, with checkboxes for an International catalog and a Russia-specific one." }
     },
     {
-      "heading": "Save changes and verify the fix",
-      "body": "After adjusting settings, save and recheck the product page to confirm it now correctly shows as available."
+      "heading": "Rule out theme and dropshipping app conflicts",
+      "body": "If the admin-side numbers and publishing settings all look correct and the storefront still shows sold out, the cause is likely outside the Shopify admin entirely. Some themes apply their own out-of-stock logic on top of Shopify's inventory data, and dropshipping apps like DSers, Zendrop, or AliExpress periodically sync stock counts from the supplier — a failed sync can silently zero out your Available count. Re-syncing the app or previewing the product with a different theme is the fastest way to isolate which layer is actually causing the display."
+    },
+    {
+      "heading": "Save and verify on the live storefront",
+      "body": "After adjusting inventory, catalog inclusion, or app sync, save your changes and open the actual product page as a customer would see it rather than trusting the admin view alone. The admin can show \"2 in stock\" while a caching layer or unsynced theme still displays the old sold-out state for a few minutes, so give it a moment and do a hard refresh before assuming the fix didn't work."
     }
   ],
   "faq": [
     {
       "question": "Why does my Shopify product show sold out when I have stock?",
-      "answer": "This is commonly caused by fulfillment location mismatches, incorrect variant quantities, unpublished sales channels, or app sync issues rather than an actual lack of stock."
+      "answer": "This is commonly caused by the Available count at a location reading zero even though On hand shows stock, incorrect variant-level quantities, a product missing from the right catalog, or app sync issues rather than an actual lack of stock."
     },
     {
       "question": "Can a dropshipping app cause this sold out display?",
-      "answer": "Yes, apps like DSers, Zendrop, or AliExpress can cause sync issues that make Shopify display a product as sold out even when inventory exists."
+      "answer": "Yes — apps like DSers, Zendrop, or AliExpress periodically sync stock counts from the supplier, and a failed sync can zero out your Available quantity even when the supplier actually has stock."
     },
     {
       "question": "Why is only one variant showing out of stock?",
-      "answer": "This usually happens when individual variant quantities weren't updated correctly, even if the overall product has stock."
+      "answer": "This happens when individual variant quantities weren't updated at the right location. Use the Edit quantities dialog to select the affected variants and set a corrected quantity across all of them at once."
     },
     {
       "question": "Does my theme affect whether sold out shows correctly?",
-      "answer": "Yes, some theme-level display logic can cause a sold out label to appear incorrectly, separate from your actual Shopify admin inventory settings."
+      "answer": "Yes — some themes apply their own out-of-stock display logic on top of Shopify's inventory data, which can show a sold-out label even when the admin's Available count is correct."
     },
     {
       "question": "Do I need to republish the product to fix this?",
-      "answer": "In some cases yes — confirming the product is published to the correct active sales channels is one of the fixes for this issue."
+      "answer": "Sometimes — check the \"Include in catalogs\" dialog to confirm the product is checked into every catalog or market your customers browse through, since a product can be fully in stock and still show unavailable if it's missing from the relevant catalog."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:16Z"
+  "generatedAt": "2026-08-06T09:00:00Z",
+  "deep": true
 }

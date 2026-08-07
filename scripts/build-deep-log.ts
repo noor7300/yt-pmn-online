@@ -2,12 +2,16 @@ import { writeFile, mkdir, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import type { CategorizedVideo, GeneratedArticle } from "../lib/types";
 import { SITE_URL } from "../lib/site";
+import { getVisibleTutorials } from "../lib/data";
 
 const CATS_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GEN_DIR = path.join(process.cwd(), "content", "generated");
 const OUT_JSON = path.join(process.cwd(), "data", "deep", "log.json");
 const OUT_MD = path.join(process.cwd(), "content", "DEEP_LOG.md");
-const TOTAL_FLAGSHIP = 315; // videos with extracted screenshots, per data/screenshots.json
+// The denominator that actually matters: pages a reader can reach at all.
+// Fixed counts go stale the moment the target set changes (flagship -> the
+// 285 already-indexed pages -> whatever's next); the visible set doesn't.
+const TOTAL_VISIBLE = getVisibleTutorials().length;
 
 interface LogEntry {
   slug: string;
@@ -58,9 +62,9 @@ async function main() {
   const rows = entries
     .map((e) => `| [${e.title}](${e.liveUrl}) | ${e.categoryLabel} | ${e.images} | ${e.words} | ${e.generatedAt.slice(0, 10)} |`)
     .join("\n");
-  const md = `# Deep-article log (Phase 3)
+  const md = `# Deep-article log
 
-${entries.length} of ${TOTAL_FLAGSHIP} flagship articles rewritten with curated inline images.
+${entries.length} of ${TOTAL_VISIBLE} visible pages rewritten with curated inline images.
 Regenerate with \`npx tsx scripts/build-deep-log.ts\`.
 
 | Title | Category | Images | Words | Rewritten |
@@ -69,7 +73,7 @@ ${rows}
 `;
   await writeFile(OUT_MD, md);
 
-  console.log(`${entries.length}/${TOTAL_FLAGSHIP} deep articles logged.`);
+  console.log(`${entries.length}/${TOTAL_VISIBLE} deep articles logged.`);
   console.log(`-> ${path.relative(process.cwd(), OUT_JSON)}`);
   console.log(`-> ${path.relative(process.cwd(), OUT_MD)}`);
 }

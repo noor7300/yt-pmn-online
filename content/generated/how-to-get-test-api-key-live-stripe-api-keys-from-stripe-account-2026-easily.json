@@ -2,27 +2,38 @@
   "slug": "how-to-get-test-api-key-live-stripe-api-keys-from-stripe-account-2026-easily",
   "seoTitle": "How to Get Test and Live API Keys From Your Stripe Account",
   "metaDescription": "Stripe keeps Test and Live API keys in the Developers section of your dashboard. This guide shows where to find both, copy them safely, and know which to use.",
-  "intro": "Setting up Stripe payments means knowing the difference between your Test and Live API keys, and where to find both without digging through menus. This tutorial walks through logging into your Stripe dashboard, locating the Developers section, and copying your Publishable and Secret keys correctly. By the end you'll know exactly which key to use during development and which to switch to once you go live.",
+  "intro": "Setting up Stripe payments means knowing the difference between your Test and Live API keys, and where to find both without digging through menus. This tutorial walks through logging into your Stripe dashboard, confirming which mode you're in, and locating the Publishable and Secret keys under API keys. By the end you'll know exactly which key to use during development and which to switch to once you go live.",
   "steps": [
     {
-      "heading": "Log into your Stripe dashboard",
-      "body": "Sign in to your Stripe account and head to the main dashboard where your account settings and integration tools live."
+      "heading": "Sign in to your Stripe account",
+      "body": "Head to the Stripe sign-in page and enter the email and password tied to your account, or use Sign in with Google, a passkey, or SSO if you've set one of those up. Stripe's own login screen also flags a common scam right below the form: never click a sign-in link from an email, since phishing pages that mimic this exact screen are common — bookmark the real login page and use that instead.",
+      "image": { "file": "/screenshots/khuO5_QWf_Y/02.webp", "caption": "Stripe's sign-in screen, with the email and password fields plus alternate options for Google, passkey, and SSO login." }
     },
     {
-      "heading": "Open the Developers section",
-      "body": "Navigate to the Developers area of the dashboard, which is where Stripe keeps both your Test and Live API keys."
+      "heading": "Confirm which mode you're working in",
+      "body": "Once you're in, check the banner at the top of the dashboard. A sandbox or test account shows a persistent notice reading \"You're testing in a sandbox — your place to experiment with Stripe functionality,\" along with a Switch to live account button. This matters because every API key you'll grab next is scoped to whichever mode is active — test keys only work against sandbox data, and live keys only work once you've flipped over.",
+      "image": { "file": "/screenshots/khuO5_QWf_Y/03.webp", "caption": "The Stripe dashboard Home screen in sandbox mode, showing the testing banner and the Switch to live account button." }
     },
     {
-      "heading": "Copy your Test API keys",
-      "body": "Grab your Test Publishable and Secret keys for use while you're building and testing your integration before accepting real payments."
+      "heading": "Open the API keys page",
+      "body": "From the left-hand navigation or the settings gear, find Developer resources and select API keys. This page is organized into two sections: Standard keys, which give full API access, and Restricted keys, which you can scope down to specific permissions if you're handing a key to a third-party integration."
     },
     {
-      "heading": "Switch to Live API keys",
-      "body": "Once you're ready for production, toggle to Live mode and copy the corresponding Live keys to use in your deployed app."
+      "heading": "Copy your Publishable and Secret keys",
+      "body": "Under Standard keys, you'll see two rows — Publishable key and Secret key — each shown as a long token starting with pk_test_ or sk_test_ while you're in sandbox mode. Click the copy icon next to either one and Stripe confirms with a small \"Copied\" tooltip right on the row. Each key also shows when it was created and when it was last used, which is handy for spotting an old key you should rotate.",
+      "image": { "file": "/screenshots/khuO5_QWf_Y/04.webp", "caption": "The API keys page under Standard keys, showing the Publishable key and Secret key rows with a \"Copied\" confirmation after clicking the token." }
     },
     {
-      "heading": "Know the difference between Publishable and Secret keys",
-      "body": "Understand that Publishable keys are safe for client-side code while Secret keys must stay on your server and never be exposed publicly."
+      "heading": "Switch to Live API keys when you're ready",
+      "body": "Use the Switch to live account button from the dashboard banner to move out of the sandbox. The API keys page will refresh to show your live Publishable and Secret keys, prefixed pk_live_ and sk_live_ instead of the test versions. Don't paste a live Secret key into any code that's still in development — keep using test keys until you're actually ready to accept real payments."
+    },
+    {
+      "heading": "Know the difference between the two key types",
+      "body": "The Publishable key is meant to sit in client-side code — your checkout page's JavaScript, for example — because it can only create tokens and can't move money or read sensitive account data on its own. The Secret key is the opposite: it can perform privileged actions on your account and belongs only on your server, in an environment variable, never in a frontend bundle or a public repository."
+    },
+    {
+      "heading": "Store your keys securely",
+      "body": "Once copied, save your Secret key in a password manager or your server's environment configuration immediately — Stripe doesn't let you view the full secret key again after you navigate away, only regenerate a new one. If a key is ever exposed publicly, roll it immediately from the same API keys page rather than leaving the old one active."
     }
   ],
   "faq": [
@@ -32,16 +43,21 @@
     },
     {
       "question": "Can I use my Test API key on a live website?",
-      "answer": "No, Test keys only work in Stripe's test mode and won't process real payments - you need to switch to Live keys once you're ready to accept actual transactions."
+      "answer": "No, Test keys only work in Stripe's sandbox mode and won't process real payments - you need to switch to live mode and copy the corresponding Live keys once you're ready to accept actual transactions."
     },
     {
       "question": "Is it safe to share my Stripe Secret key?",
-      "answer": "No, your Secret key should never be shared or committed to public code repositories since it grants access to sensitive account actions."
+      "answer": "No, your Secret key should never be shared or committed to public code repositories since it grants access to sensitive account actions - if it's exposed, roll it immediately from the API keys page."
     },
     {
       "question": "Where exactly do I find my API keys in the Stripe dashboard?",
-      "answer": "Both Test and Live API keys live under the Developers section of your Stripe dashboard, where you can view and copy them as needed."
+      "answer": "Both Test and Live API keys live under Developer resources → API keys, in the Standard keys section, where you can copy the Publishable and Secret key tokens directly."
+    },
+    {
+      "question": "How do I know which mode - test or live - I'm currently in?",
+      "answer": "Check the banner across the top of the dashboard: a sandbox account shows a persistent \"You're testing in a sandbox\" notice with a Switch to live account button until you flip it over."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:19Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

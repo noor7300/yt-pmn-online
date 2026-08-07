@@ -2,50 +2,63 @@
   "slug": "how-to-host-nextjs-website-on-hostinger-deploy-next-js-app-easily-2026",
   "seoTitle": "How to Host a Next.js Website on Hostinger (2026)",
   "metaDescription": "Deploy a Next.js app on Hostinger with this walkthrough covering hosting setup, file structure, environment variables, and going live.",
-  "intro": "Deploying a Next.js app on Hostinger involves more than just uploading files — you need the right hosting setup, correct file structure, and properly configured environment variables. This guide walks through the full process using Hostinger's file manager or FTP, whether your project uses SSR, SSG, or a static export. By the end, you'll have your Next.js site live on affordable, fast hosting.",
+  "intro": "Deploying a Next.js app on Hostinger involves more than just uploading files — you need the right hosting plan, correct file structure, and properly configured environment variables. This guide walks through Hostinger's actual signup and file manager screens, from picking a plan to selecting your build files on your own machine, whether your project uses SSR, SSG, or a static export. By the end, you'll have your Next.js site live on affordable hosting without guessing at any of the upload steps.",
   "steps": [
     {
-      "heading": "Set up your Hostinger hosting environment",
-      "body": "Start by preparing the Hostinger hosting plan you'll deploy to, since the right plan and setup depend on whether your Next.js app uses SSR, SSG, or static export."
+      "heading": "Pick a Hostinger hosting plan",
+      "body": "Start on Hostinger's plans page, where you choose between Web hosting, VPS hosting, and other options, plus a subscription length. For a Next.js static export, standard Web hosting is enough; if your app relies on server-side rendering with API routes that need to run continuously, you'll want VPS hosting instead, since shared web hosting doesn't run a persistent Node process. Picking the wrong tier here is the single most common reason deployments later fail to behave as expected.",
+      "image": { "file": "/screenshots/mik58wA1PPU/01.webp", "caption": "Hostinger's plans page, where the choice between Web hosting and VPS hosting determines whether your Next.js app can run server-side rendering or needs a static export." }
     },
     {
-      "heading": "Configure the file structure",
-      "body": "Organize your project's build output correctly so Hostinger can serve the right files, which is a key step before uploading anything."
+      "heading": "Log in to your Hostinger account",
+      "body": "Once you've got a plan, log in through Hostinger's account page, either with Google, Facebook, or your email and password. This account is what gives you access to hPanel, Hostinger's control panel, where the file manager, domains, and every other hosting setting live. Bookmark this login screen — you'll come back to it every time you need to update the site later.",
+      "image": { "file": "/screenshots/mik58wA1PPU/02.webp", "caption": "The Hostinger login screen. Signing in here is the gateway to hPanel, where the file manager and all your hosting settings are managed." }
     },
     {
-      "heading": "Upload your build",
-      "body": "Use Hostinger's file manager or FTP to upload your Next.js build files to the hosting environment."
+      "heading": "Build your Next.js app for the right output",
+      "body": "Before touching Hostinger again, run your production build locally. For a fully static site, use Next.js's static export output so the build produces plain HTML, CSS, and JavaScript files that any web host can serve — no Node server required. If your app needs SSR or API routes, you'll instead be deploying to a VPS plan capable of running Node, which changes the rest of this process considerably. Confirm which path applies to your project before uploading anything, since mixing the two approaches is a common source of broken deployments."
     },
     {
-      "heading": "Set environment variables",
-      "body": "Configure any environment variables your Next.js app relies on so it runs correctly once deployed on Hostinger."
+      "heading": "Open the file manager and start an upload",
+      "body": "Inside hPanel, open the File manager and navigate to public_html, the folder Hostinger serves your live site from. Click Upload, and you'll be asked to select an option: File or Folder. For a Next.js static export, uploading the whole build folder at once is faster than adding files one at a time, though either method lands the content in the same place.",
+      "image": { "file": "/screenshots/mik58wA1PPU/04.webp", "caption": "The Hostinger file manager's public_html directory, with the Upload dialog open and a choice between uploading a single File or an entire Folder." }
     },
     {
-      "heading": "Preview the live site",
-      "body": "After deployment, load your site to confirm everything works as expected in the live environment."
+      "heading": "Select your build files from your computer",
+      "body": "Choosing File opens your operating system's native file picker, where you browse to your project's build output folder — typically the assets or out directory Next.js generated — and select the files to upload. The compiled CSS and JavaScript bundles from the build show up here with their hashed filenames, which is normal; Next.js generates unique names on every build so browsers don't serve stale cached versions after you update the site.",
+      "image": { "file": "/screenshots/mik58wA1PPU/05.webp", "caption": "The system file picker open on a Next.js build's assets folder, with the compiled CSS and JavaScript bundles ready to upload to public_html." }
+    },
+    {
+      "heading": "Set the environment variables your app needs",
+      "body": "If your Next.js app reads any environment variables at build or runtime — an API base URL, a public analytics key, anything under NEXT_PUBLIC_ — those need to be set correctly wherever your app actually reads them. For a static export, environment variables get baked in at build time on your own machine, so you must rebuild locally with the correct values before uploading rather than trying to set them inside hPanel. For an SSR deployment on a VPS, you'll set them in the server's environment configuration instead."
+    },
+    {
+      "heading": "Preview the live site and check for broken paths",
+      "body": "Once the upload finishes, visit your domain and click through the main pages, checking that internal links, images, and API calls all resolve correctly. A common issue at this stage is broken asset paths caused by an incorrect basePath or assetPrefix in next.config, which shows up as missing styles or broken images even though the deployment technically succeeded — if that happens, fix the config, rebuild, and re-upload rather than troubleshooting on the server side."
     }
   ],
   "faq": [
     {
       "question": "Can I host a Next.js app on Hostinger shared hosting?",
-      "answer": "Yes, this depends on how your project is built — static exports work well on shared hosting, while SSR setups may need additional configuration."
+      "answer": "Yes, if you build it as a static export — shared Web hosting can serve the resulting HTML, CSS, and JS files directly. Server-side rendering with a live Node process needs a VPS plan instead."
     },
     {
       "question": "Do I need FTP to deploy Next.js on Hostinger?",
-      "answer": "You can use either Hostinger's file manager or FTP to upload your build, depending on what's more convenient for you."
+      "answer": "No — Hostinger's built-in file manager lets you upload an entire build folder directly through hPanel, though FTP works too if you prefer a dedicated client."
     },
     {
       "question": "What's the difference between deploying SSR vs static Next.js sites?",
-      "answer": "SSR apps require a running server environment, while static exports can be uploaded as plain files, which affects how you configure hosting."
+      "answer": "A static export produces plain files you can upload to shared Web hosting. SSR requires a running Node server, which means deploying to a Hostinger VPS plan rather than shared hosting."
     },
     {
-      "question": "Why do I need to set environment variables after deployment?",
-      "answer": "Next.js apps often rely on environment variables for configuration, and these need to be set correctly on Hostinger for the app to function properly."
+      "question": "Why do I need to set environment variables before uploading?",
+      "answer": "For a static export, environment variables are baked into the build at build time on your own machine — you need to rebuild locally with the correct values before uploading, since hPanel can't inject them afterward."
     },
     {
       "question": "Is Hostinger a good option for Next.js hosting?",
-      "answer": "It's presented here as an affordable and fast hosting option suitable for deploying Next.js projects of different types."
+      "answer": "For a static export, yes — shared Web hosting is affordable and handles static files well. For SSR apps with ongoing server needs, a VPS plan is the more appropriate and capable option."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:16Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

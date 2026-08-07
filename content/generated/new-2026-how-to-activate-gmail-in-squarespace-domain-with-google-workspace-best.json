@@ -2,19 +2,45 @@
   "slug": "new-2026-how-to-activate-gmail-in-squarespace-domain-with-google-workspace-best",
   "seoTitle": "How to Activate Gmail in Squarespace with Workspace",
   "metaDescription": "Learn how to connect Google Workspace to Squarespace, update MX records, and activate Gmail for a professional email address on your domain.",
-  "intro": "Running professional email on your custom domain means connecting Google Workspace to your Squarespace site and getting the DNS settings exactly right. This guide covers setting up a Google Workspace account, connecting your domain in Squarespace, updating MX records, and finally activating Gmail. It's aimed at small business owners, freelancers, and personal brands who want a working business email address under their own domain.",
+  "intro": "Running email at you@yourbusiness.com instead of yourbusiness@gmail.com is one of the cheapest credibility upgrades a small business or freelancer can make, and Google Workspace is the standard way to get there on a Squarespace-hosted domain. The process touches two separate admin panels — Google's and Squarespace's — and the DNS changes in between are exactly where most setups go wrong. This guide walks through adding your domain in Google Workspace, the DNS records Squarespace needs in return, and the verification and MX steps that actually turn Gmail on.",
   "steps": [
-    { "heading": "Set up your Google Workspace account", "body": "Sign up for Google Workspace and choose the plan that fits your business email needs." },
-    { "heading": "Connect your domain in Squarespace settings", "body": "In your Squarespace account, go to the domain settings and start the process to connect it with Google Workspace." },
-    { "heading": "Update MX records and verify DNS", "body": "Add the MX records Google Workspace provides into Squarespace's DNS settings, and complete any domain verification steps." },
-    { "heading": "Activate Gmail inside Workspace", "body": "Once verification and MX records are confirmed, activate the Gmail app within your Google Workspace account." },
-    { "heading": "Test your email setup", "body": "Send and receive a test email to confirm everything under your custom domain is working properly." }
+    {
+      "heading": "Decide if a custom domain email is worth it",
+      "body": "A branded address does real work: clients and partners trust info@yourbusiness.com noticeably more than a generic Gmail address, and it signals you're running an actual business rather than a side project. Beyond Gmail itself, Google Workspace unlocks Calendar, Docs, and Drive under that same custom domain, so the same setup that fixes your email also gives you a shared workspace for anyone else on the team. This is worth doing for any business owner, entrepreneur, or creative who's already invested in a Squarespace site and domain."
+    },
+    {
+      "heading": "Start a Google Workspace account",
+      "body": "Sign up for Google Workspace and pick a plan sized to how many people need mailboxes — a solo freelancer needs far less than a small team. You'll be asked for your business name and the domain you plan to use, which should match the domain your Squarespace site is already running on. Google walks you through account creation before it ever asks about DNS, so this step is straightforward account setup rather than technical configuration."
+    },
+    {
+      "heading": "Add your domain in the Google admin console",
+      "body": "Inside Google admin, the Add a domain screen asks for the domain name and whether it's a secondary domain — for managing separate teams or replacing your primary domain — or a user alias domain, which just gives existing users an alternate address at no extra cost. For a straightforward Squarespace setup activating Gmail on your main business domain, you'll typically be adding it as your primary domain rather than either of these secondary options, though the screen makes both alternatives available if your situation calls for them.",
+      "image": { "file": "/screenshots/uGSUd6XDWvI/03.webp", "caption": "Google admin's Add a domain screen, asking for the domain name and whether it's a secondary or user alias domain." }
+    },
+    {
+      "heading": "Verify domain ownership with a TXT record",
+      "body": "Google needs proof you actually control the domain before it'll activate anything on it, and that proof is a TXT record it generates for you to paste into Squarespace's DNS settings. In Squarespace, this means opening the domain's DNS settings and adding the exact TXT record Google provided — mismatched or truncated values are the most common reason verification fails, so copy the record exactly rather than retyping it."
+    },
+    {
+      "heading": "Point mail delivery at Google with MX records",
+      "body": "Once verified, replace any existing MX records in Squarespace's DNS settings with the set Google Workspace provides — these tell the internet where to actually deliver mail sent to your domain. Leaving old MX records in place alongside the new ones is a common mistake that causes delivery to split unpredictably between your old provider and Gmail, so remove outdated records before adding Google's rather than layering them. Double-check priority values and destination hostnames for typos, since a small mismatch here causes real delivery failures rather than a cosmetic error."
+    },
+    {
+      "heading": "Add SPF and DKIM for deliverability",
+      "body": "Beyond MX records, adding Google's recommended SPF and DKIM records helps authenticate outgoing mail from your domain and keeps it out of recipients' spam folders. These aren't strictly required to receive mail, but skipping them noticeably hurts how reliably your sent messages land in an inbox rather than getting filtered, which matters as soon as you're using this address for real client or customer communication."
+    },
+    {
+      "heading": "Finish verification and send a test email",
+      "body": "Once DNS changes propagate — anywhere from a few minutes to about a day — finish verification inside Google Workspace and Gmail activates for your domain. Send a test email in both directions to confirm delivery actually works before you start handing the new address out; if something's off, the fix is almost always rechecking that MX records exactly match what Google provided and that no old records were left behind in Squarespace."
+    }
   ],
   "faq": [
     { "question": "How long does it take for Gmail to work after connecting Squarespace and Google Workspace?", "answer": "It depends on DNS propagation, which can take anywhere from a few minutes to a day after the MX records are updated." },
     { "question": "What if I get an MX record error while connecting Squarespace to Google Workspace?", "answer": "Double-check that the MX records exactly match what Google Workspace provided, since even small typos will cause verification or delivery failures." },
     { "question": "Do I need a paid Squarespace plan to connect Google Workspace?", "answer": "You need a Squarespace plan that includes domain management access, since that's where the DNS changes for Google Workspace are made." },
-    { "question": "Can I still use my old email while switching to Google Workspace?", "answer": "Your old email may keep working until the MX record change fully propagates, after which mail will route through Google Workspace instead." }
+    { "question": "Can I still use my old email while switching to Google Workspace?", "answer": "Your old email may keep working until the MX record change fully propagates, after which mail will route through Google Workspace instead." },
+    { "question": "Do I need SPF and DKIM records, or just MX records?", "answer": "MX records alone are enough to receive mail, but adding SPF and DKIM authenticates your outgoing messages and significantly reduces the chance they get flagged as spam." }
   ],
-  "generatedAt": "2026-07-21T05:37:24Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

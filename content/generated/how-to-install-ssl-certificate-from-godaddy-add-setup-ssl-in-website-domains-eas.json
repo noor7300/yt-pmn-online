@@ -1,43 +1,60 @@
 {
   "slug": "how-to-install-ssl-certificate-from-godaddy-add-setup-ssl-in-website-domains-eas",
   "seoTitle": "How to Install and Set Up an SSL Certificate From GoDaddy",
-  "metaDescription": "Learn how to install, activate, and connect an SSL certificate from GoDaddy to your website domain, and fix a Not Secure warning by enabling HTTPS.",
-  "intro": "A website showing a Not Secure warning usually means its SSL certificate isn't active yet, and GoDaddy makes it possible to fix that whether you bought a standalone certificate or got one free with hosting. This guide covers requesting and activating the certificate, verifying domain ownership, and connecting it through cPanel, GoDaddy DNS, or a third-party host. By the end, your site should be serving over HTTPS.",
+  "metaDescription": "Learn how to choose, buy, and connect an SSL certificate from GoDaddy to your website domain, and fix a Not Secure warning by enabling HTTPS.",
+  "intro": "A website showing a Not Secure warning usually means its SSL certificate isn't active yet, and GoDaddy sells and manages certificates from the same account dashboard you already use for domains and hosting. This guide covers finding the SSL section in your GoDaddy account, understanding the real difference between Managed and Do-It-Yourself SSL, and picking the right certificate type for how many sites you're securing. It closes with how the certificate actually connects to your hosting once you've bought it, whether that's through cPanel, GoDaddy DNS, or a third-party host.",
   "steps": [
     {
-      "heading": "Request and activate your SSL certificate",
-      "body": "Start by requesting your SSL certificate in GoDaddy, whether it's a paid certificate or one included free with your hosting plan."
+      "heading": "Start from your GoDaddy account dashboard",
+      "body": "Log into GoDaddy and you'll land on your account home, with a \"Pick up where you left off\" panel showing recent items like your hosting plan or YouTube channel link, plus quick links to Renewals & Billing. SSL isn't managed from this dashboard directly — it's a product you navigate to from the top menu — but this is your starting point if you're not sure which domain or hosting plan you're adding SSL to.",
+      "image": { "file": "/screenshots/UZdy6EN07v8/01.webp", "caption": "The GoDaddy account dashboard, with quick links to your hosting, renewals, and billing before heading to the SSL section." }
     },
     {
-      "heading": "Verify domain ownership",
-      "body": "Complete the domain verification step so GoDaddy can confirm you control the domain before issuing the certificate."
+      "heading": "Open the SSL Certificates section",
+      "body": "From the main GoDaddy navigation, go to Security → SSL Certificates. The page is organized into tabs: All SSL Certificate Options, Managed SSL, Do-It-Yourself SSL, SSL Checker, and Help Me Choose an SSL. The page's own pitch is straightforward — an SSL certificate encrypts data, login credentials, and payment info, and eliminates the \"Not Secure\" browser warning that scares off visitors and can hurt trust and rankings.",
+      "image": { "file": "/screenshots/UZdy6EN07v8/02.webp", "caption": "GoDaddy's SSL Certificates page, with tabs for Managed SSL, Do-It-Yourself SSL, an SSL Checker, and a plan-picking tool." }
+    },
+    {
+      "heading": "Decide between Managed SSL and Do-It-Yourself SSL",
+      "body": "This is the real fork in the setup process. Managed SSL means GoDaddy handles installation for you, typically finishing in under an hour, plus ongoing maintenance and automatic re-issuance every 90 days to keep encryption fresh. Do-It-Yourself SSL is cheaper but puts the installation step on you — generating a certificate signing request, verifying your domain, and installing it through your host's control panel yourself. If you're not comfortable with cPanel or DNS records, the time Managed SSL saves is usually worth the price difference.",
+      "image": null
+    },
+    {
+      "heading": "Compare certificate types and pick one for your setup",
+      "body": "GoDaddy's plans split by how many sites you need to cover: Single Domain DV SSL for one website with basic coverage, Managed DV SSL Certificate for one site with GoDaddy handling everything end to end, Multi-domain SAN SSL for encrypting up to five websites or servers under one certificate, and Wildcard DV SSL for one domain plus unlimited subdomains. All four listed here use standard-level domain validation (DV), which is the fastest type to issue since it only confirms you control the domain rather than verifying your business identity. Multi-domain and Wildcard options cost more but avoid buying and managing a separate certificate for every subdomain or additional site.",
+      "image": { "file": "/screenshots/UZdy6EN07v8/04.webp", "caption": "GoDaddy's SSL certificate plans side by side — Single Domain, Managed, Multi-domain SAN, and Wildcard — each with annual pricing." }
+    },
+    {
+      "heading": "Verify your domain before the certificate issues",
+      "body": "After adding a certificate to your cart and completing checkout, GoDaddy needs to confirm you actually control the domain before it issues anything — usually through a DNS record it asks you to add, or an email sent to an address associated with the domain's registration. This step is what stands between purchase and an active certificate, so it's worth doing immediately after checkout rather than letting it sit, especially if you're already showing the Not Secure warning to visitors."
     },
     {
       "heading": "Connect the certificate to your hosting",
-      "body": "Depending on your setup, install the certificate through cPanel, GoDaddy DNS, or your third-party hosting provider's control panel."
-    },
-    {
-      "heading": "Confirm HTTPS is working",
-      "body": "Reload your site and check that the Not Secure warning is gone and HTTPS is active to build visitor trust and support SEO."
+      "body": "Once verified, a Managed SSL plan installs itself against GoDaddy-hosted sites automatically. If you're self-installing or hosting elsewhere, you'll do this through cPanel's SSL/TLS section, through GoDaddy's own DNS management if your domain and hosting are both there, or through whatever control panel your third-party host provides. After installation, reload your site and confirm the padlock shows and HTTPS loads without a warning — that's your signal the certificate is fully connected rather than just issued."
     }
   ],
   "faq": [
     {
       "question": "Do I get a free SSL certificate with GoDaddy hosting?",
-      "answer": "Many GoDaddy hosting plans include a free SSL certificate, though you can also purchase a standalone one."
+      "answer": "Many GoDaddy hosting plans include a free SSL certificate, though you can also purchase a standalone one from Single Domain, Managed, Multi-domain, or Wildcard options."
+    },
+    {
+      "question": "What's the difference between Managed SSL and Do-It-Yourself SSL?",
+      "answer": "Managed SSL has GoDaddy install and maintain the certificate for you, typically within an hour, with automatic 90-day re-issuance. Do-It-Yourself SSL is cheaper but requires you to verify your domain and install the certificate through your own hosting control panel."
     },
     {
       "question": "Why does my site still show Not Secure after buying SSL?",
-      "answer": "This usually means the certificate hasn't been fully installed or connected to your hosting yet, so double-check the activation and DNS steps."
+      "answer": "This usually means the certificate hasn't finished domain verification or hasn't been connected to your hosting yet — check both steps before assuming something's broken."
     },
     {
       "question": "Can I install SSL through cPanel?",
-      "answer": "Yes, cPanel is one of the supported ways to install and manage your SSL certificate alongside GoDaddy DNS."
+      "answer": "Yes, cPanel's SSL/TLS section is one of the supported ways to install and manage your SSL certificate alongside GoDaddy DNS management."
     },
     {
-      "question": "Does adding SSL actually help SEO?",
-      "answer": "Enabling HTTPS is considered a positive signal for search engines and helps build visitor trust, alongside its security benefits."
+      "question": "Which SSL plan do I need if I have several subdomains?",
+      "answer": "Wildcard DV SSL covers one domain plus unlimited subdomains under a single certificate, which is usually cheaper than buying separate certificates for each one."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:22Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

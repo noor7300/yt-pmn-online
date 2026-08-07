@@ -2,19 +2,43 @@
   "slug": "how-to-use-localwp-localwp-full-tutorial-2026-install-wordpress-site-like-localh",
   "seoTitle": "How to Use LocalWP to Build WordPress Sites Offline",
   "metaDescription": "Learn how to install LocalWP, create a local WordPress site, and add themes and plugins to build and test websites offline before hosting them.",
-  "intro": "LocalWP lets you spin up a full WordPress website on your own computer with a single click, no hosting or domain required. This guide covers installing LocalWP, creating a local WordPress site, and setting up themes, plugins, and Elementor for testing. It's aimed at beginners who want a safe place to practice WordPress or test plugins before going live.",
+  "intro": "LocalWP (usually just called Local) lets you spin up a full WordPress website on your own computer with a few clicks, no hosting account or domain required. This guide covers downloading Local from the official site, running through its site-creation wizard including the environment choice most beginners skip past without understanding, and confirming your new WordPress install is actually running before you touch themes or plugins. It's aimed at anyone who wants a safe, disposable place to practice WordPress or test changes before they ever touch a live server.",
   "steps": [
-    { "heading": "Download and install LocalWP", "body": "Get LocalWP for Windows or Mac and complete the installation before creating your first site." },
-    { "heading": "Create a WordPress site locally", "body": "Use LocalWP's site creation wizard to spin up a working WordPress installation on your computer in seconds." },
-    { "heading": "Install themes and plugins", "body": "Log in to your local WordPress dashboard and install themes, plugins, or page builders like Elementor just as you would on a live site." },
-    { "heading": "Use database and SSL tools", "body": "Access LocalWP's built-in database tools and enable SSL to test your site under conditions closer to a real hosting environment." },
-    { "heading": "Fix common issues and export for hosting", "body": "Troubleshoot problems like the site not loading, then export your finished local site when you're ready to move it to real hosting." }
+    {
+      "heading": "Download Local from the official site",
+      "body": "Local is built by WP Engine and distributed free from localwp.com, where the homepage bills it as \"The #1 local WordPress development tool.\" The site has a straightforward Download button for your operating system — Windows or Mac — and the install itself is a standard desktop app installer with no server configuration required on your end. Local bundles its own PHP, web server, and MySQL, which is the whole point: you get a working WordPress environment without installing any of those pieces separately.",
+      "image": { "file": "/screenshots/4RknZlGsU1I/02.webp", "caption": "The Local by WP Engine homepage, where the app is downloaded free for Windows or Mac before any WordPress site is created." }
+    },
+    {
+      "heading": "Create a new site and choose your environment",
+      "body": "Once Local is installed, creating a site walks you through a short wizard: naming the site, then choosing an environment. This is the step that trips up beginners, since Local presents two options — Preferred and Custom. Preferred uses Local's recommended, tested combination (in one setup this showed PHP 8.2.27, the nginx web server, and MySQL 8.0.35), which is the right call unless you specifically need to match an older hosting environment you're eventually deploying to. Custom lets you pick different PHP or MySQL versions manually, which matters if your live host runs something older and you want your local site to behave identically before you migrate.",
+      "image": { "file": "/screenshots/4RknZlGsU1I/04.webp", "caption": "Local's environment selection screen during site setup, with Preferred checked and its PHP, nginx, and MySQL versions listed underneath." }
+    },
+    {
+      "heading": "Confirm the site is live locally",
+      "body": "After the wizard finishes, Local starts the site's local server automatically and it's reachable in your browser like any WordPress install, just pointed at a local address instead of a real domain. A fresh install shows the default WordPress theme with the standard \"Hello world!\" post under Blog, which is your confirmation everything installed correctly and you're ready to start customizing.",
+      "image": { "file": "/screenshots/4RknZlGsU1I/05.webp", "caption": "A freshly created local WordPress site, showing the default \"Hello world!\" post — proof the install completed and the site is running." }
+    },
+    {
+      "heading": "Install themes, plugins, and Elementor",
+      "body": "From here, working inside your local site is identical to working on a live one: log in to the WordPress dashboard at the site's local admin URL and install themes or plugins from the same Add New screens you'd use anywhere else. Page builders like Elementor install and run the same way, which is exactly why Local is popular for testing — you can try a heavy plugin or a theme switch without any risk to a production site."
+    },
+    {
+      "heading": "Use Local's database and SSL tools",
+      "body": "Local includes built-in tools for opening your site's database directly (commonly through Adminer, accessible from the site's tools menu inside the app) rather than requiring a separate database client. It also offers one-click SSL, which lets your local site run under https so you can test SSL-dependent behavior — mixed-content warnings, certain plugin requirements — before your real domain has a certificate configured."
+    },
+    {
+      "heading": "Troubleshoot and export when you're ready to go live",
+      "body": "If a site won't start or a page won't load, the most common fixes are restarting the site from Local's site list or checking the app's built-in logs for the specific service that failed to boot. Once you're happy with the result, Local's export feature packages the site for migration to a real host, which is the intended endpoint of the whole workflow: build and break things locally, then push a finished, tested site live."
+    }
   ],
   "faq": [
-    { "question": "Is LocalWP free to use?", "answer": "Yes, LocalWP is free and designed to let anyone build and test WordPress sites on their own computer without hosting costs." },
-    { "question": "Can I move a site built in LocalWP to a live host later?", "answer": "Yes, LocalWP includes an export feature specifically for pushing your locally built site to a hosting provider when it's ready." },
-    { "question": "Why isn't my LocalWP site loading?", "answer": "This is often related to a local server conflict or a site that hasn't fully started, so restarting the site or checking LocalWP's logs usually resolves it." },
-    { "question": "Does LocalWP work with Elementor and other page builders?", "answer": "Yes, you can install Elementor and other plugins on a LocalWP site the same way you would on any WordPress installation." }
+    { "question": "Is LocalWP free to use?", "answer": "Yes. Local is free to download from localwp.com and is designed to let anyone build and test WordPress sites on their own computer without hosting costs." },
+    { "question": "What's the difference between the Preferred and Custom environment when creating a site?", "answer": "Preferred uses Local's tested default combination of PHP, web server, and MySQL versions. Custom lets you manually choose versions instead, which is useful if you need your local site to match an older live hosting environment exactly." },
+    { "question": "Can I move a site built in LocalWP to a live host later?", "answer": "Yes. Local includes an export feature specifically for packaging your locally built site so it can be pushed to a hosting provider when it's ready to go live." },
+    { "question": "Why isn't my LocalWP site loading?", "answer": "This is often a local server conflict or a site that hasn't fully started. Restarting the site from Local's site list, or checking the app's logs for the specific service that failed, resolves most cases." },
+    { "question": "Does LocalWP work with Elementor and other page builders?", "answer": "Yes. Once your local WordPress site is running, you install Elementor and other plugins from the dashboard exactly as you would on any live WordPress installation." }
   ],
-  "generatedAt": "2026-07-21T05:37:24Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

@@ -2,46 +2,59 @@
   "slug": "cloudflare-email-setup-beginner-tutorial-2026-know-how-to-use-email-routing-for-",
   "seoTitle": "Cloudflare Email Setup: Free Email Routing for Beginners",
   "metaDescription": "Learn how to create a custom domain email address for free using Cloudflare Email Routing, including DNS setup and forwarding to Gmail or Outlook.",
-  "intro": "Cloudflare's free Email Routing feature lets you create a custom email address on your own domain and forward it straight to an inbox you already use, like Gmail or Outlook, without paying for a separate email service. This beginner-friendly guide covers setting up the DNS records correctly and avoiding common deliverability issues. It's built for small business owners, bloggers, and anyone launching a website who wants a professional-looking email address.",
+  "intro": "Cloudflare's free Email Routing feature lets you create a custom email address on your own domain and forward it straight to an inbox you already use, like Gmail or Outlook, without paying for a separate email service. This beginner-friendly guide walks through the actual Cloudflare dashboard, from picking the right domain to filling out the custom address form, so you can see exactly where each setting lives. It's built for small business owners, bloggers, and anyone launching a website who wants a professional-looking email address without extra cost.",
   "steps": [
     {
-      "heading": "Create a custom email address on your domain",
-      "body": "Inside Cloudflare, set up Email Routing to define a custom address using your own domain name instead of a generic email provider."
+      "heading": "Find the right domain in your Cloudflare account",
+      "body": "Log into Cloudflare and land on Account Home, where every domain you've added shows up in a list with its status, security insights, and plan. If you manage more than one site, as most accounts eventually do, double-check you're clicking into the domain you actually want to set up email for — Email Routing is configured per domain, not account-wide, so picking the wrong one means redoing the whole setup later.",
+      "image": { "file": "/screenshots/rP7k_v6tdAg/02.webp", "caption": "The Cloudflare account home listing two domains, each showing its status and plan. Email Routing gets configured separately for whichever domain you click into." }
     },
     {
-      "heading": "Forward emails to your existing inbox",
-      "body": "Point your new custom address to forward incoming mail to Gmail, Outlook, or any inbox you already check, so you don't need to manage a separate mailbox."
+      "heading": "Open Email Routing for the domain",
+      "body": "Inside a specific domain, the left sidebar has an Email section with three sub-items: Email Routing, DMARC Management, and Email Security. Email Routing is the one that creates custom addresses on your domain, and the page introduces itself plainly: create custom addresses to use whenever you don't want to share your primary address. This is also where you'd manage DMARC and email security later, but routing is the starting point for a beginner setup.",
+      "image": { "file": "/screenshots/rP7k_v6tdAg/03.webp", "caption": "The Email Routing landing page inside a domain, with the domain's Active status and Free plan badge visible above it." }
     },
     {
-      "heading": "Set up the required DNS records",
-      "body": "Cloudflare needs specific DNS records added correctly for routing to work, so this step ensures mail actually reaches your forwarding address."
+      "heading": "Check the configuration summary before adding anything",
+      "body": "Once you're on the Email Routing overview tab, Cloudflare shows a Configuration summary with four numbers at a glance: custom addresses created, destination addresses verified, domains covered, and overall routing status. A domain that's never been set up will show Enabled routing status alongside a note that the required Email DNS records are already configured — Cloudflare adds those automatically when you turn routing on, which is one less manual DNS step than most other providers require.",
+      "image": { "file": "/screenshots/rP7k_v6tdAg/04.webp", "caption": "The Email Routing configuration summary — custom addresses, destination addresses, domain count, and routing status, with a note confirming the DNS records are already in place." }
     },
     {
-      "heading": "Apply tips to avoid spam and improve deliverability",
-      "body": "Following recommended settings helps keep your forwarded mail out of spam folders and improves overall deliverability for your custom domain email."
+      "heading": "Create your custom address and pick a destination",
+      "body": "Selecting Get started opens the setup form, which asks for two things: a custom address (the part before the @ on your domain, like support or hello) and an action, almost always \"Send to an email.\" Type your custom address, then enter the real inbox — Gmail, Outlook, or anywhere else — where you want that mail forwarded. Cloudflare sends a confirmation email to the destination address before routing goes live, so check that inbox right after saving.",
+      "image": { "file": "/screenshots/rP7k_v6tdAg/05.webp", "caption": "The custom address setup form — a name on your domain, an action set to \"Send to an email,\" and a destination address field waiting for the real inbox." }
+    },
+    {
+      "heading": "Confirm the destination address",
+      "body": "Cloudflare won't route mail to an unverified destination, so open the confirmation email it sends and click through before testing anything. This single verification step is what stops anyone from routing your domain's mail into an inbox they don't actually control, and it only needs to happen once per destination address even if you create several custom addresses pointing to the same inbox."
+    },
+    {
+      "heading": "Add a few more addresses and watch for spam issues",
+      "body": "Once the first address works, add the others you actually need — support, hello, billing — rather than a single catch-all, since a catch-all forwards every misspelled or spam-targeted address at your domain straight into your inbox too. If forwarded mail starts landing in spam at the destination, check that your domain's SPF and DKIM records (which Cloudflare configures automatically for routing) haven't been overwritten by another service, since a conflicting record is the most common cause of deliverability trouble after setup."
     }
   ],
   "faq": [
     {
       "question": "Is Cloudflare Email Routing really free?",
-      "answer": "Yes, Cloudflare's Email Routing feature is free to use and lets you forward custom domain emails without a paid third-party email service."
+      "answer": "Yes, Cloudflare's Email Routing feature is free to use on any plan and lets you forward custom domain emails without a paid third-party email service."
     },
     {
       "question": "Can I forward Cloudflare email to Gmail?",
-      "answer": "Yes, you can forward incoming mail from your custom domain address to Gmail, Outlook, or any inbox you already use."
+      "answer": "Yes — when you create a custom address, the destination field accepts any inbox, including Gmail, Outlook, or a work email you already check."
     },
     {
       "question": "Do I need to change my DNS settings for this to work?",
-      "answer": "Yes, setting up the correct DNS records is a required step for Cloudflare Email Routing to properly deliver mail to your forwarding address."
+      "answer": "Cloudflare adds the required Email DNS records automatically when you enable routing on a domain, which the Configuration summary confirms — you generally don't need to add them by hand."
     },
     {
       "question": "Will my forwarded emails end up in spam?",
-      "answer": "Following the recommended DNS and configuration tips helps reduce the chance of forwarded mail being flagged as spam."
+      "answer": "It's uncommon if Cloudflare's automatic SPF and DKIM records are left untouched. If mail starts landing in spam, check that another service hasn't overwritten those records."
     },
     {
       "question": "Is this suitable for someone with no technical experience?",
-      "answer": "Yes, this is described as a beginner-friendly setup aimed at small website owners and first-time users of email routing."
+      "answer": "Yes — the whole setup is a short form (custom address, action, destination) plus a confirmation email, with no manual DNS editing required for a single domain."
     }
   ],
-  "generatedAt": "2026-07-21T05:37:16Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }
