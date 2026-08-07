@@ -2,27 +2,39 @@
   "slug": "how-to-connect-godaddy-domain-to-google-workspace-use-gmail-easily-2026",
   "seoTitle": "How to Connect a GoDaddy Domain to Google Workspace",
   "metaDescription": "Learn how to connect your GoDaddy domain to Google Workspace and set up Gmail with a branded email address in 2026, including DNS records.",
-  "intro": "Using a GoDaddy-registered domain with Gmail lets you send and receive email from a professional address like you@yourdomain.com. This guide covers verifying your domain and adding the right DNS records in GoDaddy to activate Gmail through Google Workspace.",
+  "intro": "Sending email from you@yourdomain.com instead of a generic Gmail address is one of the fastest credibility upgrades a small business can make, and Google Workspace does the heavy lifting once your domain is verified. The part that trips people up isn't Gmail itself — it's the handoff between GoDaddy, where the domain actually lives, and the Google Admin Console, where you tell Workspace to use it. This guide walks through that handoff screen by screen, from adding the domain in the Admin Console to authorizing the DNS changes on the GoDaddy side, so you land on a working inbox instead of a half-finished setup.",
   "steps": [
     {
-      "heading": "Sign in to your Admin Console",
-      "body": "Start from the Google Workspace Admin Console, where you'll verify your GoDaddy domain before adding DNS records."
+      "heading": "Open Manage domains in the Admin Console",
+      "body": "Everything starts in the Google Admin Console under Account > Domains > Manage domains. This is where Workspace keeps track of every domain tied to your organization — your primary domain shows up first with its verification and Gmail status, and any secondary domains or aliases you've added appear below it. The two actions that matter here are \"Add a domain\" and \"Change primary domain,\" and for a GoDaddy domain you're about to connect for the first time, you want the former.",
+      "image": { "file": "/screenshots/SIZcWO8bv14/03.webp", "caption": "The Manage domains screen in the Admin Console, listing an already-verified primary domain alongside the option to add another." }
     },
     {
-      "heading": "Verify your domain from GoDaddy",
-      "body": "Google provides a verification code or TXT record that you'll add in your GoDaddy DNS settings to prove domain ownership."
+      "heading": "Choose a secondary domain or a user alias domain",
+      "body": "Clicking \"Add a domain\" asks you to pick one of two setups, and the choice changes how your GoDaddy domain behaves once it's connected. A secondary domain gives you a fully separate set of users with their own addresses on that domain — useful if you're managing a distinct brand or team. A user alias domain instead gives your existing users a second address at the new domain while keeping one shared inbox, which is the simpler option if you just want you@yourdomain.com to land in the same mailbox as your current account. Read both descriptions on this screen carefully before continuing, since switching later means redoing verification.",
+      "image": { "file": "/screenshots/SIZcWO8bv14/04.webp", "caption": "The domain type screen, comparing a secondary domain (separate users) against a user alias domain (shared inbox, extra address)." }
     },
     {
-      "heading": "Add MX records in GoDaddy DNS",
-      "body": "Log in to GoDaddy's DNS management and enter the MX records Google provides, replacing any conflicting records from a previous email provider."
+      "heading": "Verify ownership by signing in to GoDaddy",
+      "body": "After you enter the domain name, Google needs proof you actually own it before it will activate any Workspace service on that domain. Because GoDaddy is one of Google's supported registrars, you get a shortcut: instead of manually copying a TXT record, click \"Sign in to GoDaddy\" and authorize Google to make the required DNS changes directly. Have your GoDaddy account ID and password ready — if the authorization popup doesn't appear, click the button again before falling back to \"Switch to manual verification,\" which is the route to use if your domain is hosted anywhere other than GoDaddy.",
+      "image": { "file": "/screenshots/SIZcWO8bv14/05.webp", "caption": "The verification screen offering a one-click GoDaddy sign-in so Google can add the ownership record automatically instead of you copying it by hand." }
     },
     {
-      "heading": "Set up SPF, DKIM, and TXT records",
-      "body": "Beyond MX records, add the recommended SPF, DKIM, and TXT records to improve email deliverability and reduce the chance of messages landing in spam."
+      "heading": "Confirm the domain's status back in GoDaddy",
+      "body": "Once verification goes through, it's worth checking the domain from the GoDaddy side too. Your domain's Overview tab shows renewal and auto-renew status alongside a Quick Links panel with direct shortcuts to Manage DNS, Forward Domain, and Connect Email — the DNS link is the one you'll use next if anything needs a manual touch-up. Bookmark this page; you'll come back to the DNS tab specifically to check the MX records Google just added.",
+      "image": { "file": "/screenshots/SIZcWO8bv14/01.webp", "caption": "The domain overview in GoDaddy, with Manage DNS listed under Quick Links — the shortcut you'll need for the MX record check." }
     },
     {
-      "heading": "Test that Gmail is working",
-      "body": "Send a test email to and from your new domain address to confirm everything is routing correctly after DNS propagation."
+      "heading": "Confirm the MX records took effect",
+      "body": "If verification ran through the automatic GoDaddy sign-in, Google typically writes the MX records for you as part of that flow. Open the DNS tab for your domain anyway and confirm you see MX records pointing at Google's mail servers with the priorities Google specifies, and that any leftover MX records from a previous email provider have been removed. Conflicting MX records are the single most common reason Gmail doesn't start receiving mail after an otherwise successful setup, so this check is worth the extra minute."
+    },
+    {
+      "heading": "Add SPF, DKIM, and TXT records for deliverability",
+      "body": "MX records get mail flowing, but SPF and DKIM are what keep it out of spam folders. Back in the Admin Console under Apps > Gmail, generate the DKIM key and copy the TXT record Google gives you into GoDaddy's DNS panel, then add the SPF TXT record Google recommends alongside it. These aren't strictly required for Gmail to function, but skipping them noticeably increases the odds that your outgoing mail gets flagged, especially in the first few weeks on a new domain."
+    },
+    {
+      "heading": "Send a test email to confirm everything works",
+      "body": "DNS changes can take anywhere from a few minutes to 48 hours to fully propagate, so don't panic if things aren't instant. Once the Admin Console shows the domain as verified and Gmail activated, send a test message from your new address to an outside account, and reply back to it, to confirm mail is flowing both directions. If it isn't, the DNS tab in GoDaddy is where to look first — a stray leftover MX record is almost always the culprit."
     }
   ],
   "faq": [
@@ -36,12 +48,17 @@
     },
     {
       "question": "Why isn't my email working after adding the MX records?",
-      "answer": "Double-check that the records match Google's exact values and priorities, and confirm there aren't leftover conflicting records still active."
+      "answer": "Double-check that the records match Google's exact values and priorities, and confirm there aren't leftover conflicting records still active in the GoDaddy DNS tab."
     },
     {
       "question": "Are SPF and DKIM records required or optional?",
       "answer": "They're technically optional but strongly recommended, since they significantly improve email deliverability and reduce the chance of your mail being flagged as spam."
+    },
+    {
+      "question": "Should I choose a secondary domain or a user alias domain?",
+      "answer": "Pick a secondary domain if you need a separate set of users and addresses; pick a user alias domain if you just want your existing users to also receive mail at the new domain in the same inbox."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

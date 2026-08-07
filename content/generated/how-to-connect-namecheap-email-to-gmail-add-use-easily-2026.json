@@ -1,19 +1,45 @@
 {
   "slug": "how-to-connect-namecheap-email-to-gmail-add-use-easily-2026",
   "seoTitle": "How to Connect and Use Your Namecheap Email in Gmail",
-  "metaDescription": "Want your Namecheap custom domain email inside Gmail? Here's how to find the right POP/IMAP and SMTP settings and add the account to Gmail in 2026.",
-  "intro": "Managing a custom domain email from Namecheap separately from your regular Gmail inbox gets tedious fast, but Gmail lets you pull that email in directly. This guide covers finding your Namecheap email's POP/IMAP and SMTP settings and adding them through Gmail's 'Add another email address' feature. It works whether you're on a free or paid Gmail account, so you end up managing everything from one inbox.",
+  "metaDescription": "Want your Namecheap custom domain email inside Gmail? Here's how to find the right SMTP settings and add the account through Gmail's own account settings.",
+  "intro": "Managing a custom domain email from Namecheap Private Email separately from your regular Gmail inbox gets tedious fast, but Gmail lets you pull that mailbox in directly so you can send and receive it without switching tabs. This guide follows the real flow: confirming your mailbox exists in Namecheap Private Email, adding it through Gmail's account settings, entering the exact SMTP details Namecheap provides, and clicking through the verification email Gmail sends to confirm you own the address. It works whether you're on a free or paid Gmail account, so you end up managing everything from one inbox.",
   "steps": [
-    { "heading": "Log in to your Namecheap account", "body": "Sign in to Namecheap and locate your email hosting settings for the domain email you want to connect to Gmail." },
-    { "heading": "Find your POP/IMAP and SMTP settings", "body": "Look up the correct POP or IMAP server details along with the SMTP settings Namecheap provides for sending and receiving mail." },
-    { "heading": "Add the account in Gmail", "body": "In Gmail settings, use the 'Add another email address' option under Accounts to enter your Namecheap email along with its SMTP details." },
-    { "heading": "Verify ownership of the email address", "body": "Complete Gmail's verification step, which typically involves confirming a code or link sent to the Namecheap email address, to finish linking the two." }
+    {
+      "heading": "Confirm your mailbox in Namecheap Private Email",
+      "body": "Before touching Gmail, log in to Namecheap and open Private Email for your domain. You'll see a mailbox count like \"1 of 3 Mailboxes In Use,\" with each mailbox listed by address, status, and alias count — this is where you confirm the exact address you're connecting, such as hello@yourdomain.com, and that it's switched on before you go looking for it in Gmail.",
+      "image": { "file": "/screenshots/Sr53SSnCA4E/02.webp", "caption": "The Private Email mailbox list in Namecheap, showing a single active mailbox with its status and alias count." }
+    },
+    {
+      "heading": "Start adding the account in Gmail",
+      "body": "In Gmail, open Settings, go to Accounts and Import, and choose \"Add another email address\" under the Send mail as section. Gmail opens a small popup asking for the email address you'd like to add — enter your full Namecheap address exactly as it appears in Private Email, then click Next to move to the SMTP details."
+    },
+    {
+      "heading": "Enter the address to add",
+      "body": "The first popup screen is just the email address field itself, pre-filled if Gmail can guess it from context, with Cancel and Next buttons underneath. This step doesn't ask for anything else yet — the actual server configuration comes on the following screen, so double check the address is typed correctly here since it's what everything downstream gets built around.",
+      "image": { "file": "/screenshots/Sr53SSnCA4E/03.webp", "caption": "Gmail's \"Add a mail account\" popup, asking for the exact Namecheap email address before moving to server settings." }
+    },
+    {
+      "heading": "Fill in your Namecheap SMTP settings",
+      "body": "The next screen asks Gmail to send mail through your own SMTP server. Namecheap's Private Email SMTP server is mail.privateemail.com on port 587, and the username is your full email address — the same one you just entered. Enter your Private Email password, leave the secured connection option as recommended, and click Add Account to submit the configuration.",
+      "image": { "file": "/screenshots/Sr53SSnCA4E/04.webp", "caption": "The SMTP configuration screen, with mail.privateemail.com as the server, port 587, and the full email address as the username." }
+    },
+    {
+      "heading": "Verify ownership through the confirmation email",
+      "body": "Gmail sends a confirmation message to the Namecheap address itself, titled something like \"Gmail Confirmation - Send Mail as hello@yourdomain.com.\" Log in to your Namecheap Private Email webmail to find it, then click the verification link inside — Gmail also gives you the raw link to copy and paste manually if clicking it doesn't work. Until this step is done, Gmail won't actually send mail as that address, even though the account looks added.",
+      "image": { "file": "/screenshots/Sr53SSnCA4E/05.webp", "caption": "The confirmation email in Private Email's webmail, with the verification link Gmail requires before it will send as the new address." }
+    },
+    {
+      "heading": "Choose how you want the address to appear",
+      "body": "Back in Gmail's Accounts settings, your Namecheap address now appears under Send mail as, alongside a \"make default\" option and a choice of whether replies to messages sent to that address default to using it or your regular Gmail. Set these to match how you actually want to work — most people managing a business inbox make the custom address default so outgoing mail looks consistent."
+    }
   ],
   "faq": [
-    { "question": "Can I use this with a free Gmail account?", "answer": "Yes — this method works for both free and paid Gmail accounts, so you don't need a Google Workspace subscription just to link a Namecheap email address." },
-    { "question": "Do I need to know my POP/IMAP settings before starting?", "answer": "Yes, you'll need the correct POP or IMAP and SMTP settings from Namecheap on hand before you can add the account inside Gmail." },
-    { "question": "Will I still be able to send email as my Namecheap address from Gmail?", "answer": "Yes, once the SMTP details are added and verified, Gmail lets you send mail that appears to come from your Namecheap domain email." },
-    { "question": "What happens if I skip the ownership verification step?", "answer": "The account won't fully connect — Gmail requires you to verify you own the Namecheap email address before it will send or receive on your behalf." }
+    { "question": "Can I use this with a free Gmail account?", "answer": "Yes — this method works for both free and paid Gmail accounts, so you don't need a Google Workspace subscription just to link a Namecheap Private Email address." },
+    { "question": "What SMTP settings does Namecheap Private Email use?", "answer": "The SMTP server is mail.privateemail.com on port 587, with your full email address as the username and your Private Email password." },
+    { "question": "Where do I find the Gmail verification email?", "answer": "It's sent to the Namecheap address you're connecting, so log in to that mailbox in Namecheap's own webmail to find and click the confirmation link." },
+    { "question": "Will I still be able to send email as my Namecheap address from Gmail?", "answer": "Yes, once the SMTP details are added and the address is verified, Gmail lets you send mail that appears to come from your Namecheap domain email." },
+    { "question": "What happens if I skip the ownership verification step?", "answer": "The account won't fully connect — Gmail requires you to click the confirmation link before it will send mail as that address, even if the account already shows up in your settings." }
   ],
-  "generatedAt": "2026-07-21T05:37:25Z"
+  "generatedAt": "2026-08-07T09:00:00Z",
+  "deep": true
 }

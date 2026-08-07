@@ -1,47 +1,64 @@
 {
   "slug": "how-to-create-stripe-api-webhook-easily-step-by-step-2026",
   "seoTitle": "How to Create a Stripe API Webhook Step by Step",
-  "metaDescription": "Generate Stripe API keys and set up webhook endpoints to connect payment events to your app for smooth automation.",
-  "intro": "Stripe API keys and webhooks work together to automate how your app responds to payment events, whether you're running an e-commerce store, subscription service, or SaaS platform. This guide walks through generating your API keys and creating a webhook endpoint that connects properly to your app or website.",
+  "metaDescription": "Generate Stripe API keys and create a webhook event destination to connect payment events to your app for smooth automation.",
+  "intro": "Stripe API keys and webhooks work together to automate how your app responds to payment events, whether you're running an e-commerce store, subscription service, or SaaS platform. This guide walks through finding your API keys in the Developer settings menu, then building a webhook event destination from scratch using Stripe's event destination wizard — selecting which events to listen to, picking a destination type, and setting the endpoint that receives them.",
   "steps": [
     {
-      "heading": "Generate your API keys",
-      "body": "In your Stripe dashboard, locate the API keys section and note both your test and live mode keys."
+      "heading": "Find Developer settings in your Stripe dashboard",
+      "body": "Your API keys and webhook tools both live under the same developer-focused menu, reached from the gear or developer icon in your Stripe dashboard. Inside it you'll see a list that includes SDKs, Stripe.js, and CLI links near the top, followed by API keys, Apps, and Developer settings — API keys and webhook destinations are managed from this same neighborhood, so it's worth getting familiar with this menu since you'll return to it any time you rotate a key or add a new integration.",
+      "image": { "file": "/screenshots/vykXq-BLYbQ/03.webp", "caption": "The Developers menu in the Stripe dashboard, with API keys highlighted alongside Apps and Developer settings." }
     },
     {
-      "heading": "Create a webhook endpoint",
-      "body": "Set up a URL on your server that Stripe can send event data to, then register that endpoint in your Stripe dashboard."
+      "heading": "Copy your test and live API keys",
+      "body": "Clicking API keys shows your publishable key and secret key, each available in both test mode and live mode — Stripe keeps these visually distinct so it's hard to mistake one for the other. Use test mode keys while you're building and debugging your integration, since they let you simulate charges and events without moving real money, and only swap in live mode keys once you're ready to accept actual payments. Never commit a secret key to a public repository; store it in an environment variable instead."
     },
     {
-      "heading": "Select the events to listen for",
-      "body": "Choose which Stripe events, such as successful payments or subscription updates, should trigger your webhook."
+      "heading": "Start creating an event destination",
+      "body": "Webhooks in the current Stripe dashboard are set up through \"Create an event destination,\" a short wizard that starts by asking which events you want to listen to. Choose whether the destination receives events from Your account only, or from Connected and v2 accounts if you're managing events across a Connect platform, and confirm the API version you want the destination to use — this matters because event payload shapes can change between API versions.",
+      "image": { "file": "/screenshots/vykXq-BLYbQ/04.webp", "caption": "The first step of the event destination wizard, choosing between Your account and Connected and v2 accounts, plus the API version." }
     },
     {
-      "heading": "Test the webhook connection",
-      "body": "Trigger a test event from Stripe to confirm your endpoint is receiving and processing data correctly."
+      "heading": "Pick your specific events and destination type",
+      "body": "After choosing the account scope, you select the specific event types to listen for — invoice.created, payment_intent.succeeded, and checkout.session.completed are common choices depending on whether you're billing subscriptions or one-off purchases. You'll also choose a destination type, most commonly a webhook endpoint that Stripe sends an HTTPS request to whenever a matching event fires, versus alternatives like an Amazon EventBridge destination for teams already routing events through AWS."
     },
     {
-      "heading": "Secure your API keys and webhook",
-      "body": "Store your API keys securely and verify webhook signatures to make sure incoming events are genuinely from Stripe."
+      "heading": "Configure the destination and endpoint URL",
+      "body": "The final step summarizes your choices — events from Your account, payload style, API version, and which event you're listening to, like invoice.created — then asks for a Destination name, an Endpoint URL, and an optional description. Stripe suggests a random destination name like \"energetic-finesse\" that you can regenerate or replace with something meaningful, but the Endpoint URL is the field that matters most: it needs to be a publicly reachable HTTPS URL on your server that's ready to receive and parse Stripe's POST requests.",
+      "image": { "file": "/screenshots/vykXq-BLYbQ/05.webp", "caption": "The final configuration step: naming the destination and entering the endpoint URL that will receive the webhook events." }
+    },
+    {
+      "heading": "Verify webhook signatures on your server",
+      "body": "Once the destination is created, Stripe gives you a signing secret specific to that endpoint. Your server code should use this secret to verify that incoming requests genuinely came from Stripe rather than a spoofed source pretending to be one, using Stripe's SDK helper for signature verification rather than trusting the payload contents directly. Skipping this step is a common security gap in otherwise working webhook integrations.",
+      "image": null
+    },
+    {
+      "heading": "Test the connection before going live",
+      "body": "Stripe's dashboard shows a log of every attempt sent to your endpoint, including the response status your server returned, which makes it straightforward to confirm delivery is working before you rely on it in production. Trigger a manual test event from the destination's detail page, check that it shows as successfully delivered, and only then switch your integration over to live mode keys and a live-mode version of the same webhook destination."
     }
   ],
   "faq": [
     {
       "question": "What's the difference between test mode and live mode for webhooks?",
-      "answer": "Test mode webhooks respond to simulated events during development, while live mode webhooks process real events from actual customer transactions."
+      "answer": "Test mode webhooks respond to simulated events during development, while live mode webhooks process real events from actual customer transactions using separate API keys and signing secrets."
     },
     {
       "question": "Do I need a server to set up a webhook?",
-      "answer": "Yes, you need a publicly accessible endpoint on your server or hosting platform that can receive and process incoming webhook requests."
+      "answer": "Yes, you need a publicly accessible HTTPS endpoint on your server or hosting platform that can receive and process the incoming requests Stripe sends to your event destination."
     },
     {
       "question": "How do I know if my webhook is working correctly?",
-      "answer": "Stripe's dashboard shows a log of webhook attempts and their response status, which you can use to confirm events are being received successfully."
+      "answer": "Stripe's dashboard shows a log of webhook attempts and their response status for each event destination, which you can use to confirm events are being received and processed successfully."
     },
     {
       "question": "Why is verifying webhook signatures important?",
-      "answer": "Signature verification confirms that incoming requests genuinely came from Stripe, protecting your app from spoofed or malicious event data."
+      "answer": "Signature verification, using the signing secret tied to your specific event destination, confirms that incoming requests genuinely came from Stripe, protecting your app from spoofed or malicious event data."
+    },
+    {
+      "question": "What is an event destination in the Stripe dashboard?",
+      "answer": "It's the current name for Stripe's webhook setup flow — you choose which events to listen to, a destination type like a webhook endpoint, and then configure the name and endpoint URL that receives them."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

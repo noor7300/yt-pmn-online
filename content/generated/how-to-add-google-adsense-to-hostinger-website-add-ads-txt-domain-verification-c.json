@@ -1,19 +1,43 @@
 {
   "slug": "how-to-add-google-adsense-to-hostinger-website-add-ads-txt-domain-verification-c",
   "seoTitle": "How to Add Google AdSense to a Hostinger Website 2026",
-  "metaDescription": "Setting up Google AdSense on Hostinger? Here's how to verify your domain and upload the ads.txt file correctly so your site gets approved faster.",
-  "intro": "Getting Google AdSense fully connected to a Hostinger-hosted site takes two separate steps: verifying domain ownership and uploading an ads.txt file to the right location. This guide covers both, whether your site runs on WordPress, Hostinger's Website Builder, or custom HTML. Doing this correctly helps your site get approved faster and keeps your ad revenue reporting accurate.",
+  "metaDescription": "Setting up Google AdSense on Hostinger? Here's how to paste the verification tag, upload ads.txt to your domain root, and place the ad unit code.",
+  "intro": "Connecting Google AdSense to a Hostinger site comes down to two separate pieces of code landing in two different places: a verification meta tag in your page's head section, and an ads.txt file sitting at the root of your domain. This guide follows the actual code AdSense generates and the actual hPanel and Website Builder screens you paste it into, so you're not guessing where a snippet is supposed to go. It's built around Hostinger's Website Builder custom code option, though the same verification tag and ads.txt file apply whether you're running WordPress or a custom HTML site. Getting both pieces in correctly is what clears the two most common blockers to AdSense approval.",
   "steps": [
-    { "heading": "Get your AdSense verification code", "body": "From your AdSense account, copy the meta verification code Google provides for confirming ownership of your site." },
-    { "heading": "Add the verification code to your site's head section", "body": "Paste the meta code into the head section of your website, using your theme's header settings on WordPress or the equivalent option in Hostinger Website Builder." },
-    { "heading": "Upload the ads.txt file", "body": "Use Hostinger's File Manager, or the appropriate tool for your platform, to upload the ads.txt file to your site's root directory." },
-    { "heading": "Confirm setup across your platform", "body": "Whether you're on WordPress, Website Builder, or custom HTML, double-check both the verification code and ads.txt file are correctly placed for your specific setup." }
+    {
+      "heading": "Get your AdSense verification code and ads.txt content",
+      "body": "Google AdSense gives you three separate snippets once you request site verification: a meta tag for website verification, a single line of text for an ads.txt file, and a script block for the actual ad unit. Each ca-pub number in these snippets is unique to your AdSense account, so copy them exactly rather than reusing an example from elsewhere. The verification tag is what you need first — it's what tells Google the domain you're claiming actually belongs to you, and nothing else works until that's confirmed.",
+      "image": { "file": "/screenshots/FylxIhA9KSs/03.webp", "caption": "AdSense's setup instructions laid out as three pieces: the verification meta tag for your head section, the ads.txt line for your domain root, and the ad unit script for wherever you want ads to display." }
+    },
+    {
+      "heading": "Open your project from the Hostinger Horizons dashboard",
+      "body": "If your site runs on Hostinger's Website Builder rather than WordPress, find it under the Horizons section of hPanel, where each project is listed with its live domain and an Edit project button. Clicking through opens the Website Builder editor, which is where the custom code option for adding the AdSense verification tag lives. If you're on WordPress instead, the equivalent is your theme's header settings or a header/footer plugin — the tag itself is identical, only the paste location changes.",
+      "image": { "file": "/screenshots/FylxIhA9KSs/02.webp", "caption": "The Horizons section of hPanel, listing an active website project. This is the jumping-off point to the Website Builder editor where the verification code gets pasted in." }
+    },
+    {
+      "heading": "Paste the verification tag into your site's custom code",
+      "body": "Inside Website Builder, the Custom code section under site settings gives you a plain text box labeled to add code, with a note underneath confirming it gets injected into the head section automatically — exactly where the AdSense meta tag needs to sit. Paste the verification meta tag in as-is, without wrapping it in extra script tags, then save and update the site so the change actually publishes rather than just sitting in the editor's draft state. Return to AdSense afterward and trigger the verification check; it typically confirms within a few minutes once the tag is live on the published site.",
+      "image": { "file": "/screenshots/FylxIhA9KSs/04.webp", "caption": "Website Builder's Custom code panel, with a note that anything pasted here gets injected into the head section of the site automatically." }
+    },
+    {
+      "heading": "Upload the ads.txt file to your domain root",
+      "body": "Create a plain text file named exactly ads.txt containing the line AdSense gave you, then get it into the root of your domain — not a subfolder — so it's reachable at yourdomain.com/ads.txt. On a Website Builder site this usually means uploading through the platform's file or domain settings, while on a traditional Hostinger hosting plan you'd drop it straight into public_html through File Manager. Either way, load the URL directly in a browser afterward to confirm the file is actually there and readable, since a missing or misplaced ads.txt is one of the most common reasons AdSense flags a site during review."
+    },
+    {
+      "heading": "Add the ad unit code where you want ads to appear",
+      "body": "The third snippet — the ad unit script — goes inside the body of your page, placed at whichever spot you want an ad to actually render, rather than in the head section with the verification tag. This is optional until AdSense approves your site, but adding it early means ads start showing automatically the moment approval comes through instead of requiring a second round of edits. Keep a note of exactly which pages you've added units to, since it's easy to lose track once you're managing more than a couple of ad placements."
+    },
+    {
+      "heading": "Confirm everything is correctly placed",
+      "body": "Once the verification tag, ads.txt file, and ad unit code are all live, double check each one independently rather than assuming success from the site loading normally — view the page source to confirm the meta tag is in the head, visit the ads.txt URL directly, and check your AdSense account for the verification status. Catching a misplaced snippet at this stage saves a rejected review and a wait for AdSense to recheck your site."
+    }
   ],
   "faq": [
     { "question": "Do I need both the verification code and ads.txt file?", "answer": "Yes — the meta verification code confirms domain ownership to AdSense, while the ads.txt file is a separate requirement that helps prevent unauthorized ad sales on your site." },
-    { "question": "Where does the ads.txt file need to go?", "answer": "It needs to be uploaded to the root directory of your website so it's accessible at the top level of your domain, not buried in a subfolder." },
-    { "question": "Does this work if I built my site with Hostinger Website Builder instead of WordPress?", "answer": "Yes, the tutorial covers both methods, since Website Builder and WordPress handle adding the verification code and ads.txt file slightly differently." },
+    { "question": "Where does the ads.txt file need to go?", "answer": "It needs to be uploaded to the root directory of your website so it's accessible at yourdomain.com/ads.txt, not buried in a subfolder." },
+    { "question": "Does this work if I built my site with Hostinger Website Builder instead of WordPress?", "answer": "Yes — Website Builder has a Custom code section that injects the verification tag into the head section automatically, while WordPress typically uses theme header settings or a header/footer plugin for the same tag." },
     { "question": "Will setting this up correctly speed up AdSense approval?", "answer": "Correctly completing domain verification and ads.txt setup removes two common blockers, which can help your site move through AdSense's approval process more smoothly." }
   ],
-  "generatedAt": "2026-07-21T05:37:25Z"
+  "generatedAt": "2026-08-07T12:00:00Z",
+  "deep": true
 }

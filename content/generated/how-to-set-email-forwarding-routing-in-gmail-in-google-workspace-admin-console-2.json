@@ -2,46 +2,63 @@
   "slug": "how-to-set-email-forwarding-routing-in-gmail-in-google-workspace-admin-console-2",
   "seoTitle": "How to Set Email Forwarding & Routing in Workspace Gmail",
   "metaDescription": "Learn how to configure email forwarding and routing rules in Gmail through the Google Workspace Admin Console for secure, reliable delivery.",
-  "intro": "Forwarding and routing rules let admins automatically redirect incoming mail, manage shared inboxes, or handle employee transitions without losing messages. This guide covers how to set these up correctly through the Google Workspace Admin Console.",
+  "intro": "Forwarding and routing rules let admins automatically redirect incoming mail, manage shared inboxes, or handle employee transitions without losing messages. Unlike the forwarding option inside a personal Gmail account, this version lives in the Admin Console and applies at the organization level, which means one misconfigured rule can affect everyone at once. This guide walks through where the setting actually lives, how to build a working forwarding rule with a real recipient map, and what to double-check before you save it.",
   "steps": [
     {
-      "heading": "Open the Admin Console's Gmail settings",
-      "body": "Sign in as an admin and navigate to the Gmail section under Apps to access routing and forwarding controls."
+      "heading": "Open the Admin Console and go to Google Workspace",
+      "body": "Sign in with an administrator account and land on the Admin Console home screen, which shows the Recommendations panel plus quick links for managing Users and Billing. Routing settings aren't on this landing page — you get there through the Apps section. In the left sidebar, expand Apps, then Google Workspace, and you'll see the full list of Workspace services including Gmail, Calendar, Drive and Docs, and Google Chat underneath it.",
+      "image": { "file": "/screenshots/UurKolrioeQ/01.webp", "caption": "The Admin Console home screen. Routing lives a couple of levels deeper, under Apps → Google Workspace → Gmail, not on this landing page." }
     },
     {
-      "heading": "Create a routing rule",
-      "body": "Set up a rule that defines how incoming or outgoing mail should be handled, such as forwarding all mail from one address to another."
+      "heading": "Open Gmail settings and find Routing",
+      "body": "Click Gmail under Google Workspace to reach Settings for Gmail, where you'll see a status card confirming Gmail is ON for everyone, followed by a stack of expandable sections: End-user access, Spam, phishing and malware, Compliance, and Routing near the bottom. Routing is where both forwarding rules and SMTP relay settings are configured — it's easy to miss because it's the last item and collapsed by default. Click to expand it before continuing.",
+      "image": { "file": "/screenshots/UurKolrioeQ/02.webp", "caption": "The Settings for Gmail page, with Routing collapsed at the bottom below End-user access, Spam/phishing/malware, and Compliance." }
     },
     {
-      "heading": "Configure forwarding for specific users or groups",
-      "body": "Apply the rule to individual users, groups, or the whole organization depending on your needs, like handling an employee exit or shared inbox."
+      "heading": "Add a forwarding setting and map the recipient",
+      "body": "Inside Routing, click Add setting and choose \"Email forwarding using recipient address map.\" This opens a dialog where you build the actual mapping: an Address column for the original recipient and a Map to address column for where mail should actually land. Give the setting a name, then use Search address or Bulk add to populate the map — each row needs both fields filled in, since Google will flag an empty address with \"Email address cannot be empty\" and block the save until it's fixed.",
+      "image": { "file": "/screenshots/UurKolrioeQ/04.webp", "caption": "The Add setting dialog for email forwarding using a recipient address map, with Address and Map to address columns to fill in per row." }
     },
     {
-      "heading": "Follow best practices to avoid errors",
-      "body": "Test routing rules carefully before applying them broadly, since misconfigured rules can cause emails to loop or fail to deliver."
+      "heading": "Choose which messages are affected and set routing options",
+      "body": "Scroll down inside the same dialog to see the mapped rows you've added — for example, admin@pmntechfix.nl mapped to pmn.admin@gmail.com — followed by two important choices. Under Messages affected, pick All incoming messages to catch everything, or Only external incoming messages if you only want mail from outside your domain redirected. Under Routing options, checking Also route to original destination keeps a copy in the original mailbox instead of redirecting it entirely, which is the safer choice while you're still testing.",
+      "image": { "file": "/screenshots/UurKolrioeQ/05.webp", "caption": "The recipient map with a real forwarding pair configured, plus the Messages affected and Routing options controls beneath it." }
     },
     {
-      "heading": "Monitor and adjust as needed",
-      "body": "Check delivery logs periodically to confirm forwarding is working as expected and adjust rules if business needs change."
+      "heading": "Scope the rule and save",
+      "body": "Before saving, check the organizational unit shown in the left panel — routing settings in the Admin Console apply at whatever OU level you're currently viewing, so confirm you're not accidentally about to push a rule meant for one shared inbox out to the entire company. Click Save once everything looks right. Google notes that most changes take effect within a few minutes, and any change you make is recorded in the audit log, which is worth checking if a rule behaves unexpectedly later."
+    },
+    {
+      "heading": "Test before rolling it out broadly",
+      "body": "Send a handful of test emails to the addresses covered by your new rule and confirm they land where you expect, especially if you enabled both forwarding and \"route to original destination\" at once. If you're setting this up ahead of an employee's last day, test the rule a day or two early rather than the morning they leave, so there's time to fix a typo in the recipient map without anything getting lost."
+    },
+    {
+      "heading": "Monitor delivery and adjust as needed",
+      "body": "Use the Email Log Search link referenced right at the top of the Routing panel to check how a specific message was handled if something looks off. Revisit the rule periodically, especially after organizational changes like a domain move or a new hire replacing someone whose mail was being forwarded, since stale routing rules are a common source of \"why didn't I get that email\" support tickets."
     }
   ],
   "faq": [
     {
       "question": "Can I set up forwarding for just one user instead of the whole organization?",
-      "answer": "Yes, routing rules in the Admin Console can be scoped to specific users or groups rather than applying organization-wide."
+      "answer": "Yes, routing rules in the Admin Console can be scoped to specific users or groups rather than applying organization-wide — check the organizational unit selected in the left panel before saving to confirm the scope."
     },
     {
       "question": "What's the difference between forwarding and routing in Gmail?",
-      "answer": "Forwarding sends a copy of incoming mail to another address, while routing rules can apply more complex logic like rejecting, rerouting, or duplicating messages based on conditions."
+      "answer": "Forwarding sends a copy of incoming mail to another address using a recipient address map, while routing rules can apply more complex logic like rejecting, rerouting through an outbound gateway, or duplicating messages based on conditions."
     },
     {
       "question": "Will forwarding rules affect email security?",
-      "answer": "If set up carelessly, forwarding rules can expose sensitive information, so it's important to only route mail to trusted, verified addresses."
+      "answer": "If set up carelessly, forwarding rules can expose sensitive information, so it's important to only route mail to trusted, verified addresses and to review the audit log after making changes."
     },
     {
       "question": "Can I use routing rules when an employee leaves the company?",
-      "answer": "Yes, this is a common use case — routing an outgoing employee's mail to a manager or shared inbox ensures nothing important is missed."
+      "answer": "Yes, this is a common use case — routing an outgoing employee's mail to a manager or shared inbox with a recipient address map ensures nothing important is missed."
+    },
+    {
+      "question": "How long does it take for a new routing rule to start working?",
+      "answer": "Google Workspace notes that most routing and forwarding changes take effect within a few minutes, though it's still worth sending a test email to confirm before relying on the rule."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

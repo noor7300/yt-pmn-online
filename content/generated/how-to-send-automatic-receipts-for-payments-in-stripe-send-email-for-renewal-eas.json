@@ -2,42 +2,58 @@
   "slug": "how-to-send-automatic-receipts-for-payments-in-stripe-send-email-for-renewal-eas",
   "seoTitle": "Send Automatic Receipts & Renewal Emails in Stripe",
   "metaDescription": "Set up Stripe to automatically email receipts for payments and refunds, plus renewal reminders for subscriptions, so customers stay informed with no manual work.",
-  "intro": "Manually emailing customers every time they pay or renew a subscription doesn't scale. This guide shows how to enable Stripe's built-in tools for sending automatic payment receipts and setting up renewal notifications, so subscribers always get confirmation without you lifting a finger.",
+  "intro": "Manually emailing customers every time they pay or renew a subscription doesn't scale, and it's also unnecessary — Stripe already has the toggles built in. This guide shows exactly where those settings live in the dashboard: the customer-emails page that controls receipts for successful payments and refunds, and the separate billing page that handles subscription renewal notices. Turn both on once and every future transaction sends its own confirmation without you touching a thing.",
   "steps": [
     {
-      "heading": "Enable receipt emails in the Stripe dashboard",
-      "body": "Start in your dashboard's email settings and turn on automatic receipts so successful payments trigger a confirmation email right away."
+      "heading": "Open Settings in the Stripe dashboard",
+      "body": "From any page in the dashboard, the gear icon in the top right takes you into Settings, which is organized into Personal settings, Account settings, and Product settings. Receipt and email controls aren't filed under a single obvious \"Notifications\" heading — they're split between Business (under Account settings) and Billing (under Product settings), which is the main reason people go looking in the wrong place. Business is where account details, payouts, and legal entity info live alongside the customer email toggles you actually want here.",
+      "image": { "file": "/screenshots/4MGTmBj_EtA/03.webp", "caption": "The Stripe Settings hub. Receipt controls sit under Business in Account settings, not under a separate notifications menu." }
     },
     {
-      "heading": "Customize payment receipt settings",
-      "body": "Adjust the receipt content and appearance so it reflects your business rather than a generic default template."
+      "heading": "Turn on receipt emails for payments and refunds",
+      "body": "Inside Business, click the Customer emails tab, and you'll find two toggles under a Payments heading: Successful payments and Refunds. Both are off by default in a fresh account, which is why new stores are often surprised customers never got a receipt after their first sale. Flip Successful payments on and every completed charge automatically emails the customer a receipt; flip on Refunds too so the same happens when you return their money. The default language for these emails is set just above the toggles, worth checking if your customers aren't primarily English speakers.",
+      "image": { "file": "/screenshots/4MGTmBj_EtA/04.webp", "caption": "The Customer emails tab under Business settings, with Successful payments and Refunds toggles — both off until you turn them on." }
     },
     {
-      "heading": "Set up renewal emails for subscriptions",
-      "body": "For subscription billing, enable renewal notifications so customers get a heads-up or confirmation each time their plan renews."
+      "heading": "Notice what else lives on this page",
+      "body": "Scrolling past the payment toggles, the same Customer emails tab also holds region-specific debit notifications — Canada PAD mandate emails, BECS Australia mandate emails, Bacs mandate emails, and NZ BECS Direct Debit emails, several of which are on by default. These aren't receipts in the traditional sense; they're legally required notices for direct-debit payment methods in those countries, and Stripe bundles them here because they're all customer-facing transactional emails triggered by a payment event. Leave them on unless you know for certain your business never processes those payment types."
     },
     {
-      "heading": "Test receipts and renewal notifications",
-      "body": "Run through a test payment and renewal cycle to confirm the emails actually go out and look the way you expect before relying on them in production."
+      "heading": "Enable renewal and billing emails for subscriptions",
+      "body": "Receipts and renewal reminders are controlled separately, so head to Settings → Billing → Subscriptions and emails, under Product settings this time rather than Account settings. This page lists five customer-email toggles specific to recurring billing: a reminder seven days before a free trial ends, a notice about upcoming renewals, a warning about expiring cards, and failure notices for both card and bank debit payments. Turning on \"Send emails about upcoming renewals\" is the one that most directly answers \"will my subscribers know before they get charged again\" — enable it if you don't want renewal charges to come as a surprise.",
+      "image": { "file": "/screenshots/4MGTmBj_EtA/05.webp", "caption": "The Subscriptions and emails page under Billing settings, with toggles for trial-ending reminders, upcoming renewals, expiring cards, and payment failures." }
+    },
+    {
+      "heading": "Customize the receipt content to match your brand",
+      "body": "Once the toggles are on, the receipts themselves pull your business name, logo, and support details from your Stripe account's public business information rather than a separate template you write from scratch. Update that business profile if the receipt currently shows a placeholder name or is missing your logo, since that's the fastest way to make an automated email look intentional instead of generic. There's no need for a separate email tool here — the customization happens at the account level, and it applies to every receipt Stripe sends from that point on."
+    },
+    {
+      "heading": "Test a payment and a renewal before relying on it",
+      "body": "Before treating this as done, run a real test charge in test mode and confirm the receipt actually lands in your inbox looking the way you expect, then do the same for a subscription renewal if you sell recurring plans. It's a five-minute check, and it catches the two most common issues: a toggle that didn't save, or a business profile that's still showing placeholder information on the live receipt."
     }
   ],
   "faq": [
     {
       "question": "Will Stripe send a receipt automatically after every payment?",
-      "answer": "Yes, once you enable the setting, Stripe automatically emails a receipt each time a payment succeeds."
+      "answer": "Yes, once you enable Successful payments under Settings → Business → Customer emails, Stripe automatically emails a receipt each time a payment succeeds."
     },
     {
       "question": "Can I get renewal reminders for subscriptions too?",
-      "answer": "Yes, Stripe can send renewal notifications so subscribers know when their subscription payment has processed for another billing cycle."
+      "answer": "Yes — go to Settings → Billing → Subscriptions and emails and turn on \"Send emails about upcoming renewals\" so subscribers know before they're charged again."
     },
     {
       "question": "Do I need to write my own email templates?",
-      "answer": "No, Stripe provides built-in templates you can customize, so you don't need a separate email tool to send these confirmations."
+      "answer": "No. Stripe generates the receipt using your account's business name, logo, and support details, so updating your business profile is enough to customize it."
+    },
+    {
+      "question": "Why are receipt emails off by default?",
+      "answer": "Stripe leaves Successful payments and Refunds toggled off in new accounts so you can configure your business details and email language first, rather than sending unbranded receipts immediately."
     },
     {
       "question": "How do I know the receipts are working correctly?",
-      "answer": "Testing a payment and a renewal cycle before going live is the best way to confirm the emails are sent and formatted correctly."
+      "answer": "Run a test payment and a test subscription renewal after enabling the toggles, and confirm both emails arrive and display your correct business information."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

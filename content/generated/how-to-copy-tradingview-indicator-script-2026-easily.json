@@ -2,19 +2,43 @@
   "slug": "how-to-copy-tradingview-indicator-script-2026-easily",
   "seoTitle": "How to Copy a TradingView Indicator Script in 2026",
   "metaDescription": "Want to study or customize a TradingView indicator's Pine Script? Here's the correct way to view, copy, and reuse source code depending on its access type.",
-  "intro": "Not every indicator on TradingView lets you copy its Pine Script the same way — it depends on whether the script is public, protected, or invite-only. This guide walks through opening an indicator's source code, copying it into the Pine Editor, and what your options are when 'View Source Code' isn't available. It's aimed at Pine Script learners and strategy developers who want to study or adapt existing indicators.",
+  "intro": "Not every indicator on TradingView lets you copy its Pine Script the same way — it depends on whether the script is public, protected, or invite-only, and even TradingView's own built-in indicators handle this differently from what you might expect. This guide walks through opening the Indicators panel, finding an indicator's source code, and what actually happens when you try to edit a script that isn't yours yet. It's aimed at Pine Script learners and strategy developers who want to study or adapt existing indicators without guessing at menus.",
   "steps": [
-    { "heading": "Check if the indicator is public, protected, or invite-only", "body": "Before trying to copy anything, confirm the indicator's access type, since only public scripts typically allow full source code viewing." },
-    { "heading": "Open the source code", "body": "For public indicators, use the option to view source code directly from the indicator's chart menu." },
-    { "heading": "Copy the script into the Pine Editor", "body": "Select and copy the Pine Script text, then paste it into your own Pine Editor window to save or begin editing it." },
-    { "heading": "Save and customize your copy", "body": "Save the pasted script under your own name in the Pine Editor, then modify it as needed for your own testing or learning purposes." },
-    { "heading": "Handle protected or invite-only scripts appropriately", "body": "If 'View Source Code' isn't available, recognize that the script is protected or invite-only and its code isn't meant to be copied without permission." }
+    {
+      "heading": "Open the Indicators panel and see how scripts are organized",
+      "body": "From any chart, click Indicators to open the full library. TradingView splits everything into three groups: Personal (your Favorites, My scripts, Invite-only access, and Purchased indicators), Built-in (Technicals and Fundamentals that ship with TradingView itself), and Community (Editors' picks, Top, Trending, and the Store). This matters before you go looking for source code, because where an indicator lives tells you a lot about your access to it — a script sitting under My scripts is fully yours to edit, while one under Invite-only or Purchased is going to have restrictions the moment you try.",
+      "image": { "file": "/screenshots/7380xz93Wm0/02.webp", "caption": "The Indicators panel, split into Personal, Built-in, and Community sections. Where a script lives here hints at how much access you'll actually have to its code." }
+    },
+    {
+      "heading": "Open an indicator and check for View Source Code",
+      "body": "Add the indicator to your chart, then open its settings or the three-dot menu on its title bar to look for a source code option. Public community scripts and built-in indicators typically let you open a Pine Editor pane showing the full script — you can select all and copy it just like any other text. If that option isn't there at all, or it's grayed out, the script is protected or invite-only and the author has deliberately hidden the underlying code, which is a decision to respect rather than work around."
+    },
+    {
+      "heading": "Recognize that even built-in scripts open as read-only",
+      "body": "Here's the part that surprises people: opening the source of a built-in indicator like Relative Strength Index doesn't drop you straight into an editable file. The Pine Editor pane opens with a banner reading \"This script is read-only. To edit its code, create a working copy,\" and every line is visible but locked against direct edits. That's by design — TradingView keeps its official indicators as a stable reference, and it wants you to explicitly branch off your own version rather than accidentally mutate the original everyone else is using.",
+      "image": { "file": "/screenshots/7380xz93Wm0/03.webp", "caption": "The RSI indicator's source, opened in the Pine Editor. Even a built-in script shows as read-only, with a prompt to create a working copy before you can edit anything." }
+    },
+    {
+      "heading": "Create a working copy before you touch anything",
+      "body": "Click \"create a working copy\" and TradingView duplicates the entire script into your own My scripts library, fully editable this time. This is the actual copy step for built-in and many public community indicators — you're not manually selecting and pasting text, you're asking TradingView to fork it for you, which also preserves the original formatting, comments, and input groupings exactly as the author wrote them. From here it behaves like any script you wrote from scratch: rename it, change the RSI length default, adjust colors, or start layering your own logic on top."
+    },
+    {
+      "heading": "Save your copy and start editing in the Pine Editor",
+      "body": "Once you have your working copy, save it under a name that won't be confused with the original — something like \"RSI (my version)\" avoids mixing it up later when you have several forks running. From there the Pine Editor is a normal code environment: change an input, hit the compile/apply step, and the chart updates so you can see the effect immediately. This tight feedback loop is the actual reason to copy a script in the first place — reading Pine code teaches you less than changing one number and watching the plot move.",
+      "image": { "file": "/screenshots/7380xz93Wm0/05.webp", "caption": "The Pine Editor with its \"Your code starts here\" prompt. This is where a copied script becomes editable, ready for you to change inputs and see the chart update." }
+    },
+    {
+      "heading": "Handle protected and invite-only scripts appropriately",
+      "body": "If View Source Code and \"create a working copy\" are both missing, the author has published the script as protected or restricted it to invite-only access, and there's no legitimate workaround — no browser trick or extension substitutes for the author's own decision to keep the logic private. For invite-only scripts you don't have access to, the realistic paths are requesting access from the author, buying access if they sell it, or studying a comparable open-source alternative from the Community section instead and building your own version of the concept rather than the exact code."
+    }
   ],
   "faq": [
-    { "question": "Can I copy any indicator's script on TradingView?", "answer": "No — only public scripts generally allow you to view and copy the full source code; protected and invite-only scripts restrict this on purpose." },
-    { "question": "What does it mean if 'View Source Code' isn't available?", "answer": "It usually means the indicator is protected or invite-only, and the creator has intentionally restricted access to the underlying Pine Script." },
-    { "question": "Is it legal to copy and reuse someone else's Pine Script?", "answer": "This depends on the script's license and access type — public scripts are generally open for learning and personal use, but reusing or republishing someone's protected work raises different considerations." },
-    { "question": "Where do I paste a copied script to use it?", "answer": "You paste the copied Pine Script into TradingView's Pine Editor, where you can save it, edit it, and apply it to your own charts." }
+    { "question": "Can I copy any indicator's script on TradingView?", "answer": "No — only public scripts and built-in indicators generally let you view the full source code. Protected and invite-only scripts hide the code entirely, and there's no legitimate way around that restriction." },
+    { "question": "What does it mean if 'View Source Code' isn't available?", "answer": "It usually means the indicator is protected or invite-only, and the creator has intentionally restricted access to the underlying Pine Script — the option simply won't appear in the menu." },
+    { "question": "Why can't I edit a built-in indicator like RSI directly?", "answer": "TradingView opens even its own built-in indicators as read-only. You'll see a banner prompting you to 'create a working copy' — clicking it forks the script into your own My scripts library, where it becomes fully editable." },
+    { "question": "Is it legal to copy and reuse someone else's Pine Script?", "answer": "This depends on the script's license and access type — public scripts and built-ins are generally open for learning and personal use, but reusing or republishing someone's protected or invite-only work raises different considerations you should check with the author." },
+    { "question": "Where do I paste or edit a copied script to use it?", "answer": "You work in TradingView's Pine Editor pane, either by pasting copied code into a new script or by using 'create a working copy' on a script you already have view access to, then saving and applying it to your chart." }
   ],
-  "generatedAt": "2026-07-21T05:37:25Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

@@ -2,19 +2,44 @@
   "slug": "how-to-transfer-or-migrate-google-workspace-account-2026-easily",
   "seoTitle": "How to Migrate Your Google Workspace Account in 2026",
   "metaDescription": "Merging businesses or switching domains? Here's how to migrate Gmail, Drive, Contacts, and Calendar between Google Workspace accounts without data loss.",
-  "intro": "Moving an entire Google Workspace setup — Gmail, Drive, Contacts, and Calendar — from one organization or domain to another is a common need when businesses merge or restructure. This guide covers using Google Workspace's admin migration tools to move users and data safely, including how to route or forward email during the transition. It's built for admins who need a clean switch without losing sharing permissions or access along the way.",
+  "intro": "Moving an entire Google Workspace setup — Gmail, Drive, Contacts, and Calendar — from one organization or domain to another is a common need when businesses merge, restructure, or simply switch admins. Google's own data migration service handles the heavy lifting, but the admin console spreads the relevant tools across a few different screens, and knowing where to start makes the difference between a clean cutover and a messy one. This guide walks through the actual admin console screens involved: where to manage users before you migrate, where the migration tool itself lives, and how the source-account authorization step works.",
   "steps": [
-    { "heading": "Plan your migration using Admin tools", "body": "Start in the Google Workspace Admin Console to map out which users and data need to move to the new organization or domain." },
-    { "heading": "Set up the data migration service", "body": "Use Google's data migration service to transfer Gmail, Drive files, and Contacts from the old account to the new one." },
-    { "heading": "Route or forward email during the switch", "body": "Configure email routing or forwarding so messages keep reaching users while the migration is in progress, avoiding gaps in communication." },
-    { "heading": "Migrate users between Workspace accounts", "body": "Move user accounts over to the new Workspace tenant, keeping their data and access tied to the correct identities." },
-    { "heading": "Preserve sharing permissions and access", "body": "Check that file sharing permissions and access rights carry over correctly so users aren't locked out of shared documents after the move." }
+    {
+      "heading": "Start from the Admin console home",
+      "body": "Everything begins at admin.google.com, signed in as a super admin. The home screen's \"Manage Workspace\" section is your map of the whole organization — Users, Billing, Groups, and Support tiles, each with quick links like Add a user, Delete a user, and Reset password sitting right on the dashboard. Before migrating anything, use this view to get a clear picture of who's in the organization and confirm your own account has the super admin permissions the migration tools require, since a regular admin role won't be enough to authorize a cross-account data transfer.",
+      "image": { "file": "/screenshots/TkXvFCfkcVI/01.webp", "caption": "The Admin console home screen. Users, Billing, and Groups are managed from here, and this is also where you confirm you have super admin access before starting a migration." }
+    },
+    {
+      "heading": "Know your way around the Google apps switcher",
+      "body": "The admin console sits alongside Gmail, Drive, Gemini, Docs, and the rest of Workspace behind the same app-switcher grid in the top corner. It's a small thing, but during a migration you'll bounce between the Admin console to configure the transfer and Gmail or Drive to spot-check that data actually landed where it should. Knowing this switcher is there — rather than opening a new tab and logging in again each time — saves real time when you're verifying a migration in progress across several apps at once.",
+      "image": { "file": "/screenshots/TkXvFCfkcVI/03.webp", "caption": "The Google apps switcher, open from the Admin console. This is the fastest way to jump between the console and Gmail or Drive while checking a migration's progress." }
+    },
+    {
+      "heading": "Find the Data migration tool",
+      "body": "The migration tool itself lives under Data > Data import and export > Data migration (new) in the left-hand navigation. This newer screen is built specifically for copying data into Google Workspace from other services, and it's where Google surfaces its current migration options rather than the older tools it's phasing out. If you're migrating from on-premises Microsoft Exchange, the console flags that the classic migration service for that path is being retired and points you to Google Workspace Migration for Microsoft Exchange instead — worth checking before you build a plan around a tool that's on its way out.",
+      "image": { "file": "/screenshots/TkXvFCfkcVI/04.webp", "caption": "The Data migration (new) screen under Data > Data import and export. Google surfaces current migration paths here, including a callout about retiring support for on-premises Exchange." }
+    },
+    {
+      "heading": "Set up email migration and authorize the source account",
+      "body": "Choosing Google Workspace email migration opens a step-by-step flow, and Step 1 is where most of the setup friction actually lives: connecting to the source account you're migrating from. Enter the email address of a super admin on the source organization and request authorization — the console shows the request as \"Pending Authorisation\" until someone with admin access on the source side approves it, and you can resend that request after 24 hours if it stalls. Nothing else in the migration proceeds until this authorization clears, so if you're moving between two organizations you control, make sure you (or whoever holds the source admin login) is ready to approve it right away rather than letting the request sit.",
+      "image": { "file": "/screenshots/TkXvFCfkcVI/05.webp", "caption": "Step 1 of Google Workspace email migration: connecting to the source account. The request shows as pending until a super admin on the source organization approves it." }
+    },
+    {
+      "heading": "Map users and route mail during the transition",
+      "body": "Once authorization clears, the next step in the same flow is uploading migration maps — pairing each source email address with its matching target address so messages land in the right mailbox rather than getting dropped or duplicated. While that transfer runs, set up mail routing or forwarding on the old domain so anyone emailing addresses that haven't fully migrated yet still reaches the right person. This overlap period is where most migration complaints originate, and it's avoidable simply by not flipping MX records or shutting down the old domain until the routing rules are confirmed working."
+    },
+    {
+      "heading": "Verify data and permissions after the transfer completes",
+      "body": "A migration reporting \"complete\" isn't the same as a migration that preserved everything correctly. Spot-check a sample of migrated mailboxes for message counts that roughly match the source, open a handful of Drive files that had specific sharing permissions to confirm those permissions carried over, and check that Calendar events with multiple attendees still show the full guest list. Google's migration tools are reliable for the bulk transfer, but sharing permissions and calendar attendee lists are the details most likely to need a manual fix afterward, so budget time for this check before you consider the old account safe to retire."
+    }
   ],
   "faq": [
-    { "question": "Will I lose emails or files during a Google Workspace migration?", "answer": "The migration is designed to preserve data when done through Google's official data migration service, though it's still worth verifying key items transferred correctly afterward." },
-    { "question": "Can I migrate just some users instead of the whole organization?", "answer": "Yes, migrating users between Google Workspace accounts can be done selectively rather than requiring every user to move at once." },
-    { "question": "What tools does Google recommend for large-scale migrations?", "answer": "The guide points to Google's own data migration service and admin tools as the recommended approach, especially for handling larger migrations." },
-    { "question": "How do I avoid downtime for email during the switch?", "answer": "Setting up email routing or forwarding during the migration helps ensure messages keep arriving for users while their accounts are being moved." }
+    { "question": "Will I lose emails or files during a Google Workspace migration?", "answer": "The migration is designed to preserve data when done through Google's official data migration service, though it's still worth spot-checking mailboxes and files afterward, since sharing permissions and calendar attendee lists are the details most likely to need a manual fix." },
+    { "question": "Can I migrate just some users instead of the whole organization?", "answer": "Yes, migrating users between Google Workspace accounts can be done selectively rather than requiring every user to move at once — you upload a migration map pairing only the source and target addresses you want to transfer." },
+    { "question": "What tools does Google recommend for large-scale migrations?", "answer": "The Data migration (new) screen under Data > Data import and export is Google's current recommended tool. If you're coming from on-premises Microsoft Exchange, note that classic migration support for that path is being retired in favor of Google Workspace Migration for Microsoft Exchange." },
+    { "question": "How do I avoid downtime for email during the switch?", "answer": "Set up email routing or forwarding on the old domain while the migration runs, and don't change MX records or shut down the old domain until you've confirmed the routing rules are working — that overlap window is what prevents messages from bouncing." },
+    { "question": "Why is my migration stuck on \"Pending Authorisation\"?", "answer": "Step 1 of the migration requires a super admin on the source organization to approve the connection request. If it's been more than 24 hours, use the Resend email option and confirm the right person actually has access to approve it." }
   ],
-  "generatedAt": "2026-07-21T05:37:25Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

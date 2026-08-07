@@ -1,34 +1,45 @@
 {
   "slug": "how-to-paste-code-in-tradingview-easily-2026",
   "seoTitle": "How to Paste Code in TradingView (Pine Script)",
-  "metaDescription": "Learn how to open the Pine Editor, paste Pine Script code correctly, save it, and apply it to your TradingView chart without compile errors.",
-  "intro": "Adding a custom indicator or strategy to TradingView means working with Pine Script inside the Pine Editor, and pasting code incorrectly is one of the most common reasons scripts fail to compile. This guide shows the right way to open the editor, paste your code, save it, and apply it to a chart.",
+  "metaDescription": "Learn how to open the Pine Editor, replace the default template with your Pine Script code, save it, and apply it to your TradingView chart.",
+  "intro": "Pasting Pine Script into TradingView is simple in theory — open the editor, paste, save — but the default template it starts you with trips people up if you don't know to clear it first, and a script that looks fine can still fail to apply if you skip the Add to chart step. This guide walks through the real flow on an AAPL daily chart: from the blank Pine Editor with its placeholder script, through pasting a full custom RSI indicator, to seeing that indicator actually plotted underneath the price chart.",
   "steps": [
     {
       "heading": "Open the Pine Editor",
-      "body": "From the bottom panel of any TradingView chart, open the Pine Editor tab where you can write or paste script code."
+      "body": "From any TradingView chart, open the Pine Editor panel — it appears on the right side of the screen with its own toolbar: a script name field defaulting to \"Untitled script,\" plus Add to chart, Save, and Publish script buttons along the top. Before you've written or pasted anything, TradingView pre-fills a default template with a license comment, an //@version tag, an indicator(\"My script\") declaration, and a single plot(close) line. That template is a starting point, not something you need to work around carefully — it's meant to be replaced.",
+      "image": { "file": "/screenshots/bqsq5v-OIsM/03.webp", "caption": "The Pine Editor open with its default \"Untitled script\" template — a version tag, an indicator() declaration, and a single plot(close) line." }
     },
     {
-      "heading": "Paste the code correctly",
-      "body": "Clear any placeholder script first, then paste your indicator or strategy code into the editor without leaving stray characters from the copy source."
+      "heading": "Clear the template and paste your code",
+      "body": "Select all the text in the default template (Cmd/Ctrl+A works fine inside the editor) and delete it, then paste your own Pine Script code in its place. In this example, the pasted script is a full custom RSI indicator — an //@version=6 tag, an indicator() call with a title, shorttitle, and format, followed by input definitions for RSI length, source, and a divergence toggle, and the actual RSI calculation logic below that. The editor automatically applies syntax highlighting and line numbers as you paste, which is a quick visual check that the paste went in cleanly rather than as a single unformatted blob.",
+      "image": { "file": "/screenshots/bqsq5v-OIsM/04.webp", "caption": "A full custom RSI script pasted into the Pine Editor, replacing the default template — inputs, calculations, and plot lines all visible with syntax highlighting." }
+    },
+    {
+      "heading": "Watch for paste artifacts",
+      "body": "The most common reason a pasted script won't compile is formatting picked up from wherever the code was copied — smart quotes instead of straight quotes, extra indentation, or invisible characters from a word processor or chat app. If you copied the script from a website or a chat tool rather than a plain-text source, scan the first few lines for anything that looks visually off before saving, since that's usually where a bad paste shows up first."
     },
     {
       "heading": "Save the script",
-      "body": "Save the script with a clear name so you can find and reuse it later from your list of personal scripts."
+      "body": "Click Save and give the script a clear, descriptive name rather than leaving it as \"Untitled script\" — this is what you'll see later in your list of personal scripts if you want to reopen or reuse it. A good name here saves time later when you have several custom indicators saved and need to find the right one quickly."
     },
     {
       "heading": "Add it to your chart",
-      "body": "Use the 'Add to chart' button in the Pine Editor to apply the compiled script directly onto your active chart."
+      "body": "Click Add to chart in the Pine Editor's toolbar. TradingView compiles the script and, if it succeeds, plots it directly on your active chart — in this case, a new RSI panel appears below the price chart alongside the existing volume and RSI panels already there. If the script has an error instead of compiling cleanly, TradingView highlights the problem with an error indicator rather than silently failing, so check the editor for a flagged line if nothing appears on the chart.",
+      "image": { "file": "/screenshots/bqsq5v-OIsM/05.webp", "caption": "The custom RSI script applied to the AAPL chart, running as its own panel underneath the price candles and volume." }
     },
     {
-      "heading": "Fix common compile errors",
-      "body": "If the script doesn't compile, check for mismatched Pine Script version declarations, missing indicator() or strategy() calls, or formatting issues introduced during copy-paste."
+      "heading": "Confirm it's working as expected",
+      "body": "Once the script is on the chart, watch it update as you move your cursor across candles — values like RSI length and close price should update live, confirming the script is actually calculating from your data rather than just displaying static lines. If something looks wrong, it's usually faster to go back to the editor and re-check your input values than to re-paste the whole script from scratch."
     }
   ],
   "faq": [
     {
       "question": "Why won't my pasted Pine Script compile?",
-      "answer": "This usually happens from a version mismatch, missing declaration line, or extra characters picked up when copying the code from another source."
+      "answer": "This usually happens from a version mismatch, missing declaration line, or extra characters like smart quotes picked up when copying the code from a non-plain-text source such as a website or chat app."
+    },
+    {
+      "question": "Do I need to clear the default template before pasting?",
+      "answer": "Yes. The Pine Editor opens with a placeholder script (a version tag, an indicator() call, and a basic plot line) — select it all and delete it before pasting your own code, otherwise you'll end up with mixed or broken code."
     },
     {
       "question": "What's the difference between an indicator and a strategy in Pine Script?",
@@ -40,8 +51,9 @@
     },
     {
       "question": "Can I edit a script after pasting it?",
-      "answer": "Yes, you can edit the code directly in the Pine Editor and re-save or re-apply it to update the version on your chart."
+      "answer": "Yes, you can edit the code directly in the Pine Editor and re-save or click Add to chart again to update the version already applied to your chart."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T09:00:00Z",
+  "deep": true
 }

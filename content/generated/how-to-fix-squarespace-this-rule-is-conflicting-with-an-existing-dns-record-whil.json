@@ -1,47 +1,59 @@
 {
   "slug": "how-to-fix-squarespace-this-rule-is-conflicting-with-an-existing-dns-record-whil",
   "seoTitle": "Fix 'Rule Conflicting with DNS Record' in Squarespace",
-  "metaDescription": "Resolve the Squarespace domain forwarding error about a conflicting DNS record by finding and removing the record that's blocking your rule.",
-  "intro": "When setting up domain forwarding in Squarespace, you may hit an error saying a forwarding rule conflicts with an existing DNS record. This happens because Squarespace won't let you forward a subdomain that still has an A record or CNAME pointing somewhere else. Here's how to clear the conflict and get forwarding working.",
+  "metaDescription": "Resolve the Squarespace domain forwarding error about a conflicting DNS record by deleting the Squarespace default records blocking your rule.",
+  "intro": "Domain forwarding in Squarespace looks like a two-field form, but it silently depends on the DNS records already sitting on your domain — and when one of those records already claims the subdomain you're forwarding, Squarespace refuses to save the rule. The error reads \"This rule is conflicting with an existing DNS record. Resolve by deleting the conflicting record in the DNS settings page,\" which tells you what's wrong but not exactly where to go fix it. This guide walks through the real error on a live domain (pmntechfix.nl), shows which records are actually causing it, and finishes with what a correctly forwarded domain looks like once the conflict is cleared.",
   "steps": [
     {
-      "heading": "Understand the cause",
-      "body": "When you try to forward a subdomain like www, Squarespace checks for existing DNS records tied to it. If an A record, CNAME, or custom record already exists there, it blocks the new forwarding rule."
+      "heading": "Reproduce the error and read it carefully",
+      "body": "In Domain Forwarding, adding a rule for the www subdomain — pointing it at a destination like https://www.smartcric.space — triggers a red validation message directly under the subdomain field: \"This rule is conflicting with an existing DNS record. Resolve by deleting the conflicting record in the DNS settings page.\" The form won't let the rule save while this message is showing, no matter how many times you re-enter the destination URL. The message is specific for a reason — it's telling you the fix lives on a different page, the DNS Settings page, not inside this forwarding dialog.",
+      "image": { "file": "/screenshots/iMoPJp6IE5M/01.webp", "caption": "The Add a domain forwarding rule dialog with the www subdomain flagged: \"This rule is conflicting with an existing DNS record.\"" }
     },
     {
-      "heading": "Open your DNS settings",
-      "body": "Go to Settings, then Domains, choose your domain, and scroll down to DNS Settings to see the full list of records."
+      "heading": "Understand why it happens",
+      "body": "When you register a domain through Squarespace or connect one to a Squarespace site, the platform automatically writes a set of default DNS records — A records pointing the root domain to Squarespace's servers, and a CNAME pointing www to Squarespace's hosting. Those records exist so your site resolves correctly by default. The problem is that domain forwarding needs to write its own record for that same subdomain, and Squarespace won't silently overwrite an existing one — it stops and asks you to remove the conflict yourself first."
     },
     {
-      "heading": "Find the conflicting record",
-      "body": "Look for any CNAME or A record under the subdomain you're trying to forward — most commonly the www record."
+      "heading": "Open DNS Settings and find the defaults",
+      "body": "From your domain's settings, go to DNS Settings. You'll see a table of every record on the domain, grouped in sections — Squarespace Defaults is usually the one to look at first, listing A records for the @ host pointing at Squarespace IP addresses, plus a www CNAME record pointing to ext-sq.squarespace.com. If you're forwarding the www subdomain specifically, that CNAME row is almost always the conflict; if you're forwarding the root domain (@), it's the A records."
     },
     {
-      "heading": "Delete the conflicting record",
-      "body": "Click the trash icon next to that DNS entry to remove its current mapping."
+      "heading": "Delete the conflicting defaults",
+      "body": "Click the trash icon next to the Squarespace Defaults section, and a confirmation dialog appears: \"Delete Squarespace defaults? If you do this, your domain will no longer point to your Squarespace site. Be sure to forward your domain or restore these defaults from presets.\" That warning is accurate and worth taking seriously — deleting these records does disconnect the domain from your Squarespace site's own content, which is fine here because forwarding is about to take over that job, but it's the wrong move if you actually want the domain to keep showing your Squarespace site.",
+      "image": { "file": "/screenshots/iMoPJp6IE5M/03.webp", "caption": "The confirmation dialog for deleting the Squarespace Defaults DNS records, with a warning that the domain will stop pointing to the Squarespace site." }
     },
     {
       "heading": "Re-add the forwarding rule",
-      "body": "Go back to Forwarding settings and add the rule again — it should now save without the conflict error."
+      "body": "Back in Domain Forwarding, add the rule again with the same subdomain and destination URL as before. With the conflicting record gone, the red error no longer appears and the rule saves. If you're forwarding the root domain instead of www, remember the form's own hint: entering @ as the subdomain will delete any remaining Squarespace default records for you automatically as part of adding that rule."
+    },
+    {
+      "heading": "Confirm the rule is live",
+      "body": "Once saved, the Domain Forwarding page shows the rule's real settings: Redirect Type as Permanent redirect, Forwarding over SSL as On, and Path Forwarding as Forward path, along with a Last Update timestamp. Permanent redirect and SSL on are the settings you want for a production forward — permanent tells browsers and search engines this is the lasting destination, and SSL on keeps the redirect itself encrypted before it even reaches the destination site.",
+      "image": { "file": "/screenshots/iMoPJp6IE5M/05.webp", "caption": "A completed forwarding rule showing Permanent redirect as the type and Forwarding over SSL set to On." }
     }
   ],
   "faq": [
     {
       "question": "Why does Squarespace say my forwarding rule conflicts with a DNS record?",
-      "answer": "It's because an existing A record or CNAME is already assigned to the subdomain you're trying to forward, and Squarespace won't overwrite it automatically."
+      "answer": "Squarespace writes default A and CNAME records for your domain when it's connected to a Squarespace site. Adding a forwarding rule for a subdomain that already has one of those records triggers the conflict error until you delete the old record."
     },
     {
       "question": "Which record usually causes the conflict?",
-      "answer": "In most cases it's the www CNAME record, though root domain forwarding can also conflict with default A records."
+      "answer": "For www subdomain forwarding, it's typically the www CNAME record under Squarespace Defaults. For root domain forwarding, it's the @ A records."
     },
     {
-      "question": "Is it safe to delete the conflicting DNS record?",
-      "answer": "Yes — once forwarding is active, you no longer need the old A or CNAME record it was replacing."
+      "question": "Is it safe to delete the Squarespace Defaults records?",
+      "answer": "Yes, if you're setting up forwarding — the forwarding rule takes over routing the domain. It's not safe if you still want that domain to display your actual Squarespace site content, since deleting the defaults disconnects that link."
     },
     {
-      "question": "What if I'm forwarding my root domain?",
-      "answer": "You may need to remove multiple conflicting A records, usually the default Squarespace ones, before the rule will save."
+      "question": "What if I'm forwarding my root domain instead of www?",
+      "answer": "Entering @ as the subdomain in the forwarding rule form will automatically delete the remaining Squarespace default A records for you as part of adding the rule."
+    },
+    {
+      "question": "How do I know the forwarding rule actually worked?",
+      "answer": "Open Domain Forwarding after saving and check the rule's details — it should show a Redirect Type, Forwarding over SSL status, and a Last Update timestamp instead of the red conflict error."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T09:00:00Z",
+  "deep": true
 }

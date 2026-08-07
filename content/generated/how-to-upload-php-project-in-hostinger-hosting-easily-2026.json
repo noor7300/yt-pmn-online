@@ -1,20 +1,47 @@
 {
   "slug": "how-to-upload-php-project-in-hostinger-hosting-easily-2026",
   "seoTitle": "How to Upload a PHP Project to Hostinger Hosting 2026",
-  "metaDescription": "Ready to deploy your PHP project on Hostinger? Here's how to upload it via File Manager or FTP, set up a database, and avoid common launch issues.",
-  "intro": "Getting a PHP project live on Hostinger comes down to placing your files in the right directory and connecting a database if your project needs one. This guide covers uploading through both Hostinger's File Manager and an FTP client like FileZilla, plus the permissions and setup details beginners tend to trip over. The goal is a working deployment without technical guesswork.",
+  "metaDescription": "Ready to deploy your PHP project on Hostinger? Here's how to upload it via File Manager, place files in public_html, set up a database, and go live.",
+  "intro": "Getting a PHP project onto Hostinger comes down to two things: putting your files in the directory your domain actually serves, and connecting a database if your code needs one. Hostinger's hPanel gives you a browser-based File Manager that handles both jobs without installing anything locally, which is the fastest route for most beginners. This guide walks through the real hPanel screens — from the account dashboard down to the public_html folder — so you know exactly what you're clicking before you get there. By the end your PHP files will be live at your domain, with the common permission and directory mistakes covered along the way.",
   "steps": [
-    { "heading": "Choose your upload method", "body": "Decide between Hostinger's built-in File Manager for a browser-based upload or an FTP client like FileZilla for transferring larger projects." },
-    { "heading": "Upload your PHP files to the correct directory", "body": "Place your project files inside the public-facing directory Hostinger uses for your domain, so the site is reachable once uploaded." },
-    { "heading": "Set up a database if your project needs one", "body": "If your PHP project relies on a database, create it through Hostinger's hosting panel and update your project's connection settings to match." },
-    { "heading": "Check file permissions and common issues", "body": "Review file and folder permissions after uploading, since incorrect permissions are a frequent cause of PHP projects failing to load properly." },
-    { "heading": "Verify the site is live", "body": "Visit your domain to confirm the PHP project loads correctly and that any database-driven pages are pulling data as expected." }
+    {
+      "heading": "Sign in to your Hostinger account",
+      "body": "Start at hostinger.com and log in with your email and password, or through Google or Facebook if you connected one of those at signup. Once you're authenticated you land in hPanel, Hostinger's central control panel for every hosting plan, domain, and email account tied to your profile. If you manage more than one site, this is also where you pick which hosting plan you're uploading the PHP project to before doing anything else. Bookmark this login screen — you'll come back to it any time you need to touch files, databases, or domain settings."
+    },
+    {
+      "heading": "Open your hosting from the hPanel home screen",
+      "body": "hPanel's home screen lists every active service on your account as its own card: your hosting plan, any Horizons website projects, your free email addresses, and backup status. Find the Hosting card for the plan your domain runs on and click Manage to open it. From there the left-hand menu exposes Websites, Domains, Emails, Billing, and more — Websites is what you want next, since that's the entry point to File Manager. Confirming you're in the right hosting plan here matters if you run multiple sites, since uploading to the wrong one means your project won't be reachable at the domain you expect.",
+      "image": { "file": "/screenshots/uPJyZvN25mc/03.webp", "caption": "The hPanel home screen. Each card — Hosting, Horizons, Emails — links to a specific service, and Hosting is where the File Manager for your PHP project lives." }
+    },
+    {
+      "heading": "Open File Manager and locate public_html",
+      "body": "File Manager opens to a folder tree, and public_html is the one that matters: it's the web root Hostinger serves when someone visits your domain. Anything placed directly inside public_html becomes reachable at yourdomain.com, while a subfolder like public_html/myapp becomes yourdomain.com/myapp. If you're replacing an existing site, check what's already there first — a WordPress install, for instance, leaves folders like wp-admin and wp-content that you don't want to overwrite by accident. Create a dedicated folder for your PHP project if you want it isolated from anything else running on the same hosting account.",
+      "image": { "file": "/screenshots/uPJyZvN25mc/04.webp", "caption": "File Manager open to public_html, Hostinger's default web root — folders here are what your domain actually serves." }
+    },
+    {
+      "heading": "Upload your PHP files",
+      "body": "With public_html (or your chosen subfolder) open, use the upload icon in the top toolbar to select your PHP files from your computer. For a project with many files, it's much faster to zip everything locally first, upload the single zip, then use File Manager's extract option to unpack it directly on the server rather than uploading file by file. Once extracted, double check that your entry file — usually index.php — sits at the top level of the folder you're serving from, since a nested extra folder is one of the most common reasons a fresh upload doesn't load.",
+      "image": { "file": "/screenshots/uPJyZvN25mc/05.webp", "caption": "The File Manager toolbar — the upload icon is how you push files or a zipped project folder into public_html." }
+    },
+    {
+      "heading": "Create a database if your project needs one",
+      "body": "If your PHP code connects to MySQL, create the database from hPanel's Databases section before you test the site — most projects will throw a connection error until this exists. Hostinger generates the database name, username, and host automatically; copy all three along with the password into your project's config file exactly as shown, since a typo here is one of the most common causes of a blank white page after upload. Some projects also expect you to import a starting .sql file through phpMyAdmin, which is linked from the same Databases page."
+    },
+    {
+      "heading": "Check file permissions if something won't load",
+      "body": "PHP projects occasionally fail after upload because a folder or file has permissions too restrictive for the web server to read or write to it — commonly directories meant for caching, uploads, or logs. In File Manager, right-click the affected folder and adjust permissions, typically 755 for directories and 644 for files, unless your project's documentation specifies otherwise. This is also the point to double check you extracted into the correct directory, since a misplaced folder produces the same blank-page symptoms as a permissions problem."
+    },
+    {
+      "heading": "Confirm the site is live",
+      "body": "Visit your domain in a fresh browser tab, ideally in a private or incognito window so you're not seeing a cached version. If your project pulls data from the database, click through to a page that depends on it to confirm the connection details you entered actually work end to end, not just that the homepage renders. A blank page or a visible PHP error at this stage almost always traces back to either the wrong upload directory or a database credential mismatch, both covered above."
+    }
   ],
   "faq": [
     { "question": "Should I use File Manager or FTP to upload a PHP project?", "answer": "Either works — File Manager is quicker for smaller projects directly in the browser, while an FTP client like FileZilla is often better suited for larger projects with many files." },
     { "question": "Do I need a database for every PHP project on Hostinger?", "answer": "No, only projects that rely on stored data need a database set up — simpler PHP scripts can run without one." },
-    { "question": "Why isn't my PHP site loading after upload?", "answer": "This is often a permissions issue or a file placed in the wrong directory, both of which are covered as common problems beginners run into during deployment." },
-    { "question": "How long does it take to get a PHP project live on Hostinger?", "answer": "The video frames this as a quick deployment process that can be completed in just a few minutes once your files and any needed database are ready." }
+    { "question": "Why isn't my PHP site loading after upload?", "answer": "This is most often a wrong upload directory or a file permissions issue — check that your files sit directly in public_html (or your chosen subfolder) and that folder permissions haven't been left too restrictive." },
+    { "question": "How long does it take to get a PHP project live on Hostinger?", "answer": "With files already zipped and ready, uploading through File Manager and extracting on the server typically takes just a few minutes, plus a bit more if you also need to create and connect a database." }
   ],
-  "generatedAt": "2026-07-21T05:37:25Z"
+  "generatedAt": "2026-08-07T12:00:00Z",
+  "deep": true
 }

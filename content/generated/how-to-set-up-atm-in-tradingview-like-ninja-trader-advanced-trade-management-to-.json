@@ -1,22 +1,48 @@
 {
   "slug": "how-to-set-up-atm-in-tradingview-like-ninja-trader-advanced-trade-management-to-",
   "seoTitle": "Set Up ATM-Style Trade Management in TradingView",
-  "metaDescription": "See how to preset stop loss and take profit levels in TradingView using bracket orders, similar to NinjaTrader's Advanced Trade Management system.",
-  "intro": "TradingView doesn't have a native ATM strategy feature like NinjaTrader, but you can recreate the effect using bracket orders through connected brokers. This guide explains how to preset your stop loss and take profit before confirming a trade, so you get faster, more consistent risk management.",
+  "metaDescription": "See how to preset stop loss and take profit levels in TradingView's order ticket through a connected broker like Binance, similar to NinjaTrader's Advanced Trade Management.",
+  "intro": "NinjaTrader traders coming to TradingView often go looking for an \"ATM strategy\" toggle and don't find one, because TradingView simply doesn't ship that feature by name. What it does have is a per-order Take Profit and Stop Loss section built into the trading panel itself, which, once your broker is connected, gives you almost the same outcome: a stop and a target attached to the trade before you ever click Buy. This guide shows where those fields actually live, what they look like filled in against a connected broker, and how to practice the workflow in a paper trading account before you risk real size.",
   "steps": [
-    { "heading": "Understand the workaround", "body": "TradingView lacks a built-in ATM feature, but supported brokers such as Binance, OANDA, or TradeStation let you configure bracket-style orders through the Trading Panel." },
-    { "heading": "Enable bracket orders in your broker", "body": "Check your connected broker's settings for bracket order support, which lets stop loss and take profit attach automatically to a new trade." },
-    { "heading": "Set your default risk-to-reward ratio", "body": "Configure a preferred risk-to-reward ratio so your SL and TP levels are calculated consistently across trades." },
-    { "heading": "Adjust SL/TP by ticks, pips, or percentage", "body": "Choose the measurement that fits your instrument and set your stop loss and target distance accordingly." },
-    { "heading": "Modify orders after execution", "body": "Once a trade is live, you can quickly adjust the SL or TP directly on the chart if market conditions change." },
-    { "heading": "Consider Pine Script alerts for automation", "body": "For more customized entry and exit logic, Pine Script alerts can help automate parts of your setup beyond manual bracket orders." }
+    {
+      "heading": "Connect a broker that supports order-level risk management",
+      "body": "The bracket-style behavior you're after comes from your broker integration, not from TradingView's charting layer. Open the Trading Panel at the bottom of the chart and connect a supported account — Binance, OANDA, and TradeStation are common choices, and each surfaces the same Take Profit and Stop Loss fields once connected. The panel shows your account balance, equity, and open orders right next to the chart, so you can see risk exposure and price action in the same view instead of switching windows."
+    },
+    {
+      "heading": "Open the order ticket and set your units",
+      "body": "Click into a Buy or Sell action to open the order ticket, which slides out over the right side of the chart. Start with Units — the size of the position — and TradingView calculates the margin and total order value live as you type. This ticket has three order types across the top, Market, Limit, and Stop, and the risk fields you're setting up next apply the same way regardless of which one you pick.",
+      "image": { "file": "/screenshots/2sqNWfFA4bk/01.webp", "caption": "The order ticket on a connected Binance account, with Units set and the Take Profit and Stop Loss checkboxes sitting just below the order type tabs." }
+    },
+    {
+      "heading": "Attach Take Profit and Stop Loss before you confirm",
+      "body": "Below the Units field are two checkboxes, Take Profit and Stop Loss, each expanding into its own set of inputs for ticks, price, or a USD or percentage value. Check both, fill in your target and your stop, and they submit as part of the same order — this is the actual mechanism that replicates NinjaTrader's ATM behavior inside TradingView, even without a feature carrying that name. Because the fields accept ticks, price, or percentage, you can standardize your risk-to-reward ratio across instruments that trade at very different price scales instead of recalculating it by hand each time."
+    },
+    {
+      "heading": "Watch the order and balance update in the panel below the chart",
+      "body": "Once an order is working, the panel beneath the chart tracks it under Orders, alongside Account Balance, Equity, and unrealized profit — all updating in real time as price moves. This is also where you'd go to modify or cancel a bracket after it's live, if the market shifts and your original stop or target no longer makes sense. Keeping this panel visible while you trade means you're never guessing whether an order actually attached correctly.",
+      "image": { "file": "/screenshots/2sqNWfFA4bk/03.webp", "caption": "The panel below the chart showing a connected Binance account — Account Balance, Equity, and the Orders tab listing working trades." }
+    },
+    {
+      "heading": "Practice the setup in Paper Trading first",
+      "body": "TradingView's built-in Paper Trading account uses the exact same order ticket and the same Take Profit and Stop Loss checkboxes as a live broker connection, which makes it the obvious place to rehearse this workflow before committing real funds. Switch the account selector from your live broker to Paper Trading, and you'll get a simulated balance to trade against with identical mechanics — same fields, same bracket behavior, zero real risk while you get the habit of checking both boxes on every entry.",
+      "image": { "file": "/screenshots/2sqNWfFA4bk/05.webp", "caption": "The same order ticket switched to a Paper Trading account, with Take Profit and Stop Loss ready to configure against a simulated balance." }
+    },
+    {
+      "heading": "Standardize it with a default risk-to-reward ratio",
+      "body": "Once the mechanics are comfortable, decide on a risk-to-reward ratio you'll apply by default — 1:2 is a common starting point — and use it to set your stop and target distance on every trade rather than eyeballing levels in the moment. Consistency here matters more than any single trade's outcome, since it's what keeps your losses capped while your winners are sized to actually outweigh them over a run of trades."
+    },
+    {
+      "heading": "Go further with Pine Script alerts",
+      "body": "For anyone who wants entries and exits to trigger automatically rather than manually clicking Buy each time, Pine Script alerts can layer custom logic on top of this manual bracket setup — firing a webhook or notification when your conditions are met so you can execute the same TP/SL pattern faster. That's a separate, more advanced step from the order ticket workflow above, but it builds directly on the same Take Profit and Stop Loss fields once you're ready to automate."
+    }
   ],
   "faq": [
-    { "question": "Does TradingView have a built-in ATM strategy feature?", "answer": "No, TradingView doesn't have a native ATM feature like NinjaTrader, but bracket orders through supported brokers achieve a similar result." },
-    { "question": "Which brokers support bracket orders on TradingView?", "answer": "Brokers such as Binance, OANDA, and TradeStation can support preset stop loss and take profit levels when connected to TradingView." },
-    { "question": "Can I set a default risk-to-reward ratio?", "answer": "Yes, you can configure a default ratio so your SL and TP levels are applied consistently to new trades." },
-    { "question": "Does this work on mobile?", "answer": "Bracket order support and mobile compatibility can vary by broker, so it's worth checking your broker's mobile capabilities." },
-    { "question": "Can I automate entries and exits further?", "answer": "Yes, Pine Script alerts can be used to build more customized automated entry and exit logic." }
+    { "question": "Does TradingView have a built-in ATM strategy feature like NinjaTrader?", "answer": "No. TradingView has no feature by that name, but the order ticket's Take Profit and Stop Loss checkboxes, available once you connect a supported broker, produce a very similar bracket-order outcome." },
+    { "question": "Which brokers support this Take Profit / Stop Loss setup?", "answer": "Binance, OANDA, and TradeStation are common connected brokers that surface the fields in the order ticket. Support and exact behavior can vary by broker, so check your specific connection." },
+    { "question": "Can I test this without risking real money?", "answer": "Yes. Switch the account selector to Paper Trading and you get the identical order ticket and TP/SL fields against a simulated balance, which is the safest way to build the habit before trading live." },
+    { "question": "Can I set a default risk-to-reward ratio?", "answer": "TradingView doesn't auto-calculate a saved ratio for you, but you can apply one manually every time you set your stop and target distance in the order ticket, keeping it consistent trade to trade." },
+    { "question": "Can I automate entries and exits further?", "answer": "Yes. Pine Script alerts can trigger notifications or webhooks based on your own conditions, layering automation on top of the manual Take Profit and Stop Loss setup described here." }
   ],
-  "generatedAt": "2026-07-24T12:04:37Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

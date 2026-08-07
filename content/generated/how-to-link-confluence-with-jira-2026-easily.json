@@ -2,46 +2,65 @@
   "slug": "how-to-link-confluence-with-jira-2026-easily",
   "seoTitle": "How to Link Confluence With Jira (Step-by-Step)",
   "metaDescription": "Connect Confluence and Jira so documentation, issues, and sprints stay linked, giving your team instant visibility into project progress.",
-  "intro": "Keeping documentation separate from your issue tracker makes it easy for requirements and progress notes to fall out of sync. This guide walks through linking Confluence with Jira so your pages and issues reference each other directly, improving visibility for the whole team.",
+  "intro": "When documentation lives in Confluence and work lives in Jira, the two drift apart unless something actually connects them. Linking the two Atlassian products means a Jira issue can point straight at its spec, and a Confluence page can show the live status of the ticket it describes, so nobody has to go hunting across tabs. This guide covers the real setup path — from the Confluence dashboard where your linked Jira projects already surface, through the Jira admin screen where the application link itself gets created, to the day-to-day habit of keeping pages and issues pointed at each other. It's mostly a one-time admin task followed by a habit, not a recurring chore.",
   "steps": [
     {
-      "heading": "Confirm both tools are connected",
-      "body": "Since Jira and Confluence are both Atlassian products, make sure your site has both apps set up under the same Atlassian account."
+      "heading": "See where Jira and Confluence already overlap",
+      "body": "Open Confluence and look at the \"For you\" landing page — if your site already has Jira software and business projects on the same Atlassian domain, they show up right there as recent projects with open work item counts. This is worth checking first, because if you can already see Jira projects like this from inside Confluence, the two products are on the same site and most of the plumbing is already in place. What's still missing is the formal application link that lets Confluence macros pull live Jira data and lets Jira issues reference Confluence pages directly, which is the piece the rest of this guide sets up.",
+      "image": { "file": "/screenshots/gR5gPxp2yuw/01.webp", "caption": "The Confluence \"For you\" dashboard, already showing several Jira projects — a sign the two products share an Atlassian site." }
     },
     {
-      "heading": "Link a Confluence page to a Jira issue",
-      "body": "From within a Jira issue, use the link option to attach a related Confluence page, or insert a Jira issue macro directly into a Confluence page."
+      "heading": "Open Jira admin settings and find Application links",
+      "body": "The connection itself is configured from the Jira side. Go to your Jira admin settings and look under the Integrations section in the left sidebar — that's where Application links lives, alongside Compass and DVCS accounts. This page lists every external application currently linked to your Jira instance, along with its status. If Confluence isn't listed yet, this is the screen you'll use to add it, and it's also where you'd come back to check or remove a link later if something needs to be reconfigured.",
+      "image": { "file": "/screenshots/gR5gPxp2yuw/03.webp", "caption": "Jira admin settings with the Integrations section expanded, showing Application links in the sidebar next to Compass and DVCS accounts." }
     },
     {
-      "heading": "Use Confluence for project documentation",
-      "body": "Keep requirements, meeting notes, and specs in Confluence pages that are linked back to their relevant Jira epics or tickets."
+      "heading": "Create an application link to your Confluence site",
+      "body": "From the Application links page, start a new link and choose Direct application link rather than an application tunnel — a tunnel is only needed for self-managed instances sitting behind your own network. Paste in your Confluence site's URL (it follows the pattern yoursite.atlassian.net/wiki) into the Application URL field and continue. Jira validates the address and pulls basic details about the target application automatically, which is what makes this a few-minute setup rather than a manual credential exchange.",
+      "image": { "file": "/screenshots/gR5gPxp2yuw/04.webp", "caption": "The Create an application link dialog, set to Direct application link with the Confluence wiki URL entered." }
     },
     {
-      "heading": "Review links regularly",
-      "body": "Periodically check that linked pages and issues are still accurate as your project evolves, especially after sprint changes."
+      "heading": "Name the link and confirm the connection",
+      "body": "The next screen asks for an Application Name and Application Type — give it something your team will recognize later, since this name is what shows up in the Application links list going forward. Application Type defaults to Generic Application, which is correct for a standard Confluence connection; the optional fields below it for consumer key, shared secret, and service provider name are for advanced OAuth setups and can be left blank for a normal same-organization link. Continue through the confirmation and the link becomes active immediately, at which point Jira and Confluence can start referencing each other's content.",
+      "image": { "file": "/screenshots/gR5gPxp2yuw/05.webp", "caption": "Naming the new application link before finishing the connection — the advanced OAuth fields below can stay empty for a standard link." }
     },
     {
-      "heading": "Apply team best practices",
-      "body": "Establish a simple convention, like linking every epic to its planning doc, so the Jira-Confluence connection stays consistent across projects."
+      "heading": "Attach a Confluence page to a Jira issue",
+      "body": "With the link active, open any Jira issue and use the Link option to attach a related Confluence page directly to it — search by page title and Jira pulls in the reference, showing it in the issue's Links section from then on. It works the other way too: inside a Confluence page you can insert a Jira issue or Jira report macro that displays live status, assignee, and progress for one issue or a whole filtered list, updating automatically as the ticket moves through your workflow instead of going stale like a plain hyperlink would.",
+      "image": null
+    },
+    {
+      "heading": "Make it a habit, not a one-off",
+      "body": "The application link only creates the possibility of connection — someone still has to link the right page to the right issue for it to be useful. A simple team convention works best: every epic gets linked to its planning or requirements page the moment it's created, and every major spec change gets a note back on the epic. Do this consistently for a sprint or two and the pattern sticks, at which point new team members find both the ticket and its context in either tool without asking around.",
+      "image": null
+    },
+    {
+      "heading": "Keep links accurate as projects evolve",
+      "body": "Linked pages and issues don't self-correct when a project reorganizes, a page gets archived, or an epic gets split. Build a light review into your sprint retro or backlog grooming — a quick scan of whether the linked docs on your active epics still match what the team is actually building. It takes a few minutes and prevents the slow drift where the Confluence link on a two-year-old epic points at a spec nobody has opened since the project's first week."
     }
   ],
   "faq": [
     {
       "question": "Do I need separate Confluence and Jira licenses?",
-      "answer": "Yes, Confluence and Jira are separate products, though many Atlassian plans bundle both under one site."
+      "answer": "Yes, Confluence and Jira are separate products, though many Atlassian plans bundle both under one site, and being on the same site is what makes the application link setup this simple."
     },
     {
       "question": "Can I see linked Confluence pages from inside a Jira issue?",
-      "answer": "Yes, once linked, related Confluence pages show up directly in the issue's links section for quick access."
+      "answer": "Yes, once linked, related Confluence pages show up directly in the issue's links section for quick access, and Jira issue macros embedded in Confluence pages show live status in the other direction."
     },
     {
       "question": "Does linking sync content between the two tools?",
-      "answer": "No, linking just connects the issue and page so you can navigate between them — the content in each stays managed separately."
+      "answer": "No, linking just connects the issue and page so you can navigate between them and pull live status via macros — the content in each stays managed and edited separately."
+    },
+    {
+      "question": "What's the difference between a direct application link and a tunnel?",
+      "answer": "A direct application link is for a standard cloud-to-cloud connection using the target site's URL, which covers most setups. A tunnel is only needed when linking to a self-managed Jira or Confluence instance sitting behind your own network."
     },
     {
       "question": "Can this help with Agile reporting?",
-      "answer": "Yes, linking documentation to epics and stories gives your team instant context alongside sprint reports and boards."
+      "answer": "Yes, linking documentation to epics and stories gives your team instant context alongside sprint reports and boards, since the Jira macro in Confluence reflects live status rather than a snapshot."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-06T09:00:00Z",
+  "deep": true
 }

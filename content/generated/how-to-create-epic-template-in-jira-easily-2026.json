@@ -1,47 +1,59 @@
 {
   "slug": "how-to-create-epic-template-in-jira-easily-2026",
   "seoTitle": "How to Create an Epic Template in Jira",
-  "metaDescription": "Build reusable epic templates in Jira with predefined stories and tasks to keep project setup consistent across multiple teams.",
-  "intro": "Starting every new project's epic from scratch wastes time and leads to inconsistent structure across teams. This guide covers how to create an epic template in Jira with predefined stories and sub-tasks so you can reuse it whenever a similar project kicks off.",
+  "metaDescription": "Build a reusable epic template in Jira by structuring one epic well, then cloning it with its stories and sub-tasks for every new project.",
+  "intro": "Jira doesn't ship with a dedicated \"epic template\" feature, which trips up teams who go looking for one in the settings menu and come up empty. The workaround that actually works is simpler than it sounds: build one epic properly, with the child items and structure your team reuses every time, then clone it whenever a similar project starts. This guide walks through that flow on a real Jira Kanban board — creating the base epic, filling in its details, and using the Clone dialog to spin up a fresh copy without retyping the structure from scratch.",
   "steps": [
     {
-      "heading": "Create a new epic",
-      "body": "Start by creating the epic you want to use as your base template, filling in the fields your team typically needs."
+      "heading": "Start from your project's board",
+      "body": "Open the project where the template will live — in this example, a Kanban board called CA board under the CTC Apps project, with columns for Backlog, Selected for Development, In Progress, and Done. Existing work items like CTC iOS and CTC Android already sit in their columns with short IDs (CA-1, CA-2, and so on), which is the numbering scheme your new epic will join. Working from an active board rather than a blank project keeps the template grounded in how your team's items are actually organized, so the fields you fill in next map to real usage instead of a generic default.",
+      "image": { "file": "/screenshots/x0uu2a1cYTo/01.webp", "caption": "The CA board Kanban view, showing existing work items sorted into Backlog, Selected for Development, In Progress, and Done." }
     },
     {
-      "heading": "Add stories and sub-tasks under it",
-      "body": "Break the epic down into the standard stories and sub-tasks your projects usually require, so the structure is predefined."
+      "heading": "Create the base work item",
+      "body": "Click Create to open the new work item panel. This is where the template's shape gets decided: set a Due date if your team's epics typically carry one, add any Linked Work items that should always accompany this type of epic, and set the Assignee — or leave it blank and use \"Assign to me\" as a placeholder you'll change per project. Every field you fill in here becomes part of what gets copied later, so it's worth taking the extra minute to set them the way you actually want future clones to start.",
+      "image": { "file": "/screenshots/x0uu2a1cYTo/03.webp", "caption": "The Create panel with fields for attachments, due date, linked work items, and assignee — the fields that carry over into every cloned copy." }
     },
     {
-      "heading": "Save it as a reference template",
-      "body": "Keep this epic as a master reference, or use Jira's clone feature to duplicate it whenever you start a similar project."
+      "heading": "Add the description and child work items",
+      "body": "Once the base item is created, open it to its full detail view. This is where the actual template content lives: a Description explaining what this epic covers, a Child work items section where you add the stories and sub-tasks your projects typically need, and a Related work items section for anything that should be linked but not nested underneath. Filling these in consistently — the same three or four stories every time, the same sub-task breakdown — is what makes the epic worth cloning instead of just another one-off item."
     },
     {
-      "heading": "Reuse across teams and projects",
-      "body": "Clone the epic template for new initiatives so every team starts from the same consistent structure."
+      "heading": "Clone it to start a new project",
+      "body": "When a new project needs this same structure, open the base epic and use the Clone option. A Clone dialog appears pre-filled with a Summary field defaulting to \"CLONE - \" plus the original title, and an Assignee field carried over from the source. Jira flags one limitation here worth knowing: if you don't have the \"Modify reporter\" permission, you're set as the reporter on the cloned item automatically rather than able to choose someone else. Rename the summary to match the new project, adjust the assignee, and click Clone.",
+      "image": { "file": "/screenshots/x0uu2a1cYTo/05.webp", "caption": "The Clone dialog, pre-filled with a CLONE-prefixed summary and the original assignee, plus a note about reporter permissions." }
     },
     {
-      "heading": "Refine over time",
-      "body": "Update the template as your workflow evolves so future epics benefit from lessons learned in past projects."
+      "heading": "Check what carried over",
+      "body": "After cloning, open the new item and confirm the description and child work items came across the way you expected. Cloning behavior in Jira can vary by configuration — some setups copy child items and links automatically, others require you to re-add them — so this check is worth doing the first time you clone your template, even if you skip it on later reuses once you know your instance's behavior."
+    },
+    {
+      "heading": "Keep the template current",
+      "body": "Treat the original epic as a living document, not a one-time setup. When a retro surfaces a step your projects always need but the template is missing, add it to the base epic so every future clone includes it. Over a few projects this turns a single well-built epic into the closest thing Jira offers to a real template system, without needing a marketplace app to get there."
     }
   ],
   "faq": [
     {
       "question": "Does Jira have a built-in template feature for epics?",
-      "answer": "Jira doesn't have a dedicated epic template tool by default, but you can clone an existing epic with its stories and tasks to reuse the structure."
+      "answer": "Not a dedicated one. The practical workaround is building one well-structured epic with its child work items filled in, then using the Clone option to reuse that structure for new projects."
     },
     {
       "question": "Can I reuse an epic template across different projects?",
-      "answer": "Yes, as long as you have access, you can clone or recreate the epic structure in another project."
+      "answer": "Yes, as long as you have access to both projects, you can clone the epic and its structure, then move or recreate it in the target project."
     },
     {
       "question": "Will cloning an epic also clone its sub-tasks?",
-      "answer": "Depending on your Jira setup and clone options, sub-tasks can often be included when cloning an epic and its stories."
+      "answer": "It depends on your Jira setup — some configurations carry over child work items and links automatically, others don't. Check the cloned item once to confirm before relying on it."
+    },
+    {
+      "question": "Why was I set as the reporter on a cloned item instead of someone else?",
+      "answer": "Jira's Clone dialog assigns you as reporter automatically if your account doesn't have the \"Modify reporter\" permission. An admin can grant that permission if you need to set a different reporter."
     },
     {
       "question": "How do templates improve team efficiency?",
       "answer": "Templates save setup time and ensure every team follows the same structure, making cross-team reporting more consistent."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T09:00:00Z",
+  "deep": true
 }

@@ -61,27 +61,6 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>Embedded videos</h2>
-        <p>
-          Every tutorial page embeds a video hosted on YouTube. The video does not load until you
-          click play — until then, only a still thumbnail image is shown.
-        </p>
-        <p>
-          Once you press play, YouTube (Google) loads its player and may set cookies and collect data
-          according to its own policies, exactly as if you had visited YouTube directly. That
-          processing is controlled by Google, not by this site. See the{" "}
-          <a
-            href="https://policies.google.com/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Google Privacy Policy
-          </a>
-          .
-        </p>
-      </section>
-
-      <section>
         <h2>Advertising</h2>
         <p>
           This site may display advertising served by Google, including Google AdSense, and by other
@@ -126,9 +105,8 @@ export default function PrivacyPage() {
         <h2>Cookies</h2>
         <p>
           This site sets no cookies of its own. Cookies you may encounter here come from third-party
-          services described above — the YouTube player once a video is played, and advertising
-          vendors where ads are shown. You can block or delete cookies in your browser settings,
-          though blocking them may affect how embedded videos behave.
+          advertising vendors where ads are shown. You can block or delete cookies in your browser
+          settings.
         </p>
       </section>
 

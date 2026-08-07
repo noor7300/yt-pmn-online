@@ -1,47 +1,58 @@
 {
   "slug": "how-to-setup-your-google-workspace-domain-add-new-domain-do-set-up-2026-easily",
-  "seoTitle": "How to Set Up a Domain in Google Workspace (2026)",
-  "metaDescription": "Learn how to add and set up a new domain in Google Workspace in 2026, from entering domain details to verifying ownership correctly.",
-  "intro": "Adding a domain to Google Workspace is the foundation for getting a professional email address and using Google's tools under your own brand. This guide covers how to add a new domain and get it fully set up.",
+  "seoTitle": "How to Add a New Domain in Google Workspace (2026)",
+  "metaDescription": "Add a secondary domain or user alias domain to Google Workspace from the Admin console, and understand the difference before you commit to either.",
+  "intro": "Adding a domain to Google Workspace isn't just typing a name into a box — Google asks you to pick between two genuinely different setups on the same screen, and choosing wrong means redoing the work later. This guide walks through the actual Admin console flow: getting from the Home dashboard to the Add a domain screen, and understanding the choice between a secondary domain and a user alias domain before you commit to either one.",
   "steps": [
     {
-      "heading": "Navigate to domain settings",
-      "body": "In the Admin Console, find the Domains section where you can view existing domains and add a new one."
+      "heading": "Start from the Admin console Home",
+      "body": "Sign in at admin.google.com with an account that has admin permissions, and you land on the Home dashboard. This page surfaces the things admins reach for most — a Groups panel for managing organization groups, a Support panel with frequently asked questions like \"How to add secondary domain\" and \"How to create or update users in bulk,\" and a Discover panel pointing at other productivity tips. The left sidebar holds the full navigation: Directory, Devices, Apps, Security, Data, Reporting, Billing, and Account. Domain settings live under Account, not under Directory or Apps, which is easy to miss the first time.",
+      "image": { "file": "/screenshots/L1xIBDEH8Ek/04.webp", "caption": "The Admin console Home dashboard, with Groups and Support panels visible and the full settings navigation in the left sidebar." }
     },
     {
-      "heading": "Add your new domain",
-      "body": "Enter the domain name exactly as registered with your domain provider, choosing whether it's a primary domain or a secondary one."
+      "heading": "Open Add a domain",
+      "body": "From Account settings, choose Domains, then Add a domain. The screen that opens explains the purpose plainly: \"If your organisation owns multiple domains, add them all to your organisation's Google Account. Let users at different domains share Google services as one organisation, or give them an identity at multiple domains.\" Step 1 on this screen is a Domain name field with placeholder guidance — company.com for a full domain, or mail.mycompany.com for a subdomain — so type the exact domain you registered with your provider, matching capitalization and spelling precisely.",
+      "image": { "file": "/screenshots/L1xIBDEH8Ek/05.webp", "caption": "The Add a domain screen in the Admin console, with the domain name field and the choice between Secondary domain and User alias domain." }
+    },
+    {
+      "heading": "Choose Secondary domain or User alias domain",
+      "body": "Step 2 on the same screen is the decision that matters most. Secondary domain treats the new domain as effectively its own space: it can replace your primary domain in a user's address, and the example shown illustrates admin@pmntechfix.nl (primary) alongside joe@other-domain.com (secondary) — separate identities for separate people or teams. User alias domain instead gives existing users an additional email address at the new domain, shown as admin@pmntechfix.nl paired with admin@other-domain.com — the same person, just reachable at two addresses, at no extra cost. Pick secondary domain if you're managing genuinely separate teams or brands under one Workspace account; pick user alias domain if you just want everyone reachable at a second address."
     },
     {
       "heading": "Verify domain ownership",
-      "body": "Google requires proof that you own the domain, typically through a DNS TXT record or HTML file upload provided by your registrar."
+      "body": "After choosing a domain type and continuing, Google requires proof you actually control the domain — typically a DNS TXT record added at your domain registrar, or in some flows an HTML file uploaded to the domain's web root. This step exists specifically to stop someone from adding a domain they don't own to their Workspace account, so it can't be skipped regardless of which domain type you picked in the previous step."
     },
     {
-      "heading": "Configure the correct settings",
-      "body": "Once verified, review the domain's settings to make sure it's connected correctly and ready to support email and other Workspace services."
+      "heading": "Wait for DNS propagation, then confirm",
+      "body": "Once the verification record is in place, return to the Admin console and confirm verification. This can succeed within minutes or take up to 48 hours depending on how quickly your registrar's DNS changes propagate — if verification fails immediately after adding the record, that's usually just propagation lag rather than a mistake, and it's worth waiting before troubleshooting further."
     },
     {
-      "heading": "Apply any useful setup tips",
-      "body": "Double-check DNS propagation and settings before relying on the domain for live email, since changes can take time to fully take effect."
+      "heading": "Review the domain's final settings",
+      "body": "With the domain added and verified, it appears in your Domains list alongside your primary domain, and any users or aliases you set up on it become active. Double-check MX records if you plan to route email through this domain, since domain verification and email routing are separate steps — a verified domain doesn't automatically mean mail is flowing correctly until the MX records point at Google's mail servers too."
     }
   ],
   "faq": [
+    {
+      "question": "What's the difference between a secondary domain and a user alias domain?",
+      "answer": "A secondary domain gives you a separate identity space — different users can have their primary address on it, useful for managing separate teams or brands. A user alias domain just adds a second email address at the new domain for existing users, at no extra cost."
+    },
     {
       "question": "How long does domain verification take in Google Workspace?",
       "answer": "Verification is often quick once the DNS record is added, but propagation can take anywhere from a few minutes to 48 hours depending on your provider."
     },
     {
       "question": "Can I add more than one domain to Google Workspace?",
-      "answer": "Yes, Workspace supports adding multiple domains and domain aliases under the same account."
+      "answer": "Yes, Workspace supports adding multiple domains and domain aliases under the same account, mixing secondary domains and user alias domains as needed."
     },
     {
       "question": "Do I need to change my domain registrar to use Google Workspace?",
-      "answer": "No, you can keep your existing registrar and just update the DNS records to point to Google Workspace's services."
+      "answer": "No, you can keep your existing registrar and just add the DNS records Google requires for verification and, later, email routing."
     },
     {
       "question": "What happens if domain verification fails?",
       "answer": "Double-check that the TXT record or HTML file matches exactly what Google provided, and allow time for DNS changes to propagate before retrying."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T09:00:00Z",
+  "deep": true
 }

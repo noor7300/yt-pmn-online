@@ -1,47 +1,63 @@
 {
   "slug": "how-to-sync-google-workspace-to-outlook-connect-email-with-microsoft-outlook-365",
   "seoTitle": "How to Sync Google Workspace with Microsoft Outlook 365",
-  "metaDescription": "Learn how to connect your Google Workspace Gmail account to Microsoft Outlook 365, including IMAP setup and app password configuration.",
-  "intro": "If you prefer Outlook's interface but need to manage a Google Workspace email account, syncing the two lets you handle everything from one app. This guide covers enabling IMAP and configuring Outlook to connect with your Workspace Gmail.",
+  "metaDescription": "Connect a Google Workspace account to Outlook 365 using a Marketplace sync connector or the manual IMAP and app-password route.",
+  "intro": "There are two real ways to get a Google Workspace account talking to Outlook 365: configure IMAP by hand and enter server settings yourself, or install a Marketplace connector that handles the authorization for you. This guide walks through the connector route first, since it's what a growing number of admins reach for to keep contacts and directory data in sync across platforms with no server settings to get wrong, then covers the manual IMAP path for anyone who'd rather not add a third-party app to their Workspace account.",
   "steps": [
     {
-      "heading": "Enable IMAP in Google Workspace",
-      "body": "In your Gmail settings, turn on IMAP access so external email clients like Outlook can connect to your account."
+      "heading": "Start from the Google Admin console",
+      "body": "Sign in as a Workspace admin and land on the Admin console's home dashboard, which surfaces quick links for managing users and billing along with setup recommendations for the domain. You don't need to change anything here — this is just the jumping-off point before heading into the Google Workspace Marketplace, where the sync connector actually lives."
     },
     {
-      "heading": "Generate an app password if needed",
-      "body": "If two-step verification is enabled, you may need to create an app-specific password to use in place of your regular login."
+      "heading": "Install a Marketplace connector instead of hand-configuring IMAP",
+      "body": "In the Google Workspace Marketplace, an app like sync.blue is built specifically to keep contact data synced between Google Workspace and other platforms, including Outlook. The listing shows what it does plainly — \"Keeps your contacts in sync between countless apps\" — along with its rating, download count, and permissions before you install. This approach trades a few minutes of manual IMAP setup for an authorization flow the app walks you through, which is worth it if you want contacts and directory info to stay in sync ongoing rather than doing a one-time import.",
+      "image": { "file": "/screenshots/EG3Mccnu_7o/03.webp", "caption": "The sync.blue listing in Google Workspace Marketplace, showing what it syncs and its install button before you authorize anything." }
     },
     {
-      "heading": "Add your account in Outlook",
-      "body": "Open Outlook 365 and add a new account, entering your Workspace Gmail address and the correct credentials or app password."
+      "heading": "Create a connection between the two accounts",
+      "body": "Once installed and activated, the app's own dashboard opens to a \"My connections\" page explaining the model plainly: one connection syncs data between exactly two accounts, and you can create as many connections as you need. Click Create connection to start linking your Google Workspace account to the Outlook side — this is the step that replaces manually entering incoming and outgoing mail server details, since the app handles the authorization handshake with both platforms instead.",
+      "image": { "file": "/screenshots/EG3Mccnu_7o/04.webp", "caption": "The sync.blue \"My connections\" page — a fresh account with no connections yet, and the button that starts pairing two accounts together." }
     },
     {
-      "heading": "Configure server settings",
-      "body": "Enter the correct incoming and outgoing server details for Gmail's IMAP and SMTP servers if Outlook doesn't detect them automatically."
+      "heading": "Select Google Workspace as your source app",
+      "body": "The connection wizard runs through three clearly labeled stages — Choose your apps, Authorize your apps, Configure connection — starting with a search box where you pick the source. Typing \"google workspace\" surfaces the specific options, including Google Workspace Domain Shared Contacts and Google Workspace Directory, so you can pick the exact dataset you want flowing out of Workspace rather than a generic \"Google\" option that might grab more than you intend.",
+      "image": { "file": "/screenshots/EG3Mccnu_7o/05.webp", "caption": "Step 1 of the connection wizard: searching for and selecting the specific Google Workspace data source to sync from." }
     },
     {
-      "heading": "Confirm mail, contacts, and calendar sync",
-      "body": "Once connected, check that your emails, contacts, and calendar events from Workspace appear correctly inside Outlook."
+      "heading": "Authorize both accounts and finish the connection",
+      "body": "After picking the Workspace source, the wizard moves to step 2 and asks you to sign in and grant permission on the Google side, then repeats the process for Outlook as the destination app — each platform's own OAuth consent screen is what actually grants access, not a password you type into the connector. Step 3, Configure connection, is where you set sync direction and frequency before the two accounts start exchanging data on their own."
+    },
+    {
+      "heading": "Or connect Outlook directly via IMAP",
+      "body": "If you'd rather not add a Marketplace app, Outlook can connect to a Workspace Gmail account the traditional way: enable IMAP access in Gmail's settings, generate an app-specific password if two-step verification is on, then add the account in Outlook using imap.gmail.com and smtp.gmail.com with that password in place of your normal login. This route only handles mail — it won't sync contacts or calendar the way a dedicated connector does, so it's the better fit if email is genuinely all you need in Outlook."
+    },
+    {
+      "heading": "Confirm everything landed correctly",
+      "body": "Whichever method you use, check Outlook after the initial sync to confirm mail, contacts, or calendar events (depending on what you connected) actually appear and update when something changes on the Workspace side. A connector-based sync like this one runs on an ongoing schedule, so give it a few minutes after the first setup before assuming something's broken if a contact hasn't shown up yet."
     }
   ],
   "faq": [
     {
       "question": "Do I need an app password to connect Gmail to Outlook?",
-      "answer": "If your account uses two-step verification, yes — an app-specific password is typically required instead of your normal login password."
+      "answer": "Only if you use the manual IMAP method and have two-step verification enabled — then an app-specific password replaces your normal login password. A Marketplace connector like sync.blue uses OAuth authorization instead, so no app password is needed."
     },
     {
       "question": "Will syncing to Outlook affect my Gmail account directly?",
-      "answer": "No, syncing simply lets Outlook access your existing Gmail data through IMAP — it doesn't change anything on the Workspace side."
+      "answer": "No. Both the IMAP method and a Marketplace connector read and sync your existing Workspace data — neither changes anything on the Google side beyond what you explicitly authorize."
     },
     {
       "question": "Can I sync my Google Calendar to Outlook as well?",
-      "answer": "Yes, in addition to email, you can typically sync your Google Calendar events into Outlook for a unified schedule view."
+      "answer": "With a dedicated connector app, often yes, depending on which data sources it supports. The plain IMAP method only handles email, so calendar sync needs either a connector or a separate calendar-specific setup."
     },
     {
-      "question": "Is this method secure compared to using third-party sync tools?",
-      "answer": "Using IMAP directly with an app password is generally more secure than relying on third-party sync tools, since it keeps the connection between Google and Microsoft only."
+      "question": "Is a Marketplace connector app secure to use for this?",
+      "answer": "Reputable connector apps use OAuth to authorize access rather than asking for your password, and Google's Marketplace listing shows the app's permissions and reviews before you install — check both before granting access to your domain's contacts or directory."
+    },
+    {
+      "question": "Which method should I use — IMAP or a connector app?",
+      "answer": "If you only need email in Outlook, manual IMAP with an app password is simpler and adds no third-party app. If you also want contacts or directory data staying in sync ongoing, a connector like sync.blue handles that automatically."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

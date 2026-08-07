@@ -2,23 +2,39 @@
   "slug": "how-to-setup-stripe-instant-payouts-easily-2026-eligibility-fees-details",
   "seoTitle": "Stripe Instant Payouts: Setup, Eligibility & Fees",
   "metaDescription": "Learn how to enable Stripe Instant Payouts, what eligibility requirements apply, and what fees you'll pay to move funds to your debit card in minutes.",
-  "intro": "Instant Payouts let you move your Stripe balance to a linked debit card in minutes instead of waiting for a standard payout cycle, but there are eligibility rules and fees to understand first. This guide covers who qualifies, how to add and verify a debit card, what the fees look like, and how to activate the feature in your dashboard.",
+  "intro": "Instant Payouts move your Stripe balance to a linked debit card in minutes instead of the usual multi-day payout cycle, but Stripe doesn't turn the feature on for everyone automatically. Your account has to clear a few checks first, and there's a real cost for the speed. This guide walks through where those checks live in your dashboard, what Stripe's own documentation says about eligibility and daily limits, and what to expect on fees and timing before you rely on Instant Payouts for anything time-sensitive.",
   "steps": [
     {
-      "heading": "Check eligibility requirements",
-      "body": "Not every account or country qualifies for Instant Payouts, so confirm your account type meets the requirements before trying to enable it."
+      "heading": "Sign in to your Stripe dashboard",
+      "body": "Instant Payouts is managed entirely from your live Stripe dashboard, so the first step is just logging in with the email and password tied to your account. If you manage more than one Stripe account, double-check you're signed into the one that actually processes the payments you want to speed up — settings like payout method and eligibility are account-specific and don't carry over between them.",
+      "image": { "file": "/screenshots/OI9lLnkRzgI/02.webp", "caption": "The Stripe sign-in screen. Payout settings live inside the account you log into here, so confirm you're on the right one if you run more than one." }
     },
     {
-      "heading": "Add and verify your debit card",
-      "body": "Instant Payouts require a linked debit card, and Stripe will need to verify it before you can use the feature."
+      "heading": "Check your Balances page first",
+      "body": "Once you're in, head to Balances from the left-hand menu. This page shows your Incoming and Available totals plus a Pay out button and a Manage payouts dropdown, and it's the same place you'll come back to once Instant Payouts is active to actually trigger a transfer. A Setup guide panel on the right also tracks whether you've finished the basic account steps — accepting payments, verifying your business, going live — all of which feed into whether faster payout options are even offered to you.",
+      "image": { "file": "/screenshots/OI9lLnkRzgI/03.webp", "caption": "The Balances page, with Pay out and Manage payouts controls and a Setup guide checklist on the right tracking account completion." }
     },
     {
-      "heading": "Understand fees and transfer timelines",
-      "body": "Instant Payouts typically carry a fee per transfer in exchange for the speed, so weigh that cost against how urgently you need the funds."
+      "heading": "Confirm your business details are complete",
+      "body": "Eligibility for Instant Payouts is tied to your business profile, not just your bank details, so it's worth checking Settings > Business > Account details before assuming the feature is broken if it doesn't appear. Stripe wants your account name, business address, and related information filled in and consistent, since incomplete verification is one of the quiet reasons a feature like this stays greyed out. If anything here is missing or pending review, resolve it before troubleshooting further.",
+      "image": { "file": "/screenshots/OI9lLnkRzgI/04.webp", "caption": "The Business account details screen, where your account name and business address need to be complete and verified before some payout features unlock." }
     },
     {
-      "heading": "Activate Instant Payouts in Stripe",
-      "body": "Once eligibility and your debit card are confirmed, you can turn on Instant Payouts from your dashboard and start using it for future transfers."
+      "heading": "Read the eligibility and daily limit rules",
+      "body": "Stripe's own documentation is blunt about this: new Stripe users aren't immediately eligible for Instant Payouts, and you should check your eligibility directly in the Dashboard or via the Balances API rather than assume. Even once eligible, each instant payout counts against a daily limit that resets at a fixed local time depending on your region — midnight US Central Time for the United States and Canada, midnight London time for the UK, and similar regional cutoffs elsewhere. A payout requested just before that reset still counts toward the prior day's limit, which matters if you're trying to squeeze out a second transfer near midnight.",
+      "image": { "file": "/screenshots/OI9lLnkRzgI/05.webp", "caption": "Stripe's documentation page on Instant Payouts eligibility, listing the daily reset time for each supported region." }
+    },
+    {
+      "heading": "Understand the fee before you rely on it",
+      "body": "Instant Payouts aren't free — Stripe charges a percentage fee on top of the transferred amount in exchange for skipping the standard payout schedule. That fee comes out of the transfer itself, so budget for it if you're moving a specific amount you need in full. For routine payroll or predictable expenses, a standard payout costs nothing extra and just takes longer; save Instant Payouts for the moments where the speed is worth paying for, like covering an unexpected shortfall same-day."
+    },
+    {
+      "heading": "Add and verify a debit card for the payout",
+      "body": "Instant Payouts land on a debit card rather than a bank account, so you'll need one added and verified under your payout methods before the option becomes usable. Stripe verifies the card automatically once added, and until that verification clears, the Manage payouts menu on the Balances page will keep defaulting to your standard bank payout schedule instead."
+    },
+    {
+      "heading": "Trigger your first instant transfer",
+      "body": "With eligibility confirmed, your business details complete, and a verified debit card on file, go back to Balances and use Manage payouts to select the instant option instead of the default schedule. The dashboard will show the fee and the reduced arrival time before you confirm, so you can see the exact tradeoff for that specific transfer before committing to it."
     }
   ],
   "faq": [
@@ -28,16 +44,21 @@
     },
     {
       "question": "Do Instant Payouts cost extra?",
-      "answer": "Yes, Stripe charges a fee for each Instant Payout transfer, which is the tradeoff for getting funds faster."
+      "answer": "Yes, Stripe charges a fee for each Instant Payout transfer, which is the tradeoff for getting funds faster. A standard payout to your bank account has no equivalent fee."
     },
     {
       "question": "What do I need before I can use Instant Payouts?",
-      "answer": "You need an eligible account type and a verified debit card linked to your Stripe account before the feature becomes available."
+      "answer": "You need an eligible account type, a complete and verified business profile, and a verified debit card linked to your Stripe account before the feature becomes available."
     },
     {
       "question": "Can any Stripe account enable Instant Payouts?",
-      "answer": "No, eligibility depends on your account type and location, so it's worth checking the requirements before assuming the feature is available to you."
+      "answer": "No, eligibility depends on your account type, verification status, and location. Check the Dashboard or Balances API directly rather than assuming it's available."
+    },
+    {
+      "question": "Is there a limit on how much I can move with Instant Payouts in one day?",
+      "answer": "Yes, Stripe caps instant payouts to a daily maximum that resets at a fixed local time depending on your region, and a payout requested just before that reset still counts toward the prior day."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }
