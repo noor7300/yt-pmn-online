@@ -1,43 +1,44 @@
 {
   "slug": "how-to-accept-ach-payments-with-stripe-does-stripe-accept-it-know-easily-2026",
-  "seoTitle": "How to Accept ACH Payments With Stripe (2026 Guide)",
-  "metaDescription": "Yes, Stripe supports ACH debit and credit transfers. Here's how to enable ACH payments, understand fees and processing time, and test them safely.",
-  "intro": "A lot of business owners aren't sure whether Stripe even handles ACH payments — it does, but you need to switch it on yourself. This guide explains how ACH debit and ACH credit work on Stripe, where to activate them in your dashboard, and what to expect in terms of fees and processing time before you start accepting bank transfers from customers.",
+  "seoTitle": "How to Accept ACH Payments With Stripe (2026 Setup Guide)",
+  "metaDescription": "Yes, Stripe supports ACH. Here's how to enable ACH Direct Debit in your Stripe Dashboard, connect bank accounts, and test payments before going live.",
+  "intro": "Stripe does support ACH payments, but the option isn't switched on by default the way card payments are — you have to enable ACH Direct Debit specifically in your payment methods settings and connect it to a way of verifying customer bank accounts. For US businesses handling larger invoices or subscriptions, ACH is worth the extra setup step since bank-to-bank transfers carry lower processing fees than cards. This guide covers where the toggle lives in the Stripe Dashboard, what account-connection options you'll be asked to choose, and how to confirm it's working before relying on it for real customer payments.",
   "steps": [
     {
-      "heading": "Understand ACH debit vs. ACH credit",
-      "body": "ACH debit pulls funds directly from a customer's bank account, while ACH credit is a transfer sent to you. Knowing the difference helps you pick the right option for your business."
+      "heading": "Open Settings in your Stripe Dashboard",
+      "body": "From the Stripe Dashboard, click the gear icon to reach Settings, which is organized into Personal settings and Account settings sections — Personal details, Communication preferences, and Developers on one row, then Business, Team and security, and Your plans below that. ACH itself isn't configured from this general settings page, but it's the starting point for reaching Payments, where the actual payment methods list lives. If you're working in a sandbox, a blue banner across the top confirms you're testing and that changes here won't touch your live account.",
+      "image": { "file": "/screenshots/Ewv4PIx0EIw/03.webp", "caption": "The Stripe Dashboard Settings overview, showing Personal settings and Account settings — the entry point for reaching the Payments section where ACH gets enabled." }
     },
     {
-      "heading": "Enable ACH payments in your Stripe dashboard",
-      "body": "ACH isn't active by default, so you'll need to turn it on in your account settings before customers can pay this way at checkout."
+      "heading": "Know the difference between ACH debit and ACH credit",
+      "body": "ACH debit is what most businesses mean when they say \"accept ACH payments\" — you pull funds directly from a customer's bank account once they've authorized it, which works well for one-time purchases, invoices, and recurring subscriptions. ACH credit runs the opposite direction: the customer pushes funds to you from their own bank, which is less common for typical checkout flows and used more for things like payouts or B2B transfers initiated by the payer. Stripe supports both, but ACH Direct Debit under Payment methods is the one you'll set up for a standard storefront or invoicing use case."
     },
     {
-      "heading": "Check fees and processing times",
-      "body": "ACH transfers typically settle slower than card payments and carry their own fee structure, so review these details before promoting it as a payment option."
+      "heading": "Enable ACH Direct Debit under Payment methods",
+      "body": "Go to Payments in the left sidebar, then Payment methods, where Stripe lists every option available for your account alongside its type and where it's popular — Afterpay/Clearpay and Klarna under buy-now-pay-later, SEPA Direct Debit for Europe, Pix for Brazil, and ACH Direct Debit tagged Bank debit, popular in the United States. Click Finish setup next to ACH Direct Debit; Stripe flags it with a \"Webhooks recommended\" note, meaning you should have a webhook endpoint ready to catch the asynchronous status updates ACH payments generate, since they don't confirm instantly the way a card charge does.",
+      "image": { "file": "/screenshots/Ewv4PIx0EIw/04.webp", "caption": "The Payment methods list in Stripe, with ACH Direct Debit tagged \"Webhooks recommended\" and a Finish setup button next to Klarna, SEPA Direct Debit, and Pix." }
     },
     {
-      "heading": "Test ACH payments in test mode",
-      "body": "Before going live, run a test transaction in Stripe's test mode to confirm the flow works as expected without moving real money."
+      "heading": "Connect bank accounts through Stripe Financial Connections",
+      "body": "Finishing ACH setup routes you through Stripe Financial Connections, which handles verifying that a customer's bank account is real and able to receive a debit. You'll choose which data types to request — Tokenized account and routing number is required to move money at all, while Balances, Account ownership details, and Transactions are optional add-ons that help catch fraud and reduce failed payments by confirming the account holder's name matches and funds are actually available. Stripe's own guidance on this screen recommends adding balances and ownership details specifically to cut down on failed transactions, so it's worth enabling them even though they're not mandatory.",
+      "image": { "file": "/screenshots/Ewv4PIx0EIw/05.webp", "caption": "The Stripe Financial Connections setup panel, showing optional data types like Balances, Account ownership details, and Transactions alongside the required tokenized account and routing number." }
+    },
+    {
+      "heading": "Understand ACH fees and processing time",
+      "body": "ACH payments cost less per transaction than cards, but they settle far slower — typically several business days rather than the near-instant confirmation of a card charge, since the payment has to clear through the banking network. Because of that delay, ACH is a better fit for invoices, subscriptions, and larger purchases where a short wait is acceptable, rather than anything where a customer expects instant access to a digital product immediately after paying."
+    },
+    {
+      "heading": "Test ACH payments before going live",
+      "body": "Stay in the sandbox environment and run a test transaction using Stripe's documented test bank account and routing numbers, which simulate a successful ACH debit without touching a real bank. Confirm your webhook correctly receives and handles the payment_intent status changes, since ACH transactions move through pending, processing, and succeeded (or failed) states over time rather than resolving in a single response the way a card payment does. Only switch to live mode once you've watched a full test payment move through each of those states correctly."
     }
   ],
   "faq": [
-    {
-      "question": "Does Stripe actually accept ACH payments?",
-      "answer": "Yes, Stripe supports both ACH debit and ACH credit transfers, but you need to enable them in your account settings first."
-    },
-    {
-      "question": "Is ACH faster or slower than card payments?",
-      "answer": "ACH generally takes longer to process than card payments since it relies on bank transfer rails rather than instant card authorization."
-    },
-    {
-      "question": "Do all businesses qualify to accept ACH on Stripe?",
-      "answer": "Eligibility depends on your account type and business details, which is why the video covers what businesses need to qualify before enabling it."
-    },
-    {
-      "question": "Can I test ACH payments before going live?",
-      "answer": "Yes, Stripe's test mode lets you simulate ACH transactions so you can confirm everything works before accepting real payments."
-    }
+    { "question": "Does Stripe accept ACH payments?", "answer": "Yes. Stripe supports ACH Direct Debit for pulling payments from US bank accounts, plus ACH credit for the reverse direction. It has to be enabled specifically under Payment methods in your Stripe Dashboard." },
+    { "question": "What's the difference between ACH debit and ACH credit on Stripe?", "answer": "ACH debit pulls funds from a customer's bank account with their authorization — the standard setup for checkout and subscriptions. ACH credit is the customer pushing funds to you, used less often for typical storefronts." },
+    { "question": "Why does Stripe recommend webhooks for ACH payments?", "answer": "ACH payments don't confirm instantly like card charges — they move through pending, processing, and succeeded or failed states over several days, and webhooks are how your system gets notified as that status changes." },
+    { "question": "How long does an ACH payment take to process on Stripe?", "answer": "Typically several business days, since the transfer has to clear through the banking network, unlike a card payment which confirms in seconds." },
+    { "question": "Do I need Stripe Financial Connections to accept ACH payments?", "answer": "Yes — it's how Stripe verifies a customer's bank account details before a debit can be attempted, and it's part of the standard ACH Direct Debit setup flow." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

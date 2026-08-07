@@ -1,43 +1,59 @@
 {
   "slug": "how-to-set-up-a-stripe-account-test-mode-easily-2026",
   "seoTitle": "How to Set Up Stripe Test Mode (2026 Guide)",
-  "metaDescription": "Enable Stripe Test Mode, find your test API keys, and use Stripe's test cards to simulate payments before your store goes live.",
-  "intro": "Test Mode is what lets you try out your Stripe checkout without risking real money, and it's worth knowing well before you launch anything. This guide covers enabling Test Mode in your dashboard, locating your test API keys, generating sample payments with Stripe's test cards, and switching between Live and Test Mode when you need to.",
+  "metaDescription": "Enable Stripe's test/sandbox mode, find your test API keys, and use Stripe's test cards to simulate payments before your store goes live.",
+  "intro": "Before you ever charge a real customer, you should be able to run a payment through your Stripe integration and watch it succeed, fail, and get declined — all without touching a real bank account. That's what Stripe's test environment is for, and in 2026 it lives under the name \"sandbox\" rather than the old Test Mode toggle, though it does exactly the same job: a fully isolated copy of your account where nothing you do affects real money. This guide walks through creating your account, finding the sandbox, and using it to simulate payments before you go live.",
   "steps": [
     {
-      "heading": "Enable Test Mode in your account",
-      "body": "Test Mode is a toggle inside your Stripe dashboard that switches your account into a safe simulation environment separate from real transactions."
+      "heading": "Create your Stripe account",
+      "body": "Head to stripe.com and start the signup form. You'll enter an email, your full name, a password, and your country — Stripe uses the country to determine which payment methods and payout currencies are available to you later, so pick the one your business actually operates in rather than where you happen to be sitting. You can also sign up with a Google account if you'd rather skip typing a password. Once submitted, Stripe creates your account and drops you straight into the dashboard.",
+      "image": { "file": "/screenshots/RC7OupTk0to/02.webp", "caption": "The Stripe account creation form — email, full name, password, and country, with an option to sign up with Google instead." }
     },
     {
-      "heading": "Find your Test API keys",
-      "body": "Once Test Mode is active, Stripe provides a separate set of API keys meant only for testing, distinct from your live keys."
+      "heading": "Find your sandbox — Stripe's test environment",
+      "body": "Every new Stripe account opens into a sandbox by default, which is what used to be called Test Mode. A dark banner across the top of the dashboard makes this unmistakable: \"You're testing in a sandbox — your place to experiment with Stripe functionality.\" Everything you do here — creating products, running payments, generating API calls — is fully separated from your live account. This is intentional: it lets you build and break things freely while your integration is still in progress, with zero risk of an accidental real charge.",
+      "image": { "file": "/screenshots/RC7OupTk0to/03.webp", "caption": "A fresh sandbox dashboard, with the top banner confirming you're in Stripe's test environment rather than live mode." }
     },
     {
-      "heading": "Use Stripe's test cards for payments",
-      "body": "Stripe publishes a set of test card numbers you can use to simulate successful payments, declines, and other scenarios without spending real money."
+      "heading": "Get comfortable in the sandbox dashboard",
+      "body": "The sandbox uses the same layout as your live dashboard — Home, Balances, Transactions, Customers, and Product catalog down the left side, with Payments, Billing, Reporting, and more grouped under Products below that. The banner changes wording slightly once you're working inside it, reminding you that \"changes you make here don't affect your live account.\" Your Overview panel will show zeroed-out figures for gross volume and net volume until you start running test transactions, which is expected — this is a blank environment built specifically for you to fill with fake activity.",
+      "image": { "file": "/screenshots/RC7OupTk0to/04.webp", "caption": "The sandbox's Overview screen, with the reassurance banner and a search bar for jumping straight to settings like Team and security or Compliance." }
     },
     {
-      "heading": "Switch between Live and Test Mode",
-      "body": "When you're ready to accept real payments, you can toggle back to Live Mode, keeping your test and live data completely separate."
+      "heading": "Locate your test API keys",
+      "body": "Your API keys live under Developers in the dashboard menu, and while you're inside the sandbox, the keys shown there are your test keys — they're prefixed differently from live keys (test secret keys start with sk_test_ and test publishable keys with pk_test_) so it's obvious at a glance which environment a key belongs to. Use these test keys anywhere your checkout or backend code needs to talk to Stripe during development. Never paste a live key into a test integration or vice versa; mixing them up is the single most common way developers accidentally trigger a real charge while still \"just testing.\""
+    },
+    {
+      "heading": "Simulate payments with Stripe's test cards",
+      "body": "Stripe publishes a standard set of test card numbers that only work inside sandbox mode, and they're what you use to actually exercise your checkout flow. The number 4242 4242 4242 4242 simulates a successful payment with any future expiry date and any three-digit CVC. Other published numbers trigger specific failure scenarios — a generic decline, insufficient funds, an expired card — so you can confirm your checkout handles errors gracefully, not just the happy path. Run a handful of these through your integration before you consider it done; a checkout that only works when everything goes right isn't ready for real customers."
+    },
+    {
+      "heading": "Switch to live mode when you're ready",
+      "body": "Once your integration behaves correctly against test cards, you move to live mode from the same account — there's a toggle in the dashboard that swaps you out of the sandbox and into real payment processing, at which point you'll need your live API keys instead of the test ones. Live and sandbox data stay completely separate, so none of your test transactions or fake customers carry over. Before flipping the switch, make sure your bank account is connected for payouts, since that's required to actually receive the money live payments bring in."
     }
   ],
   "faq": [
     {
-      "question": "Does Test Mode use real money?",
-      "answer": "No, Test Mode simulates transactions using test card numbers so you can confirm your checkout works without spending real money."
+      "question": "Does Stripe's test mode use real money?",
+      "answer": "No. The sandbox (formerly called Test Mode) simulates transactions using published test card numbers so you can confirm your checkout works without spending or receiving real money."
     },
     {
-      "question": "Are Test Mode API keys different from Live Mode keys?",
-      "answer": "Yes, Stripe provides a separate set of Test API keys that only work in Test Mode, keeping test activity isolated from your live account."
+      "question": "Are test API keys different from live keys?",
+      "answer": "Yes. Test keys are prefixed sk_test_ or pk_test_ and only work inside the sandbox. Live keys use sk_live_ / pk_live_ and only work once you've switched to live mode."
     },
     {
-      "question": "Who should use Stripe Test Mode?",
-      "answer": "Anyone running an online store or using Stripe as a payment processor should use Test Mode to troubleshoot and prepare before going live."
+      "question": "Is Stripe's sandbox the same as the old Test Mode?",
+      "answer": "Functionally yes — Stripe renamed Test Mode to \"sandbox\" but it still gives you a fully isolated copy of your account for experimenting with payments, products, and API calls."
     },
     {
-      "question": "Can I switch back and forth between Test and Live Mode?",
-      "answer": "Yes, Stripe lets you toggle between the two modes at any time from your dashboard."
+      "question": "What card number do I use to test a successful payment?",
+      "answer": "4242 4242 4242 4242, with any future expiry date and any three-digit CVC, simulates a successful charge. Stripe also publishes numbers for testing declines and other failure cases."
+    },
+    {
+      "question": "Can I switch back and forth between sandbox and live mode?",
+      "answer": "Yes, at any time from your dashboard. Your test and live data never mix, so switching back to the sandbox won't show any real transactions and vice versa."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T09:00:00Z",
+  "deep": true
 }

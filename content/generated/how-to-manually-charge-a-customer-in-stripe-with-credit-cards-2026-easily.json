@@ -1,47 +1,66 @@
 {
   "slug": "how-to-manually-charge-a-customer-in-stripe-with-credit-cards-2026-easily",
   "seoTitle": "How to Manually Charge a Customer in Stripe",
-  "metaDescription": "Create a manual charge in Stripe using a customer's credit card details directly from your dashboard, without a checkout page.",
-  "intro": "Not every payment needs a checkout page — sometimes you just need to bill a customer directly from your Stripe dashboard. This guide covers how to create a manual charge using credit card details, along with tips on confirmations and receipts.",
+  "metaDescription": "Bill a customer directly from the Stripe Dashboard using an invoice, without building a checkout page — from the dashboard home to sending the invoice.",
+  "intro": "Not every payment needs a checkout page built into a website. If you're a freelancer or small business billing someone for one-off work, Stripe's Dashboard lets you create and send a payable invoice directly, with the customer entering their own card details on a secure Stripe-hosted page. This guide walks through that actual flow — starting from the Dashboard home, into the Invoices section, and through building an invoice with line items, currency, and tax settings — so you can bill a customer today without writing a line of checkout code.",
   "steps": [
     {
-      "heading": "Open the manual charge tool",
-      "body": "In your Stripe dashboard, find the option to create a new payment or charge manually."
+      "heading": "Start from the Stripe Dashboard home",
+      "body": "After logging in, you land on the Home view, which shows a Today summary with gross volume, USD balance, and payouts, plus a Setup guide panel on the right walking new accounts through choosing how to accept payments and verifying your business. The left sidebar is where every billing tool lives: Home, Balances, Transactions, Customers, and Product catalog at the top, followed by a Shortcuts section with Invoices, Payment Links, Radar, Billing overview, and Subscriptions. For a manual one-off charge, Invoices is the shortcut you want.",
+      "image": { "file": "/screenshots/qjJ4ipG58KY/03.webp", "caption": "The Stripe Dashboard home screen, with the Shortcuts panel — Invoices, Payment Links, Radar, Billing overview, Subscriptions — visible in the left sidebar." }
     },
     {
-      "heading": "Add customer details",
-      "body": "Enter the customer's information so the charge is properly associated with their account or record."
+      "heading": "Open Invoices and start a new one",
+      "body": "Click Invoices in the sidebar to reach the Invoices list, which is organized into tabs for All invoices, Draft, Open, Past due, and Paid. Any invoice you've created shows up here with its total, frequency, invoice number, customer name and email, due date, and creation date, which is genuinely useful once you're billing more than one or two people and need to see who's actually paid. Click Create test invoice (or Create invoice on a live account) in the top-right corner to start a new one.",
+      "image": { "file": "/screenshots/qjJ4ipG58KY/04.webp", "caption": "The Invoices list, filterable by All invoices, Draft, Open, Past due, and Paid, with the Create invoice button in the top-right corner." }
     },
     {
-      "heading": "Enter credit card information",
-      "body": "Input the card details provided by the customer to process the one-time payment."
+      "heading": "Add the customer and line items",
+      "body": "The invoice editor opens with the customer's billing details on one side — name, email, and address, which populate the \"Bill to\" section of the invoice preview — and the invoice's actual content on the other. Set your Currency first, since switching it later clears any items you've already added. Under Items, click Add item to add single, one-time charges, or pull from your product catalog if you've already set up recurring products. In the frame captured here, a single line item — \"WP Installation Customized x3\" — totals $33.00, which is exactly the kind of one-off service charge this flow is built for.",
+      "image": { "file": "/screenshots/qjJ4ipG58KY/05.webp", "caption": "The invoice editor: currency, line items, and options to add shipping, apply a coupon, or collect tax automatically, with a live invoice preview on the right." }
     },
     {
-      "heading": "Process the payment",
-      "body": "Submit the charge and confirm it processes successfully before closing out the transaction."
+      "heading": "Apply shipping, coupons, or tax if the charge needs them",
+      "body": "Below the item list, Add shipping lets you add a delivery charge as its own line, a coupon selector lets you apply a discount code you've already created in Stripe, and a Collect tax automatically toggle hands tax calculation to Stripe rather than you working it out by hand. None of these are required for a simple service charge, but they matter the moment you're billing for anything with a shipped component or a location-based tax obligation.",
+      "image": null
     },
     {
-      "heading": "Send confirmation and receipt",
-      "body": "Provide the customer with a receipt or confirmation once the manual charge has gone through."
+      "heading": "Review the invoice preview before sending",
+      "body": "The right-hand panel mirrors exactly what the customer will see, with tabs for Invoice PDF, Email, and Payment page. The PDF view shows the invoice number, due date, your business address, the customer's billing address, and the itemized total — check this over carefully, since it's what represents your business to the client. The Payment page tab is the one that matters for actually collecting money: it's the hosted Stripe page where the customer enters their own card number, expiry, and CVC to pay, which is what makes this a manual charge without you ever touching their raw card details.",
+      "image": null
+    },
+    {
+      "heading": "Finalize and send the invoice",
+      "body": "Once the items, currency, and any tax or coupon settings look right, finalize the invoice to lock in its contents and move it out of Draft status, then send it to the customer's email on file. Stripe emails them a link straight to the Payment page, they enter their card and pay, and the invoice automatically flips to Paid in your Invoices list — which is also where you'd go to check on anything still sitting in Open or Past due.",
+      "image": null
+    },
+    {
+      "heading": "Confirm payment and keep the receipt trail",
+      "body": "After payment, Stripe automatically emails the customer a receipt and updates the invoice status in your dashboard, so you don't need a separate confirmation step. If you ever need to issue a refund, open the paid invoice or its underlying payment in Transactions and refund it from there — partial and full refunds are both supported. This whole flow, invoice created and sent from the Dashboard rather than a page you built, is Stripe's intended way to bill a customer manually for one-time work."
     }
   ],
   "faq": [
     {
-      "question": "Is it safe to manually enter a customer's credit card details?",
-      "answer": "Stripe's dashboard is designed to securely handle card entry, but you should always follow best practices like not storing card numbers outside Stripe."
+      "question": "Is it safe to bill a customer this way?",
+      "answer": "Yes — the customer enters their own card details on Stripe's hosted Payment page, so you never handle or store their raw card number yourself."
     },
     {
-      "question": "Can I issue a refund on a manually charged payment?",
-      "answer": "Yes, manual charges can be refunded the same way as any other Stripe payment, either in full or partially."
+      "question": "Can I issue a refund on an invoice charged this way?",
+      "answer": "Yes, once an invoice is paid you can refund it in full or in part from the underlying payment in Transactions, the same as any other Stripe charge."
     },
     {
-      "question": "Do I need the customer present to process a manual charge?",
-      "answer": "No, as long as you have their card details, you can process the charge without the customer needing to be present."
+      "question": "Do I need the customer present to send an invoice?",
+      "answer": "No — you build and send the invoice from the Dashboard, and the customer pays whenever they open the emailed link to the Payment page."
     },
     {
       "question": "Is this method good for recurring billing?",
-      "answer": "Manual charges work best for one-time payments; for recurring billing, Stripe's subscription tools are a better fit."
+      "answer": "One-off invoices work best for single charges. For anything recurring, use Stripe's Subscriptions or Billing tools, both reachable from the same sidebar shortcuts."
+    },
+    {
+      "question": "What's the difference between a Draft and an Open invoice?",
+      "answer": "A Draft invoice is still editable and hasn't been sent. Finalizing it moves it to Open, which locks the contents and makes it payable by the customer."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

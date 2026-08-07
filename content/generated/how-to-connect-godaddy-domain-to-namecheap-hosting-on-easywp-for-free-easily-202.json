@@ -2,19 +2,63 @@
   "slug": "how-to-connect-godaddy-domain-to-namecheap-hosting-on-easywp-for-free-easily-202",
   "seoTitle": "Connect a GoDaddy Domain to Namecheap EasyWP Hosting",
   "metaDescription": "Point a GoDaddy domain to Namecheap EasyWP hosting for free by updating DNS records, no domain transfer required. Step-by-step connection guide.",
-  "intro": "You don't need to transfer a domain away from GoDaddy just to host it on Namecheap's EasyWP platform — you can connect the two for free by updating DNS records. This guide covers logging into GoDaddy, finding your domain's DNS settings, and pointing them to EasyWP.",
+  "intro": "You don't need to transfer a domain away from GoDaddy just to host it on Namecheap's EasyWP platform — you can keep the domain registered right where it is and simply point its DNS at your new hosting. This guide follows the actual screens involved: picking an EasyWP plan, finding the nameserver and A record settings inside GoDaddy, and entering the value that makes your domain resolve to the new host instead of GoDaddy's own parking page.",
   "steps": [
-    { "heading": "Log in to your GoDaddy account", "body": "Access your GoDaddy account and locate the domain you want to connect to EasyWP hosting." },
-    { "heading": "Find your domain's DNS settings", "body": "Open the DNS management page for your domain, where you'll be replacing existing records with the ones EasyWP requires." },
-    { "heading": "Get the DNS records from EasyWP", "body": "In your Namecheap EasyWP dashboard, find the specific A record and any other DNS values needed to point your domain to the hosting." },
-    { "heading": "Update the records in GoDaddy", "body": "Replace the default GoDaddy DNS records with the EasyWP values so your domain resolves to your new hosting." },
-    { "heading": "Verify the connection goes live", "body": "After propagation, check that your domain now loads the site hosted on EasyWP rather than any previous GoDaddy page." }
+    {
+      "heading": "Log in to your GoDaddy account",
+      "body": "Sign in at GoDaddy and land on your account dashboard, which greets you by name and surfaces shortcuts like Renewals & Billing and any domains or products you manage. You don't need to touch anything here yet — this is just confirmation you're logged into the account that actually owns the domain you're about to repoint, which matters if you manage multiple GoDaddy logins for different projects.",
+      "image": { "file": "/screenshots/V52N4mK3yhQ/01.webp", "caption": "The GoDaddy account dashboard after logging in, with quick links to pick up recent activity, billing, and account tools." }
+    },
+    {
+      "heading": "Choose an EasyWP hosting plan on Namecheap",
+      "body": "Before you can point anything at EasyWP, you need a live plan. Namecheap's hosting page lists several tiers side by side — Stellar and Stellar Business shared hosting, and EasyWP Starter, which runs a WordPress cloud plan with a free first month, 50,000 monthly visitors, and 10GB storage. Click Try for Free on EasyWP Starter (or whichever tier fits your traffic) and complete the signup; you'll need this plan active before GoDaddy's DNS settings have anywhere real to point to.",
+      "image": { "file": "/screenshots/V52N4mK3yhQ/02.webp", "caption": "Namecheap's hosting plan comparison, with EasyWP Starter WordPress hosting offered free for the first month." }
+    },
+    {
+      "heading": "Get the IP address or CNAME value from EasyWP",
+      "body": "Once your EasyWP site is created, its setup summary shows the site's default address, its subscription tier, and the starting theme. Inside the EasyWP dashboard, look for the domain or hosting connection details — usually an IP address for an A record — under a section like Domain or Connect a domain. Copy that value exactly; it's what you'll paste into GoDaddy in the next step, and a typo here is the single most common reason a domain 'connects' but the site never actually loads."
+    },
+    {
+      "heading": "Open your domain's DNS settings in GoDaddy",
+      "body": "Back in GoDaddy, go to Domains > DNS for the domain you're connecting. You'll land on a page with tabs for DNS Records, Forwarding, Nameservers, Premium DNS, Hostnames, DNSSEC, and Crypto Wallet. The Nameservers tab shows whether you're 'Using default nameservers' — GoDaddy's own, like ns33.domaincontrol.com and ns34.domaincontrol.com. For this method you're staying on GoDaddy's nameservers and just editing DNS Records, not changing nameservers wholesale, so click over to the DNS Records tab instead of Change Nameservers.",
+      "image": { "file": "/screenshots/V52N4mK3yhQ/04.webp", "caption": "The Nameservers tab in GoDaddy's DNS settings, showing the domain still on GoDaddy's default nameservers." }
+    },
+    {
+      "heading": "Add or edit the A record to point at EasyWP",
+      "body": "On the DNS Records tab, click Add New Record (or edit the existing A record if one's already there). Set Type to A, Name to @ for the root domain (or www if you're pointing a subdomain), and paste the IP address value you copied from EasyWP into the Value field. Leave TTL at its default of half an hour unless you have a reason to change it — a shorter TTL just means DNS caches refresh faster, which can be useful while you're actively testing the connection.",
+      "image": { "file": "/screenshots/V52N4mK3yhQ/05.webp", "caption": "GoDaddy's Add New Record form for an A record, with fields for Type, Name, Value, and TTL." }
+    },
+    {
+      "heading": "Save and give it time to propagate",
+      "body": "Click Save once the A record fields are filled in correctly. DNS propagation isn't instant — it can take anywhere from a few minutes to around 24-48 hours to fully reach every network worldwide, even though most visitors typically see the change within a couple of hours. Avoid making further DNS edits during this window, since repeated changes just restart the caching clock in some locations."
+    },
+    {
+      "heading": "Verify the domain loads your EasyWP site",
+      "body": "Once you believe propagation has had time to settle, load your domain in a private or incognito browser window to avoid any cached version of the old GoDaddy parking page. If it's still not resolving after a day, double-check the A record's Value field against the exact IP EasyWP gave you — a single mistyped digit is the most common cause of a connection that looks correct in GoDaddy but never actually serves your new site."
+    }
   ],
   "faq": [
-    { "question": "Do I need to transfer my domain from GoDaddy to connect it to EasyWP?", "answer": "No, you can keep the domain registered at GoDaddy and simply point its DNS records to Namecheap's EasyWP hosting." },
-    { "question": "Is this connection method really free?", "answer": "Yes, updating DNS records to point your existing domain to EasyWP doesn't require an additional purchase or transfer fee." },
-    { "question": "How long before my site is live on the new hosting?", "answer": "It depends on DNS propagation, which can take anywhere from a few minutes to a day depending on your domain and location." },
-    { "question": "Will my email still work after changing DNS?", "answer": "It depends on whether your email uses records tied to the same domain, so check MX records before making changes to avoid disruption." }
+    {
+      "question": "Do I need to transfer my domain from GoDaddy to connect it to EasyWP?",
+      "answer": "No, you can keep the domain registered at GoDaddy and simply point its DNS records — typically an A record — to Namecheap's EasyWP hosting."
+    },
+    {
+      "question": "Is this connection method really free?",
+      "answer": "Yes, updating DNS records to point your existing domain to EasyWP doesn't require an additional purchase or transfer fee. EasyWP's Starter tier also offers a free first month."
+    },
+    {
+      "question": "How long before my site is live on the new hosting?",
+      "answer": "It depends on DNS propagation, which can take anywhere from a few minutes to around a day or two depending on your domain, DNS provider, and location."
+    },
+    {
+      "question": "Should I change nameservers instead of just the A record?",
+      "answer": "Not for this method. Changing nameservers hands full DNS control to the new host; editing just the A record keeps GoDaddy's nameservers in place while pointing the site itself at EasyWP, which is simpler if you still manage email or other records through GoDaddy."
+    },
+    {
+      "question": "Will my email still work after changing DNS?",
+      "answer": "It depends on whether your email uses MX records tied to the same domain. Editing only the A record generally leaves MX records untouched, but check them before making changes to avoid disrupting existing email."
+    }
   ],
-  "generatedAt": "2026-07-24T00:15:00.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

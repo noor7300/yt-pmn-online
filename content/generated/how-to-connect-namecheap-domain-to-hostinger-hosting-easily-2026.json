@@ -1,20 +1,47 @@
 {
   "slug": "how-to-connect-namecheap-domain-to-hostinger-hosting-easily-2026",
-  "seoTitle": "Connect a Namecheap Domain to Hostinger Hosting",
-  "metaDescription": "Point your Namecheap domain to Hostinger by updating nameservers and adding the domain in hPanel, whether you run WordPress, a store, or a static site.",
-  "intro": "Connecting a Namecheap domain to Hostinger hosting is a common step whether you're running WordPress, an online store, or a static HTML site. This guide covers changing your nameservers in Namecheap and adding the domain inside Hostinger's hPanel.",
+  "seoTitle": "How to Connect a Namecheap Domain to Hostinger Hosting (2026)",
+  "metaDescription": "Point a domain you bought on Namecheap at Hostinger hosting by updating the nameservers — the exact fields to change and how long propagation takes.",
+  "intro": "Buying a domain on Namecheap and hosting on Hostinger is a common combination, but the two platforms don't talk to each other automatically — you have to tell Namecheap where to send visitors. The fix is a single settings change: swapping Namecheap's default nameservers for Hostinger's. It looks intimidating the first time because the two dashboards look nothing alike and the change doesn't take effect instantly, which makes people think they did it wrong. This guide walks through finding the nameserver values in Hostinger, logging into Namecheap, and making the swap, plus what to expect while the change spreads across the internet.",
   "steps": [
-    { "heading": "Log in to your Namecheap account", "body": "Access your Namecheap account and locate the domain you want to connect to Hostinger." },
-    { "heading": "Change nameservers to Hostinger's DNS", "body": "Update the nameservers in Namecheap to the ones provided by Hostinger so DNS management moves over to Hostinger." },
-    { "heading": "Add the domain inside Hostinger hPanel", "body": "Log in to your Hostinger hPanel and add the domain there so Hostinger knows to serve your site when the domain resolves." },
-    { "heading": "Wait for DNS propagation", "body": "Allow time for the nameserver change to propagate before checking whether the domain is fully connected." },
-    { "heading": "Verify the site loads through Hostinger", "body": "Once propagation completes, visit your domain to confirm your WordPress site, store, or static site now loads from Hostinger." }
+    {
+      "heading": "Get your Hostinger nameservers",
+      "body": "Before touching Namecheap, grab the nameserver addresses Hostinger wants you to use — you'll find them in the domain or hosting setup section of your Hostinger account, usually presented as a short info panel once you start connecting an external domain. They're listed as two addresses ending in a Hostinger-operated DNS domain, each paired with an IP address. Copy both exactly; a typo here is the single most common reason a domain connection fails to activate. Keep this tab open, because you'll need to paste these values into Namecheap in the next step.",
+      "image": { "file": "/screenshots/fy7mjC2j_B8/03.webp", "caption": "The nameserver values Hostinger provides for connecting an external domain — two addresses to copy exactly as shown." }
+    },
+    {
+      "heading": "Log into your Namecheap account",
+      "body": "Head to Namecheap and sign in with the account that owns the domain — not a new signup, since creating a second account won't have your domain attached to it. If you're not sure which email you used to register, check your original purchase receipt before trying to reset a password. Once you're in, the dashboard opens to your account overview, and the domain you want to redirect will be listed under your active domains.",
+      "image": { "file": "/screenshots/fy7mjC2j_B8/04.webp", "caption": "Namecheap's sign-in screen. Use the account that actually owns the domain — a fresh signup won't have it listed." }
+    },
+    {
+      "heading": "Open Domain List and select your domain",
+      "body": "From the left-hand menu, click Domain List, find the domain you want pointed at Hostinger, and click Manage next to it. This opens the domain's settings page, which is split into sections for status, privacy protection, PremiumDNS, and further down, Nameservers — the one you actually need. Everything above that section (renewal status, WHOIS privacy) can be left alone; you're only here to change one dropdown.",
+      "image": { "file": "/screenshots/fy7mjC2j_B8/05.webp", "caption": "The Nameservers dropdown on a domain's settings page, showing Namecheap BasicDNS, Namecheap Web Hosting DNS, and Custom DNS." }
+    },
+    {
+      "heading": "Switch to Custom DNS and paste in Hostinger's values",
+      "body": "Click the Nameservers dropdown and choose Custom DNS instead of whatever is currently selected — usually Namecheap BasicDNS by default. This reveals two (sometimes more) empty fields where you paste the Hostinger nameservers you copied earlier, one per line, with no extra spaces or trailing characters. Confirm the change with the checkmark that appears next to the field once you've entered both values; Namecheap will show a brief \"nameservers updated\" confirmation. Don't add a third or fourth nameserver unless Hostinger specifically gave you one — extra blank fields can be left empty.",
+      "image": null
+    },
+    {
+      "heading": "Wait out DNS propagation",
+      "body": "The change doesn't take effect the moment you save it. DNS propagation — the process of every internet service provider's DNS cache picking up the new nameservers — typically takes anywhere from a few hours to 24-48 hours, occasionally longer depending on your domain's TTL settings and your ISP. During this window it's normal for the site to load correctly on one network and show an old page or an error on another; that's caching, not a broken setup. Avoid the urge to keep changing settings during this period, since each change can restart the propagation clock.",
+      "image": null
+    },
+    {
+      "heading": "Confirm the connection inside Hostinger",
+      "body": "Once propagation has had time to settle, go back into Hostinger and check the domain's status — it should flip from a pending or unverified state to active, confirming Hostinger can now see the nameserver change on its end. If it still shows pending after two full days, double-check the exact nameserver values in Namecheap character by character, since a single mismatched digit in an IP address will silently block the connection indefinitely rather than throwing an obvious error.",
+      "image": null
+    }
   ],
   "faq": [
-    { "question": "Do I need to change nameservers or just add DNS records?", "answer": "The recommended method here is changing nameservers to Hostinger's, which lets Hostinger manage all DNS records automatically." },
-    { "question": "Will this work for a WordPress site specifically?", "answer": "Yes, the process works the same whether you're hosting WordPress, an online store, or a static HTML site on Hostinger." },
-    { "question": "How do I check if propagation is complete?", "answer": "You can check by visiting your domain directly, though propagation checking tools can also confirm when changes have spread globally." },
-    { "question": "Can I keep my email working during this switch?", "answer": "You may need to recreate or verify MX records within Hostinger's DNS settings after the nameserver change to keep email functioning." }
+    { "question": "How long does it take for a domain to connect after changing nameservers?", "answer": "Most connections activate within a few hours, but full DNS propagation can take up to 24-48 hours worldwide. Test from a different network or use an online DNS checker if your own connection still shows the old site." },
+    { "question": "Do I need to change anything on the Hostinger side besides adding the domain?", "answer": "You need the domain added to your Hostinger hosting account and the Hostinger nameservers copied correctly into Namecheap. If you'd rather not change nameservers at all, Hostinger also supports pointing a domain via A records, which leaves DNS management with Namecheap." },
+    { "question": "Will changing nameservers affect my existing email if I use Namecheap Private Email?", "answer": "Yes — switching to Custom DNS hands DNS control to Hostinger, so any MX records for email need to be recreated in Hostinger's DNS zone or your email will stop routing. Set those up before or immediately after the nameserver change." },
+    { "question": "What if the Nameservers dropdown only shows Namecheap options and no Custom DNS?", "answer": "Custom DNS is a standard option on every Namecheap domain; if it's missing, make sure you're logged into the account that actually owns the domain and not a linked or shared account with limited permissions." },
+    { "question": "Can I switch back to Namecheap's own DNS later?", "answer": "Yes, at any time — return to the same Nameservers dropdown and select Namecheap BasicDNS or Namecheap Web Hosting DNS to move DNS management back, though this again triggers a propagation delay." }
   ],
-  "generatedAt": "2026-07-24T00:22:00.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

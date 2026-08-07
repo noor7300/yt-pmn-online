@@ -2,18 +2,45 @@
   "slug": "how-to-add-adsense-ads-txt-file-in-hostinger-wordpress-site-in-file-manager-webs",
   "seoTitle": "Add AdSense ads.txt to Hostinger WordPress Site",
   "metaDescription": "Fix the AdSense 'Earnings at risk' warning by adding your ads.txt file to a Hostinger WordPress site via File Manager or Website Builder.",
-  "intro": "Seeing an 'Earnings at risk' warning from AdSense usually means your ads.txt file isn't in the right place, and fixing it on Hostinger is quicker than it sounds. This guide covers two ways to add the file to a WordPress site on Hostinger — through File Manager or through the Website Builder — so AdSense can detect it correctly.",
+  "intro": "Seeing an \"Earnings at risk\" warning in AdSense almost always comes down to one thing: ads.txt isn't sitting where Google's crawlers expect it. The fix itself is a two-minute job once you know where that root location actually is on Hostinger, but the exact steps differ depending on whether your site runs on classic WordPress or Hostinger's own Website Builder. This guide covers both paths, plus what the file's contents should actually look like, so the warning clears and stays cleared.",
   "steps": [
-    { "heading": "Get your ads.txt file content", "body": "Copy the ads.txt content provided by your AdSense account, which needs to be placed at your site's root directory." },
-    { "heading": "Upload via File Manager", "body": "If you're using classic WordPress, open File Manager in Hostinger and upload the ads.txt file directly to the root folder." },
-    { "heading": "Add it through Website Builder", "body": "If your site uses Hostinger's native Website Builder instead, use its interface to place the ads.txt file correctly since the file structure works differently." },
-    { "heading": "Verify AdSense detects the file", "body": "After uploading, check that AdSense recognizes the ads.txt file and that the earnings at risk warning clears." }
+    {
+      "heading": "Get the ads.txt line from your AdSense account",
+      "body": "Log into AdSense and open the Sites section, where Google generates the exact ads.txt entry tied to your publisher ID. It follows a fixed format — a domain, your publisher ID prefixed with ca-pub-, a relationship type (DIRECT or RESELLER), and a certification authority ID — something like google.com, ca-pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0. Copy that line exactly as AdSense provides it rather than retyping it, since a single mistyped character will keep the warning showing even after you've uploaded the file.",
+      "image": null
+    },
+    {
+      "heading": "Check whether your site is classic WordPress or Website Builder",
+      "body": "This matters because the two products store your site's files completely differently. If you set your site up through Hostinger's hPanel using a WordPress install, your files live in a standard folder structure accessible through File Manager. If you built the site using Hostinger's drag-and-drop Website Builder instead, there's no traditional file system to browse — the ads.txt file has to be placed through a setting inside the builder itself.",
+      "image": null
+    },
+    {
+      "heading": "Upload ads.txt through File Manager on classic WordPress",
+      "body": "In hPanel, open File Manager and navigate into your domain's root folder — usually public_html, or public_html/yourdomain.com if you're hosting multiple domains on the account. This is the same folder that holds wp-config.php and your wp-content directory, which is a useful landmark if you're not sure you're in the right place. Upload the ads.txt file directly into that root folder, not into a subfolder — Google's crawler checks yourdomain.com/ads.txt specifically, so anywhere else won't be found.",
+      "image": null
+    },
+    {
+      "heading": "Add ads.txt through Website Builder",
+      "body": "Website Builder sites don't expose a file manager, so instead you add the ads.txt content through the builder's own site settings, in the area meant for custom code or file additions at the domain root. The end result needs to be the same as the File Manager approach — the file publicly reachable at yourdomain.com/ads.txt — Hostinger's builder just handles the underlying file placement for you rather than letting you drag a file into a folder yourself.",
+      "image": null
+    },
+    {
+      "heading": "Confirm the file is actually live",
+      "body": "Before checking back with AdSense, visit yourdomain.com/ads.txt directly in a browser. You should see the plain text line you copied earlier, not a 404 page, not your WordPress theme wrapped around it, and not a redirect to your homepage. If it doesn't load as plain text at that exact URL, the upload didn't land in the true root directory and needs to be moved.",
+      "image": null
+    },
+    {
+      "heading": "Let AdSense re-crawl and confirm the warning clears",
+      "body": "Once the file is confirmed live at the root, AdSense re-checks it on its own schedule rather than instantly — it can take anywhere from a few hours to a day or two for the \"Earnings at risk\" banner to disappear from your account. If it's still showing after 48 hours, double-check the exact text in the file character-for-character against what AdSense originally gave you, since even a stray space or wrong relationship type will keep it flagged as unverified."
+    }
   ],
   "faq": [
-    { "question": "Why does AdSense show an 'Earnings at risk' error?", "answer": "This warning usually appears when your ads.txt file is missing or not placed correctly at your site's root directory." },
-    { "question": "Where exactly should ads.txt be uploaded?", "answer": "It needs to sit at the root directory of your site so AdSense's crawlers can find and verify it." },
-    { "question": "Does the process differ between WordPress and Website Builder?", "answer": "Yes, classic WordPress sites typically use File Manager, while Website Builder sites require adding the file through its own interface." },
-    { "question": "How do I know the fix worked?", "answer": "Check your AdSense account to confirm the ads.txt warning has cleared after the file is correctly placed." }
+    { "question": "Why does AdSense show an 'Earnings at risk' error?", "answer": "This warning appears when your ads.txt file is missing, unreachable, or not placed correctly at your site's true root directory, so AdSense's crawler can't verify your authorized sellers." },
+    { "question": "Where exactly should ads.txt be uploaded?", "answer": "It needs to sit directly in your site's root — the same folder as wp-config.php on WordPress — so it's reachable at yourdomain.com/ads.txt with no subfolder in the path." },
+    { "question": "Does the process differ between WordPress and Website Builder?", "answer": "Yes. Classic WordPress sites on Hostinger use File Manager to upload the file into public_html, while Website Builder sites add the same content through the builder's own settings since there's no traditional file browser." },
+    { "question": "How do I know the fix worked?", "answer": "Visit yourdomain.com/ads.txt in a browser and confirm it loads as plain text with the exact line AdSense gave you, then check back in your AdSense account after a day or two for the warning to clear." },
+    { "question": "Can a typo in ads.txt cause the warning to stay?", "answer": "Yes — the publisher ID, relationship type, and certification ID all need to match exactly what AdSense generated. Copy the line rather than retyping it to avoid this." }
   ],
-  "generatedAt": "2026-07-24T02:46:52Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

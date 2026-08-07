@@ -2,46 +2,59 @@
   "slug": "how-to-create-manage-dependencies-in-jira-add-dependency-in-issues-tickets-tasks",
   "seoTitle": "How to Create and Manage Dependencies in Jira",
   "metaDescription": "Learn how to add dependencies between Jira issues using linked issue types like \"blocks\" and \"is blocked by,\" and track them on your board.",
-  "intro": "Dependencies in Jira help your team see which tasks need to finish before others can start, keeping the whole project workflow from getting tangled. This guide covers creating dependencies between issues, using linked issue types, and tracking them visually on your board.",
+  "intro": "Dependencies in Jira help your team see which tasks need to finish before others can start, so nobody discovers halfway through a sprint that their ticket was waiting on someone else's unfinished work. The link lives inside the issue itself, under a section most people scroll past, and choosing the right direction — blocks versus is blocked by — matters more than it looks like it should. This guide walks through adding a real dependency between two issues, picking the correct link type, and where to see those dependencies once they're set.",
   "steps": [
     {
-      "heading": "Understand what dependencies do",
-      "body": "Dependencies connect related tasks so your team knows the order work needs to happen in, reducing confusion about what's blocking progress."
+      "heading": "Understand what a dependency actually links",
+      "body": "A dependency in Jira is a typed link between two issues that records an order-of-work relationship, not just a loose association. It doesn't move either issue's status automatically — it's informational, meant to tell anyone looking at the ticket that something else has to happen first, or that this ticket is itself in someone else's way. Setting these up consistently is what lets a team spot a stalled blocker before it quietly delays three other tickets."
     },
     {
-      "heading": "Add a dependency between issues",
-      "body": "Open an issue and use the link option to connect it to another issue that it depends on or that depends on it."
+      "heading": "Open the issue and find Related work items",
+      "body": "Open any issue and scroll past Description and Child work items to the Related work items section. It starts with a 'Link similar work items' search that Jira runs automatically, plus a manual linking row below it — a link-type dropdown next to a 'Type, search or paste URL' field. This is the section that holds every dependency for the issue, and it's the same place you'll return to whenever you need to check or edit one.",
+      "image": { "file": "/screenshots/Wp3fBsImPMw/01.webp", "caption": "The Related work items section on a Jira issue, with the link-type dropdown set to \"is blocked by\" next to the search field." }
     },
     {
-      "heading": "Use 'blocks' and 'is blocked by' links",
-      "body": "Choose the correct link type to accurately represent the relationship — whether one issue is blocking another or is itself blocked."
+      "heading": "Choose the correct link type",
+      "body": "Click the link-type dropdown and Jira shows the full list of relationship types available — is blocked by, blocks, and several non-dependency options like added to idea, merged into, and implements. Picking the wrong direction is the single most common dependency mistake: 'is blocked by' means this issue is waiting on the other one, while 'blocks' means this issue is what's holding the other one up. Read the sentence the dropdown forms with your issue before confirming — it should describe the real relationship in plain English.",
+      "image": { "file": "/screenshots/Wp3fBsImPMw/02.webp", "caption": "The link-type dropdown open, listing relationship options including is blocked by, blocks, merged into, and implements." }
     },
     {
-      "heading": "Follow best practices for managing dependencies",
-      "body": "Keep dependency chains as simple as possible and review them regularly so blockers get resolved before they delay downstream work."
+      "heading": "Search for and select the linked issue",
+      "body": "Type into the search field and Jira surfaces matching issues from across your accessible projects as you type — in one example, searching from a ticket in the SC App V2 project returned matches like a support page ticket, a crash report, and a Play Store release ticket from a completely different project. Click the correct one from the list, then confirm the link. There's no need to know the exact issue key ahead of time; typing a few relevant words is usually enough to find it.",
+      "image": { "file": "/screenshots/Wp3fBsImPMw/04.webp", "caption": "Searching for a related issue to link as \"blocks,\" with matching tickets from multiple projects appearing in the dropdown." }
     },
     {
-      "heading": "Track dependencies on your board",
-      "body": "Use Jira's board views to visually monitor which issues have unresolved dependencies affecting their progress."
+      "heading": "Keep dependency chains manageable",
+      "body": "It's tempting to link everything that's loosely related, but a ticket buried under a dozen dependencies becomes unreadable and nobody trusts the list enough to check it. Link only genuine blocking relationships, and revisit them during sprint planning or backlog grooming rather than letting them silently pile up. If a dependency is resolved, don't leave the stale link sitting there — remove it so the remaining links stay meaningful."
+    },
+    {
+      "heading": "See dependencies at a project level on the Timeline",
+      "body": "Individual issue links tell you about one relationship at a time; the project's Timeline view shows the bigger picture. Under a board's Timeline tab, epics and releases are laid out against actual dates, so you can see at a glance whether a dependency chain fits inside the schedule or is quietly pushing a release date out. This view is where planning conversations about dependencies usually happen, since it turns a list of blocked tickets into a visual timeline stakeholders can actually read.",
+      "image": { "file": "/screenshots/Wp3fBsImPMw/05.webp", "caption": "A project's Timeline view, showing epics and releases laid out against real dates — useful for spotting how dependencies affect the schedule." }
     }
   ],
   "faq": [
     {
       "question": "What's the difference between 'blocks' and 'is blocked by' in Jira?",
-      "answer": "'Blocks' means the current issue is preventing another from starting, while 'is blocked by' means the current issue can't proceed until another one is resolved."
+      "answer": "'Blocks' means the current issue is preventing another from starting, while 'is blocked by' means the current issue can't proceed until another one is resolved. Reading the sentence the dropdown forms with your ticket is the easiest way to check you picked the right direction."
     },
     {
       "question": "Can I see dependencies directly on my Jira board?",
-      "answer": "Yes, linked issues and their dependency status are visible from the issue detail view and can be referenced while managing your board."
+      "answer": "Individual links live in each issue's Related work items section, while a project's Timeline view shows how dependencies between epics and releases line up against real dates."
     },
     {
       "question": "Does adding a dependency change an issue's status automatically?",
-      "answer": "No, dependencies are informational links — you still need to manually update issue status as work progresses."
+      "answer": "No, dependencies are informational links — you still need to manually update issue status as work progresses. Jira won't block a status change just because a linked issue isn't done."
     },
     {
       "question": "Is dependency management available on all Jira plans?",
-      "answer": "Basic issue linking for dependencies is available across standard Jira plans, though advanced dependency visualization features can vary by plan."
+      "answer": "Basic issue linking with types like blocks and is blocked by is available across standard Jira plans; more advanced timeline and roadmap visualizations can vary by plan and project type."
+    },
+    {
+      "question": "How do I find an issue to link if I don't know its key?",
+      "answer": "Type a few relevant words into the search field in Related work items — Jira matches against issue titles across your accessible projects, so you don't need the exact ticket key ahead of time."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

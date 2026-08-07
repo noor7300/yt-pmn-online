@@ -1,20 +1,46 @@
 {
   "slug": "how-to-create-a-subdomain-in-namecheap-domain-2026-easily",
-  "seoTitle": "How to Create a Subdomain in Namecheap",
-  "metaDescription": "Need a subdomain for a blog, app, or staging site? Learn how to add one in Namecheap's Advanced DNS settings and point it to the right server.",
-  "intro": "A subdomain is a useful way to run a blog, app, or staging environment separately from your main site while staying under the same domain. This guide covers creating a subdomain in Namecheap using the Advanced DNS settings and pointing it to the correct destination.",
+  "seoTitle": "How to Create a Subdomain for a Namecheap Domain (2026)",
+  "metaDescription": "Create a subdomain for a domain bought through Namecheap — check the domain list, then use your host's control panel (like Hostinger) to build and connect it.",
+  "intro": "A subdomain like blog.yoursite.com is the standard way to run a separate section of your site — a blog, a staging environment, or an app — without buying a second domain. If your domain is registered through Namecheap but hosted elsewhere, the practical path usually runs through two places: Namecheap's Domain List, where the domain and its DNS ultimately live, and your hosting provider's control panel, where the subdomain actually gets created and connected to a website or folder. This guide covers both sides so the subdomain works end to end, using a real Namecheap-to-Hostinger setup as the example.",
   "steps": [
-    { "heading": "Log in and open your Domain List", "body": "Sign in to Namecheap and go to your Domain List to select the domain where you want to add the subdomain." },
-    { "heading": "Access Advanced DNS settings", "body": "Open the Advanced DNS tab for that domain, which is where individual DNS records including subdomains are managed." },
-    { "heading": "Add a new subdomain record", "body": "Create a new record, enter your desired subdomain name, and select the correct record type based on where it needs to point." },
-    { "heading": "Set the correct IP or hosting target", "body": "Point the record to a specific IP address or hosting server depending on whether the subdomain is for an app, blog, or staging site." },
-    { "heading": "Test the subdomain after propagation", "body": "Once DNS propagation completes, visit the subdomain to confirm it resolves correctly and works as intended worldwide." }
+    {
+      "heading": "Check your domain's settings in Namecheap",
+      "body": "Log into your Namecheap account and open Domain List from the sidebar. Selecting your domain opens its management page, which covers nameservers, Redirect Domain, Redirect Email, Private Email, and Domain Contacts — the WHOIS information required for every registered domain. This page is also where you'd manage Advanced DNS records directly if you wanted to point a subdomain manually, but note that Redirect Domain and Redirect Email both require your nameservers to be set to Namecheap's default first, which the page flags explicitly.",
+      "image": { "file": "/screenshots/LXpyzSAl7NU/02.webp", "caption": "The Namecheap domain management page, showing Redirect Domain, Redirect Email, Private Email validity, and Domain Contacts — the registrar-level settings tied to the domain." }
+    },
+    {
+      "heading": "Decide where the subdomain should actually be created",
+      "body": "If your domain's nameservers point to a hosting provider rather than staying on Namecheap's own DNS, that host is usually the better place to create the subdomain, since it can set up both the DNS record and the actual folder or website behind it in one step. Trying to do this purely from Namecheap's Advanced DNS means manually adding a CNAME or A record and then separately configuring the destination server, which is more error-prone. For a domain pointed at a host like Hostinger, the host's control panel is the faster and more reliable route.",
+      "image": null
+    },
+    {
+      "heading": "Open your website's dashboard on your host",
+      "body": "Log into your hosting account — Hostinger in this case — and select the website your subdomain will belong to from the Website name dropdown, which lists every site on the account. The dashboard summarizes the domain's status, hosting plan, email setup, and backups, and gives quick access to tools like File manager, Databases, and PageSpeed Insights. Confirm you've selected the correct site before continuing, since subdomains are created under a specific domain, not account-wide.",
+      "image": { "file": "/screenshots/LXpyzSAl7NU/03.webp", "caption": "The Hostinger dashboard for a selected website, showing domain status, hosting, email, and backup summaries — this is where you navigate into subdomain settings next." }
+    },
+    {
+      "heading": "Create the subdomain",
+      "body": "In the left menu, open Domains, then Subdomains. The Create a New Subdomain form asks for just the subdomain prefix — type something like \"blog\" — while the Domains field shows the root domain it'll attach to. There's also a Custom folder for subdomain checkbox if you want it served from a specific existing directory rather than the default one Hostinger creates automatically. Click Create, and the new subdomain appears immediately in the List of Current Subdomains below, along with the server directory it now points to.",
+      "image": { "file": "/screenshots/LXpyzSAl7NU/04.webp", "caption": "Hostinger's Subdomains page confirming \"Subdomain created successfully,\" with blog.finsenso.com listed and its directory path shown under List of Current Subdomains." }
+    },
+    {
+      "heading": "Connect the subdomain to a website or WordPress install",
+      "body": "If the subdomain is meant to run its own site rather than just serve static files, use your host's website setup wizard to attach it. Hostinger's flow asks \"What domain or subdomain would you like to use?\" and lets you pick the subdomain you just created directly from a suggestions list, tagged as a free subdomain since it's already part of your existing domain. Selecting it and continuing through the wizard installs WordPress (or whichever platform you chose) specifically at that subdomain address.",
+      "image": { "file": "/screenshots/LXpyzSAl7NU/05.webp", "caption": "The Hostinger website setup wizard, with blog.finsenso.com selected as a free subdomain before installing a site on it." }
+    },
+    {
+      "heading": "Test the subdomain once it's live",
+      "body": "Because the subdomain and its DNS record were created directly in your host's panel rather than manually in Namecheap, propagation is usually fast — often working within minutes rather than the hours a manually added DNS record can take. Visit the subdomain in a browser to confirm it loads, and check that any linked WordPress install or app is reachable there rather than showing the host's default placeholder page. If it doesn't resolve after a reasonable wait, double-check that your domain's nameservers at Namecheap are still pointed correctly at your host."
+    }
   ],
   "faq": [
-    { "question": "Do I need a separate hosting plan for a subdomain?", "answer": "Not necessarily — a subdomain can point to the same hosting as your main domain or to a completely different server, depending on your setup." },
-    { "question": "How long does it take for a new subdomain to work?", "answer": "DNS propagation timing varies, so it's normal for a subdomain to take a little while before it resolves consistently worldwide." },
-    { "question": "Can I use a subdomain for testing before launching?", "answer": "Yes, subdomains are commonly used for staging environments so you can test changes before applying them to your live site." },
-    { "question": "What record type should I use for a subdomain?", "answer": "It depends on the destination — an A record points to an IP address, while a CNAME points to another domain name." }
+    { "question": "Can I create a subdomain directly in Namecheap?", "answer": "Yes, through Advanced DNS on the domain's management page in your Domain List, by adding a CNAME or A record manually. But if your domain is hosted elsewhere, your host's control panel usually handles both the DNS record and the destination folder or site in one step, which is simpler." },
+    { "question": "Why does the Hostinger dashboard show my domain as a subdomain option automatically?", "answer": "Once you create a subdomain in your host's Subdomains tool, it's immediately available to select when setting up a new website or WordPress install on the same account, tagged as a free subdomain." },
+    { "question": "How long does it take for a new subdomain to work?", "answer": "Subdomains created directly through your hosting provider's panel typically resolve within minutes. Manually added DNS records in Namecheap's Advanced DNS can take longer, sometimes up to a few hours, to fully propagate." },
+    { "question": "Do I need to change my nameservers to create a subdomain through my host?", "answer": "Yes — your domain's nameservers need to already point to your hosting provider for that host to manage subdomains and their DNS records for you." },
+    { "question": "Can I point a subdomain to a specific folder instead of a new install?", "answer": "Yes — most host subdomain tools, including Hostinger's, include a custom folder option so the subdomain serves existing files rather than a freshly created directory." }
   ],
-  "generatedAt": "2026-07-24T00:21:00.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

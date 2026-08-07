@@ -1,47 +1,66 @@
 {
   "slug": "shopify-access-token-how-to-get-access-token-on-shopify-storefront-admin-api-eas",
   "seoTitle": "How to Get a Shopify Access Token (Storefront & Admin)",
-  "metaDescription": "Generate a Shopify Access Token for the Storefront or Admin API by creating a custom app so you can authenticate external integrations.",
-  "intro": "Custom API integrations and private apps need a Shopify Access Token to authenticate securely with your store. This guide covers how to create a custom app in Shopify, generate an Access Token, and understand the difference between the Storefront and Admin API tokens.",
+  "metaDescription": "Generate a Shopify Access Token for the Storefront or Admin API by creating a custom app in your Shopify admin, with scopes set correctly the first time.",
+  "intro": "Any custom integration, private script, or third-party tool that talks to your Shopify store needs an Access Token to authenticate — you can't just hand it your store password. Shopify issues these tokens through a custom app you create inside your own admin, and the setup trips people up mainly because Storefront API and Admin API tokens serve different purposes and are configured on different scope screens. This guide walks through creating that custom app and setting its permissions using the actual admin screens, so you end up with a token scoped correctly instead of one that's either too limited to work or too broad to be safe.",
   "steps": [
     {
-      "heading": "Open your Shopify app settings",
-      "body": "Go to your Shopify admin's app development section to begin creating a custom app."
+      "heading": "Open Apps and sales channels in your admin",
+      "body": "From your Shopify admin's Settings menu, click Apps and sales channels. This page lists every app currently installed on your store — things like Online Store, Point of Sale, Buy Button, and any sales channels or third-party apps you've added — split into Installed and Uninstalled tabs. In the top-right corner sit two buttons: Shopify App Store, for browsing apps built by others, and Develop apps, which is the one you actually need to build your own custom app and issue an Access Token.",
+      "image": { "file": "/screenshots/yf7Ro3GD4-8/03.webp", "caption": "The Apps and sales channels page, listing every installed app, with the Develop apps button in the top-right corner." }
     },
     {
-      "heading": "Create a custom or private app",
-      "body": "Set up a new custom app specifically for the integration or script that needs API access."
+      "heading": "Create a custom app",
+      "body": "Click Develop apps, then Create an app. A dialog opens asking for an App name and confirming the App developer account it's attached to — name it something that describes what it's actually for, since you may end up with several custom apps over time and a vague name gets confusing fast. Shopify notes that the app is only assignable to staff and collaborators with development permissions, and that it's subject to the Shopify API License and Terms of Use. Click Create app to continue.",
+      "image": { "file": "/screenshots/yf7Ro3GD4-8/04.webp", "caption": "The Create an app dialog, with an App name entered and the App developer account shown underneath." }
     },
     {
-      "heading": "Configure API scopes",
-      "body": "Select the specific permissions your app needs, whether for Storefront API or Admin API access."
+      "heading": "Understand Storefront vs. Admin API scopes",
+      "body": "Once the app exists, you'll configure two separate sets of permissions: Admin API scopes control access to store management data like orders, products, and customers, while Storefront API scopes control what a public-facing storefront experience — a custom frontend, a mobile app, an in-game store — is allowed to read or write on behalf of a shopper. These are genuinely different credentials for different jobs, which is the single most common source of confusion people run into with Shopify tokens.",
+      "image": null
     },
     {
-      "heading": "Generate the Access Token",
-      "body": "Once configured, Shopify will generate your Access Token, which you'll use to authenticate API requests."
+      "heading": "Set the scopes your integration actually needs",
+      "body": "On the scopes screen, permissions are grouped by resource — selling plans, bulk operations, bundles, Shop Pay installments pricing, and many more — each with its own checkbox for read or write access, prefixed unauthenticated_ for Storefront API scopes since storefront requests aren't tied to a logged-in staff account. Only check the scopes your specific integration or script will use. A calculator tool that just reads selling plans, for example, needs nothing beyond that — leaving bulk operations, bundles, and everything else unchecked keeps the resulting token as narrow as possible.",
+      "image": { "file": "/screenshots/yf7Ro3GD4-8/05.webp", "caption": "The Storefront API scopes screen, with individual read and write checkboxes per resource — only Read selling plans is checked in this configuration." }
     },
     {
-      "heading": "Store the token securely",
-      "body": "Keep your Access Token private and store it securely, since it grants direct access to your store's data."
+      "heading": "Install the app and generate the token",
+      "body": "After saving your scopes, install the app on your store from the API credentials tab. Installing is what actually activates the app and makes its Access Token available — Shopify reveals the token once at that point, so copy it immediately into a password manager or secrets store rather than a plain text file or chat message, since you generally can't view the full token again after leaving the page.",
+      "image": null
+    },
+    {
+      "heading": "Fix an \"Invalid API Key or Access Token\" error",
+      "body": "If a request comes back with this error, the most common causes are: the app was created but never installed (uninstalled apps don't have an active token), the token was regenerated after the one your integration is using, the request is hitting the wrong endpoint for the token type (using an Admin token against a Storefront API URL or vice versa), or a scope needed for that specific request was never checked. Re-check the API credentials tab for the current token and confirm the scope you need is enabled before assuming the integration code itself is broken.",
+      "image": null
+    },
+    {
+      "heading": "Keep the token secure going forward",
+      "body": "Treat an Access Token like a password: never commit it to a public repository, never share it in a support ticket screenshot, and store it in environment variables or a secrets manager rather than hardcoding it into a script. If a token is ever exposed, go back into the app's API credentials tab and revoke or regenerate it immediately — the old one stops working the moment a new one is issued, which limits the damage of a leak to whatever happened before you caught it."
     }
   ],
   "faq": [
     {
       "question": "What's the difference between the Storefront and Admin API tokens?",
-      "answer": "The Storefront API token is used for public-facing storefront data like products and collections, while the Admin API token grants access to manage store data such as orders and customers."
+      "answer": "The Storefront API token is used for public-facing storefront data like products and collections in custom shopping experiences, while the Admin API token grants access to manage store data such as orders and customers."
     },
     {
       "question": "Can I regenerate an Access Token if it's compromised?",
-      "answer": "Yes, you can revoke and regenerate a new Access Token from your custom app settings if the original one is exposed."
+      "answer": "Yes — go to the custom app's API credentials tab and regenerate the token. The old token stops working immediately once the new one is issued."
     },
     {
       "question": "Do I need coding knowledge to create a custom app?",
-      "answer": "Creating the app itself doesn't require coding, but using the Access Token in an integration or script does require development knowledge."
+      "answer": "Creating the app and setting its scopes in the admin doesn't require coding, but actually using the resulting Access Token in an integration or script does require development knowledge."
     },
     {
       "question": "Is the Access Token the same as my Shopify password?",
-      "answer": "No, an Access Token is a separate credential specifically for API authentication and should never be confused with or shared like a login password."
+      "answer": "No — an Access Token is a separate credential scoped specifically for API authentication and should never be confused with, or shared like, a login password."
+    },
+    {
+      "question": "Why am I getting an \"Invalid API Key or Access Token\" error?",
+      "answer": "Usually because the app hasn't been installed yet, the token was regenerated, the request is using the wrong API endpoint for that token type, or a required scope wasn't checked when the app was configured."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }

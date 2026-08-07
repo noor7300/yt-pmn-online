@@ -2,46 +2,65 @@
   "slug": "how-to-connect-paystack-to-shopify-add-fix-paystack-not-showing-in-shopify-easil",
   "seoTitle": "How to Connect Paystack to Shopify (Fix Not Showing)",
   "metaDescription": "Add Paystack as a payment gateway in Shopify with the correct API keys, and fix common issues when Paystack isn't showing up.",
-  "intro": "For store owners in Nigeria, Ghana, Kenya, and other African markets, Paystack is often the most practical payment gateway to offer local currencies and a smooth checkout. This guide covers how to add Paystack in your Shopify payment settings, connect it correctly with API keys, and troubleshoot when it isn't appearing.",
+  "intro": "For store owners in Nigeria, Ghana, Kenya, Rwanda, Cote d'Ivoire, and South Africa, Paystack is often the most practical payment gateway to offer because it handles local currencies and payment channels that global processors don't cover well. This guide walks through adding Paystack in your Shopify admin, connecting it with the right API keys from your Paystack dashboard, and what to check when it doesn't show up as an option.",
   "steps": [
     {
-      "heading": "Open Shopify payment provider settings",
-      "body": "Go to your Shopify admin's payment settings and look for the option to add a third-party payment provider."
+      "heading": "Start from your Shopify admin home",
+      "body": "Log into your store's admin, where the Home dashboard shows setup prompts like adding your first product, designing your store, and a Payment options card — this last one is where payment providers get configured, and it's worth confirming it's still showing an incomplete or default state before you start, so you know the change actually took effect afterward. The left sidebar holds Settings, where the full Payments section lives.",
+      "image": { "file": "/screenshots/-vZ1enW797Q/01.webp", "caption": "The Shopify admin home dashboard, with a Payment options card among the store setup tasks." }
     },
     {
-      "heading": "Add Paystack as a payment provider",
-      "body": "Select Paystack from the list of available providers or add it manually if it's supported as a custom gateway in your region."
+      "heading": "Find Paystack in the payment providers list",
+      "body": "Go to Settings, then Payments, and scroll to the section listing third-party payment providers. Paystack shows up there for stores whose primary market country is set to one of the countries it supports — if your store's country setting doesn't match, it won't appear in the list at all, which is the single most common reason people report Paystack \"missing.\" Click on Paystack to open its dedicated setup page.",
+      "image": null
     },
     {
-      "heading": "Link your Paystack account with API keys",
-      "body": "Enter your Paystack API keys correctly to authenticate the connection between Paystack and your Shopify store."
+      "heading": "Review the Paystack provider page and install it",
+      "body": "The Paystack page describes what it does — making it easy for businesses in its supported countries to accept secure payments from multiple local and global channels — and shows a Payment capture setting fixed to Automatic, which can't be changed from this screen. Click Install in the top-right corner to add Paystack as an active payment method on your store.",
+      "image": { "file": "/screenshots/-vZ1enW797Q/04.webp", "caption": "The Paystack provider page inside Shopify Payments settings, with the About Paystack description and the Install button." }
     },
     {
-      "heading": "Troubleshoot if Paystack isn't showing",
-      "body": "If Paystack doesn't appear as an option, confirm it's supported in your Shopify plan and region, since availability can vary by market."
+      "heading": "Connect your account with API keys",
+      "body": "Installing Paystack opens its own configuration screen, hosted by Paystack rather than Shopify, asking for four credentials: Test Public Key, Test Secret Key, Live Public Key, and Live Secret Key. All four come from your Paystack Dashboard's API Keys & Webhooks page — copy each one over exactly, since a swapped test/live key pair is a common setup mistake that causes payments to fail silently in one mode while appearing to work in the other. Click Save Settings once all four are entered, or Update if you're changing keys already on file.",
+      "image": { "file": "/screenshots/-vZ1enW797Q/05.webp", "caption": "Paystack's own API Keys screen reached after clicking Install, with fields for the test and live public and secret keys." }
     },
     {
-      "heading": "Test a transaction",
-      "body": "Process a test payment to confirm Paystack is working correctly at checkout before going fully live."
+      "heading": "Fix Paystack not showing in your provider list",
+      "body": "If Paystack never appeared as an option in step two, check three things in order: your store's primary country in Settings, General, since Paystack is scoped to specific African markets; whether your Shopify plan supports third-party payment providers in addition to Shopify Payments, since some plans restrict this; and whether you already have another manual or third-party gateway installed that's occupying the provider slot your plan allows. Fixing the country setting is by far the most common resolution.",
+      "image": null
+    },
+    {
+      "heading": "Confirm your Paystack account is fully activated",
+      "body": "A Paystack account that's still pending business verification can connect and accept test payments but won't process live transactions, which looks identical to a broken Shopify connection from the storefront side. Log into Paystack directly and confirm your account status shows fully activated, not pending review, before assuming the issue is on Shopify's end.",
+      "image": null
+    },
+    {
+      "heading": "Test a transaction before going live",
+      "body": "Switch to Paystack's test mode using the Test Public Key and Test Secret Key, place a test order through your storefront checkout, and confirm it completes and shows up correctly in both your Shopify Orders and your Paystack Dashboard. Only switch to the Live keys once that test transaction has cleared cleanly on both sides."
     }
   ],
   "faq": [
     {
       "question": "Why isn't Paystack showing up as a payment option in Shopify?",
-      "answer": "This is often related to regional availability or incorrect API key setup, so double-check your store's country settings and the keys you've entered."
+      "answer": "This is almost always tied to your store's primary country setting — Paystack only appears for stores set to Nigeria, Ghana, Kenya, Rwanda, Cote d'Ivoire, or South Africa — or to a Shopify plan restriction on third-party providers."
     },
     {
       "question": "Do I need a Paystack business account?",
-      "answer": "Yes, you need an active Paystack merchant account with valid API credentials before connecting it to Shopify."
+      "answer": "Yes, you need an active, verified Paystack merchant account with valid API credentials before connecting it to Shopify — a pending account can test but not process live payments."
     },
     {
       "question": "Can I use Paystack alongside Shopify Payments?",
-      "answer": "Depending on your region, you may be able to offer Paystack alongside other gateways, though availability can vary by Shopify plan."
+      "answer": "Shopify Payments isn't available in all the countries Paystack serves, so many stores in those markets use Paystack as their primary or only gateway rather than running both together."
     },
     {
       "question": "Is Paystack good for stores outside Africa?",
-      "answer": "Paystack is primarily built for African markets, so it's most useful if you're targeting customers in countries like Nigeria, Ghana, Kenya, or South Africa."
+      "answer": "Paystack is scoped to specific African markets and won't appear as an option for stores set to a country outside that list, so it isn't a fit for stores targeting other regions."
+    },
+    {
+      "question": "What's the difference between the test and live API keys?",
+      "answer": "Test keys let you place and verify transactions without moving real money, while live keys process actual customer payments — mixing them up is a common reason a store appears connected but doesn't take real payments."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "deep": true
 }
