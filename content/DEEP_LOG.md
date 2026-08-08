@@ -1,10 +1,42 @@
 # Deep-article log
 
-541 of 600 visible pages rewritten with curated inline images.
+573 of 600 visible pages rewritten with curated inline images.
 Regenerate with `npx tsx scripts/build-deep-log.ts`.
 
 | Title | Category | Images | Words | Rewritten |
 | --- | --- | --- | --- | --- |
+| [How to Close Partials on TradingView, Exit Position or Holding in Parts in 2026 Easily](https://www.easytechtuts.shop/tutorials/tradingview/how-to-close-partials-on-tradingview-exit-position-or-holding-in-parts-in-2026-e) | TradingView | 3 | 565 | 2026-08-08 |
+| [How to Connect Facebook to GoDaddy Website Easily 2026](https://www.easytechtuts.shop/tutorials/facebook/how-to-connect-facebook-to-godaddy-website-easily-2026) | Facebook | 4 | 516 | 2026-08-08 |
+| [How to Fix Disabled Accounts Can't be contacted Instagram 2026, its meaning, Blocked or Deactivated?](https://www.easytechtuts.shop/tutorials/instagram/how-to-fix-disabled-accounts-can-t-be-contacted-instagram-2026-its-meaning-block) | Instagram | 3 | 577 | 2026-08-08 |
+| [How to Forward Google Workspace Domain Emails to Your Personal Gmail 2026 Easily](https://www.easytechtuts.shop/tutorials/google-workspace/how-to-forward-google-workspace-domain-emails-to-your-personal-gmail-2026-easily) | Google Workspace | 3 | 588 | 2026-08-08 |
+| [How to Pass the Stripe Fees to Your Customer Easily 2026](https://www.easytechtuts.shop/tutorials/stripe/how-to-pass-the-stripe-fees-to-your-customer-easily-2026) | Stripe | 4 | 670 | 2026-08-08 |
+| [How to Remove Domain Forwarding Squarespace & Add, Restore DNS 2026 Easily](https://www.easytechtuts.shop/tutorials/squarespace/how-to-remove-domain-forwarding-squarespace-add-restore-dns-2026-easily) | Squarespace | 3 | 583 | 2026-08-08 |
+| [How to Remove Taxes on Shopify Checkout, Delete Estimated Tax in POS, Store 2026 Easily](https://www.easytechtuts.shop/tutorials/shopify/how-to-remove-taxes-on-shopify-checkout-delete-estimated-tax-in-pos-store-2026-e) | Shopify | 3 | 647 | 2026-08-08 |
+| [How to Reset TradingView Paper Trading Easily 2026](https://www.easytechtuts.shop/tutorials/tradingview/how-to-reset-tradingview-paper-trading-easily-2026) | TradingView | 3 | 601 | 2026-08-08 |
+| [FIX Instagram Message Unavailable Problem, Due to Deleted Content or Hidden Privacy Issues 2026](https://www.easytechtuts.shop/tutorials/instagram/fix-instagram-message-unavailable-problem-due-to-deleted-content-or-hidden-priva) | Instagram | 3 | 715 | 2026-08-08 |
+| [FIX: You cant Change the Profile Picture for This Account in Google Workspace & Change Picture 2026](https://www.easytechtuts.shop/tutorials/google-workspace/fix-you-cant-change-the-profile-picture-for-this-account-in-google-workspace-cha) | Google Workspace | 3 | 541 | 2026-08-08 |
+| [How much does Godaddy Seo Cost, is it worth, Pricing, Reviews for Website 2026](https://www.easytechtuts.shop/tutorials/godaddy/how-much-does-godaddy-seo-cost-is-it-worth-pricing-reviews-for-website-2026) | GoDaddy | 4 | 604 | 2026-08-08 |
+| [How to Add Outlook Calendar to Notion, Link & Insert Microsoft Calendar Easily 2025](https://www.easytechtuts.shop/tutorials/outlook/how-to-add-outlook-calendar-to-notion-link-insert-microsoft-calendar-easily-2025) | Outlook | 4 | 465 | 2026-08-08 |
+| [How to Add Tax on Stripe Easily 2026](https://www.easytechtuts.shop/tutorials/stripe/how-to-add-tax-on-stripe-easily-2026) | Stripe | 2 | 570 | 2026-08-08 |
+| [How to Call Ebay Customer Service, Contact Phone numbers in USA, UK, Australia 2026](https://www.easytechtuts.shop/tutorials/ebay/how-to-call-ebay-customer-service-contact-phone-numbers-in-usa-uk-australia-2026) | eBay | 4 | 662 | 2026-08-08 |
+| [How To Change Search Icon To A Search Bar In Shopify, Small icon to big Bar Easily 2026](https://www.easytechtuts.shop/tutorials/shopify/how-to-change-search-icon-to-a-search-bar-in-shopify-small-icon-to-big-bar-easil) | Shopify | 3 | 571 | 2026-08-08 |
+| [How to Create MySQL Database in Hostinger & Access Phpmyadmin Easily 2026](https://www.easytechtuts.shop/tutorials/hostinger/how-to-create-mysql-database-in-hostinger-access-phpmyadmin-easily-2026) | Hostinger | 3 | 484 | 2026-08-08 |
+| [How to Delete Purchase History on Ebay, Hide & Unhide Easily 2026](https://www.easytechtuts.shop/tutorials/ebay/how-to-delete-purchase-history-on-ebay-hide-unhide-easily-2026) | eBay | 3 | 509 | 2026-08-08 |
+| [How to Earn 200 USD with Hostinger Referral Program Easily 2026](https://www.easytechtuts.shop/tutorials/hostinger/how-to-earn-200-usd-with-hostinger-referral-program-easily-2026) | Hostinger | 3 | 567 | 2026-08-08 |
+| [How to Find Nameservers in Hostinger 2026 Easily](https://www.easytechtuts.shop/tutorials/hostinger/how-to-find-nameservers-in-hostinger-2026-easily) | Hostinger | 3 | 490 | 2026-08-08 |
+| [How To Fix Device Type Unknown Instagram Login Error 2026](https://www.easytechtuts.shop/tutorials/instagram/how-to-fix-device-type-unknown-instagram-login-error-2026) | Instagram | 3 | 574 | 2026-08-08 |
+| [How To Fix Inverted Camera in Instagram Video Call 2026, Flipped Cam Fixed](https://www.easytechtuts.shop/tutorials/instagram/how-to-fix-inverted-camera-in-instagram-video-call-2026-flipped-cam-fixed) | Instagram | 3 | 471 | 2026-08-08 |
+| [How to Fix This App isn't compatible with your store at Shopify for Tiktok & Other Apps Easily 2026](https://www.easytechtuts.shop/tutorials/shopify/how-to-fix-this-app-isn-t-compatible-with-your-store-at-shopify-for-tiktok-other) | Shopify | 3 | 602 | 2026-08-08 |
+| [How to Get Semrush Premium for Free Easily 2026](https://www.easytechtuts.shop/tutorials/semrush/how-to-get-semrush-premium-for-free-easily-2026) | Semrush | 3 | 553 | 2026-08-08 |
+| [How to List and Sell Digital Products on Ebay, Sell Downloads, NFT, E Books 2026 Easily](https://www.easytechtuts.shop/tutorials/ebay/how-to-list-and-sell-digital-products-on-ebay-sell-downloads-nft-e-books-2026-ea) | eBay | 3 | 603 | 2026-08-08 |
+| [How to List Multiple Sizes on Ebay, Add more variations Easily in iPhone, App, Site 2026](https://www.easytechtuts.shop/tutorials/ebay/how-to-list-multiple-sizes-on-ebay-add-more-variations-easily-in-iphone-app-site) | eBay | 2 | 527 | 2026-08-08 |
+| [How to Remove Estimated Taxes in Shopify Checkout, Delete Tax Included Easily 2026](https://www.easytechtuts.shop/tutorials/shopify/how-to-remove-estimated-taxes-in-shopify-checkout-delete-tax-included-easily-202) | Shopify | 4 | 521 | 2026-08-08 |
+| [How to Transfer Domain From Squarespace to WordPress 2026 Easily](https://www.easytechtuts.shop/tutorials/squarespace/how-to-transfer-domain-from-squarespace-to-wordpress-2026-easily) | Squarespace | 3 | 645 | 2026-08-08 |
+| [How To Transfer Shopify Store Ownership, Change To New Owner's Email Easily 2026](https://www.easytechtuts.shop/tutorials/shopify/how-to-transfer-shopify-store-ownership-change-to-new-owner-s-email-easily-2026) | Shopify | 4 | 569 | 2026-08-08 |
+| [How to Upload Images in Godaddy Website Builder, Add Photos Easily 2026](https://www.easytechtuts.shop/tutorials/godaddy/how-to-upload-images-in-godaddy-website-builder-add-photos-easily-2026) | GoDaddy | 3 | 545 | 2026-08-08 |
+| [How to Use Cloudflare SSL Certificate, Get & Install Free SSL Easily 2026](https://www.easytechtuts.shop/tutorials/cloudflare/how-to-use-cloudflare-ssl-certificate-get-install-free-ssl-easily-2026) | Cloudflare | 3 | 608 | 2026-08-08 |
+| [How To use Godaddy Website Builder, Pricing & Cost of Basic, Standard, Premium Ecommerce Plan Review](https://www.easytechtuts.shop/tutorials/godaddy/how-to-use-godaddy-website-builder-pricing-cost-of-basic-standard-premium-ecomme) | GoDaddy | 3 | 588 | 2026-08-08 |
+| [How to Verify Identity on Stripe & Go Live & Activate Payments Account Fully 2026](https://www.easytechtuts.shop/tutorials/stripe/how-to-verify-identity-on-stripe-go-live-activate-payments-account-fully-2026) | Stripe | 3 | 591 | 2026-08-08 |
 | [How to Add Authenticity Guarantee on ebay 2026 Easily, on Sneaker, Watches, Handbags](https://www.easytechtuts.shop/tutorials/ebay/how-to-add-authenticity-guarantee-on-ebay-2026-easily-on-sneaker-watches-handbag) | eBay | 3 | 611 | 2026-08-07 |
 | [How To Add Google AdSense To Hostinger Website, Add Ads txt & Domain Verification code Easily 2026](https://www.easytechtuts.shop/tutorials/hostinger/how-to-add-google-adsense-to-hostinger-website-add-ads-txt-domain-verification-c) | Hostinger | 3 | 656 | 2026-08-07 |
 | [How to Add music in Canva Website Easily 2026](https://www.easytechtuts.shop/tutorials/canva/how-to-add-music-in-canva-website-easily-2026) | Canva | 3 | 487 | 2026-08-07 |

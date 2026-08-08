@@ -1,21 +1,44 @@
 {
   "slug": "how-to-use-cloudflare-ssl-certificate-get-install-free-ssl-easily-2026",
   "seoTitle": "How to Get & Install Free SSL on Cloudflare Easily",
-  "metaDescription": "Activate Cloudflare's free Universal SSL, pick the right encryption mode for your host, and enforce HTTPS across your site without extra cost.",
-  "intro": "Cloudflare issues a free Universal SSL certificate automatically for domains on its network, but picking the wrong encryption mode or skipping the HTTPS enforcement settings can leave your site insecure or broken. This guide walks through activating SSL, choosing between Flexible, Full, and Full Strict modes, and turning on the settings that keep every visitor on a secure connection.",
+  "metaDescription": "Activate Cloudflare's free Universal SSL, pick the right encryption mode for your host, and generate an Origin CA certificate for Full Strict encryption.",
+  "intro": "Cloudflare issues a free Universal SSL certificate automatically for domains on its network, but the padlock in the browser bar only tells half the story — the encryption mode you choose determines whether the connection between Cloudflare and your actual hosting server is protected too. This guide follows the real dashboard path: from the account overview into the SSL/TLS panel, through the encryption-mode diagram that shows exactly what's covered, and into generating the Origin CA certificate that Full Strict mode depends on.",
   "steps": [
-    { "heading": "Open the SSL/TLS overview", "body": "From your Cloudflare dashboard, go to the SSL/TLS tab to see your domain's current certificate and encryption status." },
-    { "heading": "Confirm Universal SSL is issued", "body": "Check that the free Universal SSL certificate shows as active for your zone; this usually happens automatically once your domain is on Cloudflare." },
-    { "heading": "Choose your encryption mode", "body": "Select Flexible, Full, or Full (Strict) depending on whether your origin server has its own valid certificate — Full Strict is recommended when your host supports it." },
-    { "heading": "Generate an Origin CA certificate if needed", "body": "If your backend server needs its own certificate to support Full Strict mode, generate a free Cloudflare Origin CA certificate and install it there." },
-    { "heading": "Enforce HTTPS everywhere", "body": "Turn on \"Always Use HTTPS\" and \"Automatic HTTPS Rewrites\" under Edge Certificates to redirect visitors and fix mixed-content links automatically." },
-    { "heading": "Test your live site", "body": "Load your domain and check for the padlock icon, or run it through an external SSL scanning tool to confirm everything validates." }
+    {
+      "heading": "Start from your Cloudflare account home",
+      "body": "Logging in drops you on Account home, which lists every domain on the account under Domains along with quick Analytics for security insights, cache rate, and web traffic. Each domain in that list is where you'll dig into SSL settings — clicking a domain name takes you into that specific zone's dashboard rather than a shared account-wide SSL setting, since encryption is configured per domain.",
+      "image": { "file": "/screenshots/Nh-HR_T27Yc/02.webp", "caption": "The Cloudflare account home, listing connected domains and account-wide analytics before you drill into a specific domain's SSL settings." }
+    },
+    {
+      "heading": "Open SSL/TLS and check your current encryption mode",
+      "body": "Inside a domain, the SSL/TLS section in the left sidebar expands into Overview, Edge Certificates, Client Certificates, Origin Server, and Custom Hostnames. The Overview page shows a diagram of the full connection path — Browser to Cloudflare to Origin Server — with a padlock icon on each hop, and states your Current encryption mode plainly at the top. Full is a reasonable default, but it only confirms that Cloudflare talks to your origin server over HTTPS, not that the certificate on that origin server is actually trusted, which is where Full Strict comes in.",
+      "image": { "file": "/screenshots/Nh-HR_T27Yc/03.webp", "caption": "The SSL/TLS Overview page, showing the current encryption mode and a diagram of the encrypted hops between browser, Cloudflare, and origin server." }
+    },
+    {
+      "heading": "Decide whether you need Full (Strict)",
+      "body": "Flexible only encrypts the browser-to-Cloudflare leg and leaves the connection to your origin server unencrypted, which is a stopgap at best and shouldn't be the long-term setting for anything handling real traffic. Full encrypts both legs but accepts a self-signed or invalid certificate on the origin. Full Strict requires the origin server to present a certificate Cloudflare actually trusts, and it's the mode worth aiming for if your host supports installing a certificate there — the Overview page's traffic chart, split into TLS v1.2, TLS v1.3, and unencrypted requests, gives you a sense of how much of your current traffic is even reaching that bar."
+    },
+    {
+      "heading": "Generate an Origin CA certificate for your server",
+      "body": "Under SSL/TLS → Origin Server, the Origin Certificate Installation page walks through creating a private key and Certificate Signing Request — you can let Cloudflare generate both with your browser, or supply your own CSR if your hosting provider requires it. The form lets you set the private key type (RSA 2048 is the default), lists the hostnames the certificate will cover, including your domain and its wildcard, and lets you set how long the certificate stays valid, up to fifteen years by default.",
+      "image": { "file": "/screenshots/Nh-HR_T27Yc/04.webp", "caption": "The Origin Certificate Installation form, showing the private key type, covered hostnames, and certificate validity period before creating the certificate." }
+    },
+    {
+      "heading": "Install the certificate on your origin server",
+      "body": "Clicking Create generates the certificate and private key, which Cloudflare displays once — copy both immediately, since the private key isn't stored for you to retrieve again later. Where you install them depends entirely on your hosting stack: a control panel like cPanel usually has a dedicated SSL section to paste the certificate and key, while a server you manage directly means configuring your web server (Nginx or Apache) to reference the certificate files. Once installed and the origin trusts that certificate, switch the encryption mode on the Overview page to Full (Strict)."
+    },
+    {
+      "heading": "Enforce HTTPS and verify the padlock",
+      "body": "With Strict mode in place, head to Edge Certificates to turn on Always Use HTTPS, which redirects any HTTP request to HTTPS automatically, and Automatic HTTPS Rewrites, which fixes links to your own resources that are hardcoded to load over HTTP. Load your live domain afterward and check for the padlock in the address bar, and run it through an external SSL scanning tool for a second opinion — those tools catch configuration issues, like an incomplete certificate chain, that the padlock alone won't reveal."
+    }
   ],
   "faq": [
     { "question": "Is Cloudflare's SSL certificate really free?", "answer": "Yes, Universal SSL is included on every Cloudflare plan, including the free tier, with no extra cost." },
-    { "question": "Which encryption mode should I use?", "answer": "Full (Strict) is the safest option if your origin server has a valid certificate; use Flexible only as a temporary fix if your origin has no SSL at all." },
-    { "question": "Why am I seeing mixed content warnings after enabling SSL?", "answer": "This usually happens when some page resources still load over HTTP — Automatic HTTPS Rewrites in Cloudflare can fix most of these automatically." },
-    { "question": "What is an Origin CA certificate for?", "answer": "It's a free certificate Cloudflare issues specifically to encrypt the connection between Cloudflare's edge and your backend server, needed for Full Strict mode." }
+    { "question": "Which encryption mode should I use?", "answer": "Full (Strict) is the safest option once your origin server has a certificate Cloudflare can validate — Cloudflare's own Origin CA certificate is the simplest way to get one. Use Flexible only as a temporary fix if your origin has no SSL at all." },
+    { "question": "Why am I seeing mixed content warnings after enabling SSL?", "answer": "This usually happens when some page resources still load over HTTP — Automatic HTTPS Rewrites under Edge Certificates can fix most of these automatically." },
+    { "question": "What is an Origin CA certificate for?", "answer": "It's a free certificate Cloudflare issues from the Origin Server page specifically to encrypt the connection between Cloudflare's edge and your backend server, which is required for Full Strict mode." },
+    { "question": "How long does an Origin CA certificate last before it needs renewing?", "answer": "You choose the validity period when you create it, up to fifteen years by default, though shorter validity is available if your security policy requires more frequent rotation." }
   ],
-  "generatedAt": "2026-07-23T06:48:39Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

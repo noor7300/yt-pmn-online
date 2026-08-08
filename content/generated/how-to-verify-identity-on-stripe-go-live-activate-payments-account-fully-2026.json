@@ -1,34 +1,41 @@
 {
   "slug": "how-to-verify-identity-on-stripe-go-live-activate-payments-account-fully-2026",
   "seoTitle": "How to Verify Your Identity on Stripe and Go Live",
-  "metaDescription": "Complete Stripe's identity verification process, upload the right documents, and activate your account to start accepting live payments.",
-  "intro": "Before you can accept real customer payments, Stripe requires you to complete identity verification and move your account out of test mode. This guide covers the verification process, what documents you'll typically need, and how to activate your account fully.",
+  "metaDescription": "Complete Stripe's Activate your account flow — verify your business, link an existing account, add extras like tax calculation, and move to live mode.",
+  "intro": "A brand-new Stripe account can generate test API keys and simulate charges right away, but nothing collected in test mode turns into real money until the account is activated. That activation is its own guided flow — Verify your business, Add your bank, Add extras, Review and submit — and skipping details in any of those four steps is what stalls a Stripe account in limbo. This guide follows that flow screen by screen, from the dashboard prompt that starts it to the tax-category setting that trips up a lot of first-time sellers.",
   "steps": [
     {
-      "heading": "Start the verification process",
-      "body": "In your Stripe dashboard, locate the account activation or verification section to begin the process."
+      "heading": "Find the activation prompt on your dashboard",
+      "body": "Your Stripe dashboard Home shows Gross volume, USD balance, and Payouts at a glance, but the piece that matters before you can accept real money is the Recommendations panel and the Setup guide in the corner, which lists Verify your business, Complete your profile, and similar unchecked items. Until those are done, the account stays capable of test transactions only — the API keys shown in Recommendations are prefixed pk_test_ and sk_test_ specifically because live keys don't exist until activation is finished.",
+      "image": { "file": "/screenshots/WxprImM0tb0/03.webp", "caption": "The Stripe dashboard Home, with the Recommendations panel and Setup guide checklist prompting business verification before test-mode API keys become live ones." }
     },
     {
-      "heading": "Prepare the required documents",
-      "body": "Gather identification documents appropriate for your account type, whether you're verifying as an individual or a business."
+      "heading": "Start Activate your account and link or create a business",
+      "body": "Clicking into activation opens a dedicated flow with four numbered steps on the left: Verify your business, Add your bank, Add extras, and Review and submit. The first real question it asks is whether to link the new account to an existing business already on your Stripe profile — shown as a card with the business name, creation date, and registered address — or start fresh with Create a new business. Linking an existing business carries over tax details, ownership, and management information automatically, which saves re-entering everything if you're opening a second Stripe account for the same company.",
+      "image": { "file": "/screenshots/WxprImM0tb0/04.webp", "caption": "The Verify your business step, asking whether to link the account to an existing registered business or create a new one." }
     },
     {
-      "heading": "Upload your documents",
-      "body": "Submit the required documents through Stripe's verification flow, making sure images are clear and unedited."
+      "heading": "Complete your business and banking details accurately",
+      "body": "Once you've selected or created the business, Stripe walks through the specific identity and business details it needs — legal name, address, and the information tied to whichever KYC requirements apply in your country. The single biggest source of delay here is a mismatch: if the name or address you type doesn't exactly match what's on your official documents, Stripe's automated checks can't confirm the match and the review takes longer or gets kicked to manual review. Add your bank comes right after, since that's the account payouts will eventually land in once you're live."
     },
     {
-      "heading": "Avoid common KYC mistakes",
-      "body": "Double-check that names, addresses, and document details match exactly what's on file to avoid delays in verification."
+      "heading": "Set your tax category during Add extras",
+      "body": "The Add extras step includes an optional but easy-to-get-wrong screen: Automate tax collection on your sales, where Stripe pre-fills a product category like \"General - Electronically Supplied Services\" based on what it knows about your business. That default description explicitly covers a generic digital item like downloaded music, but the screen recommends picking something more specific — software, digital goods, cloud services, or website services — if that better describes what you actually sell, since the category affects how tax gets calculated on every transaction going forward.",
+      "image": { "file": "/screenshots/WxprImM0tb0/05.webp", "caption": "The Add extras step's tax calculation screen, with a pre-filled product category you can narrow to match what you actually sell." }
     },
     {
-      "heading": "Move from test to live mode",
-      "body": "Once verification is approved, switch your account to live mode so you can begin accepting real customer payments."
+      "heading": "Review everything before submitting",
+      "body": "The final step, Review and submit, is the last chance to catch a typo in a business address or a mismatched name before it goes to Stripe for verification. Go through each section methodically rather than skimming — business details, bank account, and the tax category you just set — since resubmitting after a rejection takes longer than getting it right the first time."
+    },
+    {
+      "heading": "Wait for approval, then confirm you're in live mode",
+      "body": "Verification times vary by country and account type, from a few minutes to a few business days, and Stripe emails you once it's resolved either way. Once approved, check the dashboard for the toggle between test and live mode — real transactions only process in live mode, and it's worth doing a small real payment yourself to confirm money actually reaches your bank account before pointing customers at a live checkout."
     }
   ],
   "faq": [
     {
       "question": "What documents does Stripe require for verification?",
-      "answer": "Requirements vary by account type and country, but individuals and businesses are generally asked for identification and business registration documents where applicable."
+      "answer": "Requirements vary by account type and country, but individuals and businesses are generally asked for identification and business registration details as part of the Verify your business step."
     },
     {
       "question": "How long does Stripe identity verification take?",
@@ -36,12 +43,17 @@
     },
     {
       "question": "Can I accept payments before verification is complete?",
-      "answer": "You can typically test your integration in test mode, but real payments require completed verification and an activated account."
+      "answer": "You can test your integration in test mode using the pk_test_/sk_test_ API keys, but real payments require completed verification and an activated account in live mode."
     },
     {
       "question": "What happens if my verification is rejected?",
       "answer": "Stripe will usually explain the reason for rejection, and you can resubmit corrected or clearer documents to try again."
+    },
+    {
+      "question": "Do I need to set a tax category during activation?",
+      "answer": "It's optional but recommended — the Add extras step pre-fills a general category, and picking a more specific one that matches what you sell improves how accurately tax gets calculated on your transactions."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

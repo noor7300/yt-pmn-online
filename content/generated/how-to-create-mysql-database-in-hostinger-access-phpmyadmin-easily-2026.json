@@ -2,18 +2,47 @@
   "slug": "how-to-create-mysql-database-in-hostinger-access-phpmyadmin-easily-2026",
   "seoTitle": "How to Create a MySQL Database in Hostinger",
   "metaDescription": "Create a MySQL database in Hostinger, assign a user, and access phpMyAdmin to manage tables and run SQL queries for your site or app.",
-  "intro": "Whether you're setting up WordPress or building a custom application, most projects eventually need a MySQL database, and Hostinger makes creating one fairly quick. This guide covers setting up a new database, assigning a user, and logging into phpMyAdmin to manage your data.",
+  "intro": "Whether you're setting up WordPress or building a custom application, most projects eventually need a MySQL database, and Hostinger keeps the whole process — creating the database, connecting it to phpMyAdmin, and browsing what's inside — in one control panel. This guide walks from the site dashboard where the Databases tool lives through to actually browsing tables inside phpMyAdmin, including what a real Hostinger-created database name looks like.",
   "steps": [
-    { "heading": "Open the database section in Hostinger", "body": "Go to your hosting dashboard and find the tool for creating a new MySQL database." },
-    { "heading": "Create the database and assign a user", "body": "Set up your new database and create a user with the correct permissions to connect to it." },
-    { "heading": "Connect it to your website or app", "body": "Use the database credentials to link your new database with your WordPress site or custom application." },
-    { "heading": "Log in to phpMyAdmin", "body": "Access phpMyAdmin securely to manage tables, import or export data, and run SQL queries as needed." }
+    {
+      "heading": "Open your site's dashboard in hPanel",
+      "body": "Log in to Hostinger and select the website you're working on to land on its Dashboard. This overview page shows tiles for Domain, Hosting, Free Email, and Backups near the top, and a second row further down with PageSpeed Insights, File manager, and Databases. The Databases tile is your entry point for everything covered in this guide — creating a new database, managing existing ones, and launching phpMyAdmin.",
+      "image": { "file": "/screenshots/GvteR3i-ZW8/03.webp", "caption": "A site's hPanel dashboard, with the Databases tile sitting alongside File manager and PageSpeed Insights." }
+    },
+    {
+      "heading": "Create a new MySQL database",
+      "body": "Click into Databases and choose the option to create a new one. Hostinger names your database with your account's numeric prefix attached automatically — something like u276259427_yourdbname — so the name you type becomes a suffix rather than the full name. Set a database name that describes what it's for, since you'll be referencing this full prefixed name in your site's configuration file later."
+    },
+    {
+      "heading": "Create a database user and assign permissions",
+      "body": "Alongside the database itself, create a MySQL user with its own username and password, then assign that user full permissions on the new database. This user-and-database pair is what your WordPress installation or custom application will authenticate with — keep the password somewhere secure, since Hostinger typically shows it only once at creation time."
+    },
+    {
+      "heading": "Connect the database to your site or app",
+      "body": "For WordPress, enter the database name, username, password, and host (usually localhost) into your wp-config.php file during setup, or let the WordPress installer handle it if you're using Hostinger's one-click install. For a custom app, use the same four credentials in whatever connection string or environment file your framework expects."
+    },
+    {
+      "heading": "Log in to phpMyAdmin",
+      "body": "From the Databases section, launch phpMyAdmin, which opens to a Structure view of whatever database is currently selected — by default this often lands on the internal information_schema database, showing dozens of system tables like COLUMNS, ENGINES, and EVENTS with their row counts, types, and collations. This is normal; information_schema is MySQL's built-in metadata database, not something you created.",
+      "image": { "file": "/screenshots/GvteR3i-ZW8/04.webp", "caption": "phpMyAdmin's Structure view showing the information_schema database's system tables, with Browse, Structure, and Search actions per table." }
+    },
+    {
+      "heading": "Switch to your own database",
+      "body": "In phpMyAdmin's left sidebar, click your actual database — it will appear with the same prefixed name Hostinger generated, such as u276259427_pmnonline, sitting below information_schema in the list. Selecting it switches the Structure view to your own tables instead of MySQL's internal ones, which is where you'll do the real work of browsing rows, editing structure, and running queries.",
+      "image": { "file": "/screenshots/GvteR3i-ZW8/05.webp", "caption": "The phpMyAdmin sidebar listing information_schema alongside a real Hostinger-created database, u276259427_pmnonline." }
+    },
+    {
+      "heading": "Manage tables, import data, and run queries",
+      "body": "Once inside your own database, use the Browse and Structure links per table to view or edit rows and columns, the SQL tab to run raw queries directly, and Import or Export at the top to move data in or out as a .sql file. This covers the everyday database management most WordPress and custom-app workflows need without ever leaving the browser."
+    }
   ],
   "faq": [
-    { "question": "Do I need to create a user separately from the database?", "answer": "Yes, you create the database and then assign a user with permissions so it can be accessed by your site or app." },
-    { "question": "Can I import and export data in phpMyAdmin?", "answer": "Yes, phpMyAdmin lets you import and export data along with running SQL queries directly." },
-    { "question": "Is this suitable for WordPress users?", "answer": "Yes, it's helpful for both beginners working on WordPress and developers building custom sites." },
-    { "question": "How do I access phpMyAdmin securely?", "answer": "You log in through the credentials tied to your database from within your Hostinger control panel." }
+    { "question": "Do I need to create a user separately from the database?", "answer": "Yes, you create the database and then create a MySQL user with permissions on it, since Hostinger treats the database and its access credentials as separate objects." },
+    { "question": "Why is my database name longer than what I typed?", "answer": "Hostinger automatically prefixes every database and username with your account's numeric ID, so a name you enter as \"pmnonline\" becomes something like u276259427_pmnonline." },
+    { "question": "Can I import and export data in phpMyAdmin?", "answer": "Yes, phpMyAdmin lets you import and export data as .sql files along with running SQL queries directly from the SQL tab." },
+    { "question": "Why does phpMyAdmin open to information_schema instead of my database?", "answer": "information_schema is MySQL's built-in metadata database and is often the default selection; just click your own prefixed database name in the sidebar to switch to it." },
+    { "question": "Is this suitable for WordPress users?", "answer": "Yes, it's helpful for both beginners working on WordPress and developers building custom sites that need direct database access." }
   ],
-  "generatedAt": "2026-07-24T02:46:52Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

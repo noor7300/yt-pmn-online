@@ -1,28 +1,35 @@
 {
   "slug": "how-to-transfer-domain-from-squarespace-to-wordpress-2026-easily",
   "seoTitle": "Transfer a Domain From Squarespace to WordPress",
-  "metaDescription": "Move your domain from Squarespace to WordPress for more design flexibility and control, with steps for both platforms.",
-  "intro": "If you're outgrowing Squarespace's design constraints, moving your domain to WordPress gives you more control through themes, plugins, and custom code. This guide covers the steps on both the Squarespace and WordPress side to get your domain connected.",
+  "metaDescription": "Move your domain from Squarespace to WordPress for more design flexibility and control, with the actual registrar steps involved in the transfer.",
+  "intro": "Moving away from Squarespace's design constraints toward WordPress's themes, plugins, and custom code is a common upgrade path, but there's a detail that trips people up: WordPress.com doesn't accept an incoming domain transfer directly. In practice, you transfer the domain away from Squarespace to a registrar or host — Hostinger in this walkthrough — and then point that domain at your WordPress site once the transfer completes. This guide covers that real path end to end, including the authorization code you'll need from Squarespace and the name-server choice that determines who manages your DNS afterward.",
   "steps": [
     {
-      "heading": "Set up your WordPress account",
-      "body": "Log in to WordPress, or create an account if you're new, so you have a destination ready for the domain."
+      "heading": "Understand why the domain goes through a host first",
+      "body": "WordPress.com is a website platform, not a domain registrar in the traditional sense — it can't receive an inbound domain transfer the way a registrar or hosting company can. That's why this kind of move actually routes through a third-party host: you transfer the domain there first, then either build your WordPress site on that host or point the domain's DNS at wherever your WordPress site actually lives. Knowing this up front saves you from hunting inside your WordPress.com account for a transfer option that doesn't exist there."
     },
     {
-      "heading": "Review your domain in Squarespace",
-      "body": "In your Squarespace dashboard, click the gear icon, go to Domains & Email, then Domains to see your current domain setup."
+      "heading": "Unlock the domain and get its authorization code from Squarespace",
+      "body": "Before any registrar will accept a transfer, the domain has to be unlocked at the losing end and you need its EPP code — sometimes called a domain secret key or authorization code. In Squarespace, this lives under the gear icon in your dashboard, then Domains & Email, then Domains; select the domain in question to find the unlock toggle and the code itself. Copy that code somewhere safe, since you'll need to paste it into the new host's transfer form in a later step, and it typically only stays valid for a limited window after you generate it."
     },
     {
-      "heading": "Locate or register the domain",
-      "body": "If the domain is already registered with Squarespace, select it and proceed to checkout to confirm ownership details and registration term."
+      "heading": "Start the transfer from your new host",
+      "body": "With the domain unlocked and the code in hand, go to the host you're transferring to — Hostinger in this case — and start a domain transfer from its dashboard rather than trying to initiate anything from the Squarespace side. Most hosts run seasonal pricing promotions on transfers, so it's worth checking the current offer, but don't let a sale distract you from confirming the host actually supports the top-level domain you're moving; not every registrar accepts every extension.",
+      "image": { "file": "/screenshots/qk1zjRgYh9U/03.webp", "caption": "The receiving host's homepage — this is where the domain transfer actually gets initiated, not from inside WordPress.com." }
     },
     {
-      "heading": "Follow the transfer prompts",
-      "body": "After saving, you'll be directed to the registration page — follow the on-screen instructions to move the domain toward WordPress."
+      "heading": "Enter the authorization code and choose your name servers",
+      "body": "The transfer form asks for the domain's Secret Key or Authorization Code (EPP code) under Additional information, followed by a choice about DNS: use the new host's name servers, or keep your existing ones. Choose the host's name servers if you have no other hosting or email service tied to this domain and want DNS management to move over with it; choose \"use existing name servers\" if you're running email or a CDN like Cloudflare elsewhere and want that untouched. Getting this choice wrong doesn't break the transfer itself, but it can knock out email or other services briefly until you fix the DNS afterward, so pick deliberately rather than defaulting.",
+      "image": { "file": "/screenshots/qk1zjRgYh9U/04.webp", "caption": "The transfer form's Additional information section, asking for the domain's EPP code and a choice between the new host's name servers or your existing ones." }
     },
     {
-      "heading": "Get support if needed",
-      "body": "Contact Squarespace support or check WordPress.com's guidance if you hit issues connecting or transferring the domain."
+      "heading": "Submit the transfer and expect a multi-day wait",
+      "body": "Once you submit, the host confirms the transfer was initiated and sets expectations plainly: it can take up to 5-7 business days to complete, and the domain will appear in your domains list once it does. This isn't a bug or a slow process on the host's part — domain transfers involve a handoff between registries and often a confirmation email you may need to approve, so don't panic if nothing visibly changes for a day or two.",
+      "image": { "file": "/screenshots/qk1zjRgYh9U/05.webp", "caption": "The transfer-initiated confirmation, noting the 5-7 business day window before the domain shows up in your account." }
+    },
+    {
+      "heading": "Point the domain at your WordPress site once it lands",
+      "body": "After the transfer completes, connect the domain to WordPress: if you're using WordPress.com's hosted service, you'll add the domain there and update its DNS records to point at WordPress.com's servers; if you're running self-hosted WordPress through the same host you just transferred to, you can often skip an extra DNS step entirely since the domain and hosting now live in one place. Either way, give DNS changes some time to propagate — it's rarely instant — before assuming something's wrong if the site doesn't show up on the new domain within the first few minutes."
     }
   ],
   "faq": [
@@ -31,17 +38,22 @@
       "answer": "WordPress offers more flexibility and customization through themes, plugins, and custom code, and can be more cost-effective for larger or growing sites."
     },
     {
+      "question": "Can I transfer my domain directly into WordPress.com?",
+      "answer": "Not as an inbound transfer target. WordPress.com isn't a domain registrar in the traditional sense, so the domain has to transfer to a registrar or host first, then get pointed at your WordPress site."
+    },
+    {
       "question": "Do I lose my domain history when transferring?",
-      "answer": "A properly completed transfer keeps the domain's registration intact — it's the platform managing it that changes."
+      "answer": "A properly completed transfer keeps the domain's registration and history intact — it's the registrar managing it that changes, not the domain itself."
     },
     {
-      "question": "Can I connect the domain without a full transfer?",
-      "answer": "Yes, in many cases you can point the domain to WordPress without moving registrars, depending on your setup."
+      "question": "What is the EPP code and where do I find it?",
+      "answer": "It's the domain's authorization code, sometimes called a Domain Secret Key, required by the new registrar to accept the transfer. In Squarespace, find it under the gear icon, then Domains & Email, then Domains."
     },
     {
-      "question": "What if I get stuck during the process?",
-      "answer": "Reach out to Squarespace support or WordPress.com for guidance specific to your account."
+      "question": "How long does a domain transfer actually take?",
+      "answer": "Most transfers complete within 5-7 business days after you submit the request, though the exact timing depends on the registries involved and whether you need to confirm an email approval."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

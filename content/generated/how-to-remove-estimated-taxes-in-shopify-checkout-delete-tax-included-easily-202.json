@@ -2,19 +2,44 @@
   "slug": "how-to-remove-estimated-taxes-in-shopify-checkout-delete-tax-included-easily-202",
   "seoTitle": "Remove Estimated Taxes in Shopify Checkout",
   "metaDescription": "Confused customers seeing \"tax included\" or estimated tax at checkout? Learn how to disable automatic tax calculation in Shopify and clean up the messaging.",
-  "intro": "Some Shopify store owners find that customers see \"tax included\" or an estimated tax line at checkout and in POS even when taxes aren't supposed to be charged. This guide walks through disabling automatic tax calculations and adjusting the related settings so checkout reflects what you actually intend to charge.",
+  "intro": "Some Shopify store owners find that customers see \"tax included\" or an estimated tax line at checkout and in POS even when taxes aren't supposed to be charged. The confusion usually comes from two different places at once — the tax region settings that control whether Shopify calculates tax at all, and the checkout wording that keeps referencing tax even after you've turned collection off. This guide covers both, working from the actual Shopify admin screens involved.",
   "steps": [
-    { "heading": "Open your tax settings in Shopify Admin", "body": "Go to the tax settings section of Shopify Admin, which controls how tax is calculated and displayed across your store and POS." },
-    { "heading": "Disable automatic tax calculations", "body": "Turn off automatic tax calculation for the regions or products where you don't want tax applied, rather than leaving Shopify's default settings active." },
-    { "heading": "Adjust tax settings on individual products", "body": "Check individual product pages for tax-related toggles, since some products may be set to charge tax independently of your general settings." },
-    { "heading": "Edit checkout and POS wording", "body": "Update the language shown at checkout and in POS so it no longer references \"tax included\" if that message doesn't match your actual pricing." },
-    { "heading": "Confirm the change at checkout", "body": "Run through a test checkout and a POS sale to verify the estimated tax and \"tax included\" message are both gone." }
+    {
+      "heading": "Open Settings in your Shopify admin",
+      "body": "From your Shopify admin, open Settings from the store menu to reach the General page, which lists your store details, billing address, currency display, and regional defaults. The full settings list runs down the left side — Payments, Checkout, Customer accounts, Shipping and delivery, and the one that matters here, Taxes and duties. Everything involved in this fix lives inside this settings panel rather than scattered across separate admin sections.",
+      "image": { "file": "/screenshots/yK3MXpe0hTQ/02.webp", "caption": "The Shopify Settings General page, with Taxes and duties listed among the other store-wide settings in the left menu." }
+    },
+    {
+      "heading": "Review your tax regions",
+      "body": "Click into Taxes and duties to see the Tax Regions table, which lists every country or region alongside whether it's currently collecting tax and which tax service handles the calculation — Manual Tax, Basic Tax, or Shopify Tax depending on the region. If a region shows an active tax service but you don't actually want to charge tax there, this table is where you correct it. Regions showing a dash under Collecting aren't currently charging tax at all, which is the state you're aiming for anywhere estimated tax shouldn't appear.",
+      "image": { "file": "/screenshots/yK3MXpe0hTQ/03.webp", "caption": "The Taxes and duties page, with a Tax Regions table listing countries, their collection status, and assigned tax service." }
+    },
+    {
+      "heading": "Turn off tax collection for the relevant region",
+      "body": "Click into the specific region — say, your home country if it's the one showing active tax collection — and switch its tax service off or clear its rate settings depending on what's configured. Save the change before moving on, since the wording fix in the next step only hides the label; it doesn't stop Shopify from calculating a real tax amount if collection is still switched on somewhere in this table."
+    },
+    {
+      "heading": "Search theme content for the tax wording",
+      "body": "Go to Online Store, then Themes, then Theme content, and search \"taxes.\" This surfaces every piece of checkout text tied to tax — Checkout general errors tax, and under Checkout order summary, fields like Taxes label, Estimated taxes label, and Information estimated taxes label. Before editing, the Estimated taxes label field typically still reads \"Estimated taxes,\" which is exactly the wording customers are seeing even when nothing is actually being charged.",
+      "image": { "file": "/screenshots/yK3MXpe0hTQ/04.webp", "caption": "Theme content search results for \"taxes,\" showing the Estimated taxes label field still set to its default \"Estimated taxes\" text." }
+    },
+    {
+      "heading": "Replace the labels and save",
+      "body": "Edit each relevant field — Taxes label, Estimated taxes label, and Information estimated taxes label — to something accurate, like \"No Tax,\" so the checkout summary stops implying a tax amount is being calculated. Click Save once all three are updated. This step is purely cosmetic text, so it won't change what a customer is actually charged, but it removes the confusing \"estimated tax\" language for stores that genuinely don't collect any.",
+      "image": { "file": "/screenshots/yK3MXpe0hTQ/05.webp", "caption": "The same theme content fields after editing, with Taxes label, Estimated taxes label, and Information estimated taxes label all changed to \"No Tax.\"" }
+    },
+    {
+      "heading": "Test both checkout and POS",
+      "body": "Run a test order through your online storefront and, separately, a test sale through Shopify POS if you use it in person. Both need checking because tax settings and theme wording apply across both channels independently — fixing the online checkout doesn't automatically clean up what a POS terminal displays. Confirm the estimated tax line and \"tax included\" wording are both gone in each before considering the change complete."
+    }
   ],
   "faq": [
-    { "question": "Why does Shopify show \"tax included\" even if I don't charge tax?", "answer": "This usually happens because automatic tax calculation is still enabled somewhere in your settings, even if you don't intend to collect tax." },
-    { "question": "Does this affect POS as well as online checkout?", "answer": "Yes, tax settings in Shopify apply across both online checkout and POS, so both need to be checked to fully remove the estimated tax." },
-    { "question": "Will removing taxes affect my tax reporting?", "answer": "It can, so it's worth confirming with your accountant or local tax requirements before turning off tax calculation entirely." },
-    { "question": "Can I remove tax for specific products only?", "answer": "Yes, individual product tax settings let you control this at a more granular level instead of changing it store-wide." }
+    { "question": "Why does Shopify show \"tax included\" even if I don't charge tax?", "answer": "This usually happens because a tax service is still active for that region in Taxes and duties, even if you don't intend to collect tax there — the checkout wording will keep referencing tax until both the region setting and the theme content label are updated." },
+    { "question": "Does this affect POS as well as online checkout?", "answer": "Yes, tax settings in Shopify apply across both online checkout and POS, so both need to be checked and tested separately to fully remove the estimated tax." },
+    { "question": "Will removing taxes affect my tax reporting?", "answer": "It can, so it's worth confirming with your accountant or local tax requirements before turning off tax collection entirely in the Tax Regions table." },
+    { "question": "Can I remove tax for specific products only?", "answer": "The Tax Regions table controls collection by region rather than by product, but individual product pages have their own tax toggle for product-level exceptions." },
+    { "question": "Does editing the theme content labels change how much customers are charged?", "answer": "No, changing labels like \"Estimated taxes\" to \"No Tax\" only updates the wording shown at checkout. Actual tax calculation is controlled separately in Taxes and duties." }
   ],
-  "generatedAt": "2026-07-24T00:05:00.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

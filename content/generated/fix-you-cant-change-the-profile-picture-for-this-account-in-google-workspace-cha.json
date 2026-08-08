@@ -2,37 +2,45 @@
   "slug": "fix-you-cant-change-the-profile-picture-for-this-account-in-google-workspace-cha",
   "seoTitle": "Fix: Can't Change Profile Picture in Google Workspace",
   "metaDescription": "Troubleshoot the 'You can't change the profile picture for this account' error in Google Workspace and learn how to update your photo successfully.",
-  "intro": "Seeing a message that blocks you from changing your Google Workspace profile picture is a common frustration, often tied to account or admin-level settings rather than a bug. This guide walks through diagnosing the issue and getting your picture updated.",
+  "intro": "Seeing a message that blocks you from changing your Google Workspace profile picture is a common frustration, and it's almost never a bug on your end — it's an organization-level policy your admin controls. This guide walks through recognizing that message for what it is, where the setting actually lives in the Admin console, and what to do whether you're the admin yourself or need to ask someone who is.",
   "steps": [
     {
-      "heading": "Understand the error",
-      "body": "This message usually appears when an admin has restricted profile picture changes at the organization level rather than being a problem with your specific account."
+      "heading": "Recognize the \"managed by your organisation\" message",
+      "body": "Open your Google Account, go to Personal info, and click Profile picture — if your organization restricts this, you'll see a notice directly under the Profile picture heading that reads \"Your profile picture is managed by your organisation,\" and the Add profile picture button below it will be greyed out and unclickable. This confirms the block is deliberate policy, not a failed upload or a temporary glitch, which saves you time troubleshooting your browser or connection when the real fix lives somewhere else entirely.",
+      "image": { "file": "/screenshots/acSq-KJgt0E/01.webp", "caption": "The Google Account profile picture panel, showing the notice that the picture is managed by your organisation and a disabled \"Add profile picture\" button." }
     },
     {
-      "heading": "Check your Google Workspace account settings",
-      "body": "Go to your account settings and look for the profile photo option to see whether it's editable or grayed out."
+      "heading": "Get into the Admin console",
+      "body": "This setting can only be changed from the Google Workspace Admin console, not from any individual user's account settings — so if you're not an admin, this is the point where you either request access or hand the next steps to whoever manages your organization's Workspace. The Admin console's home screen shows a Recommendations panel for getting started along with quick links to Users, Billing, and other org-wide settings, confirming you're in the right place before digging into Directory settings.",
+      "image": { "file": "/screenshots/acSq-KJgt0E/02.webp", "caption": "The Google Workspace Admin console home screen, with getting-started recommendations and quick links to manage Users and Billing." }
     },
     {
-      "heading": "Explore admin-level restrictions",
-      "body": "If you're not an admin, ask your organization's admin to check whether profile photo editing is disabled in the Admin Console's user settings."
+      "heading": "Find the affected account under Directory",
+      "body": "From the Admin console's left menu, open Directory, then Users, to see every account in the organization along with its status, last sign-in, and email usage. Locate the specific user having trouble — in a small organization this list might only have a handful of entries, but it's still worth confirming you're looking at the right account before changing any org-wide policy, since some settings apply per organizational unit rather than to every user at once.",
+      "image": { "file": "/screenshots/acSq-KJgt0E/04.webp", "caption": "The Directory > Users list in the Admin console, showing each account's status and last sign-in — the starting point for checking or adjusting a user's permissions." }
     },
     {
-      "heading": "Follow the troubleshooting steps",
-      "body": "Clear your browser cache, try a different browser, or use the mobile app — sometimes the change simply fails to save due to a temporary glitch."
+      "heading": "Check the profile-editing policy",
+      "body": "The actual toggle lives outside the Users list itself, under Directory settings, in a section covering what users are allowed to add to their basic profile — including photos. If that option is turned off for the organization or for a specific organizational unit, every affected user will see the exact \"managed by your organisation\" message from step one, regardless of what they try on their own end. Turning it on restores the ability for users to upload their own photo; it doesn't retroactively set one for anybody; each user still uploads their own image afterward.",
+      "image": null
     },
     {
-      "heading": "Successfully change the picture",
-      "body": "Once restrictions are lifted or the glitch is resolved, upload your new photo and confirm it displays correctly across Gmail and other Workspace apps."
+      "heading": "Have the user re-upload their photo",
+      "body": "Once the policy allows profile edits again, go back to Google Account → Personal info → Profile picture and the Add profile picture button should now be active instead of greyed out. Upload the new image, save, and give it a few minutes — the change usually appears in Gmail almost immediately but can take a little longer to propagate fully across Chat, Meet, and other Workspace apps."
+    },
+    {
+      "heading": "If you're not the admin, know what to ask for",
+      "body": "If you don't have Admin console access, you don't need to try browser fixes or reinstall the app — the fix is entirely on the organization side. Ask your Workspace admin specifically to check the profile-photo permission under Directory settings for your organizational unit, since a vague \"can I change my picture\" request is more likely to get lost than a specific pointer to the exact setting."
     }
   ],
   "faq": [
     {
       "question": "Why can't I change my profile picture in Google Workspace?",
-      "answer": "This is most often caused by an admin policy that restricts users from editing their profile photo across the organization."
+      "answer": "This is most often caused by an admin policy under Directory settings that restricts users from editing their profile photo across the organization or a specific organizational unit."
     },
     {
       "question": "Can only admins fix the profile picture restriction?",
-      "answer": "Yes, if the restriction is set at the organization level, only a Workspace admin can adjust the setting in the Admin Console."
+      "answer": "Yes, if the restriction is set at the organization level, only a Workspace admin can adjust the setting in the Admin console — individual users can't override it from their own account."
     },
     {
       "question": "Does the profile picture update everywhere at once?",
@@ -40,8 +48,13 @@
     },
     {
       "question": "Could a browser issue be causing this error?",
-      "answer": "Yes, cached data or browser extensions can sometimes interfere with the upload — try clearing your cache or using an incognito window."
+      "answer": "It's possible but less likely if you see the specific \"managed by your organisation\" notice — that message points to an admin policy, not a browser or upload glitch."
+    },
+    {
+      "question": "Where exactly does the admin change this setting?",
+      "answer": "In the Admin console, under Directory settings, in the section controlling what users can add to their basic profile, including photos — this can be scoped to the whole organization or a specific organizational unit."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

@@ -1,43 +1,58 @@
 {
   "slug": "how-to-add-tax-on-stripe-easily-2026",
   "seoTitle": "How to Add Tax on Stripe Easily (2026 Guide)",
-  "metaDescription": "Enable Stripe Tax, configure tax rates, and apply region-specific rules to your products or subscriptions for accurate, automatic sales tax collection.",
-  "intro": "Manually tracking sales tax across regions is tedious, but Stripe can calculate and apply the right rate automatically once it's set up. This guide covers enabling Stripe Tax in your dashboard, adding tax rates, applying them to products or services, and configuring region-specific rules so customers in different countries or states are charged correctly.",
+  "metaDescription": "Enable Stripe Tax, register in the states or countries where you owe tax, and let Stripe calculate sales tax, VAT, and GST automatically at checkout.",
+  "intro": "Manually tracking sales tax, VAT, and GST across every region you sell in is tedious and easy to get wrong, but Stripe Tax handles the calculation and monitoring once it's actually set up in your dashboard. This guide walks through the real Tax section inside Stripe — Overview, Thresholds, Registrations, and Transactions — using a sandbox account, so you can see exactly what's involved in going from a disconnected account to one that's tracking obligations and collecting correctly. It also covers the distinction between testing this in sandbox mode and turning it on for real transactions.",
   "steps": [
     {
-      "heading": "Enable Stripe Tax in your dashboard",
-      "body": "Stripe Tax needs to be turned on before it can start calculating and applying taxes to your transactions."
+      "heading": "Understand what Stripe Tax actually automates",
+      "body": "Stripe Tax doesn't set tax rates for you out of nowhere — it calculates the correct sales tax, VAT, or GST for a transaction based on where your business is registered to collect and where the customer is located, then applies it automatically at checkout. The part that still requires you is registration: telling Stripe (and the relevant tax authority) which states, provinces, or countries you're actually obligated to collect in. Skipping that step means Stripe has nothing to calculate against, even with Tax turned on."
     },
     {
-      "heading": "Add new tax rates",
-      "body": "Set up the specific tax rates that apply to your business, whether that's a single flat rate or several rates for different regions."
+      "heading": "Open the Tax section and start setup",
+      "body": "In your Stripe Dashboard, Tax sits under Products in the left sidebar, alongside Payments, Billing, and Reporting, and it's also pinned as a shortcut once you've opened it before. The Overview tab greets you with \"Continue Tax setup\" and an explanation that activating your account lets Stripe monitor, register, and automatically collect sales tax, VAT, and GST — along with an Activate your account button that's the actual starting point for a live setup.",
+      "image": { "file": "/screenshots/axFZfrGaKHg/05.webp", "caption": "The Tax Overview tab inside Stripe Dashboard, with \"Continue Tax setup\" and an Activate your account button as the entry point." }
     },
     {
-      "heading": "Apply taxes to products and services",
-      "body": "Once your rates exist, attach them to the relevant products or services so tax gets calculated automatically at checkout."
+      "heading": "Check your obligations under Thresholds",
+      "body": "Before registering anywhere, use the Thresholds tab to see where Stripe's monitoring suggests you may already have a tax obligation based on your transaction volume in that location — this is what the Overview page's \"Tax obligations\" panel is pointing you toward. Thresholds work differently by jurisdiction (some are based on revenue, others on transaction count), so treat Stripe's monitoring as a heads-up to investigate rather than a legal determination on its own."
     },
     {
-      "heading": "Manage region-specific tax rules",
-      "body": "For businesses selling across multiple countries or states, configure rules so customers in each region are charged the correct amount."
+      "heading": "Register in the locations where you owe tax",
+      "body": "The Registrations tab is where you formally add a tax registration, and Stripe lays the process out as three steps right on the page: first confirm your registration thresholds for a state, province, or country; second, either let Stripe help with the registration or follow local guides to register directly with the tax authority; third, once you're registered, add that registration into Stripe so it starts collecting for that location. In sandbox mode, a banner reminds you that these test registrations can be copied over to live mode once you're ready, so you can practice the flow risk-free before doing it for real.",
+      "image": { "file": "/screenshots/axFZfrGaKHg/04.webp", "caption": "The Registrations tab under Tax, with \"Add a tax registration\" and the three-step process: check thresholds, register, then add the registration to Stripe." }
+    },
+    {
+      "heading": "Add the registration to Stripe and let it start collecting",
+      "body": "Once you've completed the actual registration with the tax authority — Stripe can hand off to their registration partners for some jurisdictions, or you follow their guide to do it yourself — the final step is entering that registration into Stripe via Add registration. From that point, Stripe applies the correct rate automatically to transactions in that location without you maintaining a separate rate table for every product or region by hand."
+    },
+    {
+      "heading": "Keep monitoring as your sales grow",
+      "body": "Tax obligations aren't a one-time setup — as you sell into new states or countries, you'll cross new thresholds and need new registrations, which is exactly what the Thresholds and Transactions tabs are for tracking over time. Check back periodically rather than assuming your initial registrations cover you indefinitely, especially if your business is expanding into new markets or scaling quickly in ones you're already in."
     }
   ],
   "faq": [
     {
       "question": "Do I need a third-party app to manage tax on Stripe?",
-      "answer": "No, Stripe Tax handles calculation and compliance directly inside the dashboard, so you don't need separate third-party tools."
+      "answer": "No, Stripe Tax handles calculation, monitoring, and registration guidance directly inside the Dashboard's Tax section, so a separate tool isn't required."
     },
     {
       "question": "Can Stripe apply different tax rates for different countries?",
-      "answer": "Yes, once configured, Stripe Tax can apply region-specific rules so customers in different countries or states are charged correctly."
+      "answer": "Yes — once you've registered in a given state, province, or country under the Registrations tab, Stripe applies the correct sales tax, VAT, or GST rate for that location automatically."
+    },
+    {
+      "question": "What's the difference between sandbox and live mode for Tax?",
+      "answer": "Sandbox lets you test the full registration and collection flow without affecting real transactions; Stripe lets you copy your test registrations over to live mode once you're ready to activate for real."
+    },
+    {
+      "question": "How do I know where I need to register for tax?",
+      "answer": "The Thresholds tab monitors your transaction activity and flags locations where you may have crossed a registration threshold — treat it as a starting point for research, not a final legal answer."
     },
     {
       "question": "Does this work for subscriptions as well as one-time purchases?",
-      "answer": "Yes, the setup covers applying tax rates to both products and subscription-based services."
-    },
-    {
-      "question": "Is Stripe Tax suitable for e-commerce stores?",
-      "answer": "Yes, it's built for businesses running e-commerce, digital products, or subscriptions that need accurate sales tax compliance."
+      "answer": "Yes, Stripe Tax calculates tax on both one-time payments and subscription billing once you're registered in the relevant location."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

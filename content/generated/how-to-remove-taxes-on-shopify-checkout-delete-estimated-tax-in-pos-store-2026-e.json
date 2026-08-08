@@ -2,19 +2,45 @@
   "slug": "how-to-remove-taxes-on-shopify-checkout-delete-estimated-tax-in-pos-store-2026-e",
   "seoTitle": "Remove Taxes on Shopify Checkout & POS",
   "metaDescription": "Learn how to disable tax calculation on Shopify checkout and POS for specific products, regions, or your entire store, with changes applying instantly.",
-  "intro": "Not every Shopify store needs to charge tax, but the default setup can leave an estimated tax line showing at checkout and in POS. This guide explains how to turn off automatic tax collection for specific products, regions, or your whole store so the checkout reflects accurate pricing.",
+  "intro": "Not every Shopify store needs to charge tax — maybe you sell in a region with no sales tax obligation, your prices are already tax-inclusive, or you're testing a store that shouldn't show an estimated tax line yet. Shopify's tax controls live in a Global settings panel with a handful of checkboxes that decide whether tax gets folded into your prices or added on top, plus separate region-level rules for where tax actually gets collected. This guide walks through those settings, plus a lesser-known spot where you can edit the exact wording of tax-related messages customers see at checkout.",
   "steps": [
-    { "heading": "Navigate to tax settings", "body": "Head to the tax settings area in Shopify Admin, which is the central place for controlling how tax is applied across your store." },
-    { "heading": "Turn off automatic tax collection", "body": "Disable automatic tax collection at the level that applies to you — whether that's a specific region, a set of products, or your entire store." },
-    { "heading": "Apply changes to specific products if needed", "body": "If only certain products shouldn't be taxed, adjust their individual tax settings rather than changing the store-wide configuration." },
-    { "heading": "Save and confirm changes apply instantly", "body": "Save your settings and check that the update takes effect right away on both online checkout and Shopify POS." },
-    { "heading": "Test both checkout and POS", "body": "Run through a sample online checkout and a POS transaction to make sure the estimated tax no longer appears in either." }
+    {
+      "heading": "Open your Shopify admin",
+      "body": "Log in and land on the admin dashboard, where the left-hand navigation lists Home, Orders, Products, Customers, Marketing, Discounts, Content, Markets, and Analytics, followed by your Sales channels — Online Store with its Themes, Pages, and Preferences, and Point of Sale below that. Settings sits further down this same sidebar and is where the tax controls in the next step live. Point of Sale being in the same menu matters here, since Shopify's tax settings are shared between your online checkout and any POS terminal running under the same store.",
+      "image": { "file": "/screenshots/1unoZ4uaqdM/04.webp", "caption": "The Shopify admin dashboard, with Online Store, Themes, and Point of Sale listed in the left-hand sales channels menu." }
+    },
+    {
+      "heading": "Find the Global settings for tax calculation",
+      "body": "Inside your store's tax settings you'll find a Global settings section with a short list of checkboxes that control how tax behaves across the board: \"Include sales tax in product price and shipping rate,\" which assumes a rate (18% shown here) adjusted per market rather than adding tax as a separate line; \"Charge sales tax on shipping,\" automatically calculated for Canada, the European Union, and the United States when enabled; and \"Charge VAT on digital goods,\" which sets up VAT charged at checkout specifically for European customers buying digital products. None of these are checked by default in this view, meaning tax isn't being added under any of the three conditions.",
+      "image": { "file": "/screenshots/1unoZ4uaqdM/03.webp", "caption": "The Global settings panel for taxes, with unchecked boxes for including sales tax in price, charging tax on shipping, and charging VAT on digital goods." }
+    },
+    {
+      "heading": "Decide which checkbox actually matches your goal",
+      "body": "These three checkboxes solve different problems, so it's worth being precise about which one you need. If your displayed prices should already include tax with nothing added at checkout, that's the \"Include sales tax in product price\" option — check it and Shopify stops adding a visible tax line. If you want tax removed from shipping specifically while keeping it on products, leave \"Charge sales tax on shipping\" unchecked. And if you don't sell digital goods to EU customers, the VAT checkbox simply doesn't apply to you and can stay off without affecting anything else.",
+      "image": null
+    },
+    {
+      "heading": "Check region-level tax collection too",
+      "body": "The Global settings checkboxes control how tax is calculated and displayed, but whether you're registered to collect tax in a given country or state is a separate, region-by-region setting elsewhere in the same tax area. If estimated tax is still appearing at checkout after adjusting the global options, check that you haven't also registered to collect tax for the customer's region — Shopify will keep calculating and showing an estimate for any region where a tax registration is active, regardless of the global checkboxes.",
+      "image": null
+    },
+    {
+      "heading": "Customize the tax messaging in Theme content",
+      "body": "Separately from whether tax is charged, Shopify also lets you edit the exact wording customers see around tax at checkout. Under Online Store, open Theme content and search for \"taxes\" to find entries like \"Checkout general errors tax,\" including the message shown when \"Taxes associated to your order have changed. Review and try again.\" This won't turn tax calculation off, but it's useful if you want the checkout copy to read more clearly for a store where tax rarely or never applies.",
+      "image": { "file": "/screenshots/1unoZ4uaqdM/05.webp", "caption": "Theme content search results for \"taxes,\" showing the editable checkout error message shown when a customer's tax amount changes." }
+    },
+    {
+      "heading": "Test both online checkout and POS",
+      "body": "Once your settings are saved, run through a test order on your storefront and, separately, a sale on any Shopify POS device connected to the same store. Confirm the estimated tax line no longer appears where you expect it to be gone, and double-check that regions or products where you still need tax collected are behaving correctly. Testing both surfaces matters because a setting that looks right in the online checkout preview doesn't always guarantee POS is reading the same configuration until you check it directly."
+    }
   ],
   "faq": [
-    { "question": "Can I remove tax for just one region?", "answer": "Yes, tax settings can be adjusted by region, so you can leave tax active elsewhere while removing it for a specific area." },
-    { "question": "Does this update apply to POS immediately?", "answer": "Yes, according to the guide, changes to tax settings apply instantly to both checkout and POS once saved." },
-    { "question": "Is this different from the general Shopify tax settings?", "answer": "It uses the same settings area, but this guide focuses specifically on turning tax off entirely for stores that don't need to collect it." },
+    { "question": "Can I remove tax for just one region?", "answer": "Yes, tax collection is set on a region-by-region basis separate from the Global settings checkboxes, so you can leave tax active elsewhere while removing it for a specific area." },
+    { "question": "Does this update apply to POS immediately?", "answer": "Yes, tax settings are shared between your online checkout and Shopify POS on the same store, so changes should apply to both once saved." },
+    { "question": "What does \"Include sales tax in product price\" actually do?", "answer": "It folds an assumed tax rate into your displayed prices and shipping rate instead of adding a separate tax line at checkout, rather than turning tax off entirely." },
+    { "question": "Can I edit the wording of tax messages at checkout without changing whether tax is charged?", "answer": "Yes — under Online Store, Theme content, search \"taxes\" to find and edit checkout copy like the tax-changed error message, separately from the actual tax calculation settings." },
     { "question": "Will this affect existing orders?", "answer": "No, changing tax settings going forward doesn't retroactively change tax already applied to completed orders." }
   ],
-  "generatedAt": "2026-07-24T00:07:00.000Z"
+  "generatedAt": "2026-08-08T09:00:00Z",
+  "deep": true
 }

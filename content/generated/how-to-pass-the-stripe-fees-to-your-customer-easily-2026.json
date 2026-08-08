@@ -2,46 +2,65 @@
   "slug": "how-to-pass-the-stripe-fees-to-your-customer-easily-2026",
   "seoTitle": "How to Pass Stripe Fees to Your Customer",
   "metaDescription": "Adjust your pricing to pass Stripe processing fees to customers with surcharges while staying compliant and transparent.",
-  "intro": "If Stripe's processing fees are eating into your margins, you may want to shift that cost to the customer instead of absorbing it yourself. This guide covers practical ways to calculate Stripe fees, add surcharges, and build them into your pricing, along with important compliance considerations.",
+  "intro": "If Stripe's processing fees are eating into your margins, you may want to shift that cost to the customer instead of absorbing it yourself. Stripe doesn't have a single \"pass the fee to the customer\" toggle — you build it into how you price and invoice, using the same tools you'd use to add a tax or a line item. This guide covers calculating what Stripe actually takes, where in the dashboard to add that cost back into an invoice, and the compliance line you need to check before turning it on for real customers.",
   "steps": [
     {
-      "heading": "Calculate your Stripe processing fees",
-      "body": "Work out exactly what percentage and fixed fee Stripe charges per transaction so you know how much to pass along."
+      "heading": "Know what Stripe is actually charging you",
+      "body": "Stripe's standard rate in the US is 2.9% plus 30 cents per successful card charge, though your actual rate can differ based on your pricing plan, card type, and country. Before you pass anything along, calculate the real cost on a typical transaction — on an $11 invoice, for example, the fee is roughly 62 cents, not a round number, which is why a flat surcharge often either overcharges or undercharges slightly. Check your own rate on the Billing overview in your dashboard rather than assuming the standard figure, since negotiated or volume rates are common once you're processing steadily.",
+      "image": null
     },
     {
-      "heading": "Decide on a surcharge or built-in pricing method",
-      "body": "Choose whether to add a visible surcharge at checkout or simply build the fee into your product or service price."
+      "heading": "Find where pricing and billing tools live",
+      "body": "Stripe's dashboard groups the relevant tools under a few headings in its main navigation: Global Payments for the actual checkout and payment methods, Money Management for payouts, and Revenue and Finance Automation for Billing, Invoicing, and Sigma reporting. Passing on a fee is really a pricing decision, so Invoicing under Revenue and Finance Automation is where you'll do the actual work, not anywhere in the Payments section.",
+      "image": { "file": "/screenshots/Z5WaJbOjZek/02.webp", "caption": "Stripe's dashboard navigation, showing Billing and Invoicing grouped under Revenue and Finance Automation." }
     },
     {
-      "heading": "Set up the surcharge in your checkout flow",
-      "body": "Configure your store or invoicing system to automatically apply the calculated fee to each transaction."
+      "heading": "Open Invoices and start from a real draft",
+      "body": "In the left sidebar under Billing, click Invoices to see every invoice tied to your account — drafts, open, past due, and paid, each with its total, customer, and due date. Working from an actual invoice rather than a hypothetical is the fastest way to see how a small fee changes the total, since you can watch the amount due update in real time as you add items.",
+      "image": { "file": "/screenshots/Z5WaJbOjZek/03.webp", "caption": "The Invoices list in Stripe's Billing section, showing draft and open invoices with their totals and customer details." }
     },
     {
-      "heading": "Review compliance rules",
-      "body": "Check the surcharge regulations in your region and card network rules, since some countries and card types restrict adding surcharges."
+      "heading": "Add the fee as its own line item",
+      "body": "Open an invoice for editing and use the Items section to add a line beyond your normal product or service — \"Add a new line item\" lets you create one labeled something like \"Processing fee\" with the calculated amount, sitting next to your existing catalog items. This keeps the fee visible and separate on the invoice PDF and payment page rather than silently baked into your price, which matters both for transparency and for your own bookkeeping later.",
+      "image": { "file": "/screenshots/Z5WaJbOjZek/04.webp", "caption": "Editing a draft invoice, adding a line item alongside catalog products, with the invoice preview updating on the right." }
     },
     {
-      "heading": "Communicate transparently with customers",
-      "body": "Make sure customers can clearly see any added fee before completing their purchase to maintain trust."
+      "heading": "Or build it in as a rate, the way you would tax",
+      "body": "If a separate line item feels too conspicuous, Stripe's \"Add tax rate\" dialog offers a second pattern worth knowing about even though it's meant for sales tax: you can define a rate with a percentage and choose whether to show it exclusive of the price or included in it. That \"Include tax in price\" toggle is the same mechanic you'd want for a fee baked into the sticker price rather than itemized — set the rate, choose Included, and the surcharge is absorbed into the number the customer sees rather than appearing as an extra line.",
+      "image": { "file": "/screenshots/Z5WaJbOjZek/05.webp", "caption": "The Add tax rate dialog, with fields for rate type, region, percentage, and whether the amount is included in or added on top of the price." }
+    },
+    {
+      "heading": "Check the compliance rules before you turn it on",
+      "body": "Surcharging real customers isn't universally allowed. Several US states restrict or ban credit card surcharges outright, Visa and Mastercard both cap surcharges and require advance notice to the card networks in some cases, and rules differ again outside the US. Confirm your state and the card networks you accept before adding a live surcharge to customer-facing invoices — building the cost into your base price instead sidesteps most of this, since a higher price isn't a regulated surcharge.",
+      "image": null
+    },
+    {
+      "heading": "Make the fee visible before checkout",
+      "body": "Whichever method you use, the amount needs to be clear before the customer pays, not discovered afterward. An itemized line labeled clearly as a processing fee is the most transparent option and the easiest to defend if a customer asks about it; a price that already includes the cost is simpler for the customer to read but requires you to explain it in your terms or FAQ instead. Test the finished invoice or payment page as a customer would see it before sending it to anyone for real."
     }
   ],
   "faq": [
     {
       "question": "Is it legal to pass Stripe fees to customers?",
-      "answer": "This depends on your country and the card network's rules, since some regions restrict or regulate surcharging, so it's worth checking local regulations."
+      "answer": "This depends on your country, state, and the card network's rules — several US states restrict credit card surcharges and Visa/Mastercard both cap them, so check local regulations before enabling one."
     },
     {
       "question": "Will Stripe automatically calculate the surcharge for me?",
-      "answer": "Stripe doesn't automatically add surcharges by default, so you'll typically need to calculate and apply the fee yourself in your pricing or checkout setup."
+      "answer": "No. Stripe doesn't add surcharges by default — you add the fee yourself, either as a separate line item on an invoice or built into the price using the same rate tool used for tax."
     },
     {
       "question": "Does passing on fees affect customer trust?",
-      "answer": "It can, which is why being transparent about any added surcharge before checkout is important for maintaining customer trust."
+      "answer": "It can, which is why being transparent about any added surcharge before checkout — an itemized line is the clearest way — is important for maintaining customer trust."
     },
     {
       "question": "Can I just increase my prices instead of adding a visible fee?",
-      "answer": "Yes, building the fee into your base price is an alternative to a visible surcharge and avoids some surcharge compliance requirements."
+      "answer": "Yes. Building the fee into your base price, using the \"Include tax in price\" style setting on a rate, avoids showing a separate surcharge line and sidesteps most surcharge-specific compliance rules."
+    },
+    {
+      "question": "Where in Stripe do I add a fee to an invoice?",
+      "answer": "Open Billing, then Invoices, edit a draft, and use the Items section to add a new line item, or use the Add tax rate dialog to build a percentage-based fee into the price."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T09:00:00Z",
+  "deep": true
 }

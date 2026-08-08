@@ -2,27 +2,32 @@
   "slug": "how-to-remove-domain-forwarding-squarespace-add-restore-dns-2026-easily",
   "seoTitle": "Remove Domain Forwarding in Squarespace and Restore DNS",
   "metaDescription": "Cancel a Squarespace domain forwarding rule and restore your original DNS records, including default A and CNAME values.",
-  "intro": "Whether you're canceling forwarding or switching to a new destination, removing a Squarespace domain forwarding rule takes just a minute. This guide also covers restoring your original DNS records afterward so your site keeps working correctly.",
+  "intro": "Domain forwarding is handy when you're pointing an old or extra domain somewhere else, but it's easy to set up and then forget about — until you need to undo it. Maybe the promotion it supported has ended, or you're switching the domain to point at a different site entirely. Removing the rule itself only takes a couple of clicks inside the domain's settings, but leaving it at that can strand your domain with no working DNS records at all. This guide walks through deleting the forwarding rule and, just as importantly, putting your original A and CNAME records back so the domain resolves correctly again.",
   "steps": [
     {
-      "heading": "Log in and open Forwarding",
-      "body": "Sign in to Squarespace, select the website tied to the domain, then click Website in the left sidebar and scroll to Forwarding."
+      "heading": "Open the domain in your Squarespace account",
+      "body": "Log in to Squarespace and go to the Domains section of your account, then select the domain you want to change. The overview page shows its status and, if forwarding is active, a line right under the domain name confirming where it currently forwards to and which provider is handling it. That confirmation is worth checking first — it tells you the rule is live and gives you the exact destination URL, which is useful to have on hand in case you want to reference it later or set the same forward up again elsewhere.",
+      "image": { "file": "/screenshots/SiBL_XyoXAs/02.webp", "caption": "The domain overview page, showing the domain as Active and forwarding to another site until the rule is removed." }
     },
     {
-      "heading": "Find the rule to remove",
-      "body": "Each rule is listed with its subdomain, like @ or www, and its destination URL."
+      "heading": "Go to Website settings and find Domain Forwarding",
+      "body": "From the domain's side menu, click Website to reach the connection and forwarding settings. Scroll down and you'll find a Domain Forwarding section listing every rule currently set up for that domain, each with its source, destination, redirect type, and forward-path setting laid out in a row. Next to each rule are two small icons — a pencil to edit it and a trash can to delete it. This is the same panel you'd use to add a new rule, so it's worth a glance at the whole list before deleting anything, in case there's more than one rule and you only want to remove one of them.",
+      "image": { "file": "/screenshots/SiBL_XyoXAs/03.webp", "caption": "The Domain Forwarding panel, listing an active rule with its destination, redirect type, and the edit and delete icons on the right." }
     },
     {
-      "heading": "Delete the rule",
-      "body": "Click the trash icon or Delete button next to the rule, then confirm the deletion when prompted."
+      "heading": "Delete the forwarding rule",
+      "body": "Click the trash icon next to the rule you want to remove and confirm the deletion when Squarespace asks you to. The rule disappears from the list immediately, and the panel switches to a \"No domain forwarding\" message with a prompt to add a rule if you ever need one again. At this point the domain still resolves however its underlying DNS records say to — forwarding was just a layer on top of that, so removing it doesn't touch the DNS records themselves.",
+      "image": { "file": "/screenshots/SiBL_XyoXAs/04.webp", "caption": "The Domain Forwarding panel after the rule is deleted, now showing \"No domain forwarding\" with a button to add a new rule." }
     },
     {
-      "heading": "Restore your DNS records (optional)",
-      "body": "Go to Settings, Domains, DNS Settings, and re-add records that were removed for forwarding, such as an A record for @ pointing to 198.185.159.144 and a CNAME for www pointing to ext-cust.squarespace.com."
+      "heading": "Restore your DNS records",
+      "body": "If setting up forwarding earlier meant removing or changing your original DNS records, deleting the rule won't put those back automatically — you need to re-add them yourself. Go to the domain's DNS section and add an A record for @ pointing to 198.185.159.144, plus a CNAME record for www pointing to ext-cust.squarespace.com, which is Squarespace's standard default setup for a domain connected to one of its own sites. If your domain was pointed at something other than a Squarespace site before forwarding, use whatever records that host originally gave you instead.",
+      "image": null
     },
     {
-      "heading": "Wait for propagation",
-      "body": "Changes can take a few minutes to go live and up to 24 hours to fully propagate across networks."
+      "heading": "Give it time to propagate",
+      "body": "DNS changes aren't instant everywhere at once — expect the update to show up within a few minutes in most places, but allow up to 24 hours for it to fully propagate across every network. If you check right away and still see the old forwarding destination, that's almost always a caching issue rather than a sign something went wrong. Clear your browser cache, try an incognito window, or check from a different network like your phone's mobile data — any of those will usually show you the corrected result while the rest of the internet catches up.",
+      "image": null
     }
   ],
   "faq": [
@@ -41,7 +46,12 @@
     {
       "question": "I still see the old redirect after removing the rule — why?",
       "answer": "This is usually a caching issue. Try clearing your browser cache, using incognito mode, or checking from a mobile network."
+    },
+    {
+      "question": "Where do I find the delete option for a forwarding rule?",
+      "answer": "Open the domain in Squarespace, click Website in the side menu, and scroll to Domain Forwarding — each rule has a trash icon next to it."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T09:00:00Z",
+  "deep": true
 }

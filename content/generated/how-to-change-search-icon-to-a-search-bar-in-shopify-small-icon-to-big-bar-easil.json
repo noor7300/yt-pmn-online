@@ -2,37 +2,45 @@
   "slug": "how-to-change-search-icon-to-a-search-bar-in-shopify-small-icon-to-big-bar-easil",
   "seoTitle": "Change Shopify Search Icon to a Full Search Bar",
   "metaDescription": "Replace the small magnifying glass icon in your Shopify header with a full, visible search bar to improve store design and make searching easier.",
-  "intro": "Many Shopify themes only show a small search icon in the header, which means customers have to click before they can even start typing. This guide explains how to swap that icon out for a larger, always-visible search bar to make your store easier to navigate.",
+  "intro": "Many Shopify themes, Dawn included, only show a small magnifying-glass icon in the header, which means a customer has to click it and wait for a modal before they can type anything. This guide shows where that icon actually lives in your theme's code, how to find the exact line rendering it, and what to change so a full search field is visible in the header by default instead of hidden behind a click. It's a code edit, not a theme-setting toggle, so knowing exactly where to look saves you from scrolling through hundreds of lines of header.liquid by hand.",
   "steps": [
     {
-      "heading": "Identify your theme's header search element",
-      "body": "Locate where the search icon lives in your theme's header section, since this is what needs to be replaced with a visible bar."
+      "heading": "See what you're starting with",
+      "body": "On a default Dawn theme, the storefront header shows your logo, navigation links, a country/currency selector, and a small magnifying-glass search icon over on the right — customers click that icon to open a search modal rather than typing directly into a visible field. This is the behavior you're changing: everything else in the header stays put, only the search element itself gets swapped for something bigger and always visible.",
+      "image": { "file": "/screenshots/CWSEIGwgMgY/05.webp", "caption": "The default storefront header on the Dawn theme, with only a small search icon next to the account and cart icons." }
     },
     {
-      "heading": "Apply the code changes for the search bar",
-      "body": "Using the referenced code snippet, update the relevant theme file so the icon-only search is replaced with a full input field."
+      "heading": "Open your theme's code editor",
+      "body": "From Shopify admin, go to Online Store → Themes, find your current theme card, and click the \"...\" menu next to Customize. This opens a dropdown with View, Rename, Duplicate, Download theme file, Edit code, and Edit default theme content — choose Edit code to get into the theme's raw files rather than the visual customizer, since this change isn't available as a drag-and-drop setting.",
+      "image": { "file": "/screenshots/CWSEIGwgMgY/03.webp", "caption": "The theme's dropdown menu in Online Store > Themes, with Edit code as the option that opens the raw theme files." }
     },
     {
-      "heading": "Adjust styling to fit your theme",
-      "body": "Fine-tune the width, padding, and placement of the new search bar so it fits naturally with your store's existing header design."
+      "heading": "Find the header-search render tag",
+      "body": "Inside the code editor, open header.liquid from the sections folder and use the built-in search (or your browser's find) to locate the line that renders the search element — in Dawn this is a render tag calling 'header-search' with an input ID tied to the search modal. This single line is the hook for the whole feature: it's what swaps in the icon-triggered modal, and it's the piece you need to replace or wrap with your own markup to get a persistent visible bar instead.",
+      "image": { "file": "/screenshots/CWSEIGwgMgY/04.webp", "caption": "header.liquid open in the code editor, with the render 'header-search' line located via the file's built-in search." }
     },
     {
-      "heading": "Preview the change across devices",
-      "body": "Check how the search bar looks and behaves on both desktop and mobile to make sure it doesn't break your header layout."
+      "heading": "Swap in the search bar markup",
+      "body": "Replace the icon-only render with markup for a visible input field and submit button, styled to sit inline in the header rather than popping a modal. Because Dawn's exact class names and layout can shift between theme versions, work from a known-good snippet rather than writing the HTML from scratch, and paste it into the same spot the original render tag occupied so the rest of the header's flexbox layout doesn't shift around it. Save the file once it's in place — Shopify's code editor autosaves changes but won't reflect them on your live storefront until you preview and confirm the layout holds.",
+      "image": null
     },
     {
-      "heading": "Publish and test the search functionality",
-      "body": "Once you're happy with the appearance, save the changes and test that searches still return the correct results."
+      "heading": "Adjust the styling for desktop and mobile",
+      "body": "A search bar sized for desktop will often overflow or crowd your logo and cart icon on mobile widths, so check the header at a phone-sized viewport specifically, not just full desktop width. Dawn's header uses a small-hide/medium-hide class pattern for responsive elements, which is worth reusing rather than inventing new breakpoints — it keeps your search bar's behavior consistent with how the rest of the header already responds to screen size."
+    },
+    {
+      "heading": "Preview, save, and confirm search still works",
+      "body": "Before publishing, use the theme preview to click into the new bar and actually run a search, confirming it still returns real product results rather than just looking correct. It's easy to get the visual part right while accidentally breaking the form's action or input name in the process, so this test matters more than it might seem — a search bar that looks great but returns nothing is worse than the small icon it replaced."
     }
   ],
   "faq": [
     {
       "question": "Will this work with any Shopify theme?",
-      "answer": "The general approach applies broadly, but exact code and file locations can vary by theme, so some adjustment may be needed depending on which theme you use."
+      "answer": "The general approach applies broadly — find the header search render tag and replace it with visible input markup — but exact code and file locations vary by theme, so Dawn's specific line names won't match every theme exactly."
     },
     {
       "question": "Do I need coding experience to make this change?",
-      "answer": "Basic comfort editing theme code is helpful since the process involves modifying header files rather than using a built-in toggle."
+      "answer": "Basic comfort editing theme code is helpful since the process involves modifying header.liquid directly rather than using a built-in toggle in the theme customizer."
     },
     {
       "question": "Will a bigger search bar slow down my site?",
@@ -40,8 +48,13 @@
     },
     {
       "question": "Can I revert back to the small icon later?",
-      "answer": "Yes, since the change is made in your theme code, you can undo or restore the original icon-only search if you change your mind."
+      "answer": "Yes — since the change lives in header.liquid, you can restore the original render 'header-search' line to bring back the icon-only modal if you change your mind."
+    },
+    {
+      "question": "Where exactly is the code I need to edit?",
+      "answer": "In Online Store → Themes → Edit code, inside the sections folder's header.liquid file — search the file for 'header-search' to jump straight to the relevant line."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }
