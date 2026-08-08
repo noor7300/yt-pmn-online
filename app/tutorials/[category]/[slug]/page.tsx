@@ -25,7 +25,13 @@ export async function generateMetadata({
   const tutorial = getTutorialBySlug(slug);
   if (!tutorial) return {};
 
+  // Prefer the first screenshot the page actually shows — a share preview
+  // should look like the page behind it. The handful of articles where no
+  // frame survived curation fall back to the video's thumbnail. Site-relative
+  // paths are resolved against metadataBase in the root layout.
+  const stepImage = tutorial.article.steps.find((s) => s.image)?.image?.file;
   const thumb = tutorial.video.thumbnails.maxres ?? tutorial.video.thumbnails.medium ?? tutorial.video.thumbnails.high;
+  const ogImage = stepImage ?? thumb?.url;
 
   return {
     title: tutorial.article.seoTitle,
@@ -34,7 +40,7 @@ export async function generateMetadata({
     openGraph: {
       title: tutorial.article.seoTitle,
       description: tutorial.article.metaDescription,
-      images: thumb ? [thumb.url] : [],
+      images: ogImage ? [ogImage] : [],
       type: "article",
     },
     robots: isIndexable(tutorial) ? { index: true, follow: true } : { index: false, follow: true },
