@@ -7,9 +7,10 @@ import { RelatedTutorials } from "@/components/RelatedTutorials";
 import { ScreenshotGallery } from "@/components/ScreenshotGallery";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
+import { TableOfContents } from "@/components/TableOfContents";
 import { articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, SITE_OWNER } from "@/lib/site";
-import { toParagraphs } from "@/lib/format";
+import { toParagraphs, headingAnchors } from "@/lib/format";
 
 export function generateStaticParams() {
   // Only visible tutorials get built; hidden (not-yet-deep) ones 404.
@@ -67,8 +68,19 @@ export default async function TutorialPage({
     ? article.steps.flatMap((s) => (s.image ? [s.image.file] : []))
     : shots.map((s) => s.file);
 
+  const stepAnchors = headingAnchors(article.steps.map((s) => s.heading));
+  const tocItems = [
+    ...article.steps.map((step, i) => ({ id: stepAnchors[i], label: step.heading })),
+    ...(article.faq.length ? [{ id: "faq-heading", label: "Frequently asked questions" }] : []),
+  ];
+
   return (
-    <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    // Three columns on wide screens so the article stays centred and the
+    // contents sit in the gutter beside it; a single column below that.
+    <div className="mx-auto grid max-w-7xl gap-x-8 px-4 py-10 sm:px-6 xl:grid-cols-[minmax(0,1fr)_48rem_minmax(0,1fr)]">
+      <TableOfContents items={tocItems} />
+
+      <article className="mx-auto w-full max-w-3xl">
       <JsonLd data={articleSchema(tutorial, url, schemaImages)} />
       {faq && <JsonLd data={faq} />}
       <JsonLd
@@ -105,7 +117,10 @@ export default async function TutorialPage({
       <div className="mt-10 space-y-10">
         {article.steps.map((step, i) => (
           <section key={step.heading}>
-            <h2 className="flex items-baseline gap-3 text-xl font-bold tracking-tight text-foreground">
+            <h2
+              id={stepAnchors[i]}
+              className="flex scroll-mt-24 items-baseline gap-3 text-xl font-bold tracking-tight text-foreground"
+            >
               <span className="gradient-text shrink-0 font-mono text-base font-semibold">
                 {String(i + 1).padStart(2, "0")}
               </span>
@@ -143,7 +158,8 @@ export default async function TutorialPage({
 
       <FaqBlock items={article.faq} />
 
-      <RelatedTutorials tutorials={related} categoryLabel={video.categoryLabel} />
-    </article>
+        <RelatedTutorials tutorials={related} categoryLabel={video.categoryLabel} />
+      </article>
+    </div>
   );
 }

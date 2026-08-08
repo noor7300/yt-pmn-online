@@ -15,6 +15,23 @@ export function articleWordCount(article: { intro: string; steps: { body: string
   return text.split(/\s+/).filter(Boolean).length;
 }
 
+/** Anchor ids for a list of headings, in order. Ids double as shareable deep
+ * links, so they're derived from the heading text rather than its position;
+ * a repeated heading gets a numeric suffix so every id stays unique. */
+export function headingAnchors(headings: string[]): string[] {
+  const seen = new Map<string, number>();
+  return headings.map((heading) => {
+    const base =
+      heading
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "section";
+    const count = seen.get(base) ?? 0;
+    seen.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count + 1}`;
+  });
+}
+
 /** Trim prose to a whole word near `max` characters, adding an ellipsis. */
 export function excerpt(text: string, max = 180): string {
   if (text.length <= max) return text;

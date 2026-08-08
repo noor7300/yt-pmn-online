@@ -51,6 +51,14 @@ body {
   color: var(--foreground);
 }
 
+/* Anchor jumps from the table of contents glide rather than snap — but only
+   for readers who haven't asked the OS to reduce motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 .gradient-brand {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
 }

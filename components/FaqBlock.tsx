@@ -6,7 +6,7 @@ export function FaqBlock({ items }: { items: FaqItem[] }) {
   return (
     <section aria-labelledby="faq-heading" className="mt-14 border-t border-line pt-10">
       <span className="text-xs font-semibold uppercase tracking-wide text-accent-strong">FAQ</span>
-      <h2 id="faq-heading" className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">
+      <h2 id="faq-heading" className="mt-1.5 scroll-mt-24 text-2xl font-bold tracking-tight text-foreground">
         Frequently asked questions
       </h2>
       <div className="mt-6 divide-y divide-line rounded-xl border border-line">
