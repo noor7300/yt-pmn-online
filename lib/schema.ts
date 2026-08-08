@@ -1,27 +1,6 @@
 import { SITE_NAME, SITE_OWNER, SITE_URL } from "./site";
 import type { PublishedTutorial } from "./data";
 
-export function videoObjectSchema(t: PublishedTutorial) {
-  const { video } = t;
-  const thumb = video.thumbnails.maxres ?? video.thumbnails.high ?? video.thumbnails.medium ?? video.thumbnails.default;
-  return {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: video.title,
-    description: t.article.intro,
-    thumbnailUrl: thumb ? [thumb.url] : [],
-    uploadDate: video.publishedAt,
-    duration: video.durationISO,
-    embedUrl: `https://www.youtube.com/embed/${video.id}`,
-    contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
-    interactionStatistic: {
-      "@type": "InteractionCounter",
-      interactionType: "https://schema.org/WatchAction",
-      userInteractionCount: video.viewCount,
-    },
-  };
-}
-
 export function articleSchema(t: PublishedTutorial, url: string, imagePaths: string[] = []) {
   return {
     "@context": "https://schema.org",

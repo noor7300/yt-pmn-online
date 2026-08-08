@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getVisibleTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
-import { VideoEmbed } from "@/components/VideoEmbed";
 import { FaqBlock } from "@/components/FaqBlock";
 import { RelatedTutorials } from "@/components/RelatedTutorials";
 import { ScreenshotGallery } from "@/components/ScreenshotGallery";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { videoObjectSchema, articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, SITE_OWNER } from "@/lib/site";
 import { toParagraphs } from "@/lib/format";
 
@@ -52,7 +51,6 @@ export default async function TutorialPage({
   if (!tutorial || tutorial.video.category !== categorySlug) notFound();
 
   const { video, article } = tutorial;
-  const thumb = video.thumbnails.maxres ?? video.thumbnails.medium ?? video.thumbnails.high;
   const url = `${SITE_URL}/tutorials/${video.category}/${video.slug}`;
   const related = getRelatedTutorials(tutorial);
   const shots = getScreenshots(video.id);
@@ -65,7 +63,6 @@ export default async function TutorialPage({
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <JsonLd data={videoObjectSchema(tutorial)} />
       <JsonLd data={articleSchema(tutorial, url, schemaImages)} />
       {faq && <JsonLd data={faq} />}
       <JsonLd
@@ -139,16 +136,6 @@ export default async function TutorialPage({
       {!article.deep && <ScreenshotGallery shots={shots} videoId={video.id} title={video.title} />}
 
       <FaqBlock items={article.faq} />
-
-      <section id="video-walkthrough" className="mt-14 scroll-mt-20 border-t border-line pt-10">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">Watch the full walkthrough</h2>
-        <p className="mt-2 text-sm text-muted">
-          The same steps, demonstrated on screen from start to finish.
-        </p>
-        <div className="mt-5">
-          {thumb && <VideoEmbed videoId={video.id} title={video.title} thumbnailUrl={thumb.url} />}
-        </div>
-      </section>
 
       <RelatedTutorials tutorials={related} categoryLabel={video.categoryLabel} />
     </article>
