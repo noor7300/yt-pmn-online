@@ -1,47 +1,45 @@
 {
   "slug": "how-to-create-rich-filter-in-jira-2026-easily-setup-smart-rich-filter-in-jira",
   "seoTitle": "How to Create a Rich Filter in Jira (Setup Guide)",
-  "metaDescription": "Set up smart rich filters in Jira to build advanced dashboards, track KPIs, and visualize project data more effectively for better decisions.",
-  "intro": "Standard filters can only take your Jira reporting so far, but rich filters let you build more dynamic dashboards for tracking KPIs and project data. This guide walks through creating a rich filter in Jira and adding it to your dashboard as a gadget.",
+  "metaDescription": "Install Rich Filters for Jira Dashboards, build a smart filter with JQL clauses, and use it to power more dynamic reporting than a standard saved filter.",
+  "intro": "Standard Jira filters can only take your reporting so far — they're static lists that don't let you layer conditions or visualize results the way a real dashboard needs. Rich Filters for Jira Dashboards, an Atlassian Marketplace app, fills that gap by adding smart, JQL-backed filters that plug straight into dashboard gadgets. This guide covers installing the app, creating your first rich filter, and building the JQL-based clauses that make it \"smart\" rather than just another saved search.",
   "steps": [
     {
-      "heading": "Create a new filter",
-      "body": "Start by building a saved filter in Jira using your search criteria, such as project, status, or assignee."
+      "heading": "Install Rich Filters from the Atlassian Marketplace",
+      "body": "From your Jira sidebar, open Apps, then Explore more apps, and search for Rich Filters for Jira Dashboards, built by Appfire. The listing shows its rating, install count, and a Cloud Fortified trust badge, along with an overview video demonstrating dynamic dashboards and gadgets — worth a quick watch before installing so you know what the finished result looks like. Click Add to install it into your site; once added, it shows up under Your apps in the sidebar as Rich Filters.",
+      "image": { "file": "/screenshots/VIKaRifpPng/01.webp", "caption": "The Rich Filters for Jira Dashboards listing on the Atlassian Marketplace, showing its rating, install count, and an overview video of dynamic dashboards." }
     },
     {
-      "heading": "Configure smart filter options",
-      "body": "Adjust the filter's settings to fit the dynamic conditions you want, such as date ranges or issue type combinations."
+      "heading": "Create a new rich filter",
+      "body": "Open Rich Filters from your app list and click Create rich filter. The dialog asks for a Name for the filter and a Jira filter to base it on — this base filter is what narrows down which issues the rich filter starts working with, so pick or search for an existing saved filter that already scopes to the right project, board, or issue type before building anything smarter on top of it.",
+      "image": { "file": "/screenshots/VIKaRifpPng/03.webp", "caption": "The Create rich filter dialog, with a Name field and a Jira filter dropdown used to select the base filter the rich filter will build on." }
     },
     {
-      "heading": "Add the filter as a dashboard gadget",
-      "body": "From your Jira dashboard, add a gadget and select your saved rich filter so its results display visually."
+      "heading": "Build a smart clause with JQL",
+      "body": "Inside the new rich filter, go to Static filters or Dynamic filters and click Create smart clause. Give the clause a name and color, then write the condition in the JQL field — as you type, Jira suggests matching values, for example autocompleting status names like Delivery, Discovery, or Done as you type `status = `. Each clause becomes a selectable filter option on the dashboard, so name them for what a viewer would actually want to click, not just their JQL syntax.",
+      "image": { "file": "/screenshots/VIKaRifpPng/04.webp", "caption": "The Create a smart clause dialog, with a JQL field showing autocomplete suggestions for a status condition." }
     },
     {
-      "heading": "Fine-tune the gadget display",
-      "body": "Adjust how the gadget presents the filtered data, whether as a list, chart, or summary view."
+      "heading": "Edit clauses as your reporting needs change",
+      "body": "Any existing clause can be reopened through Edit smart clause, where you can rewrite the JQL entirely — for instance swapping a simple status condition for something more specific like tracking a chart's date range or a custom field. This is normal maintenance rather than a sign something broke; rich filters are meant to be refined as the questions your team is asking evolve.",
+      "image": { "file": "/screenshots/VIKaRifpPng/05.webp", "caption": "The Edit smart clause dialog, showing an existing clause's JQL being changed to reference a different condition." }
     },
     {
-      "heading": "Use it for ongoing reporting",
-      "body": "Revisit and refine the filter as your project evolves so your dashboard keeps reflecting accurate, up-to-date data."
+      "heading": "Add the rich filter as a dashboard gadget",
+      "body": "From any Jira dashboard, click Add gadget and search for the Rich Filters gadget, then select the rich filter you built. Viewers see your named smart clauses as clickable filter options rather than a JQL box, and the gadget's results update instantly as they switch between clauses — this is the payoff for building clauses with clear, human-readable names in the earlier step."
+    },
+    {
+      "heading": "Keep it useful for ongoing reporting",
+      "body": "Revisit the rich filter periodically as sprints, statuses, or team structure change, since a clause built around a status or field that no longer exists will just return empty results without any obvious warning. Treating the filter as a living part of your dashboard, rather than something you set up once and forget, is what keeps the reporting actually reflecting current project data."
     }
   ],
   "faq": [
-    {
-      "question": "Do I need admin access to create rich filters?",
-      "answer": "No, most Jira users with standard permissions can create and save filters, though dashboard sharing settings may vary by project."
-    },
-    {
-      "question": "Can I share a rich filter with my team?",
-      "answer": "Yes, saved filters can be shared with specific users, groups, or the whole project depending on your permissions."
-    },
-    {
-      "question": "How is a rich filter different from a basic search?",
-      "answer": "A rich filter is a saved, reusable search that you can turn into a dashboard gadget, unlike a one-off basic search."
-    },
-    {
-      "question": "Can rich filters help track sprint velocity?",
-      "answer": "Yes, when paired with the right gadgets, rich filters can support reporting on completed work and team velocity over time."
-    }
+    { "question": "Do I need admin access to create rich filters?", "answer": "No — installing the Rich Filters app requires admin permissions, but once it's added to your site, most users with standard Jira permissions can create and save their own rich filters." },
+    { "question": "Can I share a rich filter with my team?", "answer": "Yes, rich filters are added as dashboard gadgets, so anyone with access to that dashboard can see and use the smart clauses you've built." },
+    { "question": "How is a rich filter different from a basic search?", "answer": "A rich filter is built from named, JQL-backed smart clauses that plug into a dashboard gadget, letting viewers click between saved conditions instead of typing or re-running a one-off JQL search." },
+    { "question": "What is a smart clause in Rich Filters?", "answer": "A smart clause is a named, colored JQL condition — for example a specific status or date range — that becomes a selectable filter option once added to a rich filter." },
+    { "question": "Can rich filters help track sprint velocity?", "answer": "Yes, when a rich filter's clauses are built around relevant statuses or date fields and paired with the right dashboard gadgets, they can support reporting on completed work and team velocity over time." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T09:30:00Z",
+  "deep": true
 }

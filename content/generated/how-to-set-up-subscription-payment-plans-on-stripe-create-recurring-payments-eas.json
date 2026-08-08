@@ -1,43 +1,44 @@
 {
   "slug": "how-to-set-up-subscription-payment-plans-on-stripe-create-recurring-payments-eas",
   "seoTitle": "Set Up Subscription Payment Plans on Stripe (2026)",
-  "metaDescription": "Create subscription products, configure recurring monthly or annual pricing, and test billing in Stripe before switching your store to live mode.",
-  "intro": "Subscriptions power everything from SaaS tools to membership sites, and Stripe makes the underlying billing manageable if you set it up in the right order. This guide walks through creating a subscription product, configuring recurring pricing, connecting it to checkout, and testing the whole flow safely before going live.",
+  "metaDescription": "Create a subscription product in Stripe, set recurring pricing, and test the full billing flow in Sandbox before switching your store to live mode.",
+  "intro": "Subscriptions power everything from SaaS tools to membership sites, and Stripe makes the underlying billing manageable as long as you build and test it in the right order. The dashboard's Sandbox mode is the key piece most guides skip past — it lets you build a real test subscription with real pricing before a single live charge happens. This guide walks through creating a subscription product, setting recurring pricing, and using Stripe's built-in test-subscription tool to confirm everything works before you flip to live mode.",
   "steps": [
     {
       "heading": "Create a subscription product in Stripe",
-      "body": "Start by setting up a product specifically intended for recurring billing, which forms the basis for your subscription plan."
+      "body": "In your Stripe dashboard, open Product catalog and add a new product intended for recurring billing rather than a one-time charge. Give it a clear name and description, since this is what customers will see on their invoice every billing cycle — vague product names are a common source of \"what is this charge\" support tickets down the line."
     },
     {
-      "heading": "Set up recurring pricing options",
-      "body": "Choose a billing interval such as monthly or annual, so Stripe knows how often to charge subscribers automatically."
+      "heading": "Open Billing and Subscriptions",
+      "body": "From the left sidebar, expand Billing and select Subscriptions, or use the Subscriptions shortcut near the top of the dashboard. Note the banner across the top of the screen confirming you're working in a sandbox — changes made here don't touch your live account, which makes this the safe place to build out your first subscription flow before anything goes live.",
+      "image": { "file": "/screenshots/NVyyXhvPFsQ/03.webp", "caption": "The Stripe dashboard in Sandbox mode, with Billing expanded to show Overview, Subscriptions, Invoices, and Usage-based in the left sidebar." }
     },
     {
-      "heading": "Integrate subscription checkout",
-      "body": "Connect the subscription price to your checkout page so customers can sign up and start their billing cycle directly."
+      "heading": "Set up recurring pricing on your product",
+      "body": "When creating a test subscription, Stripe walks you through Subscription details, where Pricing lists the product with its quantity and total — this is where the recurring price actually gets attached, whether that's a flat monthly fee or a metered rate. Add the product, confirm the price and quantity are correct, and use Add coupon here if you're testing a promotional rate before it goes live.",
+      "image": { "file": "/screenshots/NVyyXhvPFsQ/04.webp", "caption": "Stripe's Create a test subscription screen, with a customer field, a Duration set to \"Forever,\" and a product priced at $11.00 USD under Pricing." }
     },
     {
-      "heading": "Test in Test Mode, then switch to Live Mode",
-      "body": "Run through the subscription flow in Stripe's Test Mode to confirm everything works, then switch to Live Mode once you're confident before accepting real payments."
+      "heading": "Set the billing start date and duration",
+      "body": "Scroll to Bill starting and pick the date the first charge should go out — Stripe defaults to today but lets you pick any future date from the calendar picker, which is useful if you're onboarding a customer mid-cycle or offering a delayed first charge. The Duration field above it controls whether the subscription runs indefinitely or for a fixed number of cycles, so set that intentionally rather than leaving it on whatever Stripe defaults to.",
+      "image": { "file": "/screenshots/NVyyXhvPFsQ/05.webp", "caption": "The Bill starting date picker inside Create a test subscription, with August 20, 2025 selected as the start date." }
+    },
+    {
+      "heading": "Connect the price to your checkout page",
+      "body": "Once the recurring price exists on your product, link it to a Stripe Checkout session or Payment Link so customers can actually subscribe from your site rather than through the dashboard. This is the step that turns a price you configured internally into something a real customer can click and pay for — test it the same way you tested the subscription itself, by walking through the checkout flow as if you were the customer."
+    },
+    {
+      "heading": "Test fully in Sandbox, then switch to Live Mode",
+      "body": "Before accepting a single real payment, run through the entire flow in Sandbox: create a test subscription, confirm the invoice generates correctly, and check that a cancellation actually stops future billing. Once everything behaves as expected, toggle from Sandbox to Live Mode in the dashboard — your subscription and pricing setup carries over, and from that point on the same flow processes real customer payments."
     }
   ],
   "faq": [
-    {
-      "question": "What kinds of businesses benefit from Stripe subscriptions?",
-      "answer": "Subscriptions work well for memberships, SaaS products, digital products, or any service billed monthly or yearly."
-    },
-    {
-      "question": "Can customers cancel their subscription themselves?",
-      "answer": "Cancellations and billing cycles can be managed from your Stripe dashboard, and the guide covers handling cancellations alongside invoices."
-    },
-    {
-      "question": "Should I test subscriptions before going live?",
-      "answer": "Yes, Stripe's Test Mode lets you simulate the full subscription flow so you can catch issues before switching to Live Mode."
-    },
-    {
-      "question": "How do I switch from Test Mode to Live Mode?",
-      "answer": "Once you've confirmed your subscription setup works correctly in Test Mode, you toggle over to Live Mode in your Stripe dashboard to start accepting real payments."
-    }
+    { "question": "What kinds of businesses benefit from Stripe subscriptions?", "answer": "Subscriptions work well for memberships, SaaS products, digital products, or any service billed on a recurring monthly or annual basis." },
+    { "question": "Can customers cancel their subscription themselves?", "answer": "Cancellations and billing cycles can be managed from your Stripe dashboard under Billing → Subscriptions, and you can also expose self-service cancellation through the customer portal." },
+    { "question": "Should I test subscriptions before going live?", "answer": "Yes — Stripe's Sandbox mode lets you build and run a full test subscription, including pricing, billing start date, and invoicing, so you can catch issues before switching to Live Mode." },
+    { "question": "How do I switch from Sandbox to Live Mode?", "answer": "Once you've confirmed your subscription setup works correctly in Sandbox, you toggle over to Live Mode in your Stripe dashboard, and your product and pricing configuration carries over to start accepting real payments." },
+    { "question": "Where do I set the billing start date for a subscription?", "answer": "Inside the Create a test subscription flow, the Bill starting field lets you pick any date from a calendar picker, defaulting to the current day if you don't change it." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T09:25:00Z",
+  "deep": true
 }

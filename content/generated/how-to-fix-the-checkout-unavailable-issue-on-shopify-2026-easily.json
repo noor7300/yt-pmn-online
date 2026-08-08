@@ -1,20 +1,43 @@
 {
   "slug": "how-to-fix-the-checkout-unavailable-issue-on-shopify-2026-easily",
   "seoTitle": "Fix \"Checkout Unavailable\" Issue on Shopify",
-  "metaDescription": "Shopify checkout showing as unavailable? Learn how to check payment settings, fix gateway errors, and update domain and SSL to get orders flowing again.",
-  "intro": "A \"Checkout Unavailable\" message on Shopify usually means something in your payment setup, checkout configuration, or theme is preventing customers from completing an order. This guide covers the main causes and how to work through them so your store can process orders again.",
+  "metaDescription": "Shopify checkout showing as unavailable? Learn how to check your plan, fix payment provider setup, review checkout settings, and confirm domain/SSL status.",
+  "intro": "A \"Checkout Unavailable\" message is one of the more alarming things you can see on a live Shopify store, because it means customers who want to give you money literally cannot. The good news is that it almost always traces back to one of a handful of causes: an inactive plan, a payment provider that isn't switched on, a checkout setting fighting with a theme or app, or a domain that lost its SSL connection. This guide walks through checking each of those in order, using the actual admin screens involved, so you can find the real cause instead of guessing and get orders flowing again.",
   "steps": [
-    { "heading": "Check your payment provider settings", "body": "Review your active payment provider in Shopify Admin to confirm it's properly connected and not showing any setup errors." },
-    { "heading": "Look for checkout configuration issues", "body": "Go through your checkout settings to spot any misconfigurations that could be blocking the checkout process entirely." },
-    { "heading": "Rule out theme or app conflicts", "body": "Temporarily disable recently added apps or check for theme customizations that might be interfering with checkout." },
-    { "heading": "Confirm your domain and SSL status", "body": "Verify your domain is properly connected and that SSL is active, since checkout can become unavailable if the store isn't securely reachable." },
-    { "heading": "Test the full checkout flow", "body": "Once changes are made, walk through a full test order to confirm customers can now reach and complete checkout without issues." }
+    {
+      "heading": "Understand what actually breaks checkout",
+      "body": "Before changing anything, it helps to know what \"Checkout Unavailable\" really means: Shopify is refusing to render the checkout step for a reason on your side, not the customer's. The three usual suspects are a payment provider that was never fully activated, a checkout configuration that conflicts with a theme or an installed app, and a plan or billing status that no longer qualifies the store for checkout. Working through them in that order avoids the common trap of digging into theme code when the real problem is a toggle in Settings."
+    },
+    {
+      "heading": "Confirm your plan supports checkout",
+      "body": "Open your plan page from the admin and check that you're on an active, paid plan rather than a lapsed trial — Shopify will quietly disable checkout if billing isn't current. The plan comparison screen lists exactly what each tier includes, and it's worth confirming here that nothing about your current plan (like inventory locations or staff accounts) is the reason a feature you rely on stopped working. If you recently changed plans or your trial just ended, this is usually the fastest explanation to rule in or out.",
+      "image": { "file": "/screenshots/u7idksZp8GQ/03.webp", "caption": "The plan comparison screen in Shopify admin, showing Basic, Grow, Advanced, and Plus side by side — worth checking if checkout stopped working right after a trial or billing change." }
+    },
+    {
+      "heading": "Activate a payment provider",
+      "body": "Go to Settings, then Payments, and look at Supported payment methods. If a provider like PayPal shows an \"Activate\" button instead of being connected, that gap is a direct cause of checkout being unavailable for any customer trying to use it — the option appears in your storefront but has nothing behind it to process the charge. Click through and finish activation, and while you're on the page, check the Payment capture method section to make sure a capture rule wasn't left in a broken manual state that's stalling orders."
+    },
+    {
+      "heading": "Rule out theme or app conflicts",
+      "body": "With payments confirmed active, temporarily disable any app you installed recently, especially ones that touch checkout, shipping, or currency conversion — these are the most common source of checkout-breaking conflicts. If disabling an app clears the problem, reach out to that app's support before reinstalling, since the fix is usually a compatibility update rather than removing it for good. It's also worth switching to Shopify's default theme briefly if you've made recent custom code changes, just to confirm the theme isn't the source."
+    },
+    {
+      "heading": "Confirm your domain and SSL status",
+      "body": "Under Settings, then Domains, verify your primary domain shows as connected with no pending DNS changes, and that SSL is marked active rather than provisioning. A domain that lost its SSL certificate, often after a recent DNS edit elsewhere, will make checkout unreachable even though the rest of the storefront loads fine, because checkout specifically requires a secure connection. If SSL shows as pending for more than a few hours, that delay itself is the issue worth chasing down."
+    },
+    {
+      "heading": "Run a full test order to confirm the fix",
+      "body": "Once you've addressed the likely cause, walk through an actual purchase from product page to confirmation using a real card or Shopify's Bogus Gateway in test mode. Add an item, proceed to checkout, and fill in the delivery details exactly as a customer would — reaching the payment step and completing an order is the only reliable confirmation that the fix worked. If checkout still fails at this stage, go back through the previous steps in order rather than jumping to a new theory.",
+      "image": { "file": "/screenshots/u7idksZp8GQ/02.webp", "caption": "A completed checkout delivery form with order summary and total — this is the screen you should be able to reach and fill out once the fix has actually taken." }
+    }
   ],
   "faq": [
-    { "question": "What usually causes \"Checkout Unavailable\" on Shopify?", "answer": "It's commonly tied to a payment provider that isn't set up correctly, misconfigured checkout settings, or a conflict from a theme or app." },
-    { "question": "Can an app cause checkout to break?", "answer": "Yes, certain apps can interfere with checkout, so temporarily disabling recently installed ones is a useful troubleshooting step." },
-    { "question": "Does SSL status affect checkout availability?", "answer": "Yes, an SSL or domain connection problem can prevent checkout from loading properly for customers." },
-    { "question": "How do I confirm the issue is fixed?", "answer": "Running a complete test order through checkout is the most reliable way to confirm the problem is resolved." }
+    { "question": "What usually causes \"Checkout Unavailable\" on Shopify?", "answer": "It's commonly tied to a payment provider that isn't fully activated, a lapsed plan or trial, misconfigured checkout settings, or a conflict from a theme or app." },
+    { "question": "Can an app cause checkout to break?", "answer": "Yes, certain apps — especially ones touching shipping, currency, or checkout customization — can interfere with checkout, so temporarily disabling recently installed ones is a useful troubleshooting step." },
+    { "question": "Does SSL status affect checkout availability?", "answer": "Yes, an SSL or domain connection problem can prevent checkout from loading properly for customers, since checkout specifically requires a secure connection to your domain." },
+    { "question": "Could my Shopify plan be the reason checkout is unavailable?", "answer": "It can be. If your trial has ended or a payment on your Shopify subscription failed, checkout can be disabled until billing is resolved, so it's worth checking your plan status early in troubleshooting." },
+    { "question": "How do I confirm the issue is fixed?", "answer": "Running a complete test order through checkout — from adding a product to reaching the payment step — is the most reliable way to confirm the problem is resolved." }
   ],
-  "generatedAt": "2026-07-24T00:06:00.000Z"
+  "generatedAt": "2026-08-08T09:00:00Z",
+  "deep": true
 }

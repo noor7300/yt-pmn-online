@@ -1,47 +1,64 @@
 {
   "slug": "how-to-change-primary-email-on-google-workspace-2026-easily",
   "seoTitle": "How to Change Primary Email on Google Workspace",
-  "metaDescription": "Learn how to safely change a user's primary email address in Google Workspace in 2026 without losing access to Gmail, Drive, or Calendar.",
-  "intro": "Whether you need to fix a typo, update a username, or rebrand an account, changing a primary email address in Google Workspace is a task best done carefully to avoid disrupting access. This guide walks through the safest way to do it from the Admin Console.",
+  "metaDescription": "Learn how to update the primary admin contact email in Google Workspace's Account settings, including verifying your identity and saving the change.",
+  "intro": "The primary admin email in Google Workspace is where Google sends service notices, billing alerts, and account-critical messages — if it's pointing at an old address, a typo, or an inbox nobody checks anymore, you can miss things that matter. This guide walks through the Account settings page where that address lives, how to switch into the right admin account first, and how to update the primary contact email without losing anything already configured.",
   "steps": [
     {
-      "heading": "Log in to the Admin Console",
-      "body": "Sign in with a super admin account, since primary email changes require admin-level access."
+      "heading": "Make sure you're signed into the right admin account",
+      "body": "If you manage more than one Google account, open the account switcher from your profile circle in the top right of any Google page. It lists every account you're signed into — in a typical setup you might see the same organization name attached to two different addresses, plus a separate admin account for another property entirely. Click the one tied to the Workspace organization whose contact email you're actually changing before going any further.",
+      "image": { "file": "/screenshots/WPgaZso5ivs/02.webp", "caption": "The account chooser, listing multiple signed-in Google accounts under similar names — worth checking carefully before making admin changes." }
     },
     {
-      "heading": "Locate the user",
-      "body": "Find the account whose primary email you want to change from the Users list."
+      "heading": "Re-verify your identity for admin.google.com",
+      "body": "Opening the Admin Console after a break often triggers a fresh identity check: Google shows the organization name and asks you to re-enter your password before continuing, confirming it's really the account owner making changes. This step is normal for any admin-level action and isn't specific to email changes — enter your password and click Next to proceed into the console.",
+      "image": { "file": "/screenshots/WPgaZso5ivs/03.webp", "caption": "Google's identity verification screen, shown before granting access to the Admin Console." }
     },
     {
-      "heading": "Change the primary email address",
-      "body": "Update the username field to the new primary email, which effectively renames the account's main address."
+      "heading": "Go to Account settings, then Profile",
+      "body": "In the Admin Console's left menu, expand Account and select Account settings, then open the Profile tab. This page holds your organization's core details — Customer ID, organization Name, and a Contact info section that controls where Google sends service emails, payment notifications, and other account-level messages. It's a different page from the Directory, where you'd manage individual users' login usernames — Profile is about the account's own contact details."
     },
     {
-      "heading": "Understand aliases versus primary email",
-      "body": "Know that an alias is a secondary address that still reaches the same inbox, while the primary email is the account's main identifier used for login."
+      "heading": "Review the current Contact info",
+      "body": "The Contact info card shows two fields: a Primary admin address, which is where most service and billing notifications go, and a Secondary email as a backup contact. Note down both before changing anything, since the edit pencil icon next to this section opens both fields for editing at once and it's easy to overwrite the secondary email by accident while focused on updating the primary one.",
+      "image": { "file": "/screenshots/WPgaZso5ivs/04.webp", "caption": "The Account settings Profile page, showing Customer ID, organization Name, and the Contact info card with Primary admin and Secondary email fields." }
     },
     {
-      "heading": "Confirm access is preserved",
-      "body": "After the change, verify the user can still log in and access Gmail, Drive, and Calendar without any interruption."
+      "heading": "Edit the primary admin address",
+      "body": "Click the pencil icon on Contact info to switch the fields into edit mode. The primary admin field splits into two parts — a username box on the left and a domain dropdown on the right, letting you pick from any domain or alias verified on your account rather than typing the full address by hand. Update the username portion, confirm the correct domain is selected in the dropdown, and leave the secondary email field alone unless you're deliberately changing that too.",
+      "image": { "file": "/screenshots/WPgaZso5ivs/05.webp", "caption": "Contact info in edit mode — a separate username field and a domain dropdown for the primary admin address, plus the secondary email field below." }
+    },
+    {
+      "heading": "Save and understand what this does and doesn't change",
+      "body": "Save the new address once you're satisfied it's correct. This updates where Google routes account-level notifications; it does not delete, move, or affect any Gmail, Drive, or Calendar data tied to the account, and it's a different setting from an individual user's login username in the Directory. If your goal was actually to rename a specific user's sign-in address rather than the organization's contact email, that change happens from Directory → Users → that person's account instead of this Profile page."
+    },
+    {
+      "heading": "Confirm the change took effect",
+      "body": "Give it a few minutes, then revisit Account settings → Profile and check that the Contact info card reflects the new primary admin address. If you're relying on this address for billing or security alerts, it's worth triggering a low-stakes notification — like a test from the Billing section — to confirm mail is actually arriving at the new inbox rather than assuming the save was enough."
     }
   ],
   "faq": [
     {
-      "question": "Will changing the primary email delete any of the user's data?",
-      "answer": "No, changing the primary email address doesn't affect existing Gmail, Drive, or Calendar data — it simply updates the account's main login identifier."
+      "question": "Will changing the primary admin email delete any of the account's data?",
+      "answer": "No. Updating Contact info in Account settings only changes where Google sends service and billing notifications — it doesn't affect Gmail, Drive, or Calendar data, and it's separate from any individual user's login credentials."
     },
     {
-      "question": "Can a user change their own primary email address?",
-      "answer": "This typically requires admin access, so most users will need to request the change from their Workspace admin."
+      "question": "Is the primary admin contact email the same as a user's login username?",
+      "answer": "No. The primary admin address in Account settings → Profile controls where organization-level notices go. Changing an individual user's sign-in address is a separate action done from Directory → Users."
     },
     {
-      "question": "What's the difference between an alias and the primary email?",
-      "answer": "An alias is an additional address that still delivers to the same mailbox, while the primary email is the account's official login and display address."
+      "question": "Why does Google ask for my password again before I can open the Admin Console?",
+      "answer": "This is a routine identity check for admin-level actions, especially after time away from the console. It confirms the person making changes is actually the account owner, and isn't specific to editing contact info."
     },
     {
-      "question": "How long does it take for a primary email change to take effect?",
-      "answer": "The change usually applies quickly, though it can take some time to fully propagate across all connected Google services."
+      "question": "Can I pick any domain for the primary admin address?",
+      "answer": "The domain dropdown in the edit view only lists domains and aliases already verified on your Workspace account, so you can't set the primary admin address to a domain you haven't added and verified first."
+    },
+    {
+      "question": "How long does it take for the new contact email to take effect?",
+      "answer": "The change itself saves quickly, but it's worth waiting a few minutes and then confirming on the Profile page, or triggering a test notification, before relying on the new address for anything time-sensitive like billing alerts."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }

@@ -1,20 +1,45 @@
 {
   "slug": "how-to-change-dns-on-namecheap-add-dns-records-like-txt-cname-mx-easily-2026",
   "seoTitle": "Change DNS on Namecheap: Add TXT, CNAME & MX Records",
-  "metaDescription": "Learn how to access Namecheap's DNS management panel and add or edit TXT, CNAME, and MX records for email, domain verification, and hosting.",
-  "intro": "Managing DNS records in Namecheap lets you connect email services, verify domain ownership, and configure third-party hosting, but it means understanding how records like TXT, CNAME, and MX each work. This guide covers accessing the DNS panel and adding these records correctly.",
+  "metaDescription": "Learn how to access Namecheap's Advanced DNS panel and add or edit TXT, CNAME, and MX records for email, domain verification, and hosting.",
+  "intro": "Managing DNS records in Namecheap lets you connect email services, verify domain ownership, and point subdomains at third-party hosting, but the panel packs a lot of record types into one screen and it's easy to edit the wrong row. This guide walks through finding a domain's Advanced DNS panel, reading the existing host records so you don't overwrite something that's already working, and adding a new TXT, CNAME, or MX record correctly.",
   "steps": [
-    { "heading": "Access the DNS management panel", "body": "Log in to Namecheap and open the Advanced DNS section for the domain you want to update." },
-    { "heading": "Add or edit a TXT record", "body": "TXT records are commonly used for domain verification, so add one with the exact value provided by the service requesting it." },
-    { "heading": "Add or edit a CNAME record", "body": "CNAME records point a subdomain to another domain name, useful for connecting services like email platforms or third-party tools." },
-    { "heading": "Add or edit an MX record", "body": "MX records route email for your domain, so set the priority and mail server values exactly as your email provider specifies." },
-    { "heading": "Confirm records are set up correctly", "body": "Double-check each record for typos and allow propagation time before troubleshooting further if a service isn't verifying." }
+    {
+      "heading": "Open your domain list",
+      "body": "Log in to Namecheap and land on the Domain List screen in the dashboard, which shows every domain on your account along with its status, auto-renew setting, and expiration date. Find the domain you need to edit and confirm it shows as Active — a domain that's expired or in a locked state won't let DNS changes take effect properly. Click Manage next to the domain to move into its individual settings.",
+      "image": { "file": "/screenshots/PqtYvU1erbU/01.webp", "caption": "The Domain List screen in Namecheap, showing a domain's active status and the Manage button that opens its individual settings." }
+    },
+    {
+      "heading": "Go to Advanced DNS",
+      "body": "Inside the domain's detail page you'll see tabs for Domain, Products, Sharing & Transfer, and Advanced DNS — click Advanced DNS, since that's the only tab that exposes host records. The page briefly shows a loading state while it pulls the domain's current DNS configuration, which is normal and usually resolves within a second or two.",
+      "image": { "file": "/screenshots/PqtYvU1erbU/03.webp", "caption": "A domain's detail page in Namecheap with the tab bar visible — Advanced DNS is the tab that leads to host records." }
+    },
+    {
+      "heading": "Read the existing host records before changing anything",
+      "body": "Once Advanced DNS loads, you'll see a Host Records table listing every record currently active on the domain, with columns for Type, Host, Value, and TTL. Take a moment to scan what's already there — in a typical setup you might find a CNAME record used for domain verification alongside URL Redirect records pointing the domain elsewhere — so you know what's safe to leave alone versus what you're actually here to add or edit.",
+      "image": { "file": "/screenshots/PqtYvU1erbU/04.webp", "caption": "The Host Records table under Advanced DNS, listing a domain's current CNAME and URL Redirect records with their type, host, value, and TTL." }
+    },
+    {
+      "heading": "Add a new TXT, CNAME, or MX record",
+      "body": "Click Add New Record at the bottom of the table, then use the Type dropdown to choose TXT Record, CNAME Record, or MX Record depending on what the service you're connecting requires. Fill in the Host field with the subdomain or prefix specified — often `@` for the root domain or a specific value like `www` — and paste the Value exactly as provided, since a single mismatched character will cause verification or mail delivery to fail. Leave TTL on Automatic unless a service specifically asks for a shorter value.",
+      "image": { "file": "/screenshots/PqtYvU1erbU/05.webp", "caption": "A new CNAME record being added in the Host Records table, with Host, Value, and TTL fields open and the Add New Record / Save All Changes buttons below." }
+    },
+    {
+      "heading": "Save and double-check the record",
+      "body": "Click the green checkmark next to the row, or Save All Changes if you added more than one record, and Namecheap will validate the entry immediately — a red warning icon next to a field means something in that row needs fixing before it saves. Once saved, reopen Advanced DNS and confirm the new record appears exactly as intended in the table, since a typo here is much easier to catch now than after a service has already failed to verify."
+    },
+    {
+      "heading": "Allow time for DNS propagation",
+      "body": "DNS changes on Namecheap don't take effect instantly everywhere — propagation can take anywhere from a few minutes to about 48 hours depending on the record's TTL and how various networks cache DNS data. If a service like Google Workspace or Microsoft 365 says it can't find your new record right after saving, wait before troubleshooting further; re-checking too early is the most common reason people assume a correctly entered record is broken."
+    }
   ],
   "faq": [
-    { "question": "What is a TXT record typically used for?", "answer": "TXT records are most often used to verify domain ownership for services like email providers or third-party platforms." },
-    { "question": "Why would I need to add an MX record?", "answer": "MX records tell the internet where to deliver email for your domain, so they're essential if you're setting up custom email service." },
-    { "question": "How can I speed up DNS propagation?", "answer": "You can't force it directly, but lowering the TTL value ahead of time can help changes take effect faster." },
-    { "question": "What happens if I enter a DNS record incorrectly?", "answer": "An incorrect record can prevent verification or email delivery from working, so it's worth double-checking values against what the service provided." }
+    { "question": "What is a TXT record typically used for?", "answer": "TXT records are most often used to verify domain ownership for services like Google Workspace, Microsoft 365, or other third-party platforms that need proof you control the domain." },
+    { "question": "Why would I need to add an MX record?", "answer": "MX records tell the internet where to deliver email for your domain, so they're essential if you're setting up custom email hosting through a provider other than your registrar." },
+    { "question": "How can I speed up DNS propagation?", "answer": "You can't force it directly, but lowering the TTL value on a record ahead of a planned change can help updates take effect faster across the internet afterward." },
+    { "question": "What happens if I enter a DNS record incorrectly?", "answer": "An incorrect record can prevent domain verification or email delivery from working, so it's worth comparing your entry character-for-character against what the service provided before saving." },
+    { "question": "Do I need to touch existing records to add a new one?", "answer": "No — adding a new TXT, CNAME, or MX record is done through Add New Record, and your existing host records stay untouched unless you specifically edit or delete them." }
   ],
-  "generatedAt": "2026-07-24T00:23:00.000Z"
+  "generatedAt": "2026-08-08T09:10:00Z",
+  "deep": true
 }

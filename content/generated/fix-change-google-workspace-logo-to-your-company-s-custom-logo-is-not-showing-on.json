@@ -1,47 +1,44 @@
 {
   "slug": "fix-change-google-workspace-logo-to-your-company-s-custom-logo-is-not-showing-on",
   "seoTitle": "Fix: Google Workspace Custom Logo Not Showing",
-  "metaDescription": "Troubleshoot and fix a custom company logo that isn't displaying in Google Workspace, plus how to properly upload and update your branding.",
-  "intro": "Your company logo is part of how your brand shows up across Gmail and other Workspace apps, so it's frustrating when an upload doesn't take effect. This guide covers common causes of a missing logo and how to fix and update it correctly.",
+  "metaDescription": "Troubleshoot a custom company logo that isn't displaying in Google Workspace, and learn exactly where to upload and update it in the Admin console.",
+  "intro": "Your company logo is one of the few branding touches Google Workspace exposes across Gmail and other apps, which makes it frustrating when an upload just doesn't take. Most of the time the fix isn't complicated — it's finding the right settings page, since the logo control lives a few clicks deep inside Account settings rather than somewhere obvious like a branding menu. This guide walks through signing into the Admin console, locating the Personalisation section, and correctly uploading a logo so it actually appears.",
   "steps": [
     {
-      "heading": "Understand the issue",
-      "body": "A logo not displaying is usually caused by an incorrect file format, size mismatch, or a delay in Google syncing the change across services."
+      "heading": "Sign in to the Google Admin console",
+      "body": "Only an account with admin privileges on your Workspace domain can change the organization-wide logo, so start by signing in with your admin email at admin.google.com. If you land on a password verification screen showing your admin address, that's expected — Google routinely re-confirms identity before letting you into account-level settings.",
+      "image": { "file": "/screenshots/fsAo4VK_q8s/03.webp", "caption": "The Google sign-in verification screen for an admin account. Only an account with admin rights on your Workspace domain can change the organization's logo." }
     },
     {
-      "heading": "Check your image requirements",
-      "body": "Make sure your logo file meets Google's recommended dimensions and format before uploading, since an oversized or unsupported file often fails silently."
+      "heading": "Open Account settings",
+      "body": "Once inside the Admin console, expand Account in the left sidebar and click Account settings. This section covers everything tied to your organization as a whole — account management, personalisation, conflicting accounts, and legal and compliance — rather than settings for an individual user or device, which is why it's easy to overlook if you're used to looking in Apps or Security instead."
     },
     {
-      "heading": "Go to the branding settings",
-      "body": "In the Admin Console, find the company profile or branding section where the custom logo upload option lives."
+      "heading": "Find the Personalisation section and confirm no logo is set",
+      "body": "Scroll down Account settings until you reach Personalisation, which shows a Logo field. If your upload silently failed, this is where it'll be obvious — the field will read \"No logo set\" even though you're sure you uploaded something. Seeing this confirms the problem is that the logo never actually saved, rather than a caching or display delay elsewhere in Workspace.",
+      "image": { "file": "/screenshots/fsAo4VK_q8s/04.webp", "caption": "The Account settings page in the Admin console, with the Personalisation section showing \"Logo — No logo set,\" confirming the upload didn't take." }
     },
     {
       "heading": "Upload the corrected logo",
-      "body": "Replace the existing file with a properly sized image and save the change, then check whether it appears immediately or needs time to propagate."
+      "body": "Click into Personalisation and choose Custom logo, then use Upload from device or By URL to add your image — Google requires the file to be in JPEG, PNG, or GIF format, and an unsupported format is one of the most common reasons an upload fails without any error message. If you're replacing an existing logo, as in a case where a placeholder image was already set, the current image shows in the preview box so you can confirm you're overwriting the right one before saving.",
+      "image": { "file": "/screenshots/fsAo4VK_q8s/05.webp", "caption": "The Custom logo section under Personalisation, with an existing logo preview and the Upload from device and By URL options used to replace it." }
     },
     {
-      "heading": "Confirm the logo displays correctly",
-      "body": "Check Gmail and other Workspace apps after saving to confirm your new logo is showing up as expected across your organization."
+      "heading": "Save and check for propagation delay",
+      "body": "Click Save at the bottom of the Personalisation panel, then check Gmail and other Workspace apps. A correctly uploaded logo in the right format usually shows up within minutes, but it can occasionally take longer to appear everywhere as the change rolls out across services — give it some time before assuming the upload failed again."
+    },
+    {
+      "heading": "Confirm it displays consistently for your organization",
+      "body": "Once the new logo appears for you, have another user in your organization check their own Gmail or Workspace apps, since the logo is set at the account level and should be identical for everyone, not something each person configures individually. If it's showing correctly for you but not for others after enough time has passed, that's worth flagging to Google support rather than re-uploading the same file again."
     }
   ],
   "faq": [
-    {
-      "question": "Why isn't my custom logo showing up in Google Workspace?",
-      "answer": "This is often caused by an incorrect image size or format, or simply a delay before the change propagates across all Workspace services."
-    },
-    {
-      "question": "What image format works best for a Google Workspace logo?",
-      "answer": "Google generally recommends a PNG file within their specified dimension guidelines for the clearest, most consistent display."
-    },
-    {
-      "question": "How long does it take for a new logo to appear?",
-      "answer": "Once uploaded correctly, it can take anywhere from a few minutes to a few hours to fully appear across all apps and users."
-    },
-    {
-      "question": "Do all users see the same company logo?",
-      "answer": "Yes, once set by an admin, the custom logo applies organization-wide and appears consistently for all users."
-    }
+    { "question": "Why isn't my custom logo showing up in Google Workspace?", "answer": "This is most often caused by the upload not actually saving — check Account settings → Personalisation and confirm it doesn't still read \"No logo set\" — or by an unsupported image format." },
+    { "question": "What image format works best for a Google Workspace logo?", "answer": "Google accepts JPEG, PNG, or GIF files for a custom logo; using an unsupported format is a common reason an upload fails silently." },
+    { "question": "How long does it take for a new logo to appear?", "answer": "Once uploaded correctly, it can take anywhere from a few minutes to a few hours to fully appear across all apps and users." },
+    { "question": "Do all users see the same company logo?", "answer": "Yes, once set by an admin in Account settings, the custom logo applies organization-wide and should appear consistently for every user." },
+    { "question": "Do I need admin access to change the logo?", "answer": "Yes — the logo lives under Account settings in the Admin console, which only accounts with admin privileges on the Workspace domain can access." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T09:15:00Z",
+  "deep": true
 }

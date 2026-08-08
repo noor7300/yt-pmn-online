@@ -1,43 +1,55 @@
 {
   "slug": "how-to-create-stripe-checkout-page-easily-2026",
   "seoTitle": "How to Create a Stripe Checkout Page",
-  "metaDescription": "Set up a Stripe Checkout page by adding products and pricing, generating a checkout link, and embedding it on your website.",
-  "intro": "A hosted checkout page makes it easy to accept payments without building custom payment forms yourself. This guide covers how to set up Stripe Checkout, add products and pricing, and embed or link the checkout page on your website or online store.",
+  "metaDescription": "Set up a Stripe Checkout page: start from the dashboard, add a product and price, generate a payment link, and share it or embed it on your website.",
+  "intro": "Stripe's hosted Checkout is the fastest way to start taking payments without building a custom payment form or handling card data yourself. Instead of writing integration code, you create a product, generate a link, and Stripe hosts a secure page that takes care of the rest — Apple Pay, cards, and other payment methods included. This guide follows the actual dashboard screens for creating a payment link end to end, from the product setup to the shareable URL you hand to customers.",
   "steps": [
     {
-      "heading": "Enable Stripe Checkout in your dashboard",
-      "body": "Log into your Stripe dashboard and locate the Checkout section to begin setting up a new checkout flow."
+      "heading": "Start from your Stripe dashboard",
+      "body": "Log into your Stripe dashboard and you'll land on the Today overview, showing gross volume, USD balance, and payouts at a glance. Stripe surfaces setup recommendations directly on this page — including a prompt to \"embed a payment form on your site or redirect to a Stripe-hosted page,\" which is exactly the Checkout flow this guide sets up. Your API keys are also visible here in test mode, useful later if you want to move beyond a simple link into a coded integration.",
+      "image": { "file": "/screenshots/t00uAQ-G-1g/03.webp", "caption": "The Stripe dashboard Today view, with balance figures, a setup recommendation to embed a payment form, and test API keys." }
     },
     {
-      "heading": "Add products and pricing",
-      "body": "Create the product listings and set their prices so Checkout knows what customers are paying for."
+      "heading": "Create a payment link and add your product",
+      "body": "From Payment Links, click Create a payment link. On the Payment page tab, add your product — either an existing one from your catalog or a new one created on the spot with a name and price. In the example, a $11.00/year subscription product called \"WP Domain Setup & Theme\" is added with its tax code and quantity settings, and a live preview of the actual checkout page updates on the right as you configure it. This preview is worth watching closely: it shows exactly what the customer will see, including which payment methods (card, Apple Pay, Klarna, bank account) appear as options.",
+      "image": { "file": "/screenshots/t00uAQ-G-1g/04.webp", "caption": "Building a payment link for a subscription product, with a live preview of the hosted checkout page showing Apple Pay and card fields." }
     },
     {
-      "heading": "Create a checkout session or link",
-      "body": "Generate a checkout link or session tied to your product so customers can complete payment through Stripe's hosted page."
+      "heading": "Configure the payment page options",
+      "body": "Below the product, Stripe gives you toggles for collecting tax automatically, collecting customer addresses, requiring a phone number, and offering a free trial. Turn on only what you actually need — every extra required field is one more chance for a customer to abandon checkout. If your product needs tax collected by jurisdiction, enable Collect tax automatically rather than trying to bake tax into the listed price by hand."
     },
     {
-      "heading": "Embed the checkout page on your site",
-      "body": "Add the checkout link or embed code to your website so customers can access it directly from your store or landing page."
+      "heading": "Generate the link",
+      "body": "Click Create link and Stripe generates a live URL on the buy.stripe.com domain (or your own connected domain, if you've set one up). This is your finished Checkout page — no separate hosting or embedding required to start using it. The link works immediately: anyone who opens it lands on the same page you previewed, ready to pay.",
+      "image": { "file": "/screenshots/t00uAQ-G-1g/05.webp", "caption": "A completed payment link for the $11.00/year product, showing the shareable URL, the product it's tied to, and enabled payment methods." }
+    },
+    {
+      "heading": "Share the link or embed it on your site",
+      "body": "The payment link page gives you more than just the URL — options for URL parameters, a Buy button, and a code snippet sit right next to it. Paste the plain link into an email, a social post, or a button on your site, or use the Buy button option if you want an embeddable widget instead of a plain link. Either way, Stripe hosts the actual payment page, so you don't need PCI compliance work on your own server."
+    },
+    {
+      "heading": "Verify payment methods before going live",
+      "body": "Check the Payment methods section under the link for which options are enabled — the example shows Card, Apple Pay, Klarna, Link, ACH direct debit, Cash App Pay, and Amazon Pay all switched on. Some of these need to be enabled separately in your account settings before they'll actually appear at checkout, so it's worth doing a real test payment in test mode before sharing the link publicly."
     }
   ],
   "faq": [
     {
       "question": "Do I need coding skills to set up Stripe Checkout?",
-      "answer": "Basic checkout links can be created without coding, though embedding a custom checkout session on your own site usually requires some development work."
+      "answer": "No. A payment link, as shown in this guide, is created entirely from the Stripe dashboard. Coding is only needed if you want a custom checkout session embedded through the API instead of a hosted link."
     },
     {
       "question": "Can I customize the look of the checkout page?",
-      "answer": "Yes, Stripe Checkout allows some branding customization, such as your logo and color scheme, within your dashboard settings."
+      "answer": "Yes, Stripe Checkout allows branding customization such as your logo and color scheme, and you can connect your own domain so the page doesn't show buy.stripe.com."
     },
     {
       "question": "Does Stripe Checkout support multiple products?",
-      "answer": "Yes, you can add multiple products and let customers select quantities or options within a single checkout session."
+      "answer": "Yes, use Add another product on the payment link builder to include more than one item, and let customers adjust quantity if needed."
     },
     {
       "question": "Is Stripe Checkout secure for customers?",
-      "answer": "Yes, Stripe Checkout is a hosted, PCI-compliant page, so sensitive card details never pass through your own server."
+      "answer": "Yes, Stripe Checkout is a hosted, PCI-compliant page, so card details are entered directly on Stripe's domain and never pass through your own server."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "deep": true
 }
