@@ -33,7 +33,7 @@ export function CategoryTutorialGrid({ categorySlug, page }: { categorySlug: str
         </h1>
         <p className="mt-3 max-w-xl text-muted">
           {category.count} free, step-by-step {category.label} guides covering setup, common tasks, fixes, and
-          best practices — each with a full video walkthrough.
+          best practices — each illustrated with screenshots from the app itself.
         </p>
       </header>
 

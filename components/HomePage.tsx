@@ -33,8 +33,8 @@ export function HomePage({ page }: { page: number }) {
           The tools that actually change how you <span className="gradient-text">work</span>.
         </h1>
         <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
-          {SITE_NAME} pairs a video walkthrough with a written guide built from the actual product — ChatGPT,
-          Claude, QuickBooks, Power BI, Notion, Figma, and {categories.length}+ more tools.
+          {SITE_NAME} walks you through each task step by step, with screenshots from the actual product —
+          ChatGPT, Claude, QuickBooks, Power BI, Notion, Figma, and {categories.length}+ more tools.
         </p>
         <div className="mt-8 flex items-center gap-6">
           <Link
@@ -70,7 +70,7 @@ export function HomePage({ page }: { page: number }) {
               Recently updated guides{currentPage > 1 ? ` — Page ${currentPage}` : ""}
             </h2>
             <p className="mt-2 max-w-lg text-muted">
-              Rewritten with real in-app screenshots and a fuller walkthrough, across different tools.
+              Rewritten with real in-app screenshots and fuller step-by-step detail, across different tools.
             </p>
           </div>
         </div>

@@ -76,8 +76,9 @@ export default function TermsPage() {
       <section>
         <h2>Third-party content</h2>
         <p>
-          Tutorial pages embed videos and link to external websites. Those services have their own
-          terms and policies, and this site has no control over their content or availability.
+          Tutorial pages link to external websites, including the official sites of the software
+          covered. Those services have their own terms and policies, and this site has no control
+          over their content or availability.
         </p>
       </section>
 

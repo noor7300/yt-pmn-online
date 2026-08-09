@@ -36,9 +36,10 @@ export default function AboutPage() {
       <section>
         <h2>What you&apos;ll find here</h2>
         <p>
-          The library currently holds {tutorialCount.toLocaleString()} tutorials. Each one pairs a
-          video walkthrough with a written guide covering the same steps, so you can either watch it
-          or skim the text — whichever is faster for the task in front of you.
+          The library currently holds {tutorialCount.toLocaleString()}{" "}
+          tutorials. Each one is a written, step-by-step guide illustrated with screenshots taken
+          from the software itself, so you can follow along at your own pace or skim straight to the
+          step you&apos;re stuck on.
         </p>
         <p>Most guides fall into one of a few shapes:</p>
         <ul>
@@ -60,11 +61,12 @@ export default function AboutPage() {
       <section>
         <h2>How the written guides are produced</h2>
         <p>
-          The written guide on each page is derived from the accompanying video walkthrough and its
-          notes, then edited for the web. Where a video covers a process that has changed since
-          recording, the written steps stay at the level the source material actually supports rather
-          than inventing detail — so you may occasionally see a guide describe an approach in general
-          terms instead of naming an exact button.
+          Each guide is written from a screen recording of the task being carried out in the real
+          product, and the screenshots on the page are frames taken from that same session. Where a
+          recording covers a process that has changed since it was made, the written steps stay at
+          the level the source material actually supports rather than inventing detail — so you may
+          occasionally see a guide describe an approach in general terms instead of naming an exact
+          button.
         </p>
         <p>
           Software interfaces change often. If you hit a step that no longer matches what you see on

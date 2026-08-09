@@ -7,9 +7,10 @@ function timecode(seconds: number): string {
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
-/** Captioned stills pulled from the walkthrough. Where the source video had
- * chapter markers the caption is that chapter's own title; otherwise the frame
- * is identified by its timecode rather than given an invented description. */
+/** Captioned stills pulled from the source screen recording. Where that
+ * recording had chapter markers the caption is that chapter's own title;
+ * otherwise the frame is identified by its position in the recording rather
+ * than given an invented description. */
 export function ScreenshotGallery({
   shots,
   videoId,
@@ -24,10 +25,10 @@ export function ScreenshotGallery({
   return (
     <section aria-labelledby="screenshots-heading" className="mt-14 border-t border-line pt-10">
       <h2 id="screenshots-heading" className="text-2xl font-bold tracking-tight text-foreground">
-        Screenshots from the walkthrough
+        Screenshots from this tutorial
       </h2>
       <p className="mt-2 text-sm text-muted">
-        Stills captured at each stage of the video, in order.
+        Stills captured at each stage of the task, in order.
       </p>
 
       <ol className="mt-6 flex flex-col gap-6">
