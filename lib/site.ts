@@ -17,11 +17,11 @@ export const SITE_EMAIL = "imp.mn007@gmail.com";
  * so it is worth keeping specific and first-person — how long you have been
  * doing this, and what you actually do to produce a guide. */
 export const SITE_OWNER_BIO =
-  "I run Easy Tech Tuts. Every guide here starts with me doing the task in the real product and recording the screen, then writing up exactly what I did — so the steps match what you'll see in front of you, not what the docs say should happen.";
+  "I'm a student, and I've been hooked on technology for as long as I can remember — especially the new tools and AI apps that seem to land every other week. Easy Tech Tuts is where I write up whatever I've just worked out: I do the task in the real product, record the screen, and turn it into the guide I wish I'd found first.";
 
-/** Headshot in /public (e.g. "/impran.webp"). Empty string falls back to a
- * monogram, so the box still looks deliberate before a photo exists. */
-export const SITE_OWNER_PHOTO = "";
+/** Headshot in /public. Empty string falls back to a monogram, so the box
+ * still looks deliberate before a photo exists. */
+export const SITE_OWNER_PHOTO = "/author.webp";
 
 /** Safety cap on the phased indexing rollout. Indexable pages are every
  * screenshot-bearing (deep) tutorial plus, filling the remaining room, the
