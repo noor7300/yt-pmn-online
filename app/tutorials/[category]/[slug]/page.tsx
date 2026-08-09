@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getVisibleTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
 import { FaqBlock } from "@/components/FaqBlock";
+import { AuthorBox } from "@/components/AuthorBox";
 import { RelatedTutorials } from "@/components/RelatedTutorials";
 import { ScreenshotGallery } from "@/components/ScreenshotGallery";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -156,7 +157,9 @@ export default async function TutorialPage({
           a page has inline step images, the labelled gallery is redundant. */}
       {!article.deep && <ScreenshotGallery shots={shots} videoId={video.id} title={video.title} />}
 
-      <FaqBlock items={article.faq} />
+        <FaqBlock items={article.faq} />
+
+        <AuthorBox />
 
         <RelatedTutorials tutorials={related} categoryLabel={video.categoryLabel} />
       </article>

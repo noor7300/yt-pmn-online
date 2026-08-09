@@ -12,6 +12,17 @@ export const SITE_DESCRIPTION =
 export const SITE_OWNER = "Impran M N";
 export const SITE_EMAIL = "imp.mn007@gmail.com";
 
+/** Bio shown in the author box under every tutorial. This is the main thing
+ * telling a reader a person stands behind 600 pages rather than a pipeline,
+ * so it is worth keeping specific and first-person — how long you have been
+ * doing this, and what you actually do to produce a guide. */
+export const SITE_OWNER_BIO =
+  "I run Easy Tech Tuts. Every guide here starts with me doing the task in the real product and recording the screen, then writing up exactly what I did — so the steps match what you'll see in front of you, not what the docs say should happen.";
+
+/** Headshot in /public (e.g. "/impran.webp"). Empty string falls back to a
+ * monogram, so the box still looks deliberate before a photo exists. */
+export const SITE_OWNER_PHOTO = "";
+
 /** Safety cap on the phased indexing rollout. Indexable pages are every
  * screenshot-bearing (deep) tutorial plus, filling the remaining room, the
  * next highest-viewed tutorials overall (see getIndexableSlugs in
