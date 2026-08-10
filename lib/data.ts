@@ -247,24 +247,63 @@ function withInlineImage(tutorials: PublishedTutorial[]): PublishedTutorial[] {
   return tutorials.filter((t) => t.article.steps.some((s) => s.image));
 }
 
-/** Homepage "Featured — Start here" picks: the deep-rewritten, real-screenshot
- * guides with the most real viewer demand, highest view count first. */
-export function getFeaturedTutorials(limit = 4, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
-  return withInlineImage(getDeepTutorials())
-    .filter((t) => !excludeIds.has(t.video.id))
-    .sort((a, b) => b.video.viewCount - a.video.viewCount)
-    .slice(0, limit);
+/** Categories each homepage feature strip draws from. Editorial picks rather
+ * than whatever the ranking happens to surface, so change these to re-point a
+ * section at different tools. */
+export const FEATURED_START_CATEGORIES = ["hostinger", "quickbooks"];
+export const FEATURED_GUIDE_CATEGORIES = ["namecheap", "chatgpt"];
+
+/** Fill `limit` slots by taking one guide from each category in turn. Round
+ * robin rather than a single sorted list, because sorting the pooled set lets
+ * the higher-traffic category take every slot and the other one never appear.
+ * Categories that run dry drop out and the rest keep filling. */
+function pickAcrossCategories(
+  categories: string[],
+  limit: number,
+  excludeIds: Set<string>,
+  rank: (a: PublishedTutorial, b: PublishedTutorial) => number
+): PublishedTutorial[] {
+  const pool = withInlineImage(getDeepTutorials()).filter((t) => !excludeIds.has(t.video.id));
+  const byCategory = categories.map((c) =>
+    pool.filter((t) => t.video.category === c).sort(rank)
+  );
+
+  const picked: PublishedTutorial[] = [];
+  for (let round = 0; picked.length < limit; round++) {
+    let addedThisRound = false;
+    for (const list of byCategory) {
+      if (picked.length >= limit) break;
+      const next = list[round];
+      if (!next) continue;
+      picked.push(next);
+      addedThisRound = true;
+    }
+    if (!addedThisRound) break; // every category exhausted
+  }
+  return picked;
 }
 
-/** Homepage "Featured guides — Deep dives worth your time" picks: the
- * longest, most thorough deep-rewritten guides with real screenshots,
- * excluding anything already used in the "Start here" picks so the two
- * sections don't repeat. */
+/** Homepage "Featured — Start here" picks, drawn from
+ * FEATURED_START_CATEGORIES with the most real viewer demand first. */
+export function getFeaturedTutorials(limit = 4, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
+  return pickAcrossCategories(
+    FEATURED_START_CATEGORIES,
+    limit,
+    excludeIds,
+    (a, b) => b.video.viewCount - a.video.viewCount
+  );
+}
+
+/** Homepage "Featured guides — Deep dives worth your time" picks, drawn from
+ * FEATURED_GUIDE_CATEGORIES longest-first, excluding anything already used in
+ * the "Start here" picks so the two sections don't repeat. */
 export function getDeepDiveGuides(limit = 2, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
-  return withInlineImage(getDeepTutorials())
-    .filter((t) => !excludeIds.has(t.video.id))
-    .sort((a, b) => articleWordCount(b.article) - articleWordCount(a.article))
-    .slice(0, limit);
+  return pickAcrossCategories(
+    FEATURED_GUIDE_CATEGORIES,
+    limit,
+    excludeIds,
+    (a, b) => articleWordCount(b.article) - articleWordCount(a.article)
+  );
 }
 
 export const HOME_PAGE_SIZE = 7;
