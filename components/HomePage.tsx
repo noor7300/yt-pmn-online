@@ -65,12 +65,15 @@ export function HomePage({ page }: { page: number }) {
       <section id="latest" className="scroll-mt-20 border-b border-line py-14">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wide text-accent-strong">Latest</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-accent-strong">
+              From the library
+            </span>
             <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-foreground sm:text-[28px]">
-              Recently updated guides{currentPage > 1 ? ` — Page ${currentPage}` : ""}
+              Guides to explore{currentPage > 1 ? ` — Page ${currentPage}` : ""}
             </h2>
             <p className="mt-2 max-w-lg text-muted">
-              Rewritten with real in-app screenshots and fuller step-by-step detail, across different tools.
+              A fresh selection each day from all {totalGuides.toLocaleString()} guides — every one
+              written from a real run-through, with screenshots from the app itself.
             </p>
           </div>
         </div>

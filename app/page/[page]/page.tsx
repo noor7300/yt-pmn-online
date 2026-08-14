@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { getDeepTutorials, HOME_PAGE_SIZE } from "@/lib/data";
 import { HomePage } from "@/components/HomePage";
 
+/** Matches the homepage: the rotation only advances if these regenerate. */
+export const revalidate = 86400;
+
 export function generateStaticParams() {
   const totalPages = Math.max(1, Math.ceil(getDeepTutorials().length / HOME_PAGE_SIZE));
   // Page 1 is served by "/"; this route covers pages 2+.
@@ -16,8 +19,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { page } = await params;
   return {
-    title: `Recently Updated Guides — Page ${page}`,
-    description: `More recently rewritten tutorial guides — page ${page}.`,
+    title: `Browse Guides — Page ${page}`,
+    description: `More step-by-step software guides from the library — page ${page}.`,
     alternates: { canonical: `/page/${page}` },
   };
 }

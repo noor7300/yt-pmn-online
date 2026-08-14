@@ -308,10 +308,40 @@ export function getDeepDiveGuides(limit = 2, excludeIds: Set<string> = new Set()
 
 export const HOME_PAGE_SIZE = 7;
 
-/** Paginated view over every deep-rewritten guide, newest-rewritten first —
- * the homepage's "Recently updated guides" feed. */
+/** Which day's rotation to show, resolved once per process rather than per
+ * call. Sorting the feed by rewrite date stopped meaning anything once every
+ * page had been rewritten — the same seven guides sat on the homepage
+ * permanently and the other 593 were reachable only by paging. Rotating the
+ * order gives the whole library a turn on page one.
+ *
+ * Pinned at module load so every page of the listing built in one pass agrees
+ * with the others. Pages regenerate independently under ISR, so a page that
+ * revalidates just after a day boundary can disagree with one that hasn't yet
+ * — worst case a guide shows up on two pages of the listing for a few hours,
+ * which is invisible in practice on a browse surface. */
+const ROTATION_SEED = Math.floor(Date.now() / 86_400_000);
+
+/** Deterministic Fisher-Yates. Has to be reproducible, not merely random: the
+ * listing spans ~86 paginated URLs, and an unseeded shuffle per page would
+ * drop some guides from the sequence entirely and repeat others. */
+function seededShuffle<T>(items: T[], seed: number): T[] {
+  const out = [...items];
+  let state = (seed * 2654435761) >>> 0;
+  const next = () => {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    return state / 4294967296;
+  };
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/** Paginated view over every deep-rewritten guide, in that day's rotation
+ * order — the homepage's browse feed. */
 export function getDeepTutorialsPaged(page: number): PagedTutorials {
-  const all = getDeepTutorials();
+  const all = seededShuffle(getDeepTutorials(), ROTATION_SEED);
   const totalPages = Math.max(1, Math.ceil(all.length / HOME_PAGE_SIZE));
   const currentPage = Math.min(Math.max(1, page), totalPages);
   const start = (currentPage - 1) * HOME_PAGE_SIZE;
