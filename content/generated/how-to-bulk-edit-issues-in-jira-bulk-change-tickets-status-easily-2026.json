@@ -2,46 +2,59 @@
   "slug": "how-to-bulk-edit-issues-in-jira-bulk-change-tickets-status-easily-2026",
   "seoTitle": "How to Bulk Edit Issues in Jira Easily",
   "metaDescription": "Learn how to select multiple Jira issues at once and use the bulk change feature to update fields, status, and assignees faster.",
-  "intro": "Editing Jira tickets one at a time can eat up a lot of time when you're managing dozens of tasks, but the bulk change feature lets you update many issues at once. This guide covers selecting multiple issues, using the bulk change option, and updating status, fields, and assignees efficiently.",
+  "intro": "Editing Jira tickets one at a time works fine for a handful of tasks, but it falls apart once a backlog grows into dozens of tickets that all need the same update. Jira's bulk operation tool solves this: select any number of issues from a list, walk through a short four-step wizard, and apply the same field changes to all of them at once. This guide follows that wizard screen by screen, from selecting issues in a real project view through the confirmation screen that shows exactly what's about to change before you commit.",
   "steps": [
     {
-      "heading": "Select multiple issues",
-      "body": "From your Jira issue list or board, select the tickets you want to edit together using the multi-select checkboxes."
+      "heading": "Start from your Jira homepage",
+      "body": "Jira's landing view lists the boards you belong to across projects, along with a \"Worked on\" feed of recently touched tickets — bugs, tasks, and stories with their keys, project, and reporter. This is a useful starting point when the issues you need to bulk-edit are spread across more than one board, since you can jump into the right project directly from here rather than hunting through the sidebar.",
+      "image": { "file": "/screenshots/jcYU1Y_mySA/01.webp", "caption": "The Jira homepage, showing recent boards and a worked-on feed of tickets across projects." }
     },
     {
-      "heading": "Open the bulk change option",
-      "body": "With issues selected, choose the bulk change action from the tools menu to begin editing them as a group."
+      "heading": "Select the issues you want to edit",
+      "body": "Open a project's work item list — Summary, Timeline, Kanban board, or the All work tab all lead here — and use the checkboxes on the left of each row to select the tickets you want to change. Selecting the header checkbox grabs everything currently filtered into view, which pairs well with the Type, Status, and More filters above the list if you first narrow it down to, say, every unassigned \"To Do\" ticket. Once issues are checked, open the \"...\" menu in the top right of the list and choose \"Bulk change work items\" to launch the wizard.",
+      "image": { "file": "/screenshots/jcYU1Y_mySA/03.webp", "caption": "A project's work item list with seven issues checked and the \"...\" menu open, showing Bulk change work items among the list options." }
     },
     {
-      "heading": "Change issue status for multiple tickets",
-      "body": "Use the bulk change workflow to move several tickets to a new status at once instead of updating each individually."
+      "heading": "Choose your bulk action",
+      "body": "The wizard opens on \"Step 2 of 4: Choose bulk action,\" confirming how many issues you selected and from how many projects. From here you pick what kind of change to make: Edit Issues to update field values, Move Issues to shift them to a different project or issue type, Transition Issues to push them through workflow statuses, or Watch/Stop Watching to manage notifications. Delete Issues appears too, though it's grayed out with a permissions note if your account isn't allowed to delete — a safeguard worth noticing before you assume it's available.",
+      "image": { "file": "/screenshots/jcYU1Y_mySA/04.webp", "caption": "Step 2 of the Bulk Operation wizard, choosing between Edit Issues, Move Issues, Transition Issues, and other bulk actions." }
     },
     {
-      "heading": "Edit fields and assignees",
-      "body": "Bulk change also lets you update fields like assignee, priority, or labels across all selected issues in one action."
+      "heading": "Set the field values to apply",
+      "body": "Choosing Edit Issues moves you to Operation Details, where you pick which fields to change and what to change them to — Priority, Assignee, Labels, and similar fields are typical candidates. This is the step where a bulk update earns its time savings: setting Priority to Medium and Assignee to a specific teammate here applies to every selected issue in one pass instead of seven separate edits."
     },
     {
-      "heading": "Review changes before confirming",
-      "body": "Jira typically shows a preview of the bulk change before applying it, so double-check the selected issues and updates are correct."
+      "heading": "Review the confirmation before committing",
+      "body": "The final screen, Confirmation, lays out exactly what's about to happen: an Updated Fields table listing each field name, the action (Change to), and the new value, plus a note on whether email notifications will fire for the update. Below that, a full table lists every affected issue by key, summary, assignee, reporter, priority, and status, so you can scan for anything you didn't mean to include before clicking Confirm.",
+      "image": { "file": "/screenshots/jcYU1Y_mySA/05.webp", "caption": "The Confirmation screen, showing Priority and Assignee changes queued for seven issues, with the full list of affected tickets below." }
+    },
+    {
+      "heading": "Confirm and verify the results",
+      "body": "Click Confirm to apply the changes. Jira processes all selected issues in the background and returns you to the list, where the updated priority, assignee, or status should now be visible across every ticket you included. It's worth spot-checking a couple of issues afterward, especially the first time you use bulk operations on a workflow with restricted transitions, since a status change that's blocked for one issue can behave differently than the rest of the batch."
     }
   ],
   "faq": [
     {
       "question": "How many Jira issues can I bulk edit at once?",
-      "answer": "Jira supports selecting and bulk editing a large number of issues at once, though very large batches may need to be split depending on your instance's performance."
+      "answer": "Jira supports selecting and bulk editing a large number of issues at once — the wizard shows the exact count you've selected on the Choose Issues step, and very large batches simply take longer to process."
     },
     {
       "question": "Can I change assignees in bulk in Jira?",
-      "answer": "Yes, the bulk change feature lets you reassign multiple issues to a different user in a single action."
+      "answer": "Yes, Assignee is one of the standard fields available on the Edit Issues path of the bulk operation wizard, letting you reassign every selected issue in one pass."
     },
     {
       "question": "Does bulk changing status trigger workflow transitions?",
-      "answer": "Yes, bulk status changes follow the same workflow rules as individual transitions, so restricted transitions still apply."
+      "answer": "Yes, the Transition Issues bulk action moves tickets through your workflow the same way an individual transition would, so any restrictions on who can make that transition still apply."
     },
     {
-      "question": "Is bulk edit available on all Jira plans?",
-      "answer": "Bulk change functionality is a core Jira feature available across standard plans."
+      "question": "Will bulk edits send notifications to watchers?",
+      "answer": "The confirmation screen tells you upfront whether email notifications will be sent for that specific update, so you can check before confirming rather than guessing."
+    },
+    {
+      "question": "Can I bulk delete issues in Jira?",
+      "answer": "Delete Issues appears as an option in the bulk operation wizard, but it's only available if your account has delete permission on the selected issues — otherwise it's shown as unavailable with a note explaining why."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "deep": true
 }

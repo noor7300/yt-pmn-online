@@ -1,22 +1,64 @@
 {
   "slug": "how-to-link-google-sheets-to-squarespace-embed-easily-2026",
-  "seoTitle": "Link or Embed Google Sheets on Squarespace",
-  "metaDescription": "Learn how to publish a Google Sheet to the web and embed it, or link it, into a Squarespace page so live data updates automatically.",
-  "intro": "Displaying live spreadsheet data on your Squarespace site is useful for reports, schedules, inventory, or pricing tables that change often. This guide covers publishing a Google Sheet to the web and either linking to it or embedding it directly into a Squarespace page.",
+  "seoTitle": "How to Link or Embed a Google Sheet on Squarespace",
+  "metaDescription": "Publish a Google Sheet to the web, copy its iframe code, and embed it in a Squarespace Code Block so live data updates on your site automatically.",
+  "intro": "Embedding a Google Sheet in Squarespace is the easiest way to put data that changes often — a price list, a class schedule, stock levels, a fixture table — on a website without editing the website every time. Once it's wired up, you update the spreadsheet and the page follows, which means anyone on your team can maintain the content without touching Squarespace at all. The whole job is two halves: publishing the sheet from Google so it's readable without a login, then dropping the code it gives you into a Squarespace block. There is one plan restriction on the Squarespace side worth knowing before you start, and this guide flags it at the point where you'll actually hit it.",
   "steps": [
-    { "heading": "Prepare your Google Sheet", "body": "Open the spreadsheet you want to share and format the content the way you want it to appear." },
-    { "heading": "Publish the sheet to the web", "body": "Go to File, then Share, then Publish to the web, and confirm publishing for the sheet you selected." },
-    { "heading": "Copy the link or embed code", "body": "Copy the shareable link if you just want a link, or open the Embed tab and copy the iframe code if you want to embed the sheet directly." },
-    { "heading": "Add a link in Squarespace", "body": "For a simple link, add a Button or Text block in Squarespace, highlight the text, and paste the shareable link." },
-    { "heading": "Embed the sheet directly", "body": "For a live embed, add a Code Block, click the pencil icon, and paste the iframe embed code." },
-    { "heading": "Customize the display size", "body": "Adjust the width and height values in the embed code, or use Squarespace's design tools to resize and position the block." }
+    {
+      "heading": "Tidy the sheet before you publish it",
+      "body": "Whatever the sheet looks like now is what your visitors will see, so spend two minutes on it first. Delete working columns you don't want public, put your headers in row one, and freeze nothing — the published view ignores most of that anyway. Keep the data tight against the top-left corner, because an embed of a sparsely used sheet shows a lot of empty grid. It's also worth making a dedicated tab holding just the public view, fed by formulas from your working tab, so you can keep messy calculations out of sight while still having one source of truth."
+    },
+    {
+      "heading": "Publish the sheet to the web",
+      "body": "In the sheet, go to File, then Share, then Publish to the web. The dialog opens with the note that the document is not yet published and two tabs across the top — Link and Embed — plus dropdowns for what to publish and in what format. Leave the format as Web page, and choose either Entire document or a single sheet using the left dropdown; picking one sheet is usually what you want, since publishing the whole document exposes every tab. This is a genuinely public URL, not a share-with-anyone-who-has-the-link permission, so treat anything you publish as visible to the world and to search engines.",
+      "image": { "file": "/screenshots/T4UTwhzO0G0/01.webp", "caption": "The Publish to the web dialog in Google Sheets, with Link and Embed tabs and dropdowns for what to publish and the output format." }
+    },
+    {
+      "heading": "Copy the embed code, not the share link",
+      "body": "Switch to the Embed tab and press Publish, and Google replaces the dropdowns with a ready-made iframe snippet pointing at a docs.google.com/spreadsheets/d/e/… address ending in /pubhtml. That trailing part carries two parameters — widget=true and headers=false — which strip Google's own chrome and row numbers so the embed looks like a table rather than a spreadsheet. Copy the whole tag including the closing angle bracket; a half-copied iframe is the single most common reason an embed shows up blank. Note the warning Google shows here: viewers may be able to reach the underlying data for published charts, so don't publish a sheet with anything confidential on another tab.",
+      "image": { "file": "/screenshots/T4UTwhzO0G0/02.webp", "caption": "The Embed tab after publishing, showing the full iframe tag with the widget and headers parameters already applied." }
+    },
+    {
+      "heading": "Paste it into a Squarespace Code Block",
+      "body": "In Squarespace, open the page, click Edit, add a block, and choose Code. Set Mode to HTML, leave Display Source Code off, and paste the iframe into the editor. Here's the catch worth knowing before you build a whole page around this: Squarespace treats JavaScript and iframe embeds as a premium feature and shows an upgrade notice right in the block, meaning the embed will not publish on the entry-level plan. It renders fine while you're editing, which fools a lot of people into thinking it worked — always check the live site, not just the editor.",
+      "image": { "file": "/screenshots/T4UTwhzO0G0/05.webp", "caption": "The Squarespace Code Block with the iframe pasted in, and the notice that JavaScript and iframe embeds require a plan upgrade to publish." }
+    },
+    {
+      "heading": "Size and position the block on the page",
+      "body": "Straight out of Google, the iframe carries no width or height, so it renders in a small default box. Add width=\"100%\" and a height in pixels to the tag before pasting, or edit it in place afterwards — height is the one that matters, since too little clips your rows and too much leaves dead space below the table. Then drag the block's handles in the Squarespace editor to place it in the section you want, and use Add Section if the sheet deserves a band of its own. Check the mobile preview using the device toggle at the top right, because a wide table that looks fine on desktop will need horizontal scrolling on a phone.",
+      "image": { "file": "/screenshots/T4UTwhzO0G0/03.webp", "caption": "The Squarespace page editor with the published sheet appearing below the section, and the Add Section control between bands." }
+    },
+    {
+      "heading": "Or just link to the sheet instead",
+      "body": "Embedding isn't always the right answer. If your sheet is wide, long, or full of formatting, a link often reads better than a squeezed-in iframe — and it works on every Squarespace plan, with no premium block involved. Add a Button block or a Text block, highlight the text, and paste the Link tab's URL from the same Publish to the web dialog. Set it to open in a new tab so visitors don't lose your site. This is also the pragmatic fallback if you hit the premium-block wall and don't want to change plans."
+    },
+    {
+      "heading": "Confirm updates flow through, then leave it alone",
+      "body": "The point of all this is that the connection is live: change a cell in Google Sheets, wait a moment, and the published page reflects it without you republishing anything in Squarespace. Test that once, properly — edit a value, hard-refresh the live page, and confirm it changed — so you trust the setup before handing it to a colleague. Google caches published output for a few minutes, so an instant refresh may still show the old value; that's normal and not a broken embed. From then on, the spreadsheet is your CMS for that block, and the website needs no further attention."
+    }
   ],
   "faq": [
-    { "question": "Will changes in my Google Sheet update automatically on Squarespace?", "answer": "Yes, since the embed is connected directly to Google Sheets, any changes you make in the sheet reflect automatically on your site." },
-    { "question": "What's the difference between linking and embedding?", "answer": "Linking sends visitors to view the sheet elsewhere, while embedding displays the live spreadsheet directly inside your Squarespace page." },
-    { "question": "Do I need to make my Google Sheet public?", "answer": "Yes, you need to publish the sheet to the web before it can be linked or embedded on your site." },
-    { "question": "Can I resize the embedded spreadsheet?", "answer": "Yes, you can adjust the width and height in the embed code or use Squarespace's design tools to resize the block." },
-    { "question": "What Squarespace block do I use to embed a sheet?", "answer": "You use a Code Block and paste the iframe embed code copied from Google Sheets." }
+    {
+      "question": "Will edits in my Google Sheet update automatically on Squarespace?",
+      "answer": "Yes. The embed points at Google's published copy, so changing a cell updates the page. Google caches the output for a few minutes, so allow a short delay before assuming it hasn't worked."
+    },
+    {
+      "question": "Do I need a paid Squarespace plan to embed a sheet?",
+      "answer": "For an iframe embed, yes. Squarespace flags JavaScript and iframe embeds as a premium feature and blocks them from publishing on the entry-level plan. Linking to the sheet with a button or text block works on any plan."
+    },
+    {
+      "question": "Does publishing to the web make my whole spreadsheet public?",
+      "answer": "It makes whatever you selected public — and choosing Entire document exposes every tab. Publish a single sheet, and keep confidential working data in a separate document rather than another tab."
+    },
+    {
+      "question": "My embed shows up blank. What went wrong?",
+      "answer": "Usually an incomplete paste — the iframe tag must include its closing bracket and closing tag. After that, check you're viewing the live site rather than the editor, and that your plan allows iframe embeds."
+    },
+    {
+      "question": "How do I make the embedded sheet fill the page width?",
+      "answer": "Add width=\"100%\" and an explicit pixel height to the iframe tag before pasting it into the Code Block, then resize the block itself in the editor and check the result in mobile preview."
+    }
   ],
-  "generatedAt": "2026-07-24T12:04:37Z"
+  "generatedAt": "2026-08-31T00:00:00.000Z",
+  "deep": true
 }

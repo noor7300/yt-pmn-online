@@ -1,47 +1,58 @@
 {
   "slug": "how-to-fix-domain-error-in-shopify-needs-attention-dns-server-error-in-custom-we",
   "seoTitle": "Fix Shopify Domain Error: Needs Attention & DNS Fix",
-  "metaDescription": "Shopify domain showing \"Needs Attention\" or a DNS server error? Learn how to fix it by updating A and CNAME records and reconnecting your custom domain.",
-  "intro": "If your Shopify domain shows \"Needs Attention\" or a DNS server error, customers may not be able to reach your store reliably. This guide walks through why that warning appears and how to correct the DNS records so your custom domain connects properly and stays live.",
+  "metaDescription": "Shopify domain showing \"Needs Attention\" or a DNS server error? Learn how to fix it by correcting your A record at the registrar so your custom domain connects properly.",
+  "intro": "A red \"Needs Attention\" badge next to your custom domain in Shopify means customers may be hitting a broken connection instead of your store, and the cause is almost always sitting in your domain registrar's DNS settings rather than in Shopify itself. This guide walks through reading Shopify's own diagnosis of the problem, understanding the two most common A record mistakes it flags, and fixing them at the registrar so the domain reconnects cleanly.",
   "steps": [
     {
-      "heading": "Understand why Shopify flags the domain",
-      "body": "Shopify shows \"Needs Attention\" or a DNS error when the domain's A Record or CNAME Record don't point to Shopify's servers, often because they were changed at the registrar or never set correctly."
+      "heading": "Open Domains in your Shopify admin",
+      "body": "From the Shopify admin, go to Settings and then Domains, and click into the domain that's showing a problem. You'll land on a page named after the domain itself, with a status tag next to it — Needs setup or Needs Attention — along with who the domain is managed by and when it was added. This detail page is where Shopify tells you precisely what's wrong instead of leaving you to guess.",
+      "image": { "file": "/screenshots/rryKF4Ffv60/01.webp", "caption": "The domain's detail page inside Shopify admin. The left sidebar shows Domains selected under Settings, with a red banner listing the specific DNS problems found." }
     },
     {
-      "heading": "Open your domain settings in Shopify Admin",
-      "body": "Go to your domain settings inside Shopify Admin to see exactly which record is causing the issue and what values Shopify expects you to set."
+      "heading": "Read the specific error Shopify reports",
+      "body": "The red banner spells out the exact issue rather than a vague error code. Two common messages appear together: \"Your domain has too many A records,\" meaning more than one A record exists for the domain and they conflict with each other, and \"Your domain's A record doesn't point to Shopify,\" meaning whatever A record is set currently points somewhere other than Shopify's servers. Both messages come with the exact IP address Shopify wants the A record set to, so there's no ambiguity about what value to enter."
     },
     {
-      "heading": "Update the A Record and CNAME Record",
-      "body": "Log in to your registrar — whether that's Namecheap, GoDaddy, or Cloudflare — and update the A Record and CNAME Record to match the values Shopify provides."
+      "heading": "Log in to your domain registrar",
+      "body": "The fix happens outside Shopify, at whichever company you registered or manage the domain through — GoDaddy, Namecheap, Cloudflare, or another provider. Find the DNS management section for that specific domain, which is usually labeled DNS Records, DNS Management, or Zone Editor depending on the registrar. This is the same place you'd go to set up email records or point the domain anywhere else, so if you've touched DNS before, the layout will look familiar."
     },
     {
-      "heading": "Save changes and allow propagation",
-      "body": "Save the DNS changes at the registrar and give them time to propagate, since updates don't always take effect instantly across the internet."
+      "heading": "Delete extra A records and set the correct one",
+      "body": "Look through the existing A records for the domain. If you see more than one, that's the \"too many A records\" issue — delete every A record except the one you're about to correct. Then set the remaining A record's value to the exact IP address Shopify's error page displayed, using @ or the root domain as the host/name field depending on your registrar's convention. Leaving stray A records in place, even ones that look harmless, is what causes intermittent connection failures where the store loads sometimes and not other times."
     },
     {
-      "heading": "Verify the connection inside Shopify",
-      "body": "Return to Shopify Admin and check that the domain now shows as connected, confirming the \"Needs Attention\" warning and DNS error have cleared."
+      "heading": "Consider Shopify's automatic connection option",
+      "body": "If your registrar is one Shopify has a direct integration with, the domain page offers a Connect automatically option that updates the DNS records on your behalf without you touching the registrar's dashboard at all. It's worth checking for this button before doing the manual edit, since it removes the risk of a typo in the IP address entirely. If your registrar isn't supported for automatic connection, the manual A record fix above is the reliable fallback."
+    },
+    {
+      "heading": "Save changes and wait for propagation",
+      "body": "Save the DNS changes at the registrar and be patient — Shopify's own note on the domain page states DNS updates can take up to 48 hours to fully take effect, even though most changes propagate much faster in practice. Come back to the same Domains page in Shopify admin periodically; once the records are correctly picked up, the Needs Attention badge and the red banner both clear on their own, and there's nothing further to click or confirm inside Shopify itself.",
+      "image": { "file": "/screenshots/rryKF4Ffv60/05.webp", "caption": "The lower part of the same error banner, with Shopify's chat prompt offering help setting up the domain if the DNS fix doesn't resolve on its own." }
     }
   ],
   "faq": [
     {
       "question": "Why does my Shopify domain say \"Needs Attention\"?",
-      "answer": "It usually means the A Record or CNAME Record at your registrar no longer matches what Shopify expects, so the connection between your domain and store is broken."
+      "answer": "It usually means the A record at your registrar doesn't match what Shopify expects — either it points to the wrong IP address or there's more than one A record set for the domain, both of which Shopify's domain page will name specifically."
     },
     {
       "question": "Does this work for domains bought outside Shopify?",
-      "answer": "Yes, the fix applies to third-party domains from registrars like Namecheap, GoDaddy, and Cloudflare, since you just need to update the DNS records there."
+      "answer": "Yes. This fix applies to third-party domains managed through registrars like GoDaddy, Namecheap, or Cloudflare — you just need to update the A record in that registrar's DNS settings, not inside Shopify."
+    },
+    {
+      "question": "What IP address should my A record point to?",
+      "answer": "Use the exact IP address shown on your own domain's error banner inside Shopify admin — it's listed directly in the error message, so there's no need to guess or search for a generic value."
     },
     {
       "question": "How long does it take for the fix to work?",
-      "answer": "DNS changes can take anywhere from a few minutes to a few hours to propagate fully, so the warning may not clear instantly."
+      "answer": "Shopify states DNS updates can take up to 48 hours to fully propagate, though in practice many changes are picked up within a few hours."
     },
     {
-      "question": "Will changing DNS records affect my email?",
-      "answer": "It can if your email uses records on the same domain, so double-check any MX records are untouched while updating A and CNAME records."
+      "question": "Will changing my A record affect my email?",
+      "answer": "It shouldn't, since email typically runs on separate MX records, but double-check your registrar's DNS list before deleting anything to make sure you're only removing extra A records, not MX or other unrelated entries."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "deep": true
 }

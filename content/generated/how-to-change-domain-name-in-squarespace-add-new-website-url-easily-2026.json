@@ -1,47 +1,68 @@
 {
   "slug": "how-to-change-domain-name-in-squarespace-add-new-website-url-easily-2026",
-  "seoTitle": "Change Your Domain Name in Squarespace (2026)",
-  "metaDescription": "Point a new or existing domain to your Squarespace website, whether you're buying one through Squarespace or connecting one you already own.",
-  "intro": "Whether you're rebranding or just picking a better web address, changing the domain pointed at your Squarespace site is a straightforward process. This guide covers both buying a new domain through Squarespace and connecting one you already own from another registrar.",
+  "seoTitle": "How to Change Your Domain Name in Squarespace (2026)",
+  "metaDescription": "Change the domain on your Squarespace site — open Settings, Domains & Email, then buy a new domain or connect one you already own and set it as primary.",
+  "intro": "Changing the web address on a Squarespace site is less about the domain itself and more about knowing which of two paths you're on: buying a fresh domain from Squarespace, or connecting one you already bought somewhere else. The two look similar in the interface but behave very differently — one is instant, the other depends on DNS records at your existing registrar. This guide walks the actual click path from the login screen to the Domains panel, explains what each button on that panel does, and covers the part most tutorials skip: making the new address the primary one so visitors and search engines land on it instead of your old URL.",
   "steps": [
     {
-      "heading": "Log in to Squarespace",
-      "body": "Sign in to your account, using Google, a work email, or Apple/Facebook via More Options if you're setting up new."
+      "heading": "Log in to your Squarespace account",
+      "body": "Go to squarespace.com and sign in. The login screen takes an email and password on the left, with Continue with Google, Apple, and Facebook stacked on the right — use whichever method you originally signed up with, since a Google sign-in and an email sign-in with the same address are not automatically the same account. If you're setting up from scratch, Create Account is in the top-right corner instead. Note that domain changes are an account-owner action, so a contributor invited only to edit pages won't see the settings covered here.",
+      "image": {
+        "file": "/screenshots/veyaUoDedHk/02.webp",
+        "caption": "The Squarespace login screen, with email and password on the left and the Google, Apple, and Facebook sign-in options on the right."
+      }
     },
     {
-      "heading": "Open Domains and Email",
-      "body": "From your dashboard's left panel, click Settings, then hover over Domains and Email to see your options."
+      "heading": "Open Settings, then Domains & Email",
+      "body": "From your site's dashboard, click Settings in the lower part of the left panel. The Settings drawer that slides in has its own menu — Website, Domains & Email, Customer Notifications, Selling, Brand, Marketing, Third Party Tools, Permissions & Ownership, Billing, and Developer Tools. Choose Domains & Email. That page holds exactly two cards: Domains, which covers registering and managing domains from Squarespace or other sellers, and Google Workspace for email. Everything to do with your site's address lives behind the first one.",
+      "image": {
+        "file": "/screenshots/veyaUoDedHk/04.webp",
+        "caption": "Domains & Email inside Squarespace Settings, offering a Domains card for registration and management alongside Google Workspace."
+      }
     },
     {
-      "heading": "Register a new domain or use an existing one",
-      "body": "Click Get a Domain to search and purchase one through Squarespace, or enter a domain you already own to check availability and connect it."
+      "heading": "Choose between buying a domain and connecting one you own",
+      "body": "Opening Domains gives you two buttons: Get a Domain and Use a Domain I Own. This is the fork in the road. Get a Domain runs a search inside Squarespace and registers the name for you — pricing varies by extension, and a .com will cost more than most alternatives. Use a Domain I Own is for a name you already registered at GoDaddy, Namecheap, Cloudflare, or anywhere else; Squarespace will verify it and then either walk you through pointing its DNS records or offer to transfer the registration outright. Pick the second path only if you genuinely control the domain's DNS settings, because that is where the work happens.",
+      "image": {
+        "file": "/screenshots/veyaUoDedHk/05.webp",
+        "caption": "The Domains page with its two starting points side by side: Get a Domain to buy one, or Use a Domain I Own to connect an existing name."
+      }
     },
     {
-      "heading": "Point the domain to Squarespace",
-      "body": "Once your domain is added, change it to point to your Squarespace site so it becomes your site's live web address."
+      "heading": "Connect an existing domain",
+      "body": "If you already own the name, type it in and let Squarespace check it. What follows depends on your registrar: for many providers Squarespace can connect automatically after you authorize it, while for others you'll be handed a set of DNS records — typically four A records and a CNAME — to paste into your registrar's DNS panel yourself. Neither route is instant. DNS propagation genuinely takes time, often a few hours and occasionally up to two days, so a domain that doesn't work ten minutes after you save is normal, not broken. Resist the urge to keep changing records while you wait; conflicting edits are the main reason connections fail."
     },
     {
-      "heading": "Check the SSL and domain details",
-      "body": "Click on the connected domain to view details including SSL certificate status, then confirm it's set as your site's primary domain."
+      "heading": "Set the new domain as primary",
+      "body": "Adding a domain and making it your site's address are two separate things. A Squarespace site can have several domains attached at once, but only one is the primary — the address shown in the browser bar, used in your links, and treated as canonical. Open the domain from your Domains list and set it as primary; the others will redirect to it. This is the step people miss when they say the new domain 'isn't working' even though it loads the site: it loads, but the old built-in address is still winning as the canonical URL."
+    },
+    {
+      "heading": "Check SSL and clean up the old address",
+      "body": "Click into the connected domain to see its details, including SSL certificate status. Squarespace issues certificates automatically, but the certificate can only be issued after DNS resolves correctly, so a pending or failed SSL state usually means the DNS side isn't finished rather than that anything is wrong with the certificate. Once the padlock is live, test the address with and without www and confirm both reach the site. Finally, update anywhere your old URL is published — social profiles, email signatures, business listings — because Squarespace's redirect keeps visitors working but link equity and habit both benefit from pointing at the real address."
     }
   ],
   "faq": [
     {
-      "question": "Can I use a domain I already bought elsewhere?",
-      "answer": "Yes, you can enter your existing domain and connect it to point to your Squarespace site instead of buying a new one."
+      "question": "Can I use a domain I bought from GoDaddy or Namecheap with Squarespace?",
+      "answer": "Yes. Use the Use a Domain I Own button on the Domains page. Squarespace will either connect automatically with your registrar or give you DNS records to add there yourself."
     },
     {
-      "question": "How much does a domain cost through Squarespace?",
-      "answer": "Prices vary by domain and extension, so check availability and pricing when you search for the one you want."
+      "question": "How long does the new domain take to start working?",
+      "answer": "DNS changes usually resolve within a few hours but can take up to 48 hours. Until then the domain may load intermittently or not at all, which is expected rather than a sign of a misconfiguration."
     },
     {
-      "question": "Will my SSL certificate update automatically with a new domain?",
-      "answer": "Squarespace manages SSL for connected domains, and you can check its status from the domain details page."
+      "question": "Will changing my domain break my existing pages?",
+      "answer": "No. The domain is only the address pointing at your site — your pages, design, and content are untouched. Old URLs on the previous domain will redirect once it stays attached to the site."
     },
     {
-      "question": "Does changing my domain affect my existing site content?",
-      "answer": "No, changing the domain only affects the web address pointing to your site — your pages and design stay the same."
+      "question": "Do I need to buy SSL separately for the new domain?",
+      "answer": "No. Squarespace provisions an SSL certificate automatically once DNS resolves. You can check its status from the domain's detail page under Domains & Email."
+    },
+    {
+      "question": "What happens to my old Squarespace built-in address?",
+      "answer": "It stays attached to the account and redirects to whichever domain you set as primary, so old links keep working after you switch."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T10:05:00Z",
+  "deep": true
 }

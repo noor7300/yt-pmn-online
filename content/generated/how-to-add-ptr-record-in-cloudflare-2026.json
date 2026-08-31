@@ -1,47 +1,48 @@
 {
   "slug": "how-to-add-ptr-record-in-cloudflare-2026",
-  "seoTitle": "Can You Add a PTR Record in Cloudflare? 2026 Answer",
-  "metaDescription": "Find out whether Cloudflare supports adding PTR records directly, and how it compares to setting up MX, CNAME, and other DNS record types.",
-  "intro": "PTR records are used for reverse DNS lookups, and many Cloudflare users wonder whether they can add one through the dashboard the same way they add an A or CNAME record. This guide covers what to know about PTR records in Cloudflare and how the more common DNS record types are managed there instead.",
+  "seoTitle": "How to Add a PTR Record in Cloudflare (and Why It Won't Work)",
+  "metaDescription": "Cloudflare's DNS editor does offer a PTR record type. Here's how to fill it in, why it won't fix your reverse DNS, and where rDNS is actually set.",
+  "intro": "Search for how to add a PTR record in Cloudflare and you get two contradictory answers: that it is impossible, and that it is right there in the record type dropdown. Both are half true, and that is what makes this so frustrating for anyone trying to get their mail server past a spam filter. Cloudflare will absolutely let you create a PTR record — the form exists, the fields validate, the record saves. It just will not do anything for reverse DNS on your server's IP, because reverse DNS is answered by whoever owns the IP block, not by whoever hosts your domain's forward zone. This guide shows the form and how each field is meant to be filled, explains exactly where the chain breaks, and then points you at the place the record actually needs to go.",
   "steps": [
     {
-      "heading": "Understand what a PTR record does",
-      "body": "A PTR record maps an IP address back to a domain name, the reverse of a standard A record, and is most often used for email server verification."
+      "heading": "Know what a PTR record is for",
+      "body": "Every DNS record you normally deal with is a forward lookup: a name in, an address out. A PTR record runs the other way — an IP address in, a hostname out. The main reason anyone needs one is email. Receiving mail servers check whether the IP that just connected to them resolves back to a sensible hostname, and whether that hostname resolves forward to the same IP. This pair, called forward-confirmed reverse DNS, is one of the cheapest spam signals in existence, and a mail server without it gets marked down or rejected outright regardless of how good its SPF and DKIM setup is. If you are here because your outbound mail is landing in spam, a missing PTR is a genuinely likely cause."
     },
     {
-      "heading": "Check where PTR records actually live",
-      "body": "PTR records are typically controlled by the entity that owns the IP address block — usually your hosting or cloud provider — rather than your domain's DNS zone."
+      "heading": "Understand why Cloudflare isn't where rDNS lives",
+      "body": "Reverse DNS does not live in your domain's zone at all. It lives in a separate namespace under in-addr.arpa for IPv4 and ip6.arpa for IPv6, and authority over a chunk of that namespace is delegated to whoever was allocated the IP block — your VPS host, your cloud provider, or your ISP. Cloudflare is authoritative for example.com; it is not authoritative for the reverse zone covering your server's address, unless you are a Cloudflare enterprise customer who has actually delegated a block to them. So a PTR record sitting in your forward zone is a record nobody ever queries. The resolver asking \"who is 203.0.113.45?\" goes to the reverse zone's nameservers, which belong to your host, and never touches your Cloudflare zone."
     },
     {
-      "heading": "Manage the DNS records Cloudflare does support",
-      "body": "In your Cloudflare dashboard, go to the DNS section for your domain, where you can add A, CNAME, MX, and TXT records directly."
+      "heading": "Open the DNS records page for your domain",
+      "body": "Even knowing that, it is worth seeing the form, because it is what convinces most people the feature works. Log in to Cloudflare and select the domain from your account — the zone overview shows its status, its plan, and a DNS panel on the right with a link straight to DNS Records. In the left sidebar, DNS expands into Records, Analytics and Settings. Records is the full editor for the zone. Note the DNS Setup line on this page too: Full means Cloudflare is authoritative for the whole zone, which is the setup where people most reasonably assume every record type here is functional.",
+      "image": { "file": "/screenshots/pKt0pir8Ymc/04.webp", "caption": "A zone overview in Cloudflare, with DNS expanded in the sidebar and a direct DNS Records link on the right." }
     },
     {
-      "heading": "Add an MX or CNAME record if that's your real goal",
-      "body": "If you're trying to set up email or point a subdomain elsewhere, use the Add Record option and select the MX or CNAME type instead of PTR."
+      "heading": "Add a record and choose the PTR type",
+      "body": "Click Add record and open the Type dropdown. PTR is there, alongside A, AAAA, CNAME, MX, TXT and the rest. Select it and the form rewrites itself with a plain-language hint above the fields: [domain name] points to [name] in a reverse lookup. You get three inputs. Name is the reverse-notation address — the four octets of your IP written backwards with .in-addr.arpa appended, so 203.0.113.45 becomes 45.113.0.203.in-addr.arpa. Domain name is the hostname you want that address to resolve to, such as mail.example.com. TTL can stay on Auto. There is also a Record Attributes section with a comment field, which Cloudflare notes does not affect resolution and is purely for your own reference.",
+      "image": { "file": "/screenshots/pKt0pir8Ymc/05.webp", "caption": "The PTR option selected in Cloudflare's add-record form, with its reverse-notation Name field and the hostname it should point back to." }
     },
     {
-      "heading": "Contact your hosting provider for reverse DNS",
-      "body": "If you specifically need a PTR record set up for an IP you control, request it through the provider that assigned that IP address."
+      "heading": "Understand what saving it does and doesn't do",
+      "body": "Save that record and Cloudflare accepts it happily. It will appear in your records list, and you can even query it directly against Cloudflare's nameservers and get an answer back. What you cannot do is get the rest of the internet to see it, because no resolver on earth asks your domain's nameservers about 45.113.0.203.in-addr.arpa — it asks the nameservers that the ARIN, RIPE or APNIC delegation chain points to for that block. The mail server rejecting your messages will keep rejecting them. The one legitimate case for a PTR record inside a forward zone is when your provider has delegated the reverse zone to Cloudflare and you are hosting that zone here on purpose, which is rare and something you would know about. Otherwise, delete it to avoid confusing yourself in six months."
+    },
+    {
+      "heading": "Set reverse DNS where it actually belongs",
+      "body": "The real fix is with whoever assigned your IP. Most VPS and cloud providers expose this as a field in their own panel: Hetzner, DigitalOcean, Linode, Vultr, OVH, AWS and Google Cloud all have a reverse DNS or PTR setting attached to the server or elastic IP, sometimes editable directly and sometimes gated behind a support request. On AWS you request the removal of outbound mail restrictions and set rDNS through a form; on shared hosting you generally cannot set it at all, which is a real argument for sending mail through a dedicated provider instead. Before you request it, create the matching forward record in Cloudflare: an A record for mail.example.com pointing at the same IP. Reverse and forward must agree, and providers will often refuse a PTR request whose target does not already resolve back to the address."
+    },
+    {
+      "heading": "Verify it, and do the rest of your email DNS in Cloudflare",
+      "body": "Once the provider has applied it, check from a machine outside your network with dig -x 203.0.113.45 on macOS or Linux, or nslookup on Windows, and confirm the hostname that comes back matches the one that resolves forward to that IP. Propagation for rDNS is usually quick but can take a few hours. Then use Cloudflare for everything it genuinely is authoritative over, which is most of your email setup: MX records pointing at your mail host, a TXT record with your SPF policy, the CNAME or TXT records your provider gives you for DKIM, and a DMARC TXT record at _dmarc. Those four plus a working PTR are the full deliverability checklist — and four of the five really do belong in the record editor you just opened."
     }
   ],
   "faq": [
-    {
-      "question": "Can I add a PTR record directly in Cloudflare's DNS dashboard?",
-      "answer": "Cloudflare's standard DNS dashboard is built around forward records like A, CNAME, MX, and TXT — PTR records are managed by whoever controls the IP block, not through your domain zone."
-    },
-    {
-      "question": "Why do I need a PTR record at all?",
-      "answer": "PTR records are commonly required for outbound email servers, since many mail providers check reverse DNS to reduce spam."
-    },
-    {
-      "question": "Who do I contact to set up a PTR record?",
-      "answer": "Your hosting or cloud provider, since they control the IP address the record needs to point back to your domain."
-    },
-    {
-      "question": "Can I still add an MX or TXT record in Cloudflare for email setup?",
-      "answer": "Yes, those record types are fully supported in the DNS section of your Cloudflare dashboard."
-    }
+    { "question": "Can you add a PTR record in Cloudflare?", "answer": "You can create one — PTR is in the record type dropdown and the record saves without error. It will not function as reverse DNS for your server, because resolvers query the reverse zone held by your IP's owner, not your domain's zone." },
+    { "question": "Where do I actually set a PTR record?", "answer": "With whoever assigned the IP address: your VPS host, cloud provider or ISP. Most expose a reverse DNS field on the server or IP in their control panel; some require a support ticket. Shared hosting usually offers no control at all." },
+    { "question": "What do I put in Cloudflare's PTR Name field?", "answer": "The reverse-notation form of the address — the octets backwards with .in-addr.arpa on the end, so 203.0.113.45 becomes 45.113.0.203.in-addr.arpa. The Domain name field takes the hostname it should resolve to, like mail.example.com." },
+    { "question": "Why does my email go to spam without a PTR record?", "answer": "Receiving servers check that the connecting IP resolves back to a hostname, and that the hostname resolves forward to the same IP. Failing that check is a strong spam signal, and no amount of correct SPF or DKIM fully makes up for it." },
+    { "question": "How do I check whether my PTR record is working?", "answer": "Run dig -x YOUR.IP.ADDRESS from a machine outside your network, or nslookup on Windows. If it returns your mail hostname and that hostname resolves forward to the same IP, reverse DNS is set correctly." },
+    { "question": "Which email records should I add in Cloudflare then?", "answer": "MX for mail routing, a TXT record for SPF, the DKIM records your mail provider supplies, and a DMARC TXT record at _dmarc. Those all live in your forward zone and Cloudflare is genuinely authoritative for them." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T10:28:00Z",
+  "deep": true
 }

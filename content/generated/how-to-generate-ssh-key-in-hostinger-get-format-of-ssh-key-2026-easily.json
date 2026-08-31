@@ -1,20 +1,48 @@
 {
   "slug": "how-to-generate-ssh-key-in-hostinger-get-format-of-ssh-key-2026-easily",
-  "seoTitle": "How to Generate an SSH Key in Hostinger",
-  "metaDescription": "Generate an SSH key in Hostinger and learn the correct key format so you can securely connect to your server via terminal or PuTTY.",
-  "intro": "Connecting securely to a Hostinger server starts with generating a proper SSH key, but the exact format and steps aren't always obvious to first-timers. This guide covers accessing the SSH section of your Hostinger panel, generating a key, and using it with terminal or FTP clients.",
+  "seoTitle": "How to Generate an SSH Key for Hostinger and Add It in hPanel",
+  "metaDescription": "Generate an SSH key pair for Hostinger, learn the exact ssh-rsa / ed25519 format hPanel expects, add it under SSH Access, and connect from terminal or PuTTY.",
+  "intro": "The single thing that confuses people about SSH keys on Hostinger is where the key actually comes from. hPanel has an SSH Access page with an Add SSH key button, which reads like Hostinger will generate the pair for you — it won't. The panel is a place to store a public key you generated on your own machine, which is exactly how SSH is supposed to work: the private half never leaves your computer. This guide covers both halves of that: creating the key pair locally with ssh-keygen or PuTTYgen, recognising the one-line format hPanel expects, pasting it into the right field, and then logging in without a password. It also covers the format question directly, because pasting the wrong file into that box is the most common reason the panel rejects a key.",
   "steps": [
-    { "heading": "Access the SSH section in Hostinger", "body": "Open your Hostinger panel and find the SSH settings where key generation is managed." },
-    { "heading": "Generate your SSH key", "body": "Create a new SSH key pair, noting the format used, such as RSA or ed25519." },
-    { "heading": "Copy your public key", "body": "Grab your public key from the panel so you can add it wherever it's needed for authentication." },
-    { "heading": "Connect using terminal or PuTTY", "body": "Use the key with your terminal on Mac or Linux, or with PuTTY on Windows, to log in securely." },
-    { "heading": "Store your keys securely", "body": "Keep your private key protected and follow best practices for storing SSH credentials safely." }
+    {
+      "heading": "Open hPanel and find your hosting plan",
+      "body": "Log in to Hostinger and open hPanel for the site you want SSH access to — the website selector sits at the top of the left sidebar, and the dashboard below it lists Overview, WordPress, Hosting Plan, Performance, Analytics, Security, Domains, Website, Files and Databases. SSH is not on that first screen because it lives further down the same sidebar under Advanced, so scroll the menu rather than hunting through the dashboard tiles. Note that SSH access is a hosting feature, not a domain one: if you manage several sites on the account, make sure the selector at the top shows the right one before you add a key, since keys are stored per hosting plan. Business and Cloud shared plans and every VPS include SSH; the entry-level shared tier may not, and if the Advanced menu has no SSH Access entry, that is why.",
+      "image": { "file": "/screenshots/pnqK9PsGyf0/03.webp", "caption": "hPanel's dashboard for a site. SSH Access is not among these tiles — it sits further down the left sidebar under Advanced." }
+    },
+    {
+      "heading": "Generate the key pair on your own computer",
+      "body": "Hostinger stores keys, it does not create them, so this step happens in your own terminal. On macOS or Linux, run ssh-keygen -t ed25519 -C \"your@email.com\" and press Enter to accept the default location, which puts the private key at ~/.ssh/id_ed25519 and the public key at ~/.ssh/id_ed25519.pub. If you need broader compatibility with older tooling, use ssh-keygen -t rsa -b 4096 instead. Set a passphrase when prompted — it encrypts the private key on disk, so a stolen laptop does not hand over your server. On Windows you can run the same command in PowerShell or Windows Terminal, or use PuTTYgen, clicking Generate and moving the mouse to build entropy before saving both halves."
+    },
+    {
+      "heading": "Know what a valid public key looks like",
+      "body": "This is the format question that trips people up. A public key is a single line of text with three space-separated parts: the algorithm, the encoded key, and an optional comment — for example ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB... followed by your email. An ed25519 key looks the same but starts with ssh-ed25519 and is much shorter. Two things it is never: it is not the file that begins with -----BEGIN OPENSSH PRIVATE KEY----- (that is the private half, which must stay on your machine), and it is not PuTTYgen's saved .ppk file. If you generated in PuTTYgen, copy the key from the box labelled \"Public key for pasting into OpenSSH authorized_keys file\" at the top of the window rather than exporting a file — that box is already in the right format. Read the .pub file with cat ~/.ssh/id_ed25519.pub on macOS or Linux and copy the whole line, including the ssh- prefix, with no line breaks."
+    },
+    {
+      "heading": "Open SSH Access and click Add SSH key",
+      "body": "Back in hPanel, scroll the sidebar past DNS Zone Editor, PHP Configuration and Cron Jobs to SSH Access. The page shows your connection details, a download link for the PuTTY client for Windows users, a section for managing stored keys, and a troubleshooting block covering common SSH errors. Click to add a key and a dialog headed \"Add SSH key\" opens with two fields: a Name and a large SSH public key box. The Name is only a label for you, so use something that identifies the machine the private key lives on — \"Admin\", \"work-laptop\", \"deploy-server\" — because when you retire a device later you want to know which stored key to delete without guessing.",
+      "image": { "file": "/screenshots/pnqK9PsGyf0/04.webp", "caption": "The Add SSH key dialog, opened from SSH Access in the Advanced section of the sidebar. The PuTTY download sits on the page behind it." }
+    },
+    {
+      "heading": "Paste the public key and save the record",
+      "body": "Paste the contents of your .pub file into the SSH public key box. It should land as one continuous line starting with ssh-rsa or ssh-ed25519 followed by the long encoded string — if it arrives broken across several lines, the copy picked up hard wrapping and hPanel will likely reject it, so recopy from the file rather than from a rendered web page or chat message. Click Add Record and the key is stored against the hosting plan and becomes active immediately, no restart or waiting period. The page then lists it by the name you gave it, and you can add several keys to the same plan when more than one machine needs access, which is far better practice than copying one private key onto multiple computers.",
+      "image": { "file": "/screenshots/pnqK9PsGyf0/05.webp", "caption": "A public key pasted into the dialog — one line beginning with ssh-rsa, exactly the format the field expects." }
+    },
+    {
+      "heading": "Connect from terminal or PuTTY",
+      "body": "The SSH Access page shows the three things you need to log in: the hostname or server IP, the SSH username for the plan, and the port, which on Hostinger shared hosting is a non-standard number rather than the usual 22 — read it off the page instead of assuming. From a terminal, the command is ssh -p PORT username@host, and if your key is in the default ~/.ssh location it is offered automatically; otherwise point at it with -i /path/to/private_key. In PuTTY, put the host and port on the Session screen and load the .ppk private key under Connection, SSH, Auth before you connect. A successful login lands you in your account's home directory with no password prompt, only the key passphrase if you set one."
+    },
+    {
+      "heading": "Keep the private key safe and rotate it when needed",
+      "body": "The public key you just pasted is safe to share; the private key is the credential and should never be emailed, committed to a repository, or pasted into a support chat. On macOS and Linux the private key file should be readable only by you — chmod 600 ~/.ssh/id_ed25519 — and SSH will refuse to use it if the permissions are looser. Use ssh-agent, or macOS Keychain, so you type the passphrase once per session instead of being tempted to skip it. When a laptop is lost or someone leaves the team, the fix is quick and clean: delete that named key from the SSH Access page in hPanel and its access disappears, while every other machine keeps working. That per-device separation is the whole reason for naming keys carefully in the first place."
+    }
   ],
   "faq": [
-    { "question": "What SSH key format does Hostinger use?", "answer": "Common formats like RSA or ed25519 are supported, and the guide shows what the default format looks like." },
-    { "question": "Can I use PuTTY to connect with my Hostinger SSH key?", "answer": "Yes, PuTTY is one of the tools covered for connecting to your server on Windows." },
-    { "question": "Is this useful for VPS or cloud hosting too?", "answer": "Yes, it's aimed at developers or anyone managing cloud or VPS hosting on Hostinger." },
-    { "question": "How should I store my SSH private key?", "answer": "Keep it private and secure, following general best practices for credential storage rather than sharing it anywhere." }
+    { "question": "Does Hostinger generate the SSH key for me?", "answer": "No. hPanel's SSH Access page stores a public key you paste in; you generate the key pair yourself with ssh-keygen on macOS, Linux or Windows Terminal, or with PuTTYgen on Windows. That is by design — the private half should never leave your machine." },
+    { "question": "What is the correct SSH key format for Hostinger?", "answer": "A single line starting with ssh-rsa or ssh-ed25519, followed by the long encoded string and an optional comment. Copy it from your .pub file, or from PuTTYgen's \"Public key for pasting into OpenSSH authorized_keys file\" box. Never paste the private key or a .ppk file." },
+    { "question": "Should I use RSA or ed25519?", "answer": "ed25519 for anything new — it is shorter, faster and secure at a smaller size. Use RSA at 4096 bits only if you have older tooling that cannot handle ed25519." },
+    { "question": "Why is my SSH key rejected by hPanel?", "answer": "Usually because the pasted text has line breaks in it, or because it is the private key rather than the .pub file. Recopy directly from the file with cat, check that it starts with ssh- and sits on one line, then try again." },
+    { "question": "Which port does Hostinger use for SSH?", "answer": "Shared hosting uses a non-standard port rather than 22, and the exact value along with your hostname and username is shown on the SSH Access page. Pass it with ssh -p PORT, or enter it in PuTTY's Session screen." }
   ],
-  "generatedAt": "2026-07-24T02:46:52Z"
+  "generatedAt": "2026-08-31T10:05:00Z",
+  "deep": true
 }

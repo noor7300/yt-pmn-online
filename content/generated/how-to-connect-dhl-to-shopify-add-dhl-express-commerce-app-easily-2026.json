@@ -1,47 +1,49 @@
 {
   "slug": "how-to-connect-dhl-to-shopify-add-dhl-express-commerce-app-easily-2026",
-  "seoTitle": "How to Connect DHL to Shopify With Express Commerce",
-  "metaDescription": "Set up DHL shipping in Shopify using the DHL Express Commerce app to configure rates and simplify domestic and international orders.",
-  "intro": "Shipping internationally or domestically with DHL becomes much easier once it's connected directly to your Shopify store. This guide covers how to install the DHL Express Commerce app, connect it as a shipping carrier, and configure rates inside Shopify.",
+  "seoTitle": "How to Connect DHL to Shopify With the DHL Express App",
+  "metaDescription": "Install the official DHL Express app on Shopify, link your DHL account, show live rates at checkout and print labels — plus why DHL sometimes doesn't appear.",
+  "intro": "Connecting DHL to Shopify is less about the app itself — that part takes two minutes — and more about the three things around it: an eligible DHL Express account, store defaults that produce sensible rate quotes, and a Shopify plan that can actually display carrier-calculated rates at checkout. Get those lined up and the integration pulls orders in automatically, quotes live DHL prices to the shopper, and prints labels in batches. Miss one and you hit the classic symptom where the app installs cleanly but DHL never appears as an option at checkout. This guide walks the install and account link exactly as the official app presents them, then covers rates, labels, and the fix for that missing-carrier problem.",
   "steps": [
     {
-      "heading": "Install the DHL Express Commerce app",
-      "body": "Search the Shopify App Store for DHL Express Commerce and add it to your store."
+      "heading": "Line up a DHL Express account first",
+      "body": "The app is free, but it is not a way to get DHL pricing without a relationship with DHL. Its own listing says it plainly: the integration is available to DHL Express account holders. So before you install anything, make sure you have an active DHL Express business account number and the login for it — that account is where your negotiated rates, pickup arrangements and invoicing live, and the app simply surfaces them inside Shopify. If you are shipping only domestically and in low volume, price it against your existing carrier first; DHL's strength here is cross-border, with customs paperwork and duties handled as part of the flow. If you do not have an account yet, apply through DHL Express in your country and come back once the account number is issued."
     },
     {
-      "heading": "Connect your DHL account",
-      "body": "Link your existing DHL Express account credentials through the app's setup process."
+      "heading": "Set the store defaults that rate quotes depend on",
+      "body": "Carrier rates are calculated from weight, dimensions and origin, so incorrect store defaults produce wrong quotes or none at all. In the Shopify admin, open Settings and check the General page: the unit system and default weight unit determine how your product weights are interpreted, and the store's address and time zone feed the origin and pickup logic. In the store shown here, the store is set to the metric system with kilograms as the default weight unit — pick whichever your product data actually uses and stay consistent, because a catalogue half in grams and half in pounds is the quiet reason many quotes come back wildly wrong. While you are in Settings, note that Shipping and delivery sits a few rows down in the same sidebar; that is where the carrier will appear later, and it is also where your Locations and package sizes are defined.",
+      "image": { "file": "/screenshots/jq8d8blDYw8/03.webp", "caption": "Shopify's Settings, General page — the unit system and default weight unit here decide how DHL reads your product weights." }
     },
     {
-      "heading": "Configure DHL as a shipping carrier",
-      "body": "Enable DHL within your Shopify shipping settings so it appears as an available carrier option."
+      "heading": "Install the official DHL Express app",
+      "body": "Search the Shopify App Store for DHL and choose the listing titled DHL Express (Official), published by DHL Express itself — there are third-party DHL connectors with similar names, and the official one is the one with DHL as the developer. The listing is free to install and describes exactly what you are getting: automatic order import, live shipping rates at checkout, batch label printing and advanced shipping workflows, with technical support for DHL Express account holders. Its rating sits in the low threes on a small number of reviews, which is normal for carrier-published apps and mostly reflects onboarding friction rather than the integration failing once it is set up. Click Install and approve the permissions Shopify lists — the app needs order and fulfilment access to do its job.",
+      "image": { "file": "/screenshots/jq8d8blDYw8/04.webp", "caption": "The DHL Express (Official) listing in the Shopify App Store, free to install and published by DHL Express." }
     },
     {
-      "heading": "Set up shipping rates",
-      "body": "Configure the specific DHL rates and services you want to offer customers at checkout."
+      "heading": "Link your DHL Express account",
+      "body": "After installing, the app hands you off to DHL's own sign-in to authorise the connection: an email address or username, your password, and a Log in button, with a Register link underneath for anyone who does not have credentials yet. Sign in with the account that holds your Express shipping agreement, not a personal MyDHL tracking login, since the connection inherits whatever rates and services that account is entitled to. Once authorised, you are returned to Shopify and the app begins importing orders. Enter your DHL account number where the app asks for it, confirm the pickup address matches the location you actually ship from, and save — mismatched pickup addresses are a common cause of labels that generate but fail at collection.",
+      "image": { "file": "/screenshots/jq8d8blDYw8/05.webp", "caption": "DHL's sign-in step during setup, where the app is authorised against your Express account." }
     },
     {
-      "heading": "Test your setup",
-      "body": "Place a test order to make sure DHL rates calculate correctly for both domestic and international shipments."
+      "heading": "Turn on live rates and choose which services to offer",
+      "body": "With the account linked, decide what the shopper sees. The app can push DHL's calculated rates into checkout so the price reflects real weight and destination, or you can keep Shopify's own flat or free-shipping rates and use DHL purely for fulfilment. Live rates are the honest option for international orders, where the difference between a 500g parcel to a neighbouring country and a 5kg parcel across the world is enormous and a flat rate loses you money either way. In the app's rate settings, enable only the services you want to sell — Express Worldwide for speed, economy tiers where they exist in your lane — because offering every service turns checkout into a confusing list. Add a small handling markup if you package heavily, and set a fallback flat rate for destinations DHL cannot quote so nobody hits an empty shipping step."
+    },
+    {
+      "heading": "Fulfil orders and print labels in batches",
+      "body": "Once orders start importing, the app becomes your shipping desk rather than something you visit occasionally. Orders arrive with the address and item data already populated; you confirm the package weight and dimensions, pick the service, and generate the label. Batch printing is the feature that pays for the setup effort — selecting a day's orders and producing all their labels and customs documents in one pass is dramatically faster than doing it order by order. For international parcels, make sure every product has an HS code, country of origin and a customs description saved on the product, because those fields flow straight into the commercial invoice and missing values are what hold parcels at the border. When a label is created, the tracking number should sync back to the Shopify order so the customer's shipping confirmation email carries it automatically."
+    },
+    {
+      "heading": "Fix DHL not showing up at checkout",
+      "body": "The most common complaint with this integration is that everything installs but no DHL option appears at checkout, and it usually is not the app's fault. Live carrier-calculated rates require Shopify to allow third-party rate calculation on your plan, which is a paid add-on on lower tiers and included on higher ones or on annual billing — check that first. After that, work down the list: confirm every product in the test cart has a weight, that the shipping zone you are testing actually includes the destination country, that the origin location is enabled for shipping, and that DHL serves the lane at all. Clearing and re-adding the shipping profile in Settings, Shipping and delivery often resolves a carrier that installed while a zone was misconfigured. Always test with a real address in a real destination country rather than a placeholder, since invalid postcodes silently return no rates."
     }
   ],
   "faq": [
-    {
-      "question": "Do I need my own DHL Express account?",
-      "answer": "Yes, you need an active DHL Express account before you can connect it through the app to your Shopify store."
-    },
-    {
-      "question": "Can I ship internationally with this integration?",
-      "answer": "Yes, DHL is well known for international shipping, and the Express Commerce app supports both domestic and cross-border shipments."
-    },
-    {
-      "question": "Is the DHL Express Commerce app free?",
-      "answer": "App pricing can vary, so check the current listing in the Shopify App Store for exact plan details and any free tier."
-    },
-    {
-      "question": "Will shipping labels be generated automatically?",
-      "answer": "The app typically lets you generate DHL shipping labels for your orders directly, though the exact workflow depends on your configuration."
-    }
+    { "question": "Is the DHL Express app for Shopify free?", "answer": "The app itself is free to install from the Shopify App Store. You pay DHL for shipping under your own Express account — the app is the connector, not the pricing." },
+    { "question": "Do I need a DHL Express account to use it?", "answer": "Yes. The official listing states the integration is available to DHL Express account holders, and the setup asks you to sign in with those credentials so the app inherits your negotiated rates and services." },
+    { "question": "Why is DHL not showing in my Shopify shipping settings?", "answer": "Usually because carrier-calculated rates are not enabled on your Shopify plan — they are an add-on on lower tiers. After that, check that products have weights, the destination is inside an active shipping zone, and the origin location is enabled for shipping." },
+    { "question": "Can I print DHL labels directly from Shopify?", "answer": "Yes. The app imports orders and generates labels, including batch printing for a whole day's orders, and syncs the tracking number back to the Shopify order." },
+    { "question": "Does it handle customs paperwork for international orders?", "answer": "It generates the documentation, but only from the data you supply. Save an HS code, country of origin and customs description on each product, or parcels will be held at the border for incomplete declarations." },
+    { "question": "Should I use live DHL rates or flat-rate shipping?", "answer": "Live rates for international, where weight and destination swing the cost enormously and a flat rate either overcharges or loses money. Flat rates are fine for a narrow domestic catalogue with consistent parcel sizes." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T10:20:00Z",
+  "deep": true
 }

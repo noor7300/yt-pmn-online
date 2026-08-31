@@ -2,46 +2,49 @@
   "slug": "how-to-add-nifty-options-in-tradingview-easily-2026",
   "seoTitle": "How to Add Nifty Options in TradingView the Right Way",
   "metaDescription": "Learn how to add Nifty options to your TradingView chart, choose the correct strike and expiry, and understand CE vs PE contracts for accurate analysis.",
-  "intro": "Adding the correct Nifty options contract to your TradingView chart takes more than a quick symbol search, since strike price, expiry, and contract type all matter. This guide covers how to search and add Nifty option symbols properly, understand the difference between CE and PE, and switch between spot, futures, and options views. It's aimed at Nifty traders who want confidence in the exact contract they're analyzing.",
+  "intro": "Typing \"Nifty\" into TradingView's search bar gets you the spot index or a futures contract almost every time — not the specific options contract you actually wanted to chart. Options symbols are named with a strict code that bundles the expiry date, contract type, and strike price together, and unless you filter for it directly, it's easy to end up analyzing the wrong instrument entirely. This guide covers how to search properly, filter down to Options, and read the strike-and-expiry list so you load the exact CE or PE contract you meant to trade.",
   "steps": [
     {
-      "heading": "Search the Nifty option symbol",
-      "body": "Use TradingView's symbol search to look up Nifty options, entering the relevant expiry and strike details as you type."
+      "heading": "Open the symbol search",
+      "body": "From any TradingView chart or the homepage, click the search bar at the top (or press the keyboard shortcut) to open the symbol search panel. This is the same search used for stocks, futures, and forex, which is exactly why a plain \"Nifty\" query returns a mix of everything rather than the option contract you're after."
     },
     {
-      "heading": "Select the correct strike and expiry",
-      "body": "From the search results, pick the exact strike price and expiry date matching the contract you want to view."
+      "heading": "Search Nifty and see what surfaces by default",
+      "body": "Typing the symbol brings back a mixed list: the Nifty 50 spot index, Bank Nifty, Dow Jones, and other unrelated tickers sorted by relevance rather than by contract type. You can already spot options-style entries in the results, like NIFTY260330P9000, which decodes as Nifty 50, expiring 30 March 2026, a Put, at strike 9000 — but scrolling through a mixed list to find the right one isn't reliable, which is why the next step matters.",
+      "image": { "file": "/screenshots/si3teWotXVw/02.webp", "caption": "A plain Nifty search returning a mix of instruments — the spot index, unrelated global tickers, and one options contract buried in the middle of the list." }
     },
     {
-      "heading": "Understand CE vs PE",
-      "body": "CE contracts represent call options and PE contracts represent put options, so confirm you've chosen the correct type for your intended trade or analysis."
+      "heading": "Notice that spot and futures results look similar to options",
+      "body": "Searching a query like \"nifty 18000\" without narrowing the instrument type still returns index and futures entries — Nifty 50 Index, Nifty Bank Index, and GIFT Nifty 50 Index Futures — none of which are the options contract implied by the number. This is the trap: the strike price you typed doesn't filter anything on its own, so you can end up charting a futures contract while thinking you selected an option.",
+      "image": { "file": "/screenshots/si3teWotXVw/03.webp", "caption": "The same kind of search without the Options filter applied — it surfaces the spot index and futures contracts instead of the strike-specific option you're looking for." }
     },
     {
-      "heading": "Switch between spot, futures, and options",
-      "body": "TradingView lets you toggle between the Nifty spot index, futures contracts, and options, so make sure you're on the right instrument type."
+      "heading": "Filter to Options and pick the strike and expiry",
+      "body": "Above the results list, TradingView shows category tabs — All, Stocks, Funds, Futures, Forex, Crypto, Indices, Bonds, Economy, and Options. Click Options, and the list changes entirely to rows like NIFTY260217C26000 and NIFTY260217P26000, each formatted as symbol, expiry date, contract type, and strike. Scroll to the exact expiry and strike you want to view, and you're now looking only at genuine option contracts rather than a mixed instrument list.",
+      "image": { "file": "/screenshots/si3teWotXVw/04.webp", "caption": "The Options tab selected, listing CALL and PUT contracts for the same strike and a run of weekly expiry dates — this is where you pick the exact contract to chart." }
     },
     {
-      "heading": "Apply tips for analyzing Nifty options charts",
-      "body": "Pay attention to lower liquidity and wider price swings that are common with options compared to the underlying index."
+      "heading": "Tell CE and PE apart in the symbol",
+      "body": "The letter right after the expiry date in the symbol is the giveaway: C means Call (CE) and P means Put (PE). NIFTY260217C19600 is a call at strike 19600 expiring 17 February 2026, while the P version at the same strike and date is the matching put. Confirm you've clicked the right letter before loading the chart — a call and a put at the identical strike and expiry behave completely differently, and it's an easy click to get backwards in a long scrolling list.",
+      "image": null
+    },
+    {
+      "heading": "Load the chart for the selected contract",
+      "body": "Once you click the contract you want, TradingView shows it as the active symbol at the top of the panel — for example NIFTY260330P18000 — with a preview chart and a Full chart button to open it in the main workspace. This confirms you're now looking at that specific put or call rather than the spot index or a futures series, which is the whole point of filtering through Options in the first place.",
+      "image": { "file": "/screenshots/si3teWotXVw/05.webp", "caption": "The selected option contract loaded as the active symbol, with a preview chart and a Full chart button to open it as your main chart." }
+    },
+    {
+      "heading": "Read the chart with options behavior in mind",
+      "body": "Option charts move differently from the underlying index because they combine price direction with time decay and changing volatility, especially as expiry approaches. Expect thinner volume and choppier candles than you'd see on the Nifty spot chart, particularly on strikes further from the current price, and remember that a contract's price history effectively resets each time you roll to a new expiry — there's no continuous multi-month chart the way there is for the underlying index."
     }
   ],
   "faq": [
-    {
-      "question": "Can I add Nifty options directly to my watchlist?",
-      "answer": "Yes, once you've found the specific option contract through symbol search, you can add it to your watchlist like any other symbol."
-    },
-    {
-      "question": "Why do Nifty options charts sometimes look choppy?",
-      "answer": "Options often have lower trading volume than the underlying index, which can lead to more erratic price movement on the chart."
-    },
-    {
-      "question": "What's the difference between Nifty spot and Nifty options?",
-      "answer": "The spot index reflects the current value of the underlying basket of stocks, while options are derivative contracts tied to that index with their own separate pricing."
-    },
-    {
-      "question": "Do Nifty options expire, and does that affect the chart?",
-      "answer": "Yes, options contracts have a fixed expiry date, and the chart data for a specific contract will only be relevant up until that expiry."
-    }
+    { "question": "Can I add Nifty options directly to my watchlist?", "answer": "Yes — once you've filtered to Options and found the specific contract through symbol search, you can add it to your watchlist the same way you would any other symbol." },
+    { "question": "Why do Nifty options charts sometimes look choppy?", "answer": "Options generally trade at lower volume than the underlying index, and their price reacts to time decay and volatility shifts on top of the index's own movement, which produces more erratic candles." },
+    { "question": "What's the difference between Nifty spot and Nifty options?", "answer": "The spot index (NIFTY) reflects the live value of the underlying basket of stocks. Options are separate derivative contracts tied to that index, each with its own strike, expiry, and pricing — shown in results like NIFTY260217C19600." },
+    { "question": "How do I tell a call from a put in the symbol name?", "answer": "Look at the letter right after the expiry date in the contract code: C means Call, P means Put. NIFTY260217C19600 is a call; NIFTY260217P19600 is the matching put at the same strike and expiry." },
+    { "question": "Do Nifty options expire, and does that affect the chart?", "answer": "Yes. Each contract has a fixed expiry baked into its symbol, and its chart history only exists up to that date — there's no rolling continuous options chart the way there is for the spot index." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "deep": true
 }

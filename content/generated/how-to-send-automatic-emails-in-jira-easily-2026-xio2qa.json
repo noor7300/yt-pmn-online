@@ -1,47 +1,49 @@
 {
   "slug": "how-to-send-automatic-emails-in-jira-easily-2026-xio2qa",
-  "seoTitle": "How to Send Automatic Emails in Jira",
-  "metaDescription": "Set up Jira notification schemes and automation rules to send automatic emails for issue creation, status changes, and assignments.",
-  "intro": "Manually notifying teammates about every issue update wastes time and gets missed. This guide walks through configuring Jira's notification schemes and automation rules so automatic emails go out for events like issue creation, status changes, or assignments.",
+  "seoTitle": "How to Send Automatic Emails in Jira With Automation Rules",
+  "metaDescription": "Build a Jira automation rule that emails the right people when work items are created or change status — trigger, recipients, smart values, conditions and testing.",
+  "intro": "Jira already emails people, constantly, and that is exactly the problem — the default notification scheme fires on everything and your team has long since filtered it into a folder nobody reads. Automatic emails that actually get opened come from somewhere else: automation rules, where you choose the precise event, the precise recipients, and write the subject line yourself. This guide builds one from an empty rule to a live one, covering the trigger, the Send email action and its recipient options, the smart values that put real issue data into the message, and the conditions that stop a well-meant rule turning into noise. It also covers the outgoing mail settings people forget to check when their rule runs successfully but nothing arrives.",
   "steps": [
     {
-      "heading": "Open your notification scheme",
-      "body": "Go to your Jira project settings and locate the notification scheme controlling which events trigger emails."
+      "heading": "Know which of Jira's two email systems you want",
+      "body": "Jira sends mail two different ways, and picking the wrong one is why so many setups end up half-working. Notification schemes are the built-in system: they map events like Issue Created or Issue Assigned to roles like Reporter, Assignee and Watchers, and they are all-or-nothing per event with no control over wording. Automation rules are the flexible system: you define the trigger, filter it with conditions, and compose the email yourself with real issue fields in it. If you want \"tell the assignee when something lands on them,\" the notification scheme already does that. If you want \"email the client's address when a bug moves to Done, with the issue key and a link in the subject,\" you need an automation rule. This guide builds the second kind."
     },
     {
-      "heading": "Set up automation rules for emails",
-      "body": "Create an automation rule that triggers on a specific event, such as issue creation or a status change, and add a send-email action."
+      "heading": "Confirm outgoing mail is actually configured",
+      "body": "Before building anything, check that your instance can send. In Jira's admin settings, the System section has a Mail group containing Global mail settings, Outgoing mail, Incoming mail and Send email — Outgoing mail is where the sending configuration lives, and there is a Send email page for firing a test message at yourself. The General Settings block above it also holds the Email from value, which controls the display name on outbound mail and is templated by default as the acting user's full name followed by Jira. Two things commonly bite here: outgoing mail being globally disabled after a migration, and a From name so generic that recipients cannot tell which instance a message came from. Fix both now — a rule that runs perfectly and sends nothing is a miserable thing to debug later.",
+      "image": { "file": "/screenshots/xio2qaDnCpM/02.webp", "caption": "Jira's System settings with the Mail group in the sidebar — Outgoing mail is where sending is configured, and Email from sets the display name." }
     },
     {
-      "heading": "Configure recipients and content",
-      "body": "Choose who should receive the automated email and customize the message so it includes relevant issue details."
+      "heading": "Create a rule in the project's Automation settings",
+      "body": "Open the project, go to Project settings, and choose Automation from the left menu. Create a new rule and Jira drops you into the rule builder with a single card waiting for a trigger. Pick the event that should start the rule — Work item created is the obvious one for a new-ticket alert, and Jira notes on the panel that this trigger needs no configuration at all. Other common choices are Work item transitioned for status changes, Field value changed for things like priority, and Scheduled if you want a digest at a fixed time rather than a message per event. The rule is created at project level here, which keeps its execution limits and blast radius contained; a Jira admin can create the same thing globally across projects if the need is wider.",
+      "image": { "file": "/screenshots/xio2qaDnCpM/04.webp", "caption": "A new rule with its trigger set to Work item created, and the panel offering conditions before the rule fires." }
     },
     {
-      "heading": "Test the automatic emails",
-      "body": "Trigger the event manually to confirm the email sends correctly and reaches the intended recipients."
+      "heading": "Add the Send email action and choose recipients",
+      "body": "Click Add component, choose New action, and pick Send email. The right-hand panel gives you a To field with Cc and Bcc links beside it, a required Subject, and a required Content body. Recipients are the part worth slowing down for: you can address a role rather than a person — Assignee, Reporter, Watchers, Project role — which keeps the rule correct as people change, or you can type an external address for someone with no Jira account, which is exactly how you keep a client informed without buying them a licence. Addressing the Assignee, as in the rule shown here, means the message follows whoever the work actually belongs to at the moment the rule runs, not whoever it belonged to when you wrote it.",
+      "image": { "file": "/screenshots/xio2qaDnCpM/05.webp", "caption": "The Send email action wired under the trigger, addressed to the Assignee with a subject and a body holding the issue key." }
     },
     {
-      "heading": "Avoid email overload",
-      "body": "Limit automated emails to meaningful events so your team doesn't get overwhelmed by notifications."
+      "heading": "Put real issue data in the message with smart values",
+      "body": "A bare subject like \"Test\" tells nobody anything, and this is where most automation emails fail. Smart values are placeholders in double curly braces that Jira replaces at send time, and the braces button at the corner of each field inserts them. The useful set is small: {{issue.key}} for the ticket ID, {{issue.summary}} for the title, {{issue.status.name}} for where it now sits, {{issue.assignee.displayName}} for who owns it, and {{issue.url}} for a clickable link straight to the work item. A subject of {{issue.key}} — {{issue.summary}} makes the inbox scannable on its own, and a body with the status, the assignee and the URL means most recipients never need to open Jira to know what happened. Keep the body short; an automated email that reads like a report gets skimmed like one."
+    },
+    {
+      "heading": "Narrow it with conditions before you turn it on",
+      "body": "A trigger on its own fires for every work item in the project, which is how automation earns its reputation for spam. Add a condition between the trigger and the action to narrow it: an issue-type condition so only Bugs qualify, a JQL condition for something specific like priority in (High, Highest), or a user condition so the rule ignores changes made by the automation account itself. That last one matters more than it sounds — rules that respond to their own edits are the classic cause of loops, and Jira's rule details also carry a checkbox controlling whether a rule may be triggered by other rules. Every condition you add is one fewer email your team learns to ignore."
+    },
+    {
+      "heading": "Turn the rule on, test it, and read the audit log",
+      "body": "Give the rule a real name in place of Untitled rule — future you will be grateful when there are fifteen of them — then click Turn on rule. Test it immediately by performing the actual trigger: create a work item, or transition one, and watch what arrives. If nothing does, open the rule's audit log, which records every execution with its outcome and tells you whether the rule matched but the email failed, or the rule never fired at all. Those are entirely different problems: the first points at mail configuration or an invalid recipient, the second at your trigger or conditions. Once it works, revisit it after a fortnight and ask whether people are still reading the messages. Automation earns its place by staying rare enough to notice."
     }
   ],
   "faq": [
-    {
-      "question": "Do I need admin permissions to set this up?",
-      "answer": "Yes, configuring notification schemes and automation rules typically requires project or Jira administrator access."
-    },
-    {
-      "question": "Can I customize the email template?",
-      "answer": "Yes, Jira lets you customize the content and formatting of automated emails within the automation rule or notification settings."
-    },
-    {
-      "question": "Will automatic emails work for all issue types?",
-      "answer": "Yes, you can scope automation rules to specific issue types or apply them across all issues in a project."
-    },
-    {
-      "question": "How do I stop unwanted automatic emails?",
-      "answer": "You can disable or edit the specific automation rule or notification scheme entry that's triggering the unwanted emails."
-    }
+    { "question": "What's the difference between Jira notification schemes and automation rules?", "answer": "Notification schemes map built-in events to roles like Reporter and Watchers with fixed wording. Automation rules let you choose the trigger, filter it with conditions, pick any recipient including external addresses, and write the subject and body yourself." },
+    { "question": "Can Jira send an automatic email to someone without a Jira account?", "answer": "Yes. In the Send email action's To field you can enter an external email address directly instead of a Jira role or user, which is the usual way to keep a client updated without giving them a licence." },
+    { "question": "How do I include the issue key or a link in the email?", "answer": "Use smart values in double curly braces — {{issue.key}}, {{issue.summary}}, {{issue.status.name}} and {{issue.url}}. The braces button beside the subject and content fields inserts them, and Jira substitutes the real values when the rule runs." },
+    { "question": "My automation rule runs but no email arrives. Why?", "answer": "Check the rule's audit log first to confirm it executed. If it did, the problem is usually outgoing mail — verify it is enabled under the admin Mail settings and send a test message from the Send email admin page — or an empty recipient, which happens when a rule addresses the Assignee on unassigned work." },
+    { "question": "Do I need admin permissions to create these rules?", "answer": "Project admin rights are enough for rules scoped to a single project. Global rules spanning multiple projects, and the outgoing mail configuration itself, require Jira administrator access." },
+    { "question": "How do I avoid flooding my team with automated emails?", "answer": "Add conditions so the rule only fires on the cases that matter — a specific issue type, a JQL filter on priority, or excluding changes made by the automation account. Prefer a scheduled digest over a message per event when the volume is high." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T10:36:00Z",
+  "deep": true
 }

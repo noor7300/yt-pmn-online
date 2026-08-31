@@ -1,43 +1,68 @@
 {
   "slug": "how-to-charge-card-on-stripe-ask-payment-in-credit-cards-easily-2026",
-  "seoTitle": "How to Charge a Card on Stripe & Request Payment",
-  "metaDescription": "See three ways to collect credit card payments on Stripe: manual dashboard charges, payment links, and invoices, plus how card processing fees work.",
-  "intro": "There's more than one way to get paid on Stripe, and picking the right method depends on how your business operates. This guide covers manually charging a card from the dashboard, generating a one-time payment link, and requesting payment through an invoice, along with a look at how fees apply when charging customers.",
+  "seoTitle": "How to Charge a Card on Stripe and Request Card Payments (2026)",
+  "metaDescription": "Three ways to collect card payments on Stripe — payment links, invoices, and charging a saved customer card — plus which methods to enable and what fees apply.",
+  "intro": "Stripe gives you more than one way to ask a customer for money, and choosing badly is why people end up building a checkout page for what should have been a single link. The three practical routes are a payment link you paste into a message, an invoice you email with a due date, and a direct charge against a card a customer has already saved with you. Each has different paperwork, different timing, and a different effect on how professional the request looks. This guide walks each one through the Stripe dashboard, points out the payment-method toggles that quietly decide what your customer sees, and covers the fee and test-mode details worth knowing before you send the first request.",
   "steps": [
     {
-      "heading": "Review the methods to charge cards on Stripe",
-      "body": "Before diving in, it helps to know your three main options: a manual dashboard charge, a payment link, and an invoice — each suits a different situation."
-    },
-    {
-      "heading": "Manually charge a card via the dashboard",
-      "body": "For a quick, one-off charge, you can enter a customer's card details directly in the Stripe dashboard and process the payment immediately."
+      "heading": "Pick the method that matches the situation",
+      "body": "A payment link is best when you want money now and the amount is fixed — freelance deposits, one-off products, event tickets. An invoice suits work with terms attached, where the customer needs a document with a number and a due date for their own bookkeeping. Charging a saved card directly is for repeat customers who have already paid you once and authorized you to store their card. The distinction that matters most is who types the card number: with links and invoices the customer enters it on Stripe's own page, which keeps card data entirely out of your hands and off your systems. Prefer those two by default."
     },
     {
       "heading": "Create a payment link",
-      "body": "For repeatable or shareable payment requests, generate a payment link customers can use to pay without you handling their card details directly."
+      "body": "In the dashboard's left navigation, Payment Links sits under Payments, and it's also pinned in the Shortcuts group at the top. The page lists every link you've made with its name, price, and creation date, and links you no longer want live can be deactivated rather than deleted — a deactivated link stops accepting payments but keeps its history. Click New to build one: pick or create a product, set the price, choose whether it charges once or recurs, and Stripe generates a URL you can paste anywhere. The same link can be reused by any number of customers, which is what makes it so much faster than issuing individual requests.",
+      "image": {
+        "file": "/screenshots/QUwddkBo_50/03.webp",
+        "caption": "The Payment Links page in the Stripe dashboard, showing an existing link with its price and a New button to create another."
+      }
     },
     {
-      "heading": "Use invoices to request payment",
-      "body": "For service-based or recurring work, send an invoice through Stripe so the customer can review the charge and pay on their own time."
+      "heading": "Send an invoice instead when terms matter",
+      "body": "Invoices live under Billing in the left navigation, filtered along the top by All, Draft, Open, Past due, and Paid. Each row carries the total, frequency, invoice number, customer name and email, due date, and creation date — everything you'd need to chase a late payment. Creating one attaches a customer record, line items, and a due date, and Stripe emails a hosted invoice page with a Pay button. The advantage over a link is the audit trail: the invoice number, the status, and automatic reminders when the due date passes. Use this for anything a client's finance team will need to file.",
+      "image": {
+        "file": "/screenshots/QUwddkBo_50/04.webp",
+        "caption": "The Invoices list filtered by status, with one open yearly invoice and Stripe's setup guide panel in the corner."
+      }
+    },
+    {
+      "heading": "Control which payment methods your customer sees",
+      "body": "Whichever route you use, the checkout page shows the payment methods enabled on your account, each with its own toggle in settings. Credit or debit card is the one you need on for this task; alongside it you'll typically find wallets, bank debits such as PADs, Cash App Pay, and Crypto, all switched independently. Leaving too many on clutters the page and can push the card fields below the fold; leaving too few on costs you conversions from customers who only use a wallet. Enable card plus the one or two alternatives your actual customers use, and check the result on a phone, where every extra option pushes the card form further down.",
+      "image": {
+        "file": "/screenshots/QUwddkBo_50/05.webp",
+        "caption": "Payment method toggles in Stripe settings — card and Cash App Pay switched on, Crypto left off."
+      }
+    },
+    {
+      "heading": "Charge a card the customer has already saved",
+      "body": "For a returning customer, open Customers, find their record, and charge the payment method stored on it. This is the closest thing to the classic \"charge a card from the dashboard\" workflow, and it works because the customer previously entered the card themselves and agreed to it being kept on file. Typing a card number you were read over the phone is a different thing entirely: it requires manual card entry to be eligible on your account and puts you inside the scope of card-data compliance rules. Unless you have a genuine in-person or phone-order business, send a link instead — it's faster, and it moves the security burden to Stripe."
+    },
+    {
+      "heading": "Test in sandbox, then check what the fees cost you",
+      "body": "Stripe's dashboard runs in a sandbox until you switch it to live, and a blue banner across the top tells you so — changes there don't touch your real account, and any invoice or link you build is a test object. Use it to send yourself an invoice and click through the payment page as a customer would before anything real goes out. When you go live, remember the fee applies per successful charge regardless of which of the three methods you used, with extra costs for international cards and currency conversion. Invoices and links themselves are free to create, so the method you pick is about workflow, not about price."
     }
   ],
   "faq": [
     {
-      "question": "What's the easiest way to charge a customer once on Stripe?",
-      "answer": "A manual dashboard charge or a one-time payment link are the quickest options for a single, non-recurring payment."
+      "question": "What's the fastest way to ask someone for a card payment on Stripe?",
+      "answer": "A payment link. Create it once under Payments, Payment Links, then paste the URL into an email or message — the customer enters their card on Stripe's hosted page and you never handle the number."
     },
     {
-      "question": "Do fees change depending on how I charge the card?",
-      "answer": "Processing fees generally apply to card transactions regardless of the method, though international cards can carry different rates."
+      "question": "Can I type a customer's card number into the Stripe dashboard myself?",
+      "answer": "Only if manual card entry is enabled for your account, and it brings card-data compliance obligations with it. For most businesses a payment link or invoice is both faster and safer."
     },
     {
-      "question": "Can I request payment without exposing my customer's card details to me?",
-      "answer": "Yes, payment links and invoices let customers enter their own card details securely without you handling that information directly."
+      "question": "When should I use an invoice instead of a payment link?",
+      "answer": "When the payment needs a document behind it — an invoice number, a due date, automatic reminders, and a status you can filter by Draft, Open, Past due, or Paid. Links are for immediate, informal requests."
     },
     {
-      "question": "Is this method suitable for freelancers as well as stores?",
-      "answer": "Yes, the guide covers approaches that work whether you're running an online store, a service business, or freelancing."
+      "question": "Do the fees change depending on the method?",
+      "answer": "No. Stripe charges per successful transaction rather than per method, though international cards and currency conversion add to the rate. Creating links and invoices costs nothing on its own."
+    },
+    {
+      "question": "How do I test a payment before sending it to a real customer?",
+      "answer": "Use the sandbox. The dashboard shows a banner confirming you're testing and that nothing affects your live account, so you can build a link or invoice and walk through the customer's view safely."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T10:25:00Z",
+  "deep": true
 }

@@ -99,11 +99,22 @@ function samplePoints(video: RawVideo): { at: number; label: string | null }[] {
 
 async function streamUrl(videoId: string): Promise<string> {
   // Cap height to keep the remote read light; we only need 1280px-wide stills.
+  //
+  // The player client is pinned deliberately. Left to itself yt-dlp now hands
+  // back URLs signed for ANDROID_VR, and YouTube checks the User-Agent on
+  // those — ffmpeg sends its own and every read comes back 403, which shows up
+  // here as a video that yielded zero frames rather than as an error. The
+  // android client's URLs are readable by a plain HTTP client, so they survive
+  // being handed to ffmpeg. If a future YouTube change breaks this again, the
+  // symptom is the same (0 shots for every video) and the fix is to re-test
+  // the clients and pin whichever still works.
   const { stdout } = await exec("yt-dlp", [
     "-f",
     "bestvideo[height<=720][ext=mp4]/best[height<=720]",
     "-g",
     "--no-warnings",
+    "--extractor-args",
+    "youtube:player_client=android",
     `https://www.youtube.com/watch?v=${videoId}`,
   ]);
   const url = stdout.trim().split("\n")[0];

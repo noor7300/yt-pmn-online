@@ -2,21 +2,43 @@
   "slug": "how-to-close-your-trade-in-pieces-using-tradingview-and-book-partial-profit-or-l",
   "seoTitle": "Close a TradingView Trade in Pieces for Partial Profit",
   "metaDescription": "Learn how to close an open TradingView position in pieces, using the partial close option to lock in some profit while keeping part of the trade open.",
-  "intro": "Closing a trade in pieces on TradingView gives you more control over your open positions, letting you lock in some profit while keeping the rest running for potential further gains. This guide walks through finding the close position button and using the partial close option.",
+  "intro": "Exiting an entire position at once is rarely the smartest move — sometimes you want to bank part of a winning trade while giving the rest room to run, or trim risk without abandoning a setup you still believe in. TradingView's paper trading panel has a built-in way to do exactly that: a partial close option tucked inside the same window you'd use to exit completely. This guide walks through an actual open Dow Jones (US30) position on the platform, from the moment it's live on the chart to the exact form field where you tell TradingView how many units to close and how many to leave running.",
   "steps": [
-    { "heading": "Open the chart section", "body": "Log into TradingView and go to the chart section where your open trading setup is displayed." },
-    { "heading": "Locate the position to manage", "body": "Find the specific open position you want to partially close on your chart." },
-    { "heading": "Click Close Position", "body": "Use the close position button to open the options for modifying your open trade." },
-    { "heading": "Select the partial close option", "body": "Choose the partial close checkbox or dropdown to specify that you only want to close part of the position." },
-    { "heading": "Enter the amount to close", "body": "Specify the exact amount or percentage of the trade you want to close, aligning it with your risk management plan." },
-    { "heading": "Confirm the close", "body": "Click close to finalize the partial exit, leaving the remainder of your position open." }
+    {
+      "heading": "Open your chart with the position already live",
+      "body": "Once you're logged into TradingView and a trade is open, the chart itself becomes your control panel — you'll see the entry line, a running buy/sell price ticker, and the paper trading account summary docked underneath. In this example the account is a Paper Trading account labeled PMN_Online, holding a long position on CAPITALCOM:US30 (the Dow Jones index). The tabs along the bottom — Positions, Orders, History, Account History, Trading Journal — are where you manage anything you have open, and Positions is the one you'll use here.",
+      "image": { "file": "/screenshots/vmnWXXpIkeU/01.webp", "caption": "An open US30 position on the daily chart, with the Paper Trading account panel showing balance and equity underneath." }
+    },
+    {
+      "heading": "Locate the position on the Positions tab",
+      "body": "Click the Positions tab at the bottom of the chart to see your open trade listed with its symbol, side, quantity, and live unrealized profit or loss. On the chart, the same position shows up as a horizontal line running from your entry price, with small TP and SL markers and a live P&L badge next to it — in this case the trade is 11 units long at 44,190.5, sitting a little underwater. That badge on the chart and the row in the Positions tab are two doors to the same place, so you can trigger a close from whichever one is in front of you.",
+      "image": { "file": "/screenshots/vmnWXXpIkeU/04.webp", "caption": "The open position line on the chart, with its take-profit and stop-loss markers and the live P&L figure next to the entry." }
+    },
+    {
+      "heading": "Open the Close position window",
+      "body": "Click the small X next to the position's P&L badge on the chart, or use the equivalent close control in the Positions row, and a Close position dialog pops up over the chart. It confirms exactly what you're about to touch — the symbol, the side, and the size — so you're not guessing which trade you're closing when you have more than one open at once. This is also the window where the partial close option lives, so don't close it yet even if your first instinct is to just hit close and be done."
+    },
+    {
+      "heading": "Turn on Partial close and set your quantity",
+      "body": "Inside the dialog, tick the Partial close checkbox and a quantity field appears showing how many units are eligible out of the total position size. In the example, the position is 11 units and the field is set to 5, with a line underneath spelling out the math directly: \"Partially close CAPITALCOM:US30 5 — Leaving a position of 6.\" That confirmation line is worth reading every time, since it's your last check that the split you're about to execute is the one you actually intended before any money moves.",
+      "image": { "file": "/screenshots/vmnWXXpIkeU/05.webp", "caption": "The Close position dialog with Partial close checked, splitting an 11-unit position into 5 closed now and 6 left running." }
+    },
+    {
+      "heading": "Confirm the partial close",
+      "body": "With the quantity set, click the Partially close button rather than Cancel. TradingView immediately books the realized profit or loss on the portion you closed — you'll see it reflected in the Realized P&L figure on the account panel — while the remaining units stay open under the same position, still tracking against your original take-profit and stop-loss unless you adjust them separately."
+    },
+    {
+      "heading": "Check what's left running",
+      "body": "Head back to the Positions tab and you'll see the size of the trade has updated to reflect the smaller remaining quantity, with a fresh unrealized P&L figure calculated only on those leftover units. This is the moment to decide whether to leave the stop and target where they are, tighten the stop toward breakeven now that some profit is locked in, or repeat the partial close process again later if the trade keeps moving your way."
+    }
   ],
   "faq": [
-    { "question": "Can I close only part of an open trade on TradingView?", "answer": "Yes, the partial close option lets you specify how much of your position to close while leaving the rest open." },
-    { "question": "Why would I close a trade in pieces?", "answer": "It lets you lock in some profit while keeping part of the position open for potentially higher gains." },
-    { "question": "Do I need to have multiple positions open to use this?", "answer": "No, you can use partial close on a single open position, though it's especially useful when managing multiple trades." },
-    { "question": "How do I specify how much to close?", "answer": "After selecting the partial close option, you enter the exact amount or percentage of the trade you want to close." },
-    { "question": "Does partial closing help with risk management?", "answer": "Yes, it allows you to control how much of your position is closed at any time, helping manage your risk-to-reward ratio." }
+    { "question": "Can I close only part of an open trade on TradingView?", "answer": "Yes. Open the Close position dialog for the trade, tick the Partial close checkbox, and enter how many units you want to close — the rest stays open under the same position." },
+    { "question": "Why would I close a trade in pieces?", "answer": "It lets you lock in some profit or cut some risk while keeping the remainder of the position open in case the move continues in your favor." },
+    { "question": "Does partial closing use a separate order ticket?", "answer": "No, it's the same Close position window you'd use for a full exit — checking Partial close just adds a quantity field so you can specify less than the whole size." },
+    { "question": "What happens to my stop loss and take profit after a partial close?", "answer": "They stay attached to whatever quantity remains open. You can leave them as they are or edit them separately once the remaining size is smaller." },
+    { "question": "Can I do more than one partial close on the same position?", "answer": "Yes, you can repeat the process as many times as you like until the position is fully closed, scaling out in stages rather than all at once." }
   ],
-  "generatedAt": "2026-07-24T12:04:37Z"
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "deep": true
 }

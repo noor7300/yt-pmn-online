@@ -1,47 +1,68 @@
 {
   "slug": "how-to-integrate-shiprocket-checkout-with-shopify-easily-2026",
   "seoTitle": "Integrate Shiprocket Checkout with Shopify (2026 Guide)",
-  "metaDescription": "Learn how to connect Shiprocket checkout to your Shopify store, configure shipping rates for India, and sync orders automatically to cut cart abandonment.",
-  "intro": "If you run a Shopify store in India and want a faster, more reliable checkout, connecting Shiprocket can streamline both your fulfillment and shipping process. This guide walks through installing the Shiprocket app, configuring the checkout API, and syncing orders so your delivery workflow runs on autopilot. By the end you'll have a tested checkout flow ready for real customers.",
+  "metaDescription": "Connect Shiprocket to your Shopify store step by step — install the app, link your Shiprocket account, set pickup and rates for India, and sync orders automatically.",
+  "intro": "Shiprocket is the shipping layer most Indian Shopify stores end up on, because it aggregates courier partners, handles COD, and pushes tracking back to the customer without you negotiating with each carrier yourself. The integration itself is short — install the app, authorise it with your Shiprocket login, set a pickup address, and let orders flow across — but the order you do things in matters, and a couple of steps are easy to skip in a way that only shows up when a real order fails to sync. This guide covers the full connection from a fresh Shopify admin through to a tested order, and points out where Shiprocket's own help centre answers the questions that come up most often afterwards.",
   "steps": [
     {
-      "heading": "Install the Shiprocket app on Shopify",
-      "body": "Head to the Shopify App Store, search for Shiprocket, and add it to your store. This connects your Shopify account to Shiprocket's fulfillment network."
+      "heading": "Get your Shopify store and Shiprocket account ready",
+      "body": "Two things need to exist before you install anything: a Shopify store with at least one real product, and a Shiprocket account you can log into. Sign up at Shiprocket separately if you haven't — the integration authorises an existing account rather than creating one, so the app install will stall at the login screen otherwise. On the Shopify side, open your admin and confirm you can see Orders, Products, and Apps in the left menu; you'll be moving between those three throughout. It's also worth adding one cheap test product now, since you'll need something orderable to prove the sync works at the end.",
+      "image": {
+        "file": "/screenshots/p8eQTtSlP70/01.webp",
+        "caption": "The Shopify admin home. Apps sits at the bottom of the left menu — that's where the Shiprocket app will appear once installed."
+      }
     },
     {
-      "heading": "Set up the checkout API and configuration",
-      "body": "Inside the app, configure the Shiprocket checkout API so orders placed on your store pass shipping details directly to Shiprocket for processing."
+      "heading": "Install the Shiprocket app from the Shopify App Store",
+      "body": "From your admin, open Apps and follow the link through to the Shopify App Store, then search for Shiprocket. Check the listing before you click Add: the official app is published by Shiprocket itself, and there are similarly-named third-party connectors that behave differently. Shopify will show you the permissions the app requests — order data, fulfilment, and customer addresses — which it needs in order to create shipments on your behalf. Approve the install and Shopify hands you off to Shiprocket to finish the connection."
     },
     {
-      "heading": "Configure shipping rates and delivery zones",
-      "body": "Set up shipping rates and delivery zones tailored to India so customers see accurate costs and delivery estimates at checkout."
+      "heading": "Authorise the connection with your Shiprocket login",
+      "body": "The handoff lands you on a Shiprocket login page, and this is the actual link-up: signing in with your Shiprocket credentials is what binds that account to this specific Shopify store. Use the email and password for the account whose wallet and courier settings you want orders billed against — if you manage several Shiprocket accounts, this is the moment to get it right, since re-pointing later means disconnecting and reinstalling. Once authorised, the Shiprocket dashboard shows your Shopify store listed as a connected channel. From that point, the two systems are talking and new orders can flow across."
     },
     {
-      "heading": "Sync orders automatically",
-      "body": "Enable order syncing between Shopify and the Shiprocket dashboard so every new order shows up automatically without manual entry."
+      "heading": "Set your pickup address and serviceable pincodes",
+      "body": "Shiprocket calculates rates and assigns couriers from a pickup location, so this has to be accurate before anything useful happens. In the Shiprocket dashboard, add the address your parcels will actually be collected from, including the correct pincode — a wrong pincode here silently produces wrong rates and wrong delivery estimates for every order. If you ship from more than one place, add each as a separate pickup location and mark a primary. This is also where you set which pincodes you serve and whether you offer COD, both of which directly shape what your customers see."
     },
     {
-      "heading": "Test the checkout flow",
-      "body": "Place a test order to confirm shipping rates, order sync, and checkout experience all work smoothly before going live."
+      "heading": "Configure shipping rates on the Shopify side",
+      "body": "Connecting Shiprocket does not automatically rewrite the rates your Shopify checkout shows. Go to Settings, Shipping and delivery in Shopify and decide how you want to charge: a flat rate per order, free shipping above a threshold, or weight-based bands that roughly track what Shiprocket charges you. Whatever you pick, make sure your product weights are filled in — Shiprocket bills on weight and dimensions, so a store selling with no weights entered will quote customers one figure and get charged another. Compare a few sample pincodes in Shiprocket's rate calculator against what your checkout quotes, and adjust until the gap is one you're happy to absorb."
+    },
+    {
+      "heading": "Place a test order and confirm it syncs",
+      "body": "Buy something from your own store using a real Indian address and a low-value test product. Within a minute or two the order should appear in the Shiprocket dashboard's orders list, carrying the customer name, address, and item details from Shopify. From there, assign a courier and generate a label to confirm the full path works — if the order arrives but won't ship, it's usually a missing weight or an unserviceable pincode rather than a broken connection. Check that tracking status flows back to the Shopify order too, since that's what stops customers emailing you for updates."
+    },
+    {
+      "heading": "Know where to go when something breaks",
+      "body": "Once you're live, most problems are operational rather than technical: a pincode that isn't serviceable, a product category that couriers won't carry, or a login that stops working. Shiprocket runs a searchable help centre covering exactly these cases — prohibited and dangerous goods lists, whether to contact Shiprocket or the courier partner for a shipment query, and account access issues. Bookmark it before your first busy week rather than during it. As a rule of thumb: anything about a specific shipment in transit goes to Shiprocket support, while anything about what the customer sees at checkout is a Shopify shipping setting you control.",
+      "image": {
+        "file": "/screenshots/p8eQTtSlP70/05.webp",
+        "caption": "Shiprocket's help centre articles covering prohibited items, who to contact about a shipment, and account login problems."
+      }
     }
   ],
   "faq": [
     {
-      "question": "Do I need a Shiprocket account before integrating with Shopify?",
-      "answer": "Yes, you'll need an active Shiprocket account to connect the app and access the checkout API and dashboard features."
+      "question": "Do I need a Shiprocket account before installing the Shopify app?",
+      "answer": "Yes. The install ends on a Shiprocket login screen — it authorises an account that already exists rather than creating one, so sign up at Shiprocket first."
     },
     {
-      "question": "Will this integration slow down my checkout?",
-      "answer": "A properly configured integration is designed to speed up checkout by streamlining shipping calculations, not add delays."
+      "question": "Does connecting Shiprocket change the rates my customers see at checkout?",
+      "answer": "Not by itself. Your Shopify shipping settings still control what's quoted at checkout, so set flat, free-over-threshold, or weight-based rates there and compare them against Shiprocket's actual charges."
     },
     {
-      "question": "Can I customize shipping rates by region?",
-      "answer": "Yes, you can configure shipping rates and delivery zones specifically for different areas within India."
+      "question": "Why is my Shopify order not showing in the Shiprocket dashboard?",
+      "answer": "Usually the store isn't fully authorised, or the order was placed before the connection completed. Check that your Shopify store is listed as a connected channel in Shiprocket, then place a fresh test order."
     },
     {
-      "question": "How do I know if orders are syncing correctly?",
-      "answer": "Check your Shiprocket dashboard after placing a test order on Shopify; it should appear automatically if the sync is configured correctly."
+      "question": "Can I ship from more than one location?",
+      "answer": "Yes. Add each collection point as a separate pickup address in Shiprocket and mark one as primary. Rates and courier assignment are calculated from the pickup address, so keep every pincode accurate."
+    },
+    {
+      "question": "Who do I contact when a shipment goes missing — Shiprocket or the courier?",
+      "answer": "Shiprocket. Its help centre states that queries about a shipment you sent through the platform go to Shiprocket support rather than direct to the courier partner."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T00:00:00.000Z",
+  "deep": true
 }

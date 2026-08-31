@@ -2,19 +2,43 @@
   "slug": "how-to-connect-namecheap-domain-to-wix-website-easily-2026",
   "seoTitle": "Connect a Namecheap Domain to Your Wix Website",
   "metaDescription": "Learn both the nameserver and manual DNS methods for connecting a Namecheap domain to Wix, plus verification tips and propagation timing.",
-  "intro": "Connecting a Namecheap domain to a Wix website can be done in two ways: switching to Wix's recommended nameservers for automatic DNS management, or manually pointing individual DNS records if you want to keep control. This guide walks through both approaches.",
+  "intro": "Buying a domain on Namecheap and building a site on Wix means those two platforms have to be told to talk to each other, and the easiest way to do that is by pointing Namecheap's nameservers at Wix's. Wix walks you through this with a short numbered wizard that hands you the exact values to swap, and Namecheap's domain panel is where you actually paste them in. This guide follows that real flow end to end — from Wix's nameserver instructions to the Namecheap domain list where the change gets made and confirmed.",
   "steps": [
-    { "heading": "Add your domain inside Wix", "body": "Log in to your Wix account and add your Namecheap domain in the domain connection settings so Wix can generate the required DNS values." },
-    { "heading": "Choose the nameserver method", "body": "For automatic DNS management, update your Namecheap nameservers to Wix's nameservers so Wix handles all records for you." },
-    { "heading": "Or choose the manual pointing method", "body": "If you prefer to keep DNS control in Namecheap, manually add the specific A record and CNAME Wix provides instead of switching nameservers." },
-    { "heading": "Verify the domain connection", "body": "Return to Wix and confirm the domain shows as connected, which indicates the DNS changes were applied correctly." },
-    { "heading": "Allow for DNS propagation", "body": "Give the changes time to propagate before assuming something is wrong if the site doesn't load immediately on the new domain." }
+    {
+      "heading": "Open your Wix site dashboard",
+      "body": "Log into Wix and open the dashboard for the site you want the domain attached to. The left sidebar is your control center here — Video Library, Apps, Site & Mobile App, Marketing, Analytics, Settings, and further down, Developer Tools — and it's the same dashboard you'll return to later to confirm the domain connected successfully. If you're partway through Wix's setup checklist, as shown by the \"Let's set up your blog\" progress tracker at the top, you can still jump into domain settings without finishing every item on that list first.",
+      "image": { "file": "/screenshots/79cdLzjNsbs/03.webp", "caption": "The Wix site dashboard, with the sidebar navigation you'll use throughout setup, including Settings where domain connection lives." }
+    },
+    {
+      "heading": "Start the domain connection wizard in Wix",
+      "body": "From Settings, find the domain connection option and choose to connect a domain you already own rather than buying a new one through Wix. Wix runs you through a short numbered wizard — in this flow it's a four-step process, with step 3 asking you to find your current nameservers on your registrar's site (confirmed with an \"I found them\" checkbox) before moving you into the actual swap in step 4."
+    },
+    {
+      "heading": "Copy the exact Wix nameservers",
+      "body": "Step 4 of the wizard, \"Replace your nameservers,\" lays out precisely what to remove and what to add, side by side, with copy buttons next to each value so you don't risk a typo. In this case the instructions call for removing dns2.registrar-servers.com and dns1.registrar-servers.com — Namecheap's default nameservers — and replacing them with ns1.wixdns.net and ns0.wixdns.net. The wizard is explicit that you should end up with exactly two nameserver records; if your domain has more than two listed, it tells you to remove the extras rather than leave them alongside Wix's.",
+      "image": { "file": "/screenshots/79cdLzjNsbs/05.webp", "caption": "Wix's nameserver swap instructions, showing the exact Namecheap default nameservers to remove and the two Wix nameservers to add in their place." }
+    },
+    {
+      "heading": "Update the nameservers in Namecheap",
+      "body": "Log into Namecheap and open Domain List from the left sidebar, where every domain on the account is listed with its Status, Auto-Renew toggle, and Expiration date. Click Manage next to the domain you're connecting, find the Nameservers section on that domain's management page, switch it to Custom DNS, and enter the two Wix nameservers from the wizard exactly as copied — no trailing spaces, no extra entries.",
+      "image": { "file": "/screenshots/79cdLzjNsbs/02.webp", "caption": "Namecheap's Domain List, showing an active domain with its expiration date and the Manage button that opens its nameserver settings." }
+    },
+    {
+      "heading": "Save and confirm back in Wix",
+      "body": "After saving the nameserver change in Namecheap, return to the Wix wizard and click \"I've replaced my nameservers\" to tell Wix the change is in. Wix can't verify it instantly since the update has to propagate first, but confirming this step lets Wix start checking in the background and move your domain connection status toward Connected once it detects the new nameservers."
+    },
+    {
+      "heading": "Give it time to propagate",
+      "body": "Nameserver changes typically take anywhere from a few minutes to a few hours to fully propagate, though it can occasionally stretch close to 48 hours depending on your location and DNS caching along the way. Check the domain's status in Wix's Settings periodically rather than assuming something broke if it isn't instant — if it's still unconnected after a day or two, double-check that the nameservers in Namecheap match Wix's values exactly, including no leftover default entries."
+    }
   ],
   "faq": [
-    { "question": "Should I use the nameserver method or manual DNS method?", "answer": "The nameserver method is simpler since Wix manages everything automatically, while the manual method suits people who want to keep other DNS records under their own control." },
-    { "question": "Will switching nameservers affect my email?", "answer": "It can, since nameserver changes hand over all DNS management to Wix, so you'd need to recreate any email-related records there." },
-    { "question": "How long does domain propagation typically take?", "answer": "It varies by domain and location, ranging from a few minutes to up to 48 hours in some cases." },
-    { "question": "Can I switch methods later if I change my mind?", "answer": "Yes, you can move from manual DNS pointing to the nameserver method or vice versa if your needs change." }
+    { "question": "Should I use the nameserver method or manual DNS method?", "answer": "The nameserver method shown here is simpler since Wix manages everything automatically once the two nameservers are set. A manual A-record and CNAME method exists too, for people who want to keep other DNS records under their own control at Namecheap." },
+    { "question": "Will switching nameservers affect my email?", "answer": "It can. Handing DNS control to Wix's nameservers means any email-related records (like MX records) you had at Namecheap no longer apply, so you'd need to recreate them through Wix's DNS settings instead." },
+    { "question": "How long does domain propagation typically take?", "answer": "It varies by domain and location, usually somewhere between a few minutes and a few hours, though it can occasionally take up to 48 hours in rarer cases." },
+    { "question": "What exactly do I remove and add in Namecheap?", "answer": "In this walkthrough, Wix's wizard specified removing Namecheap's default dns1.registrar-servers.com and dns2.registrar-servers.com and adding ns0.wixdns.net and ns1.wixdns.net in their place — always use the exact values your own Wix wizard shows you." },
+    { "question": "Can I switch methods later if I change my mind?", "answer": "Yes, you can move from the nameserver method back to manual DNS records or vice versa later, though switching back and forth unnecessarily just adds more propagation waiting time." }
   ],
-  "generatedAt": "2026-07-24T00:20:00.000Z"
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "deep": true
 }

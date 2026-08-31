@@ -1,43 +1,49 @@
 {
   "slug": "how-to-replace-the-add-to-cart-or-buy-now-button-on-shopify-and-redirect-it-to-a",
-  "seoTitle": "Redirect Shopify's Add to Cart Button to Affiliate",
-  "metaDescription": "Replace Shopify's Add to Cart or Buy Now button with a redirect to an external affiliate link, ideal for running an affiliate storefront.",
-  "intro": "Running an affiliate-style Shopify store means sending shoppers to another marketplace instead of your own checkout, and that requires editing the button behavior directly. This guide covers locating the right button snippet in your theme code and replacing the checkout link with your affiliate URL for both Buy Now and Add to Cart buttons.",
+  "seoTitle": "Replace Shopify's Add to Cart Button With an Affiliate Link",
+  "metaDescription": "Swap Shopify's Add to Cart or Buy Now button for a link to an external affiliate page using a Custom Liquid block — no theme file surgery, and fully reversible.",
+  "intro": "An affiliate storefront has one awkward problem: Shopify is built to take the sale, and every product page ends in an Add to cart button that leads to your own checkout. You want that button to send the shopper to Amazon, a supplier, or whichever marketplace pays you the commission. The clean way to do it is not hacking product-form.liquid — it is adding a Custom Liquid block in the theme editor that renders your own link styled as a button, then hiding the native buy buttons. This guide walks that method end to end, including the small CSS that makes the new button sit flush and full-width like the theme's own, and finishes with the link attributes and disclosure details that keep the setup professional rather than sketchy.",
   "steps": [
     {
-      "heading": "Understand why you'd redirect to an affiliate link",
-      "body": "If you're running an affiliate store, sending customers to another marketplace or supplier's product page instead of your own checkout is often the whole point of the setup."
+      "heading": "Pick the block approach over editing theme files",
+      "body": "There are two ways to change what a product page's button does. You can open Edit code and rewrite the buy-buttons snippet, or you can add a Custom Liquid block through the theme editor's own interface. The block approach wins for an affiliate store: it survives theme updates, it is undone by deleting one block instead of hunting for what you changed, and it never risks breaking the product form for the rest of the site. It also lets you keep the native buy buttons hidden rather than deleted, so switching a product back to real Shopify checkout later is a single toggle. Everything below uses that approach, and none of it requires touching a .liquid file."
     },
     {
-      "heading": "Locate the button code in the theme editor",
-      "body": "Open your theme's code editor and find the snippet responsible for the Add to Cart or Buy Now button behavior."
+      "heading": "Open your theme in the customizer",
+      "body": "From the Shopify admin, go to Online Store, then Themes. Your live theme is the one marked Current theme — Dawn in the store shown here — with a Customize button on its row. Before you click it, take the thirty seconds to duplicate the theme from the three-dot menu beside it. You are about to change how every product page converts, and a duplicate is the difference between an instant rollback and rebuilding from memory. Then hit Customize on the live copy to open the editor.",
+      "image": { "file": "/screenshots/v-xfa4hgPHg/02.webp", "caption": "Online Store, Themes — Dawn set as the current theme with the Customize button on the right." }
     },
     {
-      "heading": "Add a custom affiliate redirect link",
-      "body": "Replace the existing checkout link in that snippet with your affiliate URL so clicking the button sends visitors off-site instead."
+      "heading": "Find the Buy buttons block on the product template",
+      "body": "In the customizer, switch the template selector at the top from the home page to Default product so you are editing an actual product layout. The left panel then shows the template's sections, and under Product information you get the individual blocks that make up the right-hand column: Text, Title, Price, Variant picker, Quantity selector, Buy buttons, Description and Share. Buy buttons is the one that renders Add to cart and, when it is switched on, the Buy now button beneath it. Click through them once so you understand the stacking order — the block you are about to add will sit wherever you drop it in this list, and you want your affiliate button in the same position the customer's eye already expects.",
+      "image": { "file": "/screenshots/v-xfa4hgPHg/03.webp", "caption": "The Default product template with Product information expanded, showing Buy buttons among the blocks in the left panel." }
     },
     {
-      "heading": "Review final tips for an affiliate Shopify store",
-      "body": "Once the redirect is working for both button types, double-check that the experience still looks professional and consistent with the rest of your store."
+      "heading": "Add a Custom Liquid block with your affiliate link",
+      "body": "At the bottom of the Product information block list, click Add block and choose Custom Liquid. A Liquid code box opens in the left panel, and whatever you put there renders exactly where the block sits. Paste an anchor tag pointing at your affiliate URL and give it the theme's own button class so it inherits the store's styling: <a href=\"https://your-affiliate-link\" class=\"button custom_url\">Make An Enquiry</a> — swapping the label for something that matches the destination, like Buy on Amazon or View on supplier site. The extra custom_url class does nothing on its own; it is there purely as a hook for the CSS in the next step. Drag the new block directly above or below Buy buttons so it lands where shoppers already look for the call to action.",
+      "image": { "file": "/screenshots/v-xfa4hgPHg/04.webp", "caption": "A Custom Liquid block holding the anchor tag and its style rules, with the resulting Make An Enquiry button rendered under Add to cart in the preview." }
+    },
+    {
+      "heading": "Style it to match the theme's own button",
+      "body": "Out of the box the anchor will render as a shrink-to-fit link rather than a full-width button, which looks obviously bolted on. Add a small style block underneath the anchor in the same Custom Liquid box to fix the width and spacing — the version in use here sets .custom_url to display: flex, width: 100% and margin: 0 with !important, then zeroes the margin on .product-form so the new button sits tight against the block above instead of leaving a gap where the old one used to breathe. The !important flags are doing real work: theme button styles are specific, and without them your rules lose. Watch the live preview as you type, since it re-renders on each change and you can see immediately whether the button spans the column properly."
+    },
+    {
+      "heading": "Hide the native Add to cart and Buy now buttons",
+      "body": "With your link in place, the page now shows two calls to action, which is worse than either one alone. Hover the Buy buttons block in the left panel and click the eye icon to hide it — that removes Add to cart and Buy now from the storefront without deleting the block, so you can bring them back with the same click. This is also the point to check the block's own settings if you keep it visible on some templates: the Buy now button is a separate checkbox inside it. If you want the affiliate redirect on only some products rather than all of them, don't hide it globally — duplicate the product template instead, apply the changes to the copy, and assign that template per product from the product page's Theme template dropdown."
+    },
+    {
+      "heading": "Test the redirect and tidy up the details",
+      "body": "Click Save, open a product page on the live storefront, and click the new button — it should leave your store and land on the affiliate product page with your tracking parameters intact. Test on mobile too, since the product column stacks differently and a button with a forced width can overflow. Two additions are worth making while you are in the code box: target=\"_blank\" so the shopper keeps your tab open, and rel=\"nofollow sponsored noopener\" on the anchor, which is what search engines expect on paid links and closes a small security gap that comes with _blank. Finally, add a short affiliate disclosure near the button or in the footer — most affiliate programmes require it, and it costs you nothing in conversion when the button itself is honest about where it leads."
     }
   ],
   "faq": [
-    {
-      "question": "Does this work for both Buy Now and Add to Cart buttons?",
-      "answer": "Yes, the method covers replacing both the Buy Now and Add to Cart buttons with an affiliate redirect."
-    },
-    {
-      "question": "Do I need to edit theme code to do this?",
-      "answer": "Yes, this requires editing your theme code to locate the button snippet and replace the checkout link with your affiliate URL."
-    },
-    {
-      "question": "Will my store still look normal to visitors?",
-      "answer": "Yes, the goal is to keep your store looking professional while functioning as an affiliate hub that redirects purchases externally."
-    },
-    {
-      "question": "Is this reversible if I want to go back to a normal checkout?",
-      "answer": "Since the change is made in your theme code, reverting to the original checkout link would restore the standard Shopify checkout behavior."
-    }
+    { "question": "Do I have to edit theme code to redirect the Add to Cart button?", "answer": "No. A Custom Liquid block added through the theme editor does the job — you paste an anchor tag pointing at your affiliate URL, style it, and hide the native Buy buttons block. Nothing in the theme's .liquid files changes." },
+    { "question": "How do I hide the original Add to cart and Buy now buttons?", "answer": "In the customizer, hover the Buy buttons block under Product information and click the eye icon to hide it. That removes both buttons from the storefront and is reversible with the same click." },
+    { "question": "Can I apply this to only some products?", "answer": "Yes. Duplicate the product template, make the changes on the copy, then assign that template to the specific products from the Theme template dropdown on each product's admin page. Products on the default template keep normal checkout." },
+    { "question": "Why does my new button look small or misaligned?", "answer": "An anchor tag does not fill the column by default. Set the link's class to display: flex and width: 100% with !important in a style block inside the same Custom Liquid box, and zero the surrounding product-form margin so the spacing matches the rest of the page." },
+    { "question": "Should affiliate buttons use nofollow?", "answer": "Yes — add rel=\"nofollow sponsored noopener\" to the anchor. Sponsored marks it as a paid link for search engines, and noopener closes the security gap that comes with opening links in a new tab." },
+    { "question": "Is this reversible?", "answer": "Completely. Delete the Custom Liquid block and unhide the Buy buttons block and the page returns to standard Shopify checkout. Duplicating the theme before you start makes the rollback even safer." }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T10:12:00Z",
+  "deep": true
 }

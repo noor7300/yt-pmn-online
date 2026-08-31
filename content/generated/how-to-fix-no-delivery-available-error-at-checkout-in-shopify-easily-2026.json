@@ -1,47 +1,64 @@
 {
   "slug": "how-to-fix-no-delivery-available-error-at-checkout-in-shopify-easily-2026",
   "seoTitle": "Fix \"No Delivery Available\" Error at Shopify Checkout",
-  "metaDescription": "Customers seeing \"No Delivery Available\" at checkout? Learn how to fix shipping zones, delivery profiles, and product settings causing the error in Shopify.",
-  "intro": "The \"No Delivery Available\" error at Shopify checkout stops customers from completing their purchase, often because of a shipping configuration issue rather than anything wrong with the order itself. This guide covers the main causes and how to fix them so checkout works again.",
+  "metaDescription": "Customers seeing \"No Delivery Available\" at Shopify checkout? Work through shipping zones, delivery profiles, markets, product weight, and store address to fix it.",
+  "intro": "\"No Delivery Available\" is one of the most expensive errors a Shopify store can show, because it appears at the exact moment a customer is ready to pay. The message almost never means something is broken — it means Shopify looked for a shipping rate that covers this customer's address and this specific product, and found none. That makes it a configuration problem with a small number of possible causes: a shipping zone that doesn't include the country, a delivery profile that a product was never added to, a market that isn't active, a missing product weight, or a store origin address that Shopify can't ship from. This guide walks each of those in the order that finds the problem fastest, so you can stop guessing and get checkout working again in one pass.",
   "steps": [
     {
-      "heading": "Check your shipping zones",
-      "body": "Review your shipping zones in Shopify Admin to confirm the customer's location is actually included in a zone with an available rate."
+      "heading": "Reproduce the error before you change anything",
+      "body": "Start by proving to yourself which combination fails. Add the affected product to your cart, go to checkout, and enter the same country and postcode the customer used — then try a second address in a country you know works. If one address produces rates and the other doesn't, the problem is geographic and lives in your shipping zones or markets. If every address fails but only for one product, the problem is that product's profile or its shipping settings. Doing this first saves you from changing five settings and never knowing which one actually mattered. Everything after this happens in your Shopify admin, so keep it open in another tab.",
+      "image": { "file": "/screenshots/oFIiQgTGj6c/01.webp", "caption": "The Shopify admin home. Everything in this fix lives under Settings and Products in the left menu, not on this dashboard." }
     },
     {
-      "heading": "Review delivery profiles",
-      "body": "Missing or misconfigured delivery profiles can leave certain products without a valid shipping option, so check that every product is assigned to a profile."
+      "heading": "Open your shipping zones and check the country is listed",
+      "body": "Go to Settings, then Shipping and delivery, and open the General shipping profile. Inside it you'll see your shipping zones, each one holding a list of countries or regions with the number of rates attached to each. This is the single most common cause of the error: if the customer's country simply isn't in any zone, Shopify has nothing to quote and checkout shows no delivery options at all. Scan the list for the country that failed. A country can also be present but sitting at zero rates, which fails exactly the same way as being absent — so check the rate count next to each entry, not just whether the name appears.",
+      "image": { "file": "/screenshots/oFIiQgTGj6c/05.webp", "caption": "Countries inside a shipping profile, each showing how many rates it has. A country with no rates fails checkout just as surely as a country that isn't listed." }
     },
     {
-      "heading": "Match product weight and location settings",
-      "body": "Confirm that product weights and origin locations are set correctly, since mismatches here can cause Shopify to fail to calculate a delivery rate."
+      "heading": "Confirm the market covering that region is active",
+      "body": "Shipping zones sit underneath Markets, and a zone can be perfectly configured while the market that contains it is switched off. Open Markets from the left menu and check the region the customer is in — the status should read Active, and the region should include their country in its Includes list. Each market also carries its own shipping settings, shown as a rate and region count you can click into. If you recently added countries to a market, or duplicated a market to experiment with pricing, this is where the mismatch usually hides: the country is in the market list but the market itself was never activated, so checkout treats it as unsupported.",
+      "image": { "file": "/screenshots/oFIiQgTGj6c/04.webp", "caption": "A market set to Active with its included countries, and the Shipping panel on the right showing how many rates cover how many regions." }
     },
     {
-      "heading": "Check store address and location settings",
-      "body": "Make sure your store's shipping origin address is properly configured, as errors here can prevent rates from generating at all."
+      "heading": "Make sure every product belongs to a delivery profile",
+      "body": "Delivery profiles let you charge different shipping for different products, and they are the second big source of this error. Any product not explicitly assigned to a custom profile falls back to the General profile — which is fine, unless someone created a custom profile, moved products into it, and gave it a narrower set of zones than the general one. In practice, if a single product fails at checkout while everything else works, it's almost always in a custom profile whose zones don't cover that buyer. Open Shipping and delivery, look at each custom profile, and confirm its zones match the countries you actually sell to.",
+      "image": { "file": "/screenshots/oFIiQgTGj6c/02.webp", "caption": "A product's detail page. Scroll past pricing and inventory to the shipping section, where the physical-product toggle and weight live." }
     },
     {
-      "heading": "Test checkout after making changes",
-      "body": "Run a test checkout to a few different addresses to confirm delivery options now appear and the error is resolved."
+      "heading": "Fix product weight and the physical product setting",
+      "body": "If your rates are weight-based, a product with no weight can quietly fall outside every rate band you defined. Open the product, scroll to the Shipping section, and confirm \"This is a physical product\" is ticked and a realistic weight is entered. Two failure modes are worth knowing: a weight of zero can fall below a \"0.5 kg and up\" rate, and an accidentally huge weight can exceed your top band. Also check the opposite case — if a digital product is marked as physical, Shopify will demand a shipping rate for something that never ships. Fix these at the variant level too, since variants each carry their own weight."
+    },
+    {
+      "heading": "Check your store address and locations",
+      "body": "Shipping rates are calculated from somewhere, and that somewhere is your locations. Under Settings, check that your store's address is complete and that at least one location has \"Fulfil online orders from this location\" enabled. A location with an incomplete address — missing postcode or an unrecognised region — can prevent rates from generating even when your zones look perfect. If you fulfil from multiple locations, remember that Shopify needs a rate that works from the location holding stock for that item, so a product stocked only at a warehouse that isn't set up for online fulfilment will fail while identical products succeed."
+    },
+    {
+      "heading": "Re-test checkout and confirm the fix",
+      "body": "After each change, run the same test checkout you did at the start rather than saving everything and testing once — that way you learn which setting was actually at fault, which matters when the error returns in six months. Test at least three addresses: the one that originally failed, a domestic one, and one in a far-off zone. Clear your cart between attempts, since a stale cart can hold on to a previously calculated rate and mislead you. Once delivery options appear for all three, place a real low-value order end to end to confirm the rate carries through to payment."
     }
   ],
   "faq": [
     {
       "question": "Why does \"No Delivery Available\" appear for only some customers?",
-      "answer": "It's often because their shipping address falls outside your configured shipping zones or because a specific product lacks a valid delivery profile."
+      "answer": "Because the cause is usually geographic. Their country either isn't in one of your shipping zones, sits in a zone with zero rates, or belongs to a market that isn't active — while everyone else falls inside a zone that works fine."
     },
     {
       "question": "Can incorrect product weight cause this error?",
-      "answer": "Yes, if weight or dimensions are missing or unrealistic, Shopify may be unable to calculate a shipping rate and will show no delivery options."
+      "answer": "Yes, if your rates are weight-based. A product with no weight, or a weight outside every rate band you defined, gives Shopify nothing to match, so it returns no delivery options for that cart."
     },
     {
       "question": "Do I need a shipping app to fix this?",
-      "answer": "Not necessarily — many cases are fixed directly through Shopify's built-in shipping zone and delivery profile settings without needing a third-party app."
+      "answer": "No. Almost every case is solved inside Settings, Shipping and delivery — zones, rates, and delivery profiles — plus the product's own shipping section. Apps are worth considering only once basic rates work and you want carrier-calculated pricing."
     },
     {
-      "question": "How do I know which setting is causing the error?",
-      "answer": "Testing checkout with different addresses and products helps narrow down whether the issue is zone-based, profile-based, or tied to a specific product."
+      "question": "How do I work out which setting is causing it?",
+      "answer": "Test the same cart against several addresses. If one country fails and others pass, it's zones or markets. If one product fails everywhere, it's that product's delivery profile or weight. If everything fails, look at your store address and locations."
+    },
+    {
+      "question": "I fixed the setting but the error is still showing. Why?",
+      "answer": "Usually a stale cart. Empty the cart, start a fresh checkout, and try again in a private window. If it persists, confirm you edited the profile the product actually belongs to rather than the General profile."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T00:00:00.000Z",
+  "deep": true
 }

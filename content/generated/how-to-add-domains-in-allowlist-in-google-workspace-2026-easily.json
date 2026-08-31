@@ -2,46 +2,57 @@
   "slug": "how-to-add-domains-in-allowlist-in-google-workspace-2026-easily",
   "seoTitle": "How to Add Domains to the Allowlist in Google Workspace",
   "metaDescription": "Step-by-step guide to adding trusted domains to your Google Workspace allowlist so their emails reach your inbox securely in 2026.",
-  "intro": "An allowlist tells Google Workspace which domains should always be trusted, helping legitimate emails avoid being flagged or filtered as spam. This guide shows admins how to add domains to the allowlist correctly.",
+  "intro": "If a partner company or vendor keeps landing in spam even though you trust them completely, the fix isn't training your team to check the junk folder — it's telling Google Workspace to trust that domain outright. The domain allowlist is an admin-only setting that skips standard spam filtering for mail coming from a specific organization's domain, and it takes about a minute to set up once you know where it lives. This guide walks through signing into the admin account, finding the allowlist screen buried under Security, and adding a domain correctly the first time.",
   "steps": [
     {
-      "heading": "Access the Admin Console",
-      "body": "Sign in with an admin account and head to the Apps section, where Gmail's email safety settings are managed."
+      "heading": "Sign in with your admin account",
+      "body": "The allowlist is an organization-wide setting, so it can only be changed by someone with admin rights on the Workspace account — not a regular user login. Head to your account sign-in and enter the admin credentials for the domain you manage. If you're already signed into a personal Google account in the same browser, switch accounts first rather than trying to layer the admin session on top, since Workspace admin actions need to run under the admin identity specifically.",
+      "image": { "file": "/screenshots/PP2p2sQwxcc/03.webp", "caption": "Signing in with the Workspace admin account. This step has to use the admin identity, not a regular team member's login." }
     },
     {
-      "heading": "Find the allowlist settings",
-      "body": "Navigate to the compliance or spam settings area where you can define trusted senders and domains."
+      "heading": "Open the Admin console",
+      "body": "Once you're signed in, click the grid icon in the top right of any Google page to open the Google apps menu, then look for Admin in the list — it's separate from the everyday apps like Gmail and Drive and only shows up for accounts with admin privileges. If you don't see it, the account you're signed into doesn't have admin access and you'll need to switch to one that does. Clicking through takes you into the Admin console, which is where every Workspace-wide setting, including the allowlist, actually lives."
     },
     {
-      "heading": "Add the domain to your allowlist",
-      "body": "Enter the domain you want to trust so mail from it bypasses standard spam filtering rules."
+      "heading": "Go to the domain allowlist settings",
+      "body": "Inside the Admin console, the allowlist sits under the security settings rather than anywhere near Gmail or Apps, which is the main reason people struggle to find it. Look for a page specifically labeled for allowlisted domains — it's scoped to letting your organization collaborate with another Google Workspace domain in certain services, not general spam whitelisting for any sender. On a fresh setup you'll see a banner explaining that the domain you add must itself be running Google Workspace, plus an empty table showing zero domains allowlisted so far."
+    },
+    {
+      "heading": "Add the domain",
+      "body": "Click Add domain and type in the exact domain name of the organization you want to trust — no \"www,\" no email address, just the domain itself, such as partnercompany.com. Double-check the spelling before saving, since a typo here does nothing useful and won't get caught by any validation beyond basic format checks. Save the entry and it takes effect right away across your organization; there's no propagation delay to wait out.",
+      "image": { "file": "/screenshots/PP2p2sQwxcc/05.webp", "caption": "The Allowlisted domains page before any domain has been added. Add domain opens a simple field for the exact domain name." }
     },
     {
       "heading": "Verify the domain was added",
-      "body": "Check the list after saving to confirm the domain appears correctly and test by sending a message from that domain."
+      "body": "Return to the allowlist page after saving and confirm the domain now appears in the table with the count updated from zero to one. It's worth doing a real test at this point — have someone at the allowlisted domain send a message and confirm it lands normally rather than getting flagged, since a silent typo in the domain name would otherwise go unnoticed until someone complains about missing mail."
     },
     {
-      "heading": "Review the allowlist periodically",
-      "body": "Revisit your allowlist occasionally to remove domains you no longer need to trust, keeping your organization's email security tight."
+      "heading": "Review the list periodically",
+      "body": "An allowlist is only as safe as the domains sitting on it, so it's worth revisiting every few months rather than treating it as a set-and-forget setting. Remove entries for partnerships that have ended, and resist the temptation to allowlist a domain just to make a one-off delivery problem go away — every domain on this list bypasses filtering that would otherwise catch spoofed or malicious mail, so keep it limited to organizations you actively work with."
     }
   ],
   "faq": [
     {
       "question": "Why would I need to allowlist a domain in Google Workspace?",
-      "answer": "Allowlisting is useful when legitimate emails from a trusted partner, vendor, or internal tool keep getting caught in spam filters."
+      "answer": "Allowlisting is useful when legitimate emails from a trusted partner, vendor, or another Google Workspace organization keep getting caught in spam filters or blocked from certain collaboration features."
     },
     {
       "question": "Does allowlisting a domain apply to all users in my organization?",
-      "answer": "Yes, admin-level allowlist changes typically apply organization-wide rather than to a single user's inbox."
+      "answer": "Yes, it's an admin-level, organization-wide setting — once a domain is added, it applies across your whole Workspace, not to a single user's inbox."
+    },
+    {
+      "question": "Does the domain I'm allowlisting need to use Google Workspace too?",
+      "answer": "Yes. This particular allowlist is built for trusting another Google Workspace organization's domain for certain shared services — Google notes this requirement right on the settings page."
     },
     {
       "question": "Is allowlisting the same as whitelisting an IP address?",
-      "answer": "They're related but different — domain allowlisting trusts a sender's domain, while IP whitelisting trusts a specific sending server."
+      "answer": "No, they're related but different tools. Domain allowlisting here trusts an entire Workspace organization's domain, while IP whitelisting trusts a specific sending mail server and is configured elsewhere in the admin console."
     },
     {
       "question": "Can allowlisting a domain create a security risk?",
-      "answer": "Yes, if misused it can let spoofed emails through, so only allowlist domains you're confident are legitimate and trusted."
+      "answer": "Yes, if misused. Only allowlist domains belonging to organizations you actively and knowingly work with, and review the list periodically to remove ones you no longer need."
     }
   ],
-  "generatedAt": "2026-07-24T12:32:33.000Z"
+  "generatedAt": "2026-08-31T00:00:00Z",
+  "deep": true
 }
