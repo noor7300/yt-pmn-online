@@ -1,59 +1,75 @@
 {
   "slug": "how-to-fix-compare-price-does-not-appear-in-shopify-show-discount-sale-price-eas",
   "seoTitle": "Fix Compare at Price Not Showing in Shopify",
-  "metaDescription": "Discount strike-through price not appearing on your Shopify store? Learn how to fix compare at price settings so sale prices display correctly.",
-  "intro": "When you set a \"Compare at Price\" in Shopify to show a discount but the strike-through price never appears, it's usually a mismatch between your product pricing setup and how your store's markets or theme handle that value — not a bug in Shopify itself. This guide walks through the actual pricing fields on a product variant, why a properly filled-in compare-at price can still fail to show, and where multi-region stores in particular lose the discount. It's aimed at store owners running sales or promotions who need their pricing to look right to every customer.",
+  "metaDescription": "Compare-at price set but no sale price on your Shopify store? The rule Shopify enforces, the variant quirk that hides it on collection pages, and how markets change it.",
+  "intro": "A compare-at price that never appears usually comes down to one of three things, and only the first is the obvious one. Shopify displays the original price beside the sale price when compare-at is higher than price, so a blank or equal value produces nothing. The second is a rule about variants that catches people out on collection pages while the product page looks perfect. The third is markets, where Shopify's per-catalog price adjustment carries compare-at prices along with it by default.\n\nThis guide follows the pricing fields in the Shopify admin and checks each of those against what Shopify documents. It also separates compare-at pricing from discount codes, which behave differently on the storefront and account for a good share of the confusion.",
   "steps": [
     {
-      "heading": "Confirm what customers are actually seeing",
-      "body": "Before changing anything, load the live product page and look at the price the way a customer does. A product meant to show a discount but displaying only a single price — no strike-through, no \"was\" price next to it — confirms the compare-at value either isn't set, isn't saved on the right variant, or isn't being rendered by the theme. This is the baseline you'll check against after each fix below.",
-      "image": { "file": "/screenshots/XM1lCnFQmGs/01.webp", "caption": "A product page showing a single price with no strike-through discount — the exact symptom this guide fixes, confirmed from the customer's point of view before touching any settings." }
+      "heading": "Look at the live page the way a customer does",
+      "body": "Load the product page before changing anything. A single price with no original beside it and no sale badge means the compare-at value is missing, saved on a different variant, or not being rendered by your theme. Keep this page open. It is the check you come back to after each change below.",
+      "image": {
+        "file": "/screenshots/XM1lCnFQmGs/01.webp",
+        "caption": "A product page showing one price and no sale badge, the symptom this guide addresses."
+      }
     },
     {
-      "heading": "Open the specific variant and check its pricing fields",
-      "body": "In Products, open the item, and if it has variants — color, size, storage, whatever applies — click into the exact variant you're troubleshooting, since pricing is set per variant, not once for the whole product. Scroll to the Pricing section, where Price and Compare-at price sit side by side. It's easy to edit the wrong variant on a product with two dozen options and assume the fix didn't work when really it was never applied to the variant a customer is actually viewing.",
-      "image": { "file": "/screenshots/XM1lCnFQmGs/04.webp", "caption": "The Pricing section on a product variant, with Price set to $19.99 and a Compare-at price being entered — this exact pair of fields is what drives the strike-through display." }
+      "heading": "Set the pair correctly: compare-at above price",
+      "body": "Shopify's instructions are to open Products, select the product, find the Price section, click Compare at, and put the original price there while the reduced number goes in Price. Save. The compare-at value has to be the higher of the two, and Shopify documents that requirement plainly. Equal values, a blank field, or the two numbers swapped all produce no sale display at all.\n\nThe common error is dropping the Price for a sale and leaving Compare at empty, which loses the reference price instead of creating a discount. If the product has variants, the pair belongs to each variant, so open the exact colour or size you are testing. On a product with twenty variants, editing the wrong one looks identical to the fix not working.",
+      "image": {
+        "file": "/screenshots/XM1lCnFQmGs/04.webp",
+        "caption": "The Pricing fields on a product variant, with Price at $19.99 and a Compare-at price being entered above it."
+      }
     },
     {
-      "heading": "Make sure compare-at price is actually higher than price",
-      "body": "Shopify only renders the strike-through and discount badge when Compare-at price is a larger number than Price — if they're equal, blank, or reversed, nothing displays, even though both fields technically have values. A common mistake is leaving Compare-at price blank while lowering Price for a sale, which removes the \"was\" price entirely instead of showing a discount. Re-enter the original price into Compare-at price and the discounted number into Price, then save."
+      "heading": "If the product page is right but the collection page is not",
+      "body": "This one is documented and almost nobody knows it. Shopify shows the compare-at price on collection pages only when the compare-at pricing is consistent across all of a product's variants. Mixing empty fields with $0.00 values, or giving variants different compare-at amounts, is enough to suppress it in the grid while the product page keeps showing the sale correctly.\n\nOpen the variant list and check every row, including the ones you never put on sale. Either give them all a proper compare-at value or clear them all to genuinely empty. A stray $0.00 is the usual culprit, because it looks blank in a bulk editor and is not."
     },
     {
-      "heading": "Check pricing across every market, not just your default one",
-      "body": "If your store sells in multiple regions through Shopify Markets, compare-at price is set independently per market currency in many configurations — fixing it for your store's default USD pricing doesn't automatically fix it for UK or International shoppers. Open Markets from the sidebar and review each active market's pricing rules; a discount that shows correctly for US visitors but disappears for UK ones is one of the most common versions of this bug, and it's easy to miss because most store owners only test from their own region.",
-      "image": { "file": "/screenshots/XM1lCnFQmGs/05.webp", "caption": "The Markets page showing International, UK, and USA as separate active markets — compare-at pricing can behave differently in each one, which is easy to miss if you only test from your home region." }
+      "heading": "Check the market catalog if you sell internationally",
+      "body": "Multi-region stores add a layer. Shopify's catalogs carry an overall percentage price adjustment, and by default that adjustment applies to compare-at prices as well. The control is a toggle named Include compare-at price, under Markets, then Catalogs, in the catalog's Pricing section. Switch it off and you take responsibility for setting compare-at prices in that catalog yourself, which is how a discount that works at home quietly disappears abroad.\n\nOne more constraint sits behind the same door: Shopify's documentation states that fixed sale prices for international markets are created through a CSV import, not in the admin interface. Manually set prices also override the percentage adjustment, so a product with a fixed price in a catalog ignores the catalog-wide maths entirely.",
+      "image": {
+        "file": "/screenshots/XM1lCnFQmGs/05.webp",
+        "caption": "The Markets page listing International, UK, and USA as separate markets, each able to carry its own catalog pricing."
+      }
     },
     {
-      "heading": "Save, then hard-refresh the storefront to verify",
-      "body": "After correcting the pricing fields, save the product and reload the live page with a hard refresh (or an incognito window) rather than trusting a cached view, since Shopify's storefront and CDN can cache product pricing briefly after an edit. If the discount still doesn't appear after a genuinely fresh load, the pricing data itself is correct and the problem has moved to the theme layer."
-    },
-    {
-      "heading": "Check your theme's settings for discount display",
-      "body": "Some themes include a toggle in Theme settings or the specific product-page section settings to show or hide the compare-at price and sale badge — if that option is switched off, Shopify can have perfectly valid pricing data that the theme simply chooses not to render. Look under Online Store, then Themes, then Customize, and check the product page template's section settings for anything labeled compare price, sale badge, or discount label, and enable it if it's present but off."
+      "heading": "Reload properly, then look at the theme",
+      "body": "Save, then reload the storefront with a hard refresh or in a private window. A cached page after an edit sends people back to re-checking pricing that was already correct.\n\nIf a genuinely fresh load still shows one price, the data is fine and the theme is the remaining suspect. Shopify notes that sale price styling is often customisable through theme settings, so open Online Store, then Themes, then Customize, and look through the product template's section settings for anything about sale badges or compare-at display. Themes differ here, which is why the same product can look discounted on one theme and full price on another."
     }
   ],
   "faq": [
     {
-      "question": "Why isn't my compare at price showing on Shopify?",
-      "answer": "Most often the compare-at price is blank, equal to the price, or lower than it — Shopify only renders the strike-through when compare-at price is genuinely higher than the current price."
+      "question": "Why isn't my compare-at price showing?",
+      "answer": "Usually because it is blank, equal to the price, or lower than it. Shopify only shows the original price alongside the sale price when the compare-at value is higher than the price."
     },
     {
-      "question": "What should the compare at price be set to?",
-      "answer": "It needs to be higher than your actual selling price for Shopify to display it as a strike-through discount. A common mistake is putting the sale price in both fields."
+      "question": "It shows on the product page but not on the collection page. Why?",
+      "answer": "Shopify displays compare-at prices on collection pages only when the compare-at pricing is consistent across every variant. One variant left at $0.00 or given a different amount is enough to hide it from the grid."
     },
     {
-      "question": "Does every Shopify theme show the compare at price the same way?",
-      "answer": "No — some themes have a specific toggle for the sale badge or compare price in their section settings, and if it's switched off the pricing data can be correct but invisible on the storefront."
+      "question": "Does a compare-at price carry over to other countries?",
+      "answer": "By default yes. A catalog's percentage price adjustment is applied to compare-at prices too, controlled by the Include compare-at price toggle. Fixed sale prices for international markets have to be imported by CSV instead of being typed into the admin."
     },
     {
-      "question": "Will fixing this also update the price shown in collections?",
-      "answer": "Yes, once the variant's pricing is corrected and the theme setting (if any) is enabled, the discount should show consistently across product pages and collections."
-    },
-    {
-      "question": "Why does the discount show for some customers but not others?",
-      "answer": "If your store uses Shopify Markets, compare-at pricing can be configured separately per market currency — check each active market individually rather than assuming a fix to your default pricing covers every region."
+      "question": "Will a discount code produce the same strike-through?",
+      "answer": "No. Shopify's documentation says showing crossed-out prices for discounts on product and collection pages needs a third-party discount app or custom work. Compare-at pricing and discount codes are separate systems, and only compare-at drives the built-in sale display."
     }
   ],
+  "references": [
+    {
+      "label": "Shopify Help Center: Setting sale prices for products",
+      "url": "https://help.shopify.com/en/manual/products/details/product-pricing/sale-pricing"
+    },
+    {
+      "label": "Shopify Help Center: Set price adjustments (Include compare-at price toggle)",
+      "url": "https://help.shopify.com/en/manual/markets/pricing/price-adjustments"
+    },
+    {
+      "label": "Shopify Help Center: Set product prices by country",
+      "url": "https://help.shopify.com/en/manual/markets/pricing/product-prices-by-country"
+    }
+  ],
+  "verifiedNote": "The admin screens come from a walkthrough recorded in 2025. In September 2026 the behaviour was re-checked against Shopify's Help Center pages on sale pricing and on market price adjustments. Two claims changed as a result. The earlier version said fixing a variant's pricing makes the discount appear consistently across product and collection pages; Shopify documents that collection pages need consistent compare-at pricing across all variants, so that has been corrected. The earlier description of markets, that compare-at is set independently per market currency, has been replaced with what Shopify documents: a per-catalog percentage adjustment that includes compare-at prices by default, with fixed international sale prices set by CSV import. No store was tested first-hand.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

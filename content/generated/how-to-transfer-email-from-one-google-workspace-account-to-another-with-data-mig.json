@@ -1,63 +1,108 @@
 {
   "slug": "how-to-transfer-email-from-one-google-workspace-account-to-another-with-data-mig",
   "seoTitle": "Transfer Email Between Google Workspace Accounts",
-  "metaDescription": "Migrating email between Google Workspace accounts? Use the built-in Data Migration Tool, forwarding, or routing rules to move mail without losing data.",
-  "intro": "Whether you're switching domains, consolidating teams, or restructuring your business, moving email between Google Workspace accounts requires choosing the right method for your situation. This guide walks through the Admin Console's built-in Data Migration Tool step by step, then covers forwarding and routing rules as the alternatives to reach for when a one-time copy isn't what you actually need. It's built for Workspace admins and anyone with super admin access on both the source and target accounts.",
+  "metaDescription": "Move mail between Google Workspace accounts with Google's data import tool: the renamed Admin console path, the CSV mapping rules, the 1,000-user and 25 MB limits, and when forwarding is the better answer.",
+  "intro": "Switching domains, merging two companies, or retiring an old Workspace tenant all end at the same question: how do the mailboxes come across?\n\nGoogle's answer is a built-in tool in the Admin console that copies mail from one Workspace account into another, in the cloud, with no client software and no mailbox exports. Two things about it trip people up. It has been renamed, so the menu item in most existing guides no longer matches what is on screen. And it is an email tool. Drive files, Calendar and Contacts are not part of the job.\n\nThis guide covers the current click path, the mapping file and its limits, and the two situations where forwarding or routing beats a migration outright.",
+  "prerequisites": [
+    "Super administrator sign-in on the target Workspace account. Google's documentation states that a super admin must set up and run the import, and that resellers cannot import data for customer accounts.",
+    "Cooperation from a super admin on the source account, who has to approve an authorization request by email",
+    "A user account already created in the target organization for every person being imported. The tool only imports into accounts that already exist.",
+    "Gmail turned on and a licence assigned for each of those users",
+    "On the Essentials edition, a verified domain before you begin. Other editions can verify before or after."
+  ],
   "steps": [
     {
-      "heading": "Sign in to the Google Admin Console",
-      "body": "Everything here happens at admin.google.com, not in regular Gmail. Once you're signed in with an administrator account, the Home screen shows a \"Manage Workspace\" section with Users and Billing cards front and center, plus a left-hand sidebar covering Directory, Devices, Apps, Security, and Data. The migration tool lives under Data, which is easy to miss the first time since it's nested a few levels deep rather than sitting on the dashboard itself."
+      "heading": "Find the tool under its current name",
+      "body": "Everything happens at admin.google.com, not in Gmail. Sign in with an administrator account and the Home screen shows Users and Billing up front, with Directory, Devices, Apps, Security and Data down the left.\n\nThe path Google documents today is Menu, then Data, then Data import and export, then Data import. From there you pick Business Gmail as the source and click Import.\n\nOlder guides, this one included until recently, describe the same feature as Data migration or Data migration (new). Google has since settled on \"the data import tool\", and its documentation moved off support.google.com onto a separate Workspace knowledge site. If the sidebar shows Data import where you expected Data migration, nothing is broken and you are in the right place. Two neighbours in the same menu do different jobs: Data Export archives your own organization's data, and Google Takeout is the consumer download tool.",
+      "image": {
+        "file": "/screenshots/atmy-iU7PTw/03.webp",
+        "caption": "The Data section expanded in the Admin console sidebar, with the import and export entries grouped together."
+      }
     },
     {
-      "heading": "Navigate to Data migration under Data import and export",
-      "body": "Expand Data in the left sidebar, then Data import and export, and you'll find Data migration (new) alongside Data Export and Google Takeout. These three are easy to confuse: Data migration copies mail between Workspace accounts, Data Export pulls a full archive of your own organization's data, and Google Takeout is the consumer-facing personal-download tool. For an account-to-account email transfer, Data migration (new) is the one you want.",
-      "image": { "file": "/screenshots/atmy-iU7PTw/03.webp", "caption": "The Data section expanded in the Admin Console sidebar, with Data migration (new) sitting alongside Data Export and Google Takeout." }
+      "heading": "Get the source account to authorize the transfer",
+      "body": "The first stage asks for the email address of a super administrator on the account you are copying from, then sends that person an authorization request.\n\nNothing moves until they approve it, and the request expires after 24 hours. Approving it generates a client ID on the source side and switches on domain-wide delegation, which is how the target account is granted read access to those mailboxes. If the window lapses, send a fresh request; there is no way to extend one.\n\nThe consequence of that design is useful to know in advance. A migration cannot be run against a Workspace account you do not control, and it cannot be run quietly. Someone with super admin on the old tenant has to act, so line that up before you book a cutover date.",
+      "image": {
+        "file": "/screenshots/atmy-iU7PTw/04.webp",
+        "caption": "The wizard's first stage, connecting to the source account by super admin email address before any data moves."
+      }
     },
     {
-      "heading": "Connect to the source Google Workspace account",
-      "body": "Opening Google Workspace email migration drops you into a three-step wizard. Step 1 asks for the email address of a super admin on the source organization — the account you're copying mail from — and a \"Request authorisation\" button that kicks off an OAuth-style consent flow between the two Workspace domains. Nothing gets copied until that authorization is granted, so this step effectively confirms both sides agree to the transfer before any data moves.",
-      "image": { "file": "/screenshots/atmy-iU7PTw/04.webp", "caption": "The Google Workspace email migration wizard: Step 1 connects to the source account by super admin email, with migration maps and settings as Steps 2 and 3." }
+      "heading": "Map old mailboxes to new ones with a CSV",
+      "body": "Next you tell Google which mailbox becomes which. The mapping is a CSV with two columns, Source GUser and Target GUser, one row per person: terry@altostrat.com in the first column, terry@cymbalgroup.com in the second. Google offers a sample file in the correct format, and starting from it avoids the malformed header row that causes most rejected uploads.\n\nThree limits govern the file. No more than 1,000 source users, no larger than 128 MB, and no source user mapped to more than one target user. A one-to-many split is not something the tool will do, so a shared mailbox that needs to land in two places has to be handled another way.\n\nThose 1,000 users are per import, and the ceiling depends on where the mail is coming from. Google documents the same 1,000 for Microsoft Exchange Online, 100 for an IMAP server, and exactly one for a single Gmail account.",
+      "image": {
+        "file": "/screenshots/atmy-iU7PTw/05.webp",
+        "caption": "The mapping upload, showing the Source GUser and Target GUser columns with an example pairing."
+      }
     },
     {
-      "heading": "Upload a migration map to pair source and target users",
-      "body": "Step 2 is where you tell Google which mailbox on the old account goes to which mailbox on the new one. Rather than clicking through user by user, you upload a CSV with two columns — Source GUser and Target GUser — one row per person, for example terry@altostrat.com mapped to terry@cymbalgroup.com. Google provides a downloadable sample CSV in this exact format, which is worth using as your starting template even for a handful of users, since a malformed header row is a common reason the upload gets rejected.",
-      "image": { "file": "/screenshots/atmy-iU7PTw/05.webp", "caption": "The migration map upload, showing the required Source GUser / Target GUser CSV columns with a sample mapping." }
+      "heading": "Set the date range and options, then start",
+      "body": "You choose a start date, and the tool imports messages from that date up to the moment the import begins. Anything older is left behind, which is how you avoid duplicating a decade of mail nobody has opened since 2014.\n\nThree options sit alongside it: import deleted messages, import messages marked as spam, and exclude specific labels. Sublabels in the exclusion list are written with a forward slash, so a rule against Archive also needs Archive/2019 spelled out if that is what you mean.\n\nFrom a Workspace source, the import carries email messages including drafts and sent mail, labels and sublabels, stars, and read or unread state. Individual messages larger than 25 MB with attachments do not come across, and Gmail's usual block on executable attachments applies to imported mail too.\n\nStart it and close the tab if you like. The job runs in the cloud, the status page reports items discovered, warnings, failures, skipped messages and users processed as it goes, and Google emails a report when it finishes."
     },
     {
-      "heading": "Configure migration settings and start the transfer",
-      "body": "Step 3 lets you set an email start date, so you can migrate everything or limit the transfer to messages received after a specific point — useful if the old account has years of mail you don't need duplicated. Review the settings, then hit Start migration. Larger mailboxes can take hours to fully copy, and you can leave the page; Google processes the job in the background and the migration status page shows progress per user."
+      "heading": "Know when an import is the wrong tool",
+      "body": "The import copies history. It does nothing about mail that arrives at the old address tomorrow, and the two problems get confused constantly.\n\nFor mail that keeps landing on the old address, forwarding in that user's Gmail settings sends it on. For a permanent domain-level change affecting a whole organization, Gmail routing rules in the Admin console handle it centrally instead of one mailbox at a time.\n\nAlso be clear on scope with anyone signing off the migration. This tool moves email. Google's import tooling handles files separately and only from OneDrive, so Drive contents, Calendar events and Contacts from a Workspace source need their own plan. Discovering that on cutover weekend is a bad afternoon."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The source admin never got to the authorization link in time",
+      "cause": "Authorization requests expire 24 hours after they are sent.",
+      "fix": "Send a new request and agree a window with them first. The expiry cannot be extended."
     },
     {
-      "heading": "Use forwarding or routing rules instead, when a copy isn't the goal",
-      "body": "The Data Migration Tool is built for a one-time historical copy, not ongoing mail flow — if you need messages sent to the old address to keep landing in the new one indefinitely, set up email forwarding in that user's Gmail settings instead. For a domain-wide change affecting many users at once, such as consolidating two company domains permanently, Gmail routing rules configured in the Admin Console handle it at the domain level rather than per mailbox, which scales far better than forwarding each account individually."
+      "problem": "The mapping file is rejected",
+      "cause": "Usually a header row that does not match Source GUser and Target GUser, more than 1,000 rows, a file over 128 MB, or a source address repeated against two targets.",
+      "fix": "Start from Google's sample CSV, keep it under both limits, and split shared-mailbox cases out of the file. One source user maps to exactly one target user."
     },
     {
-      "heading": "Run pre-checks before you rely on any of these",
-      "body": "Before starting a migration or turning on forwarding, confirm both accounts have available storage for the incoming mail, that the target address is fully provisioned and not still pending setup, and that any existing filters or forwarding rules on the target won't conflict with what you're about to add. A quick test with one mailbox before running the full migration map catches formatting problems in your CSV long before they affect everyone on the list."
+      "problem": "Some users are skipped entirely",
+      "cause": "The tool imports only into accounts that already exist, with Gmail turned on and a licence assigned.",
+      "fix": "Create and licence the missing target users, then re-run the import for just those rows."
+    },
+    {
+      "problem": "A handful of large messages are missing afterwards",
+      "cause": "Messages over 25 MB including attachments are not imported, and Gmail blocks certain attachment types such as executables.",
+      "fix": "Identify them on the source account and move those specific messages by hand, or store the attachments in Drive and link to them."
     }
   ],
   "faq": [
     {
-      "question": "Which method should I use to move email between Workspace accounts?",
-      "answer": "For a one-time copy of existing mail history, use the Data Migration Tool in the Admin Console. For ongoing mail that keeps arriving at the old address, use forwarding. For a domain-wide, permanent change affecting many users, use Gmail routing rules instead."
+      "question": "Why can't I find \"Data migration\" in the Admin console?",
+      "answer": "It was renamed. Google's current documentation describes the data import tool at Menu, then Data, then Data import and export, then Data import, with Business Gmail as the source. The help articles also moved off support.google.com to a separate Workspace knowledge site, so old bookmarks redirect."
     },
     {
-      "question": "Will I lose old emails during the transfer?",
-      "answer": "The Data Migration Tool is designed to copy rather than move messages, and its Step 3 settings let you choose an email start date, so nothing on the source account is deleted as part of the process."
+      "question": "Does this move Drive files, Calendar and Contacts as well?",
+      "answer": "No. This is an email import. Google's import tooling covers email, chat, and files from Microsoft OneDrive; Drive contents, calendars and contacts from another Workspace account are a separate exercise."
     },
     {
-      "question": "What format does the migration map need to be in?",
-      "answer": "A CSV with two columns, Source GUser and Target GUser, one row per user pair you're migrating. Google provides a downloadable sample CSV in Step 2 of the migration wizard that matches the exact format expected."
+      "question": "What exactly comes across from a Workspace source?",
+      "answer": "Email messages including drafts and sent mail, labels and sublabels, stars, and read or unread status. Deleted and spam messages are optional toggles. Messages over 25 MB with attachments are left behind."
     },
     {
-      "question": "Can I forward mail without moving everything at once?",
-      "answer": "Yes — setting up email forwarding in Gmail settings on the source account sends new incoming mail to the new address automatically, without touching the historical mail a full migration would copy."
+      "question": "Does anything get deleted from the old account?",
+      "answer": "No. The tool copies mail into the target account and leaves the source mailbox as it was. The start date option limits how far back the copy reaches, and nothing outside that range is touched on either side."
     },
     {
-      "question": "Who can set up domain-wide routing rules?",
-      "answer": "Only a super admin, through the Admin Console. Routing rules apply at the domain level, which is why they need broader access than an individual user's forwarding settings do."
+      "question": "Do the new mailboxes need to exist before I start?",
+      "answer": "Yes. Google's prerequisites state that data is imported only into accounts of existing users, with Gmail turned on and a licence assigned. Create and licence everyone first, then build the mapping file."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Admin Help: Import email from a Google Workspace account (official)",
+      "url": "https://knowledge.workspace.google.com/admin/migrate/migrate-email-from-a-google-workspace-account"
+    },
+    {
+      "label": "Google Workspace Admin Help: About importing email with the data import tool (official)",
+      "url": "https://knowledge.workspace.google.com/admin/migrate/about-migrating-email-with-the-new-data-migration-service"
+    },
+    {
+      "label": "Google Workspace Admin Help: About the data import tool (official)",
+      "url": "https://knowledge.workspace.google.com/admin/migrate/about-the-new-data-migration-service"
+    }
+  ],
+  "verifiedNote": "Screens and click path come from a walkthrough recorded in the Admin console. In September 2026 the procedure was re-checked against Google's official Workspace admin documentation, which corrected the menu path this guide previously gave: Google now documents the feature as the data import tool at Data, Data import and export, Data import, with Business Gmail as the source, and has moved those help articles from support.google.com to knowledge.workspace.google.com. The same check supplied the 24-hour authorization expiry, the 1,000-user and 128 MB mapping-file limits, the per-source user maximums, the 25 MB message ceiling, and the list of what an import carries, none of which the earlier version stated.",
   "generatedAt": "2026-08-06T09:00:00Z",
   "deep": true
 }

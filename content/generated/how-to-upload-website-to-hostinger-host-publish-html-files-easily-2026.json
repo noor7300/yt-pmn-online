@@ -2,61 +2,111 @@
   "slug": "how-to-upload-website-to-hostinger-host-publish-html-files-easily-2026",
   "seoTitle": "How to Upload Your Website to Hostinger and Go Live",
   "metaDescription": "Upload HTML files to Hostinger using File Manager: create a folder, zip your site, extract it, and move the files into place to go live.",
-  "intro": "Getting a finished HTML website onto Hostinger doesn't require any coding - just Hostinger's built-in File Manager and a zipped copy of your site files. This guide walks through the hPanel dashboard, creating the right folder for your domain or subfolder, and uploading, extracting, and moving your files so the site goes live. The same process works whether you're publishing to your main domain or a new folder alongside an existing WordPress install.",
+  "intro": "Getting a finished HTML website onto Hostinger doesn't require any coding, just Hostinger's built-in File Manager and a zipped copy of your site files. This guide walks through the hPanel dashboard, creating the right folder for your domain or subfolder, and uploading, extracting, and moving your files so the site goes live. The same process works whether you're publishing to your main domain or a new folder alongside an existing WordPress install.",
+  "prerequisites": [
+    "An active Hostinger hosting plan with hPanel access (a domain registration alone isn't enough; File Manager only exists on the hosting side of the account)",
+    "Your finished website's files (HTML, CSS, JS, images) compressed into a single archive, ideally a .zip"
+  ],
+  "costNote": "File Manager only appears once a hosting plan is active, so a domain or a Website Builder subscription on its own doesn't unlock it. There's no separate charge for using File Manager, Upload, or Extract; the cost is whatever the underlying hosting plan already costs.",
   "steps": [
     {
-      "heading": "Log into Hostinger and open hPanel",
-      "body": "Sign into your Hostinger account and you'll land in hPanel, the dashboard where domains, websites, email, and hosting all live under one sidebar. The Domains section shows your domain portfolio at a glance, and from Websites you can jump into the specific hosting plan you want to manage. This is your starting point regardless of whether you're uploading to a brand-new domain or an existing one.",
+      "heading": "Log into Hostinger and open File Manager",
+      "body": "Sign into your Hostinger account and you land in hPanel, the dashboard where domains, websites, email, and hosting all live under one sidebar. From your hosting plan, open File Manager, then navigate into the public_html folder. That's where files need to sit if you want the site to load at your main domain (yourdomain.com). If another site, like WordPress, is already installed on your main domain, upload into a new folder instead so the two installs don't collide.",
       "image": { "file": "/screenshots/cBDYVtJI4Nk/02.webp", "caption": "The Hostinger hPanel dashboard, showing the Domains section with Domain portfolio, Get a New Domain, and Transfers in the sidebar." }
     },
     {
-      "heading": "Open File Manager and find public_html",
-      "body": "From your hosting plan, open File Manager, then navigate into the public_html folder. If you want your website to load at your main domain — yourdomain.com — this is where the files need to sit. If another site, like WordPress, is already installed on your main domain, you'll want to upload into a new folder instead so the two don't collide."
-    },
-    {
       "heading": "Create a new folder for your site",
-      "body": "Click New folder in the left sidebar, type a name for it in the dialog that appears, and click Create. Hostinger will suggest existing similarly-named folders as you type, which is a useful check that you're not about to create a duplicate. This folder becomes the subfolder path your site loads under, so pick a name you're fine seeing in the URL.",
-      "image": { "file": "/screenshots/cBDYVtJI4Nk/03.webp", "caption": "The New directory dialog in File Manager, naming a folder before clicking Create — this becomes the subfolder your site will load from." }
+      "body": "Click New folder in the left sidebar, type a name for it in the dialog that appears, and click Create. Hostinger will suggest existing similarly-named folders as you type, a useful check that you're not about to create a duplicate. This folder becomes the subfolder path your site loads under, so pick a name you're fine seeing in the URL. Skip this step if you're publishing straight to public_html at your main domain.",
+      "image": { "file": "/screenshots/cBDYVtJI4Nk/03.webp", "caption": "The New directory dialog in File Manager, naming a folder before clicking Create. This becomes the subfolder your site will load from." }
     },
     {
       "heading": "Zip your site and upload it",
-      "body": "Before uploading, compress your entire local website into a single ZIP file — this is the most reliable way to move a full folder of HTML, CSS, JS, and image assets without missing anything along the way. Open your new folder, click Upload from the top menu, and choose File to select your ZIP. The upload starts immediately once you confirm.",
+      "body": "Before uploading, compress your entire local website into a single ZIP file. That's the most reliable way to move a full folder of HTML, CSS, JS, and image assets without missing anything along the way. Open your new folder, click Upload from the top menu, and choose File to select your ZIP. The upload starts immediately once you confirm. File Manager handles uploads up to 100GB; for anything larger, or for a slow connection, Hostinger's own guidance is to use FTP instead.",
       "image": { "file": "/screenshots/cBDYVtJI4Nk/04.webp", "caption": "The Upload dialog inside a project folder, offering File or Folder as upload options." }
     },
     {
       "heading": "Extract the ZIP file",
-      "body": "Once the upload finishes, right-click the ZIP file (or use the row's overflow menu) to bring up file actions — Info, Rename, Copy file, Move file, Permissions, Archive, Extract, Download, and Delete. Select Extract, confirm a folder name if prompted, and File Manager unpacks the archive right where the ZIP sits.",
+      "body": "Once the upload finishes, right-click the ZIP file (or use the row's overflow menu) to bring up file actions: Info, Rename, Copy file, Move file, Permissions, Archive, Extract, Download, and Delete. Select Extract, confirm a folder name if prompted, and File Manager unpacks the archive right where the ZIP sits.",
       "image": { "file": "/screenshots/cBDYVtJI4Nk/05.webp", "caption": "The file actions menu for an uploaded ZIP, with Extract highlighted among options like Rename, Move file, and Download." }
     },
     {
       "heading": "Move the extracted files into place",
-      "body": "Double-click into the extracted folder — if there's another folder nested inside it, open that too, since ZIP tools sometimes wrap everything in an extra layer. Select all the files, starting from the first and shift-clicking the last, then click Move from the top menu and navigate to the folder you created earlier. Confirm the move, and your files land exactly where the domain or subfolder expects them.",
+      "body": "Double-click into the extracted folder. If another folder is nested inside it, open that too, since ZIP tools sometimes wrap everything in an extra layer. Select all the files, starting from the first and shift-clicking the last, then right-click and choose Move (or use the Move icon in the toolbar), and navigate to the folder you created earlier. Confirm the move, and your files land exactly where the domain or subfolder expects them.",
       "image": null
     },
     {
       "heading": "Verify the live site",
-      "body": "Visit your domain or subfolder URL in a browser to confirm the site loads correctly. If it doesn't show up right away, double-check that the files ended up directly inside the target folder rather than nested one level too deep — that's the most common reason a freshly uploaded HTML site shows a blank page or a 403 error instead of the homepage.",
+      "body": "Visit your domain or subfolder URL in a browser to confirm the site loads correctly. If it doesn't show up right away, double-check that the files ended up directly inside the target folder and are not nested one level too deep. That's the most common reason a freshly uploaded HTML site shows a blank page or a 403 error instead of the homepage.",
       "image": null
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The extracted files show up in a folder inside a folder",
+      "cause": "Many ZIP tools wrap a site's files in one extra top-level folder that shares the archive's name, so extracting lands you a level too deep.",
+      "fix": "Open into that inner folder before selecting files to move, so only the actual site files (index.html and its siblings) end up in the target folder."
+    },
+    {
+      "problem": "The site shows a blank page or a 403 error after upload",
+      "cause": "The homepage file isn't sitting directly inside public_html or your subfolder; it's nested one level too deep from the extra folder issue above.",
+      "fix": "Open the folder in File Manager and confirm index.html is a direct child of the target folder, then move it up if it isn't."
+    },
+    {
+      "problem": "File Manager won't extract the archive",
+      "cause": "File Manager's Extract action only supports zip, tar, tar.gz, tar.bz2, tar.xz, tar.lz4, and tar.sz. Other compressed formats, like .rar, aren't supported.",
+      "fix": "Re-compress the site as a .zip on your computer and re-upload it."
+    },
+    {
+      "problem": "The upload stalls or fails on a large site",
+      "cause": "File Manager is built for browser uploads and can bog down on very large transfers even though its stated ceiling is 100GB.",
+      "fix": "Use an FTP client such as FileZilla with the FTP credentials from hPanel; Hostinger recommends FTP over File Manager for large or slow uploads."
     }
   ],
   "faq": [
     {
       "question": "Do I need to zip my website before uploading it to Hostinger?",
-      "answer": "Yes, zipping your files into a single archive before uploading is the most reliable way to make sure nothing gets left out during the transfer."
+      "answer": "You don't have to, but it's the most reliable way to move a full folder of HTML, CSS, JS, and images without missing anything. File Manager's Extract action also supports tar, tar.gz, tar.bz2, tar.xz, tar.lz4, and tar.sz if your files are already packaged that way."
     },
     {
       "question": "Can I upload a website to a subfolder instead of my main domain?",
-      "answer": "Yes, you can create a new folder inside public_html and upload your files there if your main domain already has another site, like WordPress, installed."
+      "answer": "Yes. Create a new folder inside public_html and upload your files there if your main domain already has another site, like WordPress, installed."
     },
     {
       "question": "Do I need coding knowledge to upload an HTML site to Hostinger?",
-      "answer": "No, the process uses Hostinger's File Manager interface - creating a folder, uploading a ZIP, extracting it, and moving files - so it doesn't require any coding."
+      "answer": "No. The process uses Hostinger's File Manager interface, creating a folder, uploading a ZIP, extracting it, and moving files, so it doesn't require any coding."
     },
     {
       "question": "Why isn't my site showing up after uploading to Hostinger?",
-      "answer": "Double check that the extracted files were moved directly into the correct folder rather than left nested inside an extra subfolder, since that's the most common reason a site doesn't display at the expected URL."
+      "answer": "Check that the extracted files were moved directly into the correct folder instead of being left nested inside an extra subfolder. That's the most common reason a site doesn't display at the expected URL."
+    },
+    {
+      "question": "Is there a file size limit for uploading through File Manager?",
+      "answer": "Hostinger's File Manager handles uploads up to 100GB. Beyond that, or on a slow connection, Hostinger recommends using an FTP client instead."
+    },
+    {
+      "question": "Do I need a hosting plan, or does a domain alone work?",
+      "answer": "You need an active hosting plan. File Manager is a hosting feature, so a domain registration or a Website Builder subscription by itself won't give you access to it."
     }
   ],
+  "references": [
+    {
+      "label": "Hostinger Documentation: File Manager (official)",
+      "url": "https://docs.hostinger.com/websites/file-manager"
+    },
+    {
+      "label": "Hostinger Support: Basic actions in the File Manager (official)",
+      "url": "https://www.hostinger.com/support/4548688-basic-actions-in-the-file-manager-in-hostinger/"
+    },
+    {
+      "label": "Hostinger Support: How to extract archives using File Manager (official)",
+      "url": "https://www.hostinger.com/support/1583613-how-to-extract-archives-using-file-manager"
+    },
+    {
+      "label": "Hostinger Tutorial: How to Upload Your Website (official)",
+      "url": "https://www.hostinger.com/tutorials/how-to-upload-your-website/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2026. The upload, folder creation, extraction, and move steps were re-checked against Hostinger's official File Manager documentation and its 'How to Upload Your Website' tutorial in September 2026. That check added the 100GB File Manager ceiling, the full list of supported archive formats, and the FTP recommendation for large sites, none of which the original draft mentioned; the click path itself matched the current documentation.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

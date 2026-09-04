@@ -1,72 +1,115 @@
 {
   "slug": "how-to-connect-wordpress-to-github-easily-2026",
   "seoTitle": "How to Connect WordPress to GitHub for Version Control",
-  "metaDescription": "Link WordPress to GitHub to manage theme and plugin code with version control. This guide covers repo setup, connecting via a deploy plugin, and pushing files.",
-  "intro": "Editing theme and plugin files straight on a live WordPress site with no history of what changed is how small mistakes turn into a broken homepage at 2am. Connecting the site to GitHub fixes that: every change gets tracked, you can roll back a bad edit in seconds, and you can push updates from a repository instead of dragging files over FTP. This guide walks through the practical path most WordPress users actually take — using a bridge plugin to link the two — rather than raw server-side Git commands, so it works whether you're on shared cPanel hosting, Cloudways, or a local environment.",
+  "metaDescription": "Link WordPress to GitHub with WP Pusher: repo setup, when a paid license is genuinely required, getting a GitHub token, and pushing theme or plugin updates.",
+  "intro": "Editing theme and plugin files straight on a live WordPress site with no history of what changed is how small mistakes turn into a broken homepage at 2am. Connecting the site to GitHub fixes that: every change gets tracked, a bad edit rolls back in seconds, and updates come from a repository push instead of dragging files over FTP. It's most worth doing for custom-coded themes and plugins; a stock theme with no edits doesn't gain much from being versioned. This guide uses WP Pusher, the connector plugin most WordPress users reach for, instead of raw server-side Git commands, so it works whether you're on shared cPanel hosting, Cloudways, or a local environment.",
   "steps": [
     {
       "heading": "Start from your WordPress dashboard",
-      "body": "Log into your site's wp-admin and take stock of what you're about to put under version control — active theme, installed plugins, and the general shape of the site under Appearance and Plugins in the left-hand menu. This is also the point to note your WordPress version and confirm you have admin access, since connecting to GitHub later usually means installing a plugin, which requires the Plugins screen. If your host offers SSH or SFTP access, jot down those credentials too; some connection methods use them alongside the GitHub side of the setup.",
+      "body": "Log into wp-admin and take stock of what you're about to put under version control: active theme, installed plugins, and the general shape of the site under Appearance and Plugins in the left-hand menu. This is also the point to confirm you have admin access, since connecting to GitHub means installing a plugin, which needs the Plugins screen. You don't need SSH or SFTP credentials for the method in this guide; WP Pusher's documentation states it works without either, on any host where the standard WordPress theme and plugin installer works.",
       "image": {
         "file": "/screenshots/SrmWe5oTctg/01.webp",
-        "caption": "The WordPress admin dashboard — the starting point before any Git tooling gets installed. Note the theme and plugin count here so you know what you're bringing under version control."
+        "caption": "The WordPress admin dashboard, the starting point before any Git tooling gets installed. Note the theme and plugin count here so you know what you're bringing under version control."
       }
-    },
-    {
-      "heading": "Understand why GitHub is worth adding",
-      "body": "GitHub gives WordPress two things the admin dashboard doesn't: a full history of every file change, and a place to collaborate on code without emailing zip files back and forth. If a plugin update breaks your layout, you can see exactly what changed and revert it. If you maintain the same custom theme across several client sites, a repository becomes the single source of truth instead of five slightly different copies living on five different servers. It's most valuable for custom-coded themes and plugins — a stock theme with no edits doesn't gain much from being versioned."
     },
     {
       "heading": "Create a GitHub repository for the site",
-      "body": "On github.com, create a new repository to hold your theme or plugin code — keep it private if the code isn't meant to be public. Name it something you'll recognize months later, like the site's domain or client name, and add a simple README describing what the repo deploys to. You don't need to upload anything yet; an empty repository is enough to connect to in the next step. Decide now whether you're tracking a single theme folder, a plugin, or the whole wp-content directory, since that scope is harder to change once files are pushed."
+      "body": "On github.com, create a new repository to hold your theme or plugin code, private if the code isn't meant to be public. Name it something recognizable months later, like the site's domain or client name, and add a short README describing what it deploys to. You don't need to upload anything yet; an empty repository is enough to connect to in the next step. Decide now whether you're tracking a single theme folder, a plugin, or the whole wp-content directory, since that scope is harder to change once files are pushed."
     },
     {
-      "heading": "Find and install a GitHub-to-WordPress connector",
-      "body": "Rather than wiring up Git on the server by hand, most WordPress users install a plugin built specifically to pull from or deploy to a GitHub repository — WP Pusher is one of the most common, alongside similar deploy tools. Search for the plugin's name to find its download page and setup docs, since these tools are typically distributed from their own site rather than the WordPress.org repository. Read the plugin's requirements before installing; some need a specific PHP version or write access to the wp-content folder to work properly.",
+      "heading": "Install WP Pusher and check whether you need a paid license",
+      "body": "Download WP Pusher from wppusher.com, then install it in WordPress the normal way, through Plugins > Add New > Upload Plugin. WP Pusher is free for deploying from public repositories. A paid license is required for private repositories, and separately for Push-to-Deploy (automatic deployment on every push), even on a public repo. If either applies to you, pick a plan before going further; there's no partial free tier for those two features.",
       "image": {
         "file": "/screenshots/SrmWe5oTctg/04.webp",
-        "caption": "Searching for a GitHub deployment plugin. Tools like this sit outside the standard WordPress.org plugin directory, so you install them from the developer's own site."
+        "caption": "Searching for WP Pusher. The plugin is distributed from its own site, not the WordPress.org directory, so it's installed by uploading the zip, not by searching Plugins > Add New."
       }
     },
     {
-      "heading": "Authorize the connection with a GitHub token",
-      "body": "Once the plugin is installed and activated, it needs permission to talk to your GitHub account. That means generating an access token — a long string GitHub issues in place of your password, scoped to only the permissions the plugin actually needs, like reading repository contents. The plugin walks you through requesting this token and shows it to you once, so copy it immediately into the plugin's settings screen rather than closing the tab and hunting for it again. Treat this token like a password: it grants real access to your repositories, so don't paste it anywhere outside the plugin's own settings field.",
+      "heading": "Get a GitHub token, if you need one",
+      "body": "A token isn't required to install from a public repository with no Push-to-Deploy. It is required for a private repository and for Push-to-Deploy on any repository. From the GitHub section of WP Pusher's settings, click \"Obtain a GitHub token\" and WP Pusher will request one on your behalf with the access it needs; you can also generate your own token manually in GitHub and paste it in, scoped only to the repositories WP Pusher should reach. Either way, GitHub shows the token once, so copy it straight into WP Pusher's settings field instead of closing the tab and hunting for it again. Treat it like a password: it grants real access to your repositories.",
       "image": {
         "file": "/screenshots/SrmWe5oTctg/05.webp",
-        "caption": "A GitHub access token generated for the connector plugin. It's shown once — copy it straight into the plugin's settings before doing anything else."
+        "caption": "A GitHub access token generated for WP Pusher. It's shown once, so copy it into WP Pusher's settings before doing anything else."
       }
     },
     {
-      "heading": "Push your theme or plugin files and enable deployment",
-      "body": "With the token in place, point the plugin at the repository you created earlier and choose whether it should install from a specific branch or tag. Most connector plugins pull the repository's current contents down into WordPress as an initial install, after which every subsequent update comes from a fresh push to GitHub rather than a manual upload. Some plugins also support a webhook, so a push to the repository triggers an automatic deploy to your live site within seconds — useful once you trust the pipeline, but worth testing on a staging site first."
+      "heading": "Point WP Pusher at the repository and enable deployment",
+      "body": "Under WP Pusher > Install Plugin/Theme, enter the repository as username/repository-name, or use the \"Pick from GitHub\" button. Leave the branch field blank to install from master, or name a specific branch or tag; add a subdirectory path if the plugin or theme code doesn't sit at the repo root. WP Pusher pulls the repository's current contents down as the initial install; after that, updates come from a fresh push, not a manual upload. Turn on Push-to-Deploy if you want a push to trigger an automatic live deploy, and confirm both your license and token cover it, since this is one of the two features the free tier doesn't include. Test it on a staging site before trusting it against production."
     },
     {
-      "heading": "Fix the permission and file errors that come up early",
-      "body": "The most common snag is a permissions error — the plugin can't write to wp-content because the file owner on the server doesn't match the user PHP runs as, which your host's support can usually fix in one ticket. The second most common issue is a token that's expired or scoped too narrowly, which shows up as an authentication failure when the plugin tries to pull the repo; regenerating the token in GitHub and re-pasting it resolves it. If files pull down but the site doesn't reflect the change, clear any caching plugin before assuming the deploy failed."
+      "heading": "Fix the permission and token errors that come up early",
+      "body": "The most common snag is a permissions error: WP Pusher can't write to wp-content because the file owner on the server doesn't match the user PHP runs as, which your host's support can usually fix in one ticket. The second is a token that's expired, scoped too narrowly, or missing on an account that needs one, which shows up as an authentication failure when WP Pusher tries to reach the repo; regenerating the token in GitHub, or confirming your license is active if you're using Push-to-Deploy, resolves it. If files pull down but the site doesn't reflect the change, clear any caching plugin before assuming the deploy failed."
+    }
+  ],
+  "tables": [
+    {
+      "title": "WP Pusher pricing",
+      "columns": ["Plan", "Price", "Sites", "Private repos & Push-to-Deploy"],
+      "rows": [
+        ["Free", "$0", "Unlimited public-repo installs", "Not included"],
+        ["Freelancer", "$99/year", "5 sites", "Included"],
+        ["Agency", "$199/year", "20 sites", "Included"],
+        ["Big Agency", "$499/year", "100 sites", "Included"]
+      ],
+      "note": "From wppusher.com, checked September 2026. All paid plans carry a 30-day money-back guarantee; prices and tier limits are set by WP Pusher and can change."
+    }
+  ],
+  "costNote": "WP Pusher itself is free only for pulling from public repositories with no automatic deploy. Private repositories and Push-to-Deploy both require a paid license starting at $99/year for 5 sites. GitHub is free for the account and repository this guide uses.",
+  "troubleshooting": [
+    {
+      "problem": "WP Pusher can't write files during install or deploy",
+      "cause": "The file owner on the server doesn't match the user PHP runs as, so WP Pusher lacks write access to wp-content.",
+      "fix": "Ask your host's support to fix the file-ownership mismatch; it's usually a single ticket."
+    },
+    {
+      "problem": "Authentication fails when WP Pusher tries to reach the repository",
+      "cause": "The GitHub token has expired or was scoped too narrowly for the repository.",
+      "fix": "Regenerate the token in GitHub (or via WP Pusher's \"Obtain a GitHub token\" button) and paste the new one into WP Pusher's settings."
+    },
+    {
+      "problem": "Push-to-Deploy doesn't fire after a git push",
+      "cause": "Push-to-Deploy needs a paid WP Pusher license and a valid token even when the repository is public; the free tier doesn't include it.",
+      "fix": "Confirm the license is active and Push-to-Deploy is switched on for that install, not just the initial pull."
+    },
+    {
+      "problem": "Files pull down from GitHub but the live site looks unchanged",
+      "cause": "A caching plugin is still serving the old version.",
+      "fix": "Clear the site's cache before assuming the deploy itself failed."
     }
   ],
   "faq": [
     {
       "question": "Do I need to know Git commands to connect WordPress to GitHub?",
-      "answer": "No — a connector plugin like WP Pusher handles the pulling and deploying for you through a settings screen, so you don't need to run git commands on the server yourself."
+      "answer": "No. WP Pusher handles pulling and deploying through a settings screen, so you don't run git commands on the server yourself."
+    },
+    {
+      "question": "Is WP Pusher free?",
+      "answer": "Only for public repositories without Push-to-Deploy. Private repository access and Push-to-Deploy both require a paid license, starting at $99/year for 5 sites."
     },
     {
       "question": "Does this work with any WordPress hosting provider?",
-      "answer": "Yes, as long as your host allows the plugin to write to wp-content. It works on cPanel hosting, Cloudways, Namecheap, Hostinger, and local environments like LocalWP or XAMPP."
+      "answer": "Yes, as long as the host allows writing to wp-content. WP Pusher doesn't need Git, SSH or FTP on the server, so it works on cPanel hosting, Cloudways, and even inexpensive shared hosting, plus local environments like LocalWP or XAMPP."
     },
     {
       "question": "Can I automatically deploy changes from GitHub to my live site?",
-      "answer": "Yes — most connector plugins support a webhook so a push to the repository triggers an automatic deploy, though it's worth testing that pipeline on staging before trusting it on a live site."
+      "answer": "Yes, through Push-to-Deploy, but it requires a paid WP Pusher license and a token even on a public repository. Test the pipeline on staging before trusting it on a live site."
     },
     {
       "question": "What if I get permission errors when pushing files?",
-      "answer": "That usually means the plugin can't write to wp-content because of a file-ownership mismatch on the server. Your host's support can typically fix this in one ticket."
+      "answer": "That usually means WP Pusher can't write to wp-content because of a file-ownership mismatch on the server. Your host's support can typically fix this in one ticket."
     },
     {
-      "question": "Where do I get the GitHub token the plugin asks for?",
-      "answer": "The connector plugin generates a request to GitHub for you and displays the resulting access token once — copy it directly into the plugin's settings field right away, since GitHub won't show it again."
+      "question": "Where do I get the GitHub token WP Pusher asks for?",
+      "answer": "Click \"Obtain a GitHub token\" in WP Pusher's GitHub settings and it requests one for you, or generate your own token manually in GitHub scoped to the relevant repositories. GitHub shows it once, so copy it into WP Pusher's settings field right away."
     }
   ],
+  "references": [
+    { "label": "WP Pusher Knowledge Base: Getting Started (official)", "url": "https://docs.wppusher.com/article/6-getting-started" },
+    { "label": "WP Pusher Knowledge Base: Setting Up a Plugin or Theme on GitHub (official)", "url": "https://docs.wppusher.com/article/17-setting-up-a-plugin-or-theme-on-github" },
+    { "label": "WP Pusher FAQ (official)", "url": "https://wppusher.com/faq/" },
+    { "label": "WP Pusher homepage, pricing tiers (official)", "url": "https://wppusher.com/" }
+  ],
+  "verifiedNote": "Click paths and screenshots come from a walkthrough recorded in July 2026. The cost claims, GitHub token requirements, Push-to-Deploy licensing, and the no-SSH/no-FTP claim were checked against WP Pusher's own knowledge base, FAQ and homepage in September 2026. The earlier draft implied WP Pusher was simply free once installed and that SSH/SFTP credentials might be needed; both are corrected here: public-repo pulling is free, but private repos and Push-to-Deploy need a paid license, and WP Pusher explicitly doesn't require server-side SSH, FTP or Git.",
   "generatedAt": "2026-07-21T06:00:49.000Z",
   "deep": true
 }

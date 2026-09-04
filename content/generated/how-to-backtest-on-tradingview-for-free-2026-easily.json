@@ -1,55 +1,100 @@
 {
   "slug": "how-to-backtest-on-tradingview-for-free-2026-easily",
   "seoTitle": "How to Backtest Trading Strategies on TradingView Free",
-  "metaDescription": "Test your trading strategy on TradingView without a premium plan. Learn to use the Bar Replay tool to step through history and check win rate before going live.",
-  "intro": "Backtesting lets you check whether a trading strategy actually holds up before you risk real money on it, and TradingView's Bar Replay tool makes this possible on the free plan, no premium subscription required. This guide walks through turning on Replay mode, stepping through historical price data candle by candle, and simulating trades as if you were watching them unfold live. You'll also see how to read the results honestly so a strategy that looks good in replay actually means something.",
+  "metaDescription": "Backtest a strategy with TradingView's Bar Replay tool on the free plan: how to start it, why daily timeframes work best without upgrading, and how to read results honestly.",
+  "intro": "Backtesting lets you check whether a trading strategy holds up before risking real money on it, and TradingView's Bar Replay tool makes this possible on the free Basic plan, no paid subscription required for the core feature. This guide covers turning on Replay mode, stepping through historical price data candle by candle, and simulating trades as if watching them unfold live. It also covers a real constraint the free plan carries: full intraday replay depth is gated to paid tiers, so which timeframe you choose matters.",
   "steps": [
     {
-      "heading": "Understand what Bar Replay actually simulates",
-      "body": "Bar Replay hides everything after a point you choose on the chart and reveals candles one at a time as you click forward, recreating the experience of watching a market develop in real time without knowing what comes next. This is different from just scrolling back through history and eyeballing patterns, because it forces you to make entry and exit decisions blind to the outcome — which is the whole point of a meaningful backtest."
+      "heading": "Understand what Bar Replay simulates",
+      "body": "Bar Replay hides everything after a point you choose on the chart and reveals candles one at a time as you click forward, recreating the experience of watching a market develop without knowing what comes next. This differs from scrolling back through history and eyeballing patterns, because it forces entry and exit decisions blind to the outcome, which is the point of a meaningful backtest. It doesn't work on every chart type: TradingView's own documentation excludes Renko, Kagi, Point & Figure, Range, Line Break, Volume Footprint and Time Price Opportunity charts, along with spread and tick-based charts, from Replay."
     },
     {
       "heading": "Open a chart and check your current view",
-      "body": "Load the symbol you want to test — an index, stock, or crypto pair — and set your timeframe first. The right-hand watchlist panel is worth keeping open too, since comparing your test symbol against related instruments (other indices, correlated stocks) gives useful context for whether a signal is specific to that chart or part of a broader market move.",
+      "body": "Load the symbol you want to test, an index, stock, or crypto pair, and set your timeframe first. On the free Basic plan, daily and higher timeframes give you all of a symbol's available history in Replay; intraday timeframes are where the free plan runs into a real limit, covered in the next step. The right-hand watchlist panel is worth keeping open too, since comparing your test symbol against related instruments gives useful context for whether a signal is specific to that chart or part of a broader market move.",
       "image": { "file": "/screenshots/ZzrC4h1nt7Y/03.webp", "caption": "A daily Dow Jones Industrial Average chart with the watchlist panel open alongside it, before Replay mode is turned on." }
     },
     {
       "heading": "Turn on Replay and pick your starting bar",
-      "body": "Click the Replay button in the top toolbar, then click \"Select bar\" and choose the candle you want the simulation to start from. Once selected, the chart grays out everything after that point and a Replay control bar appears at the bottom with play, step-forward, and speed controls, plus a 1x speed toggle if you want it to advance automatically instead of one click at a time.",
+      "body": "Click the Replay button in the top toolbar. You can set the starting point three ways: hover the chart and click a specific bar, choose \"Select the first available day\" to start from the earliest history TradingView has, or use \"Random bar\" to let TradingView pick one for you, which is a built-in way to sidestep the hindsight bias described later in this guide. Once selected, the chart grays out everything after that point and a Replay control bar appears with play, step-forward and speed controls (Shift+Down starts or stops playback, Shift+Right steps forward one bar, if you'd rather use the keyboard). If you switch to an intraday timeframe, how far back you can go depends on your plan: TradingView's free Basic plan is not listed on their intraday-depth chart, which starts at the paid Essential tier (6 months of 1-minute data); daily and higher timeframes aren't affected by this limit.",
       "image": { "file": "/screenshots/ZzrC4h1nt7Y/04.webp", "caption": "Bar Replay activated with \"Select bar\" prompting a starting point, and the Replay control bar showing play, step, and speed options underneath." }
     },
     {
       "heading": "Step forward and place simulated trades",
-      "body": "Use the step-forward button to reveal one candle at a time, and apply the same indicators and entry rules you'd use in live trading — don't peek ahead by scrolling the chart, since that defeats the purpose. When your setup triggers, use Replay Trading or the manual Trade panel to log a simulated entry, then keep stepping forward to see how the trade plays out against your stop and target.",
+      "body": "Use the step-forward button to reveal one candle at a time, and apply the same indicators and entry rules you'd use live; don't peek ahead by scrolling the chart, since that defeats the purpose. When your setup triggers, click Replay Trading to log a simulated entry, after setting your initial capital, base currency and commission size in its panel; TradingView defaults new positions to 1 unit for most symbols and 1,000 units for forex unless you change it. Keep stepping forward to see the trade play out against your stop and target. TradingView's own documentation is explicit that this data isn't kept: \"Data on trades and the overall result are available only in the session itself, and they are not saved anywhere,\" so anything you want to review later has to be logged outside the platform as you go.",
       "image": { "file": "/screenshots/ZzrC4h1nt7Y/05.webp", "caption": "Replay stepped forward to a later date, with the chart still greyed out beyond the current bar and price continuing to update as you advance." }
     },
     {
       "heading": "Track win rate and risk-reward as you go",
-      "body": "Keep a running log of each simulated trade outside of TradingView — a spreadsheet works fine — noting entry, exit, and outcome. After enough trades, calculate your win rate and average risk-reward ratio across the sample. A strategy needs a reasonable sample size before those numbers mean anything; five or six trades in replay isn't enough to draw conclusions from."
+      "body": "Since Replay Trading doesn't save anything once the session ends, keep a running log outside TradingView, a spreadsheet works fine, noting entry, exit and outcome for each simulated trade. After enough trades, calculate win rate and average risk-reward ratio across the sample. A strategy needs a reasonable sample size before those numbers mean anything; five or six trades in replay isn't enough to draw conclusions from."
     },
     {
       "heading": "Watch for the mistakes that inflate results",
-      "body": "The most common backtesting error is unconsciously picking a starting bar because you already remember what happened next, which quietly removes the uncertainty the exercise is supposed to test. Also resist stopping a replay run early just because it's going well, and factor in that Replay doesn't account for slippage or fees, so real results will run a bit worse than what you see in the simulation."
+      "body": "The most common backtesting error is unconsciously picking a starting bar because you already remember what happened next, which quietly removes the uncertainty the exercise is meant to test; using Random Bar to pick your starting point, from the previous step, removes that temptation. Also resist stopping a replay run early just because it's going well, and factor in that Replay doesn't account for slippage or fees, so real results will run somewhat worse than what the simulation shows."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Intraday Bar Replay depth by plan",
+      "columns": ["Plan", "1-minute history", "5-minute history", "15-minute history"],
+      "rows": [
+        ["Essential", "6 months", "30 months", "90 months"],
+        ["Plus", "1 year", "5 years", "15 years"],
+        ["Premium / Ultimate", "All available history", "All available history", "All available history"]
+      ],
+      "note": "From TradingView's official \"How much data is available for Bar Replay\" page, checked September 2026. That page doesn't list the free Basic plan; daily and higher timeframes are not affected by these limits on any plan."
+    }
+  ],
+  "costNote": "Bar Replay itself is a free-plan feature; no paid plan is required to turn it on or to use it on daily and higher timeframes. The limit is on intraday depth: TradingView's own data-availability page for Bar Replay only lists tiers starting at the paid Essential plan ($14.95/month at time of writing), so relying on deep 1-minute or 5-minute replay history is where a subscription becomes relevant, not the tool itself.",
+  "troubleshooting": [
+    {
+      "problem": "The Bar Replay button or toolbar doesn't appear",
+      "cause": "Replay doesn't work on every chart type. TradingView excludes Renko, Kagi, Point & Figure, Range, Line Break, Volume Footprint and Time Price Opportunity charts, as well as spread and tick-based charts.",
+      "fix": "Switch to a standard candlestick, bar, area or line chart, then open Bar Replay again."
+    },
+    {
+      "problem": "Intraday replay history looks shorter than expected on the free plan",
+      "cause": "Deep intraday replay depth is gated to paid plans; TradingView's own documentation on this starts at the Essential tier.",
+      "fix": "Stick to daily or higher timeframes on the free Basic plan, or move to a paid tier if the strategy specifically needs long intraday history."
+    },
+    {
+      "problem": "A simulated trade's results are gone after closing the tab",
+      "cause": "Replay Trading data exists only for the current session and TradingView does not save it.",
+      "fix": "Log each trade's entry, exit and outcome in a spreadsheet as you go, not after the session ends."
     }
   ],
   "faq": [
     {
       "question": "Can I backtest for free on TradingView without a paid subscription?",
-      "answer": "Yes, the Bar Replay tool is available on TradingView's free plan and lets you manually step through historical price data to backtest strategies without upgrading."
+      "answer": "Yes. Bar Replay is available on the free Basic plan and lets you manually step through historical price data. The caveat is depth on intraday timeframes, which is capped on lower tiers; daily and higher timeframes aren't affected."
+    },
+    {
+      "question": "What timeframes can I backtest for free?",
+      "answer": "Daily and higher timeframes give you all of a symbol's available history on the free Basic plan. Deep intraday replay (1-minute up to 15-minute) is where paid tiers matter, starting with Essential."
     },
     {
       "question": "Does backtesting guarantee a strategy will work in live trading?",
-      "answer": "No, backtesting shows how a strategy would have performed historically, but live markets can behave differently and Replay doesn't fully account for slippage or fees, so it's a guide rather than a guarantee."
+      "answer": "No. Backtesting shows how a strategy would have performed historically, but live markets can behave differently, and Replay doesn't account for slippage or fees, so it's a guide, not a guarantee."
     },
     {
       "question": "What markets can I backtest on TradingView?",
-      "answer": "The Bar Replay method works across stocks, indices, crypto, and forex, making it useful for intraday, swing, and longer-term traders regardless of what they trade."
+      "answer": "The Bar Replay method works across stocks, indices, crypto and forex on any standard chart type; it doesn't support Renko, Kagi, Point & Figure, Range, Line Break, Volume Footprint or Time Price Opportunity charts."
+    },
+    {
+      "question": "Are my simulated Replay Trading results saved for later?",
+      "answer": "No. TradingView's documentation states trade data and results from Replay Trading exist only for that session and aren't saved anywhere, so keep your own log outside the platform."
     },
     {
       "question": "What's the most common mistake beginners make when backtesting?",
-      "answer": "Picking a starting point on the chart because you can already see what happens next is the biggest one — it removes the blind, real-time uncertainty that makes a backtest meaningful in the first place."
+      "answer": "Picking a starting point because you can already see what happens next, which removes the blind, real-time uncertainty that makes a backtest meaningful. TradingView's own \"Random bar\" option, which picks a starting point for you, is a built-in way around it."
     }
   ],
+  "references": [
+    { "label": "TradingView: Bar Replay, how and why to test a strategy in the past (official)", "url": "https://www.tradingview.com/support/solutions/43000712747-bar-replay-how-and-why-to-test-a-strategy-in-the-past/" },
+    { "label": "TradingView: How much data is available for Bar Replay? (official)", "url": "https://www.tradingview.com/support/solutions/43000692816-how-much-data-is-available-for-bar-replay/" },
+    { "label": "TradingView: Learn to trade on historical data, Replay Trading (official)", "url": "https://www.tradingview.com/support/solutions/43000691889-learn-to-trade-on-historical-data/" },
+    { "label": "TradingView: How do I turn Bar Replay on? (official)", "url": "https://www.tradingview.com/support/solutions/43000474024-how-do-i-turn-bar-replay-on/" }
+  ],
+  "verifiedNote": "Click paths and screenshots come from a walkthrough recorded in July 2026. The claim that Bar Replay is unrestricted on the free plan was checked against TradingView's own data-availability page in September 2026, which lists intraday depth starting at the paid Essential tier and doesn't cover Basic at all; this guide now flags that gap instead of implying full free access. The Replay Trading defaults, the unsupported chart types, the starting-bar options and the \"results aren't saved\" behaviour were confirmed against TradingView's own support articles at the same time.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

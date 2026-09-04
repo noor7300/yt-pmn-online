@@ -3,58 +3,106 @@
   "seoTitle": "Cloudflare Email Setup: Free Email Routing for Beginners",
   "metaDescription": "Learn how to create a custom domain email address for free using Cloudflare Email Routing, including DNS setup and forwarding to Gmail or Outlook.",
   "intro": "Cloudflare's free Email Routing feature lets you create a custom email address on your own domain and forward it straight to an inbox you already use, like Gmail or Outlook, without paying for a separate email service. This beginner-friendly guide walks through the actual Cloudflare dashboard, from picking the right domain to filling out the custom address form, so you can see exactly where each setting lives. It's built for small business owners, bloggers, and anyone launching a website who wants a professional-looking email address without extra cost.",
+  "prerequisites": [
+    "A domain added to Cloudflare using its full nameserver setup, not the partial CNAME option. Email Routing needs to manage the domain's DNS directly.",
+    "No existing MX record on the domain pointing at another mail provider. Google Workspace, Microsoft 365, and similar services all set their own MX records, which conflict with Cloudflare's."
+  ],
+  "costNote": "Email Routing itself is free and unlimited on every Cloudflare plan, including Free, with no card required, up to the account limits of 200 routing rules and 200 destination addresses. Cloudflare's newer Email Service, which sends mail out instead of forwarding it in, needs a paid Workers plan, but that's a separate feature from what this guide covers.",
   "steps": [
     {
       "heading": "Find the right domain in your Cloudflare account",
-      "body": "Log into Cloudflare and land on Account Home, where every domain you've added shows up in a list with its status, security insights, and plan. If you manage more than one site, as most accounts eventually do, double-check you're clicking into the domain you actually want to set up email for — Email Routing is configured per domain, not account-wide, so picking the wrong one means redoing the whole setup later.",
+      "body": "Log into Cloudflare and land on Account Home, where every domain you've added shows up in a list with its status, security insights, and plan. If you manage more than one site, double-check you're clicking into the right domain before you start. Email Routing is configured per domain, not account-wide, so setting it up on the wrong one means doing the whole thing again on the correct site.",
       "image": { "file": "/screenshots/rP7k_v6tdAg/02.webp", "caption": "The Cloudflare account home listing two domains, each showing its status and plan. Email Routing gets configured separately for whichever domain you click into." }
     },
     {
-      "heading": "Open Email Routing for the domain",
-      "body": "Inside a specific domain, the left sidebar has an Email section with three sub-items: Email Routing, DMARC Management, and Email Security. Email Routing is the one that creates custom addresses on your domain, and the page introduces itself plainly: create custom addresses to use whenever you don't want to share your primary address. This is also where you'd manage DMARC and email security later, but routing is the starting point for a beginner setup.",
+      "heading": "Find Email Routing in the dashboard",
+      "body": "Cloudflare has since folded Email Routing into a broader Email Service product, and the current documentation points to Compute > Email Service > Email Routing in the main dashboard navigation, not a domain-level sidebar. That's different from the layout in this walkthrough's screenshots, which show Email Routing sitting under a domain-level Email section next to DMARC Management and Email Security. Look for whichever one your account shows; the setup underneath is the same. Inside, three tabs run across the top: Overview, Routing Rules, and Destination Addresses.",
       "image": { "file": "/screenshots/rP7k_v6tdAg/03.webp", "caption": "The Email Routing landing page inside a domain, with the domain's Active status and Free plan badge visible above it." }
     },
     {
       "heading": "Check the configuration summary before adding anything",
-      "body": "Once you're on the Email Routing overview tab, Cloudflare shows a Configuration summary with four numbers at a glance: custom addresses created, destination addresses verified, domains covered, and overall routing status. A domain that's never been set up will show Enabled routing status alongside a note that the required Email DNS records are already configured — Cloudflare adds those automatically when you turn routing on, which is one less manual DNS step than most other providers require.",
+      "body": "On the Overview tab, Cloudflare shows a configuration summary: custom addresses created, destination addresses verified, domains covered, and the routing status. A domain that's never been set up shows Enabled routing status with a note that the required DNS records are already in place. Cloudflare adds an MX record and SPF and DKIM TXT records automatically when routing turns on, so there's no manual DNS step for a domain using Cloudflare's own nameservers. Routing doesn't work on a domain added with the partial CNAME setup; it needs full DNS management, and any existing MX record pointing at another mail provider has to come out first.",
       "image": { "file": "/screenshots/rP7k_v6tdAg/04.webp", "caption": "The Email Routing configuration summary — custom addresses, destination addresses, domain count, and routing status, with a note confirming the DNS records are already in place." }
     },
     {
-      "heading": "Create your custom address and pick a destination",
-      "body": "Selecting Get started opens the setup form, which asks for two things: a custom address (the part before the @ on your domain, like support or hello) and an action, almost always \"Send to an email.\" Type your custom address, then enter the real inbox — Gmail, Outlook, or anywhere else — where you want that mail forwarded. Cloudflare sends a confirmation email to the destination address before routing goes live, so check that inbox right after saving.",
+      "heading": "Create your custom address and confirm the destination",
+      "body": "Selecting Get started (Create routing rule, on the newer layout) opens the setup form. It asks for a custom address, the part before the @ on your domain, like support or hello, and an action, almost always \"Send to an email.\" Type the custom address, then enter the real inbox you want that mail forwarded to: Gmail, Outlook, or anywhere else.\n\nSave the rule, then open that destination inbox. Cloudflare sends a confirmation email and won't route anything to it until you click the verification link inside. That check exists so nobody can quietly route your domain's mail into an inbox they don't control. It only needs doing once per destination address: point five custom addresses at the same Gmail account and you confirm that Gmail address a single time, not five.",
       "image": { "file": "/screenshots/rP7k_v6tdAg/05.webp", "caption": "The custom address setup form — a name on your domain, an action set to \"Send to an email,\" and a destination address field waiting for the real inbox." }
     },
     {
-      "heading": "Confirm the destination address",
-      "body": "Cloudflare won't route mail to an unverified destination, so open the confirmation email it sends and click through before testing anything. This single verification step is what stops anyone from routing your domain's mail into an inbox they don't actually control, and it only needs to happen once per destination address even if you create several custom addresses pointing to the same inbox."
+      "heading": "Add the other addresses you need",
+      "body": "With the first address confirmed, add the others one at a time: support, hello, billing, whatever the site needs. Cloudflare also offers a catch-all rule that forwards every address at the domain, including typos and spam probes, to one inbox. It's convenient on a very small domain and noisy on anything bigger, since every misspelled address someone tries lands in the same inbox as real mail. The account-wide limits are generous either way: up to 200 routing rules and 200 destination addresses, well beyond what a small site will use."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Forwarded mail never arrives, not even in spam",
+      "cause": "Since July 2025, Cloudflare only forwards a message if the sender's own domain has SPF or DKIM configured. An unauthenticated message is dropped: not delivered, not bounced.",
+      "fix": "This is a problem with the sender's domain, not yours, so there's nothing to change on your end. If you know them, ask them to check their SPF/DKIM setup, or have them resend from an address that already authenticates."
     },
     {
-      "heading": "Add a few more addresses and watch for spam issues",
-      "body": "Once the first address works, add the others you actually need — support, hello, billing — rather than a single catch-all, since a catch-all forwards every misspelled or spam-targeted address at your domain straight into your inbox too. If forwarded mail starts landing in spam at the destination, check that your domain's SPF and DKIM records (which Cloudflare configures automatically for routing) haven't been overwritten by another service, since a conflicting record is the most common cause of deliverability trouble after setup."
+      "problem": "A new address doesn't seem to work",
+      "cause": "The destination address hasn't been verified yet. Cloudflare disables a routing rule until someone clicks the confirmation link sent to its destination.",
+      "fix": "Check that inbox, including spam, for Cloudflare's verification email and click through. The rule activates right after."
+    },
+    {
+      "problem": "Email Routing won't finish setting up on a domain",
+      "cause": "The domain isn't fully on Cloudflare's nameservers, and a partial CNAME setup won't do it, or an existing MX record from another mail provider is still in place.",
+      "fix": "Switch the domain to Cloudflare's full nameserver setup and remove the conflicting MX record before turning routing on."
+    },
+    {
+      "problem": "Forwarded mail lands in the destination's spam folder",
+      "cause": "Usually a second SPF record on the domain. SPF allows only one record per domain, so if another service (a form tool, a marketing platform) added its own SPF entry after Cloudflare set up routing, the two conflict.",
+      "fix": "Check the domain's TXT records for more than one entry starting with v=spf1 and merge them into a single record. SPF also caps out at 10 DNS lookups, so a domain already near that limit can break when a new entry gets added."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Email Routing account limits",
+      "columns": ["Limit", "Value"],
+      "rows": [
+        ["Routing rules per domain", "200"],
+        ["Destination addresses per account", "200"],
+        ["Max inbound message size", "25 MiB"],
+        ["Domains per zone (Email Routing + Email Service combined)", "30"]
+      ],
+      "note": "From Cloudflare's published Email Service limits. These are account-wide caps, not per-address."
     }
   ],
   "faq": [
     {
       "question": "Is Cloudflare Email Routing really free?",
-      "answer": "Yes, Cloudflare's Email Routing feature is free to use on any plan and lets you forward custom domain emails without a paid third-party email service."
+      "answer": "Yes. Cloudflare's own pricing page lists inbound forwarding as unlimited on every plan, including Free, with no card required. A paid Workers plan is only needed for Cloudflare's separate Email Service feature, which sends mail out instead of forwarding it in."
     },
     {
-      "question": "Can I forward Cloudflare email to Gmail?",
-      "answer": "Yes — when you create a custom address, the destination field accepts any inbox, including Gmail, Outlook, or a work email you already check."
+      "question": "Can I forward Cloudflare email to Gmail or Outlook?",
+      "answer": "Yes. The destination field for a routing rule accepts any inbox you can verify, including Gmail, Outlook, or a work address you already check."
     },
     {
-      "question": "Do I need to change my DNS settings for this to work?",
-      "answer": "Cloudflare adds the required Email DNS records automatically when you enable routing on a domain, which the Configuration summary confirms — you generally don't need to add them by hand."
+      "question": "Do I need to touch DNS myself?",
+      "answer": "No, as long as the domain uses Cloudflare's full nameserver setup. Cloudflare adds the MX, SPF, and DKIM records automatically when routing turns on. A domain added with the partial CNAME option can't use Email Routing at all."
     },
     {
-      "question": "Will my forwarded emails end up in spam?",
-      "answer": "It's uncommon if Cloudflare's automatic SPF and DKIM records are left untouched. If mail starts landing in spam, check that another service hasn't overwritten those records."
+      "question": "Why does a forwarded email sometimes never arrive, not even in spam?",
+      "answer": "Since July 2025, Cloudflare has required the sender's domain to have SPF or DKIM configured before it will forward a message. Without that, the mail is dropped: not delivered, not bounced, nothing in spam either. That's a problem with the sender's setup, not yours."
     },
     {
-      "question": "Is this suitable for someone with no technical experience?",
-      "answer": "Yes — the whole setup is a short form (custom address, action, destination) plus a confirmation email, with no manual DNS editing required for a single domain."
+      "question": "Why is forwarded mail landing in spam?",
+      "answer": "Usually a duplicate SPF record on the domain. SPF permits one record per domain, so if a form plugin or marketing tool added its own SPF entry after Email Routing set up its own, the two conflict and authentication fails. Merge them into a single record."
+    },
+    {
+      "question": "Where do I find Email Routing in the Cloudflare dashboard now?",
+      "answer": "Cloudflare's current documentation lists it under Compute > Email Service > Email Routing. Older accounts may still show it under a domain-level Email section instead; both lead to the same setup."
     }
   ],
+  "references": [
+    { "label": "Cloudflare Email Service docs: Route emails (official)", "url": "https://developers.cloudflare.com/email-service/get-started/route-emails/" },
+    { "label": "Cloudflare Email Service docs: Domain DNS configuration (official)", "url": "https://developers.cloudflare.com/email-routing/setup/email-routing-dns-records/" },
+    { "label": "Cloudflare Email Service docs: Limits (official)", "url": "https://developers.cloudflare.com/email-service/platform/limits/" },
+    { "label": "Cloudflare Email Service docs: Pricing (official)", "url": "https://developers.cloudflare.com/email-service/platform/pricing/" },
+    { "label": "Cloudflare changelog: Mail authentication requirement for Email Routing (official)", "url": "https://developers.cloudflare.com/changelog/post/2025-06-30-mail-authentication" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Navigation, DNS behaviour, account limits, pricing, and the SPF/DKIM requirement were re-checked against Cloudflare's official Email Service documentation and changelog in September 2026. Two corrections came from that check: Cloudflare now files Email Routing under Compute > Email Service > Email Routing, not the domain-level sidebar shown in the screenshots, and forwarding silently fails when a sender's domain lacks SPF or DKIM (a rule Cloudflare added in July 2025), which is a different and more serious problem than the spam-folder issue this guide originally described as the main risk.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

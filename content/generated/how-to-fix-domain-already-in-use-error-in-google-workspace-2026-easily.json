@@ -3,15 +3,18 @@
   "seoTitle": "Fix 'Domain Already in Use' Error in Google Workspace",
   "metaDescription": "Seeing 'this domain is already in use' in Google Workspace? Learn how to verify ownership with a TXT record and submit the domain recovery form correctly.",
   "intro": "The 'domain already in use' error in Google Workspace almost always means the domain is still tied to a previous Google account, blocking your new setup. This walkthrough covers the exact error message, the Google Admin Help page that lists possible causes, and the domain recovery form itself, including TXT record verification through a DNS provider. It's based on a real fix done through Squarespace's DNS settings, but the same steps apply to most hosting providers.",
+  "prerequisites": [
+    "Access to the DNS settings for the domain in question, through your registrar or host, needed for TXT record verification if none of Google's other listed causes apply."
+  ],
   "steps": [
     {
-      "heading": "See where the error actually appears",
-      "body": "When you enter your business's domain name during Google Workspace signup, the field turns red and shows: \"This domain name is already in use. If you own this domain and would like to use Google Workspace, please follow the steps here.\" This confirms the issue is specific to that domain rather than anything wrong with your signup details, and the built-in \"here\" link is the fastest way into Google's own troubleshooting page.",
+      "heading": "See where the error appears",
+      "body": "When you enter your business's domain name during Google Workspace signup, the field turns red and shows: \"This domain name is already in use. If you own this domain and would like to use Google Workspace, please follow the steps here.\" This confirms the issue is specific to that domain, not anything wrong with your signup details, and the built-in \"here\" link is the fastest way into Google's own troubleshooting page.",
       "image": { "file": "/screenshots/bis8mLpPW-o/01.webp", "caption": "The domain name field during Workspace signup, flagged red with \"This domain name is already in use\" underneath it." }
     },
     {
       "heading": "Check Google's listed reasons first",
-      "body": "The Admin Help page walks through a short list of explanations: maybe you or someone in your organization already created a managed account with this domain, or the domain is attached to another Google account you own. Each has its own fix — resetting the administrator password, or removing the domain from the other account. Read through these before doing anything else, since if one applies, it's a faster fix than the recovery form. If none apply, the page points you to \"Fill out this form\" so the Support team can look into it, with a reply promised within 48 hours.",
+      "body": "Google's Admin Help page lists three explanations, in this order. First, and easy to miss: you or someone else recently removed this exact domain from another managed Google account. Google holds a domain back from reuse for 24 hours, or 7 days if that account came through a reseller, and this needs nothing more than waiting it out; no form required. Second, you or someone in your organization already created a managed account with this domain, fixed by resetting the administrator password. Third, the domain is attached to another Google account you own, fixed by removing it from that account. Work through all three before doing anything else, since the first two are faster than the recovery form. If none apply, the page points to Fill out this form so the Support team can look into it, with a reply promised within 48 hours.",
       "image": { "file": "/screenshots/bis8mLpPW-o/02.webp", "caption": "The Google Workspace Admin Help page listing possible causes, with the \"Fill out this form\" link for cases where none of them apply." }
     },
     {
@@ -21,44 +24,66 @@
     },
     {
       "heading": "Choose the TXT record verification method",
-      "body": "When the form asks how you'd like to verify ownership, pick the TXT record option over CNAME — it's a single record you add and remove without touching any existing DNS entries, which makes it faster to set up and safer to reverse than juggling a CNAME. Copy the destination target value the tool generates; you'll paste this into your DNS provider next."
+      "body": "When the form asks how you'd like to verify ownership, pick the TXT record option over CNAME. It's a single record you add and remove without touching any existing DNS entries, which makes it faster to set up and safer to reverse than juggling a CNAME record. Copy the destination target value the tool generates. You'll paste it into your DNS provider next."
     },
     {
       "heading": "Add the TXT record in your DNS settings",
-      "body": "Log into your domain registrar or hosting provider — in this case Squarespace's Domains section — and open the DNS or Custom records area. Add a new record, paste the value Google gave you into the Data field, leave the TTL at its default, and save. If you're not on Squarespace, search \"how to add a TXT record in [your provider]\" since the exact menu names shift between hosts, but the record itself works the same everywhere.",
-      "image": { "file": "/screenshots/bis8mLpPW-o/05.webp", "caption": "Adding a custom DNS record in Squarespace's domain settings — Host, Type, Priority, TTL, and Data fields for the TXT verification entry." }
+      "body": "Log into your domain registrar or hosting provider (in this case, Squarespace's Domains section) and open the DNS or Custom records area. Add a new record, paste the value Google gave you into the Data field, leave the TTL at its default, and save. If you're not on Squarespace, search \"how to add a TXT record in [your provider]\" since the exact menu names shift between hosts, but the record itself works the same everywhere.",
+      "image": { "file": "/screenshots/bis8mLpPW-o/05.webp", "caption": "Adding a custom DNS record in Squarespace's domain settings: Host, Type, Priority, TTL, and Data fields for the TXT verification entry." }
     },
     {
-      "heading": "Recheck and submit the request",
-      "body": "Return to the Google recovery tab and click Check Again. DNS changes can take anywhere from a few minutes to a few hours to propagate, so if it doesn't verify immediately, wait and retry rather than assuming something's wrong. Once verification passes, click Submit Request — you'll get a confirmation screen on-screen and a follow-up email at the contact address you provided."
+      "heading": "Recheck, submit, and know what happens next",
+      "body": "Return to the Google recovery tab and click Check Again. DNS changes can take anywhere from a few minutes to a few hours to propagate, so if it doesn't verify immediately, wait and retry instead of assuming something's wrong. Once verification passes, click Submit Request; you'll get an on-screen confirmation and a follow-up email at the contact address you provided, typically within 48 hours.\n\nIn most cases, this error happens because the domain is still linked to an old, often abandoned Google Workspace account, not because someone is actively squatting on it. If you genuinely believe another party owns and is using the domain, the form has a separate option to have Google contact them instead of freeing it up for you directly. Pick that path if you're not certain the domain is yours to claim."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The error keeps showing right after removing the domain from an old Workspace account",
+      "cause": "Google holds a domain back from reuse for 24 hours after removal, or 7 days if the old account came through a reseller. This is stated directly on Google's Admin Help page as the first possible cause, separate from the recovery form process.",
+      "fix": "Wait out the hold period and try signup again. No form or DNS verification is needed for this specific cause."
     },
     {
-      "heading": "Know what to expect afterward",
-      "body": "In the vast majority of cases, this error happens because the domain is still linked to an old, often abandoned Google Workspace account rather than someone actively squatting on it. If you genuinely believe another party owns and is using the domain, the form has a separate option to have Google contact them instead of freeing it up for you directly — pick that path if you're not certain the domain is actually yours to claim."
+      "problem": "The TXT record was added, but Check Again still fails",
+      "cause": "DNS changes propagate on their own schedule, anywhere from a few minutes to a few hours depending on the provider and the record's TTL.",
+      "fix": "Wait and retry instead of editing the record again. Retyping it usually just resets the propagation clock."
+    },
+    {
+      "problem": "Submitted the recovery form, but no confirmation email arrived",
+      "cause": "The email went to the contact address entered on the form, which may not be the same inbox used to sign in, or it landed in spam.",
+      "fix": "Check spam in the inbox entered on the form, and check back after 48 hours before resubmitting a second request."
     }
   ],
   "faq": [
     {
       "question": "Why does Google Workspace say this domain is already in use?",
-      "answer": "This happens in most cases because the domain is still linked to a previous Google Workspace or Google account, even if that account is inactive."
+      "answer": "Most often because the domain is still linked to a previous Google Workspace or Google account, even an inactive one. It can also mean the domain was only just removed from another managed account and needs 24 hours (7 days via a reseller) before Google will let it be reused."
     },
     {
       "question": "Should I use a TXT record or CNAME to verify my domain?",
-      "answer": "TXT record verification is generally easier and faster to set up in your DNS settings than a CNAME record, and it's the method shown on Google's own recovery form."
+      "answer": "TXT record verification is generally easier and faster to set up in DNS settings than a CNAME record, and it's the method Google's own recovery form offers."
     },
     {
       "question": "What if I don't own the domain that's flagged as already in use?",
-      "answer": "The recovery form lets you select an option for Google to contact the current owner if you suspect someone else controls the domain, rather than submitting a recovery request yourself."
+      "answer": "The recovery form has an option for Google to contact the current owner instead, if you suspect someone else genuinely controls the domain, instead of submitting a recovery request yourself."
     },
     {
       "question": "How long does domain verification take after adding the TXT record?",
-      "answer": "It can take a few attempts of clicking Check Again after adding the record, since DNS changes sometimes take minutes to hours to propagate depending on your provider."
+      "answer": "It can take a few tries of clicking Check Again, since DNS changes sometimes take minutes to hours to propagate depending on your provider."
     },
     {
       "question": "What happens after I submit the domain recovery request?",
-      "answer": "You'll see a confirmation screen right away, and Google sends a follow-up email to the contact address you entered on the form, typically within 48 hours."
+      "answer": "You'll see a confirmation screen right away, and Google sends a follow-up email to the contact address you entered, typically within 48 hours."
+    },
+    {
+      "question": "I just removed this domain from an old account. Do I really need the recovery form?",
+      "answer": "Not necessarily. Google's Admin Help page lists this as a separate, faster case: removing a domain triggers a 24-hour hold before it can be reused elsewhere, or 7 days if the account came through a reseller. Wait that out first before going through the form."
     }
   ],
+  "references": [
+    { "label": "Google Workspace Admin Help: Can't sign up my domain for a Google service (official)", "url": "https://knowledge.workspace.google.com/admin/support/troubleshooting/cant-sign-up-my-domain-for-a-google-service" },
+    { "label": "Google Admin Toolbox: Domain recovery tool (official)", "url": "https://toolbox.googleapps.com/apps/recovery/domain_in_use" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough using Squarespace's DNS settings; the four-stage recovery form and the 48-hour response promise match Google's current Admin Help page exactly. One addition came from checking that page directly in September 2026: it currently lists a third possible cause, ahead of the two shown in the recorded screenshot, for a domain recently removed from another managed account, held back from reuse for 24 hours (7 days via a reseller) with no form needed. Whether that cause is new since the recording or was simply scrolled past in the screenshot isn't something this check can determine, but it's real and worth checking first, so it's included here.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

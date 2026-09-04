@@ -1,63 +1,121 @@
 {
   "slug": "how-to-set-up-trailing-stop-loss-on-tradingview-can-you-fix-trailing-sl-button-n",
-  "seoTitle": "Set Up Trailing Stop Loss on TradingView (Fix Missing Button)",
-  "metaDescription": "Set a trailing stop loss on TradingView step by step — where it lives in the broker order panel, how to set the distance, and why the trailing SL button is missing.",
-  "intro": "A trailing stop loss is the closest thing trading has to a free lunch: it follows a winning position up, locking in profit as price moves your way, and never moves back down. On TradingView the confusion isn't the concept, it's the location — trailing stops are not a charting tool, they belong to whichever broker you've connected, which is why one account shows the option and the next one doesn't. This guide walks the real flow: connecting a broker panel, opening the order ticket, setting the trailing distance, and watching the stop actually step up behind price. It also covers the question that brings most people here — why the trailing SL button isn't showing at all, and what genuinely fixes it rather than the usual advice to refresh the page.",
+  "seoTitle": "Trailing Stop Loss on TradingView: Where It Hides and Why It's Missing",
+  "metaDescription": "TradingView's trailing stop is not a separate button. It is an option inside the Stop Loss dropdown in the order panel, and it only appears if your broker's integration supports it.",
+  "intro": "People go looking for a trailing stop button on TradingView and conclude the platform does not have one. There is no button. Trailing Stop is an option inside the Stop Loss bracket in the order panel: you click Stop Loss, and it is in the dropdown that opens.\n\nThe second half of the problem is that the dropdown entry is not guaranteed to be there. A trailing stop is an order type your broker has to support, and TradingView passes through whatever each integration exposes. Tradovate, to take one documented example, does not offer it at all. So two traders on the same platform, same chart, same symbol, will honestly report opposite experiences.\n\nThis guide covers where the setting lives, what the distance costs you, how to confirm the stop is stepping up instead of sitting still, and how to work out which of the four reasons is behind a missing option.",
+  "prerequisites": [
+    "A broker account connected to TradingView. Trailing stops are placed through the broker, so a chart with no trading connection has no order panel to put one in.",
+    "A broker whose TradingView integration supports the Trailing Stop order type. TradingView's compare brokers page is where that gets checked, and support differs between brokers and sometimes between account types at the same broker."
+  ],
   "steps": [
     {
-      "heading": "Know what the trailing stop is doing before you arm one",
-      "body": "A normal stop loss sits at a fixed price until you drag it. A trailing stop is defined by a distance instead — say 15 ticks or 1% — and the platform keeps re-issuing the stop order at that distance behind the best price the trade has reached. If you're long and price climbs, the stop climbs with it; if price falls back, the stop stays put and eventually gets hit, closing you out with whatever you'd banked. That one-way ratchet is the whole point, and it's also the trap: the distance you choose is the amount of open profit you're willing to hand back on every pullback, so it needs to reflect the instrument's normal noise rather than your comfort level."
+      "heading": "Know what the distance is buying you",
+      "body": "A fixed stop sits at a price until you drag it. A trailing stop is defined by a distance behind the position, and it moves that distance along as price goes your way. TradingView's own description is a stop that \"automatically moves a set distance behind your position as long as the price moves in your favor\", and freezes at its highest achieved level when the trend turns. If price then reaches the frozen level, the trade closes.\n\nTheir worked example: buy at $100 with a 5% trailing stop, price runs to $120, the stop has followed up to $114. That $6 gap is not a rounding detail, it is the deal. The distance you pick is the amount of open profit you agree to give back on every pullback. Set it tight and ordinary noise closes the position early. Set it wide and you hand back a large slice of the move before the exit triggers. TradingView names both failure modes explicitly, which is a fair signal that neither one is rare."
     },
     {
-      "heading": "Connect a broker — the trailing stop lives in their panel, not the chart",
-      "body": "Open a chart and look at the bottom panel, where Pine Editor, Paper Trading and Trade sit as tabs. Trading features appear only once an account is attached there, whether that's TradingView's own Paper Trading account or a live connection to a supported broker. The panel shows your balance, equity, realised and unrealised P&L, and a Positions table listing every open trade with its Take Profit and Stop Loss columns. Those two columns are your quickest sanity check later: once a trailing stop is running, the Stop Loss value in this row is what should keep changing on its own.",
-      "image": { "file": "/screenshots/KZtlR553rnk/03.webp", "caption": "The trading panel docked under the chart, with an open Silver position and its Take Profit and Stop Loss shown as live columns." }
+      "heading": "Connect a broker, and check it supports the order type first",
+      "body": "The trading panel docks under the chart, sharing tab space with Pine Editor and Paper Trading. Once an account is attached it shows balance, equity, realised and unrealised P&L, and a Positions table with Take Profit and Stop Loss as live columns. Note those two columns now, because the Stop Loss value in that row is the thing you will watch change later.\n\nBefore connecting anything, check the broker offers trailing stops through TradingView. This is not a detail you can work around afterwards. TradingView's documentation states plainly that Tradovate's integration does not include Trailing Stop. Forex.com's does. OANDA's requires a V20 account. The compare brokers page carries the current list. Read it before you fund an account, not after.",
+      "image": {
+        "file": "/screenshots/KZtlR553rnk/03.webp",
+        "caption": "The trading panel docked under the chart, with an open Silver position and its Take Profit and Stop Loss shown as live columns."
+      }
     },
     {
-      "heading": "Open the order ticket and pick the right order type",
-      "body": "Clicking Buy or Sell on the chart, or the trade button in the panel, opens the order ticket. Across the top are the order types your broker supports — typically Market, Limit, Stop and Stop Limit — and underneath are Units, a risk field, and tick boxes for Take Profit and Stop Loss with sub-fields for ticks, price, currency amount or percent. This ticket is the entire vocabulary your broker has given TradingView. If a trailing option exists for your account it appears here, alongside those Stop Loss fields; if this panel only offers a fixed Stop Loss, that is your answer about the missing button, and no setting elsewhere in TradingView will add it.",
-      "image": { "file": "/screenshots/KZtlR553rnk/04.webp", "caption": "The order ticket on a futures contract, showing the available order types and the Take Profit / Stop Loss fields the broker exposes." }
+      "heading": "Open the order panel and click Stop Loss",
+      "body": "Clicking Buy or Sell on the chart, or the Trade button, opens the order panel. Across the top sit the order types your broker supports, typically Market, Limit, Stop and Stop Limit. Below them are Units, a risk field, and the Take Profit and Stop Loss brackets with sub-fields for ticks, price, currency amount or percent.\n\nThe trailing stop is not among the order types along the top, and this is where most people give up. Click the Stop Loss bracket itself. TradingView's instruction is to \"click on the Stop Loss bracket order\" and then \"select Trailing Stop from the dropdown menu\". The dropdown is the whole mechanism. If Trailing Stop is not in that list, the answer is in the final step of this guide, and no other setting in TradingView will add it.",
+      "image": {
+        "file": "/screenshots/KZtlR553rnk/04.webp",
+        "caption": "The order ticket on a futures contract, showing the available order types and the Take Profit / Stop Loss fields the broker exposes."
+      }
     },
     {
-      "heading": "Set the trailing distance and activate it",
-      "body": "Enter the distance in whichever unit the ticket offers — ticks and points for futures, pips for FX, percent where it's supported — then confirm the order. A useful starting point is roughly one and a half to two times the recent average range of a single candle on your trading timeframe, which keeps the stop outside ordinary chop. Avoid setting it in round human numbers like exactly 10 or 20 ticks on a liquid contract, since those levels are crowded. You can usually attach the trailing stop to an already-open position too, rather than only at entry, which is the sensible way to use it: enter with a fixed stop while the trade is unproven, then switch to trailing once it's moved clearly into profit."
+      "heading": "Set the trailing distance",
+      "body": "With Trailing Stop selected, specify the distance. The units on offer come from the broker: on Forex.com through TradingView you can express it in \"pips, absolute price, percentage, and money that you are willing to risk\", and TradingView's general documentation works its examples in percentages. Futures tickets tend to talk in ticks and points.\n\nOn choosing a number, the useful principle is that the distance should reflect how much the instrument normally moves, not how much loss feels tolerable. A common approach is to size it against the recent average range of one candle on your trading timeframe, so the stop sits outside routine chop. Round numbers on liquid contracts, exactly 10 or 20 ticks, tend to be crowded. And widen the trail through high-volatility sessions and scheduled news, since a stop order fills at the next available price and a gap can take you out well below the level you set.\n\nWhether you can attach one to a position that is already open depends entirely on the broker. Some allow it. TradingView's Tradovate documentation goes the other way: Stop Loss and Take Profit levels can only be added when placing the order in the order panel, and using right-click and Modify Order on a live order shows both greyed out. Find out which behaviour your broker has on a small position before you rely on it."
     },
     {
-      "heading": "Confirm it is actually trailing",
-      "body": "Once armed, the stop draws as its own labelled line on the chart and the order log records every adjustment. What you want to see is the same order ID being modified repeatedly at rising prices — a sell stop placed at one level, then modified a tick or two higher, then higher again — because that stream of modifications is the trailing mechanism working. If the line is sitting on the chart but the log shows no modifications while price makes new highs, the order was placed as a plain stop rather than a trailing one. Check this on the first trade you run it on, not on the one that matters.",
-      "image": { "file": "/screenshots/KZtlR553rnk/05.webp", "caption": "The trailing stop drawn as its own line, with the order log underneath showing the same stop order being modified upward as price advances." }
+      "heading": "Confirm the stop is really trailing",
+      "body": "Once armed, the stop draws as its own labelled line and the order log records every adjustment. What you want to see in the log is one order ID being modified repeatedly at improving prices: a sell stop placed at one level, modified a tick higher, then higher again. That stream of modifications is the trailing mechanism working.\n\nIf the line sits on the chart while price makes new highs and the log shows nothing, the order went in as a plain stop. Check this on the first trade you use it on, not on the one that matters.",
+      "image": {
+        "file": "/screenshots/KZtlR553rnk/05.webp",
+        "caption": "The trailing stop drawn as its own line, with the order log underneath showing the same stop order being modified upward as price advances."
+      }
     },
     {
-      "heading": "Fix the trailing SL button not showing",
-      "body": "There are four causes worth checking, in order. First, broker support: trailing stops are a broker-side order type, so if your connection doesn't offer them the button will never render — check the broker's own order-type list rather than TradingView's help pages. Second, account mode: paper and demo accounts frequently expose a reduced set of order types compared with the funded account at the same broker. Third, the instrument: many brokers allow trailing stops on FX and futures but not on certain CFDs or on symbols outside regular trading hours. Fourth, the order type selected in the ticket — a trailing stop attaches to a position, so selecting a pending entry order type can hide it until the position exists. If all four check out and it's still missing, reconnect the broker account rather than reloading the chart, since the order-type list is fetched when the connection is established."
+      "heading": "When Trailing Stop is missing from the dropdown",
+      "body": "Four causes, in the order worth checking.\n\nBroker support comes first and settles most cases. The order type is issued by the broker, so an integration that does not carry it will never render the option. TradingView says so directly about Tradovate. Check the broker's entry on TradingView's compare brokers page before assuming anything is broken.\n\nAccount type is second. OANDA's trailing stops need a V20 account, which is a good illustration of the general pattern: the same broker can expose different order types to different account tiers, and demo or paper accounts often carry a reduced set.\n\nThe instrument is third. Order-type availability varies by market within a single broker, and outside regular trading hours some symbols accept fewer types.\n\nFourth, check you are looking in the right place. Trailing Stop lives in the Stop Loss bracket dropdown, not in the row of order types across the top of the panel. Plenty of \"missing button\" reports are this.\n\nIf all four check out, reconnect the broker account instead of reloading the chart. The list of available order types is negotiated when the connection is established, so a refresh redraws the same stale list."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The order types across the top of the panel show no trailing option",
+      "cause": "Trailing Stop is not one of the top-level order types. TradingView files it inside the Stop Loss bracket.",
+      "fix": "Click the Stop Loss bracket in the order panel and open its dropdown. Select Trailing Stop there, then specify the distance."
     },
     {
-      "heading": "Use it without getting shaken out early",
-      "body": "The most common failure isn't a technical one, it's a distance set too tight, which converts a good trend trade into a scratch on the first normal retracement. Widen the trail on higher-volatility sessions and around scheduled news, when spreads gap and a stop can be taken out at a price nowhere near where you set it. Don't tighten a trail manually while the trade is running unless you've decided in advance at what level you'll do it — otherwise you're just moving the exit closer every time you feel nervous. And remember the trail keeps working when your screen is off, which is exactly its value: the position is managed by a rule, not by whether you happened to be watching."
+      "problem": "Trailing Stop is genuinely absent from the Stop Loss dropdown",
+      "cause": "The broker's integration does not expose that order type, or your account tier does not. TradingView documents Tradovate as not supporting it, and OANDA as requiring a V20 account.",
+      "fix": "Check the broker on TradingView's compare brokers page. If the integration does not carry it, no TradingView setting will add it, and the choice is a different broker or managing the exit manually."
+    },
+    {
+      "problem": "The stop line is on the chart but never moves",
+      "cause": "The order was submitted as a fixed stop. A working trailing stop shows repeated modifications to the same order ID in the log as price advances.",
+      "fix": "Cancel and re-place, confirming Trailing Stop is selected in the Stop Loss dropdown before submitting. Verify from the order log, not from the chart line."
+    },
+    {
+      "problem": "You cannot attach a trailing stop to a position that is already open",
+      "cause": "Some integrations only accept brackets at order placement. On Tradovate, TradingView documents that Stop Loss and Take Profit can only be added in the order panel when placing the order, and appear greyed out under Modify Order afterwards.",
+      "fix": "Set the bracket when you enter. If you need to switch an existing position onto a trail and the broker will not allow it, closing and re-entering is the only route, and it carries the spread and slippage of a fresh entry."
     }
   ],
   "faq": [
     {
-      "question": "Why is the trailing stop loss button not showing on TradingView?",
-      "answer": "Because trailing stops come from your broker, not from TradingView. The button only renders if the connected broker supports that order type for the account mode and instrument you're trading — demo and paper accounts often expose fewer order types than a funded account at the same broker."
+      "question": "Where is the trailing stop loss button on TradingView?",
+      "answer": "There is no separate button. Open the order panel, click the Stop Loss bracket order, and select Trailing Stop from the dropdown that appears. Then specify the trailing distance."
     },
     {
-      "question": "Does every broker connected to TradingView support trailing stops?",
-      "answer": "No. Support varies by broker, and often by instrument within the same broker. Check the broker's own list of supported order types before assuming the feature is missing due to a bug."
+      "question": "Why is Trailing Stop not showing for me?",
+      "answer": "Almost always because the connected broker's integration does not offer that order type, or your account tier does not. TradingView states that Trailing Stop is not available on its Tradovate integration, and that OANDA's requires a V20 account. Check the broker on TradingView's compare brokers page."
     },
     {
-      "question": "Can I add a trailing stop to a position that's already open?",
-      "answer": "Usually yes, and it's often the better approach — enter with a fixed stop, then convert to a trailing stop once the trade has moved meaningfully into profit and you're protecting gains rather than capital."
+      "question": "What units can I set the trailing distance in?",
+      "answer": "That depends on the broker. Through Forex.com, TradingView lists pips, absolute price, percentage, and a money amount you are willing to risk. TradingView's general documentation works its examples in percentages, and futures tickets typically use ticks or points."
     },
     {
-      "question": "What trailing distance should I use?",
-      "answer": "Base it on the instrument's normal movement rather than a fixed habit. Roughly one and a half to two times the average range of a candle on your trading timeframe keeps the stop clear of ordinary noise while still capturing most of a move."
+      "question": "Can I add a trailing stop to a position that is already open?",
+      "answer": "Broker-dependent, and not safe to assume. TradingView's Tradovate documentation says Stop Loss and Take Profit levels can only be added when placing the order in the order panel, and that Modify Order shows them greyed out on an existing order. Test it on a small position before relying on it."
     },
     {
       "question": "Does a trailing stop guarantee I exit at that price?",
-      "answer": "No. It sends a stop order, which fills at the next available price. In fast markets or around news the fill can be worse than the level you set, which is one reason to widen the trail during high-volatility periods."
+      "answer": "No. It sends a stop order, which fills at the next available price. In fast markets or around news the fill can be materially worse than the level shown."
+    },
+    {
+      "question": "How does the trailing stop behave when price reverses?",
+      "answer": "It stops moving. TradingView describes it as freezing at its highest achieved level once the trend reverses, and the trade closes automatically if price reaches that level."
     }
   ],
+  "references": [
+    {
+      "label": "TradingView: Introduction to trailing stops (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000754965-trailing-stop/"
+    },
+    {
+      "label": "TradingView: How do I place a Trailing Stop order? (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000501552-how-do-i-place-a-trailing-stop-order/"
+    },
+    {
+      "label": "TradingView: Can I place a Trailing Stop order? (Tradovate, official)",
+      "url": "https://www.tradingview.com/support/solutions/43000703849-can-i-place-a-trailing-stop-order/"
+    },
+    {
+      "label": "TradingView: Can I add Stop Loss / Take Profit levels on the chart? (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000664282-can-i-add-stop-loss-take-profit-levels-on-the-chart/"
+    },
+    {
+      "label": "TradingView Blog: Trailing stop in Forex.com (official)",
+      "url": "https://www.tradingview.com/blog/en/trailing-stop-in-forex-com-22182/"
+    }
+  ],
+  "verifiedNote": "The panel layout and click path come from a walkthrough recorded in 2025. In September 2026 the placement flow, the supported units, and the broker dependency were re-checked against TradingView's own help pages and blog. That check corrected two things this guide previously got wrong: Trailing Stop is chosen from the dropdown on the Stop Loss bracket, not found among the order types along the top of the panel, and attaching a trail to an already-open position is broker-specific, not generally possible (TradingView documents Tradovate as not allowing it). The named broker examples are quoted from TradingView's pages listed below and can change without notice; the compare brokers page is the current source. Nothing here is trading advice.",
   "generatedAt": "2026-08-06T10:00:00Z",
   "deep": true
 }

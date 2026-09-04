@@ -1,54 +1,101 @@
 {
   "slug": "how-to-remove-buy-and-sell-arrows-buttons-in-tradingview-2026-easily",
   "seoTitle": "How to Remove Buy and Sell Arrows in TradingView Charts",
-  "metaDescription": "Buy and sell arrows cluttering your TradingView charts? Turn them off in the Trading settings tab to get a cleaner view for technical analysis.",
-  "intro": "Those small up and down arrows marking past trade executions can clutter a TradingView chart, especially once you've got several trades logged and the labels start overlapping your candles. This guide shows exactly what those markers look like on a live chart and walks through the settings menu that controls them, so you can switch to a cleaner view for technical analysis without losing your actual trade history. It takes just a couple of clicks once you know which menu to open.",
+  "metaDescription": "Buy and sell arrows or the floating Buy/Sell order buttons cluttering your TradingView chart? Both live under the chart's Trading settings tab, in different sections.",
+  "intro": "Two separate things get called \"buy and sell arrows\" on TradingView, and they're turned off in different places. Execution marks are the small chevrons that show where your past trades filled; the Buy/Sell buttons are the floating order-placement controls that let you trade straight off the chart. This guide covers what each one looks like, then walks through the settings menu for both, so you can get to a cleaner view for technical analysis without losing your actual trade history or accidentally leaving one-click order buttons active.",
   "steps": [
     {
       "heading": "Spot the execution arrows on your chart",
-      "body": "On a BTCUSD chart with trade history, you'll see small blue chevron-style arrows sitting near recent price action, sometimes paired with quantity labels like \"7 @ 118122\" and \"7 @ 118297\" marking the price and size of each executed order. These render directly on top of your candles and moving averages, which is exactly why they start to feel like clutter once several show up close together on the same timeframe.",
-      "image": { "file": "/screenshots/GuJG59JeDP4/01.webp", "caption": "A BTCUSD chart with an execution arrow rendered near the most recent candles, next to the live watchlist panel." }
+      "body": "On a BTCUSD chart with trade history, small chevron-style arrows sit near recent price action, sometimes paired with quantity labels like \"7 @ 118122\" marking the price and size of each executed order. TradingView colors these by side: blue for executed buys, red for executed sells. They render directly on top of candles and moving averages, which is why they start to feel like clutter once several show up close together.",
+      "image": { "file": "/screenshots/GuJG59JeDP4/01.webp", "caption": "A BTCUSD chart with a blue execution arrow marking an executed buy, near the most recent candles, next to the live watchlist panel." }
     },
     {
       "heading": "See how labels stack up over time",
-      "body": "On a daily chart covering a longer trade history, both a down arrow and an up arrow appear together with their price and quantity labels layered above the candles. The more trades you log, the more these accumulate, and on a shorter timeframe or a smaller chart window they can start to overlap the price action you're actually trying to read.",
+      "body": "On a daily chart covering a longer trade history, a red sell arrow and a blue buy arrow can appear together with their price and quantity labels layered above the candles. The more trades you log, the more these accumulate; TradingView groups marks automatically once there are many on the same area, but on a shorter timeframe or a smaller chart window they can still overlap the price action you're trying to read.",
       "image": { "file": "/screenshots/GuJG59JeDP4/03.webp", "caption": "Execution arrows and their quantity labels stacked above recent candles on a daily BTCUSD chart, showing how they accumulate with more trade history." }
     },
     {
       "heading": "Open your chart settings",
-      "body": "With your chart open, click the settings gear or the \"...\" menu near the chart's symbol name at the top-left to bring up the display preferences window. This is the same settings panel that controls indicators, gridlines, and other visual elements on the chart, so it's worth knowing for other cleanup tasks too."
+      "body": "With your chart open, click the gear icon on the chart's toolbar (or the \"...\" menu near the symbol name) to bring up the settings window. This is the same panel that controls indicators, gridlines and other visual elements, useful to know for other cleanup tasks too."
     },
     {
       "heading": "Go to the Trading tab",
-      "body": "Inside the settings window, find the tab related to trading or order execution — its exact label can shift slightly between TradingView updates, but it's generally grouped with other order-visibility options rather than under general chart appearance settings."
+      "body": "Inside settings, open the Trading tab. It's split into two sections that matter here: Appearance, which controls how past trades render on the chart, and General, which controls the buttons used to place new orders. The arrows and the order buttons are separate settings in separate sections, which is why turning one off doesn't touch the other."
     },
     {
-      "heading": "Uncheck executions and execution labels",
-      "body": "Scroll to the executions section and uncheck both the Executions and Execution labels boxes. These are checked by default, which is why the arrows and their price/quantity text show up automatically once you have trade history on that symbol — unchecking them controls the visual markers only, not your actual order data."
+      "heading": "Turn off the execution arrows and labels",
+      "body": "In the Trading tab's Appearance section, uncheck Executions and Execution labels. Executions controls the blue and red arrows themselves; Execution labels controls the price and quantity text near the price scale. Both are checked by default, which is why they show up automatically once you have trade history on that symbol. Unchecking them only controls the visual markers, not your actual order data."
+    },
+    {
+      "heading": "Turn off the Buy/Sell order buttons, if those are what's cluttering the chart",
+      "body": "If it's the floating Buy and Sell buttons you want gone, not the trade-history arrows, that's a different toggle: still in the Trading tab, but under General, not Appearance. Unchecking it removes the one-click order buttons from the chart entirely. A faster route to the same setting is right-clicking any item in the chart's legend and toggling it from there. On the TradingView mobile app, the equivalent control is called one-tap trading: turning it off hides the floating Buy/Sell panel and replaces it with a single Trade button that opens the full order ticket instead."
     },
     {
       "heading": "Confirm the change",
-      "body": "Click OK to save the settings, and the buy and sell arrows should disappear from your chart immediately, leaving just your candles and any indicators you've added. Your trade history itself is untouched — this setting only affects whether it renders visually on the chart."
+      "body": "Click OK to save. Whichever combination you unchecked, the change applies to the chart immediately, leaving just your candles and any indicators you've added. Your trade history and any open orders are untouched; these settings only affect what renders on the chart."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Two different \"arrow\" features on TradingView charts",
+      "columns": ["Feature", "What it shows", "Where to turn it off"],
+      "rows": [
+        ["Executions", "Blue/red arrows marking where past trades filled", "Settings > Trading > Appearance"],
+        ["Execution labels", "Price and quantity text next to each execution arrow", "Settings > Trading > Appearance"],
+        ["Buy/Sell buttons", "Floating buttons for placing new orders at market price", "Settings > Trading > General (or the chart legend's right-click menu)"]
+      ]
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Arrows are still on the chart after unchecking Executions",
+      "cause": "The arrows may be coming from an indicator or script added to the chart, not from TradingView's native execution marks.",
+      "fix": "Check the indicators list for a buy/sell-arrow script; remove it or look for its own show/hide toggle, separate from the Trading tab setting."
+    },
+    {
+      "problem": "The Buy/Sell buttons are still visible after turning off Executions",
+      "cause": "Executions and Buy/Sell buttons are separate settings, in Appearance and General respectively, under the same Trading tab.",
+      "fix": "Uncheck the Buy/Sell buttons option under Trading > General, or right-click a chart legend item and toggle it off from there."
+    },
+    {
+      "problem": "Can't find a Buy/Sell button toggle in the mobile app",
+      "cause": "On mobile, the same control is named one-tap trading, not Buy/Sell buttons.",
+      "fix": "Turn off one-tap trading in the app's trading settings; the floating panel is replaced by a single Trade button that opens the order ticket."
     }
   ],
   "faq": [
     {
       "question": "Where do I find the option to remove buy and sell arrows on TradingView?",
-      "answer": "It's inside the chart settings window, under the Trading tab, where you'll find the Executions and Execution labels checkboxes."
+      "answer": "In chart settings, under the Trading tab's Appearance section: the Executions and Execution labels checkboxes."
+    },
+    {
+      "question": "What's the difference between execution arrows and the Buy/Sell buttons?",
+      "answer": "Execution arrows mark where past trades already filled, colored blue for buys and red for sells. Buy/Sell buttons are separate, floating controls for placing new orders directly from the chart. They're turned off in different sections of the same Trading tab."
     },
     {
       "question": "Will removing the arrows delete my trade history?",
-      "answer": "No, unchecking Executions only hides the visual markers on the chart - it doesn't affect your actual trade records or account history."
+      "answer": "No. Unchecking Executions only hides the visual markers on the chart; it doesn't affect your actual trade records or account history."
     },
     {
       "question": "Does this work on TradingView mobile as well as desktop?",
-      "answer": "The settings menu is structured a bit differently on mobile, but a similar executions toggle is available to hide the arrows there too."
+      "answer": "The execution-arrow toggle isn't documented separately for mobile. The Buy/Sell buttons equivalent is called one-tap trading; turning it off hides the floating buttons and shows a single Trade button instead."
     },
     {
-      "question": "Can I turn the arrows back on later if I change my mind?",
-      "answer": "Yes, just revisit the same Trading tab in chart settings and recheck the Executions and Execution labels boxes to bring them back."
+      "question": "Are the execution arrows different colors for buys and sells?",
+      "answer": "Yes. TradingView renders executed buy orders as blue arrows and executed sell orders as red arrows."
+    },
+    {
+      "question": "Can I turn the arrows or buttons back on later if I change my mind?",
+      "answer": "Yes. Revisit the Trading tab in chart settings and recheck Executions and Execution labels for the arrows, or the Buy/Sell buttons option under General for the order buttons."
     }
   ],
+  "references": [
+    { "label": "TradingView: Execution marks (official)", "url": "https://www.tradingview.com/support/solutions/43000763371-execution-marks/" },
+    { "label": "TradingView: How to configure your Supercharts (official)", "url": "https://www.tradingview.com/support/solutions/43000748166-how-to-configure-your-supercharts/" },
+    { "label": "TradingView: How to show buy/sell buttons on the chart? (official)", "url": "https://www.tradingview.com/support/solutions/43000479981-how-to-show-buy-sell-buttons-on-the-chart/" },
+    { "label": "TradingView: How to enable/disable Buy/Sell Buttons in the app? (official, mobile)", "url": "https://www.tradingview.com/support/solutions/43000641691-how-to-enable-disable-buy-sell-buttons-in-the-app/" }
+  ],
+  "verifiedNote": "Click paths and screenshots come from a walkthrough recorded in July 2026. The earlier draft covered only the execution arrows despite the title also naming \"buttons\"; a dedicated step and settings table for the Buy/Sell order-placement buttons, a separate control under Trading > General, not Appearance, were added and checked against TradingView's own Supercharts and Buy/Sell button support pages in September 2026. The blue-buy/red-sell color distinction and the mobile one-tap trading behaviour were confirmed against TradingView's Execution marks and mobile Buy/Sell button pages at the same time.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }
