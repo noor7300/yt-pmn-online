@@ -3,6 +3,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getVisibleTutorials, getTutorialBySlug, getRelatedTutorials, isIndexable, getScreenshots } from "@/lib/data";
 import { FaqBlock } from "@/components/FaqBlock";
+import {
+  Prerequisites,
+  CostNote,
+  ArticleTables,
+  Troubleshooting,
+  SourcesAndVerification,
+} from "@/components/ArticleExtras";
 import { AuthorBox } from "@/components/AuthorBox";
 import { RelatedTutorials } from "@/components/RelatedTutorials";
 import { ScreenshotGallery } from "@/components/ScreenshotGallery";
@@ -70,9 +77,18 @@ export default async function TutorialPage({
     : shots.map((s) => s.file);
 
   const stepAnchors = headingAnchors(article.steps.map((s) => s.heading));
+  // Optional sections only earn a contents entry on the articles that carry
+  // them, so the list mirrors the page rather than promising empty anchors.
   const tocItems = [
+    ...(article.prerequisites?.length ? [{ id: "prereq-heading", label: "Before you start" }] : []),
     ...article.steps.map((step, i) => ({ id: stepAnchors[i], label: step.heading })),
+    ...(article.troubleshooting?.length
+      ? [{ id: "trouble-heading", label: "When it doesn't work" }]
+      : []),
     ...(article.faq.length ? [{ id: "faq-heading", label: "Frequently asked questions" }] : []),
+    ...(article.references?.length || article.verifiedNote
+      ? [{ id: "sources-heading", label: "Sources and last check" }]
+      : []),
   ];
 
   return (
@@ -114,6 +130,9 @@ export default async function TutorialPage({
           <p key={i}>{p}</p>
         ))}
       </div>
+
+      <Prerequisites items={article.prerequisites} />
+      <CostNote note={article.costNote} />
 
       <div className="mt-10 space-y-10">
         {article.steps.map((step, i) => (
@@ -157,7 +176,16 @@ export default async function TutorialPage({
           a page has inline step images, the labelled gallery is redundant. */}
       {!article.deep && <ScreenshotGallery shots={shots} videoId={video.id} title={video.title} />}
 
+        <ArticleTables tables={article.tables} />
+
+        <Troubleshooting items={article.troubleshooting} />
+
         <FaqBlock items={article.faq} />
+
+        <SourcesAndVerification
+          references={article.references}
+          verifiedNote={article.verifiedNote}
+        />
 
         <AuthorBox />
 
