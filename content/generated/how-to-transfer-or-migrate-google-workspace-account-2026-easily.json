@@ -1,45 +1,91 @@
 {
   "slug": "how-to-transfer-or-migrate-google-workspace-account-2026-easily",
   "seoTitle": "How to Migrate Your Google Workspace Account in 2026",
-  "metaDescription": "Merging businesses or switching domains? Here's how to migrate Gmail, Drive, Contacts, and Calendar between Google Workspace accounts without data loss.",
-  "intro": "Moving an entire Google Workspace setup — Gmail, Drive, Contacts, and Calendar — from one organization or domain to another is a common need when businesses merge, restructure, or simply switch admins. Google's own data migration service handles the heavy lifting, but the admin console spreads the relevant tools across a few different screens, and knowing where to start makes the difference between a clean cutover and a messy one. This guide walks through the actual admin console screens involved: where to manage users before you migrate, where the migration tool itself lives, and how the source-account authorization step works.",
+  "metaDescription": "Merging businesses or switching domains? There's no single button that moves Gmail, Drive, Contacts, and Calendar together. Here's which admin console tool handles which piece, and where each one breaks down.",
+  "intro": "Moving a Google Workspace setup from one organization or domain to another is a common need when businesses merge, restructure, or switch admins. What trips people up is assuming there's one migration flow that carries Gmail, Drive, Contacts, and Calendar across together. There isn't. Google's admin console handles each of those as a separate job, with separate limits, and Drive in particular can't be moved to a different domain by an admin at all without extra tooling.\n\nThis guide walks through which tool covers which data type, the source-account authorization step that trips up most migrations, and where the native tools stop and a bigger tool (or a third-party one) becomes necessary.",
+  "prerequisites": [
+    "Super admin access on both the source and target Google Workspace accounts",
+    "The source organization's admin available to approve the authorization request within 24 hours",
+    "For more than about 1,000 users, budget for Google Workspace Migrate, a separate downloadable tool with its own Windows server requirements, rather than the standard admin console import"
+  ],
   "steps": [
     {
-      "heading": "Start from the Admin console home",
-      "body": "Everything begins at admin.google.com, signed in as a super admin. The home screen's \"Manage Workspace\" section is your map of the whole organization — Users, Billing, Groups, and Support tiles, each with quick links like Add a user, Delete a user, and Reset password sitting right on the dashboard. Before migrating anything, use this view to get a clear picture of who's in the organization and confirm your own account has the super admin permissions the migration tools require, since a regular admin role won't be enough to authorize a cross-account data transfer.",
+      "heading": "Start from the Admin console and confirm super admin access",
+      "body": "Everything begins at admin.google.com, signed in as a super admin on the target account. The home screen's Users, Billing, and Groups tiles give you a map of the organization you're migrating into. A regular admin role isn't enough here; authorizing a cross-account data transfer specifically needs super admin permissions on both sides of the move.",
       "image": { "file": "/screenshots/TkXvFCfkcVI/01.webp", "caption": "The Admin console home screen. Users, Billing, and Groups are managed from here, and this is also where you confirm you have super admin access before starting a migration." }
     },
     {
-      "heading": "Know your way around the Google apps switcher",
-      "body": "The admin console sits alongside Gmail, Drive, Gemini, Docs, and the rest of Workspace behind the same app-switcher grid in the top corner. It's a small thing, but during a migration you'll bounce between the Admin console to configure the transfer and Gmail or Drive to spot-check that data actually landed where it should. Knowing this switcher is there — rather than opening a new tab and logging in again each time — saves real time when you're verifying a migration in progress across several apps at once.",
+      "heading": "Know which tool covers which data type",
+      "body": "Google's Data import tool moves Gmail, Contacts, or Calendar, one data type at a time and one user pairing at a time; it does not move Drive files. Drive works under a different rule entirely: an admin can reassign file ownership between two accounts only inside the same organization. Moving Drive content to a different domain isn't something the standard admin console offers, so it needs either Google Workspace Migrate (Google's own tool for larger migrations) or a third-party Drive-to-Drive tool.\n\nThe app switcher in the top corner is worth knowing about here, since a migration means bouncing between the Admin console to configure each job and Gmail or Drive to spot-check where data landed.",
       "image": { "file": "/screenshots/TkXvFCfkcVI/03.webp", "caption": "The Google apps switcher, open from the Admin console. This is the fastest way to jump between the console and Gmail or Drive while checking a migration's progress." }
     },
     {
-      "heading": "Find the Data migration tool",
-      "body": "The migration tool itself lives under Data > Data import and export > Data migration (new) in the left-hand navigation. This newer screen is built specifically for copying data into Google Workspace from other services, and it's where Google surfaces its current migration options rather than the older tools it's phasing out. If you're migrating from on-premises Microsoft Exchange, the console flags that the classic migration service for that path is being retired and points you to Google Workspace Migration for Microsoft Exchange instead — worth checking before you build a plan around a tool that's on its way out.",
-      "image": { "file": "/screenshots/TkXvFCfkcVI/04.webp", "caption": "The Data migration (new) screen under Data > Data import and export. Google surfaces current migration paths here, including a callout about retiring support for on-premises Exchange." }
+      "heading": "Open the Data import tool",
+      "body": "In the left-hand navigation, go to Data, then Data import and export, then Data import. Pick the data type you're moving: Business Gmail for an org-to-org email move, Contacts, or Calendar, then click Import. Each is a separate job. If you're coming from on-premises Microsoft Exchange rather than another Workspace account, the console points to Google Workspace Migration for Microsoft Exchange instead of this tool.",
+      "image": { "file": "/screenshots/TkXvFCfkcVI/04.webp", "caption": "The Data import screen under Data > Data import and export, with Business Gmail selected as the source type." }
     },
     {
-      "heading": "Set up email migration and authorize the source account",
-      "body": "Choosing Google Workspace email migration opens a step-by-step flow, and Step 1 is where most of the setup friction actually lives: connecting to the source account you're migrating from. Enter the email address of a super admin on the source organization and request authorization — the console shows the request as \"Pending Authorisation\" until someone with admin access on the source side approves it, and you can resend that request after 24 hours if it stalls. Nothing else in the migration proceeds until this authorization clears, so if you're moving between two organizations you control, make sure you (or whoever holds the source admin login) is ready to approve it right away rather than letting the request sit.",
+      "heading": "Authorize the source account",
+      "body": "Enter the source super admin's email address and click Request authorization. Google emails that admin a link, valid for 24 hours, that they need to open, sign in through, and confirm with Authorize. Until then, the job sits at Pending authorization. If nobody acts in time, the request shows as expired and you click Refresh request to send a new one; only the admin address you entered can approve it, so double-check that address before sending.\n\nIf you're moving between two organizations you control yourself, have that source admin login ready to go the moment you send the request, since nothing else proceeds until this clears.",
       "image": { "file": "/screenshots/TkXvFCfkcVI/05.webp", "caption": "Step 1 of Google Workspace email migration: connecting to the source account. The request shows as pending until a super admin on the source organization approves it." }
     },
     {
-      "heading": "Map users and route mail during the transition",
-      "body": "Once authorization clears, the next step in the same flow is uploading migration maps — pairing each source email address with its matching target address so messages land in the right mailbox rather than getting dropped or duplicated. While that transfer runs, set up mail routing or forwarding on the old domain so anyone emailing addresses that haven't fully migrated yet still reaches the right person. This overlap period is where most migration complaints originate, and it's avoidable simply by not flipping MX records or shutting down the old domain until the routing rules are confirmed working."
+      "heading": "Upload the mapping file and run the import",
+      "body": "Once authorization clears, upload a CSV pairing each source address with its target address, then start the import. The console tracks progress live: discovered, successful, failed, skipped, and warning counts per item, so a partial failure is visible while the job runs rather than only at the end. Repeat this whole process separately for Contacts or Calendar if you need those too; there's no combined job that carries all three at once.\n\nWhile mail is mid-migration, set up routing or forwarding on the old domain so messages to addresses that haven't moved yet still reach the right person. Hold off on changing MX records or shutting the old domain down until that routing is confirmed working."
     },
     {
-      "heading": "Verify data and permissions after the transfer completes",
-      "body": "A migration reporting \"complete\" isn't the same as a migration that preserved everything correctly. Spot-check a sample of migrated mailboxes for message counts that roughly match the source, open a handful of Drive files that had specific sharing permissions to confirm those permissions carried over, and check that Calendar events with multiple attendees still show the full guest list. Google's migration tools are reliable for the bulk transfer, but sharing permissions and calendar attendee lists are the details most likely to need a manual fix afterward, so budget time for this check before you consider the old account safe to retire."
+      "heading": "Handle Drive separately",
+      "body": "For a small number of users moving Drive content into a different organization, the practical option is often for each user to share or copy their own files into the new account, since there's no admin bulk transfer across domains. For a full company migration, Google Workspace Migrate is built for this, but it's a separate download that runs on its own Windows server rather than living inside the admin console, and Google positions it for organizations around 1,000 users or more. Below that scale, a third-party Drive migration tool from the Workspace Marketplace is usually the faster route."
+    },
+    {
+      "heading": "Verify data and permissions after each transfer completes",
+      "body": "A job reporting complete isn't the same as one that preserved everything correctly. Spot-check message counts against the source mailbox, open a handful of Drive files that had specific sharing permissions to confirm those permissions carried over, and check that Calendar events with multiple attendees still show the full guest list. Sharing permissions and attendee lists are the details most likely to need a manual fix, so leave time for this check before retiring the old account."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Which tool moves what",
+      "columns": ["Data type", "Tool", "Scope"],
+      "rows": [
+        ["Gmail", "Data import (Business Gmail)", "One user pairing per job, via CSV mapping"],
+        ["Contacts", "Data import", "One user pairing per job, separate from Gmail"],
+        ["Calendar", "Data import", "One user pairing per job, separate from Gmail and Contacts"],
+        ["Drive (small scale, cross-domain)", "Manual per-user sharing/copying, or a third-party tool", "No native admin bulk transfer across domains"],
+        ["Drive and full org (roughly 1,000+ users)", "Google Workspace Migrate", "Separate downloadable tool, own Windows server requirement"]
+      ],
+      "note": "Ownership of a Drive file can only be reassigned by an admin when both the current and new owner are in the same organization; Google does not support a direct cross-domain ownership transfer."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The migration is stuck on \"Pending authorization\"",
+      "cause": "The source admin hasn't opened the authorization email and clicked Authorize within the 24-hour window, so the request has expired.",
+      "fix": "Click Refresh request to send a new one, and confirm the email address entered actually belongs to someone with super admin access on the source account."
+    },
+    {
+      "problem": "Drive files aren't showing up after the Gmail migration finished",
+      "cause": "The Data import tool only moves Gmail, Contacts, and Calendar. It never touched Drive, which needs its own process.",
+      "fix": "Use per-user sharing or copying for a handful of accounts, or Google Workspace Migrate for a full organization; don't expect Drive content to appear as a side effect of the email migration."
+    },
+    {
+      "problem": "Some messages, contacts, or events show as failed or skipped in the import report",
+      "cause": "The live progress view separates discovered, successful, failed, skipped, and warning counts, so partial failures are expected on large mailboxes rather than a sign the whole job broke.",
+      "fix": "Review the failed and skipped items specifically in the report rather than the overall completion status, and re-run just those addresses if needed."
     }
   ],
   "faq": [
-    { "question": "Will I lose emails or files during a Google Workspace migration?", "answer": "The migration is designed to preserve data when done through Google's official data migration service, though it's still worth spot-checking mailboxes and files afterward, since sharing permissions and calendar attendee lists are the details most likely to need a manual fix." },
-    { "question": "Can I migrate just some users instead of the whole organization?", "answer": "Yes, migrating users between Google Workspace accounts can be done selectively rather than requiring every user to move at once — you upload a migration map pairing only the source and target addresses you want to transfer." },
-    { "question": "What tools does Google recommend for large-scale migrations?", "answer": "The Data migration (new) screen under Data > Data import and export is Google's current recommended tool. If you're coming from on-premises Microsoft Exchange, note that classic migration support for that path is being retired in favor of Google Workspace Migration for Microsoft Exchange." },
-    { "question": "How do I avoid downtime for email during the switch?", "answer": "Set up email routing or forwarding on the old domain while the migration runs, and don't change MX records or shut down the old domain until you've confirmed the routing rules are working — that overlap window is what prevents messages from bouncing." },
-    { "question": "Why is my migration stuck on \"Pending Authorisation\"?", "answer": "Step 1 of the migration requires a super admin on the source organization to approve the connection request. If it's been more than 24 hours, use the Resend email option and confirm the right person actually has access to approve it." }
+    { "question": "Does one migration move Gmail, Drive, Contacts, and Calendar together?", "answer": "No. Google's Data import tool handles Gmail, Contacts, and Calendar as separate jobs, one at a time, and it doesn't touch Drive at all. There's no single combined migration." },
+    { "question": "How do I move Drive files to a different Workspace organization?", "answer": "An admin can only reassign Drive file ownership within the same organization. Moving files to a different domain means each user sharing or copying their own files, using Google Workspace Migrate for a full-company move, or a third-party Drive migration tool." },
+    { "question": "Why is my migration stuck on \"Pending authorization\"?", "answer": "The source super admin needs to open the emailed link and click Authorize within 24 hours. If that window passes, the request expires and you click Refresh request to send a new one." },
+    { "question": "What's the difference between Data import and Google Workspace Migrate?", "answer": "Data import lives in the admin console and handles Gmail, Contacts, or Calendar for individual user pairings. Google Workspace Migrate is a separate tool you install on your own Windows server, built for larger, full-organization migrations, roughly 1,000 users and up." },
+    { "question": "How do I avoid email downtime during the switch?", "answer": "Keep routing or forwarding active on the old domain while the migration runs, and don't change MX records or shut the old domain down until that routing is confirmed working." }
   ],
+  "references": [
+    { "label": "Google Workspace Admin Help: Migrate email from a Gmail account (official)", "url": "https://knowledge.workspace.google.com/admin/migrate/migrate-email-from-a-gmail-account" },
+    { "label": "Google Workspace Admin Help: Migrate email from a Google Workspace account (official)", "url": "https://knowledge.workspace.google.com/admin/migrate/migrate-email-from-a-google-workspace-account" },
+    { "label": "Google Workspace Admin Help: Transfer data between Google Workspace accounts (official)", "url": "https://knowledge.workspace.google.com/admin/getting-started/transfer-data-between-google-workspace-accounts" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. In September 2026 the migration scope was re-checked against Google's own Workspace Admin Help articles on email migration and on transferring data between accounts. That check found the previous version significantly overstated the tools: there is no single migration that moves Gmail, Drive, Contacts, and Calendar together, the Data import tool works one user pairing and one data type at a time, and Drive ownership transfer is restricted to accounts within the same organization, with Google Workspace Migrate or a third-party tool needed for a cross-domain Drive move. This version corrects that scope and adds a comparison table of which tool covers which data type.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

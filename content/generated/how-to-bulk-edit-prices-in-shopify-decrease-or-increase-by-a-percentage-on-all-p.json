@@ -1,42 +1,88 @@
 {
   "slug": "how-to-bulk-edit-prices-in-shopify-decrease-or-increase-by-a-percentage-on-all-p",
   "seoTitle": "How to Bulk Edit Shopify Prices by Percentage in 2026",
-  "metaDescription": "Need to raise or lower prices across your whole Shopify store? Here's how to bulk edit by percentage using a pricing app's Create task screen.",
-  "intro": "Changing prices one product at a time in Shopify works fine for a handful of items, but it falls apart the moment you're running a storewide sale or adjusting margins after a supplier cost change. This guide covers the real path through the Shopify admin and a bulk pricing app — specifically Bulk Price Editor Sami's Create task screen — to apply a percentage increase or decrease across your whole catalog in one action instead of hundreds. It also covers what to check before you apply a change, since a percentage adjustment across every product is hard to reverse cleanly if something's set up wrong.",
+  "metaDescription": "Need to raise or lower prices across your whole Shopify store? Compare the built-in bulk editor, a CSV reimport, and a pricing app's Create task screen, plus the free-tier product cap that catches people out.",
+  "intro": "Changing prices one product at a time in Shopify works fine for a handful of items, but it falls apart the moment you're running a storewide sale or adjusting margins after a supplier cost change. Shopify's own tools can move many prices at once, but neither the built-in bulk editor nor a CSV import will do the percentage math for you; a percentage change that recalculates itself is a third-party app's job.\n\nThis guide covers all three paths: the free built-in bulk editor for flat changes, a CSV export/reimport for a percentage you calculate yourself, and a pricing app's Create task screen (using Bulk Price Editor Sami) for a percentage the app calculates. It also covers what to check before applying a change to your whole catalog, since that kind of change is hard to reverse cleanly if something's set up wrong.",
   "steps": [
     {
       "heading": "Start from your Shopify admin home",
-      "body": "The admin home screen gives you a quick read on recent sessions, total sales, and orders before you touch anything, plus the left-hand navigation you'll use throughout — Products is where individual items and their prices live, while Discounts and Content sit nearby but aren't the same thing as bulk price editing. If you're running a sale, glancing at this dashboard first gives you a sense of current traffic and conversion, which is useful context for deciding how aggressive a price change to run.",
-      "image": { "file": "/screenshots/lBQqKTR9Q9U/01.webp", "caption": "The Shopify admin dashboard — sessions, sales, and orders at a glance, with Products and the sales channels list in the left-hand navigation." }
+      "body": "The admin home screen gives a quick read on recent sessions, total sales, and orders before you touch anything, plus the left-hand navigation used throughout: Products is where individual items and their prices live, while Discounts and Content sit nearby but aren't the same thing as bulk price editing.",
+      "image": { "file": "/screenshots/lBQqKTR9Q9U/01.webp", "caption": "The Shopify admin dashboard, sessions, sales, and orders at a glance, with Products and the sales channels list in the left-hand navigation." }
     },
     {
-      "heading": "Use Shopify's built-in bulk editor for simple changes",
-      "body": "For editing a modest number of products or setting the exact same new price across a small selection, Shopify's own Products page has a built-in bulk editor — select the checkboxes next to the products you want, then use the bulk actions menu to edit fields including price directly in a spreadsheet-style view. This works well for flat, one-off changes but doesn't handle percentage-based math across an entire catalog on its own, which is where a dedicated app comes in."
+      "heading": "Use the built-in bulk editor for flat, one-off changes",
+      "body": "On the Products page, select the checkboxes next to the products you want, then click Bulk edit. Shopify opens a spreadsheet-style table; click Columns to add Price and Compare-at price if they aren't already showing, then type or paste new values directly into the cells.\n\nThis tool doesn't do percentage math on its own; it's built for setting exact values across a selection, not recalculating every price by a percent. Shopify's own documentation also notes that larger batches take longer to save, and that its bulk editor can throw errors in Microsoft Edge specifically, so use Chrome, Firefox, or Safari for this."
+    },
+    {
+      "heading": "Or run the percentage math yourself with a CSV file",
+      "body": "For a percentage change across the full catalog without installing anything, export your products to CSV from the Products page, then open the file in a spreadsheet program. Add a formula next to the Variant Price column, for example =D2*1.1 for a 10% increase, then paste the results back into that column as plain values.\n\nKeep the Option1 Name and Option1 Value columns in the file exactly as exported. Shopify's documentation warns that dropping them creates a new default variant and deletes the existing ones on import. Before reimporting, turn on \"Overwrite products with matching handles\" so the file updates your existing products instead of creating duplicates."
     },
     {
       "heading": "Install a percentage-based bulk pricing app",
-      "body": "For a true percentage change — increase everything by 10%, decrease everything by 20% — install an app built for that specific job, such as Bulk Price Editor Sami, Easy by Bulk Editing, or Hextom. These apps add themselves to your admin's left-hand navigation once installed and give you a task-based interface for defining exactly what should change and by how much, rather than editing product by product."
+      "body": "For a percentage change the app itself calculates, with scheduling and an automatic revert built in, install an app made for that job: Bulk Price Editor Sami, Easy by Bulk Editing, or Hextom are options. These add themselves to the admin's left-hand navigation and give a task-based interface for defining what should change and by how much, instead of touching a spreadsheet at all."
     },
     {
       "heading": "Create a percentage price task",
-      "body": "Inside the app, Create task is where the actual rule lives: name the task something identifiable like \"Bulk increase by 10%,\" set Field to edit to Price, choose Increase by percentage or Decrease by percentage under Edit method, and enter your value. A Rounding option, set here to round to the nearest .01, keeps the math from producing awkward prices like $10.458, and a Compare at price setting lets you decide whether the app should touch your strikethrough sale pricing as part of the same task or leave it alone.",
-      "image": { "file": "/screenshots/lBQqKTR9Q9U/04.webp", "caption": "Bulk Price Editor Sami's Create task screen — a named task, Field set to Price, Increase by percentage, a value of 10%, and rounding set to the nearest cent." }
+      "body": "Inside the app, Create task is where the rule lives: name the task something identifiable like \"Bulk increase by 10%,\" set Field to edit to Price, choose Increase by percentage or Decrease by percentage under Edit method, and enter the value. A Rounding option, set here to the nearest .01, keeps the math from producing awkward prices like $10.458, and a Compare at price setting decides whether the task also touches strikethrough sale pricing.",
+      "image": { "file": "/screenshots/lBQqKTR9Q9U/04.webp", "caption": "Bulk Price Editor Sami's Create task screen, a named task, Field set to Price, Increase by percentage, a value of 10%, and rounding set to the nearest cent." }
     },
     {
       "heading": "Choose when the change takes effect",
-      "body": "Most of these apps offer a Start time choice between running the task immediately or scheduling it for a specific date and time — useful for lining a price increase up with a supplier cost change or timing a discount to start exactly at midnight on a sale's first day. A Revert time option, when available, is worth using for temporary sales, since it schedules the price to automatically return to normal afterward instead of relying on you remembering to undo it manually."
+      "body": "Most of these apps offer a Start time choice between running the task immediately or scheduling it for a specific date and time, useful for lining a price increase up with a supplier cost change or starting a sale exactly at midnight. A Revert time option, when available, is worth using for temporary sales: it schedules prices to return to normal afterward instead of relying on someone remembering to undo it manually."
     },
     {
       "heading": "Test before applying to your whole catalog",
-      "body": "Before running a percentage task against every product you sell, apply it to a small handful first — a single collection or a few test products — and check the resulting prices look right, including anything affected by the rounding and compare-at settings. This catches mistakes like an inverted increase/decrease setting or an unexpected rounding result while the damage is still limited to a few items instead of your entire store."
+      "body": "Before running a percentage task against every product, apply it to a small handful first: a single collection, or a few test products, and check the resulting prices look right, including anything affected by rounding and compare-at settings. This catches mistakes like an inverted increase/decrease setting while the damage is limited to a few items instead of the entire store."
+    }
+  ],
+  "costNote": "Shopify's built-in bulk editor and CSV import/export are free on every plan. The third-party apps are not automatically free at any catalog size: Bulk Price Editor Sami's free tier caps a task at 100 products, with paid tiers starting around $9.90/month for up to 1,000 products and scaling to about $39.90/month for unlimited products. Check a store's product count against an app's free-tier cap before assuming the free plan will cover a full-catalog change.",
+  "tables": [
+    {
+      "title": "Three ways to change prices in bulk",
+      "columns": ["Method", "Calculates the percentage for you", "Practical limit", "Cost"],
+      "rows": [
+        ["Built-in bulk editor", "No, values are typed or pasted per product", "Selected products on one page at a time", "Free"],
+        ["CSV export and reimport", "No, the formula is applied in a spreadsheet before reimporting", "Whole catalog in one file", "Free"],
+        ["Pricing app (e.g. Bulk Price Editor Sami)", "Yes, enter a percentage and it recalculates every price", "Free tier capped at 100 products per task on Sami; higher caps on paid tiers", "Free tier, then from about $9.90/month"]
+      ]
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The built-in bulk editor won't load or throws errors",
+      "cause": "Microsoft Edge has URL length restrictions that can break Shopify's bulk editor interface.",
+      "fix": "Use Chrome, Firefox, or Safari instead."
+    },
+    {
+      "problem": "Reimporting the price CSV creates duplicate products or wipes out variants",
+      "cause": "The Option1 Name and Option1 Value columns were removed or edited, or \"Overwrite products with matching handles\" wasn't enabled on import.",
+      "fix": "Keep those columns exactly as exported, and turn on the overwrite-by-handle option before reimporting."
+    },
+    {
+      "problem": "A percentage app skips part of the catalog",
+      "cause": "The store has more products than the plan's per-task limit; Sami's free tier stops at 100.",
+      "fix": "Split the run into batches by collection, or move to a paid tier with a higher cap."
+    },
+    {
+      "problem": "New prices come out as awkward decimals like $10.458",
+      "cause": "No rounding rule was set before running the task.",
+      "fix": "Set the Rounding option to the nearest .01 (or another whole increment) before applying the change."
     }
   ],
   "faq": [
-    { "question": "Can I bulk edit prices without installing an app?", "answer": "Yes, Shopify's admin has a built-in bulk editor for adjusting prices directly on selected products, though percentage-based automation across a whole catalog typically requires a dedicated app." },
-    { "question": "What's the difference between Bulk Price Editor Sami, Easy by Bulk Editing, and Hextom?", "answer": "These are different third-party apps that all offer percentage-based bulk pricing tools with a similar task-based workflow, so the right choice depends on which pricing tier and extra features fit your store best." },
-    { "question": "Can I schedule a price increase to happen automatically after a sale ends?", "answer": "Yes — apps like this typically offer a Revert time option that schedules prices to return to normal automatically after a sale, without manual work." },
-    { "question": "Is it safe to bulk edit prices on a live store?", "answer": "It's safer to test the change on a small collection or a few products first, since applying a percentage change to your entire catalog without checking rounding and compare-at settings can lead to pricing mistakes that affect real customers." }
+    { "question": "Can I bulk edit prices without installing an app?", "answer": "Yes, two ways: Shopify's built-in bulk editor for typing exact new prices, or a CSV export where you calculate the percentage yourself in a spreadsheet and reimport it. Neither does the percentage math automatically." },
+    { "question": "Does Shopify's own bulk editor support percentage-based price changes?", "answer": "No. It's built for entering or pasting exact values across selected products, not recalculating prices by a percent. That kind of automation comes from a CSV formula or a third-party app." },
+    { "question": "Is Bulk Price Editor Sami free?", "answer": "There's a free tier, but it's capped at 100 products per task. Larger catalogs need a paid plan, which starts at roughly $9.90/month for up to 1,000 products." },
+    { "question": "What's the difference between Bulk Price Editor Sami, Easy by Bulk Editing, and Hextom?", "answer": "All three are third-party apps offering percentage-based bulk pricing with a similar task-based workflow. Which one fits best depends on catalog size against each app's free-tier limits and pricing." },
+    { "question": "Can I schedule a price increase to revert automatically after a sale ends?", "answer": "Yes, apps like this typically offer a Revert time option that schedules prices to return to normal automatically once a sale is over." },
+    { "question": "Is it safe to bulk edit prices on a live store?", "answer": "It's safer to test on a small collection or a few products first. Applying a percentage change to the entire catalog without checking rounding and compare-at settings first can produce pricing mistakes that reach real customers before anyone notices." }
   ],
+  "references": [
+    { "label": "Shopify Help Center: Bulk editing (official)", "url": "https://help.shopify.com/en/manual/shopify-admin/productivity-tools/bulk-editing" },
+    { "label": "Shopify Help Center: Using CSV files to import and export products (official)", "url": "https://help.shopify.com/en/manual/products/import-export/using-csv" },
+    { "label": "Sami Bulk Price Editor listing (Shopify App Store, official)", "url": "https://apps.shopify.com/bulk-price-editor-sami" }
+  ],
+  "verifiedNote": "The Create task screen and app screens come from a walkthrough recorded in 2026. The built-in bulk editor's behavior, its lack of percentage math, the Edge browser issue, and the CSV column and reimport requirements were re-checked against Shopify's official Help Center in September 2026; the CSV method was added to this guide because it wasn't covered at all in the earlier version. Bulk Price Editor Sami's pricing and free-tier product cap were confirmed against its Shopify App Store listing in the same session.",
   "generatedAt": "2026-08-07T12:00:00Z",
   "deep": true
 }

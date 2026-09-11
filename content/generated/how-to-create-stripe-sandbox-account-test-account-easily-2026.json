@@ -1,17 +1,17 @@
 {
   "slug": "how-to-create-stripe-sandbox-account-test-account-easily-2026",
   "seoTitle": "How to Create a Stripe Sandbox Account for Testing",
-  "metaDescription": "Set up a Stripe Sandbox and test account to try payments, API keys, and integrations safely before switching your store over to live payment mode.",
-  "intro": "Testing payments before going live is essential for developers and store owners, and Stripe's sandbox tools make that possible without touching real money. This guide covers registering for a free Stripe account, landing in your sandbox dashboard, and generating the test keys and test cards you need to build a payment flow safely. It finishes by showing where the switch to live payments actually lives once your integration checks out.",
+  "metaDescription": "Set up a Stripe sandbox to test payments, API keys, and integrations safely — plus the account-country rule and sandbox limits Stripe's own docs spell out.",
+  "intro": "Testing payments before going live is standard practice for developers and store owners, and Stripe's sandbox tools make that possible without touching real money. This guide covers registering for a free Stripe account, landing in your sandbox dashboard, and generating the test keys and test cards you need to build a payment flow safely. It also covers two things that catch people out: a country setting you effectively can't undo, and a hard cap on how many sandboxes one account gets.",
   "steps": [
     {
       "heading": "Start from the Stripe sign-in page",
-      "body": "Go to stripe.com and click through to sign in. If you've never used Stripe before, don't hunt for a separate registration page — the sign-in screen itself offers passkey and SSO options up top, and beneath them a plain link reading \"New to Stripe? Create account.\" That link is your entry point into the whole setup, so click it rather than trying to sign in with credentials you don't have yet.",
+      "body": "Go to stripe.com and click through to sign in. If you've never used Stripe before, don't hunt for a separate registration page — the sign-in screen itself offers passkey and SSO options up top, and beneath them a plain link reading \"New to Stripe? Create account.\" That link is your entry point into the whole setup.",
       "image": { "file": "/screenshots/o0h06zGdbIY/02.webp", "caption": "The bottom of Stripe's sign-in screen, with passkey and SSO options above a plain \"New to Stripe? Create account\" link for first-time users." }
     },
     {
       "heading": "Fill out the account creation form",
-      "body": "The signup form asks for your country before anything else, since Stripe's available features and payout rules vary by region — double-check this is set correctly, because it's not trivial to change later. From there you can either fill in an email and password directly or use the \"Sign up with Google\" shortcut to skip typing a new password entirely. Either path creates a free account with no payment details required up front.",
+      "body": "The signup form asks for your country before anything else, since Stripe's available features and payout rules vary by region. Get this right the first time: once the account is activated — meaning it's processed a live charge, shares a legal entity with another account, or has an Atlas application submitted — Stripe locks the country permanently, and its own support documentation says the only fix at that point is opening a new account. From there you can either fill in an email and password directly or use the \"Sign up with Google\" shortcut. Either path creates a free account with no payment details required up front.",
       "image": { "file": "/screenshots/o0h06zGdbIY/03.webp", "caption": "The account creation form: a country selector, the Create account button, and a Sign up with Google shortcut underneath." }
     },
     {
@@ -20,30 +20,60 @@
     },
     {
       "heading": "Land in your sandbox dashboard",
-      "body": "Once you're in, the dashboard makes it obvious you're not touching real money: a banner across the top reads \"You're testing in a sandbox. Changes you make here don't affect your live account.\" The left-hand menu is the same one you'll use in production — Payments, Billing, Reporting, and a More section holding Connect, Identity, Atlas, Issuing, and other add-on products — so anything you learn to navigate here transfers directly once you go live. A Setup guide panel sits in the corner, walking through Set up payments, Verify your business, and Go live as sequential checklist sections.",
+      "body": "Once you're in, the dashboard makes it obvious you're not touching real money: a banner across the top reads \"You're testing in a sandbox. Changes you make here don't affect your live account.\" The left-hand menu is the same one you'll use in production — Payments, Billing, Reporting, and a More section holding Connect, Identity, Atlas, Issuing, and other add-on products — so anything you learn to navigate here transfers directly once you go live. A Setup guide panel sits in the corner, walking through Set up payments, Verify your business, and Go live as sequential checklist sections. One limit worth knowing early: an account can hold up to five sandboxes total, so if you're setting one up per teammate rather than sharing a single sandbox, that cap will eventually matter.",
       "image": { "file": "/screenshots/o0h06zGdbIY/05.webp", "caption": "The sandbox dashboard with its testing banner, the standard Payments/Billing/Reporting navigation, and a Setup guide panel tracking progress toward Go live." }
     },
     {
       "heading": "Generate test API keys",
-      "body": "Under Developers in the dashboard, Stripe issues a separate pair of publishable and secret keys specifically for the sandbox environment — these are the keys your code should use while building. They're clearly labeled as test keys and start with pk_test_ and sk_test_ prefixes, which makes it hard to accidentally wire a test key into a production deploy. Keep them out of version control the same way you would live keys, even though no real charges can happen with them."
+      "body": "Under Developers in the dashboard, Stripe issues a separate pair of publishable and secret keys specifically for the sandbox environment — these are the keys your code should use while building. They start with pk_test_ and sk_test_ prefixes, which makes it hard to accidentally wire a test key into a production deploy. Keep them out of version control the same way you would live keys, even though no real charges can happen with them."
     },
     {
       "heading": "Create a test product and run a sample charge",
-      "body": "Add a product under Product catalog exactly as you would for a real item, then use one of Stripe's published test card numbers to run a transaction against it. These test cards simulate specific outcomes — a successful charge, a decline, a card requiring extra authentication — so you can confirm your checkout handles each case gracefully before a real customer ever sees it. Any transaction here shows up in the sandbox's own Gross volume chart, completely separate from live figures."
+      "body": "Add a product under Product catalog exactly as you would for a real item, then charge it with one of Stripe's published test card numbers. 4242 4242 4242 4242 simulates a clean successful charge with any future expiry date and any 3-digit CVC; other numbers simulate a decline, insufficient funds, or a card that forces 3D Secure authentication, so you can confirm your checkout handles each case before a real customer hits it. A handful of common ones are in the table below — Stripe's testing documentation has the full set, including brand-specific and dispute scenarios. Any transaction here shows up in the sandbox's own Gross volume chart, separate from live figures."
     },
     {
       "heading": "Move to Go live when you're ready",
-      "body": "The same Setup guide panel that tracked your sandbox progress has a Go live section — that's where you complete business verification and switch the account over to accepting real payments. Nothing you built in the sandbox needs to be redone; the same product catalog structure and integration code carry over, you're just pointing your app at live keys instead of test ones once this final section is checked off."
+      "body": "The same Setup guide panel that tracked your sandbox progress has a Go live section — that's where you complete business verification and switch your main account over to accepting real payments. Nothing you built in the sandbox needs to be redone; the same product catalog structure and integration code carry over, you're just pointing your app at live keys instead of test ones once this final section is checked off. The sandbox itself doesn't merge into the live account or disappear — it stays available afterward as your ongoing test environment."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Common Stripe test card numbers",
+      "columns": ["Scenario", "Card number", "Notes"],
+      "rows": [
+        ["Successful Visa charge", "4242 4242 4242 4242", "Any future expiry date, any 3-digit CVC"],
+        ["Generic decline", "4000 0000 0000 0002", "Returns a card_declined error"],
+        ["Insufficient funds decline", "4000 0000 0000 9995", "Returns card_declined with an insufficient_funds code"],
+        ["Requires 3D Secure authentication", "4000 0027 6000 3184", "Forces the authentication step on every charge"]
+      ],
+      "note": "These are a handful of the most commonly used numbers. Stripe's own testing documentation lists the full set, including per-brand cards, fraud-review scenarios, and dispute simulations."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Picked the wrong country during signup and now can't change it",
+      "cause": "Stripe locks an account's country permanently once it's activated — triggered by a live charge, a shared legal entity, an Atlas application, or being a connected account without full Dashboard access.",
+      "fix": "If none of those have happened yet, correct the country immediately. If one already has, Stripe's own support guidance is to open a new account rather than try to edit the existing one."
+    },
+    {
+      "problem": "Need more than one isolated test environment, e.g. one per teammate",
+      "cause": "A single account can hold up to five sandboxes total, and creating one requires the Sandbox Administrator, Administrator, Developer, or Sandbox User role.",
+      "fix": "Create additional sandboxes from the account picker instead of sharing one sandbox's keys across a team, choosing \"Copy your account\" if you want current settings mirrored into the new one."
+    },
+    {
+      "problem": "Deleted a sandbox and the test data or a teammate's access disappeared",
+      "cause": "Deleting a sandbox is permanent — it removes all data inside it and revokes access for anyone else who was using it.",
+      "fix": "There's no undo. Recreate the sandbox and rebuild whatever test data or product setup you need."
     }
   ],
   "faq": [
     {
-      "question": "Is a Stripe Sandbox account free to create?",
-      "answer": "Yes, registering for a Stripe account and using its sandbox environment doesn't cost anything, and no payment details are required to start testing."
+      "question": "Is a Stripe sandbox account free to create?",
+      "answer": "Yes. Registering for Stripe and using its sandbox environment costs nothing, and no payment details are required to start testing."
     },
     {
       "question": "Can I test payments without using real money?",
-      "answer": "Yes, the sandbox dashboard and test API keys let you simulate transactions using Stripe's published test card numbers instead of real funds."
+      "answer": "Yes. The sandbox dashboard and test API keys let you simulate transactions using Stripe's published test card numbers instead of real funds."
     },
     {
       "question": "How do I switch from testing to accepting real payments?",
@@ -51,9 +81,20 @@
     },
     {
       "question": "Do test transactions show up in my real Stripe balance?",
-      "answer": "No, the sandbox environment is fully separate — its Gross volume, balance, and payouts are all independent from your live account and never mix with real figures."
+      "answer": "No. The sandbox environment is fully isolated — its Gross volume, balance, and payouts never mix with your live account's figures."
+    },
+    {
+      "question": "Can I change my account's country after signing up?",
+      "answer": "Only before the account is activated. Once it's processed a live charge, shares a legal entity, or has an Atlas application submitted, Stripe locks the country and the only fix is opening a new account."
     }
   ],
+  "references": [
+    { "label": "Stripe Docs: Sandboxes (official)", "url": "https://docs.stripe.com/sandboxes" },
+    { "label": "Stripe Docs: Manage sandboxes (official)", "url": "https://docs.stripe.com/sandboxes/dashboard/manage" },
+    { "label": "Stripe Docs: Test card numbers (official)", "url": "https://docs.stripe.com/testing" },
+    { "label": "Stripe Support: \"Stripe account country can't be changed after activation\" (official)", "url": "https://support.stripe.com/questions/stripe-account-country-can-t-be-changed-after-activation" }
+  ],
+  "verifiedNote": "Click path and screens come from an existing walkthrough recording, and the sandbox terminology it shows matches Stripe's current documentation — sandboxes are now the default testing environment for new accounts, distinct from the older test-mode toggle. The five-sandbox cap, the roles required to create one, the exact country-lock triggers, and the specific test card numbers were checked against Stripe's official docs and support pages in September 2026 and added to the article; none of them were present before this pass, and the country warning was previously vague (\"not trivial to change\") rather than the precise, documented lock-out rule.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

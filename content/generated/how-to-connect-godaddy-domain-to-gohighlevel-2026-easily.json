@@ -1,20 +1,20 @@
 {
   "slug": "how-to-connect-godaddy-domain-to-gohighlevel-2026-easily",
   "seoTitle": "How to Connect a GoDaddy Domain to GoHighLevel (2026)",
-  "metaDescription": "Connect a GoDaddy domain to GoHighLevel step by step — add the domain in GHL, copy the A and CNAME values, enter them in GoDaddy, and verify SSL.",
-  "intro": "If you're building funnels, websites, or automations in GoHighLevel but bought your domain through GoDaddy, the two platforms need to be introduced to each other through DNS before anything goes live. That means taking the exact record values GoHighLevel generates for your domain and typing them into GoDaddy's DNS editor, then waiting for GHL to confirm the connection and issue SSL. It sounds simple, but a mistyped value or a record added to the wrong host is the single most common reason a funnel domain sits stuck on \"not connected.\" This guide walks the process screen by screen, from your GoDaddy dashboard through to a verified, secure domain in GoHighLevel.",
+  "metaDescription": "Connect a GoDaddy domain to GoHighLevel step by step: add the domain in GHL, copy the A and CNAME values, enter them in GoDaddy, and verify SSL.",
+  "intro": "If you're building funnels, websites, or automations in GoHighLevel but bought your domain through GoDaddy, the two platforms need to be introduced through DNS before anything goes live. That means taking the exact record values GoHighLevel generates for your domain and typing them into GoDaddy's DNS editor, then waiting for GHL to confirm the connection and issue SSL. A mistyped value, or a record added under the wrong host, is the most common reason a funnel domain sits stuck on \"not connected.\" This guide walks the process screen by screen, from your GoDaddy dashboard through to a verified, secure domain in GoHighLevel.",
   "steps": [
     {
       "heading": "Start from your GoDaddy account",
-      "body": "Log in to GoDaddy and land on the account dashboard, where you'll see quick links to Domains, Websites, Hosting, and Email along with any renewal or setup prompts. You don't need to touch any of the marketing tiles here — the piece you actually need is a few clicks away, under your domain's DNS management screen. It's worth confirming at this point that you're logged into the account that actually owns the domain, especially if you manage multiple GoDaddy accounts for different clients or projects, since DNS changes made on the wrong account won't do anything for your GoHighLevel site.",
+      "body": "Log in to GoDaddy and land on the account dashboard, with quick links to Domains, Websites, Hosting, and Email. None of the marketing tiles here matter for this task; the piece you need is a few clicks away, under your domain's DNS management screen. If you manage more than one GoDaddy account, confirm you're logged into the one that owns this domain, since DNS changes saved on the wrong account won't do anything for your GoHighLevel site.",
       "image": {
         "file": "/screenshots/o09ervSaLtk/01.webp",
-        "caption": "The GoDaddy account dashboard — the starting point before jumping into DNS management for the domain you're connecting."
+        "caption": "The GoDaddy account dashboard, the starting point before jumping into DNS management for the domain you're connecting."
       }
     },
     {
       "heading": "Open the right sub-account in GoHighLevel",
-      "body": "GoHighLevel is agency software, so if you manage multiple client accounts, the first real step inside GHL is picking the correct sub-account — the one whose domain settings you're about to edit. The account switcher lists your recent sub-accounts along with a search box, since agencies running dozens of client accounts can't scroll to find the right one. Get this wrong and you'll add DNS records that point at the wrong site, so it's worth pausing on this screen and double-checking the business name before moving into Settings.",
+      "body": "GoHighLevel is agency software, so if you manage multiple client accounts, the first step inside GHL is picking the correct sub-account, the one whose domain settings you're about to edit. The account switcher lists your recent sub-accounts along with a search box, since agencies running dozens of client accounts can't scroll to find the right one. Get this wrong and the DNS records you add will point at the wrong site, so double-check the business name before moving into Settings.",
       "image": {
         "file": "/screenshots/o09ervSaLtk/02.webp",
         "caption": "GoHighLevel's sub-account switcher. Agencies managing several client accounts need to land in the correct one before touching domain settings."
@@ -22,7 +22,7 @@
     },
     {
       "heading": "Add the domain and copy GoHighLevel's DNS values",
-      "body": "Inside the sub-account, go to Settings → Domains and add your GoDaddy domain. GoHighLevel responds with a \"Set up your domain manually\" panel listing the exact records it needs: an A record on the root host (@) pointing to an IP address, and a CNAME on the www host pointing to a GHL-managed hostname. Each value has a copy icon next to it — use it rather than retyping, since a single wrong digit in the IP address is enough to keep the domain from resolving. Leave this panel open, or copy both values somewhere handy, because you'll need them in the very next step.",
+      "body": "Inside the sub-account, go to Settings and add your GoDaddy domain under the domain settings for your site or funnel. GoHighLevel responds with a \"Set up your domain manually\" panel listing the exact records it needs: an A record on the root host (@) pointing to an IP address, and a CNAME on the www host pointing to a GHL-managed hostname. GoHighLevel's own setup documentation shows these as 162.159.140.166 for the A record and sites.ludicrous.cloud for the CNAME, but always copy the exact values your own panel displays using the copy icons next to each field, since GoHighLevel can change the underlying infrastructure. Leave this panel open, or copy both values somewhere handy, since you'll need them in the next step.",
       "image": {
         "file": "/screenshots/o09ervSaLtk/03.webp",
         "caption": "GoHighLevel's manual domain setup panel, listing the A record's required IP value and the CNAME's required host value."
@@ -30,43 +30,81 @@
     },
     {
       "heading": "Enter the A record in GoDaddy's DNS editor",
-      "body": "Back in GoDaddy, open the domain's DNS management page and add a new record. Set the Type to A, the Name to @ (the root domain), and paste the IP address GoHighLevel gave you into Value — GoDaddy's form even lets you add a second value if GHL provided more than one. Leave TTL on its default unless you have a specific reason to change it. Save this record, then repeat the process for the CNAME: Type CNAME, Name www, Value the GHL hostname from the previous step. These two records together are what actually point your domain at GoHighLevel's servers.",
+      "body": "Back in GoDaddy, open the domain's DNS management page and add a new record. Set the Type to A, the Name to @ (the root domain), and paste the IP address GoHighLevel gave you into Value. Leave TTL on its default (typically 1/2 Hour) for a normal setup; lower it to 5 minutes only if you're troubleshooting and want changes to take effect faster. Save this record, then repeat for the CNAME: Type CNAME, Name www, Value the GHL hostname from the previous step. These two records are what point your domain at GoHighLevel's servers.",
       "image": {
         "file": "/screenshots/o09ervSaLtk/04.webp",
-        "caption": "Adding the A record in GoDaddy's DNS editor — type A, name @, and the IP address copied from GoHighLevel's setup panel."
+        "caption": "Adding the A record in GoDaddy's DNS editor, type A, name @, and the IP address copied from GoHighLevel's setup panel."
       }
     },
     {
       "heading": "Verify the connection in GoHighLevel",
-      "body": "Once both records are saved in GoDaddy, return to the same panel in GoHighLevel and click Verify records. DNS changes don't apply instantly — GoDaddy itself warns that updates can take a little while to propagate, and GHL's verification will simply retry and fail until the records are visible from its side. If verification doesn't succeed right away, wait a few minutes and try again rather than re-adding the records, since duplicate entries are a common self-inflicted problem at this stage."
+      "body": "Once both records are saved in GoDaddy, return to the same panel in GoHighLevel and click Verify records. DNS changes don't apply instantly; propagation typically finishes within minutes but can take up to 24 to 48 hours depending on your TTL setting, and GHL's verification will simply retry and fail until the records are visible from its side. If verification doesn't succeed right away, wait and try again instead of re-adding the records, since duplicate entries on the same host are a common self-inflicted problem here."
     },
     {
       "heading": "Fix a stuck \"domain not connected\" error",
-      "body": "If GoHighLevel still shows the domain as unconnected after propagation should have finished, go back through the values one more time: check that the A record's Name is exactly @ and not a typo like www or blank, confirm the CNAME's target host matches what GHL displayed character for character, and make sure you didn't leave a leftover A or CNAME record from a previous host still active on the same name — conflicting records on the same host are a frequent cause of failed verification. Once the records are clean and verification succeeds, GoHighLevel issues SSL automatically, and your funnel or website is live on your own domain."
+      "body": "If GoHighLevel still shows the domain as unconnected after propagation should have finished, go through the values again: check that the A record's Name is exactly @ and not a typo like www or blank, confirm the CNAME's target host matches what GHL displayed character for character, and make sure no leftover A or CNAME record from a previous host is still active on the same name. GoHighLevel's documentation also notes that a domain or subdomain can only be pointed at one platform at a time, so if it's still parked, forwarded, or connected to a website builder elsewhere, that will block verification too. Once the records are clean and verification succeeds, GoHighLevel issues SSL automatically, and your funnel or website is live on your own domain."
+    }
+  ],
+  "tables": [
+    {
+      "title": "The two DNS records GoHighLevel needs",
+      "columns": ["Type", "Name/Host", "Typical value", "Purpose"],
+      "rows": [
+        ["A", "@", "162.159.140.166", "Points your root domain at GoHighLevel's servers"],
+        ["CNAME", "www", "sites.ludicrous.cloud", "Points the www version at the same platform"]
+      ],
+      "note": "Confirm both against the exact values your own GoHighLevel domain panel shows before saving them in GoDaddy; GoHighLevel can change the underlying IP or hostname."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Verification keeps failing well after DNS should have propagated",
+      "cause": "A duplicate or leftover A/CNAME record on the same host from a previous setup is conflicting with the new one.",
+      "fix": "Open GoDaddy's DNS management page and remove any other A or CNAME record using the same @ or www host before re-verifying."
+    },
+    {
+      "problem": "The domain won't verify even though the records look right",
+      "cause": "The domain is still parked, forwarded, or connected to another website builder. GoHighLevel documents that one domain or subdomain can only be pointed at one platform at a time.",
+      "fix": "Turn off any domain forwarding or parking page in GoDaddy and disconnect the domain from any other site builder before verifying in GHL."
+    },
+    {
+      "problem": "Verification is slow to reflect a DNS fix",
+      "cause": "A high TTL value on the existing record means resolvers cache the old answer for longer.",
+      "fix": "Lower the TTL to around 5 minutes on the record while troubleshooting, then verify again once that shorter TTL has had time to take effect."
+    },
+    {
+      "problem": "The A record or CNAME was added under the wrong sub-account or GoDaddy account",
+      "cause": "Multiple client sub-accounts in GoHighLevel, or multiple GoDaddy accounts, made it easy to edit the wrong one.",
+      "fix": "Confirm the business name in GHL's sub-account switcher and the domain owner in GoDaddy before touching any DNS record."
     }
   ],
   "faq": [
     {
       "question": "How long does it take for the domain to connect after updating DNS?",
-      "answer": "DNS changes need time to propagate across the internet, so the domain may not show as connected in GoHighLevel immediately after you save the A and CNAME records in GoDaddy — retry verification after a few minutes rather than re-adding records."
+      "answer": "Often within minutes, but propagation can take up to 24 to 48 hours depending on the record's TTL. Retry verification after a while instead of re-adding the records."
     },
     {
       "question": "Why does GoHighLevel say my domain is not connected?",
-      "answer": "This usually means the DNS records in GoDaddy don't yet match what GoHighLevel expects, propagation hasn't finished, or there's a leftover conflicting record on the same host — recheck the exact values in GHL's setup panel first."
+      "answer": "Usually because the DNS records in GoDaddy don't yet match what GoHighLevel expects, propagation hasn't finished, there's a leftover conflicting record on the same host, or the domain is still parked or forwarded elsewhere."
     },
     {
       "question": "Do I get SSL automatically after connecting my domain?",
-      "answer": "Yes — once the domain connection is verified inside GoHighLevel, SSL is issued automatically so your site or funnel loads securely with no separate certificate step."
+      "answer": "Yes. Once the domain connection is verified inside GoHighLevel, SSL is issued automatically, with no separate certificate step."
     },
     {
-      "question": "Can I use this method for both funnels and full websites?",
-      "answer": "Yes, the same domain connection process — add the domain in GHL, enter the A and CNAME records in GoDaddy, then verify — applies whether you're pointing your domain at a GoHighLevel funnel or a full website."
+      "question": "Can the same domain point at two things at once, like a GoDaddy site and a GoHighLevel funnel?",
+      "answer": "No. GoHighLevel's own documentation states a domain or subdomain can only be used with one platform at a time, so anything else it's currently connected to needs to be disconnected first."
     },
     {
       "question": "What if I manage the domain on a different GoDaddy account than my GHL sub-account?",
-      "answer": "Make sure you're logged into the GoDaddy account that actually owns the domain before editing DNS, and the correct GoHighLevel sub-account before adding it — records saved on the wrong account won't affect the live site."
+      "answer": "Log into the GoDaddy account that owns the domain before editing DNS, and the correct GoHighLevel sub-account before adding it. Records saved on the wrong account won't affect the live site."
     }
   ],
+  "references": [
+    { "label": "HighLevel Support: How to set up Root Domain/Subdomain for your Funnels/Websites (official)", "url": "https://help.gohighlevel.com/support/solutions/articles/48001153720-how-to-set-up-root-domain-subdomain-for-your-funnels-websites-" },
+    { "label": "HighLevel Support: How to Add a Domain and Verify DNS Record (official)", "url": "https://help.gohighlevel.com/support/solutions/articles/155000002220-how-to-add-a-domain-and-verify-dns-record" }
+  ],
+  "verifiedNote": "Click paths and screens come from a walkthrough recorded in 2025, and the A/CNAME values visible in the domain-setup screenshot were cross-checked against HighLevel's own support articles in September 2026, which list the same IP (162.159.140.166) and hostname (sites.ludicrous.cloud). The one-platform-per-domain restriction, the 24-48 hour propagation window, and the TTL troubleshooting tip were added from that same documentation; the article's earlier advice never conflicted with it, but the source lets the guide state these details with a citation instead of as a general assumption.",
   "generatedAt": "2026-07-21T06:00:49.000Z",
   "deep": true
 }

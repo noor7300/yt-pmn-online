@@ -1,45 +1,87 @@
 {
   "slug": "how-to-connect-namecheap-email-to-gmail-add-use-easily-2026",
   "seoTitle": "How to Connect and Use Your Namecheap Email in Gmail",
-  "metaDescription": "Want your Namecheap custom domain email inside Gmail? Here's how to find the right SMTP settings and add the account through Gmail's own account settings.",
-  "intro": "Managing a custom domain email from Namecheap Private Email separately from your regular Gmail inbox gets tedious fast, but Gmail lets you pull that mailbox in directly so you can send and receive it without switching tabs. This guide follows the real flow: confirming your mailbox exists in Namecheap Private Email, adding it through Gmail's account settings, entering the exact SMTP details Namecheap provides, and clicking through the verification email Gmail sends to confirm you own the address. It works whether you're on a free or paid Gmail account, so you end up managing everything from one inbox.",
+  "metaDescription": "Send from your Namecheap Private Email address through Gmail: the exact SMTP settings, the verification step, and why Google is phasing this feature out for non-Workspace accounts in January 2027.",
+  "intro": "Managing a custom domain mailbox from Namecheap Private Email separately from your regular Gmail inbox gets tedious fast, and Gmail's \"Send mail as\" feature lets you send outgoing mail from that address without switching tabs. It doesn't pull incoming mail into Gmail on its own; that's a separate setting, and one Google has been steadily shutting down.\n\nThis guide follows the send-mail-as flow: confirming your mailbox exists in Namecheap Private Email, adding it through Gmail's account settings, entering the SMTP details Namecheap actually documents, and confirming ownership through the email Gmail sends. It also covers a timing issue worth knowing before you start: Google is phasing this exact feature out for personal Gmail accounts, on a schedule that overlaps with when you're likely reading this.",
+  "prerequisites": [
+    "A mailbox already created and active in Namecheap Private Email",
+    "If two-factor authentication is on for that mailbox, an application-specific password generated in Private Email's security settings"
+  ],
   "steps": [
     {
       "heading": "Confirm your mailbox in Namecheap Private Email",
-      "body": "Before touching Gmail, log in to Namecheap and open Private Email for your domain. You'll see a mailbox count like \"1 of 3 Mailboxes In Use,\" with each mailbox listed by address, status, and alias count — this is where you confirm the exact address you're connecting, such as hello@yourdomain.com, and that it's switched on before you go looking for it in Gmail.",
+      "body": "Before touching Gmail, log in to Namecheap and open Private Email for your domain. You'll see a mailbox count like \"1 of 3 Mailboxes In Use,\" with each mailbox listed by address, status, and alias count. Confirm the exact address you're connecting, such as hello@yourdomain.com, and that it's switched on before you go looking for it in Gmail.",
       "image": { "file": "/screenshots/Sr53SSnCA4E/02.webp", "caption": "The Private Email mailbox list in Namecheap, showing a single active mailbox with its status and alias count." }
     },
     {
-      "heading": "Start adding the account in Gmail",
-      "body": "In Gmail, open Settings, go to Accounts and Import, and choose \"Add another email address\" under the Send mail as section. Gmail opens a small popup asking for the email address you'd like to add — enter your full Namecheap address exactly as it appears in Private Email, then click Next to move to the SMTP details."
-    },
-    {
-      "heading": "Enter the address to add",
-      "body": "The first popup screen is just the email address field itself, pre-filled if Gmail can guess it from context, with Cancel and Next buttons underneath. This step doesn't ask for anything else yet — the actual server configuration comes on the following screen, so double check the address is typed correctly here since it's what everything downstream gets built around.",
+      "heading": "Add the address in Gmail's Send mail as settings",
+      "body": "In Gmail, open Settings, then See all settings, then the Accounts and Import tab. Under Send mail as, click \"Add another email address.\" Gmail opens a small popup asking for the email address to add, pre-filled if it can guess one from context. Type your full Namecheap address exactly as it appears in Private Email and click Next; the server configuration comes on the following screen, so it's worth double-checking the address here since everything downstream is built around it.",
       "image": { "file": "/screenshots/Sr53SSnCA4E/03.webp", "caption": "Gmail's \"Add a mail account\" popup, asking for the exact Namecheap email address before moving to server settings." }
     },
     {
-      "heading": "Fill in your Namecheap SMTP settings",
-      "body": "The next screen asks Gmail to send mail through your own SMTP server. Namecheap's Private Email SMTP server is mail.privateemail.com on port 587, and the username is your full email address — the same one you just entered. Enter your Private Email password, leave the secured connection option as recommended, and click Add Account to submit the configuration.",
-      "image": { "file": "/screenshots/Sr53SSnCA4E/04.webp", "caption": "The SMTP configuration screen, with mail.privateemail.com as the server, port 587, and the full email address as the username." }
+      "heading": "Enter your Namecheap SMTP settings",
+      "body": "The next screen asks Gmail to send mail through your own SMTP server. Namecheap's own documentation for this exact setup lists mail.privateemail.com as the server, with two working port options: 465 with SSL, which Namecheap treats as the default, or 587 with TLS if 465 is blocked on your network. The username is your full email address, the same one you just entered. For the password, use your Private Email login password, or the application-specific password from your prerequisites if two-factor authentication is on for that mailbox. Leave the secured-connection option matching whichever port you chose, then click Add Account.",
+      "image": { "file": "/screenshots/Sr53SSnCA4E/04.webp", "caption": "The SMTP configuration screen, with mail.privateemail.com as the server and the full email address as the username." }
     },
     {
-      "heading": "Verify ownership through the confirmation email",
-      "body": "Gmail sends a confirmation message to the Namecheap address itself, titled something like \"Gmail Confirmation - Send Mail as hello@yourdomain.com.\" Log in to your Namecheap Private Email webmail to find it, then click the verification link inside — Gmail also gives you the raw link to copy and paste manually if clicking it doesn't work. Until this step is done, Gmail won't actually send mail as that address, even though the account looks added.",
+      "heading": "Verify ownership",
+      "body": "Gmail sends a confirmation message to the Namecheap address itself, titled something like \"Gmail Confirmation - Send Mail as hello@yourdomain.com.\" Log in to Private Email's own webmail to find it, then click the verification link inside. Gmail also displays a verification code in the same window you can type in directly, which works even if the link doesn't load. The account looks added the moment you click Add Account, but Gmail won't send as that address until one of these two verification methods is complete.",
       "image": { "file": "/screenshots/Sr53SSnCA4E/05.webp", "caption": "The confirmation email in Private Email's webmail, with the verification link Gmail requires before it will send as the new address." }
     },
     {
-      "heading": "Choose how you want the address to appear",
-      "body": "Back in Gmail's Accounts settings, your Namecheap address now appears under Send mail as, alongside a \"make default\" option and a choice of whether replies to messages sent to that address default to using it or your regular Gmail. Set these to match how you actually want to work — most people managing a business inbox make the custom address default so outgoing mail looks consistent."
+      "heading": "Choose how the address behaves",
+      "body": "Back in Gmail's Accounts settings, your Namecheap address now appears under Send mail as, with a \"make default\" option and a choice of whether replies to messages sent to that address use it or your regular Gmail address by default. Set these to match how you work; most people running a business inbox make the custom address the default so outgoing mail looks consistent."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Two Gmail features, two different fates",
+      "columns": ["Feature", "What it does", "Status for personal Gmail (September 2026)"],
+      "rows": [
+        ["Send mail as (this guide)", "Sends outgoing mail so it appears to come from your Namecheap address", "New setups may already be restricted during a transition running through the rest of 2026; existing setups keep working until Google removes the feature in January 2027"],
+        ["Check mail from other accounts (POP)", "Imports incoming Namecheap mail into the Gmail inbox itself", "Already blocked for new users since early 2026; existing users lose it in January 2027 as well"]
+      ],
+      "note": "Google Workspace accounts are not affected by either change. Source: Google's official Gmail Help pages, checked September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Gmail won't let me set up Send mail as for my Namecheap address",
+      "cause": "Google is restricting new Send as configurations for third-party, non-Workspace addresses during a transition period running through the rest of 2026, ahead of removing the feature entirely in January 2027.",
+      "fix": "If it was already working before the restriction, it keeps running through the transition. For a fresh setup now, send directly from Namecheap's own webmail, or add the mailbox to the Gmail mobile app over IMAP instead."
+    },
+    {
+      "problem": "Gmail rejects the password that works fine in Namecheap's webmail",
+      "cause": "If two-factor authentication is on for the mailbox, Namecheap requires an application-specific password for SMTP rather than the normal login password.",
+      "fix": "Generate an application password inside Private Email's security settings and use that in Gmail's SMTP fields instead."
+    },
+    {
+      "problem": "The confirmation email never arrives",
+      "cause": "It's sent to the Namecheap address itself, so it never shows up in your regular Gmail inbox, and it can also land in that mailbox's spam folder.",
+      "fix": "Log in directly to Private Email's webmail, not Gmail, and check both inbox and spam. You can also type the verification code Gmail displays instead of waiting on the email."
+    },
+    {
+      "problem": "Messages sent to my Namecheap address don't show up in Gmail",
+      "cause": "This SMTP setup only handles sending. Receiving relies on Gmail's separate \"Check mail from other accounts\" (POP) feature, which Google has been restricting for new users since early 2026.",
+      "fix": "Set up mail forwarding from Namecheap's own settings to your Gmail address, or check the Namecheap mailbox in the Gmail mobile app over IMAP, which isn't affected by either change."
     }
   ],
   "faq": [
-    { "question": "Can I use this with a free Gmail account?", "answer": "Yes — this method works for both free and paid Gmail accounts, so you don't need a Google Workspace subscription just to link a Namecheap Private Email address." },
-    { "question": "What SMTP settings does Namecheap Private Email use?", "answer": "The SMTP server is mail.privateemail.com on port 587, with your full email address as the username and your Private Email password." },
-    { "question": "Where do I find the Gmail verification email?", "answer": "It's sent to the Namecheap address you're connecting, so log in to that mailbox in Namecheap's own webmail to find and click the confirmation link." },
-    { "question": "Will I still be able to send email as my Namecheap address from Gmail?", "answer": "Yes, once the SMTP details are added and the address is verified, Gmail lets you send mail that appears to come from your Namecheap domain email." },
-    { "question": "What happens if I skip the ownership verification step?", "answer": "The account won't fully connect — Gmail requires you to click the confirmation link before it will send mail as that address, even if the account already shows up in your settings." }
+    { "question": "Can I use this with a free Gmail account?", "answer": "Yes, the setup itself works the same on free and paid Gmail accounts. The difference is durability: Google Workspace \"send as\" addresses are unaffected by the phase-out described below, while free personal Gmail accounts are the ones losing this feature." },
+    { "question": "What SMTP settings does Namecheap Private Email use?", "answer": "mail.privateemail.com, with either port 465 using SSL (Namecheap's documented default) or port 587 using TLS as a fallback. The username is your full email address, and the password is your Private Email password or an application password if two-factor authentication is on." },
+    { "question": "Where do I find the Gmail verification email?", "answer": "It's sent to the Namecheap address you're connecting, so log in to that mailbox in Namecheap's own webmail to find and click the confirmation link. Gmail also shows a verification code in the same window you can enter directly instead." },
+    { "question": "Will I still be able to send email as my Namecheap address from Gmail?", "answer": "For now. Google is restricting new setups of this feature during a transition through the rest of 2026 and plans to remove it for non-Workspace accounts entirely in January 2027. A setup you complete and verify before then should keep working through the transition." },
+    { "question": "What happens if I skip the ownership verification step?", "answer": "The account won't fully connect. Gmail requires either the confirmation link or the verification code before it will send mail as that address, even though the account already shows up in your settings." },
+    { "question": "Is Google actually shutting this feature down?", "answer": "Yes, for personal Gmail accounts. Google's own Gmail Help documents a Q3-Q4 2026 transition where new third-party \"send as\" setups may be restricted, followed by full removal in January 2027. Google Workspace accounts keep the feature." },
+    { "question": "Does this also let me receive Namecheap email inside Gmail?", "answer": "No. This method only covers sending. Receiving Namecheap mail inside Gmail relies on a separate POP-based feature that Google has already restricted for new users, so forwarding from Namecheap or checking the mailbox via IMAP in the Gmail mobile app are the more durable options." }
   ],
+  "references": [
+    { "label": "Namecheap: Private Email account setup for sending emails from the Gmail interface (official)", "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/10592/2175/private-email-account-setup-for-sending-emails-from-the-gmail-interface/" },
+    { "label": "Google: Send emails from a different address or alias (official Gmail Help)", "url": "https://support.google.com/mail/answer/22370?hl=en" },
+    { "label": "Google: Learn about changes to third-party email account support in Gmail (official)", "url": "https://support.google.com/mail/answer/17101213?hl=en" },
+    { "label": "Google: Learn about upcoming changes to Gmailify & POP in Gmail (official)", "url": "https://support.google.com/mail/answer/16604719?hl=en" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2026. SMTP details and the verification flow were re-checked against Namecheap's own knowledge-base article for this exact setup, and against Google's official Gmail Help pages, in September 2026. That check found two things the original draft missed: Namecheap documents port 465 with SSL as its default (587 with TLS is a fallback, not the only option), and Google is actively phasing out Send mail as for non-Workspace third-party addresses, restricting new setups from Q3 2026 and removing the feature for existing ones in January 2027. The original also implied this method covers receiving mail, which it does not.",
   "generatedAt": "2026-08-07T09:00:00Z",
   "deep": true
 }

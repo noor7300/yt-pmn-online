@@ -1,59 +1,101 @@
 {
   "slug": "how-to-get-back-disappeared-candles-on-tradingview-unhide-candlesticks-easily-20",
   "seoTitle": "Fix Disappeared Candles on TradingView",
-  "metaDescription": "If candlesticks vanished from your TradingView chart, here's how to use the symbol's right-click menu to toggle them back on in seconds.",
-  "intro": "If your candlesticks suddenly seem to have disappeared from a TradingView chart, it's almost never a technical glitch — it's a visibility setting that got toggled off, usually by an accidental click while you were working with the chart. This guide shows exactly what the empty chart looks like when this happens, where the visibility toggle actually lives, and how to switch the candles back on without touching your indicators, drawings, or saved settings.",
+  "metaDescription": "If candlesticks vanished from your TradingView chart, here's the right-click Hide toggle that usually caused it, plus the chart type, Symbol style, and autoscale settings that can do the same thing.",
+  "intro": "If your candlesticks seem to have disappeared from a TradingView chart, it's rarely a technical glitch. The most common cause is the symbol's visibility getting switched off by an accidental click, but TradingView's own troubleshooting notes list a few other places to check too: the chart type, the Symbol style settings, and the price scale's autoscale setting. This guide starts with the right-click toggle, since it accounts for most cases, then works through the less common causes and how to rule each one out.",
   "steps": [
     {
       "heading": "Recognize the symptom",
-      "body": "When this happens, the chart itself still loads normally — the price scale, time axis, watchlist, and toolbar all behave as expected — but the plot area where candlesticks should be is completely blank aside from your crosshair. It's easy to assume something is broken or that the data feed dropped, but if everything else on the page is responding normally, the data is still there; it's just been told not to draw.",
+      "body": "When this happens, the chart itself still loads normally. The price scale, time axis, watchlist, and toolbar all behave as expected. Only the plot area where candlesticks should be is completely blank, aside from your crosshair. It's easy to assume something is broken or that the data feed dropped, but if everything else on the page is responding normally, the data is still there. It's just been told not to draw.",
       "image": { "file": "/screenshots/VOwb27XvkEI/02.webp", "caption": "The chart with candlesticks toggled off — price scale, watchlist, and toolbar all working normally, but the plot area is empty." }
     },
     {
-      "heading": "Right-click the symbol to find the visibility toggle",
-      "body": "Right-click directly on the symbol's name or price legend in the top-left corner of the chart. This opens a context menu with a long list of options — Add alert, Add order, Add indicator/strategy, Security info, Seasonals, Copy price, Visual order, Move to, and further down, Hide. That Hide entry is the visibility toggle for the symbol's plot, and it's the one that silently switches off when it gets clicked by accident, often while you're trying to click something else nearby like Pin to scale or Settings.",
-      "image": { "file": "/screenshots/VOwb27XvkEI/01.webp", "caption": "The symbol's right-click context menu, with Hide listed among the options below Move to and above Add to watchlist." }
+      "heading": "Right-click the symbol to find Hide",
+      "body": "Right-click directly on the symbol's name or price legend in the top-left corner of the chart. This opens a long context menu: Add alert, Add order, Add indicator/strategy, Add financial metric, Security info, Seasonals, Copy price, Visual order, Move to, Pin to scale, and further down, Hide. That Hide entry is the visibility toggle for the symbol's plot. It's the one that switches off silently when it gets clicked by accident, often while aiming for a neighboring row like Pin to scale or Settings.",
+      "image": { "file": "/screenshots/VOwb27XvkEI/01.webp", "caption": "The symbol's right-click context menu, with Hide listed among the options below Pin to scale and above Add to watchlist." }
     },
     {
       "heading": "Toggle it back on",
-      "body": "If the menu shows the symbol as currently hidden, selecting the same option again restores it. The candlesticks reappear instantly along with any moving averages plotted on the same pane — in the frames here that's a 9-period EMA and SMA layered over the candles — confirming that nothing about your indicator setup was lost, only the candle visibility itself.",
+      "body": "If the menu shows the symbol as currently hidden, selecting the same option again restores it. The candlesticks reappear instantly along with any moving averages plotted on the same pane. In the frames here that's a 9-period EMA and SMA layered over the candles, confirming that nothing about the indicator setup was lost, only the candle visibility itself.",
       "image": { "file": "/screenshots/VOwb27XvkEI/04.webp", "caption": "The chart immediately after re-enabling visibility — candlesticks back, along with the EMA 9 and SMA 9 lines that were plotted alongside them the whole time." }
     },
     {
-      "heading": "Rule out an indicator or overlay covering the same pane",
-      "body": "If toggling Hide on and off doesn't bring candles back, check whether a full-pane indicator or a replay session is sitting on top of the price plot instead of below it. TradingView's Replay mode in particular can visually take over a chart until you exit it, which looks similar to candles vanishing but is actually a different mode entirely rather than a visibility setting."
+      "heading": "If Hide wasn't the cause, check three more settings",
+      "body": "TradingView's own troubleshooting notes for this exact symptom point to three other places. First, confirm the chart type is still set to Candles: switching to Line, Area, or another type replaces the candles without touching the Hide toggle at all. Second, right-click the chart, open Settings, and go to the Symbol tab. Check that Body, Border and Wick are all ticked, with a color that stands out from your chart background; a candle color that matches the background is technically drawn but invisible. Third, check autoscale. If it's off and the price scale is stuck on an old range, candles can flatten into an unreadable sliver at the top or bottom of the pane instead of disappearing outright.",
+      "image": { "file": "/screenshots/VOwb27XvkEI/03.webp", "caption": "The same empty plot area at a different point in the recording. Chart type, Symbol style, and autoscale are the next things to check once Hide is confirmed off." }
     },
     {
-      "heading": "Check the object tree and data window if it's still not visible",
-      "body": "For a more stubborn case, open the object tree and data window from the right-side toolbar. This panel lists every plotted element on the chart individually, including the main symbol, and lets you confirm its visibility state directly rather than guessing from the context menu. It's also where you'd catch a case where a drawing tool or a second symbol overlay is sitting directly on top of the price candles, blocking them from view even though they're technically still visible underneath."
+      "heading": "Still blank? Use the Object Tree and Data Window",
+      "body": "Click Object Tree and Data Window on the right-side toolbar, or press Ctrl+Shift+O (Cmd+Shift+O on a Mac), and use it to hide, show, or remove drawings, indicators and symbols directly instead of guessing from the right-click menu. It also lists every plotted element individually, which is where you'd catch a full-pane indicator or an active Replay session sitting on top of the price plot and blocking it from view."
     },
     {
       "heading": "Avoid triggering it again",
-      "body": "Because the Hide option sits in the same right-click menu as several frequently used actions — Move to, Pin to scale, Settings — it's worth slowing down slightly when right-clicking near the symbol legend, especially on a laptop trackpad where a slightly-off click can land on the wrong row. If you rely on a specific chart layout daily, save it once everything is confirmed visible, so a stray click during a session doesn't carry over the next time you open TradingView."
+      "body": "Because Hide sits in the same right-click menu as several frequently used actions, it's easy to slow down slightly when right-clicking near the symbol legend, especially on a laptop trackpad where a slightly-off click can land on the wrong row. If you rely on a specific chart layout daily, save it once everything is confirmed visible, so a stray click during a session doesn't carry over the next time you open TradingView."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Selecting Hide again does nothing",
+      "cause": "The chart type was switched away from Candles (to Line, Area, or similar) instead of the main series being hidden.",
+      "fix": "Open the chart type dropdown next to the timeframe selector and switch it back to Candles."
+    },
+    {
+      "problem": "Hide is off and the chart type is Candles, but the plot is still empty",
+      "cause": "The Symbol style settings for Body, Border or Wick are unticked, or set to a color that matches your chart background.",
+      "fix": "Right-click the chart, open Settings, go to the Symbol tab, and tick Body, Border and Wick with a color that stands out from the background."
+    },
+    {
+      "problem": "Candles look squashed into a flat line at the edge of the pane",
+      "cause": "Autoscale is off and the price scale is stuck on an old range.",
+      "fix": "Enable autoscale on the price scale so TradingView refits the visible range to the current data."
+    },
+    {
+      "problem": "None of the above explains it",
+      "cause": "A full-pane indicator or an active Replay session is sitting over the price plot.",
+      "fix": "Exit Replay mode if it's running, and use the Object Tree and Data Window to check what else is drawn on the same pane."
     }
   ],
   "faq": [
     {
       "question": "Why did my candles disappear on TradingView?",
-      "answer": "This usually happens when the symbol's visibility was accidentally turned off through the right-click Hide option, not because of a technical glitch or a data feed issue."
+      "answer": "Most often because the symbol's visibility got switched off by an accidental click. TradingView's own troubleshooting guidance lists two other common causes too: the chart type getting changed away from Candles, and the Symbol style settings (Body, Border, Wick) being unticked or colored to match the background."
     },
     {
       "question": "How do I get my candles back?",
-      "answer": "Right-click the symbol's name in the top-left legend and select Hide again to toggle visibility back on — the candles reappear immediately along with any indicators plotted on the same pane."
+      "answer": "Right-click the symbol's name in the top-left legend and select Hide again to toggle visibility back on. If Hide is already off, check the chart type and the Symbol style settings next."
     },
     {
-      "question": "Where is the visibility toggle located?",
-      "answer": "It's in the context menu you get from right-clicking the symbol name or price legend at the top-left of the chart, listed as \"Hide\" among the other symbol options."
+      "question": "Where is the Hide option located?",
+      "answer": "In the context menu you get from right-clicking the symbol name or price legend at the top-left of the chart. It's listed below Pin to scale and above Add to watchlist."
     },
     {
-      "question": "Does toggling visibility affect my other chart data or indicators?",
-      "answer": "No — toggling the symbol's visibility only affects whether the candlesticks are drawn. Moving averages and other indicators plotted on the same pane reappear right along with them, untouched."
+      "question": "Does toggling visibility affect my indicators or drawings?",
+      "answer": "No. Toggling the symbol's visibility only affects whether the candlesticks are drawn. Moving averages and other indicators on the same pane are unaffected and reappear right along with the candles."
     },
     {
-      "question": "What if the candles still don't show up after toggling Hide?",
-      "answer": "Check the object tree and data window on the right side of the chart to confirm the symbol's actual visibility state, and rule out Replay mode or an overlay sitting on top of the price plot."
+      "question": "I checked Hide and it's already off. What next?",
+      "answer": "Confirm the chart type is set to Candles, then open Settings, go to the Symbol tab, and check that Body, Border and Wick are all ticked with a color that contrasts against your background. If the price scale looks stuck, enable autoscale too."
+    },
+    {
+      "question": "What if none of that works?",
+      "answer": "Open the Object Tree and Data Window from the right toolbar and check the symbol's listed visibility state directly. This is also where you'd catch a Replay session or a full-pane indicator sitting over the candles."
     }
   ],
+  "references": [
+    {
+      "label": "TradingView Help: Candles have disappeared from the chart (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000472764-candles-have-disappeared-from-the-chart/"
+    },
+    {
+      "label": "TradingView Help: How to restore hidden drawings/indicators/charts (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000484389-how-to-restore-hidden-drawings-indicators-charts/"
+    },
+    {
+      "label": "TradingView Help: How to show Hide, Settings and Remove options of an indicator or ticker symbol (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000539711-how-to-show-hide-settings-and-remove-options-of-an-indicator-or-ticker-symbol/"
+    }
+  ],
+  "verifiedNote": "Click path and screenshots come from a screen recording; the right-click menu and the Hide item are visible directly in the captured frames. The list of causes was checked in September 2026 against TradingView's official support articles 'Candles have disappeared from the chart,' 'How to restore hidden drawings/indicators/charts,' and 'How to show Hide, Settings and Remove options of an indicator or ticker symbol.' The original draft covered only the Hide toggle; the chart-type, Symbol-style, and autoscale causes were added from those articles, and the Object Tree step was corrected to match the documented access method (right toolbar, or Ctrl+Shift+O / Cmd+Shift+O).",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

@@ -1,49 +1,70 @@
 {
   "slug": "how-to-connect-namecheap-domain-to-wordpress-easily-2026",
   "seoTitle": "How to Connect a Namecheap Domain to Your WordPress Site",
-  "metaDescription": "Follow this guide to connect a Namecheap domain to WordPress by updating name servers or DNS, whether you're self-hosted or using WordPress.com.",
-  "intro": "If you registered your domain through Namecheap but built your site on WordPress.com, connecting the two means working in both dashboards — starting a domain request on the WordPress side, then finishing the DNS or nameserver change back in Namecheap. This guide follows that exact round trip using a real domain, finsenso.com, showing the choice WordPress.com actually presents you with and where that choice sends you next. It applies to a free WordPress.com site being upgraded with a custom domain, which is the most common starting point people hit this wall from.",
+  "metaDescription": "Connect a Namecheap domain to WordPress.com by choosing Connect over Transfer and pointing the right name servers. Covers the paid-plan requirement and the real propagation window.",
+  "intro": "If you registered your domain through Namecheap but built your site on WordPress.com, connecting the two means working in both dashboards: starting a domain request on the WordPress.com side, then finishing the name-server change back in Namecheap. This guide follows that round trip on a real domain, finsenso.com, and shows the choice WordPress.com presents partway through and where it leads. Most people hit this from a free WordPress.com site that needs upgrading to take a custom domain, so that's the starting point here.",
+  "prerequisites": [
+    "A domain already registered and active in your Namecheap account",
+    "A WordPress.com site, plus willingness to move it to a paid plan — connecting an existing domain is not available on the free plan"
+  ],
+  "costNote": "WordPress.com restricts domain connection to its Personal plan and above. A free site can search for a domain, but finishing the connection requires upgrading first.",
   "steps": [
     {
-      "heading": "Start from your WordPress.com dashboard",
-      "body": "Log into WordPress.com and open My Home. The Quick links panel on the right lists the domain-related actions you'll need — Add a domain and Manage all domains — alongside the everyday tools like Write a blog post and Manage comments. There's also a prompt on the main panel offering to sell you a new domain outright; ignore that if you already own one through Namecheap, since you're connecting an existing domain, not buying a fresh one.",
+      "heading": "Open your site's domain settings in WordPress.com",
+      "body": "Log into WordPress.com and open My Home. The Quick links panel lists Add a domain and Manage all domains alongside everyday tools like Write a blog post. WordPress.com has since introduced a newer Hosting Dashboard for this: click the WordPress W icon in the top-left corner, or go to my.wordpress.com, then choose your site and select Domains from the left sidebar. Either route lands you at the same domain settings; if Quick links doesn't show an Add a domain option, that newer dashboard is where to look.\n\nIgnore any prompt offering to sell you a new domain outright. You're connecting one you already own through Namecheap, not registering a fresh one.",
       "image": { "file": "/screenshots/ZlIExdzFewI/01.webp", "caption": "The WordPress.com dashboard for a free site, with Add a domain and Manage all domains listed under Quick links." }
     },
     {
-      "heading": "Search for your existing domain in WordPress.com",
-      "body": "Selecting Add a domain opens a search field. Type in the domain you already own — finsenso.com in this case — rather than a new name you're hoping to register. WordPress.com flags an important detail right above the search box on a free plan: domains added here redirect to your sportsnews22098.wordpress.com-style address unless you upgrade to a paid plan, since a free WordPress.com site can't fully take over a custom domain without one.",
+      "heading": "Search for your existing domain",
+      "body": "Selecting Add a domain (or Add domain name, then Use a domain name I own, in the newer dashboard) opens a search field. Type in the domain you already own, finsenso.com here, not a new name to register. WordPress.com's own documentation is direct about the plan gate: connecting an existing domain is available on the Personal, Premium, Business, and Commerce plans, and a free site needs to upgrade to finish the process. Expect a prompt to do that before the connection completes.",
       "image": { "file": "/screenshots/ZlIExdzFewI/04.webp", "caption": "WordPress.com's domain search with an existing domain typed in, and a note that custom domains require a paid plan to fully connect." }
     },
     {
-      "heading": "Choose Transfer or Connect",
-      "body": "Once WordPress.com recognizes the domain, it presents two paths. Transfer your domain moves registration itself to WordPress.com, marked Recommended, and bundles in a year of renewal, private registration, and a free SSL certificate — but it also means Namecheap stops being your registrar. Connect your domain is the lighter option: you keep the domain registered at Namecheap and just point it at WordPress.com's servers, which is the route most people mean when they say \"connect a Namecheap domain to WordPress.\"",
+      "heading": "Choose Connect, not Transfer",
+      "body": "Once WordPress.com recognizes the domain, it offers two paths. Transfer moves the registration itself to WordPress.com and bundles a year of renewal, private registration, and a free SSL certificate, but Namecheap stops being your registrar. Connect is the lighter option: the domain stays registered at Namecheap and you just point it at WordPress.com's name servers. That's what most people mean by \"connect a Namecheap domain to WordPress,\" and it's the path this guide takes from here.",
       "image": { "file": "/screenshots/ZlIExdzFewI/05.webp", "caption": "WordPress.com's Transfer vs. Connect screen, with Connect your domain keeping the registration at your current provider." }
     },
     {
-      "heading": "Go back to Namecheap and open the domain",
-      "body": "With Connect selected, WordPress.com shows you the name server or DNS values it needs. Switch over to Namecheap's dashboard, open Domain List, and find the same domain — search narrows the list quickly if you manage more than one. Click Manage to open its settings, where Namecheap's own Nameservers section is what you'll be editing next.",
+      "heading": "Point Namecheap's nameservers at WordPress.com",
+      "body": "With Connect selected, WordPress.com shows the name server values to use. According to WordPress.com's support documentation these are ns1.wordpress.com, ns2.wordpress.com, and ns3.wordpress.com, entered with no other values left in place. Copy the exact set shown on your own screen, since WordPress.com occasionally revises them.\n\nSwitch to Namecheap, open Domain List, and click Manage next to the domain. In its Nameservers section, change the dropdown from Namecheap BasicDNS to Custom DNS and enter the WordPress.com values, one per field, then confirm with the green checkmark. This hands DNS authority for the domain to WordPress.com, which is what makes the site respond when someone visits it.",
       "image": { "file": "/screenshots/ZlIExdzFewI/03.webp", "caption": "Namecheap's Domain List filtered down to the domain being connected, with the Manage button that opens its DNS settings." }
     },
     {
-      "heading": "Update the name servers to WordPress.com's values",
-      "body": "In the domain's Nameservers section, switch away from Namecheap's default (or any custom DNS previously set) and enter the name server addresses WordPress.com displayed during the Connect flow. This hands authority over the domain's DNS to WordPress.com, which is what actually makes the site respond when someone visits the domain."
+      "heading": "Wait for propagation, then confirm on the WordPress side",
+      "body": "WordPress.com's own guidance puts the window at up to 72 hours for the new name servers to take effect everywhere, though it's often much faster. Namecheap separately notes local ISPs can take up to 24 hours to refresh their cached DNS, which is really the same wait measured from the other end.\n\nBack in WordPress.com's domain settings, the connection shows as pending until it detects the name servers are live; there's nothing to click here beyond refreshing occasionally. If it's still unresolved well past 72 hours, recheck the exact name server values against what WordPress.com currently lists. An old set copied from an older guide, including this one after a future change, won't work."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no \"Add a domain\" link under Quick links",
+      "cause": "WordPress.com has been migrating domain management into a separate Hosting Dashboard, reached from the W icon in the top-left corner or my.wordpress.com.",
+      "fix": "Open the Hosting Dashboard, select your site, click Domains in the left sidebar, then Add domain name and Use a domain name I own."
     },
     {
-      "heading": "Confirm the connection on the WordPress side",
-      "body": "Back in WordPress.com's domain settings, the connection typically shows as pending until it detects the new name servers are live. There's no action needed here beyond waiting and refreshing the page periodically — WordPress.com checks automatically and updates the status once it sees the change has taken hold."
+      "problem": "The Connect option never appears, only Transfer",
+      "cause": "Connecting an existing domain is gated to WordPress.com's paid plans; a free site doesn't get the full flow.",
+      "fix": "Upgrade to Personal or higher first, then search for the domain again."
     },
     {
-      "heading": "Give it time to propagate before troubleshooting",
-      "body": "Name server changes don't take effect everywhere instantly; expect anywhere from a few hours up to 24-48 hours in slower cases before the domain reliably loads your WordPress site for everyone. If it's still not resolving well past that window, double-check the exact name server values against what WordPress.com currently lists, since these values can occasionally change and an old set copied from a guide won't work."
+      "problem": "The domain still doesn't load the WordPress.com site after a few days",
+      "cause": "Either the name servers weren't entered exactly as WordPress.com listed them, or a leftover custom DNS record is still pointing elsewhere.",
+      "fix": "Reopen Namecheap's Nameservers section and confirm only the three current WordPress.com values are present, then allow the full 72-hour window before assuming something's wrong."
     }
   ],
   "faq": [
-    { "question": "How long does it take for a Namecheap domain to connect to WordPress?", "answer": "Name server changes typically propagate within a few hours, though it can occasionally take up to 24-48 hours." },
-    { "question": "Should I transfer my domain or just connect it?", "answer": "Connect keeps your domain registered at Namecheap and only points its DNS at WordPress.com; Transfer moves the registration itself to WordPress.com. Connect is the simpler, more common choice if you're happy with Namecheap as your registrar." },
-    { "question": "Do I need a paid WordPress.com plan to use a custom domain?", "answer": "Yes — on a free plan, a custom domain you add will redirect to your default wordpress.com address instead of fully replacing it, so a paid plan is required to remove that redirect." },
-    { "question": "Will my old website go down while I make these changes?", "answer": "There can be a brief window of downtime while the new name servers propagate, so it's best to make the change during low-traffic periods." },
-    { "question": "What information do I need from WordPress.com before editing Namecheap's settings?", "answer": "The specific name server addresses WordPress.com shows you after selecting Connect your domain — copy those exactly before switching to Namecheap's Nameservers section." }
+    { "question": "How long does it take for a Namecheap domain to connect to WordPress.com?", "answer": "WordPress.com's own documentation gives up to 72 hours for the name server change to take effect everywhere, though it's frequently faster than that." },
+    { "question": "Should I transfer my domain or just connect it?", "answer": "Connect keeps the domain registered at Namecheap and only repoints its DNS at WordPress.com; Transfer moves registration itself. Connect is the simpler choice if you're happy staying with Namecheap." },
+    { "question": "Do I need a paid WordPress.com plan to use a custom domain?", "answer": "Yes. WordPress.com limits domain connection to the Personal plan and above; a free site can search for the domain but has to upgrade to finish connecting it." },
+    { "question": "I can't find \"Add a domain\" in my WordPress.com dashboard. Where did it go?", "answer": "WordPress.com has been moving domain tools into a newer Hosting Dashboard, reachable from the W icon top-left or my.wordpress.com, with Domains listed in the left sidebar there instead of under Quick links." },
+    { "question": "Will my site go down while I make these changes?", "answer": "There can be a short window of downtime while the new name servers propagate, so it helps to make the change during low-traffic hours." },
+    { "question": "What do I need from WordPress.com before I touch Namecheap's settings?", "answer": "The exact name server addresses WordPress.com shows after you pick Connect your domain. Copy those precisely before switching over to Namecheap's Nameservers section." }
   ],
+  "references": [
+    { "label": "WordPress.com Support: How to Connect a Domain to WordPress (official)", "url": "https://wordpress.com/support/domains/connect-existing-domain/" },
+    { "label": "WordPress.com Support: Change a WordPress.com domain's name servers (official)", "url": "https://wordpress.com/support/domains/change-name-servers/" },
+    { "label": "Namecheap: How to Change DNS for a Domain (official)", "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/767/10/how-to-change-dns-for-a-domain/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded on a free WordPress.com site. Re-checked against WordPress.com's and Namecheap's official support documentation in September 2026, which corrected the propagation window from this guide's earlier 24-48 hours to WordPress.com's own stated 72 hours, and flagged that WordPress.com now also manages domains through a newer Hosting Dashboard alongside the older My Home > Quick links path shown in the recording.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

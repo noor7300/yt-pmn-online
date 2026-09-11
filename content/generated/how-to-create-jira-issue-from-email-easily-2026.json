@@ -1,49 +1,88 @@
 {
   "slug": "how-to-create-jira-issue-from-email-easily-2026",
   "seoTitle": "How to Create a Jira Issue Automatically From an Email",
-  "metaDescription": "Learn how to configure Jira to turn incoming emails into issues automatically, covering the email handler setup and creating tasks, bugs, or stories.",
-  "intro": "Manually copying support requests or team emails into Jira wastes time that a proper mail handler can save entirely. This guide covers the actual admin screens for turning incoming email into Jira issues — from the settings menu where mail configuration lives, through creating an incoming mail handler, to the specific options that decide what issue type an email becomes. It's built for admins who want support requests or stakeholder emails landing directly in the backlog instead of an inbox.",
+  "metaDescription": "Set up a Jira incoming mail handler so support or stakeholder emails become issues automatically, including attachment limits and the issue-to-work-item rename.",
+  "intro": "Manually retyping support requests or team emails into Jira wastes time a mail handler can save entirely. This guide covers the real admin screens for turning incoming email into Jira issues (Atlassian is mid-rollout on renaming these to \"work items\", more on that below), from the settings menu where mail configuration lives, through creating an incoming mail handler, to the options that decide what type of issue an email becomes. It's for admins who want support or stakeholder emails landing directly in the backlog instead of an inbox.",
+  "prerequisites": [
+    "The \"Administer Jira\" global permission on the instance",
+    "An incoming mail server already set up under System > Mail (Default Cloud Mail Server, or a POP, IMAP or Microsoft Graph server you've added)"
+  ],
   "steps": [
     {
-      "heading": "Understand why to automate issue creation from email",
-      "body": "Every manually re-typed email is a chance to lose a detail, misassign a project, or just forget to log the request at all. A mail handler removes that step entirely: anything sent to the configured address becomes a Jira issue automatically, with the sender's message body carried into the issue description. This matters most for teams fielding a steady stream of support or stakeholder emails, where consistency in logging beats speed of any one manual entry."
-    },
-    {
       "heading": "Open Jira's admin settings",
-      "body": "From any Jira screen, click the gear icon in the top navigation to open Settings. Personal settings sit at the top — general preferences and notifications — while Jira admin settings below cover System, Products, Projects, Work items, and Apps. Mail configuration lives under System, which is the section to head into next.",
-      "image": { "file": "/screenshots/bihfjMET4O8/02.webp", "caption": "The Settings menu, with Jira admin settings — System, Products, Projects — listed below the personal preference options." }
+      "body": "From any Jira screen, click the gear icon in the top navigation to open Settings. Personal settings sit at the top (general preferences and notifications), while Jira admin settings below cover System, Products, Projects, Work items, and Apps. Mail configuration lives under System, the section to open next.",
+      "image": { "file": "/screenshots/bihfjMET4O8/02.webp", "caption": "The Settings menu, with Jira admin settings (System, Products, Projects) listed below the personal preference options." }
     },
     {
       "heading": "Find the Mail Handlers section",
-      "body": "Under System, the left sidebar has a Mail group with Global mail settings, Outgoing mail, Incoming mail, and Send email. Incoming mail opens the Mail Handlers page, which lists every handler currently configured — in this instance, one named \"Comments from emails\" tied to the Default Cloud Mail Server, with properties like Bulk: ignore and Strip Quotes: true already set. This table is also where you'd edit or delete an existing handler, so check it first in case a similar one already exists before creating a new one.",
+      "body": "Under System, the left sidebar has a Mail group with Global mail settings, Outgoing mail, Incoming mail, and Send email. Incoming mail opens the Mail Handlers page, listing every handler currently configured, in this case one named \"Comments from emails\" tied to the Default Cloud Mail Server, with properties like Bulk: ignore and Strip Quotes: true already set. Check this table first in case a similar handler already exists before creating a new one.\n\nAtlassian is partway through renaming \"issue\" to \"work item\" across Jira Cloud, and this page shows the transition mid-stream: a banner reads \"As we roll out 'work' as the new term for items tracked in Jira, you may still see 'issue' in some areas,\" while the handler table's own column is already labelled Work type even though the setup dialog below still says Issue Type. Expect labels on this screen to keep shifting from issue to work item.",
       "image": { "file": "/screenshots/bihfjMET4O8/03.webp", "caption": "The Mail Handlers page, listing configured handlers alongside an \"Add incoming mail handler\" button and DMARC authentication settings." }
     },
     {
       "heading": "Create a new incoming mail handler",
-      "body": "Click \"Add incoming mail handler\" to open the setup dialog. Give it a name, choose the Incoming Mail Server it should watch — Default Cloud Mail Server here — and set an optional processing delay. The key decision is the Mail Handler Type list further down: options include creating a new issue or adding a comment to an existing one, adding a comment from just the non-quoted email body, or creating a new issue from every single email message. Picking \"Create a new issue or add a comment to an existing issue\" is the standard choice for turning support emails into trackable work.",
+      "body": "Click \"Add incoming mail handler\" to open the setup dialog. Give it a name, choose the Incoming Mail Server it should watch (Default Cloud Mail Server here), and set an optional processing delay. The key decision is the Mail Handler Type list further down, six options in total; the table below breaks down what each one does. \"Create a new issue or add a comment to an existing issue\" is the standard choice for turning support emails into trackable work.",
       "image": { "file": "/screenshots/bihfjMET4O8/04.webp", "caption": "The Incoming Mail Handler dialog, with Mail Handler Type options including creating a new issue or adding a comment to an existing one." }
     },
     {
       "heading": "Configure what kind of issue gets created",
-      "body": "After choosing the handler type, the next screen sets the specifics: an Issue Type dropdown (defaulting to something like Epic, though Task or Bug are typically better fits for support requests), a Strip Quotes checkbox to clean up reply chains, a Catch Email Address field that restricts processing to emails sent to a specific address, and a Bulk setting controlling what happens to bulk or auto-submitted mail — set to \"Ignore the email and do nothing\" by default, which is the sensible choice to avoid junk mail spawning issues. A Default Reporter field further down assigns ownership when the sender isn't a recognized Jira user.",
+      "body": "After choosing the handler type, the next screen sets the specifics: an Issue Type dropdown (it defaults to Epic, though Task or Bug is usually the better fit for support requests), a Strip Quotes checkbox to clean up reply chains, a Catch Email Address field that restricts processing to emails sent to a specific address, and a Bulk setting controlling what happens to bulk or auto-submitted mail (set to \"Ignore the email and do nothing\" by default, which keeps junk mail from spawning issues). A Default Reporter field further down assigns ownership when the sender isn't a recognised Jira user.\n\nAttachments on the original email do carry over to the created issue automatically, as long as attachments are enabled in Jira. The combined message and attachments need to stay under Jira's 25 MB limit, or the email won't process.",
       "image": { "file": "/screenshots/bihfjMET4O8/05.webp", "caption": "The issue-creation configuration screen, with Issue Type, Catch Email Address, and Bulk handling options for the mail handler." }
     },
     {
-      "heading": "Test the handler with a real email",
-      "body": "Send a test message to the address tied to your handler and confirm it lands in Jira as the right issue type, in the right project, with the email body intact as the description. This is the point to catch mismatches — an issue type that defaulted to the wrong value, or quoted reply text cluttering the description when Strip Quotes wasn't checked — before real support emails start flowing through the same handler."
+      "heading": "Test the handler, then set expectations for senders",
+      "body": "Send a test message to the address tied to your handler and confirm it lands in Jira as the right issue type, in the right project, with the email body intact as the description. This is the point to catch a wrong default issue type or quoted reply text cluttering the description because Strip Quotes wasn't checked, before real emails start flowing through the same handler.\n\nOnce it's live, ask anyone emailing into it to keep subject lines short and put the actual request early in the body, since that becomes the issue summary and description. Consistent formatting on the sending side is what keeps auto-created issues usable instead of needing manual cleanup afterward."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Mail Handler Type options",
+      "columns": ["Option", "What it does"],
+      "rows": [
+        ["Create a new issue or add a comment to an existing issue", "The default. Creates a new issue for unrecognised subjects, adds a comment when the subject line references an existing issue key."],
+        ["Add a comment from the non quoted email body", "Adds only the new reply text to an existing issue as a comment, stripping out quoted history automatically."],
+        ["Add a comment with the entire email body", "Adds the full email, quoted history included, as a comment on an existing issue."],
+        ["Create a new issue from each email message", "Always creates a new issue, even for a reply to a thread already linked to one."],
+        ["Add a comment before a specified marker or separator in the email body", "Adds only the text before a separator string you choose, useful when senders include a fixed signature or footer."],
+        ["Cloud Email Handler", "Jira's own built-in handler, used for the default \"Comments from emails\" configuration rather than picked when building a custom one."]
+      ],
+      "note": "Options and order as shown in the Mail Handler Type dropdown at the time of recording; Atlassian may rename or add to this list over time."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "An email sent a while ago never turned into an issue",
+      "cause": "Jira only processes messages with a sent date within the last 7 days.",
+      "fix": "Ask the sender to resend the request if the original email is older than a week."
     },
     {
-      "heading": "Keep email formatting consistent going forward",
-      "body": "Once the handler is live, coach anyone emailing into it to keep subject lines short and put the actual request early in the body, since that's what becomes the issue summary and description. Consistent formatting on the sending side is what keeps auto-created issues actually usable instead of needing manual cleanup after the fact."
+      "problem": "The created issue is missing the file the sender attached",
+      "cause": "Attachments carry over automatically, but the email plus attachments together exceed Jira's 25 MB limit.",
+      "fix": "Ask the sender to resend with a smaller file or share a link instead of attaching it directly."
+    },
+    {
+      "problem": "Every email creates an Epic instead of a Task or Bug",
+      "cause": "Issue Type defaults to Epic until it's changed, and it's easy to skip on first setup.",
+      "fix": "Edit the handler and set Issue Type to whatever matches the incoming request."
+    },
+    {
+      "problem": "Emails from a CRM or ticketing tool never create issues",
+      "cause": "The Bulk setting defaults to \"Ignore the email and do nothing\" for anything carrying a Precedence: bulk or Auto-Submitted header.",
+      "fix": "Change Bulk to accept that mail if you actually want automated senders to open issues."
     }
   ],
   "faq": [
-    { "question": "Do I need Jira admin access to set up email issue creation?", "answer": "Yes, configuring the incoming mail handler happens under Jira admin settings, which requires administrator permissions on the instance." },
-    { "question": "Can any email automatically become a Jira issue?", "answer": "Only emails sent to the address tied to your configured mail handler are processed — the Catch Email Address field lets you restrict this further to a specific recipient address." },
-    { "question": "What issue type does an email create by default?", "answer": "Whatever you set in the handler's Issue Type field during setup; it defaults to a generic type but should be changed to match how you actually want incoming requests classified, such as Task or Bug." },
-    { "question": "Can attachments in the email be added to the Jira issue?", "answer": "Most email handler setups support carrying over attachments from the original email onto the created issue, though it's worth testing with a sample attachment to confirm." },
-    { "question": "What happens to bulk or automated emails sent to the handler?", "answer": "By default the Bulk setting is \"Ignore the email and do nothing,\" which prevents automated or bulk-flagged messages from spawning issues — change this only if you specifically want that mail processed." }
+    { "question": "Do I need Jira admin access to set up email issue creation?", "answer": "Yes. Configuring an incoming mail handler requires the \"Administer Jira\" global permission on the instance." },
+    { "question": "Can any email automatically become a Jira issue?", "answer": "Only emails sent to the address tied to your configured mail handler are processed, and the Catch Email Address field lets you restrict that further to one specific recipient address." },
+    { "question": "What issue type does an email create by default?", "answer": "Whatever the handler's Issue Type field is set to; it defaults to Epic and should be changed to match how incoming requests should be classified, such as Task or Bug." },
+    { "question": "Do attachments in the email carry over to the Jira issue?", "answer": "Yes, automatically, as long as attachments are enabled in Jira. The email plus its attachments must stay under Jira's 25 MB combined limit." },
+    { "question": "Why didn't an old email turn into an issue?", "answer": "Jira only processes messages with a sent date within the last 7 days. Anything older is skipped." },
+    { "question": "Is a Jira \"issue\" the same thing as a \"work item\"?", "answer": "Yes. Atlassian has been renaming \"issue\" to \"work item\" across Jira Cloud since March 2025. It's the same underlying data, permissions and workflow under a new label, and both terms still turn up depending on which screen you're on." }
   ],
+  "references": [
+    { "label": "Atlassian Support: Create work items and comments from email (official)", "url": "https://support.atlassian.com/jira-cloud-administration/docs/create-issues-and-comments-from-email/" },
+    { "label": "Atlassian Community: It's here, 'Work' is the new collective term for all items you track in Jira (official Atlassian announcement)", "url": "https://community.atlassian.com/forums/Jira-articles/It-s-here-Work-is-the-new-collective-term-for-all-items-you/ba-p/2954892" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough, which itself shows Atlassian's issue-to-work-item rename in progress. The mail handler fields, the attachment behaviour, the 25 MB size limit and the 7-day processing window were checked against Atlassian's official support documentation, and the terminology change was checked against Atlassian's own community announcement, in September 2026. The attachment answer (previously hedged as \"worth testing\") and the terminology note are corrections this pass added.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

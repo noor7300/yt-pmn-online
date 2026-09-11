@@ -2,42 +2,78 @@
   "slug": "how-to-delete-a-user-on-google-workspace-from-home-page-of-admin-console-easily-",
   "seoTitle": "How to Delete a User in the Google Workspace Console",
   "metaDescription": "Follow this quick guide to deleting a user in the Google Workspace Admin Console, from locating the account to confirming the deletion is complete.",
-  "intro": "Whether someone left the company or you're tidying up unused accounts, removing a user from Google Workspace is a task every admin ends up doing sooner or later. The button itself is easy to find once you know where to look, but the screen that follows asks you to make a real decision about what happens to that person's Gmail, Drive files, and Classroom data before the account disappears for good. This guide walks through the Admin Console's Home page shortcut for deleting a user and explains what each option on the confirmation screen actually does, so you're not guessing at the moment it matters most.",
+  "intro": "Whether someone left the company or you're tidying up unused accounts, removing a user from Google Workspace is a task every admin ends up doing sooner or later. The button itself is easy to find once you know where to look, but the screen that follows asks you to make a real decision about what happens to that person's Gmail, Drive files, and Classroom data before the account disappears for good. This guide walks through the Admin Console's Home page shortcut for deleting a user and explains what each option on the confirmation screen does, so you're not guessing at the moment it matters most.",
+  "prerequisites": [
+    "A Google Workspace admin account with the User management privilege",
+    "The email address of a manager or teammate to name as the new owner, if you plan to transfer any of the deleted user's data"
+  ],
   "steps": [
     {
       "heading": "Open the Admin Console and find the Users card",
-      "body": "Sign in with an administrator account and land on the Admin Console Home page. Rather than digging through the Directory menu on the left, the Home page itself has a \"Manage Workspace\" section with a Users card that lists the three most common actions: Add a user, Delete a user, and Reset password. This shortcut is the fastest route in if you already know who you're removing and don't need to browse the full directory first.",
+      "body": "Sign in with an administrator account and land on the Admin Console Home page. Instead of digging through the Directory menu on the left, the Home page itself has a \"Manage Workspace\" section with a Users card that lists the three most common actions: Add a user, Delete a user, and Reset password. This shortcut is the fastest route in if you already know who you're removing and don't need to browse the full directory first.",
       "image": { "file": "/screenshots/psmxI61wwmA/03.webp", "caption": "The Admin Console Home page. The Users card under Manage Workspace has a direct \"Delete a user\" link, next to Billing, Groups, and Support." }
     },
     {
       "heading": "Search for the account you want to remove",
-      "body": "Clicking \"Delete a user\" prompts you to search for the person, either by name or by their Workspace email address. Take a moment here — deletion in Workspace is not instantly reversible after the recovery window closes, so confirm you've selected the exact account before continuing, especially in an organization where similar names are common."
+      "body": "Clicking \"Delete a user\" prompts you to search for the person, either by name or by their Workspace email address. Take a moment here: deletion in Workspace is not instantly reversible once the recovery window closes, so confirm you've selected the exact account before continuing, especially in an organization where similar names are common."
     },
     {
-      "heading": "Review the data transfer warning before confirming",
-      "body": "Once you select the user, the Admin Console opens a dedicated \"Delete user\" screen, and it leads with a warning: once deleted, the user can't access their account, and any data you haven't transferred is permanently removed after 20 days. Below that warning is a \"Transfer user's data\" section broken out by service — Gmail, Classroom, and other apps like Drive — each with its own transfer option so you can hand off files and mail to a manager or teammate before the account is gone. If you're not ready to commit yet, the same screen links to resetting the password or suspending the account instead, which blocks access without deleting anything.",
+      "heading": "Review the warning and set data transfer options",
+      "body": "Once you select the user, the Admin Console opens a dedicated \"Delete user\" screen, and it leads with a warning: once deleted, the user can't access their account, and any data you haven't transferred is permanently removed after 20 days.\n\nBelow that warning sits a \"Transfer user's data\" section broken out by service. Gmail can be migrated to another account or forwarded to one, so future messages sent to the old address still reach someone. Drive and Docs files, and the user's primary calendar, can be transferred to a named person, typically a manager. Classroom classes the user owned can have ownership handed to another teacher so students don't lose access. Each service has its own Transfer versus Don't transfer choice, and if you're not ready to commit, the same screen links to resetting the password or suspending the account instead, which blocks access without deleting anything.",
       "image": { "file": "/screenshots/psmxI61wwmA/04.webp", "caption": "The Delete user confirmation screen, with per-service data transfer options for Gmail, Classroom, and Drive above the final delete action." }
     },
     {
-      "heading": "Set transfer or discard for each data type",
-      "body": "For Gmail, you can migrate the user's existing email to another account, or set up email forwarding so future messages sent to the old address still reach someone. For Classroom, you'll want to transfer ownership of any classes the user created so students don't lose access to course content. For Drive and other apps, the screen offers a straightforward Transfer versus Don't transfer choice — picking Transfer lets you name a specific person, typically the departing user's manager, to receive their files."
-    },
-    {
       "heading": "Confirm the deletion",
-      "body": "With transfer choices made, complete the flow to permanently remove the user from your organization. The account, and its license, is freed up immediately for reassignment, while any data you chose to transfer starts moving to its new owner in the background rather than disappearing along with the account."
+      "body": "With transfer choices made, complete the flow to permanently remove the user from your organization. The account and its license are freed up immediately for reassignment, while any data you chose to transfer starts moving to its new owner in the background instead of disappearing along with the account."
     },
     {
       "heading": "Verify the account is gone",
-      "body": "Head back to Directory > Users and search for the name or email you just deleted. It should no longer appear in the active user list. If you need to double check a transfer completed, the destination account's Drive or Gmail is the place to look rather than the Admin Console itself, since transferred files simply show up as new content owned by whoever you selected."
+      "body": "Head back to Directory > Users and search for the name or email you just deleted. It should no longer appear in the active user list. To confirm a transfer completed, check the destination account's Drive or Gmail instead of the Admin Console: transferred files simply show up as new content owned by whoever you selected."
+    }
+  ],
+  "tables": [
+    {
+      "title": "What can be transferred before a user is deleted",
+      "columns": ["Data type", "Transfer method", "Who can set it"],
+      "rows": [
+        ["Gmail", "Migrate to another mailbox, or forward new mail", "Any admin with User management privilege"],
+        ["Drive and Docs", "Transfer ownership to a named user", "Super admin"],
+        ["Primary Calendar", "Transfer ownership to a named user", "Super admin"],
+        ["Classroom classes", "Transfer class ownership (Education edition)", "Any admin with the appropriate privilege"]
+      ],
+      "note": "Anything not transferred before deletion is permanently removed 20 days after the account is deleted."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The \"Delete a user\" option doesn't appear on the Home page or in the directory",
+      "cause": "The signed-in admin account doesn't hold the User management privilege, which Google requires for this action.",
+      "fix": "Ask a super admin to either perform the deletion or grant the User management privilege to your admin role."
+    },
+    {
+      "problem": "A deleted user needs their account back, but it's been more than 20 days",
+      "cause": "Google only allows account restoration for up to 20 days after deletion; after that the account and any untransferred data are gone for good.",
+      "fix": "There's no way to restore the account. A new account has to be created manually, and anything that wasn't transferred beforehand is unrecoverable."
+    },
+    {
+      "problem": "Transferred Drive or Gmail data hasn't shown up in the new owner's account yet",
+      "cause": "Data transfers run in the background after you confirm the deletion, not instantly, and large accounts take longer.",
+      "fix": "Check the destination account again after some time has passed instead of looking for a status indicator in the Admin Console."
     }
   ],
   "faq": [
-    { "question": "What happens to a deleted user's data in Google Workspace?", "answer": "Anything you explicitly transfer during the delete flow moves to the account you named. Anything left untransferred is retained for 20 days after deletion and then permanently removed, so review the Gmail, Classroom, and Drive transfer options before confirming." },
-    { "question": "Can I undo a user deletion in Google Workspace?", "answer": "Google Workspace allows account restoration within a limited window after deletion (typically up to 20 days), but it's not guaranteed indefinitely, so treat the delete action as effectively final and use suspension instead if you're unsure." },
-    { "question": "Do I need admin permissions to delete a Google Workspace user?", "answer": "Yes. Only an account with the appropriate admin role can see the Delete a user option in the Admin Console, and the same role determines whether you can also manage data transfer for that user." },
-    { "question": "Will deleting a user free up a license for someone else?", "answer": "Yes, removing a user immediately frees up their assigned Workspace license, which you can then assign to a new or existing account." },
+    { "question": "What happens to a deleted user's data in Google Workspace?", "answer": "Anything you explicitly transfer during the delete flow moves to the account you named. Anything left untransferred is retained for 20 days after deletion and then permanently removed, so review the Gmail, Drive, Calendar, and Classroom transfer options before confirming." },
+    { "question": "Can I undo a user deletion in Google Workspace?", "answer": "Google allows account restoration for up to 20 days after deletion, but not indefinitely, so treat the delete action as effectively final and use suspension instead if you're unsure." },
+    { "question": "Do I need admin permissions to delete a Google Workspace user?", "answer": "Yes. Only an account with the User management privilege can see the Delete a user option in the Admin Console, and the same privilege determines whether you can manage data transfer for that user." },
     { "question": "What's the difference between suspending and deleting a user?", "answer": "Suspending blocks a user from signing in while keeping their account and data intact and reversible at any time. Deleting removes the account outright and starts the 20-day countdown on any data you didn't transfer, so suspension is the safer first step if you're not certain yet." }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Admin Help: Delete or remove a user from your organization (official)",
+      "url": "https://knowledge.workspace.google.com/admin/users/delete-or-remove-a-user-from-your-organization"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The 20-day retention and restoration window, the per-service transfer options, and the User management privilege requirement were re-checked against Google's official Admin Console Help documentation in September 2026. The primary calendar transfer option, present in Google's documentation but missing from the original draft, has been added; no other factual corrections were needed.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

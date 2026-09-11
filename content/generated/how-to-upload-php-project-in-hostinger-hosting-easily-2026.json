@@ -1,47 +1,94 @@
 {
   "slug": "how-to-upload-php-project-in-hostinger-hosting-easily-2026",
   "seoTitle": "How to Upload a PHP Project to Hostinger Hosting 2026",
-  "metaDescription": "Ready to deploy your PHP project on Hostinger? Here's how to upload it via File Manager, place files in public_html, set up a database, and go live.",
-  "intro": "Getting a PHP project onto Hostinger comes down to two things: putting your files in the directory your domain actually serves, and connecting a database if your code needs one. Hostinger's hPanel gives you a browser-based File Manager that handles both jobs without installing anything locally, which is the fastest route for most beginners. This guide walks through the real hPanel screens — from the account dashboard down to the public_html folder — so you know exactly what you're clicking before you get there. By the end your PHP files will be live at your domain, with the common permission and directory mistakes covered along the way.",
+  "metaDescription": "Ready to deploy your PHP project on Hostinger? Here's how to upload it via File Manager, place files in public_html, connect a database correctly, and fix the errors that follow.",
+  "intro": "Getting a PHP project onto Hostinger comes down to two things: putting your files in the directory your domain serves, and connecting a database if your code needs one. Hostinger's hPanel gives you a browser-based File Manager that handles both jobs without installing anything locally, which is the fastest route for most beginners.\n\nThis guide walks through the real hPanel screens, from the hosting dashboard down to the public_html folder, and corrects a couple of assumptions that trip people up: the database fields you fill in yourself versus what Hostinger fills in for you, and which archive formats File Manager will actually unpack.",
+  "prerequisites": [
+    "An active Hostinger hosting plan with your domain already pointed to it",
+    "Your PHP project's files, zipped into a single archive if there are many of them"
+  ],
   "steps": [
     {
-      "heading": "Sign in to your Hostinger account",
-      "body": "Start at hostinger.com and log in with your email and password, or through Google or Facebook if you connected one of those at signup. Once you're authenticated you land in hPanel, Hostinger's central control panel for every hosting plan, domain, and email account tied to your profile. If you manage more than one site, this is also where you pick which hosting plan you're uploading the PHP project to before doing anything else. Bookmark this login screen — you'll come back to it any time you need to touch files, databases, or domain settings."
-    },
-    {
-      "heading": "Open your hosting from the hPanel home screen",
-      "body": "hPanel's home screen lists every active service on your account as its own card: your hosting plan, any Horizons website projects, your free email addresses, and backup status. Find the Hosting card for the plan your domain runs on and click Manage to open it. From there the left-hand menu exposes Websites, Domains, Emails, Billing, and more — Websites is what you want next, since that's the entry point to File Manager. Confirming you're in the right hosting plan here matters if you run multiple sites, since uploading to the wrong one means your project won't be reachable at the domain you expect.",
-      "image": { "file": "/screenshots/uPJyZvN25mc/03.webp", "caption": "The hPanel home screen. Each card — Hosting, Horizons, Emails — links to a specific service, and Hosting is where the File Manager for your PHP project lives." }
+      "heading": "Open your hosting from hPanel",
+      "body": "Log in at hostinger.com to reach hPanel, Hostinger's control panel for every hosting plan, domain, and email account on your profile. The home screen lists each active service as its own card: your hosting plan, any Horizons projects, your email addresses, and backup status. Find the Hosting card for the plan your domain runs on and click Manage. From the left-hand menu that opens, Websites is the entry point to File Manager. If you run multiple sites, confirm you're in the right plan here; uploading to the wrong one means your project won't be reachable at the domain you expect.",
+      "image": { "file": "/screenshots/uPJyZvN25mc/03.webp", "caption": "The hPanel home screen. Each card, Hosting, Horizons, Emails, links to a specific service, and Hosting is where the File Manager for your PHP project lives." }
     },
     {
       "heading": "Open File Manager and locate public_html",
-      "body": "File Manager opens to a folder tree, and public_html is the one that matters: it's the web root Hostinger serves when someone visits your domain. Anything placed directly inside public_html becomes reachable at yourdomain.com, while a subfolder like public_html/myapp becomes yourdomain.com/myapp. If you're replacing an existing site, check what's already there first — a WordPress install, for instance, leaves folders like wp-admin and wp-content that you don't want to overwrite by accident. Create a dedicated folder for your PHP project if you want it isolated from anything else running on the same hosting account.",
-      "image": { "file": "/screenshots/uPJyZvN25mc/04.webp", "caption": "File Manager open to public_html, Hostinger's default web root — folders here are what your domain actually serves." }
+      "body": "File Manager opens to a folder tree, and public_html is the one that matters: it's the web root Hostinger serves when someone visits your domain. Anything placed directly inside public_html becomes reachable at yourdomain.com, while a subfolder like public_html/myapp becomes yourdomain.com/myapp. If you're replacing an existing site, check what's already there; a WordPress install, for instance, leaves folders like wp-admin and wp-content you don't want to overwrite by accident. Create a dedicated folder for your PHP project if you want it isolated from anything else on the same hosting account.",
+      "image": { "file": "/screenshots/uPJyZvN25mc/04.webp", "caption": "File Manager open to public_html, Hostinger's default web root. Folders here are what your domain actually serves." }
     },
     {
-      "heading": "Upload your PHP files",
-      "body": "With public_html (or your chosen subfolder) open, use the upload icon in the top toolbar to select your PHP files from your computer. For a project with many files, it's much faster to zip everything locally first, upload the single zip, then use File Manager's extract option to unpack it directly on the server rather than uploading file by file. Once extracted, double check that your entry file — usually index.php — sits at the top level of the folder you're serving from, since a nested extra folder is one of the most common reasons a fresh upload doesn't load.",
-      "image": { "file": "/screenshots/uPJyZvN25mc/05.webp", "caption": "The File Manager toolbar — the upload icon is how you push files or a zipped project folder into public_html." }
+      "heading": "Upload and extract your PHP files",
+      "body": "With public_html (or your chosen subfolder) open, use the upload icon in the top toolbar to select your files. For a project with many files, zip everything locally first, upload the single archive, then right-click it and choose Extract instead of uploading file by file. Hostinger's File Manager unpacks .zip, .tar, .tar.gz, .tar.bz2, .tar.xz, .tar.lz4, and .tar.sz; it does not support .rar, so re-compress in one of those formats first if that's what you have.\n\nOnce extracted, check that your entry file, usually index.php, sits at the top level of the folder you're serving from. A nested extra folder from the zip is one of the most common reasons a fresh upload doesn't load. If a large archive stalls partway through, it's likely hitting your plan's PHP upload size limit rather than a connection problem; that's covered below.",
+      "image": { "file": "/screenshots/uPJyZvN25mc/05.webp", "caption": "The File Manager toolbar. The upload icon is how you push files or a zipped project folder into public_html." }
     },
     {
       "heading": "Create a database if your project needs one",
-      "body": "If your PHP code connects to MySQL, create the database from hPanel's Databases section before you test the site — most projects will throw a connection error until this exists. Hostinger generates the database name, username, and host automatically; copy all three along with the password into your project's config file exactly as shown, since a typo here is one of the most common causes of a blank white page after upload. Some projects also expect you to import a starting .sql file through phpMyAdmin, which is linked from the same Databases page."
+      "body": "If your PHP code connects to MySQL, create the database from hPanel's Databases section before you test the site; most projects throw a connection error until it exists. You type in the database name, username, and password yourself. Hostinger doesn't generate these for you, but it does prepend a fixed account prefix, something like u123456789_, to both the name and username, and that prefix can't be removed or changed. The password needs at least 8 characters, with one number, one uppercase letter, and one lowercase letter, or Hostinger rejects it at creation.\n\nCopy the full name and username, prefix included, into your project's config file exactly as they appear in hPanel; the host is normally localhost. Note that each database can only have one user on shared hosting; a second user for the same database needs a VPS plan. Some projects also expect a starting .sql file imported through phpMyAdmin, linked from the same Databases page."
     },
     {
       "heading": "Check file permissions if something won't load",
-      "body": "PHP projects occasionally fail after upload because a folder or file has permissions too restrictive for the web server to read or write to it — commonly directories meant for caching, uploads, or logs. In File Manager, right-click the affected folder and adjust permissions, typically 755 for directories and 644 for files, unless your project's documentation specifies otherwise. This is also the point to double check you extracted into the correct directory, since a misplaced folder produces the same blank-page symptoms as a permissions problem."
+      "body": "PHP projects occasionally fail after upload because a folder or file has permissions too restrictive for the web server to read or write to it, commonly directories meant for caching, uploads, or logs. In File Manager, right-click the affected folder and use the Permissions option to adjust it. Hostinger's own documentation doesn't publish a specific default; 755 for directories and 644 for files is the general convention most PHP applications expect, so use that unless your project's own documentation says otherwise. This is also a good point to double check you extracted into the correct directory, since a misplaced folder produces the same blank-page symptoms as a permissions problem."
     },
     {
       "heading": "Confirm the site is live",
-      "body": "Visit your domain in a fresh browser tab, ideally in a private or incognito window so you're not seeing a cached version. If your project pulls data from the database, click through to a page that depends on it to confirm the connection details you entered actually work end to end, not just that the homepage renders. A blank page or a visible PHP error at this stage almost always traces back to either the wrong upload directory or a database credential mismatch, both covered above."
+      "body": "Visit your domain in a fresh browser tab, ideally in a private or incognito window so you're not looking at a cached version. If your project pulls data from the database, click through to a page that depends on it to confirm the connection details actually work end to end, not just that the homepage renders. A blank page or a visible PHP error at this stage almost always traces back to the wrong upload directory or a database credential mismatch, both covered above."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Archive formats File Manager can extract",
+      "columns": ["Format", "Extension"],
+      "rows": [
+        ["ZIP", ".zip"],
+        ["TAR", ".tar"],
+        ["Gzip-compressed TAR", ".tar.gz"],
+        ["Bzip2-compressed TAR", ".tar.bz2"],
+        ["XZ-compressed TAR", ".tar.xz"],
+        ["LZ4-compressed TAR", ".tar.lz4"],
+        ["Snappy-compressed TAR", ".tar.sz"]
+      ],
+      "note": "RAR is not on this list; re-compress as one of the above first. From Hostinger's official File Manager documentation, checked September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The zip upload fails or stalls partway through",
+      "cause": "The file is larger than the PHP upload_max_filesize value configured for your plan.",
+      "fix": "Raise it in hPanel under Hosting > Advanced > PHP Configuration > PHP Options (uploadMaxFilesize), or add php_value lines for upload_max_filesize and post_max_size to public_html/.htaccess, keeping post_max_size larger than upload_max_filesize."
+    },
+    {
+      "problem": "Right-clicking my archive doesn't offer Extract",
+      "cause": "The archive is in a format File Manager can't unpack, most often .rar.",
+      "fix": "Re-compress the same files as .zip, or one of the supported tar variants, on your computer and upload that instead."
+    },
+    {
+      "problem": "My PHP code can't connect even though the credentials look right",
+      "cause": "Hostinger prepends a fixed account prefix, like u123456789_, to both the database name and username, and it's easy to paste the un-prefixed name into a config file by mistake.",
+      "fix": "Copy the full database name and username exactly as hPanel's Databases list shows them, prefix included."
+    },
+    {
+      "problem": "Hostinger won't accept the database password I typed",
+      "cause": "Database passwords must be at least 8 characters and include one number, one uppercase letter, and one lowercase letter.",
+      "fix": "Choose a password meeting all four rules; anything shorter or all-lowercase gets rejected at creation."
     }
   ],
   "faq": [
-    { "question": "Should I use File Manager or FTP to upload a PHP project?", "answer": "Either works — File Manager is quicker for smaller projects directly in the browser, while an FTP client like FileZilla is often better suited for larger projects with many files." },
-    { "question": "Do I need a database for every PHP project on Hostinger?", "answer": "No, only projects that rely on stored data need a database set up — simpler PHP scripts can run without one." },
-    { "question": "Why isn't my PHP site loading after upload?", "answer": "This is most often a wrong upload directory or a file permissions issue — check that your files sit directly in public_html (or your chosen subfolder) and that folder permissions haven't been left too restrictive." },
-    { "question": "How long does it take to get a PHP project live on Hostinger?", "answer": "With files already zipped and ready, uploading through File Manager and extracting on the server typically takes just a few minutes, plus a bit more if you also need to create and connect a database." }
+    { "question": "Should I use File Manager or FTP to upload a PHP project?", "answer": "Either works. File Manager is quicker for smaller projects directly in the browser, while an FTP client like FileZilla tends to suit larger projects with many individual files better." },
+    { "question": "Do I need a database for every PHP project on Hostinger?", "answer": "No. Only projects that rely on stored data need a database set up; simpler PHP scripts can run without one." },
+    { "question": "Does Hostinger generate my database name and username for me?", "answer": "No. You type both in yourself. Hostinger only adds a fixed, unremovable account prefix in front of whatever you choose." },
+    { "question": "Can a Hostinger database have more than one user?", "answer": "Not on shared hosting; each database is limited to one user there. A second user for the same database requires upgrading to a VPS plan." },
+    { "question": "Why isn't my PHP site loading after upload?", "answer": "Most often a wrong upload directory or a file permissions issue. Check that your files sit directly in public_html (or your chosen subfolder) and that folder permissions haven't been left too restrictive." },
+    { "question": "How long does it take to get a PHP project live on Hostinger?", "answer": "With files already zipped and ready, uploading through File Manager and extracting on the server typically takes a few minutes, plus a bit more if you also need to create and connect a database." }
   ],
+  "references": [
+    { "label": "Hostinger: How to use the Hostinger File Manager (official)", "url": "https://www.hostinger.com/support/4548688-basic-actions-in-the-file-manager-in-hostinger/" },
+    { "label": "Hostinger: How to extract archives using File Manager (official)", "url": "https://support.hostinger.com/en/articles/1583613-how-to-extract-archives-using-file-manager" },
+    { "label": "Hostinger: How to create a new MySQL Database (official)", "url": "https://www.hostinger.com/support/1583542-how-to-create-a-new-mysql-database-in-hostinger/" },
+    { "label": "Hostinger: How to increase upload_max_filesize and PHP values (official)", "url": "https://www.hostinger.com/support/4622447-how-to-increase-upload-max-filesize-and-php-values-on-cpanel-at-hostinger/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2026. Database field behavior, archive format support, and upload size limits were re-checked against Hostinger's official documentation in September 2026. That check corrected the original claim that Hostinger auto-generates the database name and username (it only adds a fixed prefix you can't change), added the password's character requirements, added the one-user-per-database limit on shared hosting, and confirmed .rar archives are not supported for extraction. The 755/644 permissions guidance is a general PHP hosting convention, not a value Hostinger's own documentation states as a default, and is now described that way.",
   "generatedAt": "2026-08-07T12:00:00Z",
   "deep": true
 }

@@ -1,8 +1,11 @@
 {
   "slug": "how-to-use-bar-replay-in-tradingview-for-free-solve-not-working-alternatives-202",
   "seoTitle": "How to Use TradingView Bar Replay for Free in 2026",
-  "metaDescription": "Learn how to use TradingView's Bar Replay for free, fix it when it's greyed out or not working, and find alternatives if your plan limits access.",
-  "intro": "Bar Replay lets you rewind a TradingView chart to any earlier point and step forward bar by bar, watching a setup unfold the way it actually happened rather than judging it in hindsight. This guide walks through turning it on from a live chart, what its controls actually do, and where free-plan limits tend to show up as the feature seeming greyed out or restricted rather than genuinely broken. By the end you'll know exactly which button does what and what to check first when replay won't cooperate.",
+  "metaDescription": "Turn on TradingView's Bar Replay, fix it when the toolbar won't appear, and see exactly how much intraday history a free plan actually gives you.",
+  "intro": "Bar Replay lets you rewind a TradingView chart to any earlier point and step forward bar by bar, watching a setup unfold the way it happened instead of judging it in hindsight. This guide covers turning it on from a live chart, what its controls do, and where the real limits sit — which is not quite where most people assume. By the end you'll know which button does what and what to check first when the replay toolbar refuses to appear.",
+  "prerequisites": [
+    "A TradingView account, signed in"
+  ],
   "steps": [
     {
       "heading": "Start from a normal chart before turning on replay",
@@ -11,50 +14,82 @@
     },
     {
       "heading": "Turn on Bar Replay and pick your starting bar",
-      "body": "Click the Bar Replay icon and a new control bar appears at the bottom of the chart: Select bar, playback controls (step back, play, step forward), a speed selector currently set to 1x, and a timeframe indicator matching your chart. Click Select bar, then click anywhere on the chart's history to set your replay starting point — everything after that point disappears from view until you play it back. A red Sell and blue Buy button also appear at the bottom, letting you simulate entering a position right from the replay bar as if you were trading live.",
+      "body": "Click the Bar Replay icon and the chart drops into starting-point selection: hover over the price history and a vertical guide follows the cursor. Click the point you want to start from and everything after it disappears from view until you play it back. A new control bar appears at the bottom of the chart with playback controls (step back, play, step forward) and a speed selector currently set to 1x, plus Buy and Sell buttons that let you place simulated trades right from the replay bar, as if you were trading live.",
       "image": { "file": "/screenshots/Ny4PlVCVDVQ/03.webp", "caption": "Bar Replay's control bar at the bottom of the chart, with Select bar, playback controls, speed, and simulated Buy/Sell buttons." }
     },
     {
-      "heading": "Set the update interval for how fast bars reveal",
-      "body": "Switching to a daily chart and clicking the replay speed control opens an Update Interval menu with choices like 1 hour, 2 hours, 3 hours, 4 hours, 1 day, or Auto select interval. This controls how much time passes with each step or tick of playback, independent of your chart's own timeframe — useful when you want to blow through a slow multi-month range quickly but still see each daily candle form individually rather than jumping straight to the end.",
-      "image": { "file": "/screenshots/Ny4PlVCVDVQ/04.webp", "caption": "The Update Interval menu that controls how much time each replay step advances, separate from your chart's timeframe." }
+      "heading": "Set the replay interval for how fast bars reveal",
+      "body": "Switching to a daily chart and clicking the interval control opens a menu with choices like 1 hour, 2 hours, 3 hours, 4 hours, 1 day, or Auto select interval. This is the amount of time added to the chart with each step of playback — TradingView's own docs describe it as one data update per tick of replay. The options on offer depend on your chart's own timeframe (a 1-minute chart won't offer a 4-hour interval), so it isn't a fully separate setting, but within what's available it lets you blow through a slow multi-month range quickly while still watching each candle form individually instead of jumping straight to the end.",
+      "image": { "file": "/screenshots/Ny4PlVCVDVQ/04.webp", "caption": "The replay interval menu that controls how much time each step advances, scoped to what your chart's timeframe allows." }
     },
     {
       "heading": "Step through and place simulated trades",
-      "body": "With a starting bar and interval chosen, use the play button to run replay forward automatically or the step buttons to advance one bar at a time. The Buy, Sell, and Flatten buttons at the bottom of the replay bar let you open and close a simulated position as price moves, complete with a quantity field and running order line on the chart itself — effectively paper trading against historical data instead of the live market. This is the core of what makes Bar Replay useful for practice: you're forced to make the same decision a live trader would, without knowing what candle comes next.",
+      "body": "With a starting bar and interval chosen, use the play button to run replay forward automatically or the step buttons to advance one bar at a time. The Buy, Sell, and Flatten controls let you open and close a simulated position as price moves, complete with a quantity field and a running order line on the chart — TradingView calls this Replay Trading, and the trade markers it draws on the chart are called Executions. Nothing from a replay session is saved once it ends; it exists only for that run.",
       "image": { "file": "/screenshots/Ny4PlVCVDVQ/05.webp", "caption": "Bar Replay running on a daily chart, with the Buy, Sell, and Flatten buttons active for simulating a trade in real time." }
+    }
+  ],
+  "costNote": "Bar Replay doesn't require a paid plan on its own, but how much intraday history you can replay does. A free Basic account gets Bar Replay only on daily-and-higher timeframes; replaying an intraday chart (1-minute, 5-minute, and so on) needs an Essential plan or above. See the table below for what each tier gives you.",
+  "tables": [
+    {
+      "title": "Bar Replay intraday depth by plan",
+      "columns": ["Plan", "1-minute replay history"],
+      "rows": [
+        ["Basic (free)", "Not available — replay works on daily and higher timeframes only"],
+        ["Essential", "6 months (scales up for coarser intraday intervals, e.g. 12 months at 2-minute)"],
+        ["Plus", "1 year (scales up similarly, e.g. 2 years at 2-minute)"],
+        ["Premium & Professional", "All stored 1-minute data for the symbol — back to 2000-2011 for some"]
+      ],
+      "note": "Daily and longer timeframes give every plan the symbol's full stored history for replay. Figures are TradingView's own, checked against their support documentation in September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Clicking Bar Replay does nothing — no toolbar appears at the bottom of the chart",
+      "cause": "The chart is on a type or symbol Bar Replay doesn't support: Renko, Kagi, Point & Figure, Range, Line Break, Volume Footprint or Time Price Opportunity charts, a spread (formula) symbol, or a symbol converted to a non-default currency.",
+      "fix": "Switch to a standard candlestick or bar chart on a regular symbol, then click Bar Replay again."
     },
     {
-      "heading": "Know what's actually a free-plan limit",
-      "body": "Most of what's shown above — activating replay, stepping through bars, and placing simulated trades — works on a free TradingView account. Where free plans get restricted is usually how far back you can set your starting bar and how many chart types or extra indicators you can layer on top while replaying. If Bar Replay looks greyed out entirely, check that you're not trying to use it on a symbol or chart type that's Pro-only rather than assuming the feature itself is broken — it's a plan gate far more often than a bug."
+      "problem": "The starting bar won't go back as far as I need on an intraday chart",
+      "cause": "This is a plan limit rather than a bug. A free Basic account only gets Bar Replay on daily-and-higher timeframes; deeper intraday history needs Essential or a higher plan.",
+      "fix": "Switch the chart to a daily timeframe, or upgrade if intraday replay depth is what you actually need."
     },
     {
-      "heading": "Fall back on alternatives if you're plan-limited",
-      "body": "If your free account's Bar Replay range is too short for the strategy you're testing, a few workarounds get you most of the way there without upgrading: manually scroll the chart to an earlier period and mentally track price action bar by bar, use a Pine Script backtesting strategy instead of manual replay, or test the same setup on a different free charting platform that offers its own replay tool. None of these fully replace TradingView's replay controls, but they can bridge the gap while you decide whether a paid plan is worth it for your trading volume."
+      "problem": "Buy/Sell trade markers clutter the chart every time you replay",
+      "cause": "Executions and Execution Labels are on by default in Replay Trading.",
+      "fix": "Open Settings, go to the Trading tab, and turn off Executions and Execution Labels."
     }
   ],
   "faq": [
     {
       "question": "Is Bar Replay free on TradingView?",
-      "answer": "Yes, the core Bar Replay controls — selecting a starting bar, stepping through history, and simulating trades — work on a free account, though how far back you can go is more limited than on paid plans."
+      "answer": "Yes, Bar Replay itself doesn't need a paid plan. What's gated is intraday depth: a free Basic account only replays daily-and-higher timeframes, so 1-minute or 5-minute replay needs an Essential plan or above."
     },
     {
-      "question": "Why is Bar Replay not working or greyed out for me?",
-      "answer": "This is usually a plan or symbol restriction rather than a bug — check that the chart type and time range you're trying to replay are available on your current plan."
+      "question": "Why doesn't the Bar Replay toolbar appear when I click it?",
+      "answer": "Almost always an unsupported chart type or symbol: Renko, Kagi, Point & Figure, Range, Line Break, Volume Footprint, Time Price Opportunity, a spread symbol, or a currency-converted symbol. Switch to a standard chart type and a regular symbol and try again."
     },
     {
-      "question": "What does the Update Interval control in Bar Replay?",
-      "answer": "It sets how much time each replay step advances — options like 1 hour, 4 hours, or 1 day — separately from your chart's own timeframe, so you can move through history faster or slower."
+      "question": "What does the replay interval control?",
+      "answer": "How much time is added to the chart with each step — for example 1 minute or 1 day. The options depend on your chart's own timeframe, and TradingView auto-selects a sensible one when it's set to Auto."
     },
     {
-      "question": "Can I simulate trades without upgrading to premium?",
-      "answer": "Yes, the Buy, Sell, and Flatten buttons in Bar Replay work on free accounts for simulating trades against historical price action."
+      "question": "Can I place simulated trades during replay without a paid plan?",
+      "answer": "Yes. Replay Trading's Buy, Sell, and Flatten controls work on a Basic account within whatever timeframe replay is available to you on that plan."
     },
     {
-      "question": "What is Bar Replay used for?",
-      "answer": "It lets traders rewind the chart to a past point and step forward bar by bar, practicing chart reading and trade decisions as if trading in real time."
+      "question": "What can I do if my plan's replay range isn't long enough?",
+      "answer": "Scroll the chart manually to the period you want and track price action bar by bar without the automated controls, or build a Pine Script backtesting strategy instead of relying on manual replay. Neither fully replaces Bar Replay, but both work within a free plan while you decide whether upgrading is worth it."
     }
   ],
+  "references": [
+    { "label": "TradingView Help Center: How do I turn Bar Replay on? (official)", "url": "https://www.tradingview.com/support/solutions/43000474024-how-do-i-turn-bar-replay-on/" },
+    { "label": "TradingView Help Center: How much data is available for Bar Replay? (official)", "url": "https://www.tradingview.com/support/solutions/43000692816-how-much-data-is-available-for-bar-replay/" },
+    { "label": "TradingView Help Center: Bar Replay doesn't work, there is no Replay toolbar (official)", "url": "https://www.tradingview.com/support/solutions/43000475470-bar-replay-doesn-t-work-there-is-no-replay-toolbar/" },
+    { "label": "TradingView Help Center: Learn to trade on historical data (official)", "url": "https://www.tradingview.com/support/solutions/43000691889-learn-to-trade-on-historical-data/" },
+    { "label": "TradingView Help Center: How do I disable Executions in Bar Replay? (official)", "url": "https://www.tradingview.com/support/solutions/43000744131-how-do-i-disable-executions-in-bar-replay/" },
+    { "label": "TradingView Help Center: How to select replay interval for the Bar Replay (official)", "url": "https://www.tradingview.com/support/solutions/43000739158-how-to-select-replay-interval-for-the-bar-replay/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. Plan limits, unsupported chart types, the replay-interval behaviour, and the Executions terminology were re-checked against TradingView's official Help Center in September 2026. That check corrected the article's earlier claim that free-plan replay is limited mainly by how far back you can start — the real free-plan limit is that intraday timeframes aren't replayable at all on Basic, only daily and higher — and added the unsupported-chart-type and Executions-toggle details it didn't previously carry.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

@@ -1,60 +1,97 @@
 {
   "slug": "how-to-add-a-payment-method-in-hostinger-for-ecommerce-store-manager-2026-easily",
   "seoTitle": "Add a Payment Method in Hostinger Store Manager",
-  "metaDescription": "Connect PayPal, Stripe, or a local payment processor to your Hostinger eCommerce store so you can accept payments.",
-  "intro": "Linking a payment method is the step that turns a Hostinger website from a page people can browse into a store that can actually take money. The setting lives inside Store Manager's Payments section, and connecting a provider like Stripe involves a real verification step, not just typing in a few settings. This guide walks through logging in, finding the payment settings inside Store Manager, and completing the Stripe verification screen you'll actually see during setup.",
+  "metaDescription": "Connect Stripe, PayPal, or a region-specific gateway to your Hostinger eCommerce store, including the PayPal business account and Stripe review step people miss.",
+  "intro": "Linking a payment method is the step that turns a Hostinger website from a page people can browse into a store that can take money. The setting lives inside Store Manager's Payments section, and connecting Stripe involves a real verification step, not just typing in a few settings. This guide walks through logging in, finding the payment settings inside Store Manager, and the two prerequisites people tend to skip past: an Ecommerce-capable plan and, for PayPal, a business account instead of a personal one.",
+  "prerequisites": [
+    "A Hostinger Ecommerce-enabled store. Ecommerce is billed as its own subscription, and newer Unlimited and Cloud hosting plans no longer include it automatically",
+    "A PayPal Business account if you plan to accept PayPal; a personal PayPal account can't be connected"
+  ],
+  "costNote": "Hostinger Ecommerce is its own subscription, not a feature bundled free into every hosting plan. Business Web and Cloud plan holders get full Ecommerce access with no feature locks; newer Unlimited or Cloud hosting subscriptions don't include it. Connecting Stripe or PayPal itself is free; each processor's own transaction fees apply on top.",
   "steps": [
     {
       "heading": "Log in to your Hostinger account",
-      "body": "Open hostinger.com in your browser and click Log in at the top right. Sign in with your Hostinger credentials to reach hPanel, the control panel where hosting, domains, and store settings all live. If you're new, you'll see promotional offers for hosting and AI website tools on the homepage first — none of that is required to set up payments, so head straight for the login button rather than getting pulled into a plan upgrade.",
+      "body": "Open hostinger.com in your browser and click Log in at the top right. Sign in with your Hostinger credentials to reach hPanel, the control panel where hosting, domains, and store settings all live. If you're new, you'll see promotional offers for hosting and AI website tools on the homepage first. None of that is required to set up payments, so head straight for the login button instead of getting pulled into a plan upgrade.",
       "image": { "file": "/screenshots/QkoKefBu5Fg/01.webp", "caption": "The Hostinger homepage with the Log in button in the top-right corner, where the payment setup process starts." }
     },
     {
       "heading": "Open Store Manager for your site",
-      "body": "From hPanel, find the website running your store and open its Store Manager. You'll land on an overview page with a \"Set up your store\" checklist tracking your progress — items like adding your first product, setting up a payment method, and updating your company information, each with a checkmark once done. This checklist is a useful sanity check: if \"Set up a payment method\" already shows a green checkmark, a gateway is already connected, and you're here to change or add one rather than set up from scratch.",
+      "body": "From hPanel, find the website running your store and open its Store Manager. You'll land on an overview page with a \"Set up your store\" checklist tracking your progress: items like adding your first product, setting up a payment method, and updating your company information, each with a checkmark once done. If \"Set up a payment method\" already shows a green checkmark, a gateway is already connected, and you're here to change or add one instead of setting up from scratch.",
       "image": { "file": "/screenshots/QkoKefBu5Fg/02.webp", "caption": "The Store Manager overview with its setup checklist, showing \"Set up a payment method\" already marked complete." }
     },
     {
-      "heading": "Navigate to Settings, then Payments",
-      "body": "In the left-hand sidebar, click Settings to expand it, which reveals Store details, Company information, Payments, Shipping, Checkout, Emails, Taxes, and Invoices. Click Payments — this is the section where you add, edit, or remove the gateways your store accepts. It's easy to go looking for this under a top-level \"Payments\" menu item instead, but in Store Manager it sits nested under Settings alongside the store's other configuration pages.",
+      "heading": "Navigate to Settings, then Payments, and pick a gateway",
+      "body": "In the left-hand sidebar, click Settings to expand it, which reveals Store details, Company information, Payments, Shipping, Checkout, Emails, Taxes, and Invoices. Click Payments. It's easy to go looking for this under a top-level \"Payments\" menu item instead, but in Store Manager it sits nested under Settings.\n\nHostinger's builder supports Stripe and PayPal everywhere, plus two gateways tied to specific countries: Razorpay for stores in India and Paysera for stores in Lithuania. If you're outside those two countries, Stripe and PayPal are the options. If more than one applies to you, choose based on where your customers are instead of which name you recognize; a local gateway can mean lower fees or a checkout customers already trust.",
       "image": { "file": "/screenshots/QkoKefBu5Fg/03.webp", "caption": "The expanded Settings menu in Store Manager, with Payments listed alongside Shipping, Checkout, and Taxes." }
     },
     {
-      "heading": "Connect a provider and complete verification",
-      "body": "Choose a supported gateway — Stripe is built directly into Hostinger's Website Builder for secure payments, and PayPal or a local processor may also be available depending on your region. When you connect Stripe specifically, expect a real identity verification step: a \"Verify your login\" screen asking for a 6-digit code from your authenticator app before the connection completes. This isn't optional friction to skip past — it's Stripe confirming you're the account holder before it starts routing customer payments through your store, so have your authenticator app ready before you start this step.",
+      "heading": "Connect the gateway and complete verification",
+      "body": "Click Connect next to the gateway you chose. For PayPal, you'll need a PayPal Business account; a personal PayPal account can't be linked here. For Stripe, you'll authenticate with an existing Stripe account or create one, then complete a \"Verify your login\" screen asking for a 6-digit code from your authenticator app. That screen confirms you're the account holder, but it isn't the end of Stripe's checks: Stripe still reviews and verifies the submitted details afterward, which Hostinger's documentation puts at 1-3 business days, and emails you once it's approved.",
       "image": { "file": "/screenshots/QkoKefBu5Fg/05.webp", "caption": "The Stripe verification screen shown when connecting payments through Hostinger Website Builder, asking for a 6-digit authenticator code." }
     },
     {
-      "heading": "Pick the gateway that fits your customers",
-      "body": "If more than one option is available, choose based on where your customers actually are rather than which provider you've heard of most. Stripe and PayPal both cover a wide range of countries and cards, but local processors sometimes offer lower fees or faster payouts in specific regions, and some customers trust a familiar local brand at checkout more than an international one. You can typically enable more than one gateway at once, letting customers pick their preferred option at checkout instead of forcing everyone through a single processor."
+      "heading": "Confirm it's live before you announce the store",
+      "body": "Once the connection is saved, go back to the Store Manager overview and confirm the payment method checklist item now shows complete. Before sending real traffic to the store, place a small test order if your provider supports test mode, or check the provider's own dashboard to confirm the store is correctly linked to your account. If you connected Stripe, remember its review can still be pending even though the checklist item is checked. Catching a misconfigured or still-pending gateway before launch is far less painful than finding out from a customer whose checkout failed."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "PayPal's Connect button won't finish, or PayPal rejects the account",
+      "cause": "Hostinger's PayPal integration requires a PayPal Business account. A personal PayPal account can't be connected.",
+      "fix": "Upgrade to, or create, a PayPal Business account, then reconnect."
     },
     {
-      "heading": "Confirm it's live before you announce the store",
-      "body": "Once the connection is saved, go back to the Store Manager overview and confirm the payment method checklist item now shows complete. Before sending real traffic to the store, place a small test order if your provider supports test mode, or check the provider's own dashboard to confirm the store is correctly linked to your account. Catching a misconfigured gateway before launch is far less painful than finding out from a customer whose checkout failed."
+      "problem": "Stripe shows as connected, but live payments don't seem to be going through yet",
+      "cause": "Stripe reviews and verifies new accounts after the initial setup screens, which Hostinger's documentation states typically takes 1-3 business days.",
+      "fix": "Wait for Stripe's approval email before assuming the connection failed."
+    },
+    {
+      "problem": "Razorpay or Paysera doesn't show up as an option",
+      "cause": "Razorpay is limited to stores in India and Paysera to stores in Lithuania. Both are tied to the store's country, not a globally available option.",
+      "fix": "Check your store's country setting, or use Stripe or PayPal if you're outside those two countries."
     }
   ],
   "faq": [
     {
       "question": "Which payment methods does Hostinger's Store Manager support?",
-      "answer": "Stripe is built directly into Hostinger Website Builder for secure payments, and PayPal or other local or custom gateways may also be available depending on your location."
+      "answer": "Stripe and PayPal are available everywhere. Razorpay is available for stores based in India, and Paysera for stores based in Lithuania."
     },
     {
       "question": "Where is the Store Manager located?",
-      "answer": "Open hPanel after logging in, find the website running your store, and open its Store Manager. Payment settings live under Settings → Payments inside that view."
+      "answer": "Open hPanel after logging in, find the website running your store, and open its Store Manager. Payment settings live under Settings, then Payments, inside that view."
     },
     {
       "question": "Do I need to verify my identity to connect Stripe?",
-      "answer": "Yes. When connecting Stripe through Hostinger Website Builder, you'll be asked to enter a 6-digit verification code from your authenticator app before the connection is completed."
+      "answer": "Yes. You'll complete a screen asking for a 6-digit code from your authenticator app, and Stripe separately reviews the account afterward, which Hostinger's documentation says typically takes 1-3 business days before full approval."
     },
     {
-      "question": "Why is adding a payment method important for a Hostinger store?",
-      "answer": "It's the core requirement for turning website traffic into actual revenue by letting customers pay for what they order — without it, products can be browsed but not purchased."
+      "question": "Can I connect my personal PayPal account?",
+      "answer": "No. Hostinger's PayPal integration requires a PayPal Business account. A personal account can't be linked to the store, and Stripe and PayPal can both run at once if you want customers to have a choice at checkout."
     },
     {
-      "question": "Can I use more than one payment gateway at once?",
-      "answer": "Typically yes — many stores enable both an international option like Stripe or PayPal and a local processor, letting customers choose their preferred method at checkout."
+      "question": "Does adding a payment method cost anything beyond my hosting plan?",
+      "answer": "Connecting Stripe or PayPal is free. Hostinger Ecommerce itself, though, is billed as its own subscription; some newer Unlimited and Cloud hosting plans don't include it, and each processor charges its own transaction fees once you're live."
     }
   ],
+  "references": [
+    {
+      "label": "Hostinger AI Builder: Online payment gateways (official)",
+      "url": "https://www.hostinger.com/support/6538413-hostinger-ai-builder-online-payment-gateways/"
+    },
+    {
+      "label": "Hostinger AI Builder: Enabling Stripe payments (official)",
+      "url": "https://www.hostinger.com/support/6538420-hostinger-ai-builder-enabling-stripe-payments/"
+    },
+    {
+      "label": "Hostinger Website Builder: Enabling PayPal Payments (official)",
+      "url": "https://www.hostinger.com/support/6940790-website-builder-enabling-paypal-payments"
+    },
+    {
+      "label": "Hostinger Ecommerce: Product overview (official)",
+      "url": "https://www.hostinger.com/support/hostinger-ecommerce-what-is-hostinger-ecommerce/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The full list of supported gateways (Stripe and PayPal everywhere, Razorpay in India, Paysera in Lithuania), the PayPal Business account requirement, Stripe's 1-3 business day review window, and Hostinger Ecommerce's status as a separate subscription were checked against Hostinger's official documentation in September 2026. The recording only showed Stripe and PayPal, so this guide previously said nothing about Razorpay, Paysera, the PayPal Business account requirement, or Ecommerce being billed separately from hosting.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

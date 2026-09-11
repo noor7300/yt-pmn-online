@@ -1,47 +1,88 @@
 {
   "slug": "how-to-remove-google-workspace-account-2026-easily",
   "seoTitle": "How to Fully Remove a Google Workspace Account 2026",
-  "metaDescription": "Shutting down Google Workspace? Here's how to sign in as admin, remove users, cancel billing, delete the organization, and release your domain safely.",
-  "intro": "Closing out a Google Workspace account involves more than canceling a subscription — you need to sign into the Admin Console as an administrator, work through the Account section to reach organization deletion, remove users, cancel billing, and decide what happens to your domain. This guide follows the real Admin Console screens for that process, from picking the right administrator account at sign-in to finding the Account settings where deletion actually lives. It's aimed at freelancers, startups, and small business owners who signed up for a trial or a short-term project and now want to shut things down cleanly, without getting billed again or losing data they meant to keep.",
+  "metaDescription": "Shutting down Google Workspace? Here's the real order of operations: back up first, cancel billing, delete the organization from Account management, and what actually happens to your domain.",
+  "intro": "Closing out a Google Workspace account involves more than canceling a subscription. You need an account with the right administrator privilege, a completed backup, every subscription canceled, and a trip to the Account management screen where deletion actually lives.\n\nThis guide follows the real Admin Console screens for that process and corrects a detail that trips a lot of people up: there is no separate step to \"release\" your domain. Deleting the organization does that on its own. It's aimed at freelancers, startups, and small business owners who signed up for a trial or a short-term project and now want to shut things down cleanly, without getting billed again or losing data they meant to keep.",
+  "prerequisites": [
+    "The Domain settings administrator privilege on the Workspace account you're closing",
+    "Anything you want to keep, exported before you start: Google Takeout, the admin Data Export tool, and your billing invoices all become unreachable the moment the account is deleted"
+  ],
   "steps": [
     {
-      "heading": "Sign in with your administrator account",
-      "body": "Head to admin.google.com and Google will prompt you to choose which account to continue with — this matters because only an account with administrator privileges can reach the settings needed to remove the organization. If you manage several Workspace accounts, as many freelancers and agencies do, take a second to confirm you're picking the right one before continuing; the account picker lists the email address under each profile name so you can check the domain matches the Workspace you're actually closing.",
-      "image": { "file": "/screenshots/4y0Mvf5FfpE/03.webp", "caption": "Google's account picker at admin.google.com. Deleting a Workspace organization requires signing in with an administrator account, not a regular user login." }
+      "heading": "Sign in with the right administrator account",
+      "body": "Head to admin.google.com and Google prompts you to choose which account to continue with. Deleting the organization itself needs more than ordinary admin access: Google requires the Domain settings administrator privilege specifically. If you manage several admin-level accounts, confirm the one you're using actually carries that privilege before you get deep into the process. If you manage more than one Workspace organization, the account picker lists the email address under each profile name, so check the domain matches the one you're actually closing.",
+      "image": { "file": "/screenshots/4y0Mvf5FfpE/03.webp", "caption": "Google's account picker at admin.google.com. Deleting a Workspace organization requires an account with the Domain settings administrator privilege, not just any admin login." }
     },
     {
-      "heading": "Back up anything you need before deleting",
-      "body": "Before touching removal settings, download any emails, Drive files, or other data tied to the organization that you want to keep, since deleting a Workspace account removes access to that content for good. Google Takeout, reachable from your account settings, lets you export Gmail, Drive, Calendar, and other services in bulk rather than pulling files one at a time. This step is easy to skip when you're in a hurry to stop being charged, but it's the one you can't undo after the fact."
+      "heading": "Back up everything Google will delete for good",
+      "body": "Once you delete the organization, Google states plainly that none of it comes back: mail, Drive files, users, groups, organizational units, even your own billing history. Google's own pre-deletion checklist covers more than a personal export. Save or print your billing invoices and payment receipts, since billing records become unreachable the moment the account is gone. Run Google Takeout, or the admin-level Data Export tool, for Gmail, Drive, Calendar, and Chat across your users. Uninstall any Google Workspace Marketplace apps still connected, and delete any Google Cloud or Apps Script projects tied to the organization, since none of that is cleaned up automatically by deleting the account.\n\nYou don't have to suspend or delete individual users first. Deleting the organization removes every user, group, and organizational unit on its own. Doing it manually beforehand is only worth the time if you want a chance to check what's tied to a specific mailbox before it disappears."
     },
     {
-      "heading": "Search the Admin Console if you're not sure where to start",
-      "body": "The Admin Console's search bar at the top of the screen accepts plain-language queries, and typing something like \"remove\" pulls up related help articles alongside matching settings. It's a useful sanity check before an irreversible action like deleting an organization — you can confirm what the deletion actually does to users, billing, and your domain before clicking anything. The settings you actually need for deletion itself live under the Account section of the left-hand menu, not under Billing or Users directly.",
-      "image": { "file": "/screenshots/4y0Mvf5FfpE/01.webp", "caption": "Typing \"REMOVE\" into the Admin Console search bar surfaces related help articles — a quick way to confirm you're heading toward the right setting before you commit to deleting anything." }
+      "heading": "Cancel every subscription except Cloud Identity Free",
+      "body": "Google won't let you delete the organization while a paid subscription is still active, with one exception: Cloud Identity Free can't be canceled and doesn't block deletion. From Billing, or from Account, then Account settings, then Account management, select your subscription, choose Cancel Subscription, pick a reason when prompted, and confirm through to Cancel My Subscription. If you're mid-trial rather than a paying subscriber, there's often nothing left to unwind here, but it's still worth confirming nothing shows as active before you move on."
     },
     {
-      "heading": "Remove users from the organization",
-      "body": "Under Directory in the left menu, go through the list of users and either suspend or delete each account no longer in use. Removing users individually first, rather than relying solely on organization-level deletion, gives you a chance to confirm nothing important is tied to a specific mailbox before it's gone. For a small team this only takes a few minutes; for a larger org, exporting the user list first makes it easier to track who's been handled."
+      "heading": "Use the search bar if you're unsure where to start",
+      "body": "The Admin Console's search bar at the top of the screen accepts plain-language queries. Typing something like \"remove\" surfaces related help articles alongside matching settings, a reasonable check before an action Google describes as irreversible. The setting you actually need lives under Account, not Billing, which is where most people look first.",
+      "image": { "file": "/screenshots/4y0Mvf5FfpE/01.webp", "caption": "Typing \"REMOVE\" into the Admin Console search bar surfaces related help articles, a quick way to confirm you're heading toward the right setting before committing to anything." }
     },
     {
-      "heading": "Open the Account section to find deletion settings",
-      "body": "Scroll the Admin Console's left navigation past Reporting and Billing to the Account section — this is easy to miss on a first pass, since the instinct is to look for account deletion somewhere inside Billing instead. Account expands into sub-items including Account settings, where Google surfaces the option to delete the Google Workspace subscription and organization entirely. Opening it here, rather than hunting through billing menus, is the direct path to the deletion flow.",
-      "image": { "file": "/screenshots/4y0Mvf5FfpE/05.webp", "caption": "The Admin Console's left-hand menu, scrolled down to Account — this is where organization-level settings, including deletion, live rather than under Billing." }
+      "heading": "Open Account management and delete the account",
+      "body": "Go to Menu, then Account, then Account settings, then Account management. Click Delete Account, check the box confirming you've read what deletion does, and click Delete Account a second time to confirm. You need the Domain settings administrator privilege to see this option at all. If Delete Account isn't there, that privilege is the most likely reason, followed by a subscription other than Cloud Identity Free still needing to be canceled first.",
+      "image": { "file": "/screenshots/4y0Mvf5FfpE/05.webp", "caption": "The Admin Console's left-hand menu, scrolled to Account. Account management here, not Billing, is where the Delete Account option lives." }
     },
     {
-      "heading": "Cancel billing before you delete the organization",
-      "body": "From the Billing section, cancel your active subscription so you're not charged again, ideally before you finalize the organization deletion — cancellation and deletion are handled as separate steps in the Admin Console. If you're mid-trial rather than a paid subscriber, this step is usually quicker since there's no active payment method to unwind, but it's still worth confirming there isn't a scheduled charge pending."
+      "heading": "Know what happens after you click Delete Account",
+      "body": "You're signed out immediately and lose access to the Admin Console, including billing records, so anything you meant to save from step two needs to already be saved. Every user, group, and organizational unit is deleted and, per Google, can't be restored. There's no separate step for releasing the domain: deleting the organization automatically frees it within 24 hours for use with a new Google Account, whether that's a different Workspace setup or a personal Gmail-based one."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Cancel Subscription vs. Delete Account",
+      "columns": ["Action", "What it does", "Can you undo it?"],
+      "rows": [
+        ["Cancel Subscription (Billing)", "Stops future billing on that subscription; the organization and its data can still exist afterward", "Often recoverable for a period; check the Billing section"],
+        ["Delete Account (Account management)", "Removes every user, group, and organizational unit, ends your own admin access, and frees the domain within 24 hours", "No. Google states this cannot be undone"]
+      ],
+      "note": "From Google Workspace's official Admin Help pages, checked September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Delete Account doesn't appear in Account management",
+      "cause": "The signed-in account doesn't hold the Domain settings administrator privilege, or a subscription other than Cloud Identity Free is still active.",
+      "fix": "Sign in with an account that holds that specific privilege, and cancel any remaining subscription first. Cloud Identity Free is the one exception that doesn't need canceling."
     },
     {
-      "heading": "Release your domain if you plan to reuse it",
-      "body": "If the domain tied to this Workspace account should keep working with a different provider or a personal Gmail setup, release it as the final step so it isn't stuck pointing at a deleted organization. Google walks you through domain release from within the same account deletion flow, and it's worth doing in the same session rather than coming back to it later, since a domain still attached to a deleted org can complicate re-verifying ownership elsewhere."
+      "problem": "There's no button to release my domain",
+      "cause": "There isn't a separate manual release step in the Admin Console.",
+      "fix": "Complete the account deletion. The domain becomes available for a new Google Account on its own, within 24 hours."
+    },
+    {
+      "problem": "I can't find my old invoices after deletion",
+      "cause": "Billing records become unreachable the moment the account is deleted, and there's no way to retrieve them from Google afterward.",
+      "fix": "Save or print invoices and payment receipts from the Billing section before you delete the account."
+    },
+    {
+      "problem": "A Google Cloud project or Marketplace app is still active after I thought I'd shut everything down",
+      "cause": "Deleting the Workspace organization doesn't automatically remove installed Marketplace apps or associated Google Cloud and Apps Script projects.",
+      "fix": "Uninstall Marketplace apps and delete Cloud or Apps Script projects yourself, before or shortly after deleting the organization."
     }
   ],
   "faq": [
-    { "question": "Will I lose my data if I delete my Google Workspace account?", "answer": "Yes, deleting the account can permanently remove associated data, which is why it's worth downloading anything important through Google Takeout before starting the removal process." },
-    { "question": "Do I need to cancel billing separately from deleting the account?", "answer": "Yes — canceling billing and deleting the Workspace organization are separate steps in the Admin Console, and skipping billing cancellation risks being charged again." },
-    { "question": "Can I keep using my domain after removing Google Workspace?", "answer": "Yes, releasing your domain from Workspace as part of the deletion flow lets you continue using it with another email provider or purpose once the account is shut down." },
-    { "question": "Where in the Admin Console is account deletion actually located?", "answer": "It's under the Account section of the left-hand menu, in Account settings — not inside Billing, which is where most people first look for it." }
+    { "question": "Will I lose my data if I delete my Google Workspace account?", "answer": "Yes. Google states the deletion can't be undone, which is why it's worth exporting anything important through Google Takeout or the admin Data Export tool, and saving your billing records, before you start." },
+    { "question": "Do I need to cancel billing separately from deleting the account?", "answer": "Yes. Google won't let you delete the organization while a paid subscription is active, with one exception: Cloud Identity Free can't be canceled and doesn't block deletion." },
+    { "question": "Can I keep using my domain after removing Google Workspace?", "answer": "Yes. There's no separate manual step for it; deleting the organization automatically frees the domain within 24 hours for use with a different provider or a personal Gmail setup." },
+    { "question": "Where in the Admin Console is account deletion actually located?", "answer": "Under Account, then Account settings, then Account management, where the Delete Account button lives. It's not inside Billing, which is where most people first look for it." },
+    { "question": "Do I need to remove all users before deleting the organization?", "answer": "No. Deleting the organization automatically removes every user, group, and organizational unit. Removing them individually first only helps if you want to review what's tied to a mailbox beforehand." },
+    { "question": "What admin privilege do I need to delete the organization?", "answer": "The Domain settings administrator privilege specifically. Without it, the Delete Account option won't appear even for other kinds of admin accounts." },
+    { "question": "What happens to Google Cloud projects or Marketplace apps?", "answer": "Nothing, automatically. Deleting the Workspace organization doesn't remove installed Marketplace apps or associated Google Cloud and Apps Script projects; those need to be deleted separately." }
   ],
+  "references": [
+    { "label": "Google Workspace Admin Help: Delete your organization's Google Account (official)", "url": "https://support.google.com/a/answer/9468554?hl=en" },
+    { "label": "Google Workspace Admin Help: Cancel a subscription or your account (official)", "url": "https://support.google.com/a/answer/9420777?hl=en&authuser=1" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2026. The deletion process, admin privilege requirement, and domain-release behavior were re-checked against Google Workspace's official Admin Help documentation in September 2026. That check corrected the original claim that domain release is a manual step inside the deletion flow (it isn't; deletion frees the domain automatically within 24 hours), added the Domain settings administrator privilege requirement, added the Cloud Identity Free exception to subscription cancellation, clarified that removing users first is optional rather than required, and added the pre-deletion items the original omitted: billing records, Marketplace apps, and Google Cloud or Apps Script projects.",
   "generatedAt": "2026-08-07T12:00:00Z",
   "deep": true
 }

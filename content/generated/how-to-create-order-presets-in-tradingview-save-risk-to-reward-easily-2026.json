@@ -1,48 +1,70 @@
 {
   "slug": "how-to-create-order-presets-in-tradingview-save-risk-to-reward-easily-2026",
   "seoTitle": "Create Order Presets in TradingView",
-  "metaDescription": "Learn how to configure a reusable order in TradingView's trading panel, including units, percent risk, and stop loss, so you can size trades consistently.",
-  "intro": "Typing the same units, risk percentage, and stop distance into the order ticket before every single trade is the kind of friction that leads to mistakes when the market is moving fast. TradingView's trading panel keeps all of that on one screen, and once you understand how the fields feed into each other, setting up a consistent, repeatable order takes seconds instead of a minute of manual math. This guide walks through opening the panel from a live chart, filling in units and percent risk, and attaching a stop loss with the actual price and dollar amount calculated for you.",
+  "metaDescription": "Learn how to configure units, percent risk, and stop loss in TradingView's order ticket, then save the whole setup with TradingView's dedicated Order presets feature so it's one click next time.",
+  "intro": "Typing the same units, risk percentage, and stop distance into the order ticket before every single trade is the kind of friction that leads to mistakes when the market is moving fast. TradingView's order ticket keeps those fields on one screen, and once units, percent risk, and a stop are filled in, a dedicated Order presets feature lets the whole configuration be saved and reapplied in a click instead of rebuilt from scratch. This guide walks through filling in the ticket, then turning that into an actual saved preset.",
+  "prerequisites": [
+    "A TradingView account with either Paper Trading or a connected broker active, since the order ticket only appears once one of those is available"
+  ],
   "steps": [
     {
       "heading": "Open a chart and get your bearings",
-      "body": "Start from a normal TradingView chart with your symbol loaded — the example here is BTCUSD on the daily timeframe, with EMA and SMA lines plotted so the trend context is visible before any order gets placed. The buy and sell price boxes in the top left update live, and this is also where you'd switch timeframes if you want to plan an entry against a different chart resolution than the one you're currently trading from.",
+      "body": "Start from a normal TradingView chart with your symbol loaded — the example here is BTCUSD on the daily timeframe, with EMA and SMA lines plotted so the trend context is visible before any order gets placed. The buy and sell price boxes in the top left update live, and this is also where you'd switch timeframes to plan an entry against a different chart resolution than the one currently open.",
       "image": { "file": "/screenshots/JYl196QFvOY/01.webp", "caption": "A BTCUSD daily chart with EMA and SMA close values shown, the starting point before opening an order." }
     },
     {
       "heading": "Open the trading panel and pick your order type",
-      "body": "Click the trade button, or click directly on the Buy or Sell price box, to slide out the order ticket over the chart. Across the top are three order types — Market, Limit, and Stop — and Limit is the one to use if you want to specify an exact entry price rather than taking whatever the market offers right now. With Limit selected, a Price field and a Ticks field appear, letting you set your entry either as a specific price or as a number of ticks away from the current ask."
+      "body": "Click the trade button, or click directly on the Buy or Sell price box, to slide out the order ticket over the chart. Across the top are three order types: Market, Limit, and Stop. Limit is the one to use for an exact entry price instead of whatever the market offers right now. With Limit selected, a Price field and a Ticks field appear, setting the entry as a specific price or as a number of ticks away from the current ask."
     },
     {
       "heading": "Set your Units and switch to percent risk",
-      "body": "The Units field controls position size directly, but the more useful field next to it is the dropdown currently showing \"% risk\" — this is what turns your position size into a risk-based calculation instead of a fixed number you have to work out yourself. With a small Units value and no stop set yet, the risk percentage sits near zero, which is your cue that the position size and the eventual stop loss are linked and need to be set together, not independently.",
+      "body": "The Units field controls position size directly, but the more useful field next to it is the dropdown showing \"% risk\". This turns position size into a risk-based calculation instead of a fixed number worked out by hand. With a small Units value and no stop set yet, the risk percentage sits near zero, a cue that position size and the eventual stop loss are linked and need to be set together, not independently.",
       "image": { "file": "/screenshots/JYl196QFvOY/03.webp", "caption": "The Limit order ticket open on a Paper Trading account, with Units and a % risk dropdown sitting next to the Price and Ticks fields." }
     },
     {
-      "heading": "Attach a Stop Loss and let TradingView calculate the rest",
-      "body": "Check the Stop Loss box below Units, and four linked fields appear: Ticks, Price, USD, and percent. Enter your stop in whichever unit is most natural for how you think about risk — ticks away from entry, or a hard price — and TradingView fills in the rest. In this example, a 25-tick stop against a 118011 entry price works out to a 117986 stop price, a 275.40 USD risk, and 0.28% of account equity, all calculated automatically the moment the stop is entered.",
+      "heading": "Attach a Stop Loss and Take Profit, and let TradingView calculate the rest",
+      "body": "Check the Stop Loss box below Units, and four linked fields appear: Ticks, Price, USD, and percent. Enter the stop in whichever unit is most natural, ticks away from entry or a hard price, and TradingView fills in the rest. In this example, a 25-tick stop against a 118011 entry price works out to a 117986 stop price, a 275.40 USD risk, and 0.28% of account equity, all calculated the moment the stop is entered. Take Profit sits right next to Stop Loss and works the same way, with whichever field gets filled in first driving the rest. Setting both before submitting is what turns this into a genuine reusable configuration instead of a one-off entry.",
       "image": { "file": "/screenshots/JYl196QFvOY/05.webp", "caption": "Stop Loss enabled with the stop set 25 ticks away, showing the calculated stop price, USD risk, and percent risk fields filled in together." }
     },
     {
-      "heading": "Check the Take Profit side before you commit",
-      "body": "Take Profit sits right next to Stop Loss and works the same way — ticks, price, USD, or percent, whichever you fill in first drives the rest. Setting both before submitting the order is what makes this feel like a genuine preset rather than a one-off entry: your risk and your target are both defined and visible on screen before you click Buy, not adjusted after the fact once the trade is already open."
-    },
-    {
       "heading": "Confirm Time in force and place the order",
-      "body": "Below the risk fields is Time in force, defaulting to Week for a limit order that should stay working until it fills or you cancel it — change this if you want the order to expire sooner. Once everything checks out, the Buy or Sell Mkt button at the bottom submits the order with the units, entry, stop, and target all attached as one package, exactly the way you configured them."
+      "body": "Below the risk fields is Time in force, defaulting to Week for a limit order that stays working until it fills or gets canceled; change this if the order should expire sooner. Once everything checks out, the Buy or Sell Mkt button at the bottom submits the order with units, entry, stop, and target attached as one package, exactly as configured."
     },
     {
-      "heading": "Reuse the same settings on your next trade",
-      "body": "TradingView remembers your last-used order type and field layout, so returning to the ticket on a new symbol starts you close to where you left off rather than from a blank form. If your strategy consistently uses the same risk percentage and a similar tick-based stop, you'll find yourself only changing the entry price and ticks each time, which is most of what a saved preset buys you in practice — a fast, consistent path from chart to order without re-deriving your risk math."
+      "heading": "Turn it into an Order preset",
+      "body": "TradingView has a dedicated Order presets feature for exactly this situation: instead of retyping the same units, percent risk, and stop distance next time, click Order presets inside the order ticket, choose Save Order preset, and give it a name. The saved preset then appears in the ticket's preset menu, and once one exists, a matching preset button also appears next to the chart's Buy/Sell buttons for one-click reuse. In the \"placing orders without confirmation\" mode, the hotkeys Shift+B and Shift+S place an order with the applied preset directly. TradingView caps saved presets at 10 per user, and presets are unique to each connected broker or account, so a different connection starts with its own fresh set of 10."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no obvious way to save the current order setup",
+      "cause": "The Order presets button lives inside the order ticket itself and only appears once the ticket is open, easy to miss if you're looking at the chart toolbar instead.",
+      "fix": "Open the order ticket (Buy/Sell or Trade), then look for Order presets near the top of the ticket and choose Save Order preset."
+    },
+    {
+      "problem": "TradingView won't let me save another preset",
+      "cause": "Saved presets are capped at 10 per user, and the count is unique to each connected broker or account.",
+      "fix": "Delete a preset that's no longer used, or switch to a different broker account, which starts with its own set of 10."
+    },
+    {
+      "problem": "The Take Profit / Stop Loss fields look different on my connected broker than they do here",
+      "cause": "TradingView's own documentation for these fields is written against Paper Trading; real broker integrations vary in which of Ticks, Price, USD, and percent they expose.",
+      "fix": "Check the exact fields available for that broker, or build and test the preset in Paper Trading first, where the full field set is guaranteed."
     }
   ],
   "faq": [
-    { "question": "What is an order preset on TradingView?", "answer": "TradingView's trading panel keeps your order type, units, and risk fields on one ticket that carries over between trades, so setting the same percent risk and stop distance each time functions like a reusable preset even without a dedicated save-template button." },
-    { "question": "Where do I set my risk percentage?", "answer": "In the order ticket, next to Units, there's a dropdown you can switch to \"% risk.\" Combined with a Stop Loss entry, TradingView calculates the exact ticks, price, and USD amount that correspond to your chosen percentage." },
-    { "question": "Does the order ticket show profit and loss projections?", "answer": "Yes. Once Take Profit and Stop Loss are both filled in, their price, USD, and percent fields show you the projected loss and gain for the trade before you submit it." },
-    { "question": "Can I test this without risking real money?", "answer": "Yes — the same order ticket and fields work identically on a Paper Trading account, so you can practice sizing trades by percent risk with simulated funds first." },
-    { "question": "Can I use different order types with the same risk setup?", "answer": "Yes. Market, Limit, and Stop all share the same Units, percent risk, Take Profit, and Stop Loss fields — only the entry price mechanics differ between the three." }
+    { "question": "What is an order preset on TradingView?", "answer": "A saved, named configuration of the order ticket: order type, price, units, percent risk, Take Profit, Stop Loss, and time in force, created with the Order presets button and reapplied later from a menu, a chart button, or a keyboard shortcut." },
+    { "question": "Where do I set my risk percentage?", "answer": "In the order ticket, next to Units, there's a dropdown that can be switched to \"% risk.\" Combined with a Stop Loss entry, TradingView calculates the exact ticks, price, and USD amount that correspond to the chosen percentage." },
+    { "question": "How many order presets can I save?", "answer": "Up to 10 per user, according to TradingView's own documentation, and that count is separate for each connected broker or account, so a different connection gets its own fresh set of 10." },
+    { "question": "Can I test this without risking real money?", "answer": "Yes. The same order ticket, risk fields, and Order presets feature work identically on a Paper Trading account, so sizing trades by percent risk can be practiced with simulated funds first." }
   ],
+  "references": [
+    { "label": "TradingView Help: What are order presets? (official)", "url": "https://www.tradingview.com/support/solutions/43000742709-what-are-order-presets/" },
+    { "label": "TradingView Help: How to create an order preset? (official)", "url": "https://www.tradingview.com/support/solutions/43000742710-how-to-create-an-order-preset/" },
+    { "label": "TradingView Help: How to apply the created preset? (official)", "url": "https://www.tradingview.com/support/solutions/43000742712-how-to-apply-the-created-preset/" },
+    { "label": "TradingView: Optimize your trading with Order presets (official blog)", "url": "https://www.tradingview.com/blog/en/optimize-trading-with-order-presets-48237" }
+  ],
+  "verifiedNote": "Screens and click path come from a screen recording of a BTCUSD Paper Trading order ticket; the Units, % risk, and Ticks/Price/USD/% Stop Loss numbers match the captured frames exactly. The original draft claimed TradingView has no dedicated way to save an order template. That was wrong: TradingView has a named Order presets feature (Order presets button, Save Order preset, a 10-preset-per-broker cap, and Shift+B/Shift+S hotkeys), confirmed in September 2026 against TradingView's official support articles on order presets and the linked blog post. The final step and two FAQ entries were rewritten to describe that feature in place of the earlier 'TradingView remembers your last-used settings' claim, which the recording never demonstrated.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

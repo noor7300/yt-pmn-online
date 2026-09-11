@@ -1,44 +1,104 @@
 {
   "slug": "how-to-know-if-your-shopify-store-is-live-easily-2026",
   "seoTitle": "How to Know if Your Shopify Store Is Really Live 2026",
-  "metaDescription": "Not sure if customers can actually see your Shopify store? Here's how to confirm your store is published, your domain works, and checkout is live.",
-  "intro": "New Shopify sellers often finish setup and still aren't sure whether anyone else can actually see their store. This guide covers the quick checks that confirm your store is genuinely live: reading the real signals in your admin dashboard, confirming your theme's Live status directly in the theme editor, and then verifying your domain, product visibility, and checkout so nothing blocks a customer who finds you. Running through these before you announce your store means you find gaps before a customer does.",
+  "metaDescription": "Not sure customers can see your Shopify store? Here's how to confirm your store is published, your domain works, and checkout is live.",
+  "intro": "New Shopify sellers often finish setup and still aren't sure whether anyone else can see their store. This guide covers the checks that confirm your store is genuinely live: reading the real signals in your admin dashboard, confirming your theme's Live status directly in the theme editor, and then verifying your domain, product visibility, and checkout so nothing blocks a customer who finds you. Running through these before you announce your store means you find gaps before a customer does.",
   "steps": [
     {
       "heading": "Check your admin Home dashboard for real activity",
-      "body": "Your Shopify admin Home page shows Sessions, Total sales, Orders, and Conversion rate for a rolling date range, with a chart plotting sessions day by day. Seeing any nonzero session count here — even a small one — is meaningful: it means real visitors are reaching your storefront, which only happens if the store is published and reachable. A flat chart at zero across every day is your first warning sign that something upstream, like password protection or a broken domain, is blocking traffic before it ever counts.",
+      "body": "Your Shopify admin Home page shows Sessions, Total sales, Orders, and Conversion rate for the last 30 days, with a chart plotting sessions day by day. Seeing any nonzero session count here, even a small one, is meaningful: it means real visitors are reaching your storefront, which only happens if the store is published and reachable. A flat chart at zero across every day is your first warning sign that something upstream, like password protection or a broken domain, is blocking traffic before it ever gets counted.",
       "image": { "file": "/screenshots/j_wbbgIn7XI/02.webp", "caption": "The Shopify admin Home dashboard, showing Sessions, Total sales, Orders, and Conversion rate with a day-by-day traffic chart underneath." }
     },
     {
       "heading": "Open Online Store > Themes and check your current theme",
-      "body": "From the left sidebar, go to Sales channels > Online Store > Themes. This page lists your published theme — labeled \"Current theme\" — along with core performance metrics like LCP (Largest Contentful Paint) and INP (Interaction to Next Paint), both marked \"Good\" in a healthy store. If you see a theme here at all with a Customize button next to it, that confirms you have an active theme assigned to your storefront rather than an unfinished setup with nothing published.",
-      "image": { "file": "/screenshots/j_wbbgIn7XI/03.webp", "caption": "The Themes page under Online Store, showing the current theme (Dawn), its performance scores, and the Customize button that opens the theme editor." }
+      "body": "From the left sidebar, go to Sales channels > Online Store > Themes. This page lists your published theme, labeled \"Current theme\", along with the store's three Core Web Vitals over the last 30 days: LCP (Largest Contentful Paint), INP (Interaction to Next Paint), and Cumulative Layout Shift, each marked \"Good\" in a healthy store. If you see a theme here with a Customize button next to it, that confirms an active theme is assigned to your storefront and not an unfinished setup with nothing published.",
+      "image": { "file": "/screenshots/j_wbbgIn7XI/03.webp", "caption": "The Themes page under Online Store, showing the current theme (Dawn), its LCP/INP/CLS scores, and the Customize button that opens the theme editor." }
     },
     {
       "heading": "Confirm the Live badge in the theme editor",
-      "body": "Click Customize on your current theme to open the theme editor, and look at the top-left corner next to the theme name — a green \"Live\" badge next to \"Dawn 15.4.0\" (or whatever theme you're running) is the most direct confirmation available that this is the theme customers actually see when they visit your store right now, not a draft or unpublished variant. If that badge instead reads something like \"Unpublished\" or is missing entirely, customers are not seeing this theme, no matter how finished it looks in the editor.",
-      "image": { "file": "/screenshots/j_wbbgIn7XI/04.webp", "caption": "The theme editor for the current theme, with a green \"Live\" badge next to the theme name — direct confirmation that this is what customers see." }
+      "body": "Click Customize on your current theme to open the theme editor, and look at the top-left corner next to the theme name. A green \"Live\" badge next to \"Dawn 15.4.0\" (or whatever theme you're running) is direct confirmation that this is the theme customers see when they visit your store right now, not a draft or an unpublished variant. If that badge instead reads \"Draft\" or is missing, customers are not seeing this theme, no matter how finished it looks in the editor.",
+      "image": { "file": "/screenshots/j_wbbgIn7XI/04.webp", "caption": "The theme editor for the current theme, with a green \"Live\" badge next to the theme name, direct confirmation that this is what customers see." }
     },
     {
-      "heading": "Test your domain from outside your own devices",
-      "body": "Open your custom domain in a browser on a different device or network than the one you used to build the store — a phone on mobile data works well for this. You're checking that the domain actually resolves to your storefront rather than a Shopify placeholder page, a parking page from your registrar, or nothing at all, which can happen if DNS records haven't fully propagated yet after connecting a domain."
+      "heading": "Rule out password protection, then test your domain from outside",
+      "body": "Before anything else, check Online Store > Preferences for a \"Restrict access with a password\" setting. Shopify puts every new store into private mode automatically when you sign up, and it stays that way until someone turns it off, so a fully finished store can still be invisible to the public. With that ruled out, open your custom domain in a browser on a different device or network than the one you built the store on; a phone on mobile data works well. You're checking that the domain resolves to your storefront instead of a Shopify placeholder page, a parking page from your registrar, or nothing at all, which can happen while DNS records are still propagating after connecting a domain."
     },
     {
       "heading": "Verify your products are visible, not just created",
-      "body": "Back in the admin, open Products and check that the items you want customers to buy show an Active status and are assigned to the Online Store sales channel specifically. A product can exist in your catalog and still be invisible to shoppers if it's left in Draft status or was never added to that sales channel — both are common gaps after a bulk import or a rushed initial setup."
+      "body": "Back in the admin, open Products and check that the items you want customers to buy show an Active status and are assigned to the Online Store sales channel. A product can exist in your catalog and still be invisible to shoppers if it's left in Draft status or was never added to that channel, both common gaps after a bulk import or a rushed initial setup."
     },
     {
-      "heading": "Run a test purchase to confirm checkout works",
-      "body": "Finally, use Shopify's test payment gateway (Settings > Payments) to run a complete purchase through checkout without charging a real card, or place a genuine low-cost order if you'd rather see the full customer experience end to end. This is the check that catches problems the other steps can't — a misconfigured payment provider or a broken checkout step that only shows up when someone actually tries to pay."
+      "heading": "Run a test order to confirm checkout works",
+      "body": "In Settings > Payments, either turn on test mode for Shopify Payments if that's your provider, or deactivate your live provider and select Test payment gateway from the list of other providers. Either option lets you run a full order through checkout using fake payment details, with no card charged and no real money moving. Placing one order this way catches problems the earlier checks can't: a misconfigured payment provider or a checkout step that only fails once someone tries to pay for real. Remember to switch test mode back off afterward, since customers can't complete real orders while it's on."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Every visitor lands on a password entry page instead of the storefront",
+      "cause": "Shopify sets new stores to private mode by default when you first sign up, and it stays on until you turn it off.",
+      "fix": "Go to Online Store > Preferences, turn off \"Restrict access with a password\" under store access, and save."
+    },
+    {
+      "problem": "The custom domain shows a placeholder, a registrar parking page, or nothing at all",
+      "cause": "The domain was never fully connected in Settings > Domains, or DNS records haven't finished propagating.",
+      "fix": "Recheck the connection status in Settings > Domains. Propagation can take a few hours and occasionally up to 48."
+    },
+    {
+      "problem": "A product doesn't show up on the storefront even though it's in the admin",
+      "cause": "The product's status is Draft, or it was never added to the Online Store sales channel.",
+      "fix": "Open the product, set Status to Active, and confirm Online Store is checked under its sales channels."
+    },
+    {
+      "problem": "A test order won't go through in Settings > Payments",
+      "cause": "A live payment provider is still active and expects a real card, or no provider is selected at all.",
+      "fix": "Deactivate the live provider first, then choose Test payment gateway from the other-providers list, or enable Shopify Payments test mode if that's what the store uses."
     }
   ],
   "faq": [
-    { "question": "Why does my Shopify store show a password page to visitors?", "answer": "Shopify stores start with password protection enabled by default during setup, so if you haven't turned it off in Online Store > Preferences, visitors will hit that page instead of your storefront even if everything else is configured correctly." },
-    { "question": "How do I know if my domain is properly connected?", "answer": "Open your custom domain in a browser on a device or network you haven't used to edit the store, and confirm it loads your actual storefront rather than an error page or a Shopify placeholder." },
-    { "question": "How can I tell if my theme is actually live?", "answer": "Open Online Store > Themes and click Customize on your current theme. A green \"Live\" badge next to the theme name in the top-left corner of the editor confirms customers are seeing that exact theme right now." },
-    { "question": "Can I check if my store is live without making a real purchase?", "answer": "Yes — Shopify offers a test payment mode in Settings > Payments that lets you run through the entire checkout flow without charging a real card." },
-    { "question": "My products aren't showing up on the storefront — why?", "answer": "This usually means the product's status is set to Draft or it hasn't been added to the Online Store sales channel, both of which you can fix from the product's page in Products in your admin." }
+    {
+      "question": "Why does my Shopify store show a password page to visitors?",
+      "answer": "Shopify puts every new store into private mode automatically when you register, so unless you've turned that off in Online Store > Preferences, visitors hit a password page instead of your storefront, even if everything else is configured correctly."
+    },
+    {
+      "question": "How do I know if my domain is properly connected?",
+      "answer": "Open your custom domain on a device or network you haven't used to edit the store, and confirm it loads your actual storefront instead of an error page or a Shopify placeholder."
+    },
+    {
+      "question": "How long does it take for a newly connected domain to start working?",
+      "answer": "Usually a few hours. DNS changes can occasionally take up to 48 hours to propagate fully, so a domain that fails the outside-device test right after connecting isn't necessarily broken."
+    },
+    {
+      "question": "How can I tell if my theme is live?",
+      "answer": "Open Online Store > Themes and click Customize on your current theme. A green \"Live\" badge next to the theme name in the top-left corner of the editor confirms customers are seeing that exact theme right now."
+    },
+    {
+      "question": "Can I check if my store is live without making a real purchase?",
+      "answer": "Yes. Settings > Payments lets you turn on test mode (for Shopify Payments) or switch to the Test payment gateway, either of which lets you run a full checkout without charging a real card."
+    },
+    {
+      "question": "My products aren't showing up on the storefront. Why?",
+      "answer": "Almost always the product's status is Draft, or it hasn't been added to the Online Store sales channel. Both are fixable from the product's page in Products."
+    }
   ],
+  "references": [
+    {
+      "label": "Shopify Help Center: Restrict access to your online store (official)",
+      "url": "https://help.shopify.com/en/manual/online-store/themes/password-page"
+    },
+    {
+      "label": "Shopify Help Center: Theme editor features overview (official)",
+      "url": "https://help.shopify.com/en/manual/online-store/themes/customizing-themes/theme-editor/features-overview"
+    },
+    {
+      "label": "Shopify Help Center: Activating a payment gateway in test mode (official)",
+      "url": "https://help.shopify.com/en/manual/checkout-settings/test-orders/payments-test-mode"
+    },
+    {
+      "label": "Shopify Help Center: Shopify Home page (official)",
+      "url": "https://help.shopify.com/en/manual/shopify-admin/shopify-home"
+    }
+  ],
+  "verifiedNote": "Click paths and screens come from a walkthrough recorded in 2025. The private-mode default, the theme editor's Live/Draft labeling, the three Core Web Vitals shown on the Themes page, the Home page's default metrics, and the test-order options in Settings > Payments were re-checked against Shopify's official Help Center in September 2026. No step was factually wrong; the Themes-page screenshot also showed a Cumulative Layout Shift score the original draft omitted, so that's now mentioned alongside LCP and INP.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

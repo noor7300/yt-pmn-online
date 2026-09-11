@@ -1,44 +1,71 @@
 {
   "slug": "how-to-use-localwp-localwp-full-tutorial-2026-install-wordpress-site-like-localh",
   "seoTitle": "How to Use LocalWP to Build WordPress Sites Offline",
-  "metaDescription": "Learn how to install LocalWP, create a local WordPress site, and add themes and plugins to build and test websites offline before hosting them.",
-  "intro": "LocalWP (usually just called Local) lets you spin up a full WordPress website on your own computer with a few clicks, no hosting account or domain required. This guide covers downloading Local from the official site, running through its site-creation wizard including the environment choice most beginners skip past without understanding, and confirming your new WordPress install is actually running before you touch themes or plugins. It's aimed at anyone who wants a safe, disposable place to practice WordPress or test changes before they ever touch a live server.",
+  "metaDescription": "Install Local (LocalWP), create a local WordPress site, and add themes and plugins to build and test websites offline on Windows, Mac, or Linux before hosting them.",
+  "intro": "Local (often called LocalWP) lets you spin up a full WordPress website on your own computer in a few clicks, no hosting account or domain required. This guide covers downloading Local from the official site, running through its site-creation wizard including the environment choice most beginners skip past without understanding, and confirming a new WordPress install is running before touching themes or plugins. It's aimed at anyone who wants a safe, disposable place to practice WordPress or test changes before they touch a live server.",
+  "prerequisites": [
+    "Windows 10/11 (64-bit), macOS Monterey (12) or later, or a Debian- or RPM-based Linux distro",
+    "About 4GB of RAM and 1.5GB of free disk space, more if you plan to run several sites at once"
+  ],
+  "costNote": "Local costs nothing to download or use. Its official FAQ describes it as free for anyone, and none of the features in this guide, environments, Live Links, SSL, or the database viewer, sit behind a paid tier.",
   "steps": [
     {
-      "heading": "Download Local from the official site",
-      "body": "Local is built by WP Engine and distributed free from localwp.com, where the homepage bills it as \"The #1 local WordPress development tool.\" The site has a straightforward Download button for your operating system — Windows or Mac — and the install itself is a standard desktop app installer with no server configuration required on your end. Local bundles its own PHP, web server, and MySQL, which is the whole point: you get a working WordPress environment without installing any of those pieces separately.",
-      "image": { "file": "/screenshots/4RknZlGsU1I/02.webp", "caption": "The Local by WP Engine homepage, where the app is downloaded free for Windows or Mac before any WordPress site is created." }
+      "heading": "Download and install Local",
+      "body": "Local is built by WP Engine and distributed free from localwp.com, where the homepage bills it as \"The #1 local WordPress development tool.\" It's available for Windows 10/11, macOS Monterey or later, and Linux, as a .deb package for Debian-based distros like Ubuntu or an .rpm for Fedora and Red Hat. The installer needs roughly 1.5GB of free disk space, and Local recommends at least 4GB of RAM. Local bundles its own PHP, web server, and MySQL, so there's nothing else to install separately to get a working WordPress environment.",
+      "image": { "file": "/screenshots/4RknZlGsU1I/02.webp", "caption": "The Local by WP Engine homepage, where the app downloads free for Windows, Mac, or Linux before any WordPress site is created." }
     },
     {
       "heading": "Create a new site and choose your environment",
-      "body": "Once Local is installed, creating a site walks you through a short wizard: naming the site, then choosing an environment. This is the step that trips up beginners, since Local presents two options — Preferred and Custom. Preferred uses Local's recommended, tested combination (in one setup this showed PHP 8.2.27, the nginx web server, and MySQL 8.0.35), which is the right call unless you specifically need to match an older hosting environment you're eventually deploying to. Custom lets you pick different PHP or MySQL versions manually, which matters if your live host runs something older and you want your local site to behave identically before you migrate.",
+      "body": "Once Local is installed, creating a site walks you through a short wizard: name the site, then choose an environment. This is the step that trips up beginners, since Local presents two options, Preferred and Custom. Preferred applies Local's own tested pairing of PHP and MySQL versions with an NGINX web server (one setup showed PHP 8.2.27, nginx, and MySQL 8.0.35), and it suits most beginners. Custom lets you pick different PHP or MySQL versions by hand, which matters if your live host runs something older and you want the local site to behave the same way before you migrate.",
       "image": { "file": "/screenshots/4RknZlGsU1I/04.webp", "caption": "Local's environment selection screen during site setup, with Preferred checked and its PHP, nginx, and MySQL versions listed underneath." }
     },
     {
       "heading": "Confirm the site is live locally",
-      "body": "After the wizard finishes, Local starts the site's local server automatically and it's reachable in your browser like any WordPress install, just pointed at a local address instead of a real domain. A fresh install shows the default WordPress theme with the standard \"Hello world!\" post under Blog, which is your confirmation everything installed correctly and you're ready to start customizing.",
+      "body": "After the wizard finishes, Local starts the site's local server automatically, and it's reachable in your browser like any WordPress install, just pointed at a local address instead of a real domain. A fresh install shows the default WordPress theme with the standard \"Hello world!\" post under Blog: confirmation that everything installed correctly and you're ready to start customizing.",
       "image": { "file": "/screenshots/4RknZlGsU1I/05.webp", "caption": "A freshly created local WordPress site, showing the default \"Hello world!\" post — proof the install completed and the site is running." }
     },
     {
-      "heading": "Install themes, plugins, and Elementor",
-      "body": "From here, working inside your local site is identical to working on a live one: log in to the WordPress dashboard at the site's local admin URL and install themes or plugins from the same Add New screens you'd use anywhere else. Page builders like Elementor install and run the same way, which is exactly why Local is popular for testing — you can try a heavy plugin or a theme switch without any risk to a production site."
-    },
-    {
-      "heading": "Use Local's database and SSL tools",
-      "body": "Local includes built-in tools for opening your site's database directly (commonly through Adminer, accessible from the site's tools menu inside the app) rather than requiring a separate database client. It also offers one-click SSL, which lets your local site run under https so you can test SSL-dependent behavior — mixed-content warnings, certain plugin requirements — before your real domain has a certificate configured."
+      "heading": "Work inside the site: themes, plugins, database, and SSL",
+      "body": "From here, working on your local site is the same as working on a live one. Log in to the WordPress dashboard at the site's local admin URL and install themes or plugins from the same Add New screens you'd use anywhere else. Page builders like Elementor install and run the same way, which is why Local is popular for testing: you can try a heavy plugin or a theme switch with no risk to a production site.\n\nFor the database, open the site's Database tab inside Local and use the built-in database viewer there instead of setting up a separate client, or copy the connection details shown on that tab into an external tool like MySQL Workbench, DBeaver, or TablePlus. For HTTPS, the Site Overview page has an SSL section with a Trust button. One click creates and trusts a certificate so you can test SSL-dependent behavior, such as mixed-content warnings, before your real domain has one configured. On newer macOS versions Local can't always trust the certificate automatically, and you may need to set it to \"Always Trust\" in Keychain Access yourself."
     },
     {
       "heading": "Troubleshoot and export when you're ready to go live",
-      "body": "If a site won't start or a page won't load, the most common fixes are restarting the site from Local's site list or checking the app's built-in logs for the specific service that failed to boot. Once you're happy with the result, Local's export feature packages the site for migration to a real host, which is the intended endpoint of the whole workflow: build and break things locally, then push a finished, tested site live."
+      "body": "If a site won't start, restart it from Local's site list first, then check the app's built-in logs for the specific service that failed to boot before restarting Local itself.\n\nOnce you're happy with the result, right-click the site and choose Export. Local packages the entire wp-content folder, plus a database export, into a single zip: everything a host needs to bring the site online. That's the intended endpoint of the workflow: build and break things locally, then push a finished, tested site live."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The built-in database viewer won't open from the Database tab",
+      "cause": "This is a known intermittent issue with the Adminer-based tool some Local versions ship.",
+      "fix": "Restart the site, or Local itself, and try again. If it still fails, copy the connection details from the Database tab into an external client like MySQL Workbench or TablePlus instead."
+    },
+    {
+      "problem": "A local site won't start",
+      "cause": "A port conflict, or a service the site depends on failed to boot.",
+      "fix": "Restart just that site from Local's site list, then check Local's built-in logs for the specific service before restarting the whole app."
+    },
+    {
+      "problem": "The SSL certificate still shows a browser warning after clicking Trust",
+      "cause": "Recent macOS versions block Local from trusting certificates automatically.",
+      "fix": "Open Keychain Access, find the certificate, and set \"When using this certificate\" to \"Always Trust,\" per Local's macOS SSL documentation."
     }
   ],
   "faq": [
-    { "question": "Is LocalWP free to use?", "answer": "Yes. Local is free to download from localwp.com and is designed to let anyone build and test WordPress sites on their own computer without hosting costs." },
-    { "question": "What's the difference between the Preferred and Custom environment when creating a site?", "answer": "Preferred uses Local's tested default combination of PHP, web server, and MySQL versions. Custom lets you manually choose versions instead, which is useful if you need your local site to match an older live hosting environment exactly." },
-    { "question": "Can I move a site built in LocalWP to a live host later?", "answer": "Yes. Local includes an export feature specifically for packaging your locally built site so it can be pushed to a hosting provider when it's ready to go live." },
-    { "question": "Why isn't my LocalWP site loading?", "answer": "This is often a local server conflict or a site that hasn't fully started. Restarting the site from Local's site list, or checking the app's logs for the specific service that failed, resolves most cases." },
-    { "question": "Does LocalWP work with Elementor and other page builders?", "answer": "Yes. Once your local WordPress site is running, you install Elementor and other plugins from the dashboard exactly as you would on any live WordPress installation." }
+    { "question": "Is Local free to use?", "answer": "Yes. Local's own FAQ describes it as free for anyone to use, with no paid tier gating features like Live Links, SSL, or the database tools covered here." },
+    { "question": "Does Local run on Linux, or only Windows and Mac?", "answer": "All three. Local ships as a .deb package for Debian-based distros such as Ubuntu, and as an .rpm for Fedora and Red Hat, alongside its Windows and macOS builds." },
+    { "question": "What's the difference between the Preferred and Custom environment when creating a site?", "answer": "Preferred uses Local's tested default combination of PHP, web server, and MySQL versions. Custom lets you choose versions manually instead, which helps if you need your local site to match an older live hosting environment exactly." },
+    { "question": "Can I move a site built in Local to a live host later?", "answer": "Yes. Right-click the site and choose Export; Local packages the wp-content folder and a database export into a zip you can hand to almost any host." },
+    { "question": "Why isn't my Local site loading?", "answer": "Often a local server conflict or a site that hasn't fully started. Restarting the site from Local's site list, or checking the app's logs for the specific service that failed, resolves most cases." },
+    { "question": "How do I open my site's database without installing a separate app?", "answer": "Open the site's Database tab inside Local, where a built-in database viewer is one click away. The same tab shows connection details if you'd rather point an external tool such as MySQL Workbench at it instead." }
   ],
+  "references": [
+    { "label": "Local Help Docs: Install Local (official)", "url": "https://localwp.com/help-docs/getting-started/installing-local/" },
+    { "label": "Local Help Docs: SSL in Local (official)", "url": "https://localwp.com/help-docs/getting-started/ssl-in-local/" },
+    { "label": "Local Help Docs: FAQ (official)", "url": "https://localwp.com/help-docs/getting-started/local-by-flywheel-faq/" },
+    { "label": "Local Help Docs: Import/Export a WordPress Site (official)", "url": "https://localwp.com/help-docs/getting-started/how-to-import-a-wordpress-site-into-local/" },
+    { "label": "Local Help Docs: Connect a Database Tool (official)", "url": "https://localwp.com/help-docs/advanced/connect-a-tool-like-mysql-workbench-to-my-local-sites-database/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2026. OS support, minimum system requirements, the SSL Trust flow, the Database tab, and the export/import behavior were re-checked against Local's official help docs in September 2026. That check corrected two things this guide got wrong: Local also ships for Linux, not only Windows and Mac, and its database viewer sits behind the site's Database tab, not a general tools menu.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

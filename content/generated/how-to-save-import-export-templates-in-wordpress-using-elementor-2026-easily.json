@@ -1,12 +1,13 @@
 {
   "slug": "how-to-save-import-export-templates-in-wordpress-using-elementor-2026-easily",
   "seoTitle": "How to Save, Import & Export Templates in Elementor",
-  "metaDescription": "Learn how to save, export as JSON, and import Elementor templates between WordPress sites, plus how to fix templates that won't import correctly.",
-  "intro": "Reusing page designs across WordPress sites, or simply backing up your layouts, is much easier once you know how Elementor's template system works. A page you've built once doesn't have to be rebuilt from scratch on the next client site — save it as a template, export the file, and import it wherever it's needed. This guide covers saving a page to your Template Library, exporting it as a JSON file, importing it elsewhere, and what to check when a template comes in with pieces missing.",
+  "metaDescription": "Save, export as JSON, and import Elementor templates between WordPress sites, including the Site vs Cloud Templates choice and what to check when an import comes in with gaps.",
+  "intro": "Reusing page designs across WordPress sites, or backing up your layouts, gets much easier once you know how Elementor's template system works. A page built once doesn't need rebuilding from scratch on the next client site: save it as a template, export the file, and import it wherever it's needed. This guide covers saving a page to your Template Library, exporting it as a JSON file, importing it elsewhere, and what to check when a template comes in with pieces missing.",
+  "costNote": "Saving, exporting, and importing a single template as JSON (Site Templates) works in both free Elementor and Elementor Pro at no extra cost. Cloud Templates, which sync a template across sites automatically without any manual export or import, need an active Elementor Pro subscription.",
   "steps": [
     {
       "heading": "Open the page you want to reuse",
-      "body": "In the Elementor editor, open the page whose layout you want saved for later — the Widgets panel on the left confirms you're in the standard Elementor editing view, with Layout elements like Container and Grid at the top and Basic elements like Heading and Text Editor below. There's nothing special to configure here; any page you can edit in Elementor can be saved as a template, whether it's a full page, a single section, or a container.",
+      "body": "In the Elementor editor, open the page whose layout you want saved for later. The Widgets panel on the left confirms you're in the standard editing view, with Layout elements like Container and Grid at the top and Basic elements like Heading and Text Editor below. Any page you can edit in Elementor can become a template, whether it's a full page, a single section, or a container.",
       "image": {
         "file": "/screenshots/GyX_Vz0sWQY/03.webp",
         "caption": "A page open in the Elementor editor, ready to be saved. Any page, section, or container built here can become a reusable template."
@@ -14,7 +15,7 @@
     },
     {
       "heading": "Save the page as a template",
-      "body": "Click the small arrow next to the Publish button in the top bar to open its dropdown menu, which shows Save Draft, Save as Template, and View Page. Choose Save as Template, give it a clear, descriptive name — something you'll recognize months later rather than a generic label — and confirm. The design is now stored in your Template Library rather than only existing as this one page, which means you can insert it into any other page on the same site going forward.",
+      "body": "Click the small arrow next to the Publish button to open its dropdown, which shows Save Draft, Save as Template, and View Page. Choose Save as Template and give it a name you'll still recognize months from now.\n\nElementor's own documentation adds a step worth knowing about here: the save dialog now asks you to choose Site Templates or Cloud Templates. Site Templates stores the design locally on this one site, available to anyone with access to it, free on any Elementor plan. Cloud Templates saves it to your personal Elementor account instead, making it reusable on any site you connect that account to, but it needs an active Elementor Pro subscription and is only accessible to the account holder. For the JSON export-and-import workflow in this guide, choose Site Templates.",
       "image": {
         "file": "/screenshots/GyX_Vz0sWQY/05.webp",
         "caption": "The Publish dropdown with Save as Template as an option alongside Save Draft and View Page — this is the single action that moves a page design into your reusable Template Library."
@@ -22,11 +23,11 @@
     },
     {
       "heading": "Export the template as a JSON file",
-      "body": "Navigate to Templates → Saved Templates in the WordPress admin sidebar to see every template you've saved, listed with its type, author, and date. Find the template you just created, and use its export option to download it as a .json file to your computer. This file is the portable version of your design — everything about the layout, widget settings, and content structure is packed into it, ready to move to a different WordPress installation entirely."
+      "body": "Go to Templates → Saved Templates in the WordPress admin sidebar to see every template saved on the site, listed with its type, author, and date. Find the one you just created and use its export option to download it as a .json file.\n\nElementor's current help documentation describes the same export from inside the editor's Template Library instead: open the Template Library, click Templates, find the template, click the ellipsis next to its name, and select Export. Either route produces the same JSON file, and either is fine to use."
     },
     {
       "heading": "Import the template into another site",
-      "body": "On the destination WordPress site, go to the same Templates → Saved Templates screen and click Import Templates near the top of the page. Upload the .json file you exported, and Elementor adds it to that site's Template Library within seconds. From there, insert it into any page the same way you'd insert any saved template — no copy-pasting individual sections or rebuilding anything by hand.",
+      "body": "On the destination site, open the same Templates → Saved Templates screen and click Import Templates near the top. Upload the .json file, and Elementor adds it to that site's Template Library within seconds.\n\nElementor's documentation also supports uploading directly from the in-editor Template Library: open it, click Templates, click the upload icon, select the file (Elementor accepts both .json and .zip here), confirm, then click Insert to add it straight to the page you're on.",
       "image": {
         "file": "/screenshots/GyX_Vz0sWQY/04.webp",
         "caption": "The Saved Templates screen, with Add New Template and Import Templates buttons at the top and existing templates listed below by title, author, and date."
@@ -34,35 +35,75 @@
     },
     {
       "heading": "Fix a template that fails to import or comes in missing widgets",
-      "body": "The most common cause of a broken import is a mismatch in plugins between the two sites — if the original template used a widget from Elementor Pro or a third-party addon plugin, that widget simply won't render on a site that doesn't have the same plugin installed and active. Before importing, check what the template actually relies on; if you built it with a specific icon pack or a form plugin's widget, install that on the destination site first. A template that fails to import entirely, rather than importing with gaps, is usually a corrupted or incomplete JSON file — re-export from the source site and try again."
+      "body": "The most common cause of a broken import is a plugin mismatch between the two sites. If the original template used a widget from Elementor Pro or a third-party addon, that widget won't render on a site missing the same plugin. Check what the template depends on before importing; if it uses a specific icon pack or a form plugin's widget, install that on the destination site first.\n\nA template that fails to import entirely, instead of coming in with gaps, is usually a corrupted or incomplete JSON file. Re-export from the source site and try again."
     },
     {
       "heading": "Keep your Template Library organized",
-      "body": "Once you're saving templates regularly, naming and categorization stop being optional. Use Elementor's Categories option under Templates to group designs by type — headers, testimonial sections, pricing tables — so you're not scrolling through a flat list of similarly-named entries months later. A consistent naming convention, like starting each template's name with the section type it represents, pays off the moment you're hunting for one specific layout across a growing library."
+      "body": "Once you're saving templates regularly, naming and categorization stop being optional. Use Elementor's Categories option under Templates to group designs by type: headers, testimonial sections, pricing tables, so you're not scrolling a flat list of similarly-named entries months later. A consistent naming convention, like starting each template's name with the section type it represents, pays off the moment you're hunting for one specific layout in a growing library."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Elementor's template and export options",
+      "columns": ["Option", "What it moves", "Requires"],
+      "rows": [
+        ["Site Templates (this guide)", "One page, section, or container, manually via JSON/zip export and import", "Free, any Elementor plan"],
+        ["Cloud Templates", "One page, section, or container, synced automatically across any site tied to your account", "Elementor Pro"],
+        ["Website Templates (Kit)", "An entire site: pages, posts, media, theme, plugins, and settings", "Free to export as zip; saving to a cloud library needs an Advanced plan or higher"]
+      ],
+      "note": "From Elementor's own help documentation. If you're moving one design, Site or Cloud Templates are the right tool; for migrating a whole site, use Website Templates under Elementor > Tools instead."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The imported template is missing widgets or sections",
+      "cause": "The destination site doesn't have a plugin or Elementor Pro widget the original template relied on.",
+      "fix": "Check what the template uses before importing, and install any matching plugins or Pro features on the destination site first."
+    },
+    {
+      "problem": "A teammate can't find a template that was saved",
+      "cause": "It was saved to Cloud Templates instead of Site Templates, which ties it to the personal Elementor account of whoever saved it.",
+      "fix": "Re-save the design choosing Site Templates so it lives locally on the site, visible to everyone with access to it."
+    },
+    {
+      "problem": "The import fails completely instead of coming in with gaps",
+      "cause": "Usually a corrupted or incomplete JSON file, not a plugin mismatch.",
+      "fix": "Re-export the template from the source site and upload the fresh file."
     }
   ],
   "faq": [
     {
       "question": "Does exporting Elementor templates work with the free version?",
-      "answer": "Yes, both Elementor Free and Elementor Pro support saving and exporting templates as JSON files from the Saved Templates screen."
+      "answer": "Yes. Saving, exporting, and importing a Site Template as JSON works in both Elementor Free and Elementor Pro. Cloud Templates, which sync across sites automatically, need Elementor Pro."
     },
     {
       "question": "Why is my imported Elementor template missing widgets?",
-      "answer": "This usually happens when the destination site is missing a plugin or Elementor Pro widget that the original template relied on. Check what the template uses before importing and install any matching plugins first."
+      "answer": "Usually because the destination site is missing a plugin or Elementor Pro widget the original template relied on. Check what the template uses before importing and install matching plugins first."
     },
     {
       "question": "Can I import an Elementor template into a completely different theme?",
-      "answer": "Generally yes, since Elementor templates are largely theme-independent, though fonts, colors, or spacing that inherit from the theme's own global styles may look different on the new site."
+      "answer": "Generally yes, since Elementor templates are largely theme-independent, though fonts, colors, or spacing inherited from the theme's own global styles may look different on the new site."
     },
     {
       "question": "How do I move my whole template library to a new website?",
-      "answer": "Export each template as its own JSON file from Saved Templates, then use the Import Templates button on the destination site to bring them in one at a time, or in bulk if your Elementor version supports multi-file import."
+      "answer": "With Elementor Pro, Cloud Templates sync automatically without manual export. On the free version, export each template as its own JSON file from Saved Templates, then import them one at a time on the destination site."
     },
     {
       "question": "Where do I find templates I've already saved?",
-      "answer": "Go to Templates → Saved Templates in the WordPress admin sidebar — every template you've saved on that site is listed there with its type, author, and date."
+      "answer": "Templates → Saved Templates in the WordPress admin sidebar lists them all with type, author, and date. The same templates also appear under My Templates in the in-editor Template Library."
+    },
+    {
+      "question": "Is this the same as exporting my whole website?",
+      "answer": "No. This guide covers a single template. Moving an entire site, pages, media, theme, and plugins included, is a separate feature called Website Templates (or Kits), found under Elementor > Tools."
     }
   ],
+  "references": [
+    { "label": "Elementor Help: Create templates for faster website building (official)", "url": "https://elementor.com/help/create-templates-for-faster-website-building/" },
+    { "label": "Elementor Help: How to Use Elementor Template Library (official)", "url": "https://elementor.com/help/template-library/" },
+    { "label": "Elementor Help: The difference between site templates and cloud templates (official)", "url": "https://elementor.com/help/the-difference-between-site-templates-and-cloud-templates/" },
+    { "label": "Elementor Help: Import and export Elementor website templates (official)", "url": "https://elementor.com/help/import-and-export-elementor-website-templates/" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough using the WordPress admin's Saved Templates screen. Re-checked against Elementor's own help documentation in September 2026, which added the Site Templates vs Cloud Templates choice now shown in the Save as Template dialog, confirmed the in-editor Template Library as an alternate export/import route, and clarified that the separate Website Templates (Kit) feature, not covered by this guide, is what to use for moving an entire site instead of one template.",
   "generatedAt": "2026-07-21T06:00:49.000Z",
   "deep": true
 }

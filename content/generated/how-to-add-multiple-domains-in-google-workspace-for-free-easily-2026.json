@@ -1,58 +1,99 @@
 {
   "slug": "how-to-add-multiple-domains-in-google-workspace-for-free-easily-2026",
   "seoTitle": "How to Add Multiple Domains to Google Workspace Free",
-  "metaDescription": "Add multiple domains to Google Workspace for free using the Admin Console, covering primary domains, secondary domains, and domain aliases for one account.",
-  "intro": "If your business runs more than one brand, storefront, or side project, you don't need a separate Workspace subscription for each one. Google lets you attach extra domains to a single account at no additional cost, as long as you understand which of the three domain types you actually need. This guide walks through where that setting lives in the Admin Console, how to tell a secondary domain apart from an alias, and what to check with DNS and user email so nobody ends up locked out or confused about which address to use.",
+  "metaDescription": "Add multiple domains to Google Workspace using the Admin Console — secondary domains vs. aliases, the exact domain and alias limits, and what breaks if you pick the wrong type.",
+  "intro": "If your business runs more than one brand, storefront, or side project, you don't need a separate Workspace subscription for each one. Google lets you attach extra domains to a single account without a per-domain fee, as long as you understand which of the three domain types you actually need and where each one hits a real limit. This guide walks through where that setting lives in the Admin Console, how a secondary domain differs from an alias in ways that matter after setup (not just at setup), and what to check with DNS and Gmail activation so mail actually arrives.",
   "steps": [
     {
       "heading": "Open the Admin Console from your Google account",
-      "body": "You don't need a bookmark for this — from any signed-in Google page, click the grid of apps in the top-right corner and look for the Admin icon among Gmail, Drive, and Calendar. It only appears for accounts with admin privileges on a Workspace organization, so if you don't see it, you're signed into the wrong account or don't have admin rights yet. Clicking it drops you straight into the console where domain management, users, and billing all live.",
+      "body": "You don't need a bookmark for this — from any signed-in Google page, click the grid of apps in the top-right corner and look for the Admin icon among Gmail, Drive, and Calendar. It only appears for accounts with admin privileges on a Workspace organization, so if you don't see it, you're signed into the wrong account or don't have admin rights yet. Clicking it drops you into the console where domain management, users, and billing all live.",
       "image": { "file": "/screenshots/CVgPnNLV80Q/04.webp", "caption": "The Google apps grid with Admin sitting alongside Gmail and Drive — this is the fastest way into the console if you don't have it bookmarked." }
     },
     {
       "heading": "Find Domains in the left-hand menu",
-      "body": "Inside the Admin Console, open Account in the left sidebar and expand Domains underneath it. This reveals three sub-items: Overview, Manage domains, and Allowlisted domains. Manage domains is where you'll spend the next several minutes — it lists every domain currently attached to your organization and is also where the \"Add a domain\" button lives. Overview is worth a glance too, since it summarizes verification status for each domain at a glance.",
+      "body": "Inside the Admin Console, open Account in the left sidebar and expand Domains underneath it. This reveals three sub-items: Overview, Manage domains, and Allowlisted domains. Manage domains is where you'll spend the next several minutes — it lists every domain currently attached to your organization and is also where the \"Add a domain\" button lives. Overview is worth a glance too, since it summarizes verification status for each domain.",
       "image": { "file": "/screenshots/CVgPnNLV80Q/05.webp", "caption": "The Admin Console's Account section with Domains expanded, showing Overview, Manage domains, and Allowlisted domains." }
     },
     {
       "heading": "Know the difference before you click Add",
-      "body": "Google Workspace recognizes three kinds of domains, and picking the wrong one causes headaches later. Your primary domain is the one you signed up with and can't easily change. A secondary domain is a fully separate domain name that functions almost like its own mini-organization inside your account — useful when you run distinct brands that each need their own identity. A domain alias, by contrast, mirrors your primary domain's settings and just gives users an extra address; it's the simpler option when you only want user@brandtwo.com to land in the same inbox as user@brandone.com. Decide which one fits before you start clicking Add, since converting between them isn't straightforward once users are attached."
+      "body": "Google Workspace recognizes three kinds of domains, and picking the wrong one causes real problems later, not just extra clicks. Your primary domain is the one you signed up with. A secondary domain is a fully separate domain that can have its own users signing in with their own address on it — useful when you run distinct brands or absorbed a separate company. A domain alias mirrors your primary domain's settings and just adds an extra address for existing users; it's the simpler option when user@brandtwo.com just needs to reach the same inbox as user@brandone.com. One constraint that decides this for you in some cases: the Admin Console can only add an alias to your primary domain — aliasing a secondary domain isn't available in the console UI at all, only through Google's Directory API. And a user can never sign in with an alias address, only with their primary or secondary-domain one; the alias only ever works for sending and receiving mail. Google doesn't support converting a domain from one type to the other once it's attached, so this choice sticks."
     },
     {
       "heading": "Add and verify the new domain",
-      "body": "From Manage domains, add the domain name and choose whether it's a secondary domain or an alias. Google will ask you to prove ownership, typically by adding a TXT record through your domain registrar's DNS settings — the same verification method used for Search Console. This step can take anywhere from a few minutes to a few hours depending on how quickly your registrar's DNS propagates, so don't panic if it doesn't verify instantly; check back rather than repeating the process."
+      "body": "From Manage domains, add the domain name and choose whether it's a secondary domain or an alias. Google will ask you to prove ownership, typically by adding a TXT record through your domain registrar's DNS settings — the same verification method used for Search Console. This can take anywhere from a few minutes to a few hours depending on your registrar's DNS propagation, so check back instead of repeating the process if it doesn't verify right away. One thing worth knowing in advance: if you're re-adding a domain you recently removed from this account, Google makes you wait up to 24 hours before it will accept it again."
     },
     {
-      "heading": "Point MX records so mail actually arrives",
-      "body": "Verification alone doesn't route email. Each domain you add — secondary or alias — needs its own MX records pointed at Google's mail servers before messages to that domain land in Workspace inboxes instead of bouncing or disappearing. If you're migrating a domain that previously used a different email provider, plan for a short overlap window and confirm the old MX records are fully replaced, not just supplemented, to avoid split delivery."
+      "heading": "Point MX records and activate Gmail for the domain",
+      "body": "Verification alone doesn't route email. Each domain you add — secondary or alias — needs its own MX records pointed at Google's mail servers, and back in Manage domains you still need to select the domain and click Activate Gmail before it starts handling mail at all. If you're migrating a domain that previously used a different email provider, plan for a short overlap window and confirm the old MX records are fully replaced, not just supplemented, to avoid split delivery."
     },
     {
       "heading": "Create addresses across your domains",
-      "body": "Once a domain is verified and routed, existing users can be given an additional address on it from their user profile in the Admin Console, and new users can be created directly under whichever domain fits their role. This is how you end up with something like user@domain1.com and user@domain2.com both delivering to the same person, or entirely separate users per brand if you went the secondary-domain route instead."
+      "body": "Once a domain is verified, activated, and routed, existing users can be given an additional address on it from their user profile in the Admin Console, and new users can be created directly under whichever domain fits their role. This is how you end up with user@domain1.com and user@domain2.com both delivering to the same person on an alias, or entirely separate users per brand if you went the secondary-domain route instead — remembering that only secondary-domain users can actually sign in with that domain's address."
     },
     {
-      "heading": "Set branding and routing to avoid confusion",
-      "body": "The last mile is making sure people don't get lost. If several domains route to shared inboxes, set clear signature and reply-from defaults so replies go out from the address a customer actually emailed, not always the primary one. For secondary domains running as separate brands, keep their admin-assigned organizational units distinct so policies, groups, and sharing settings don't bleed across brands by accident. A few minutes spent here up front saves a lot of \"why did this email come from the wrong address\" tickets later."
+      "heading": "Set routing and know what can't be split by domain",
+      "body": "If several domains route to shared inboxes, set clear signature and reply-from defaults so replies go out from the address a customer actually emailed. Beyond that, a few things in Workspace apply org-wide no matter how many domains you run: you can specify only one logo across all your domains, Drive sharing settings can't be restricted by domain, and policies aren't set per domain either — organizational units are the actual tool for keeping settings distinct between brands, so lean on those instead of expecting per-domain branding or policy controls that don't exist."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Domain alias vs. secondary domain",
+      "columns": ["", "Domain alias", "Secondary domain"],
+      "rows": [
+        ["Users", "Same users as your primary domain", "Can have its own, separate users"],
+        ["Sign-in", "Can't sign in with the alias address", "Users sign in with their own address on it"],
+        ["Where you can add it", "Primary domain only, in the Admin Console (Directory API needed for a secondary domain's alias)", "Any Workspace account"],
+        ["Typical use", "Same team, extra brand addresses", "Separate team or an acquired company"]
+      ],
+      "note": "Workspace and Cloud Identity Premium accounts can hold up to 600 domains total — one primary plus up to 599 secondary domains and aliases combined, with a maximum of 20 of those as aliases. Google Workspace for Nonprofits is capped much lower, at 5 domains total (one primary, four secondary)."
+    }
+  ],
+  "costNote": "Adding a domain doesn't cost anything on its own — Workspace bills per user license, not per domain. A domain alias never creates new users, so it's inherently free to add. A secondary domain can have its own users, and each new user you create there costs the same as any user on your plan; the domain itself isn't an extra line item.",
+  "troubleshooting": [
+    {
+      "problem": "The Admin Console won't let you add an alias to a secondary domain",
+      "cause": "This isn't a bug. The console UI only supports adding a domain alias to your primary domain — aliasing a secondary domain requires Google's Directory API.",
+      "fix": "Either add the alias to your primary domain instead, or treat this as a developer task via the Directory API if it genuinely needs to sit on the secondary domain."
+    },
+    {
+      "problem": "A user can't sign in with their new alias-domain email address",
+      "cause": "Expected behavior. Alias addresses work for sending and receiving mail, but Google only accepts sign-in with a user's primary or secondary-domain address.",
+      "fix": "Have the user sign in with their primary address; mail sent to the alias address still lands in the same inbox regardless."
+    },
+    {
+      "problem": "DNS shows the domain as verified, but mail to it still isn't arriving",
+      "cause": "Verification only confirms ownership. MX records still need to point at Google's mail servers, and the domain still needs Gmail activated for it under Manage domains.",
+      "fix": "Check MX records against Google's current values, then go to Manage domains, select the domain, and click Activate Gmail if it hasn't been already."
     }
   ],
   "faq": [
     {
       "question": "Does adding a second domain to Google Workspace cost extra?",
-      "answer": "No, additional domains can be added for free as long as you're using the same Workspace subscription — you're not billed per domain, only per user license."
+      "answer": "No, not by itself. You're billed per user license, not per domain — a domain alias adds no new users, and a secondary domain's users cost the same as any user on your plan."
     },
     {
-      "question": "What's the difference between a secondary domain and a domain alias?",
-      "answer": "A secondary domain functions more independently, with its own users and settings, while a domain alias mirrors the primary domain's settings and mainly adds extra email addresses for existing users."
+      "question": "What's the real difference between a secondary domain and a domain alias?",
+      "answer": "A secondary domain has its own users who sign in with an address on that domain. A domain alias mirrors your primary domain's users and only adds them an extra address; nobody can sign in with an alias address."
     },
     {
-      "question": "Do I need to verify each new domain?",
-      "answer": "Yes, domain verification through a DNS TXT record is required before Google Workspace will activate a new domain, and you'll also need to add MX records separately for mail to actually be delivered."
+      "question": "Do I need to verify each domain, and does that finish the setup?",
+      "answer": "Yes, verification (usually a DNS TXT record) is required for every domain, but it only confirms ownership. Mail still needs MX records pointed at Google and Gmail activated for that domain before anything is delivered."
     },
     {
-      "question": "Can users get confused logging in with multiple domains?",
-      "answer": "It can happen, especially with reply-from addresses and shared inboxes, which is why setting default routing and keeping organizational units distinct per brand helps avoid confusion."
+      "question": "How many domains can one Workspace account have?",
+      "answer": "Up to 600 total on standard Workspace or Cloud Identity Premium plans — one primary plus up to 599 secondary domains and aliases, with a cap of 20 aliases. Workspace for Nonprofits is limited to 5 domains total."
+    },
+    {
+      "question": "Can each domain have its own logo or policies?",
+      "answer": "No. Only one logo applies across all your domains, and policies aren't set per domain — organizational units are the tool for keeping settings distinct between brands instead."
     }
   ],
+  "references": [
+    { "label": "Google Workspace Admin Help: FAQ for multiple domains (official)", "url": "https://knowledge.workspace.google.com/admin/domains/faq-for-multiple-domains" },
+    { "label": "Google Workspace Admin Help: Limitations with multiple domains (official)", "url": "https://knowledge.workspace.google.com/admin/domains/limitations-with-multiple-domains" },
+    { "label": "Google Workspace Admin Help: Add a user alias domain or secondary domain (official)", "url": "https://knowledge.workspace.google.com/admin/domains/add-a-user-alias-domain-or-secondary-domain" }
+  ],
+  "verifiedNote": "Click path and screens come from an existing walkthrough recording; the Account → Domains → Manage domains navigation it shows matches Google's own current documentation. Domain-type behavior, the 600-domain and 20-alias caps, the nonprofit 5-domain limit, the alias-to-primary-only restriction, the sign-in restriction on alias addresses, and the Activate Gmail step were checked against Google Workspace's official Admin Help pages in September 2026. None of those constraints were in the article before this pass; the MX-record step also didn't previously mention that Gmail still needs activating for a domain after DNS verifies.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

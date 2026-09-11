@@ -1,63 +1,105 @@
 {
   "slug": "how-to-use-tradingview-paper-trading-fix-paper-trading-panel-not-visible-easily-",
   "seoTitle": "Use TradingView Paper Trading & Fix a Missing Panel",
-  "metaDescription": "Learn how to enable TradingView Paper Trading, place buy and sell orders, set stop loss and take profit, and fix the panel when it's not visible.",
-  "intro": "Practicing trades without risking real money is exactly what TradingView's Paper Trading is built for, but a lot of users run into trouble when the panel simply won't show up, or they're unsure how to set proper exits on a simulated order. This guide walks through the actual Paper Trading panel — the account settings, the order ticket, and the positions view — so you can place buy and sell trades, attach stop loss and take profit levels, and read your results the same way you would on a live account. It closes with the fix for the panel-not-visible issue, which is almost always a layout problem rather than an account problem.",
+  "metaDescription": "Enable TradingView Paper Trading, place market, limit, stop, and stop-limit orders, attach stop loss and take profit, and fix the panel when it won't show.",
+  "intro": "Practicing trades without risking real money is what TradingView's Paper Trading is built for, but plenty of users hit the same two snags: the panel won't show up, or they're not sure how bracket orders behave once submitted.\n\nThis guide walks through the real Paper Trading panel: account settings, the order ticket, and the positions view, so you can place trades, attach exits, and read your results the way you would on a live account. It ends with the fix for the panel-not-visible problem, which is a layout issue almost every time, not an account one.",
+  "costNote": "Paper Trading itself is free on every TradingView plan, including the Basic (free) tier, with a starting virtual balance you set yourself. That's separate from Bar Replay, which now requires at least the Essential plan; the two features are often confused because they sit near each other on the chart.",
   "steps": [
     {
       "heading": "Switch to the Paper Trading tab",
-      "body": "On any TradingView chart, the bottom-left panel has two tabs: Trade and Paper Trading. Paper Trading is the one you want for practice, since it runs entirely on simulated funds against live or near-live prices. If you don't see this tab at all, it usually means your current layout has the bottom panel collapsed or hidden rather than the feature being unavailable — more on that fix later in this guide."
+      "body": "On any TradingView chart, the trading panel at the bottom lists the brokers you can connect, with Paper Trading, powered by TradingView, at the top. Selecting it opens a simulated account that fills against live or near-live prices using virtual funds. If the tab isn't there at all, the bottom panel is almost certainly collapsed, not the feature being unavailable; the fix is at the end of this guide."
     },
     {
       "heading": "Set up or reset your paper account",
-      "body": "Before placing your first trade, it's worth opening Account settings to configure the account the way you actually want to practice with. Here you can reset the account entirely, which wipes existing orders, history, and positions and resets the balance to a value you choose, and you can set separate leverage ratios for stocks, futures, forex, and crypto. This matters because the default leverage on a fresh paper account may not match what you'd realistically get on a live account for the instrument you're practicing, and testing a strategy at 50:1 forex leverage when your real broker offers 10:1 will teach you the wrong lessons.",
+      "body": "Before your first trade, open Account settings to configure the account. You can reset it entirely, wiping orders, history, and positions and resetting the balance to a value you choose, and set separate leverage ratios per asset class (stocks, futures, forex, crypto). This matters because a fresh account's default leverage may not match what a live broker gives you: testing a strategy at 50:1 forex leverage when your real broker offers 10:1 teaches the wrong lessons.",
       "image": { "file": "/screenshots/HTLUDnWXlwk/03.webp", "caption": "The Reset account dialog, where you set a starting balance and per-asset leverage before wiping an existing paper account clean." }
     },
     {
-      "heading": "Place a buy or sell order",
-      "body": "With the Paper Trading panel open, click a symbol on your watchlist to load it, then use the Buy and Sell buttons at the top of the order ticket to open a position in either direction. You can choose Market, Limit, or Stop order types depending on whether you want the trade to fill immediately or wait for price to reach a specific level, which is the same choice you'd make with real capital."
+      "heading": "Place an order",
+      "body": "Click a symbol on your watchlist to load it, then use Buy or Sell at the top of the order ticket. TradingView supports four order types here: Market (fills immediately at the best available price), Limit (fills only at your price or better), Stop (turns into a market order once a trigger price is hit), and Stop-Limit (a trigger price that then submits a limit order instead of a market one). Which one fits depends on whether you want the fill guaranteed or the price guaranteed; you can't have both."
     },
     {
       "heading": "Attach a stop loss and take profit",
-      "body": "The order ticket has an Exits section where you turn on \"Take profit, price\" and set a stop loss price below it, both expressed either as a price or in ticks from your entry. TradingView validates these as you type — notice the warning that a stop loss order must sit below your entry price for a long position, which stops you from submitting an exit that wouldn't actually protect the trade. Order info below shows your margin usage and leverage in real time, so you can see exactly how much of your simulated balance a given trade size ties up before you commit to it.",
+      "body": "The order ticket's Exits section lets you turn on a take-profit price and a stop-loss price, either as an exact price or in ticks from your entry. TradingView validates these as you type; a stop loss on a long position has to sit below your entry, and it will flag a price that doesn't. Set both and you have a bracket order: once either the stop or the target fills, TradingView automatically cancels the other, so you're never left with a stray exit order after the position closes. The order info panel shows margin usage and leverage in real time as you set the size.",
       "image": { "file": "/screenshots/HTLUDnWXlwk/04.webp", "caption": "The order ticket with Take profit and Stop loss fields filled in below the Buy/Sell buttons, plus a live margin and leverage readout." }
     },
     {
       "heading": "Track positions, orders, and results",
-      "body": "Once a trade is live, the bottom panel switches to showing it under Positions, with running Account Balance, Equity, Realized P&L, and Unrealized P&L figures updating as price moves. The Orders and Order History tabs log every fill and pending order, and Trading Journal keeps a timestamped record of activations and executions — useful for reviewing what actually happened after a session rather than relying on memory. This is where paper trading earns its keep: the numbers behave like a real account, so bad habits show up here before they cost anything.",
+      "body": "Once a trade fills, the bottom panel switches to Positions, with running Account Balance, Equity, Realized P&L, and Unrealized P&L updating as price moves. Orders and Order History log every fill and pending order, and Trading Journal keeps a timestamped record of activations and executions, useful for reviewing a session afterward instead of relying on memory.",
       "image": { "file": "/screenshots/HTLUDnWXlwk/05.webp", "caption": "The Paper Trading panel after a trade fills, showing account balance, equity, open orders, and a timestamped trading journal entry." }
     },
     {
       "heading": "Fix the panel when it's not visible",
-      "body": "If the Paper Trading tab has vanished entirely, the most common cause is that the bottom panel got collapsed by an accidental drag or a keyboard shortcut. Look for a thin bar at the very bottom of the chart window and click it to expand the panel back out. If that doesn't bring it back, right-click anywhere on the chart and check that no custom layout is hiding the toolbar, since a saved layout from a different session can carry panel visibility settings with it."
+      "body": "TradingView's own documentation for collapsed panes gives two ways back in. Hold Ctrl (Windows) or Cmd (Mac) and double-click anywhere inside the collapsed bottom pane to restore it. If a Collapse Pane button is visible in the pane's corner, clicking it toggles the same thing (turn its visibility on under Chart Settings > Canvas if you don't see it).\n\nIf that doesn't bring the tab back, check that a different broker isn't already selected in the panel instead of Paper Trading. As a last resort, reset the chart layout to TradingView's default: this only affects which panels and toolbars show, not your paper account, balance, or trade history, and it clears most layout conflicts a saved session can carry over."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The Paper Trading tab is missing from the bottom of the chart",
+      "cause": "The bottom pane is collapsed, which can happen from an accidental drag or shortcut.",
+      "fix": "Hold Ctrl/Cmd and double-click inside the collapsed pane, or use the Collapse Pane button in its corner if it's enabled in Chart Settings > Canvas."
     },
     {
-      "heading": "Reset your layout as a last resort",
-      "body": "When reopening the panel doesn't work, resetting the chart layout to TradingView's default almost always clears the underlying conflict. This won't touch your paper account, balance, or trade history — it only affects which panels and toolbars are shown — so it's a safe step to try before assuming something is actually broken. After the reset, the Paper Trading tab should be back in its usual spot at the bottom of the chart."
+      "problem": "The panel is visible but shows a different broker, not Paper Trading",
+      "cause": "Another connected broker is currently selected in the trading panel's broker list.",
+      "fix": "Open the broker dropdown at the top of the panel and select Paper Trading, powered by TradingView."
+    },
+    {
+      "problem": "Nothing above works and the layout still looks wrong",
+      "cause": "A saved custom layout is carrying panel-visibility settings from a previous session.",
+      "fix": "Reset the chart layout to TradingView's default. It doesn't touch your paper account balance or trade history, only which panels are shown."
+    },
+    {
+      "problem": "A stop-loss or take-profit price gets rejected when submitting",
+      "cause": "The price is on the wrong side of your entry, for example a stop above entry on a long position.",
+      "fix": "Adjust the price so the stop sits below entry (long) or above entry (short), which is what TradingView's validation is checking for."
     }
   ],
   "faq": [
     {
-      "question": "Why is my TradingView Paper Trading panel not showing up?",
-      "answer": "This is almost always a layout issue — the bottom panel got collapsed or a saved layout is hiding it — and can usually be fixed by expanding the panel bar or resetting your layout to default."
-    },
-    {
-      "question": "Can I set a stop loss on a Paper Trading order?",
-      "answer": "Yes. The order ticket's Exits section lets you set both a take profit and a stop loss, in price or in ticks, with TradingView validating that the stop sits on the correct side of your entry."
+      "question": "Is Paper Trading free on TradingView?",
+      "answer": "Yes, on every plan including the free Basic tier. You choose your own starting balance when you set up or reset the account."
     },
     {
       "question": "Does Paper Trading use real market prices?",
-      "answer": "Yes, Paper Trading fills against live or near real-time market prices while simulating the trade with virtual funds instead of real money."
+      "answer": "Yes. It fills against live or near-real-time market prices while simulating the trade with virtual funds instead of real money."
+    },
+    {
+      "question": "What order types can I use in Paper Trading?",
+      "answer": "Market, Limit, Stop, and Stop-Limit. Market and Stop guarantee a fill; Limit and Stop-Limit guarantee a price, at the risk of not filling at all if the market moves past it."
+    },
+    {
+      "question": "What happens when I set both a stop loss and a take profit?",
+      "answer": "That's a bracket order. When either one fills, TradingView automatically cancels the other, so a closed position doesn't leave a stray exit order behind."
+    },
+    {
+      "question": "Why is my Paper Trading panel not showing up?",
+      "answer": "Almost always a collapsed bottom pane. Hold Ctrl/Cmd and double-click inside it to restore, or reset the chart layout to default if that doesn't work."
     },
     {
       "question": "Can I reset my paper trading balance?",
-      "answer": "Yes, from Account settings you can reset the account, which clears orders, history, and positions and lets you set a new starting balance and leverage for each asset class."
-    },
-    {
-      "question": "Is Paper Trading free to use on TradingView?",
-      "answer": "Paper Trading access can depend on your account type, so check your specific plan for availability and any related feature limits."
+      "answer": "Yes, from Account settings. Resetting clears orders, history, and positions and lets you set a new starting balance and leverage for each asset class."
     }
   ],
+  "references": [
+    {
+      "label": "TradingView Pricing — plan comparison (official)",
+      "url": "https://www.tradingview.com/pricing/"
+    },
+    {
+      "label": "TradingView Help Center: Types of orders — market, limit, stop (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000785102-types-of-orders-market-limit-stop/"
+    },
+    {
+      "label": "TradingView Help Center: Order brackets (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000754951-order-brackets/"
+    },
+    {
+      "label": "TradingView Help Center: How to collapse separate panes? (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000665813-how-to-collapse-separate-panes/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Plan availability, order types, and the panel-collapse mechanism were checked against TradingView's official pricing page and Help Center in September 2026. That check firmed up the original article's vague \"check your plan\" answer on cost (confirmed free on Basic), added the Stop-Limit order type and bracket cancellation behavior the original didn't mention, and replaced the original's generic \"look for a thin bar\" panel fix with TradingView's documented Ctrl/Cmd-double-click shortcut.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

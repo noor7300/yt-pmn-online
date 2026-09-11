@@ -2,42 +2,71 @@
   "slug": "how-to-fix-sold-out-problem-in-shopify-even-product-has-inventory-shopify-sold-o",
   "seoTitle": "Fix Shopify \"Sold Out\" Showing With Stock Available",
   "metaDescription": "Product shows \"Sold Out\" on Shopify even though you have stock? Learn how to fix variant inventory, continue-selling settings, and market publishing.",
-  "intro": "A Shopify product that displays Sold Out while your backend clearly shows stock almost always comes down to one of a few things: inventory tracked wrong at the variant level, the \"continue selling when out of stock\" toggle left off when it should be on, or a sales channel or market that isn't actually including the product. This guide walks through the real inventory and market settings in Shopify admin where these get fixed, rather than generic troubleshooting steps, so you can find the specific screen that matches what's actually wrong with your listing.",
+  "intro": "A Shopify product that displays Sold Out while your backend clearly shows stock almost always comes down to one of a few things: inventory tracked wrong at the variant level, the \"continue selling when out of stock\" toggle left off when it should be on, or a sales channel or market that isn't including the product. This guide walks through the real inventory and market settings in Shopify admin where these get fixed, so you can find the specific screen that matches what's actually wrong with your listing instead of working through generic troubleshooting steps.",
   "steps": [
     {
       "heading": "Check inventory at the variant level, not just the product",
-      "body": "If your product has variants — different covers, colors, or sizes — Shopify tracks inventory per variant, not as one shared number for the whole product. This view lists each variant with its own price and Available count, and the total across all locations shown underneath; a customer trying to buy a specific variant that shows zero here will see Sold Out even if every other variant, and the product as a whole, is well stocked. Scroll through every variant rather than just checking the top of the list, since it's easy to miss one showing zero buried a few rows down.",
+      "body": "If your product has variants — different covers, colors, or sizes — Shopify tracks inventory per variant, not as one shared number for the whole product. This view lists each variant with its own price and Available count, and the total across all locations shown underneath. A customer trying to buy a specific variant that shows zero here sees Sold Out even if every other variant, and the product as a whole, is well stocked. Scroll through every variant instead of only checking the top of the list; it's easy to miss one showing zero buried a few rows down.",
       "image": { "file": "/screenshots/QiKQM2Sb5FI/03.webp", "caption": "A product's variant list — Back cover, Shell cover, Other — each with its own price and available count. A single mistracked variant can show as sold out even while the rest of the product has stock." }
     },
     {
       "heading": "Check the Track quantity and continue-selling settings",
-      "body": "Open a specific variant's inventory panel and look at two settings together: whether Track quantity is checked, and whether Continue selling when out of stock is checked below it. If tracking is on and continue-selling is off, the moment available quantity at a location hits zero, Shopify shows Sold Out regardless of what you believe your real stock to be — which is often the actual cause when a product \"has inventory\" by your own count but the number never got updated in Shopify itself. Use Adjust Available to correct the quantity at the specific location shown, confirming the number matches what you actually have before saving.",
+      "body": "Open a specific variant's inventory panel and look at two settings together: whether Track quantity is checked, and whether Continue selling when out of stock is checked below it. Shopify only lets you turn on Continue selling once Track quantity is on. With tracking on and continue-selling off, the moment available quantity at a location hits zero, Shopify shows Sold Out no matter what your real stock count is elsewhere. That mismatch, a number that never got updated inside Shopify itself, is a common cause when a product \"has inventory\" by your own count. Use Adjust Available to correct the quantity at the specific location shown, and confirm the number matches your actual count before saving.",
       "image": { "file": "/screenshots/QiKQM2Sb5FI/04.webp", "caption": "A variant's Inventory panel — Track quantity is checked, and the Adjust Available popup shows quantity by location, with an option below to allow continued selling once stock hits zero." }
     },
     {
-      "heading": "Confirm which locations actually hold the stock",
-      "body": "If you sell from more than one location — a warehouse and a retail store, for example — inventory is tracked separately per location, and a product can show plenty of stock at one location while showing zero, and therefore Sold Out to some customers, at another. Check that the location fulfilling online orders is the one actually carrying the quantity you expect, since stock sitting at the wrong location behaves identically to no stock at all from the storefront's perspective."
+      "heading": "Confirm which location fulfills online orders",
+      "body": "If you sell from more than one location, a warehouse and a retail store, for example, inventory is tracked separately per location. Shopify's own documentation is specific here: a product shows as out of stock online if the location assigned to fulfill online orders has zero inventory, even when other locations that don't fulfill online orders are fully stocked. Check that the location actually serving your online store carries the quantity you expect. Stock sitting at the wrong location behaves the same as no stock at all from the storefront's point of view."
     },
     {
-      "heading": "Check whether the product is included in the right sales channel or market",
-      "body": "Beyond a single sales channel, Shopify Markets lets you run separate catalogs per region, each with its own pricing rules and its own included or excluded product list. A product can be fully in stock and correctly tracked, yet still show as unavailable to shoppers in a specific market if it's sitting in that market's Excluded list rather than Included — worth checking directly if the sold-out reports are coming from customers in one particular region rather than everywhere.",
+      "heading": "Check whether the product is included in the right market catalog",
+      "body": "Shopify Markets lets you run separate catalogs per region, each with its own pricing rules and its own list of included or excluded products. By default every product is available in every market; a catalog is what narrows that down. If a product sits in a market's Excluded list instead of its Included one, Shopify treats it as unpublished in that market: it drops out of search there and a customer who reaches its page directly gets redirected to the store's homepage. Check this if sold-out reports are coming from one specific region rather than everywhere.",
       "image": { "file": "/screenshots/QiKQM2Sb5FI/05.webp", "caption": "A Market's Catalogs settings, showing pricing rules and a Products list split into Included, Excluded, and All tabs — a product excluded here won't show as available in that market even with full stock." }
     },
     {
-      "heading": "Confirm the sales channel itself is published",
-      "body": "Separately from Markets, each product has its own per-channel publishing status — Online Store, Shop App, Facebook, and so on — and a product unpublished from a given channel can appear unavailable there even with stock and tracking set up correctly everywhere else. Check the product's Sales channels and apps section and confirm every channel you actually sell through is toggled on."
+      "heading": "Confirm the sales channel itself is publishing the product",
+      "body": "Separate from Markets, each product has its own per-channel publishing status, shown in the product's Publishing section (labelled Sales channels on the Shopify mobile app) covering Online Store, Shop, Facebook, and any other channel you've connected. A product's overall status can be Active and it can still be hidden from a single channel if that channel is unchecked here. Open the product's Publishing section and confirm every channel you actually sell through is selected."
     },
     {
       "heading": "Save, refresh, and test as a real customer would",
-      "body": "After correcting inventory, toggles, location quantities, or channel settings, save the change and reload the storefront in a private browser window rather than trusting the admin preview, since caching can occasionally show an old state for a few minutes. Add the specific variant that was showing Sold Out to a cart the way a customer would, rather than just checking that the product page looks right, to confirm the fix actually holds through checkout."
+      "body": "After correcting inventory, toggles, location quantities, or channel settings, save the change and reload the storefront in a private browser window instead of trusting the admin preview; caching can occasionally show an old state for a few minutes. Add the specific variant that was showing Sold Out to a cart the way a customer would, not just checking that the product page looks right, to confirm the fix holds through checkout."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "One variant shows Sold Out while the rest of the product is in stock",
+      "cause": "Shopify tracks inventory per variant, and Available quantity for that one variant has hit zero at the location serving online orders.",
+      "fix": "Open that variant's Inventory panel, use Adjust Available to correct the count for the correct location, or enable Continue selling when out of stock if you intend to sell past zero."
+    },
+    {
+      "problem": "Stock is correct in the backend but the storefront still shows Sold Out",
+      "cause": "Inventory may be sitting at a location that isn't the one assigned to fulfill online orders, so the online-facing count is still zero.",
+      "fix": "Check which location is set to fulfill online orders and confirm stock is recorded there, not only at a warehouse or retail location that doesn't serve the storefront."
+    },
+    {
+      "problem": "The product is in stock everywhere but customers in one country report it as unavailable",
+      "cause": "The product is on that market's Excluded list in Shopify Markets, or the catalog assigned to that market simply doesn't include it.",
+      "fix": "Open the market's Catalogs settings, find the product under the Excluded tab, and move it to Included."
+    },
+    {
+      "problem": "The fix was applied in admin but the storefront hasn't updated",
+      "cause": "The browser is serving a cached version of the page rather than the current state.",
+      "fix": "Reload in a private/incognito window, which bypasses the cached copy, before assuming the setting didn't save."
     }
   ],
   "faq": [
-    { "question": "Why does Shopify show \"Sold Out\" when I have stock?", "answer": "It's most often a variant with zero tracked quantity at the location serving online orders, or the \"continue selling when out of stock\" setting left off — both fixable directly in the variant's inventory panel." },
-    { "question": "Could this be a variant-specific issue?", "answer": "Yes — Shopify tracks inventory per variant, so one variant can show as sold out while others, and the product as a whole, have plenty of stock." },
-    { "question": "Does publishing status affect stock display?", "answer": "Yes — a product unpublished from a given sales channel, or excluded from a specific market's catalog, can appear unavailable there regardless of actual stock levels." },
-    { "question": "Do I need an app to fix inventory tracking?", "answer": "Not necessarily — most fixes happen directly in Shopify Admin's variant inventory settings, location quantities, and Markets catalog settings without needing extra apps." }
+    { "question": "Why does Shopify show \"Sold Out\" when I have stock?", "answer": "Most often a variant has zero tracked quantity at the location serving online orders, or \"Continue selling when out of stock\" is left off. Both are fixable directly in the variant's inventory panel." },
+    { "question": "Could this be a variant-specific issue?", "answer": "Yes. Shopify tracks inventory per variant, so one variant can show as sold out while others, and the product as a whole, have plenty of stock." },
+    { "question": "Does my sales channel or market setup affect stock display?", "answer": "Yes. A product unpublished from a specific sales channel, or excluded from a market's catalog, shows as unavailable there regardless of actual stock levels." },
+    { "question": "Do I need an app to fix inventory tracking?", "answer": "No. The fixes here happen in Shopify admin's variant inventory settings, location quantities, and Markets catalog settings. No extra app is required." },
+    { "question": "Does 'Continue selling when out of stock' work everywhere, including in-store?", "answer": "No. Shopify's documentation notes it doesn't apply to Shopify POS; staff can still oversell at the register, but they get a warning first." }
   ],
+  "references": [
+    { "label": "Shopify Help Center: Selling out-of-stock products (official)", "url": "https://help.shopify.com/en/manual/products/inventory/setup/selling-when-out-of-stock" },
+    { "label": "Shopify Help Center: Creating catalogs for markets (official)", "url": "https://help.shopify.com/en/manual/markets/customizations/catalogs" },
+    { "label": "Shopify Help Center: Adding and updating products (official)", "url": "https://help.shopify.com/en/manual/products/add-update-products" }
+  ],
+  "verifiedNote": "Click paths and screens come from a recorded walkthrough. The inventory-tracking, multi-location, and Markets-catalog behavior were re-checked against Shopify's official Help Center in September 2026 and match. One correction: the per-channel publishing area is Shopify's Publishing section (Sales channels on mobile), not \"Sales channels and apps\" as the article previously called it.",
   "generatedAt": "2026-08-07T12:00:00Z",
   "deep": true
 }

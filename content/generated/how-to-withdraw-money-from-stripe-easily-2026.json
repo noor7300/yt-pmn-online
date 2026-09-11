@@ -1,12 +1,17 @@
 {
   "slug": "how-to-withdraw-money-from-stripe-easily-2026",
   "seoTitle": "How to Withdraw Money From Stripe to Your Bank",
-  "metaDescription": "Transfer your Stripe balance to your bank account by verifying your bank details and setting up automatic or manual payouts.",
-  "intro": "Collecting payments through Stripe is only half the job — at some point that balance needs to land in your actual bank account. Stripe doesn't push money out automatically the moment it's charged; it holds it in your balance until a payout is triggered, either on a schedule you set or by hand. This guide walks through the Balances page where that money lives, how to attach and confirm a bank account, and the difference between letting Stripe pay you out automatically versus doing it yourself whenever you want.",
+  "metaDescription": "Transfer your Stripe balance to your bank account: where bank accounts and payout schedules actually live in the dashboard now, what Instant Payouts cost, and why a first payout takes longer than the rest.",
+  "intro": "Collecting payments through Stripe is only half the job. At some point that balance needs to land in your bank account, and Stripe doesn't push money out the moment it's charged. It holds funds in your balance until a payout is triggered, either on a schedule you set or by hand.\n\nThis guide covers the Balances page where that money lives, how to attach a bank account, and the real difference in cost and speed between a standard payout and an Instant Payout.",
+  "prerequisites": [
+    "A Stripe account that has processed at least one successful live payment — Stripe holds the very first payout for 7-14 days as a new-account check, regardless of your schedule",
+    "Admin or Owner permissions on the account. Stripe restricts adding or editing bank account details to those two roles"
+  ],
+  "costNote": "Standard payouts to a bank account carry no fee. Instant Payouts do: Stripe deducts 1% in Canada, the EU, UK, Singapore, Norway, Hong Kong and Malaysia, and 1.5% in the US, Australia, New Zealand and the UAE. The fee is taken out before the money lands, so the amount shown as available for an instant transfer is already net of it.",
   "steps": [
     {
       "heading": "Check your available balance",
-      "body": "Every Stripe account has a Balances page reachable from the left-hand menu, and it's the control center for anything payout-related. It splits your money into Incoming (payments still clearing) and Available (funds Stripe will actually let you move out), both shown as running totals. Before you try to withdraw anything, glance at Available — if it reads $0.00, there's simply nothing to pay out yet, no matter how the payout settings are configured. Stripe also surfaces account-level notices here, like a requirement to submit more verification information or a bank holiday that will push a payout back a day, both worth reading before you assume something is broken.",
+      "body": "Every Stripe account has a Balances page reachable from the left-hand menu, and it's the control center for anything payout-related. It splits your money into Incoming (payments still clearing) and Available (funds Stripe will let you move out), both shown as running totals. Before trying to withdraw anything, check Available: if it reads $0.00, there is nothing to pay out yet, no matter how the schedule is configured.\n\nStripe also surfaces account-level notices here, such as a request for more verification information or a bank holiday that will push a payout back a day. Both are worth reading before assuming something is broken.",
       "image": {
         "file": "/screenshots/aVTVaIKB8fo/03.webp",
         "caption": "The Balances page, with Incoming and Available totals and buttons for Top up and Manage payouts. Account notices about paused payouts or holiday delays show up right above it."
@@ -14,7 +19,7 @@
     },
     {
       "heading": "Add and confirm your bank account",
-      "body": "Stripe can't send money anywhere until it knows where to send it. From the payouts menu, open Bank accounts, and you'll see any account already on file listed with its bank name, currency, and the last few digits of the account number. Use Add bank account to connect a new one, or Edit account if details need updating. Depending on your country, Stripe may run a small verification step — like confirming micro-deposits — before the account is fully trusted to receive payouts, so don't expect a brand-new account to be payout-ready within seconds of adding it.",
+      "body": "Stripe can't send money anywhere until it knows where to send it, and this setting does not live under a dedicated payouts menu the way older recordings show it. Click the gear icon for Settings, then Business settings, then Bank accounts and scheduling. Any account already on file is listed with its bank name, currency, and the last few digits of the account number. Use Add bank account to connect a new one, or Edit to update details.\n\nDepending on your country, Stripe may run a verification step, such as confirming a small deposit, before the account is trusted to receive payouts. Don't expect a brand-new account to be payout-ready within seconds of adding it, and remember only Admin or Owner users can make this change.",
       "image": {
         "file": "/screenshots/aVTVaIKB8fo/04.webp",
         "caption": "The Bank accounts panel, listing a connected account with options to edit it or add another."
@@ -22,43 +27,91 @@
     },
     {
       "heading": "Set your payout schedule",
-      "body": "This is where automatic and manual payouts actually get decided. Opening Payout schedule presents two radio options: Manual payouts, where nothing leaves your balance until you personally initiate it, and Automatic payouts, where you pick a cadence — the dropdown defaults to Daily but can be set to weekly or monthly with specific payout days. Automatic is the better default for most ongoing businesses, since it keeps cash moving to your bank without you having to remember to log in. Manual makes more sense if you want to control exactly when transfers happen, for example to match them to your own accounting periods.",
+      "body": "This is where automatic and manual payouts get decided, on the same Bank accounts and scheduling screen from the step above. There are two options: Manual, where nothing leaves your balance until you initiate it, and Automatic, where you pick daily, weekly, or monthly, with specific days for the latter two.\n\nAutomatic suits most ongoing businesses since it keeps cash moving without a login required. Manual gives more control over exactly when transfers happen, useful for matching them to your own accounting periods. Some countries override this choice entirely: Brazil and India run automatic daily payouts only, and Japan does not offer a daily option at all.",
       "image": {
         "file": "/screenshots/aVTVaIKB8fo/05.webp",
         "caption": "The Payout schedule dialog, choosing between manual payouts and an automatic schedule with a configurable frequency."
       }
     },
     {
-      "heading": "Trigger a manual payout when you need one",
-      "body": "If you've set your schedule to manual, or just want money out sooner than the next automatic date, use the Manage payouts button on the Balances page and choose to pay out now. Stripe will offer to send whatever is currently in your Available balance, subject to your account's payout minimums and any country-specific restrictions. This is also the option to reach for if you've built up a balance and want to sweep it all out before a reporting deadline rather than waiting on the schedule."
+      "heading": "Trigger a payout and know what affects its timing",
+      "body": "To pay out sooner than the next scheduled date, go back to the Balances page and click Pay out (shown as Manage payouts in some older dashboards; Stripe has since renamed it). If your account qualifies for Instant Payouts and has an eligible card or bank account attached, you'll be offered a choice between a free standard payout and a fee-based instant one that typically lands within 30 minutes.\n\nTiming has two separate stages. First, funds sit in Incoming for a holding period before becoming Available: commonly a couple of business days in the US, longer elsewhere, and 7-14 days for a brand-new account's very first payout. Second, once a payout is sent it still travels through the banking network, which is where weekends and bank holidays add a day. If a payout looks delayed, check those two things before assuming there's an account problem: was the money Available yet, and did a holiday push the transfer back."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "\"Pay out\" is greyed out even though there have been recent sales",
+      "cause": "Recent charges are still sitting in Incoming, not Available. Funds only become payout-eligible after Stripe's holding period for your country, and a brand-new account's first payout is held for 7-14 days regardless of schedule.",
+      "fix": "Check the Available figure on the Balances page rather than the total. Nothing can be paid out until it moves from Incoming into Available."
     },
     {
-      "heading": "Understand what affects payout timing",
-      "body": "Newly charged payments don't move straight from Incoming to Available — Stripe holds funds for a rolling period (commonly a few business days, longer for new accounts or higher-risk industries) before they're payout-eligible. Once a payout is sent, it still has to clear through the banking network, and that leg is affected by ordinary banking realities: weekends, and holidays like the Labor Day notice Stripe displays right on the Balances page when it applies. If a payout looks delayed, check those two things first — whether the funds were actually Available yet, and whether a bank holiday pushed the transfer to the next business day — before assuming there's an account problem."
+      "problem": "Can't find the old \"Payout schedule\" menu item",
+      "cause": "Stripe now combines bank accounts and payout scheduling on one screen instead of two separate menu entries, so older step-by-step guides point at a layout that no longer exists.",
+      "fix": "Go to Settings (gear icon), then Business settings, then Bank accounts and scheduling. Both the bank account list and the schedule options are on that one page."
+    },
+    {
+      "problem": "No Instant Payout option appears at all",
+      "cause": "Instant Payouts require an eligible debit card or supported bank account and are only offered in a specific set of countries; new accounts also aren't automatically eligible.",
+      "fix": "Add an eligible instant payout method under Bank accounts and scheduling, and check the Balances page for an instant-eligible amount before assuming the feature is broken."
+    },
+    {
+      "problem": "A teammate can't add or change the bank account",
+      "cause": "Stripe restricts editing bank account details to users with Admin or Owner permissions on the account.",
+      "fix": "Have an Owner or Admin make the change, or grant the teammate that role first."
     }
   ],
   "faq": [
     {
       "question": "How long does a Stripe payout take to arrive?",
-      "answer": "Payout timing varies by country and account history, but it typically takes a few business days for funds to reach your bank, and bank holidays can add an extra day on top of that."
-    },
-    {
-      "question": "Can I withdraw money before verifying my bank account?",
-      "answer": "No, Stripe requires a verified bank account under Bank accounts before it will send any payouts to you."
+      "answer": "A brand-new account's first payout takes 7-14 days as a risk check. After that, standard payouts follow your country's settlement timing, commonly a couple of business days in the US and a little longer elsewhere, plus any weekend or holiday delay. Instant Payouts, where available, land in about 30 minutes for a fee."
     },
     {
       "question": "Is there a fee for withdrawing from Stripe?",
-      "answer": "Standard payouts are generally free, though Stripe may charge for instant or expedited payout options depending on your account and country."
+      "answer": "Standard payouts to a bank account are free. Instant Payouts cost 1% in Canada, the EU, UK, Singapore, Norway, Hong Kong and Malaysia, or 1.5% in the US, Australia, New Zealand and the UAE, deducted before the funds arrive."
     },
     {
-      "question": "Can I change from automatic to manual payouts?",
-      "answer": "Yes, open Payout schedule from the Balances page and switch between Manual payouts and Automatic payouts at any time."
+      "question": "Can I withdraw money before verifying my bank account?",
+      "answer": "No. Stripe requires a verified bank account on file before it will send any payout."
     },
     {
-      "question": "Why does my balance show $0.00 even though I've had sales?",
-      "answer": "New payments usually sit in Incoming for a rolling holding period before moving to Available, so a fresh sale won't be payout-eligible immediately."
+      "question": "Where did the separate \"Payout schedule\" setting go?",
+      "answer": "It's no longer its own menu item. Both the bank account list and the schedule now live together under Settings > Business settings > Bank accounts and scheduling."
+    },
+    {
+      "question": "Who is allowed to change the bank account on a Stripe account?",
+      "answer": "Only users with Admin or Owner permissions. Other team roles can view payout information but can't add or edit bank account details."
+    },
+    {
+      "question": "Is there a minimum amount Stripe will pay out?",
+      "answer": "Yes, generally one base unit of the account's currency, for example $0.01 in the US or £1 in the UK. Balances below that stay in the account until more payments arrive."
     }
   ],
+  "tables": [
+    {
+      "title": "Instant Payout fee by region",
+      "columns": ["Region", "Fee"],
+      "rows": [
+        ["Canada, EU, UK, Singapore, Norway, Hong Kong, Malaysia", "1%"],
+        ["US, Australia, New Zealand, UAE", "1.5%"]
+      ],
+      "note": "Standard payouts carry no fee in any region. Instant Payouts are also capped per transaction, for example $9,999 USD in the US."
+    }
+  ],
+  "references": [
+    {
+      "label": "Stripe Docs: Receive payouts (official)",
+      "url": "https://docs.stripe.com/payouts"
+    },
+    {
+      "label": "Stripe Support: Understanding daily, automatic, and manual payout schedules (official)",
+      "url": "https://support.stripe.com/questions/understanding-daily-automatic-and-manual-payout-schedules"
+    },
+    {
+      "label": "Stripe Docs: Instant Payouts for Dashboard users (official)",
+      "url": "https://docs.stripe.com/payouts/instant-payouts"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. Re-checked against Stripe's official documentation in September 2026, which corrected two things this guide previously carried: the bank account and payout schedule settings are no longer reached via a separate payouts menu (they now sit together under Settings > Business settings > Bank accounts and scheduling), and the Balances page button is currently labelled Pay out rather than Manage payouts. Instant Payout fee percentages, country restrictions, and the 7-14 day first-payout hold were added from the same documentation.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

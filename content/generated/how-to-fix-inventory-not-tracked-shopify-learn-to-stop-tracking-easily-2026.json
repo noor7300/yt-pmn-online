@@ -2,43 +2,87 @@
   "slug": "how-to-fix-inventory-not-tracked-shopify-learn-to-stop-tracking-easily-2026",
   "seoTitle": "Fix 'Inventory Not Tracked' in Shopify or Stop Tracking",
   "metaDescription": "Understand why Shopify shows 'Inventory not tracked,' how to enable tracking for real stock counts, and how to disable it for unlimited items.",
-  "intro": "Seeing 'Not tracked' next to a location in Shopify's inventory panel throws a lot of store owners, especially when they expected to see a quantity and a low-stock warning instead. It isn't a bug — it's a per-variant setting that's simply switched off. This guide shows exactly where that setting lives on the product page, what it looks like in both states, and how to decide which products should actually have stock counts turned on versus left open-ended.",
+  "intro": "Seeing \"Not tracked\" next to a location in Shopify's inventory panel throws a lot of store owners, especially when they expected to see a quantity and a low-stock warning instead. It isn't a bug. It's a per-product setting that's simply switched off. This guide shows where that setting lives on the product page, what it looks like in both states, and how to decide which products should actually have stock counts turned on versus left open-ended.",
   "steps": [
     {
       "heading": "Start from your Shopify admin home",
-      "body": "Log in and land on the admin Home screen, which summarizes sessions, orders, and payments to capture for the last 30 days. This isn't where inventory settings live, but it's the fastest route to Products in the left-hand menu, and it's worth a glance anyway — an order sitting in \"1 order to fulfill\" is often the moment someone notices a product let itself be sold with zero stock, which is exactly the untracked-inventory scenario this guide fixes.",
+      "body": "Log in and land on the admin Home screen, which summarizes sessions, orders, and payments for the last 30 days. Inventory settings don't live here, but it's the fastest route to Products in the left-hand menu. It's also worth a glance on its own: an order sitting in \"1 order to fulfill\" is often the moment someone notices a product sold with zero stock left, which is exactly the untracked-inventory scenario this guide covers.",
       "image": { "file": "/screenshots/onIlo9eVwVo/02.webp", "caption": "The Shopify admin Home dashboard, with Products one click away in the left-hand navigation." }
     },
     {
       "heading": "Open the product that's showing the issue",
-      "body": "From Products, click into the specific listing — here, a phone case product with its title, description, and media already filled in. Scroll down past pricing to the Inventory section; that's the block that controls whether Shopify counts stock for this specific product, separate from everything else on the page like pricing, shipping weight, or the description editor above it.",
+      "body": "From Products, click into the specific listing. In this example it's a phone case product with its title, description, and media already filled in. Scroll down past pricing to the Inventory section, the block that controls whether Shopify counts stock for this product, separate from pricing, shipping weight, or the description editor above it.",
       "image": { "file": "/screenshots/onIlo9eVwVo/05.webp", "caption": "A product's edit page in Shopify admin. The Inventory section further down the page is where tracking gets turned on or off." }
     },
     {
       "heading": "Recognize the untracked state",
-      "body": "In the Inventory section, an unchecked \"Track quantity\" box is the whole story: no Quantity field appears, and under Location the store simply reads \"Not tracked\" instead of a number. This is Shopify's default for a lot of import and duplication flows, which is why products can end up in this state without anyone deliberately choosing it. If a product should be showing stock counts and isn't, this checkbox is the first thing to check.",
+      "body": "In the Inventory section, an unchecked Track quantity box is the whole story: no quantity field appears, and under Location the store simply reads \"Not tracked\" instead of a number. Store owners often find products sitting in this state after an import or a duplicated listing, without anyone deliberately choosing it. If a product should be showing stock counts and isn't, this checkbox is the first thing to check.",
       "image": { "file": "/screenshots/onIlo9eVwVo/03.webp", "caption": "The Inventory section with Track quantity unchecked. No quantity field shows, and the location reads \"Not tracked.\"" }
     },
     {
       "heading": "Turn on tracking and set your quantity behavior",
-      "body": "Check Track quantity and the panel expands into a real quantity table, broken down by location into Unavailable, Committed, Available, and On hand counts. A second checkbox, \"Continue selling when out of stock,\" appears right below it — leave that off if you want the product to actually go unavailable at zero, or check it if you're fine taking orders that get fulfilled once more stock arrives. Shopify is explicit that this setting won't affect Shopify POS staff, who'll see a warning but can still complete the sale.",
+      "body": "Check Track quantity and the panel expands into a quantity table, broken down by location. Ticking the box doesn't pull in a stock count from anywhere: every location starts at zero until you type in the number you actually hold there. A second checkbox, Continue selling when out of stock, appears right below; leave it off if the product should go unavailable at zero, or check it to keep taking orders that get fulfilled once more stock arrives. Shopify's documentation notes this setting doesn't apply to Shopify POS: in-store staff will still see a warning on a zero-stock item, but they can complete the sale anyway.",
       "image": { "file": "/screenshots/onIlo9eVwVo/04.webp", "caption": "Track quantity enabled, showing the per-location quantity breakdown and the option to keep selling once stock hits zero." }
     },
     {
-      "heading": "Decide which products should stay untracked",
-      "body": "Not every product needs a stock count. Digital downloads, made-to-order items, and services have no physical inventory to run out of, so leaving Track quantity off for them is correct, not a mistake to fix. The goal isn't to track everything — it's to make sure the setting matches how you actually fulfill each product, so a physical item with limited stock never accidentally sells past what you have."
+      "heading": "Decide what should stay untracked, then check the rest of your catalog",
+      "body": "Not every product needs a stock count. Digital downloads, made-to-order items, and services have no physical inventory to run out of, so leaving Track quantity off for them is correct, not a mistake to fix. Once the toggle makes sense to you, a pass through the full product list is worth doing: watch for products that sell out instantly with no warning, or, the opposite problem, limited items that never seem to go unavailable. Both point back to this same Inventory section, set the wrong way for what the product actually is."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Track quantity is on but Available still shows 0",
+      "cause": "Turning tracking on doesn't import a stock count from anywhere. Every location starts at zero until the on-hand number is entered manually.",
+      "fix": "Open each location row under Inventory and type in the quantity actually held there."
     },
     {
-      "heading": "Audit your catalog for defaults left unchanged",
-      "body": "Once you understand the toggle, it's worth a pass through your full product list checking that tracked and untracked items were set intentionally rather than left on whatever Shopify defaulted to during import or duplication. A quick way to spot problems is watching for products that sell out instantly with no warning, or conversely items you know are limited that never seem to go unavailable — both point back to this same Inventory section."
+      "problem": "A product reads out of stock online even though there's stock somewhere",
+      "cause": "Online orders fulfill from one designated location. If that location shows 0 while a different location holds the stock, the product stays unavailable online no matter how Continue selling when out of stock is set.",
+      "fix": "Move or add inventory to the location assigned to fulfill online orders, and confirm that location has online fulfillment turned on."
+    },
+    {
+      "problem": "Shopify POS still sells an item marked out of stock",
+      "cause": "Continue selling when out of stock only governs the online store. Shopify's own documentation states POS staff can complete a sale on a zero-stock item regardless of this setting; they just see a warning first.",
+      "fix": "This is expected POS behavior, not a tracking bug. Train staff to read the warning before confirming a sale that shouldn't go through."
     }
   ],
   "faq": [
-    { "question": "Why does Shopify say a product's inventory isn't tracked?", "answer": "It means tracking was never turned on for that variant, so Shopify isn't counting stock levels or triggering sold-out states for it." },
-    { "question": "Should I track inventory for every product?", "answer": "Not necessarily; physical stock items usually benefit from tracking, while digital products or unlimited-supply items are often better left untracked." },
-    { "question": "Will turning off inventory tracking let customers order out-of-stock items?", "answer": "Yes, untracked products stay purchasable regardless of how many you actually have, which is the point for unlimited-availability items." },
-    { "question": "Can I turn inventory tracking back on after disabling it?", "answer": "Yes, you can toggle tracking on or off for a product at any time from its inventory settings." }
+    {
+      "question": "Why does Shopify say a product's inventory isn't tracked?",
+      "answer": "Tracking was never turned on for that product or variant, so Shopify isn't counting stock levels or triggering sold-out states for it."
+    },
+    {
+      "question": "Should I track inventory for every product?",
+      "answer": "Not necessarily. Physical stock items usually benefit from tracking, while digital products or made-to-order items are often better left untracked."
+    },
+    {
+      "question": "Will turning off inventory tracking let customers order out-of-stock items?",
+      "answer": "Yes. Untracked products stay purchasable no matter how many exist, which is the point for unlimited-availability items."
+    },
+    {
+      "question": "Can I turn inventory tracking back on after disabling it?",
+      "answer": "Yes, at any time from the product's Inventory section. Turning it back on starts the count at zero for every location, so re-enter the actual quantity before saving."
+    },
+    {
+      "question": "Why does a product show out of stock even though another location has units?",
+      "answer": "Shopify fulfills online orders from a specific location. Stock sitting at a different location that isn't set to fulfill online orders won't count toward what's available online."
+    },
+    {
+      "question": "Does Continue selling when out of stock apply to in-person POS sales?",
+      "answer": "No. It only affects the online store. Shopify POS staff can already sell a zero-stock item; they get a warning first but can still complete the sale."
+    }
   ],
+  "references": [
+    {
+      "label": "Shopify Help Center: Setting up inventory tracking (official)",
+      "url": "https://help.shopify.com/en/manual/products/inventory/setup/set-up-inventory-tracking"
+    },
+    {
+      "label": "Shopify Help Center: Selling out of stock products (official)",
+      "url": "https://help.shopify.com/en/manual/products/inventory/setup/selling-when-out-of-stock"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough of a single product's Inventory section. Re-checked against Shopify's official Help Center in September 2026, which confirmed the POS behavior as originally described and added two things the walkthrough didn't cover: that a newly tracked location starts at zero rather than an imported count, and the multi-location fulfillment gap that leaves a product reading out of stock online.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

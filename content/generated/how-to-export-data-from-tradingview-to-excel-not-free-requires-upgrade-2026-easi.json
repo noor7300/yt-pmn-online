@@ -1,44 +1,64 @@
 {
   "slug": "how-to-export-data-from-tradingview-to-excel-not-free-requires-upgrade-2026-easi",
   "seoTitle": "How to Export TradingView Chart Data to Excel",
-  "metaDescription": "See exactly where TradingView's Export chart data option lives, what it saves as a CSV, and how plan level affects who can use it.",
-  "intro": "TradingView doesn't export straight into an .xlsx file — it saves chart data to CSV, which Excel or Google Sheets can then open directly. That distinction trips people up as much as the plan restriction does. This guide shows exactly where the export option is tucked away in the layout menu, walks through the export dialog's two settings, and explains what actually lands in the file once you click Export, so you know what to expect before relying on it for backtesting or record-keeping.",
+  "metaDescription": "See exactly where TradingView's Export chart data option lives, what the CSV contains, and which plan tier (Essential and up) is required to use it.",
+  "intro": "TradingView doesn't export straight into an .xlsx file. It saves chart data to a CSV file that Excel or Google Sheets can open directly, and that distinction confuses as many readers as the plan restriction does. This guide shows where the export option hides in the layout menu, walks through the two settings in the dialog, and covers exactly what lands in the file once you click Export, including which plan tier TradingView requires and what to do if you're on the free plan.",
+  "prerequisites": [
+    "A TradingView account on the Essential plan or higher (the free Basic plan does not include chart data export)",
+    "A chart loaded with the symbol, timeframe and indicators you want in the file"
+  ],
+  "costNote": "Exporting chart data is a paid-plan feature. TradingView's pricing page lists chart data export as included from the Essential plan upward, so Essential, Plus, Premium and Ultimate all have it; the free Basic plan does not. If Export chart data doesn't show up in your layout menu at all, that's the plan gate, not a bug.",
   "steps": [
     {
-      "heading": "Open the layout menu on your chart",
-      "body": "With a chart loaded, click the layout options icon in the top toolbar — the same menu that holds Save layout, Autosave, Sharing, Make a copy, and Rename. Export chart data sits in that list alongside Create new layout, which is easy to miss if you're used to looking for export controls near the chart itself rather than in the layout management menu."
-    },
-    {
-      "heading": "Choose Export chart data",
-      "body": "Clicking Export chart data opens a small dialog explaining plainly what you're about to get: all information from the selected chart, including the symbol and any indicators applied, saved to a CSV file. That wording matters — it's a data export of OHLC values and indicator readings, not a formatted spreadsheet with charts or styling, so temper expectations if you were picturing a polished Excel workbook coming out the other end.",
+      "heading": "Open the layout menu and choose Export chart data",
+      "body": "With a chart loaded, click the layout options icon in the top toolbar, the same menu that holds Save layout, Autosave, Sharing, Make a copy and Rename. Export chart data sits in that list next to Create new layout, easy to miss if you're used to looking for export controls near the chart itself instead of inside layout management.",
       "image": { "file": "/screenshots/QnhfWD0dh_k/03.webp", "caption": "The layout menu, with Export chart data listed between Sharing controls and Create new layout." }
     },
     {
-      "heading": "Confirm the chart and pick a time format",
-      "body": "The dialog auto-fills the Chart field with your currently loaded symbol and timeframe — CAPITALCOM:US30 on the daily in this case — and offers a dropdown if you want to switch which chart's data gets exported. Below that, the Time format field defaults to a readable option but can be switched to UNIX timestamp, which matters if you're feeding the CSV into a script or spreadsheet formula that expects raw epoch time rather than a formatted date string.",
+      "heading": "Set the chart and time format",
+      "body": "Clicking Export chart data opens a dialog stating plainly what you're about to get: all information from the selected chart, including the symbol and any indicators applied, saved to a CSV file. That's a data export of OHLC values and indicator readings, not a formatted workbook with charts or styling.\n\nThe Chart field auto-fills with your currently loaded symbol and timeframe (CAPITALCOM:US30 on the daily here), with a dropdown to switch which chart's data gets exported. The Time format field defaults to UTC and can be switched to UNIX timestamp, useful if the CSV is feeding a script or formula that expects raw epoch values instead of a formatted date string.",
       "image": { "file": "/screenshots/QnhfWD0dh_k/04.webp", "caption": "The Export chart data dialog, with the Chart field showing the currently loaded symbol and an autocomplete dropdown for switching charts." }
     },
     {
-      "heading": "Set the time format and export",
-      "body": "Once the chart and time format are set the way you want — UNIX timestamp selected here — click Export to download the CSV. From there, opening it in Excel is just a normal file-open: Excel reads CSV natively, so there's no import wizard or conversion step required, only some light cleanup if you picked UNIX timestamps and want readable dates in your sheet.",
+      "heading": "Export the file and open it in Excel",
+      "body": "With the chart and time format set, click Export to download the CSV. The exported data matches what the chart currently shows: if you need a longer history, scroll the chart left or drag the x-axis to load more bars before exporting, not after.\n\nOpening the file in Excel is a normal file-open. Excel reads CSV natively, so there's no import wizard, only some light cleanup if you chose UNIX timestamps and want readable dates in the sheet.",
       "image": { "file": "/screenshots/QnhfWD0dh_k/05.webp", "caption": "The same dialog with UNIX timestamp selected as the time format and the Export button ready to download the CSV." }
     },
     {
-      "heading": "Know what plan level you need",
-      "body": "Chart data export has historically been a feature TradingView reserves for paid tiers rather than the free plan, and free-account users sometimes hit an upgrade prompt instead of this dialog. Plan requirements shift over time, so if you're on a free account and don't see Export chart data in your layout menu at all, that's the likely explanation rather than a bug — check your current plan's feature list before assuming something's broken."
+      "heading": "Use free workarounds if you're not on a paid plan",
+      "body": "Without Essential or higher, you can still get data out by hand: copy values off the chart or watch list, screenshot a specific range for reference, or use a third-party browser extension built for scraping TradingView data. Check any extension's permissions before connecting it to an account you trade on. None of these match the one-click CSV export for volume or accuracy, but they cover occasional, small needs without a subscription."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The exported CSV is missing older bars I could see on the chart",
+      "cause": "TradingView only exports the range currently loaded on the chart, not its full history.",
+      "fix": "Scroll left or drag the chart's x-axis to load more bars, then reopen Export chart data and export again."
     },
     {
-      "heading": "Use free workarounds if you're not ready to upgrade",
-      "body": "Short of a paid plan, you can still get data out manually: copy visible values off the chart or watch list by hand, take a screenshot of a specific range for reference, or use a third-party browser extension built for scraping TradingView data — though you should vet any extension's permissions before connecting it to an account you trade on. None of these match the one-click CSV export for volume or accuracy, but they cover occasional, small-scale needs without a subscription."
+      "problem": "Export chart data doesn't appear in the layout menu",
+      "cause": "The account is on the free Basic plan. Chart data export is listed as an Essential-plan-and-up feature on TradingView's pricing page.",
+      "fix": "Upgrade to Essential or higher, or fall back to a manual workaround such as copying values or a browser extension."
+    },
+    {
+      "problem": "Timestamps in Excel show as large plain numbers instead of dates",
+      "cause": "The export used the UNIX timestamp time format, which is seconds since 1970, not a date string.",
+      "fix": "Re-export with the UTC time format, or convert the UNIX column in Excel with a formula like =(A1/86400)+DATE(1970,1,1) formatted as a date."
     }
   ],
   "faq": [
-    { "question": "Is exporting TradingView data to Excel completely free?", "answer": "TradingView's built-in Export chart data tool is generally gated behind a paid subscription; free accounts often see an upgrade prompt where this dialog would otherwise appear." },
-    { "question": "Does TradingView export directly to an Excel file?", "answer": "No — it saves a CSV file, which Excel and Google Sheets both open natively. There's no native .xlsx export." },
-    { "question": "What can I still do with a free TradingView account?", "answer": "Free users can typically view and manually copy data or take screenshots, even without access to the built-in Export chart data feature." },
-    { "question": "Should I use UTC or UNIX timestamp when exporting?", "answer": "Use the readable UTC time format for manual analysis in Excel; switch to UNIX timestamp if you're feeding the CSV into a script or formula that expects raw epoch values." },
-    { "question": "Are there safe third-party tools for pulling TradingView data?", "answer": "Some exist, but it's worth checking their reviews and permissions carefully before connecting them to your TradingView account." }
+    { "question": "Does TradingView export chart data directly to an Excel file?", "answer": "No. It saves a CSV file, which Excel and Google Sheets both open natively. There is no built-in .xlsx export." },
+    { "question": "What plan do I need to export chart data?", "answer": "TradingView's pricing page lists chart data export from the Essential plan upward, so Essential, Plus, Premium and Ultimate all include it. The free Basic plan does not." },
+    { "question": "Why is data missing from my exported CSV?", "answer": "TradingView exports only the range currently loaded on the chart. Scroll left or drag the x-axis to bring more history into view before exporting." },
+    { "question": "Should I export with UTC or UNIX timestamp?", "answer": "UTC gives readable dates for manual analysis in Excel. UNIX timestamp works better when the CSV feeds a script or formula expecting raw epoch values." },
+    { "question": "Can I get TradingView data without a paid plan?", "answer": "Not through the built-in export. Free-plan users can copy values by hand, screenshot a range, or use a third-party browser extension, though none match the CSV export for volume or accuracy." }
   ],
+  "references": [
+    { "label": "TradingView Help Center: How can I export chart data? (official)", "url": "https://www.tradingview.com/support/solutions/43000537255-how-can-i-export-chart-data/" },
+    { "label": "TradingView Blog: You can now export & download data into a CSV file (official)", "url": "https://www.tradingview.com/blog/en/export-chart-data-in-csv-14395" },
+    { "label": "TradingView Pricing (official plan comparison)", "url": "https://www.tradingview.com/pricing/" }
+  ],
+  "verifiedNote": "Click path and dialog screens come from a recorded walkthrough. Plan gating and the CSV's chart-range limitation were re-checked against TradingView's help center, blog and pricing page in September 2026, which sharpened a vague 'paid tiers' claim into the specific Essential-plan-and-up gate and added the chart-range limitation the article didn't previously mention.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

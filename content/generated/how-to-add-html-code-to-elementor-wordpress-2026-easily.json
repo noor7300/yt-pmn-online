@@ -1,60 +1,91 @@
 {
   "slug": "how-to-add-html-code-to-elementor-wordpress-2026-easily",
   "seoTitle": "How to Add Custom HTML Code to Elementor in WordPress",
-  "metaDescription": "Embed custom HTML, scripts, and widgets in Elementor using the built-in HTML widget. This guide covers safe code placement and styling with CSS.",
-  "intro": "Elementor's HTML widget is the quiet workaround that lets you drop in custom code, embed a third-party widget, or fire off a script without touching a single theme file. It's the same widget whether you're on Elementor Free or Pro, which makes it one of the more reliable tools in the page builder. This guide walks through opening the editor, finding the widget, pasting in real code, and checking the result before you publish — the exact sequence that trips people up the first time they try it.",
+  "metaDescription": "Embed custom HTML, scripts, and widgets in Elementor using the built-in HTML widget. This guide covers safe code placement, and which styling options need Elementor Pro.",
+  "intro": "Elementor's HTML widget is a quiet workaround for dropping in custom code, embedding a third-party widget, or firing off a script without touching a theme file. It ships with both Elementor Free and Pro, which makes it one of the more dependable tools in the page builder. This guide walks through opening the editor, finding the widget, pasting real code, and checking the result before you publish: the sequence that trips people up the first time.",
+  "prerequisites": [
+    "A WordPress site with Elementor installed (Free or Pro) and a page you can edit"
+  ],
+  "costNote": "The HTML widget itself is part of Elementor Free; no paid plan is needed to add code to a page. Styling that code through Elementor's own tools is where cost enters: the per-widget Custom CSS field and the site-wide Custom Code panel are both Elementor Pro features. Free-plan users can still style an embed by wrapping CSS in <style> tags inside the HTML widget itself, or through WordPress's own Additional CSS in the Customizer.",
   "steps": [
     {
       "heading": "Open Elementor from your WordPress dashboard",
-      "body": "Log into wp-admin and click Elementor in the left sidebar to land on its home screen, where you'll see a Create a Page button alongside prompts for building with AI or starting from a template. This screen isn't where you'll paste any code — it's just the entry point — but it's worth knowing it exists separately from the classic WordPress Pages list, since Elementor keeps its own dashboard for templates, settings, and add-ons. If you're adding HTML to a page that already exists rather than a new one, you can skip past this screen entirely and jump straight to your Pages list.",
+      "body": "Log into wp-admin and click Elementor in the left sidebar to reach its home screen, where you'll see a Create a Page button next to prompts for building with AI or starting from a template. Nothing on this screen is where code gets pasted; it's just the entry point. Elementor keeps this dashboard separate from the classic WordPress Pages list, with its own home for templates, settings and add-ons. If you're editing a page that already exists instead of starting a new one, skip this screen and go straight to Pages.",
       "image": { "file": "/screenshots/1B2GkBJph0I/01.webp", "caption": "The Elementor home screen inside WordPress, reached from the Elementor item in the admin sidebar." }
     },
     {
       "heading": "Find your page and launch the editor",
-      "body": "Go to Pages in the WordPress sidebar, hover over the page you want to edit, and click Edit with Elementor rather than the standard Edit link — the standard editor won't give you access to Elementor's widgets. This distinction matters more than it sounds like it should: a lot of people end up in the block editor wondering where the HTML widget went, when they simply launched the wrong editor. Once you click through, Elementor loads the page in its drag-and-drop canvas with the widget panel docked on the left.",
+      "body": "Go to Pages in the WordPress sidebar, hover over the page you want to edit, and click Edit with Elementor instead of the standard Edit link. The default WordPress editor won't give you access to Elementor's widgets at all. This trips up a lot of people: they land in the block editor wondering where the HTML widget went, when they simply opened the wrong editor. Once you click through, Elementor loads the page in its drag-and-drop canvas with the widget panel docked on the left.",
       "image": { "file": "/screenshots/1B2GkBJph0I/04.webp", "caption": "The WordPress Pages list, with Edit with Elementor as the link that opens the page in the Elementor canvas rather than the default editor." }
     },
     {
       "heading": "Add the HTML widget to your layout",
-      "body": "In the widget panel, search \"HTML\" and you'll see the HTML widget appear — it's part of the free widget set, so no Pro upgrade is required. Drag it onto the section or container where you want the code to render, the same way you'd place a heading or image widget. Elementor treats it like any other element: it can sit inside a column, stack above or below other widgets, and be resized or repositioned afterward without affecting the code inside it.",
+      "body": "In the widget panel, search \"HTML\" and the HTML widget appears. It ships with Elementor's free widget set, so no Pro upgrade is needed just to place it. Drag it onto the section or container where the code should render, the same way you'd place a heading or image widget. It behaves like any other element: it can sit inside a column, stack above or below other widgets, and be resized or repositioned afterward without touching the code inside it.",
       "image": null
     },
     {
       "heading": "Paste your custom HTML code",
-      "body": "Once the widget is placed, its settings panel opens on the left with a Content tab showing an HTML Code field — a plain text editor where you type or paste your markup directly. This is where an embed snippet from a third-party service, a custom form, or a hand-written HTML block goes; Elementor renders it live in the canvas as you type, so you can see roughly how it will look before saving. There's no visual formatting toolbar here on purpose — it's a raw code field, which is exactly what makes it flexible enough to hold scripts and embeds that a normal text widget would strip out.",
+      "body": "With the widget placed, its settings panel opens on the left with a Content tab showing an HTML Code field: a plain text area where you type or paste markup directly. This is where an embed snippet from a third-party service, a custom form, or hand-written HTML goes. Elementor renders it live in the canvas as you type, so you get a rough preview before saving. There's no formatting toolbar here by design. It's a raw code field, which is what lets it hold scripts and embeds that a normal text widget would strip out.",
       "image": { "file": "/screenshots/1B2GkBJph0I/05.webp", "caption": "The Edit HTML panel with its HTML Code field, open on a fresh container ready for a pasted code snippet." }
     },
     {
-      "heading": "Apply CSS or JS if the embed needs styling",
-      "body": "Plenty of embedded widgets and scripts come with their own styling and don't need anything extra, but if your snippet looks unstyled or misaligned, Elementor gives you two ways to fix it. Custom CSS can be added per-element in the widget's Advanced tab, or site-wide under Elementor's Custom Code settings if the styling needs to apply everywhere. JavaScript can go directly inside the HTML widget's code field wrapped in script tags, or in Custom Code if you want it to load on every page rather than just this one section."
+      "heading": "Style it: what's free and what needs Pro",
+      "body": "JavaScript goes straight into the HTML widget's own code field, wrapped in <script> tags, on Free or Pro at no extra cost. Styling is where the plans diverge. The per-widget Custom CSS field on the Advanced tab and the site-wide Custom Code panel are both Elementor Pro features; Elementor's own documentation lists Custom Code as a Pro capability and notes it does not accept PHP. On Free, the practical workaround is to wrap your styles in <style> tags inside the same HTML widget, or add them through WordPress's own Customizer under Additional CSS."
     },
     {
       "heading": "Save and preview before publishing",
-      "body": "Click Update (or Publish, on a new page) and then use Elementor's preview icon to check the live page rather than trusting the editor canvas alone — some scripts and embeds only behave correctly outside the builder's iframe. Check both desktop and the mobile preview toggle at the top of the editor, since an HTML embed that fits cleanly on a wide screen can overflow or get clipped on mobile. If something looks broken, it's almost always a missing closing tag or a script that needs to load after the page rather than during it."
+      "body": "Click Update (or Publish on a new page), then use Elementor's preview icon to check the live page instead of trusting the editor canvas by itself; some scripts and embeds only run correctly outside the builder's iframe. Check both the desktop view and the mobile preview toggle at the top of the editor, since an embed that fits a wide screen can overflow or get clipped on mobile. A broken result is almost always a missing closing tag or a script that needs to fire after the page loads rather than during it."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The Custom CSS field doesn't show up in the Advanced tab",
+      "cause": "Per-widget Custom CSS is an Elementor Pro feature; it isn't present in Elementor Free.",
+      "fix": "Wrap the CSS in <style> tags directly inside the HTML widget's code field instead, or add the rules through WordPress's Customizer under Additional CSS."
+    },
+    {
+      "problem": "The embed looks fine in the editor but breaks on the live page",
+      "cause": "The editor renders the canvas inside an iframe, so some scripts and third-party embeds behave differently there than on the published page.",
+      "fix": "Judge the result from Elementor's preview icon or the live URL, not the editor canvas."
+    },
+    {
+      "problem": "The HTML widget doesn't appear in the widget search",
+      "cause": "The page was opened with WordPress's default editor instead of Edit with Elementor; the HTML widget only exists inside Elementor's own panel.",
+      "fix": "Go back to Pages and reopen the page with Edit with Elementor."
     }
   ],
   "faq": [
     {
       "question": "Do I need Elementor Pro to add HTML code to my page?",
-      "answer": "No, the HTML widget is available in both Elementor Free and Elementor Pro, so you don't need the paid version just to embed custom code."
+      "answer": "No. The HTML widget that holds your HTML, CSS and JavaScript is included in Elementor Free. Pro is only needed if you want to style that code through the widget's Advanced-tab Custom CSS field or the site-wide Custom Code panel."
     },
     {
       "question": "Can adding custom HTML break my WordPress site?",
-      "answer": "Poorly formatted or conflicting code can cause display issues, so it's worth previewing changes — including on mobile — before publishing and undoing anything that looks off."
+      "answer": "Badly formatted or conflicting code can cause display issues. Preview changes, including on mobile, before publishing, and remove anything that looks off."
     },
     {
-      "question": "Can I add JavaScript through the Elementor HTML widget, not just HTML?",
-      "answer": "Yes, the HTML widget accepts script tags along with HTML, so you can embed JavaScript-driven widgets or custom functionality the same way."
+      "question": "Can I add JavaScript through the HTML widget, not just HTML?",
+      "answer": "Yes. The HTML widget accepts script tags along with HTML, so you can embed JavaScript-driven widgets or custom functionality the same way."
+    },
+    {
+      "question": "Does styling an HTML embed require Elementor Pro?",
+      "answer": "Only if you use Elementor's own CSS tools. The per-widget Custom CSS field and the Custom Code panel are both Pro features. On Free, wrap your CSS in <style> tags inside the HTML widget itself, or add it through WordPress's Additional CSS in the Customizer."
     },
     {
       "question": "Will custom HTML added through Elementor work with any WordPress theme?",
-      "answer": "Yes, since the HTML widget renders independently of the theme's templates, it should work consistently across different WordPress themes."
+      "answer": "Yes. Since the HTML widget renders independently of the theme's templates, it should work consistently across different WordPress themes."
     },
     {
-      "question": "Why don't I see the HTML widget option in my editor?",
-      "answer": "Make sure you opened the page with Edit with Elementor rather than the default WordPress editor — the HTML widget only appears inside Elementor's own widget panel."
+      "question": "Why don't I see the HTML widget in my editor?",
+      "answer": "Make sure you opened the page with Edit with Elementor instead of the default WordPress editor. The HTML widget only appears inside Elementor's own widget panel."
     }
   ],
+  "references": [
+    { "label": "Elementor: HTML widget (official)", "url": "https://elementor.com/help/html-widget/" },
+    { "label": "Elementor: Add custom code, Pro feature (official)", "url": "https://elementor.com/help/custom-code-pro/" },
+    { "label": "Elementor: Custom CSS in Elementor (official)", "url": "https://elementor.com/help/custom-css-in-elementor/" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Widget availability on the Free plan, and the Pro/Free split for per-widget Custom CSS and the site-wide Custom Code panel, were checked against Elementor's official help pages in September 2026 - that check corrected the earlier version's claim that per-element Custom CSS and the Custom Code panel are available without Pro.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

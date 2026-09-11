@@ -1,59 +1,96 @@
 {
   "slug": "how-to-add-a-calendar-to-hostinger-website-easily-2026",
   "seoTitle": "Add a Calendar to Your Hostinger Website",
-  "metaDescription": "Embed Google Calendar or another scheduling tool into your Hostinger website using the Website Builder's Embed Code element.",
-  "intro": "Whether you're running a blog, business site, or booking platform, embedding a calendar on your Hostinger website helps visitors see your availability or upcoming events at a glance, and you don't need a developer or a paid plugin to do it. This guide covers getting from your Hostinger dashboard into the Website Builder's element panel, finding the embed option that accepts a calendar's code, and where to grab that code from Google Calendar in the first place.",
+  "metaDescription": "Embed Google Calendar or another scheduling tool into your Hostinger website using the Website Builder's embed code element, including the public-sharing step most guides skip.",
+  "intro": "Hostinger's Website Builder has no dedicated calendar block. What it has is an embed code element that accepts a block of code from an outside service, and Google Calendar is the simplest source for that code.\n\nThis guide covers getting from your Hostinger dashboard into the builder's element panel, generating the embed code on Google Calendar's side, and the one setting on the Google Calendar side that determines whether visitors see anything at all.",
+  "prerequisites": [
+    "A Hostinger account with a site already open in Website Builder",
+    "A Google Calendar (or other service) set to public, or shared with anyone who has the link — a private calendar's embed code renders as a blank box to site visitors"
+  ],
   "steps": [
     {
-      "heading": "Open your Websites list in hPanel",
-      "body": "After logging in, you land on Websites inside hPanel, which lists every site tied to your account under its hosting plan — in this case a Cloud Startup plan showing several sites, each with its own status. A domain that's temporary or not yet connected is flagged directly in the list, like \"Domain not connected\" with a Check guide link, so you can confirm the right site is fully set up before trying to edit it. Find the site you want to add a calendar to and use the Edit website or Tools option next to it.",
+      "heading": "Open your site in Website Builder",
+      "body": "After logging in, hPanel's Websites list shows every site tied to your account, each with its own status. A domain flagged \"Domain not connected\" is worth resolving before you build anything on top of it, since visitors won't reach a page on a domain that isn't live. Find the right site and click Edit website.",
       "image": { "file": "/screenshots/3qYrWBp2wlo/03.webp", "caption": "The Websites list in hPanel, showing connected sites with their domains and quick actions like Edit website and Tools." }
     },
     {
-      "heading": "Open the element panel in Website Builder",
-      "body": "Inside Website Builder, click Add section (or the plus icon) to open the panel of building blocks you can drop onto the page — Text, Button, Add to bag, Image, Gallery, Video, Shape, Map, Instagram feed, Contact form (RSVP), Subscription form, and Social icons all sit in the same grid. Below those, a code icon labeled for embedding raw code is what you're actually after for a calendar, since Hostinger doesn't have a dedicated \"Calendar\" block — it works by accepting embed code from an external calendar service instead.",
+      "heading": "Open the embed code element",
+      "body": "Inside the builder, open the elements panel to see the blocks you can drop onto the page: Text, Button, Image, Gallery, Video, Shape, Map, Instagram feed, Contact form, Subscription form, Social icons, and an embed code element near the bottom. That last one is what you want. Hostinger's own documentation for it describes the same click path: drag the element onto the page, then use its Enter code option once you have something to paste.",
       "image": { "file": "/screenshots/3qYrWBp2wlo/04.webp", "caption": "The Website Builder's element panel, with content blocks like Contact form, Subscription form, and an embed-code option near the bottom." }
     },
     {
-      "heading": "Get your calendar's embed code from Google Calendar",
-      "body": "Outside of Hostinger, open Google Calendar's own Settings, select the specific calendar you want to display — shown here as a calendar named \"PMN Online\" with its time zone set to India Standard Time and an Owner field confirming who controls it — and look for the Integrate calendar section. That section provides an embed code you copy in full; the same settings page is also where you'd rename the calendar, add a description, or export it if you ever need a backup.",
+      "heading": "Make the calendar public and copy its embed code",
+      "body": "In Google Calendar's own Settings, select the calendar you want to display and open Integrate calendar. Under Embed code, click Customize to set dimensions (Google requires at least 500 by 500) and pick which controls show, then copy the code.\n\nBefore you leave this screen, check Access permissions for this calendar. Google Calendar embeds are visible only to people the calendar is shared with; a calendar that isn't set to public, or at least shared with anyone who has the link, will embed successfully but show blank to every visitor who isn't already on the guest list.",
       "image": { "file": "/screenshots/3qYrWBp2wlo/05.webp", "caption": "Google Calendar's settings page for a specific calendar, including its name, time zone, and owner, near where the embed code lives." }
     },
     {
-      "heading": "Paste the code into the Embed element",
-      "body": "Back in Hostinger's Website Builder, place the embed-code element on the page where you want the calendar to show, click into it, and paste the code you copied from Google Calendar. The same embed element works for other calendar and booking tools too — Apple Calendar, Microsoft Outlook Calendar, and third-party booking widgets like those from Booking.com all provide their own embed codes in a similar format, so this one element covers more than just Google's calendar."
+      "heading": "Paste the code and resize the block",
+      "body": "Back in the builder, place the embed element where you want the calendar, click Enter code, and paste what you copied. It renders as a live, interactive component, not a static image, so drag its edges to resize it or move the whole block if it doesn't fit where you first put it. A full-width placement near the top of a booking or events page tends to work better than a narrow sidebar.\n\nThe same element accepts embed codes from Apple Calendar, Outlook Calendar, or booking widgets like Calendly, since they all hand you a similar block of code."
     },
     {
-      "heading": "Resize and reposition the calendar block",
-      "body": "Once pasted, the calendar renders directly on the page as a live, interactive component rather than a static image. Drag its edges to resize it, or move the whole block to a different section of the page if it doesn't fit well where you first placed it — a full-width placement near the top of a booking or events page tends to read better than squeezing it into a narrow sidebar column."
+      "heading": "Save, publish, and check the live page",
+      "body": "Save keeps your progress inside the builder; Update website pushes it to your actual domain, which is a separate step people skip and then wonder why nothing changed. Preview on both desktop and mobile, since embedded calendars can render narrower than expected on small screens.\n\nIf your domain was still showing as temporary or not connected back in step one, get that fixed now: a calendar embedded on a builder-preview URL isn't visible to anyone browsing your real domain."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Hostinger rejects the code with \"Error: embed code is too large\"",
+      "cause": "The code contains an inline image using the data:image… format instead of a normal image URL. The builder doesn't support that format.",
+      "fix": "Edit the source code to reference a hosted image URL instead of an inline data URI, or use the calendar service's plain iframe embed code, which doesn't carry inline images."
     },
     {
-      "heading": "Save and publish the change",
-      "body": "Use Save to keep your progress inside the builder, then Update website (or Publish, depending on your builder version) to push the calendar live on your actual domain. Preview the page afterward on both desktop and mobile view, since embedded calendars can render narrower than expected on small screens and sometimes need a manual width adjustment to stay usable there."
+      "problem": "The calendar block is empty or shows an access message to visitors",
+      "cause": "The Google Calendar behind the embed hasn't been made public or shared with anyone who has the link. Google Calendar only shows the embed to people the calendar is shared with.",
+      "fix": "In Google Calendar's settings for that calendar, open Access permissions and enable public access (or share it with anyone who has the link), then reload the live page."
     },
     {
-      "heading": "Confirm the right domain is connected",
-      "body": "If your site's domain shows as temporary or not connected, as flagged in the Websites list, get that resolved before relying on the calendar being visible to real visitors — a calendar embedded on a temporary builder-preview URL won't be seen by anyone browsing your actual domain. Once the domain shows connected, revisit the live page one more time to confirm the calendar loads correctly outside of the builder's preview mode."
+      "problem": "The widget doesn't show up after clicking Update website",
+      "cause": "The browser is serving a cached version of the page.",
+      "fix": "Hard-refresh the live URL or open it in a private window."
+    },
+    {
+      "problem": "Linked images or buttons inside the embedded widget don't load",
+      "cause": "The embed code references an http:// link instead of https://, or a URL containing spaces. Hostinger's builder blocks non-HTTPS resources and rejects spaces in URLs.",
+      "fix": "Edit the embed code to use https:// links with no spaces before pasting it back in."
     }
   ],
   "faq": [
     {
       "question": "Which calendar services can I embed in Hostinger?",
-      "answer": "Google Calendar, Apple Calendar, Microsoft Outlook Calendar, and third-party booking widgets can all be embedded using the same embed-code element in Website Builder."
+      "answer": "Google Calendar, Apple Calendar, Outlook Calendar, and booking tools like Calendly all work through the same embed code element in Website Builder, since each one hands you a similar block of code to paste."
     },
     {
       "question": "Do I need coding skills to add a calendar?",
-      "answer": "No, you just need the embed code provided by your calendar service's own settings, which you paste into Hostinger's embed-code element without writing anything yourself." },
+      "answer": "No. You copy the embed code from the calendar service's own settings and paste it into Hostinger's embed code element without writing anything yourself."
+    },
+    {
+      "question": "Does my Google Calendar need to be public?",
+      "answer": "Yes, or at least shared with anyone who has the link. A private calendar generates an embed code just fine, but visitors who aren't already shared on it will see a blank box instead of your events."
+    },
     {
       "question": "Can visitors book appointments through the embedded calendar?",
-      "answer": "This depends on the calendar or booking tool you embed — some services support interactive booking directly through the widget, while a plain Google Calendar embed is mainly for viewing availability." },
+      "answer": "It depends on the tool. A plain Google Calendar embed is for viewing availability only; booking widgets like Calendly support interactive scheduling directly through the embedded widget."
+    },
     {
-      "question": "Where do I find the embed code for Google Calendar?",
-      "answer": "In Google Calendar's Settings for the specific calendar you want to share, under the Integrate calendar section, where an embed code is provided for you to copy." },
+      "question": "Why did Hostinger reject my embed code?",
+      "answer": "Most often because the code contains an inline image in data:image… format instead of a URL. Replace it with a hosted image link, or use the service's plain iframe embed code."
+    },
     {
-      "question": "What if my calendar doesn't show up after publishing?",
-      "answer": "Check that your site's domain is fully connected rather than still on a temporary builder-preview URL, since a calendar added while the domain isn't connected won't be visible to visitors on your real website." }
+      "question": "What if the calendar doesn't show up after publishing?",
+      "answer": "Check three things in order: the domain is fully connected (not a temporary preview URL), the source calendar is public or shared with anyone who has the link, and the browser isn't serving a cached copy of the page."
+    }
   ],
+  "references": [
+    {
+      "label": "Hostinger Website Builder: How to embed custom code (official)",
+      "url": "https://www.hostinger.com/support/6463152-hostinger-website-builder-how-to-embed-custom-code/"
+    },
+    {
+      "label": "Google Calendar Help: Add a calendar to your website (official)",
+      "url": "https://support.google.com/calendar/answer/41207?hl=en"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The embed element's behavior and error conditions were checked against Hostinger's official documentation, and the calendar-sharing requirement against Google Calendar's official help page, in September 2026. The public-sharing requirement was missing from the original guide and is added here as the most common reason an embedded calendar shows nothing.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

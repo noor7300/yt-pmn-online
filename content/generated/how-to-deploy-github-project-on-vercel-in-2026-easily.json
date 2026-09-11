@@ -1,16 +1,21 @@
 {
   "slug": "how-to-deploy-github-project-on-vercel-in-2026-easily",
   "seoTitle": "How to Deploy a GitHub Project on Vercel for Free Hosting",
-  "metaDescription": "Follow this step-by-step guide to deploy a GitHub project on Vercel for free, from uploading files to GitHub through to a live, hosted site.",
-  "intro": "Vercel makes it possible to take a project sitting in a GitHub repository and turn it into a live, hosted website in just a few clicks, with no backend required. This guide walks through uploading a project to GitHub, connecting it to Vercel, and configuring the deployment settings, using a simple to-do list app as the example. It applies just as well to React apps, Next.js projects, or any static site you want hosted for free, and by the end you'll have both a live URL and a dashboard for managing future deploys.",
+  "metaDescription": "Deploy a GitHub project on Vercel's free Hobby plan, including its non-commercial-use restriction, the exact import screens, and how automatic redeploys work.",
+  "intro": "Vercel makes it possible to take a project sitting in a GitHub repository and turn it into a live, hosted website in a few clicks, with no backend required. This guide walks through uploading a project to GitHub, connecting it to Vercel, and configuring the deployment settings, using a simple to-do list app as the example. It applies just as well to React apps, Next.js projects, or any static site, and by the end you'll have both a live URL and a dashboard for managing future deploys.",
+  "prerequisites": [
+    "A GitHub account with your project already pushed to a repository",
+    "Ownership of that repository if it's under your personal GitHub account. Vercel requires you to be the repo Owner, not just a Collaborator, to create the webhook it needs to auto-deploy"
+  ],
+  "costNote": "Deploying is free on Vercel's Hobby plan, the tier this walkthrough uses. Hobby is limited to non-commercial, personal use under Vercel's fair use guidelines, so a site that generates revenue for anyone involved needs a Pro plan. Hobby also caps a team at 200 projects and 100 deployments a day, well above what a personal site needs.",
   "steps": [
     {
       "heading": "Upload your project to GitHub",
-      "body": "Before Vercel enters the picture, your code needs to live in a GitHub repository. Create a new repo, name it something descriptive like \"to-do,\" and use the Quick Setup screen's \"Upload files\" option to add your project directly from your file manager rather than dragging and dropping — for a simple static project this can be as small as a single index.html file. Commit the changes, and your code is now live on GitHub and ready to be connected to a hosting platform."
+      "body": "Before Vercel enters the picture, your code needs to live in a GitHub repository. Create a new repo, name it something descriptive like \"to-do,\" and use the Quick Setup screen's \"Upload files\" option to add your project directly from your file manager instead of dragging and dropping. For a simple static project this can be as small as a single index.html file. Commit the changes, and your code is live on GitHub and ready to connect to a hosting platform."
     },
     {
       "heading": "Start deploying from Vercel",
-      "body": "Head to vercel.com, a platform widely used for free hosting of GitHub projects, especially for front-end developers and static or JAMstack apps. Click Start Deploying from the homepage, then continue with GitHub to authenticate — if you're already signed into GitHub in another tab, Vercel typically detects and links the account automatically without asking you to log in twice.",
+      "body": "Head to vercel.com and click Start Deploying from the homepage, then continue with GitHub to authenticate. If you're already signed into GitHub in another tab, Vercel typically detects and links the account automatically without asking you to log in twice.",
       "image": {
         "file": "/screenshots/NWl9w1JHOx8/01.webp",
         "caption": "Vercel's homepage, with the Start Deploying button that kicks off the GitHub authentication and import flow."
@@ -18,11 +23,11 @@
     },
     {
       "heading": "Import your repository and grant access",
-      "body": "After authenticating, click Import Git Repository. Vercel gives you a choice between granting access to all of your GitHub repositories or just specific ones — selecting only the specific repository you're deploying is the safer option, since it means Vercel never sees the rest of your GitHub account. Select the repo (to-do in this example) and click Install to finish linking it."
+      "body": "After authenticating, click Import Git Repository. Vercel offers a choice between granting access to all of your GitHub repositories or just specific ones; selecting only the repository you're deploying is the safer option, since Vercel never sees the rest of your GitHub account. Select the repo (to-do in this example) and click Install to finish linking it.\n\nIf the repository doesn't appear in the picker, ownership is the usual reason: a Collaborator on a personal repo can't create a Vercel project from it, only the repo's Owner can."
     },
     {
       "heading": "Configure the project and deploy",
-      "body": "Vercel's New Project screen shows exactly what it's importing — the repository name and branch (pmnonline/to-do on main, for instance) — plus a form for the Vercel Team, Project Name, Framework Preset, and Root Directory. For a plain HTML project with no framework, set the Framework Preset to \"Other\" rather than guessing at a specific framework; Build and Output Settings and Environment Variables stay collapsed and can be left alone for a simple static site. Click Deploy once everything looks right.",
+      "body": "Vercel's New Project screen shows exactly what it's importing (the repository name and branch, pmnonline/to-do on main in this case) plus a form for the Vercel Team, Project Name, Framework Preset, and Root Directory. For a plain HTML project with no framework, set the Framework Preset to \"Other\" instead of guessing at a specific one; Build and Output Settings and Environment Variables stay collapsed and can be left alone for a simple static site. Click Deploy once everything looks right.",
       "image": {
         "file": "/screenshots/NWl9w1JHOx8/03.webp",
         "caption": "The New Project screen, importing from GitHub with the project name, Framework Preset set to Other, and Root Directory left at the default."
@@ -30,43 +35,70 @@
     },
     {
       "heading": "Confirm the deployment finished",
-      "body": "When the build completes, Vercel shows a Next Steps panel with shortcuts for what to do now that the site is live: push a new branch for Instant Previews, add a custom domain, or enable Speed Insights to track how real users experience the site over time. None of these are required to have a working deployment — they're the next layer of polish once the basic hosting is confirmed working. Click Continue to Dashboard when you're ready to move on.",
+      "body": "When the build completes, Vercel shows a Next Steps panel with shortcuts for what to do now that the site is live: push a new branch for Instant Previews, add a custom domain, or enable Speed Insights to track how real users experience the site over time. None of these are required for a working deployment; they're the next layer of polish once basic hosting is confirmed working. Click Continue to Dashboard to move on.",
       "image": {
         "file": "/screenshots/NWl9w1JHOx8/04.webp",
         "caption": "The post-deployment Next Steps screen, offering Instant Previews, Add Domain, and Enable Speed Insights before continuing to the dashboard."
       }
     },
     {
-      "heading": "View and manage your deployed site",
-      "body": "The Vercel dashboard's Production Deployment view is where everything about the live site comes together: the generated deployment URL, any custom domains attached, the current status (Ready, in this case), who deployed it and when, and which commit it was built from. From here you can also open Build Logs and Runtime Logs, or use Instant Rollback if a future deploy breaks something and you need to revert to this working version quickly.",
+      "heading": "Manage the site and let future pushes redeploy it",
+      "body": "The Vercel dashboard's Production Deployment view is where everything about the live site comes together: the generated deployment URL, any custom domains attached, the current status (Ready, here), who deployed it and when, and which commit it was built from. The Hobby badge next to the team name confirms which plan the project is on. From here you can open Build Logs and Runtime Logs, or use Instant Rollback if a future deploy breaks something.\n\nThe real payoff of connecting GitHub instead of uploading files manually is that Vercel deploys every push by default. A push to the production branch (usually main) updates the live domain; a push to any other branch, or to a pull request, builds a separate Preview Deployment with its own URL instead of touching the live site.",
       "image": {
         "file": "/screenshots/NWl9w1JHOx8/05.webp",
         "caption": "The Vercel dashboard's Production Deployment page, showing the live domain, deployment status, and the commit it was built from."
       }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The repository doesn't show up when importing",
+      "cause": "For a personal GitHub account, Vercel requires you to be the repository's Owner, not just a Collaborator, to create the deploy webhook. For an organization-owned repo, you need to be an Org Owner or a Member with access to that specific repository.",
+      "fix": "Ask the repo's owner to do the import, or ask an org admin to grant repository access, then try again."
     },
     {
-      "heading": "Let future pushes redeploy automatically",
-      "body": "The real payoff of connecting GitHub to Vercel rather than uploading files manually is that any future push to the connected branch triggers an automatic redeployment — you edit code locally, push to GitHub, and the live site updates on its own within a minute or two. That makes this setup genuinely suited to ongoing projects, not just a one-time publish, whether it's a static HTML site, a React app, or a full Next.js project."
+      "problem": "Importing an organization repository prompts Vercel to create a team",
+      "cause": "Deploying from a GitHub organization on the Hobby plan requires a Vercel team, since organization collaboration is a Pro feature.",
+      "fix": "Upgrade to Pro, or move the code to a personal repository you own and import that instead."
+    },
+    {
+      "problem": "The build succeeds but the live site is blank or shows the wrong content",
+      "cause": "Root Directory or Framework Preset on the New Project screen don't match where the project's files actually sit in the repo.",
+      "fix": "Open Project Settings > General, correct Root Directory and Framework Preset, then redeploy."
+    },
+    {
+      "problem": "Unsure whether the deployed site is allowed to make money",
+      "cause": "The Hobby plan is restricted to non-commercial, personal use under Vercel's own fair use policy.",
+      "fix": "Upgrade the project to a Pro plan before using it for anything that generates revenue for you or a client."
     }
   ],
   "faq": [
     {
       "question": "Is deploying a GitHub project on Vercel really free?",
-      "answer": "Yes, Vercel offers free hosting for personal and small projects deployed directly from GitHub, under its Hobby plan."
+      "answer": "Yes, on the Hobby plan, but Hobby is restricted to non-commercial, personal use per Vercel's fair use guidelines. A site used for business or client work needs a Pro plan."
     },
     {
       "question": "Does Vercel automatically update my site when I push new code?",
-      "answer": "Yes, once connected, any push to your GitHub repository triggers an automatic redeployment on Vercel, which is what makes the GitHub integration more useful than a manual upload."
+      "answer": "Yes. A push to the production branch (usually main) updates the live domain automatically; pushes to other branches or pull requests get their own Preview Deployment URL instead."
     },
     {
       "question": "Can I deploy a React or Next.js project the same way?",
-      "answer": "Yes, the same GitHub-to-Vercel connection process works for React, Next.js, and other front-end frameworks — just choose the matching Framework Preset instead of \"Other\" during setup."
+      "answer": "Yes, the same GitHub-to-Vercel connection process works for React, Next.js, and other front-end frameworks. Choose the matching Framework Preset instead of \"Other\" during setup."
     },
     {
       "question": "Can I add a custom domain to my Vercel deployment?",
       "answer": "Yes, custom domain settings are available from the Vercel project dashboard's Domains tab, and Vercel also surfaces an Add Domain shortcut right after your first deployment finishes."
+    },
+    {
+      "question": "Why doesn't my GitHub repository show up in the import list?",
+      "answer": "Usually a permissions issue: on a personal account you need to be the repo's Owner rather than a Collaborator, and on an organization repo you need to be an Org Owner or a Member with access to that repository."
     }
   ],
+  "references": [
+    { "label": "Vercel Docs: Vercel Hobby Plan (official)", "url": "https://vercel.com/docs/plans/hobby" },
+    { "label": "Vercel Docs: Deploying GitHub Projects with Vercel (official)", "url": "https://vercel.com/docs/git/vercel-for-github" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough, including the Hobby plan badge visible on the dashboard. Plan limits, the non-commercial-use restriction, repository-ownership requirements for importing, and how pushes map to production versus preview deployments were re-checked against Vercel's official docs in September 2026; the commercial-use restriction and the ownership requirement were not in the article before this pass.",
   "generatedAt": "2026-07-21T06:00:49.000Z",
   "deep": true
 }
