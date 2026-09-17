@@ -1,48 +1,85 @@
 {
   "slug": "how-to-add-skrill-to-shopify-connect-payment-method-easily-2026",
   "seoTitle": "How to Add Skrill to Shopify: Connect the Payment Gateway (2026)",
-  "metaDescription": "Add Skrill as a payment method in Shopify — install the Skrill Official app, connect your API credentials, and test checkout before going live.",
-  "intro": "Skrill is a useful addition to a Shopify store's checkout if you sell to customers across multiple currencies or regions where local e-wallets matter more than cards, since it covers over 20 local payment methods and 80+ banks globally through a single integration. Connecting it isn't quite as simple as flipping a toggle — it involves setting up an app inside Shopify's Payments settings and matching it with API credentials from your Skrill business account. This guide walks through both sides of that connection so your first Skrill transaction goes through cleanly instead of bouncing back with a configuration error.",
+  "metaDescription": "Add Skrill as a payment method in Shopify: install the Skrill app, whitelist Shopify's IP in Skrill's Developer Settings, enter your Merchant ID and credentials, then test before going live.",
+  "intro": "Skrill is a useful addition to a Shopify store's checkout if you sell to customers across multiple currencies or regions where local e-wallets matter more than cards. Connecting it isn't as simple as flipping a toggle: it involves installing an app inside Shopify's Payments settings, generating credentials in a Skrill business account, and whitelisting Shopify's own IP address on Skrill's side before the two will talk to each other. This guide walks through both sides of that connection so the first Skrill transaction goes through cleanly instead of bouncing back with a configuration error.",
+  "prerequisites": [
+    "A free Skrill merchant (business) account, opened through Skrill's own application form",
+    "Your Skrill Merchant ID and account email — the Merchant ID is the numeric customer ID shown in the upper-right corner of your Skrill account, not your email address"
+  ],
+  "costNote": "Installing the app is free. Skrill's own published rates (per its Shopify integration page) list card payments at 1.9% + €0.29 for new merchants, Rapid Transfer at 1% + €0.29, refunds at €0.49 each, and withdrawals at €4.00 each. Check Skrill's pricing page for your account's current rate, since these change.",
   "steps": [
     {
-      "heading": "Open Settings in your Shopify admin",
-      "body": "From your Shopify admin, click Settings at the bottom of the left-hand menu. The settings list covers everything from General and Plan to Users, Checkout, Shipping and delivery, and further down, Payments — which is the section you need for adding any new payment gateway, including Skrill. Shopify groups third-party payment providers separately from Shopify Payments itself, so if you already accept cards through Shopify Payments, adding Skrill sits alongside it rather than replacing it.",
+      "heading": "Open Payments in your Shopify admin",
+      "body": "From your Shopify admin, click Settings at the bottom of the left-hand menu, then open Payments. Scroll down to Add payment methods and click Search by provider. Shopify groups third-party gateways like Skrill separately from Shopify Payments, so if you already accept cards through Shopify Payments, adding Skrill sits alongside it instead of replacing it.",
       "image": { "file": "/screenshots/uZr317BbYiM/02.webp", "caption": "The Shopify Settings menu, with Payments listed among General, Plan, Billing, Checkout, and Shipping and delivery — this is where third-party gateways like Skrill get added." }
     },
     {
-      "heading": "Find and open the Skrill Official app",
-      "body": "Inside Payments, look for an option to add a third-party provider or browse alternative payment methods, and search for Skrill. Selecting Skrill Official opens its app page inside your Shopify admin, describing the gateway as supporting over 20 local payment methods and 80-plus banks globally, along with a note that payment capture on this integration is automatic and can't be changed from your regular capture settings. Click Install to add it to your store, or Contact provider first if you need clarification on fees or supported regions before committing.",
+      "heading": "Find Skrill and install the app",
+      "body": "Type Skrill into the search field, click the Skrill result, then click Activate, followed by Connect, then Install app. Shopify's install screen names the permissions the app needs (accessing and editing store information) before you confirm. The app page describes Skrill's coverage of cards and regional payment methods and a note that payment capture on this integration is automatic and can't be changed from Shopify's regular capture settings.",
       "image": { "file": "/screenshots/uZr317BbYiM/03.webp", "caption": "The Skrill Official app page inside Shopify Payments, describing the gateway's coverage and showing the Install button plus a note that payment capture is automatic." }
     },
     {
-      "heading": "Get your API credentials from Skrill",
-      "body": "Connecting the app in Shopify requires credentials generated on Skrill's own site, not inside Shopify. Log into your Skrill business account, go to Settings, then Developer Settings, where you manage the Automated Payment Interface (API), Merchant Query Interface (MQI), and related security options for each of your Skrill wallet accounts. This is also where you set your API/MQI password and secret word, both of which Shopify's Skrill integration will ask you to enter, and where you whitelist the IP addresses allowed to communicate with your account.",
+      "heading": "Get your Merchant ID and set a Secret Word in Skrill",
+      "body": "The credentials Shopify asks for come from Skrill's site, not Shopify's. Log into your Skrill merchant account and go to Settings, then Developer Settings, then API / MQI / GSR / CVT Management. From there, set an API/MQI password and a Secret Word: Skrill requires the Secret Word to be at least 8 characters with one uppercase letter, one lowercase letter, and one number. Your Merchant ID is the numeric customer ID shown in the upper-right corner of your Skrill account; you'll need it, your account email, the Secret Word, and the API password on the Shopify side.",
       "image": { "file": "/screenshots/uZr317BbYiM/04.webp", "caption": "Skrill's Developer Settings page, showing Automated Payment Interface, Merchant Query Interface, and IP whitelisting controls used to generate the credentials Shopify needs." }
     },
     {
-      "heading": "Whitelist Shopify's IP addresses in Skrill",
-      "body": "Skrill's API access is locked down by IP by default, so any request coming from an address that isn't on your whitelist gets silently rejected — this is the single most common reason a Skrill-Shopify connection fails even when the password and secret word are correct. Add the IP addresses Shopify's Skrill app documentation specifies to the API secure IP address list under Automated Payment Interface, save the change, and confirm the status shows as Enabled with the correct number of IPs whitelisted before moving on."
+      "heading": "Whitelist Shopify's IP address in Skrill",
+      "body": "Skrill's API access is locked to specific IP addresses by default, so a request from an address that isn't whitelisted gets rejected. This is the single most common reason a Skrill-Shopify connection fails even when the password and Secret Word are correct. Skrill's own Shopify configuration guide lists the required address as 185.88.185.6; add it under both Automated Payment Interface and Merchant Query Interface in Developer Settings, then save. Skrill changed this IP in January 2025, so an older whitelist entry copied from an outdated guide will silently fail."
     },
     {
-      "heading": "Enter your credentials back in Shopify",
-      "body": "Return to the Skrill app inside Shopify Payments and enter your Skrill merchant email, secret word, and any API password it asks for. Save the configuration, and Shopify will attempt to validate the connection against Skrill's servers immediately — if the IP whitelist step was skipped or entered incorrectly, this is usually where you'll see the connection error rather than later at checkout."
+      "heading": "Enter your credentials in Shopify and pick payment methods",
+      "body": "Back in the Skrill settings screen inside Shopify, fill in Merchant ID, Email, Secret Word, and API Password exactly as they're set in your Skrill account; Logo URL is optional and only affects the checkout branding. Below that, enable or disable the individual payment methods you want to offer, such as cards, Skrill's own digital wallet, or regional options like Rapid Transfer or Boleto. Only turn on methods that are also enabled on your Skrill account, since a mismatch there is a separate way for a transaction to fail. Click Activate Skrill once everything is set."
     },
     {
-      "heading": "Verify your account and run a test payment",
-      "body": "Before relying on Skrill for real orders, confirm your Skrill business account is fully verified — an unverified or partially verified account can accept the connection but still decline live transactions. Use Shopify's test mode if the Skrill integration supports it, or place a genuine small-value order yourself and complete it with Skrill selected at checkout, watching for the payment to appear correctly in both your Shopify order list and your Skrill account balance."
+      "heading": "Test before relying on it for real orders",
+      "body": "The Skrill settings panel in Shopify includes its own Test mode toggle, which simulates successful and failed transactions without moving real money. Skrill also publishes two card numbers for use with test merchant accounts: 5438311234567890 for Mastercard and 4000001234567890 for Visa, each used with any future expiry date and a random CVV. Run a test transaction with test mode on, confirm it appears as expected, then switch test mode off before customers start checking out for real."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Skrill's published Shopify transaction fees",
+      "columns": ["Transaction type", "Fee"],
+      "rows": [
+        ["Card payment (new merchants)", "1.9% + €0.29"],
+        ["Rapid Transfer", "1% + €0.29"],
+        ["Refund", "€0.49 per transaction"],
+        ["Withdrawal", "€4.00 per withdrawal"]
+      ],
+      "note": "From Skrill's business pricing page for the Shopify integration. Rates can change and may differ by account, so confirm against your own Skrill dashboard before relying on them."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Shopify rejects the connection with an IP whitelist error",
+      "cause": "Skrill changed the IP address its Shopify app connects from in January 2025. An entry copied from an older guide no longer matches.",
+      "fix": "Whitelist 185.88.185.6 under both Automated Payment Interface and Merchant Query Interface in Skrill's Developer Settings."
     },
     {
-      "heading": "Troubleshoot common connection errors",
-      "body": "If checkout with Skrill fails, the fault almost always traces back to one of three things: an IP address missing from the whitelist, a mismatched secret word between the two platforms, or an unverified Skrill account. Double-check each one in order, since Skrill's error messages are often generic rather than pointing at the exact field that's wrong. Once a test transaction clears successfully, Skrill is fully live as a checkout option for your customers."
+      "problem": "Skrill's Secret Word field won't save",
+      "cause": "Skrill requires the Secret Word to be at least 8 characters with one uppercase letter, one lowercase letter, and one number.",
+      "fix": "Set a Secret Word that meets all three requirements in Skrill's Developer Settings, then re-enter the same value in Shopify."
+    },
+    {
+      "problem": "The Merchant ID field in Shopify is rejected or looks wrong",
+      "cause": "Merchant ID is not the same as the account email. It's the numeric customer ID Skrill displays in the upper-right corner of the merchant account.",
+      "fix": "Copy the numeric ID from the Skrill dashboard, not the account email, into Shopify's Merchant ID field."
     }
   ],
   "faq": [
-    { "question": "Do I need a separate Skrill app installed on Shopify?", "answer": "Yes — search for Skrill Official under Payments in your Shopify Settings and install it. It runs alongside Shopify Payments rather than replacing it." },
-    { "question": "Why does my Skrill connection keep failing in Shopify?", "answer": "The most common cause is an IP address missing from Skrill's whitelist under Developer Settings, followed by a mismatched secret word or API password between the two platforms." },
-    { "question": "Does Skrill support multiple currencies on Shopify?", "answer": "Yes — Skrill's gateway supports over 20 local payment methods and more than 80 banks globally, making it useful for stores selling across multiple regions." },
-    { "question": "Can I change how Skrill captures payments in Shopify?", "answer": "No. Payment capture for the Skrill Official integration is automatic and can't be changed from Shopify's regular payment capture settings." },
-    { "question": "Should I test a real transaction before going live with Skrill?", "answer": "Yes — placing a small real or test-mode order and confirming it appears correctly in both Shopify and your Skrill account balance is the best way to catch configuration issues before customers do." }
+    { "question": "Do I need a separate Skrill app installed on Shopify?", "answer": "Yes. Search for Skrill under Add payment methods in Shopify's Payments settings, then Activate, Connect, and Install app. It runs alongside Shopify Payments instead of replacing it." },
+    { "question": "What information do I need from my Skrill account before starting?", "answer": "Your Merchant ID (the numeric customer ID shown in the upper-right of the Skrill dashboard), your account email, a Secret Word, and an API/MQI password set under Skrill's Developer Settings." },
+    { "question": "Why does my Skrill connection keep failing in Shopify?", "answer": "Most often an IP whitelist mismatch: Skrill's Shopify app connects from 185.88.185.6, which changed in January 2025, so an outdated whitelist entry fails silently. A Secret Word that doesn't meet Skrill's format rules is the next most common cause." },
+    { "question": "Can I test the integration before going live?", "answer": "Yes. The Skrill settings panel in Shopify has its own Test mode toggle for simulating transactions, and Skrill provides dedicated test card numbers for Mastercard and Visa to use with a test merchant account." },
+    { "question": "Does Skrill charge fees on top of Shopify's own charges?", "answer": "Yes. Skrill's published Shopify rates list 1.9% + €0.29 on card payments for new merchants, plus separate rates for Rapid Transfer, refunds, and withdrawals. These are separate from anything Shopify itself charges." },
+    { "question": "Can I change how Skrill captures payments in Shopify?", "answer": "No. Payment capture for the Skrill integration is automatic and can't be changed from Shopify's regular payment capture settings." }
   ],
+  "references": [
+    { "label": "Skrill Shopify Module Configuration Guide, v2.2 (official PDF)", "url": "https://www.skrill.com/fileadmin/business/b2b-2020/shopping-carts/Module_guides/Skrill_Shop_Guide.pdf" },
+    { "label": "Skrill Business: Shopify integration page (official)", "url": "https://www.skrill.com/en/business/shopping-carts/shopify/" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Re-checked in September 2026 against Skrill's own Shopify Module Configuration Guide (v2.2), which corrected the whitelist step: the guide previously said only to whitelist 'the IP address Shopify's documentation specifies' without naming it, and Skrill's own PDF confirms the current address is 185.88.185.6, changed from an older one in January 2025. The Merchant ID field, the Secret Word format rule, the Test mode toggle, and the two published test card numbers were all added from that same official guide, and fee figures were checked against Skrill's business pricing page for Shopify.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

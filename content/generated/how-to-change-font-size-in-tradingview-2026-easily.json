@@ -6,40 +6,79 @@
   "steps": [
     {
       "heading": "Open the chart you want to adjust",
-      "body": "Load any symbol on TradingView's chart view — the example here uses the Dow Jones Industrial Average (US30) on a 5-minute timeframe, but the font settings apply the same way regardless of what you're charting. The toolbar along the top holds the timeframe selector and chart-type icons, and the gear-style settings icon near the top right is what you'll use next.",
+      "body": "Load any symbol on TradingView's chart view. The example here uses the Dow Jones Industrial Average (US30) on a 5-minute timeframe, but the font settings apply the same way regardless of what you're charting. The toolbar along the top holds the timeframe selector and chart-type icons, and the gear-style settings icon near the top right is what you'll use next.",
       "image": { "file": "/screenshots/FYqoLqiEOY4/01.webp", "caption": "A live TradingView chart with the toolbar and watch list visible. The settings icon in the top-right cluster opens the panel used for font changes." }
     },
     {
-      "heading": "Open chart Settings",
-      "body": "Click the settings icon and a Settings window opens as an overlay on top of your chart, with a vertical list of tabs down the left side: Symbol, Status line, Scales and lines, Canvas, Trading, Alerts, and Events. Text formatting for the chart itself isn't under Status line despite that being one of the first tabs listed — it's under Canvas, a couple of items further down.",
+      "heading": "Open chart Settings and go to Canvas",
+      "body": "Click the settings icon and a Settings window opens as an overlay on top of your chart, with a vertical list of tabs down the left side: Symbol, Status line, Scales and lines, Canvas, Trading, Alerts, and Events. Text formatting for the chart itself isn't under Status line despite that being one of the first tabs listed. It sits under Canvas, a couple of items further down; TradingView's own configuration guide places scale-label formatting there too.",
       "image": { "file": "/screenshots/FYqoLqiEOY4/03.webp", "caption": "The Settings overlay with its tab list on the left. Canvas, a few tabs down from Status line, is where text and scale formatting live." }
     },
     {
       "heading": "Find the Text size field under Scales",
-      "body": "Click Canvas, then scroll to the Scales section. Here you'll find a Text row with a small color swatch and a number field next to it — that number is the font size applied to the price and time labels along your chart's edges. In a default setup it's commonly set around 22; clicking the dropdown lets you pick a different value from the list rather than typing one freehand.",
+      "body": "Click Canvas, then scroll to the Scales section. Here you'll find a Text row with a small color swatch and a number field beside it, and that number is the font size applied to the price and time labels along your chart's edges. In this recording it showed 22, which is a saved value for that layout, not a fixed default everyone starts on. Clicking the dropdown lets you pick a different value from the list instead of typing one freehand.",
       "image": { "file": "/screenshots/FYqoLqiEOY4/04.webp", "caption": "The Canvas tab's Scales section, with the Text field showing a font size of 22 next to its color swatch." }
     },
     {
       "heading": "Increase the size and watch it apply live",
-      "body": "Select a larger value from the Text dropdown and the change reflects immediately on the chart behind the Settings panel — you don't need to close the window to see the result. Pushing the number up to something like 40 makes a noticeable difference for screen recordings or presentations, though for regular day-to-day trading a more moderate increase usually keeps the chart from feeling cramped.",
+      "body": "Select a larger value from the Text dropdown, and the change reflects immediately on the chart behind the Settings panel. You don't need to close the window to see the result. Pushing the number up to something like 40 makes a noticeable difference for screen recordings or presentations. For regular day-to-day trading, a more moderate increase usually keeps the chart from feeling cramped.",
       "image": { "file": "/screenshots/FYqoLqiEOY4/05.webp", "caption": "The same Text field after increasing the size to 40, with the larger price labels visible on the chart behind the panel." }
     },
     {
-      "heading": "Adjust the text color for better contrast",
-      "body": "Right next to the size dropdown is a color swatch for that same text. If you've switched to a lighter or darker chart background under Chart basic styles, revisit this swatch afterward — text that was legible on a dark background can wash out once you switch to a light one, and vice versa. Picking a color with strong contrast against your background keeps the larger text actually easier to read, not just bigger."
+      "heading": "Adjust contrast, then close the panel to keep it",
+      "body": "Right next to the size dropdown is a color swatch for that same text. If you've switched to a lighter or darker chart background under the Canvas tab's own background controls, revisit this swatch afterward. Text that was legible on a dark background can wash out on a light one, and the reverse is just as true. TradingView applies each change as you make it, so once size and color look right, close the Settings overlay with the X in its top corner. The new font size is saved to that specific chart layout going forward."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The text still looks small on a different chart or tab",
+      "cause": "TradingView saves this setting per chart layout, not as one global preference, so a change made on one layout doesn't carry over to another.",
+      "fix": "Repeat the change on each layout you use, or set up the size you want on a layout you save and reopen as your starting point."
     },
     {
-      "heading": "Close the panel to keep your changes",
-      "body": "TradingView applies settings changes as you make them, so once the text size and color look right, simply close the Settings overlay by clicking the X in its top corner. Your layout, including the new font size, is saved to that chart layout going forward until you change it again."
+      "problem": "Indicator names or value labels stayed the same size after raising Scales Text",
+      "cause": "The Scales Text field controls the price and time axis labels specifically, not the text an individual indicator draws on the chart.",
+      "fix": "Open that indicator's own settings and check its Style tab for a separate label or line-value size option."
+    },
+    {
+      "problem": "The larger text is harder to read, not easier",
+      "cause": "Size went up but the color swatch next to it wasn't revisited, so contrast against the current chart background is poor.",
+      "fix": "Pick a color from that same swatch with stronger contrast against your background color."
     }
   ],
   "faq": [
-    { "question": "Where do I change font size on TradingView?", "answer": "Open chart settings via the gear icon, then go to the Canvas tab and look under the Scales section for the Text field, which controls the font size of your price and time labels." },
-    { "question": "Can I change font color as well as size?", "answer": "Yes, the same Text row in the Canvas tab's Scales section has a color swatch right next to the size dropdown, so you can adjust both together." },
-    { "question": "Does this affect all annotations on my chart?", "answer": "The Scales Text setting controls the price and time axis labels. Individual drawings and annotations you add manually can often have their own separate text size set when you place them." },
-    { "question": "Will my font settings be saved automatically?", "answer": "Yes, TradingView applies the change as soon as you select it from the dropdown — there's no separate save button, just close the Settings window once you're happy with it." },
-    { "question": "Why does my chart text look too small by default?", "answer": "TradingView's default text size is tuned for a fairly standard monitor and zoom level, so if you're on a large display, presenting to others, or recording your screen, bumping the Scales Text size up a notch or two usually helps." }
+    {
+      "question": "Where do I change font size on TradingView?",
+      "answer": "Open chart settings via the gear icon, then go to the Canvas tab and look under the Scales section for the Text field, which controls the font size of your price and time labels."
+    },
+    {
+      "question": "Can I change font color as well as size?",
+      "answer": "Yes. The same Text row in the Canvas tab's Scales section has a color swatch right next to the size dropdown, so you can adjust both together."
+    },
+    {
+      "question": "Does this affect all annotations on my chart?",
+      "answer": "No. The Scales Text setting controls only the price and time axis labels. TradingView's own documentation for the Text drawing tool confirms that a manually placed text annotation has its own separate font size, set in that annotation's own property dialog."
+    },
+    {
+      "question": "Why does my chart text look too small by default?",
+      "answer": "TradingView doesn't publish one universal default: the number you see is whatever was last saved to that chart layout. If it looks cramped on a large display, or you're presenting or recording your screen, raising the Scales Text value a notch or two is the fix, and it applies immediately."
+    }
   ],
+  "references": [
+    {
+      "label": "TradingView: How to configure your Supercharts (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000748166-how-to-configure-your-supercharts/"
+    },
+    {
+      "label": "TradingView: Text drawing tool (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000516983-text/"
+    },
+    {
+      "label": "TradingView: Layouts, a quick guide (official)",
+      "url": "https://www.tradingview.com/support/solutions/43000746975-tradingview-layouts-a-quick-guide/"
+    }
+  ],
+  "verifiedNote": "Settings-panel tab order, the Canvas > Scales > Text location, and the on-screen values (22, then 40) come directly from the recorded screenshots. Re-checked against TradingView's official Supercharts configuration guide, its Text drawing tool documentation, and its layouts guide in September 2026; no error turned up in the original click path, but the claim that 22 is a fixed default was softened to reflect that it's a per-layout saved value, and the article now notes explicitly that this setting is saved per chart layout rather than account-wide.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

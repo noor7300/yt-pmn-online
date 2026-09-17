@@ -2,11 +2,12 @@
   "slug": "fluent-forms-fluent-crm-tutorial-for-how-to-add-subscribe-newsletter-signup-form",
   "seoTitle": "Fluent Forms & FluentCRM: Free Newsletter Signup",
   "metaDescription": "Build a free email signup form in WordPress using Fluent Forms, connect it to FluentCRM, and start collecting subscribers without paid tools.",
-  "intro": "Building a working newsletter signup form usually means paying for a form plugin, an email tool, or both — but Fluent Forms and FluentCRM cover the entire pipeline for free: the form itself, the automatic tagging of new subscribers, and the email list they land in. This guide walks through installing both plugins, picking a ready-made subscribe form, wiring it to FluentCRM so submissions don't just sit in a database, and dropping it onto a page. It's aimed at bloggers and small business sites that want real list-building without a monthly plugin bill.",
+  "intro": "Building a working newsletter signup form usually means paying for a form plugin, an email tool, or both. Fluent Forms and FluentCRM cover the whole pipeline for free: the form itself, automatic tagging of new subscribers, and the list they land in. This guide installs both plugins, picks a ready-made subscribe form, wires it to FluentCRM so submissions don't just sit in a database, and drops it onto a page. It's aimed at bloggers and small business sites that want real list-building without a monthly plugin bill.",
+  "costNote": "Both plugins are free. FluentCRM's own documentation lists it among the integrations available in Fluent Forms' free version, alongside Mailchimp, Stripe and Slack; the integrations that need Fluent Forms Pro are the larger third-party ones such as ActiveCampaign, Zapier and HubSpot. Nothing in this guide requires an upgrade.",
   "steps": [
     {
       "heading": "Install Fluent Forms and FluentCRM",
-      "body": "From Plugins → Add New in your WordPress admin, search for \"fluent forms\" and install the free Fluent Forms plugin — it's the one from Shahjahan Jewel with hundreds of thousands of active installs, not to be confused with paid form builders in the same results list. Do the same search for FluentCRM and install it separately; the two are companion plugins from the same team but ship as independent installs. Activate both before moving on, since Fluent Forms won't show a CRM integration option until FluentCRM is active too.",
+      "body": "From Plugins → Add New in your WordPress admin, search for \"fluent forms\" and install the free Fluent Forms plugin, built by WPManageNinja and listed with over 700,000 active installs on WordPress.org. Don't confuse it with paid form builders that show up in the same search results.\n\nRun a second search for FluentCRM and install it separately. The two are companion plugins from the same team, but they ship as independent installs, and Fluent Forms won't show a CRM integration option until FluentCRM is active too. Activate both before moving on.",
       "image": {
         "file": "/screenshots/gdgEI62E3yM/02.webp",
         "caption": "Searching for Fluent Forms in Add Plugins. It's the free contact-form plugin with drag-and-drop building, separate from the paid SMTP and PDF add-ons shown alongside it."
@@ -14,7 +15,7 @@
     },
     {
       "heading": "Start from a newsletter form template",
-      "body": "Inside Fluent Forms, choose to create a new form and you'll land on a template gallery organized by category — Basic, Marketing, Product, Education, and more. Rather than building a signup form field by field, look under Basic or Marketing for a template already shaped like a newsletter signup, such as a \"Subscribe to our newsletter\" layout with just a name and email field. Starting from a template saves you from manually configuring field types and gets you to a working form in under a minute, which you can still rename and restyle afterward.",
+      "body": "Inside Fluent Forms, create a new form and you land on a template gallery organized by category: Basic, Marketing, Product, Education, and more. Instead of building a signup form field by field, look under Basic or Marketing for a template already shaped like one, such as a \"Subscribe to our newsletter\" layout with just a name and email field. Starting from a template gets you to a working form in under a minute, and you can still rename and restyle it afterward.",
       "image": {
         "file": "/screenshots/gdgEI62E3yM/03.webp",
         "caption": "Fluent Forms' template gallery. A ready-made \"Subscribe to our newsletter\" layout sits right in the Basic category, next to conversational and support form templates."
@@ -22,37 +23,70 @@
     },
     {
       "heading": "Trim the form to just what you need",
-      "body": "A newsletter signup converts best when it asks for as little as possible — in most cases, email only, or email plus first name if you want to personalize campaigns later. Open the template in the form editor and delete any field beyond that, since every additional required field measurably lowers signup rates. Rename the Subscribe button to something specific to your list rather than the generic default, and adjust the confirmation message shown after submission so it tells the person what happens next.",
+      "body": "A newsletter signup converts best when it asks for as little as possible: email only in most cases, or email plus first name if you want to personalize campaigns later. Open the template in the form editor and delete any field beyond that. Rename the Subscribe button to something specific to your list instead of the generic default, and adjust the confirmation message shown after submission so it tells the person what happens next.",
       "image": {
         "file": "/screenshots/gdgEI62E3yM/05.webp",
-        "caption": "A trimmed-down subscribe form — just an email field and a Subscribe button — shown inside the Elementor page it's about to be embedded on."
+        "caption": "A trimmed-down subscribe form, just an email field and a Subscribe button, shown inside the Elementor page it's about to be embedded on."
       }
     },
     {
-      "heading": "Connect the form to FluentCRM",
-      "body": "Inside the form's settings, look for the FluentCRM integration section rather than a general email notification setting — this is what actually moves a submission into your subscriber list instead of just sitting in the Entries tab. Under Contact Tags, assign a tag like \"signup\" so every person who submits this specific form gets tagged consistently, which lets you later build a targeted email sequence just for newsletter subscribers rather than everyone in your CRM. You can also enable double opt-in here if you want a confirmation email before someone counts as fully subscribed, which is worth turning on if you plan to send regular campaigns and want to protect your sender reputation.",
+      "heading": "Turn on the FluentCRM module, then connect the form",
+      "body": "Before any form can send data to FluentCRM, the connection has to be switched on in two places. First, go to Fluent Forms' own Integrations tab (not the form editor) and toggle the FluentCRM module on; it does nothing until it's enabled here. Then open the specific form's Settings and Integration tab, choose Configure Integration, click Add New Integration, and select FluentCRM Integration Feed from the list.\n\nName the feed, pick which FluentCRM list it should add contacts to, and map the form's email and name fields to FluentCRM's fields. Under Contact Tag, assign a tag such as \"newsletter-signup\" so everyone who submits this particular form is tagged consistently; that's what lets you later send a sequence to just this group instead of your whole CRM. FluentCRM's documentation also offers a \"skip contact if already exists\" option here, useful if the same person might submit more than one of your forms.\n\nIf you want a confirmation email before someone counts as fully subscribed, turn on Enable Double Opt-In inside this feed, not inside Fluent Forms' own form settings. FluentCRM's docs are explicit that turning it on in both places sends two separate confirmation emails.",
       "image": {
         "file": "/screenshots/gdgEI62E3yM/04.webp",
-        "caption": "The FluentCRM integration on a form's settings, with a \"signup\" contact tag applied to every submission — this is what actually lands new emails in FluentCRM."
+        "caption": "The FluentCRM integration feed on a form's settings, with a contact tag applied to every submission. This is what moves new emails into FluentCRM, not the Entries tab."
       }
     },
     {
       "heading": "Embed the form on your site",
-      "body": "Fluent Forms works with any page builder or the standard block editor, since it provides both a shortcode and a dedicated widget/block. In Elementor, search the widgets panel for Fluent Forms, drag it onto the page, and pick your newsletter form from the dropdown list of forms you've created. If you're using the block editor instead, the Fluent Forms block does the same job — search for it, insert it, and select the form. Either way, no code or shortcode-pasting is required for a standard embed."
+      "body": "Fluent Forms works with any page builder or the standard block editor, since it provides both a shortcode and a dedicated widget or block. In Elementor, search the widgets panel for Fluent Forms, drag it onto the page, and pick your newsletter form from the dropdown. If you're using the block editor instead, the Fluent Forms block does the same job: search for it, insert it, and select the form. No shortcode-pasting is required for a standard embed."
     },
     {
       "heading": "Test the signup before promoting it",
-      "body": "Submit a real test entry using an email address you can check, then go to FluentCRM's contact list and confirm the entry landed there with the correct tag attached — not just in Fluent Forms' own Entries tab, which only proves the form itself works, not the CRM connection. If double opt-in is enabled, verify the confirmation email actually arrives and isn't landing in spam. Only after seeing a clean, correctly tagged contact appear should you put the form live on a public page or link to it from an email campaign."
+      "body": "Submit a real test entry using an email address you can check, then go to FluentCRM's contact list and confirm the entry landed there with the correct tag. Checking Fluent Forms' own Entries tab only proves the form itself works, not the CRM connection. If double opt-in is enabled, confirm the email actually arrives and isn't landing in spam, and that only one confirmation email shows up. Only after seeing a correctly tagged contact appear should the form go live on a public page or an email campaign."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Which Fluent Forms integrations are free",
+      "columns": ["Integration", "Plan required"],
+      "rows": [
+        ["FluentCRM", "Free"],
+        ["Mailchimp", "Free"],
+        ["Stripe", "Free"],
+        ["Slack", "Free"],
+        ["ActiveCampaign", "Pro"],
+        ["Zapier", "Pro"],
+        ["HubSpot", "Pro"]
+      ],
+      "note": "Per Fluent Forms' own free-vs-pro comparison; check that page before assuming a specific third-party tool is included."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Test submissions show up in Fluent Forms but never appear in FluentCRM",
+      "cause": "Either the FluentCRM module was never toggled on under Fluent Forms' Integrations tab, or this specific form has no FluentCRM Integration Feed added under its own Settings and Integration tab. Both are required; enabling one without the other does nothing.",
+      "fix": "Check Integrations for the FluentCRM toggle first, then open the form's Settings and Integration tab and confirm a FluentCRM Integration Feed exists with a list and tag configured."
+    },
+    {
+      "problem": "Subscribers receive two double opt-in confirmation emails",
+      "cause": "Double opt-in was turned on both inside the FluentCRM integration feed and inside Fluent Forms' own form settings (Enable Double Opt-in Confirmation before Form Data Processing).",
+      "fix": "Leave Fluent Forms' own double opt-in setting off and let the FluentCRM feed send the single confirmation email."
+    },
+    {
+      "problem": "There's no FluentCRM option in the form's integration list at all",
+      "cause": "FluentCRM isn't installed or active. Fluent Forms only lists a CRM feed option when FluentCRM is running alongside it.",
+      "fix": "Install and activate the FluentCRM plugin separately, then reopen the form's Configure Integration screen."
     }
   ],
   "faq": [
     {
       "question": "Is Fluent Forms really free to use?",
-      "answer": "Yes, Fluent Forms has a free version available in the WordPress plugin repository that covers basic form building, templates, and CRM integrations — no paid add-on is required for a newsletter signup form."
+      "answer": "Yes. Fluent Forms has a free version in the WordPress plugin repository that covers form building, templates, and the FluentCRM integration; no paid add-on is needed for a newsletter signup form."
     },
     {
       "question": "Do I need Elementor Pro to use this setup?",
-      "answer": "No, Fluent Forms can be embedded on any WordPress page using its own widget, block, or shortcode, so it works on Elementor Free, the block editor, or any other page builder."
+      "answer": "No. Fluent Forms can be embedded on any WordPress page using its own widget, block, or shortcode, so it works on Elementor Free, the block editor, or any other page builder."
     },
     {
       "question": "What does FluentCRM do with the collected emails?",
@@ -60,13 +94,32 @@
     },
     {
       "question": "Why isn't my newsletter signup form working?",
-      "answer": "Check two things separately: that the Fluent Forms to FluentCRM integration is set up with a tag under the form's settings, and that a test submission actually appears in FluentCRM's contact list, not just in Fluent Forms' own Entries tab."
+      "answer": "Check two things separately: that a FluentCRM Integration Feed with a tag is configured under the form's own Settings and Integration tab, and that a test submission actually appears in FluentCRM's contact list, not just in Fluent Forms' Entries tab."
     },
     {
-      "question": "What's the difference between a contact tag and a subscriber list?",
-      "answer": "A tag marks which form or source a contact came from — useful for segmenting campaigns to just your newsletter subscribers — while the contact itself lives in FluentCRM's single unified list regardless of how many forms feed into it."
+      "question": "Will subscribers get two confirmation emails if I turn on double opt-in?",
+      "answer": "Only if double opt-in is enabled in both places at once. FluentCRM's documentation says to enable it inside the FluentCRM integration feed and leave Fluent Forms' own double opt-in setting off, so only one email goes out."
+    },
+    {
+      "question": "What's the difference between a contact tag and a list?",
+      "answer": "A tag marks which form or source a contact came from, useful for segmenting campaigns to just your newsletter subscribers. The list is the broader group the contact belongs to inside FluentCRM, and a single contact can carry several tags while sitting on one list."
     }
   ],
+  "references": [
+    {
+      "label": "FluentCRM: Fluent Forms integration with FluentCRM (official)",
+      "url": "https://docs.fluentcrm.com/wp-fluent-forms-integration-with-fluentcrm"
+    },
+    {
+      "label": "Fluent Forms: FluentCRM Integration (official)",
+      "url": "https://docs.fluentforms.com/fluentcrm-integration"
+    },
+    {
+      "label": "Fluent Forms: Free vs Pro comparison (official)",
+      "url": "https://fluentforms.com/free-vs-pro/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2026. The integration steps, the free-vs-pro status of the FluentCRM feed, and the double opt-in behaviour were re-checked against FluentCRM's and Fluent Forms' official documentation in September 2026. That check added the requirement to enable the FluentCRM module under Integrations before a form's feed will work, and the warning against enabling double opt-in in both plugins at once, which this guide previously omitted.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

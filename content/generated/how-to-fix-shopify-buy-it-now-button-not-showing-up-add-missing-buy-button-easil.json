@@ -1,56 +1,93 @@
 {
   "slug": "how-to-fix-shopify-buy-it-now-button-not-showing-up-add-missing-buy-button-easil",
   "seoTitle": "Fix Shopify Buy It Now Button Not Showing Up",
-  "metaDescription": "Restore a missing Buy It Now button on Shopify by enabling dynamic checkout, checking your active payment provider, and fixing theme conflicts.",
-  "intro": "A missing Buy It Now button quietly costs conversions, since it removes the fast lane for customers who already know they want to check out and don't want to detour through a cart page. The fix is almost always one of two things: the dynamic checkout button setting is off, or your store doesn't have a live payment provider active for it to attach to. This guide checks your storefront first to confirm the button is actually gone, then walks through both of those settings so you know exactly which one is the culprit.",
+  "metaDescription": "Restore a missing Buy It Now button on Shopify by enabling accelerated checkout, checking your active payment provider, and fixing theme conflicts.",
+  "intro": "A missing Buy It Now button quietly costs conversions: it removes the fast lane for customers who already know they want to check out and don't want to detour through a cart page. The fix is almost always one of two things: the checkout button setting is off in your theme, or your store doesn't have a live payment provider active for it to attach to. This guide checks your storefront first to confirm the button is actually gone, then walks through both settings so you know which one is the culprit.",
+  "costNote": "Turning the button on doesn't cost anything by itself. Whatever payment provider you activate to make it appear, Shopify Payments, PayPal, or another processor, carries its own standard transaction fees once it's live, the same as it would for a normal checkout.",
   "steps": [
     {
       "heading": "Confirm the button is missing on your live storefront",
-      "body": "Before changing settings, open the product page on your actual storefront the way a customer would. On a working setup you'd see both an Add to cart button and a black Buy it now button beneath the quantity selector — if only Add to cart appears, as in the case below, that confirms the dynamic checkout button either isn't enabled or has nothing to attach to yet.",
+      "body": "Before changing settings, open the product page on your actual storefront the way a customer would. On a working setup you'd see both an Add to cart button and a black Buy it now button beneath the quantity selector. If only Add to cart appears, as in the case below, that confirms the accelerated checkout button either isn't enabled or has no active payment method to attach to yet.",
       "image": { "file": "/screenshots/PPw4QAUuPI4/01.webp", "caption": "A live product page showing only an Add to cart button, with no Buy it now button beneath it." }
     },
     {
       "heading": "Open your Shopify admin",
-      "body": "Log in to your Shopify admin dashboard, where the left sidebar gives you Home, Orders, Products, Customers, Marketing, and further down, Online Store under Sales channels. The two settings that control the Buy It Now button live in different places — one under Settings > Payments, and one inside your theme editor — so you'll be moving between both.",
+      "body": "Log in to your Shopify admin dashboard. The two settings that control the Buy It Now button live in different places: one under Settings > Payments, and one inside your theme editor. You'll be checking both in turn.",
       "image": { "file": "/screenshots/PPw4QAUuPI4/02.webp", "caption": "The Shopify admin Home dashboard, the starting point for both the Payments settings and the theme editor." }
     },
     {
       "heading": "Check that a real payment provider is active",
-      "body": "Go to Settings > Payments. If the only provider listed is \"(for testing) Bogus Gateway,\" that's your answer — Bogus Gateway simulates transactions for development and never shows checkout buttons to real customers, dynamic or otherwise. Under Additional payment methods, activate a genuine provider like Shopify Payments or PayPal. Dynamic checkout buttons, including Buy It Now, only render once the storefront has at least one live payment method to route the customer to.",
+      "body": "Go to Settings > Payments. If the only provider listed is \"(for testing) Bogus Gateway,\" that's worth fixing first: Shopify's own documentation confirms customers can't complete live orders while a store's payment providers are in test mode, and that whether accelerated checkout buttons display at all depends on your active payment settings. Under Additional payment methods, activate a genuine provider like Shopify Payments or PayPal.",
       "image": { "file": "/screenshots/PPw4QAUuPI4/05.webp", "caption": "The Payments settings page, showing the testing-only Bogus Gateway active and PayPal available as an additional payment method to activate." }
     },
     {
-      "heading": "Turn on dynamic checkout buttons in your theme editor",
-      "body": "With a live payment provider active, open Online Store > Themes > Customize, then navigate to a product page and select the Buy buttons block in the left panel. There's a toggle for Dynamic checkout buttons — if it's switched off, that alone will hide Buy it now even with payments fully configured. Flip it on, and the preview on the right should immediately show both Add to cart and Buy it now stacked beneath the quantity selector.",
-      "image": { "file": "/screenshots/PPw4QAUuPI4/03.webp", "caption": "The Buy buttons settings in the theme editor, with Dynamic checkout buttons toggled on and both buttons visible in the live preview." }
+      "heading": "Turn on accelerated checkout buttons in your theme editor",
+      "body": "With a live payment provider active, open Online Store > Edit theme, go to the Products template, and select the Buy buttons block inside Product information. Shopify renamed this toggle: current themes label it \"Show accelerated checkout buttons,\" while older theme versions still call it \"Dynamic checkout buttons.\" Either way, it's the same setting. If it's switched off, that alone hides Buy it now even with payments fully configured. Turn it on, and the preview should show both Add to cart and Buy it now stacked beneath the quantity selector.",
+      "image": { "file": "/screenshots/PPw4QAUuPI4/03.webp", "caption": "The Buy buttons settings in the theme editor, with the accelerated checkout toggle on and both buttons visible in the live preview." }
     },
     {
       "heading": "Rule out theme customizations hiding the button",
-      "body": "If both the payment provider and the dynamic checkout toggle are already correct and the button is still missing, the cause is usually a custom theme edit rather than a Shopify setting — a CSS rule hiding the element, a duplicated or edited product template, or a third-party app injecting its own buy-button code that conflicts with the theme's default one. Check any recent theme code changes or apps installed around the time the button disappeared, since that timing is usually the fastest way to narrow down the cause."
+      "body": "If the payment provider and the toggle are both already correct and the button is still missing, the cause is usually a custom theme edit, not a Shopify setting: a CSS rule hiding the element, an edited product template, or a third-party app injecting its own buy-button code that conflicts with the theme's default one. Check recent theme code changes and apps installed around when the button disappeared. That timing is usually the fastest way to narrow it down."
     },
     {
       "heading": "Save and verify on the live storefront",
-      "body": "After making changes, click Save in the theme editor, then reload the actual product page on your storefront (not just the customizer preview) to confirm Buy it now appears for a real visitor. Test it in an incognito or private window too, since cached versions of the page can make an already-fixed button appear to still be missing."
+      "body": "After making changes, click Save in the theme editor, then reload the actual product page on your storefront, not just the customizer preview, to confirm Buy it now appears for a real visitor. Test it in an incognito or private window too, since a cached page can make an already-fixed button look like it's still missing."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Only Add to cart shows, no Buy it now",
+      "cause": "No live payment provider is active, or the accelerated checkout toggle is off for the Buy buttons block in the theme editor.",
+      "fix": "Activate a real payment provider under Settings > Payments, then confirm the toggle (labeled \"Show accelerated checkout buttons\" or \"Dynamic checkout buttons,\" depending on theme version) is on."
+    },
+    {
+      "problem": "Buy it now is still missing after payments and the toggle both check out",
+      "cause": "A custom theme edit, CSS rule, or a third-party app injecting its own buy-button markup is overriding the theme's default block.",
+      "fix": "Check recent theme code changes and apps installed around when the button disappeared. Temporarily disabling a suspect app is the fastest way to confirm it."
+    },
+    {
+      "problem": "The change looks applied in the editor but the live page still shows the old layout",
+      "cause": "The customizer preview updated but the theme wasn't saved, or the live page is serving a cached version.",
+      "fix": "Click Save in the theme editor, then reload the live product page in a private window to bypass cache."
     }
   ],
   "faq": [
     {
       "question": "Why did my Buy It Now button disappear?",
-      "answer": "It's usually caused by either the dynamic checkout button setting being disabled in your theme editor, or your store not having a live payment provider active — a testing-only gateway like Bogus Gateway won't display it to real customers."
+      "answer": "Usually one of two things: the accelerated checkout toggle is off in your theme editor, or your store doesn't have a live payment provider active. Shopify's documentation confirms that whether these buttons display depends on your active payment settings, and that customers can't complete real orders while payments are only in test mode."
     },
     {
       "question": "Do I need to edit code to fix this?",
-      "answer": "Usually not — enabling the dynamic checkout toggle in Online Store > Themes > Customize and activating a real payment provider under Settings > Payments resolves it in most cases. Code edits are only needed if a theme customization or app is actively hiding the button."
+      "answer": "Usually not. Turning on the accelerated checkout toggle under Online Store > Edit theme and activating a real payment provider under Settings > Payments resolves it in most cases. Code edits are only needed if a theme customization or app is actively hiding the button."
     },
     {
       "question": "Will this fix work on any Shopify theme?",
-      "answer": "The dynamic checkout toggle and payment provider settings apply across Shopify themes, though the exact location of the Buy buttons block inside the theme editor can vary slightly by theme."
+      "answer": "The underlying settings apply across Shopify themes, but the toggle's label has changed over time: newer themes call it \"Show accelerated checkout buttons,\" older ones call it \"Dynamic checkout buttons.\" The exact location inside the theme editor can also vary slightly by theme."
+    },
+    {
+      "question": "Does turning on accelerated checkout buttons cost anything?",
+      "answer": "No, the setting itself is free. The payment provider behind it, Shopify Payments, PayPal, or another processor, carries its own standard transaction fees once live, same as any other checkout."
     },
     {
       "question": "How can I confirm the fix worked?",
       "answer": "Visit your actual product page on the live storefront, ideally in a private browser window to avoid cached content, and confirm the Buy it now button appears alongside Add to cart."
     }
   ],
+  "references": [
+    {
+      "label": "Shopify Help Center: Accelerated checkout buttons (official)",
+      "url": "https://help.shopify.com/en/manual/online-store/dynamic-checkout"
+    },
+    {
+      "label": "Shopify Help Center: Showing accelerated checkout buttons on your online store (official)",
+      "url": "https://help.shopify.com/en/manual/online-store/themes/dynamic-checkout"
+    },
+    {
+      "label": "Shopify Help Center: Activating a payment gateway in test mode (official)",
+      "url": "https://help.shopify.com/en/manual/checkout-settings/test-orders/payments-test-mode"
+    }
+  ],
+  "verifiedNote": "Screens and the storefront comparison come from a recorded walkthrough. Re-checked against Shopify's official Help Center in September 2026. That check surfaced a naming change this article previously missed: Shopify's current theme editor labels the setting \"Show accelerated checkout buttons,\" not \"Dynamic checkout buttons,\" though older theme versions still use the old name. It also softened an overstated claim that a testing-only gateway like Bogus Gateway \"never\" shows the button to customers; Shopify's documentation confirms button display depends on active payment settings and that live orders are blocked in test mode, but doesn't spell out that specific mechanism.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

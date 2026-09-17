@@ -1,44 +1,67 @@
 {
   "slug": "how-to-solve-domain-is-locked-at-the-current-registrar-error-godaddy-to-hostinge",
   "seoTitle": "Fix \"Domain Locked at Registrar\" Error (GoDaddy to Hostinger)",
-  "metaDescription": "Stuck transferring your domain from GoDaddy to Hostinger due to a lock error? Learn how to unlock the domain, get your EPP code, and retry the transfer.",
-  "intro": "The \"Domain is locked at the current registrar\" error shows up the moment you try to move a domain from GoDaddy to Hostinger before GoDaddy's own lock has been switched off. It looks alarming the first time you see it, but it's really just Hostinger telling you which of three requirements hasn't been met yet. This guide walks through Hostinger's transfer checklist, where to find and change the lock setting on the GoDaddy side, and how to get the authorization code the transfer actually needs.",
+  "metaDescription": "Stuck transferring your domain from GoDaddy to Hostinger due to a lock error? Unlock the domain, get the EPP code the right way, and clear domain privacy before you retry.",
+  "intro": "The \"Domain is locked at the current registrar\" error shows up the moment you try to move a domain from GoDaddy to Hostinger before GoDaddy's own lock has been switched off. It looks alarming the first time you see it, but it's really Hostinger telling you which of three requirements hasn't been met yet. This guide walks through Hostinger's transfer checklist, where to find and change the lock setting on the GoDaddy side, and how to get the authorization code the transfer actually needs, including a detail both companies' own support pages are clear about but that trips people up anyway: GoDaddy shows you that code, it doesn't just email it.",
+  "prerequisites": [
+    "The domain must be at least 60 days past its initial registration or last transfer",
+    "Access to the GoDaddy account the domain is registered under, since only that account can unlock it and release the code"
+  ],
   "steps": [
     {
       "heading": "Start the transfer from Hostinger's Domains menu",
-      "body": "In hPanel, open Domains in the left sidebar and expand it to reveal Domain portfolio, Get a New Domain, and Transfers. Click Transfers — this is the page that both starts a new incoming transfer and shows you exactly what's blocking one, before you even enter a domain.",
+      "body": "In hPanel, open Domains in the left sidebar and expand it to reveal Domain portfolio, Get a New Domain, and Transfers. Click Transfers: this is the page that both starts a new incoming transfer and shows you exactly what's blocking one, before you even enter a domain.",
       "image": { "file": "/screenshots/T3RcfBo6scs/02.webp", "caption": "The hPanel sidebar with Domains expanded, showing Domain portfolio, Get a New Domain, and Transfers as the three sub-sections." }
     },
     {
       "heading": "Read the three transfer requirements",
-      "body": "The Transfers page lays out exactly what Hostinger checks before it will accept an incoming domain: that at least 60 days have passed since the domain's initial registration or last transfer, that the domain is unlocked at its current registrar, and that you have a valid authorization code. The lock error means specifically the middle one — \"Domain is unlocked\" — hasn't been satisfied yet, and Hostinger links directly to instructions for unlocking it from your current registrar.",
+      "body": "The Transfers page lays out what Hostinger checks before it accepts an incoming domain: that at least 60 days have passed since the domain's initial registration or last transfer, that the domain is unlocked at its current registrar, and that you have a valid authorization code. The lock error means specifically the middle one, \"Domain is unlocked,\" hasn't been satisfied yet, and Hostinger links directly to instructions for unlocking it from your current registrar.",
       "image": { "file": "/screenshots/T3RcfBo6scs/05.webp", "caption": "Hostinger's Transfers page listing all three requirements: 60 days since registration, an unlocked domain, and a valid authorization code." }
     },
     {
       "heading": "Find the domain lock setting in GoDaddy",
-      "body": "Log in to GoDaddy and open the specific domain's management page. You'll see details like its expiry date, auto-renew status, and renewal cost, along with a Secure section showing the domain's current protection level. The lock toggle itself sits among this domain's settings — look for a security or lock option near where you'd forward the domain or manage its DNS, and switch it off. GoDaddy locks domains by default specifically to prevent unauthorized transfers, so this step is expected, not a sign anything is wrong with the domain.",
+      "body": "Log in to GoDaddy and open the Domain Portfolio. Select the domain's three-dot menu and choose Turn Lock Off. You'll also see details like its expiry date, auto-renew status, and renewal cost on the domain's own page, with a Secure section showing its current protection level; the lock toggle sits alongside those. GoDaddy locks domains by default specifically to prevent unauthorized transfers, so needing to switch it off here is expected, not a sign anything is wrong with the domain.",
       "image": { "file": "/screenshots/T3RcfBo6scs/03.webp", "caption": "A domain's management page in GoDaddy, showing expiry and renewal details along with the Secure section where protection settings live." }
     },
     {
-      "heading": "Request your authorization (EPP) code",
-      "body": "With the domain unlocked, request the EPP code — also called an authorization code — from GoDaddy's domain settings. GoDaddy typically emails this code to the account's registered address rather than displaying it directly on screen, so check your inbox (and spam folder) if it doesn't show up within a few minutes. This code is what proves to Hostinger that you're authorized to pull the domain away from GoDaddy, and it's required regardless of how long you've owned the domain."
-    },
-    {
-      "heading": "Consider WHOIS privacy if the transfer still stalls",
-      "body": "If the domain is unlocked and you have a valid EPP code but the transfer still won't go through, WHOIS privacy protection is worth checking next. It occasionally interferes with the automated ownership checks a transfer relies on, so temporarily disabling it in GoDaddy's domain settings can clear a stubborn transfer that otherwise looks like it should be working."
+      "heading": "Get the EPP code and turn off domain privacy in the same GoDaddy screen",
+      "body": "With the domain unlocked, open the domain's Domain Settings in GoDaddy and look under Additional Settings for Transfer domain away from GoDaddy. Selecting it, then Click here to see Authorization Code, displays the EPP code directly on screen, where you can copy it. GoDaddy also sends the same code to the account's registered email as a backup, so check there if the on-screen step doesn't work, but the code isn't email-only the way some guides describe it.\n\nWhile you're in Domain Settings, disable domain privacy protection if it's turned on. Hostinger's own transfer guide flags this as something to do at this point, not just a fix for later, since privacy protection can stop the transfer confirmation from reaching the domain's actual contact address.",
+      "image": null
     },
     {
       "heading": "Return to Hostinger and submit the transfer",
-      "body": "Back on Hostinger's Transfers page, enter the domain in the field provided and click Transfer. With the lock off and the EPP code in hand, the three requirements should now all show as met, and Hostinger will guide you through entering the authorization code and confirming the move. The transfer itself isn't instant — expect it to take several days to fully complete on the registry side — but the lock error specifically should no longer block you from starting it."
+      "body": "Back on Hostinger's Transfers page, enter the domain and select Transfer domain to Hostinger. With the lock off and the EPP code in hand, the three requirements should now show as met, and Hostinger will guide you through entering the authorization code and confirming the move. The transfer itself isn't instant; expect it to take several days to fully complete on the registry side, but the lock error specifically should no longer block you from starting it."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The lock error still shows after switching Turn Lock Off in GoDaddy",
+      "cause": "The domain is inside the 60-day window since its last registration or transfer, when GoDaddy won't allow unlocking regardless of the toggle.",
+      "fix": "Check the domain's registration or last-transfer date against the 60-day requirement on Hostinger's Transfers page before assuming the unlock itself failed."
+    },
+    {
+      "problem": "The EPP code doesn't arrive by email and the on-screen copy didn't get saved",
+      "cause": "GoDaddy shows the code once on screen when you select Click here to see Authorization Code; if you didn't copy it then and the email hasn't landed, there's nothing further to wait for.",
+      "fix": "Go back through Domain Settings > Additional Settings > Transfer domain away from GoDaddy and generate the on-screen code again, checking spam for the backup email."
+    },
+    {
+      "problem": "Hostinger never sends a transfer confirmation to approve",
+      "cause": "Domain privacy protection was still enabled on the GoDaddy side, so the confirmation email went to a masked address instead of the real contact.",
+      "fix": "Turn off domain privacy in GoDaddy's Domain Settings, then restart the transfer from Hostinger's Transfers page."
     }
   ],
   "faq": [
-    { "question": "Why does GoDaddy show a domain lock error during transfer?", "answer": "Domain locking is a default security feature that prevents unauthorized transfers, and it must be manually disabled in the domain's GoDaddy settings before a transfer to another registrar can proceed." },
-    { "question": "Does disabling domain lock make my domain less secure?", "answer": "Temporarily, yes, since it removes a layer of protection against unauthorized transfers, so it's best to complete the transfer soon after unlocking rather than leaving it unlocked indefinitely." },
-    { "question": "What if the transfer still fails after unlocking?", "answer": "Check that the EPP code is correct and current, that WHOIS privacy isn't interfering, and that the domain meets Hostinger's 60-day minimum since registration or last transfer — these are the other common blockers on the Transfers requirements list." },
-    { "question": "Where do I get the authorization code from GoDaddy?", "answer": "Request it from the domain's settings page in GoDaddy; it's typically sent to the email address on the account rather than shown directly on screen." },
-    { "question": "Do I need to disable WHOIS protection every time I transfer a domain?", "answer": "Not always, but it can interfere with verification in some cases, so it's worth checking if the other two requirements are met and the transfer is still stuck." }
+    { "question": "Why does GoDaddy show a domain lock error during transfer?", "answer": "Domain locking is a default security feature that prevents unauthorized transfers, and it must be manually disabled in the domain's GoDaddy settings, via Turn Lock Off in the domain's three-dot menu, before a transfer to another registrar can proceed." },
+    { "question": "Does disabling domain lock make my domain less secure?", "answer": "Temporarily, yes, since it removes a layer of protection against unauthorized transfers. It's best to complete the transfer soon after unlocking instead of leaving it unlocked indefinitely." },
+    { "question": "Where do I get the authorization code from GoDaddy?", "answer": "From the domain's Additional Settings, under Transfer domain away from GoDaddy. Selecting Click here to see Authorization Code shows it directly on screen, and GoDaddy also emails the same code to the account's registered address as a backup." },
+    { "question": "What if the transfer still fails after unlocking?", "answer": "Check that the EPP code is correct and current, that domain privacy is off, and that the domain meets Hostinger's 60-day minimum since registration or last transfer. These are the other common blockers on the Transfers requirements list." },
+    { "question": "Do I need to disable domain privacy every time I transfer away from GoDaddy?", "answer": "If it's enabled, yes. Hostinger's own transfer guide has you turn it off at the same point you get the EPP code, since an active privacy service can keep the transfer confirmation email from reaching the domain's real contact address." }
   ],
+  "references": [
+    { "label": "Hostinger: How to transfer a domain from GoDaddy to Hostinger (official)", "url": "https://www.hostinger.com/tutorials/how-to-transfer-domain-from-godaddy-to-hostinger/" },
+    { "label": "Hostinger: How to get the EPP code from GoDaddy (official)", "url": "https://www.hostinger.com/support/1583437-how-to-get-the-epp-code-from-godaddy/" }
+  ],
+  "verifiedNote": "Click path and hPanel screens come from a recorded GoDaddy-to-Hostinger transfer. The EPP-code and domain-privacy steps were re-checked against Hostinger's own transfer and EPP-code support pages in September 2026, which corrected this guide's earlier claim that GoDaddy only emails the code: GoDaddy displays it on screen and emails it as a backup, and disabling domain privacy is meant to happen alongside that step, not only if the transfer later stalls.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

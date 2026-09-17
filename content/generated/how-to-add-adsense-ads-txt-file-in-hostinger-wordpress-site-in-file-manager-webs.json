@@ -1,46 +1,88 @@
 {
   "slug": "how-to-add-adsense-ads-txt-file-in-hostinger-wordpress-site-in-file-manager-webs",
   "seoTitle": "Add AdSense ads.txt to Hostinger WordPress Site",
-  "metaDescription": "Fix the AdSense 'Earnings at risk' warning by adding your ads.txt file to a Hostinger WordPress site via File Manager or Website Builder.",
-  "intro": "Seeing an \"Earnings at risk\" warning in AdSense almost always comes down to one thing: ads.txt isn't sitting where Google's crawlers expect it. The fix itself is a two-minute job once you know where that root location actually is on Hostinger, but the exact steps differ depending on whether your site runs on classic WordPress or Hostinger's own Website Builder. This guide covers both paths, plus what the file's contents should actually look like, so the warning clears and stays cleared.",
+  "metaDescription": "Fix the AdSense 'Earnings at risk' warning on a Hostinger site: the correct ads.txt line (not the ca-pub- ID from your ad code), and where the file goes on WordPress vs Website Builder.",
+  "intro": "An \"Earnings at risk\" warning in AdSense almost always comes down to one thing: ads.txt isn't sitting where Google's crawler expects it, or the line inside it doesn't match what AdSense generated. The fix takes a couple of minutes once you know the right location on Hostinger, but that location and the ID format both depend on details people get wrong constantly. This guide covers the WordPress and Website Builder paths, the ID prefix that trips up more publishers than anything else, and how long Google actually takes to clear the warning once the file is fixed.",
+  "prerequisites": [
+    "An AdSense account with your site added under Sites, so Google has generated your publisher ID",
+    "Access to hPanel File Manager (classic WordPress) or the Website Builder's Integrations settings, depending on which one runs your site"
+  ],
   "steps": [
     {
       "heading": "Get the ads.txt line from your AdSense account",
-      "body": "Log into AdSense and open the Sites section, where Google generates the exact ads.txt entry tied to your publisher ID. It follows a fixed format — a domain, your publisher ID prefixed with ca-pub-, a relationship type (DIRECT or RESELLER), and a certification authority ID — something like google.com, ca-pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0. Copy that line exactly as AdSense provides it rather than retyping it, since a single mistyped character will keep the warning showing even after you've uploaded the file.",
+      "body": "Log into AdSense and open the Sites section, where Google generates the exact ads.txt entry tied to your account. It follows a fixed structure: a domain, your publisher ID, a relationship type (DIRECT or RESELLER), and a certification authority ID, for example google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0.\n\nThe ID here uses the pub- prefix, not ca-pub-. The ca-pub- version is what shows up in your AdSense ad code and script tags; Google's own ads.txt guidance says to strip that ca- prefix and keep only pub- plus the 16-digit number. Pasting the ad-code version in by mistake is one of the most common reasons the file still gets flagged after upload. Copy the line AdSense gives you rather than retyping it from your ad code.",
       "image": null
     },
     {
       "heading": "Check whether your site is classic WordPress or Website Builder",
-      "body": "This matters because the two products store your site's files completely differently. If you set your site up through Hostinger's hPanel using a WordPress install, your files live in a standard folder structure accessible through File Manager. If you built the site using Hostinger's drag-and-drop Website Builder instead, there's no traditional file system to browse — the ads.txt file has to be placed through a setting inside the builder itself.",
+      "body": "The two products store site files differently, so the upload method differs too. A WordPress site set up through hPanel keeps its files in a normal folder structure reachable through File Manager. A site built with Hostinger's drag-and-drop Website Builder has no file system to browse; ads.txt goes in through a setting inside the builder instead.",
       "image": null
     },
     {
       "heading": "Upload ads.txt through File Manager on classic WordPress",
-      "body": "In hPanel, open File Manager and navigate into your domain's root folder — usually public_html, or public_html/yourdomain.com if you're hosting multiple domains on the account. This is the same folder that holds wp-config.php and your wp-content directory, which is a useful landmark if you're not sure you're in the right place. Upload the ads.txt file directly into that root folder, not into a subfolder — Google's crawler checks yourdomain.com/ads.txt specifically, so anywhere else won't be found.",
+      "body": "In hPanel, open File Manager and go into your domain's root folder, usually public_html, or public_html/yourdomain.com when several domains share the account. This is the same folder that holds wp-config.php and wp-content, a useful landmark if you're unsure you're in the right place. Upload ads.txt directly into that root, not a subfolder: Google's crawler checks yourdomain.com/ads.txt specifically.",
       "image": null
     },
     {
       "heading": "Add ads.txt through Website Builder",
-      "body": "Website Builder sites don't expose a file manager, so instead you add the ads.txt content through the builder's own site settings, in the area meant for custom code or file additions at the domain root. The end result needs to be the same as the File Manager approach — the file publicly reachable at yourdomain.com/ads.txt — Hostinger's builder just handles the underlying file placement for you rather than letting you drag a file into a folder yourself.",
+      "body": "Website Builder has no file manager, so ads.txt content goes in through Integrations settings instead of a file upload. Open your site in the builder, go to Integrations settings, and paste the line from step 1 into the Google AdSense field there. Hostinger's own instructions describe this field specifically for ads.txt content, not a general-purpose custom code box, so it is worth locating that exact field rather than pasting into a script/embed field meant for other integrations. Save changes, then update your website so the change publishes.",
       "image": null
     },
     {
-      "heading": "Confirm the file is actually live",
-      "body": "Before checking back with AdSense, visit yourdomain.com/ads.txt directly in a browser. You should see the plain text line you copied earlier, not a 404 page, not your WordPress theme wrapped around it, and not a redirect to your homepage. If it doesn't load as plain text at that exact URL, the upload didn't land in the true root directory and needs to be moved.",
+      "heading": "Confirm it's live, then wait for AdSense to clear the warning",
+      "body": "Visit yourdomain.com/ads.txt directly in a browser before checking back with AdSense. You should see the plain-text line, not a 404, not your theme wrapped around it, and not a redirect to the homepage. If it doesn't load as plain text at that exact URL, the file isn't in the true root and needs to move.\n\nOnce it's confirmed live, Google's own ads.txt guidance says the warning can take a few days to clear, and up to a month on a site that doesn't get many ad requests yet. That is longer than the 24-48 hours some guides quote. If it's still flagged well past a month, recheck the line character-for-character against what AdSense generated, including the pub- prefix from step 1.",
       "image": null
+    }
+  ],
+  "tables": [
+    {
+      "title": "Where ads.txt goes, by site type",
+      "columns": ["Site type", "Where the file lives", "How you add it"],
+      "rows": [
+        ["Classic WordPress (hPanel)", "public_html (or public_html/yourdomain.com)", "Upload ads.txt directly via File Manager"],
+        ["Website Builder", "Generated by the builder itself", "Paste the ads.txt line into the Google AdSense field under Integrations settings"]
+      ]
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The warning stays even after uploading the file",
+      "cause": "The publisher ID was copied from the AdSense ad code (ca-pub-...) instead of the ads.txt-specific format. Google's ads.txt guidance requires the ca- prefix to be dropped, leaving just pub- plus the 16-digit number.",
+      "fix": "Re-copy the line directly from AdSense's Sites section rather than your ad code, and confirm it reads pub- not ca-pub-."
     },
     {
-      "heading": "Let AdSense re-crawl and confirm the warning clears",
-      "body": "Once the file is confirmed live at the root, AdSense re-checks it on its own schedule rather than instantly — it can take anywhere from a few hours to a day or two for the \"Earnings at risk\" banner to disappear from your account. If it's still showing after 48 hours, double-check the exact text in the file character-for-character against what AdSense originally gave you, since even a stray space or wrong relationship type will keep it flagged as unverified."
+      "problem": "yourdomain.com/ads.txt shows a 404 or your homepage instead of plain text",
+      "cause": "The file was uploaded into a subfolder, or (on Website Builder) it was pasted into the wrong integrations field.",
+      "fix": "On WordPress, confirm the file sits in public_html itself, alongside wp-config.php. On Website Builder, confirm the line is in the dedicated Google AdSense field, then republish."
+    },
+    {
+      "problem": "The file is correct and live, but AdSense still shows the warning after a few days",
+      "cause": "Google states the recrawl can take up to a month on sites that don't yet generate much ad traffic, not just a day or two.",
+      "fix": "Wait out the longer window before assuming something is wrong. Only re-check the file contents if the warning persists past a month."
     }
   ],
   "faq": [
-    { "question": "Why does AdSense show an 'Earnings at risk' error?", "answer": "This warning appears when your ads.txt file is missing, unreachable, or not placed correctly at your site's true root directory, so AdSense's crawler can't verify your authorized sellers." },
-    { "question": "Where exactly should ads.txt be uploaded?", "answer": "It needs to sit directly in your site's root — the same folder as wp-config.php on WordPress — so it's reachable at yourdomain.com/ads.txt with no subfolder in the path." },
-    { "question": "Does the process differ between WordPress and Website Builder?", "answer": "Yes. Classic WordPress sites on Hostinger use File Manager to upload the file into public_html, while Website Builder sites add the same content through the builder's own settings since there's no traditional file browser." },
-    { "question": "How do I know the fix worked?", "answer": "Visit yourdomain.com/ads.txt in a browser and confirm it loads as plain text with the exact line AdSense gave you, then check back in your AdSense account after a day or two for the warning to clear." },
-    { "question": "Can a typo in ads.txt cause the warning to stay?", "answer": "Yes — the publisher ID, relationship type, and certification ID all need to match exactly what AdSense generated. Copy the line rather than retyping it to avoid this." }
+    { "question": "Why does AdSense show an 'Earnings at risk' error?", "answer": "The warning appears when ads.txt is missing, unreachable, or doesn't match what AdSense generated, so Google's crawler can't verify who's authorized to sell ads on the site." },
+    { "question": "Where exactly should ads.txt be uploaded?", "answer": "Directly in the site's root, the same folder as wp-config.php on WordPress, so it's reachable at yourdomain.com/ads.txt with no subfolder in the path. On Website Builder there's no folder at all; the line goes into the Google AdSense field under Integrations settings instead." },
+    { "question": "Should the publisher ID in ads.txt start with pub- or ca-pub-?", "answer": "pub-, not ca-pub-. Google's ads.txt guidance says to strip the ca- prefix that appears in AdSense's ad code and keep only pub- followed by the 16-digit ID. Using the ca-pub- version is a common reason the file gets rejected." },
+    { "question": "Does the process differ between WordPress and Website Builder?", "answer": "Yes. Classic WordPress sites upload the file into public_html via File Manager. Website Builder sites paste the same line into the Google AdSense field in Integrations settings, since there's no file browser." },
+    { "question": "How long does it take for the warning to clear?", "answer": "Google's own guidance says a few days typically, and up to a month if the site isn't generating much ad traffic yet. It is not usually a same-day fix." }
   ],
+  "references": [
+    {
+      "label": "Hostinger Website Builder: How to connect Google AdSense (official)",
+      "url": "https://www.hostinger.com/support/6463126-hostinger-website-builder-how-to-connect-google-adsense/"
+    },
+    {
+      "label": "Google AdSense: ads.txt guide (official)",
+      "url": "https://support.google.com/adsense/answer/7532444?hl=en"
+    },
+    {
+      "label": "Google AdSense: ads.txt FAQs, publisher ID prefix guidance (official)",
+      "url": "https://support.google.com/adsense/answer/9785052?hl=en"
+    }
+  ],
+  "verifiedNote": "Click paths for File Manager and Website Builder are unchanged from the original walkthrough. The publisher ID format, the Website Builder upload mechanism, and the recrawl timeline were re-checked against Hostinger's and Google's official documentation in September 2026. That check corrected two things this guide previously got wrong: it recommended the ca-pub- ID (ads.txt needs pub-), and it quoted a 24-48 hour recrawl window where Google's own guidance says a few days, up to a month on low-traffic sites.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

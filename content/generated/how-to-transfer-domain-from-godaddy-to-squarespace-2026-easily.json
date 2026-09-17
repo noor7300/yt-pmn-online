@@ -1,64 +1,108 @@
 {
   "slug": "how-to-transfer-domain-from-godaddy-to-squarespace-2026-easily",
   "seoTitle": "Transfer a Domain From GoDaddy to Squarespace",
-  "metaDescription": "Move your domain from GoDaddy to Squarespace by connecting it to your site, so your website and domain settings live in one dashboard.",
-  "intro": "Running a website on Squarespace while your domain sits on a GoDaddy account you barely log into is a common but avoidable headache — renewals, DNS records, and support end up split across two providers instead of one. Squarespace lets you either connect a GoDaddy domain to your site or move it over entirely, and for most people the quicker connect option is all that's needed. This guide follows the real flow across both dashboards: finding your domain in GoDaddy, starting the connection there, and finishing it from Squarespace's own domain settings so your site answers to your existing domain name.",
+  "metaDescription": "Connect a GoDaddy domain to Squarespace: the real starting point (it's Squarespace, not GoDaddy), the DNSSEC check that blocks the connection, and how long propagation actually takes.",
+  "intro": "Running a website on Squarespace while your domain sits on a GoDaddy account you barely log into splits renewals, DNS records, and support across two providers instead of one. Squarespace lets you connect a GoDaddy domain to your site without a full registrar transfer, and for most people that's the option to use.\n\nThe part that trips people up is where the process starts. It isn't a setting you find inside GoDaddy first; you begin in Squarespace's own Domains panel, which then prompts you to sign into GoDaddy partway through. This guide follows that real order, plus the DNSSEC check that will block the connection if you skip it and the actual propagation window, which is longer than most guides say.",
+  "prerequisites": [
+    "The domain already registered and active in your GoDaddy account",
+    "GoDaddy's default nameservers still in place (removing them before you start causes an error)",
+    "Your GoDaddy login handy, since Squarespace prompts you to sign in mid-flow"
+  ],
   "steps": [
     {
-      "heading": "Start from your Squarespace site dashboard",
-      "body": "Log in to Squarespace and open the site you want the domain attached to. The site's home panel shows setup progress along with quick links, including a \"Get a custom domain\" button — that's the same destination you'll reach manually through Settings, but it's worth noting here because it confirms your site isn't using a custom domain yet. Have this dashboard open in one tab and your GoDaddy account open in another, since you'll be moving back and forth between the two.",
+      "heading": "Confirm the domain in GoDaddy and check for DNSSEC",
+      "body": "In GoDaddy, open My Products and find the domain you want to connect. Its listing shows the registration date and registrar, which is worth a glance if your account holds more than one domain.\n\nWhile you're there, check whether DNSSEC is enabled on this domain. Squarespace's connection process fails if it is, so turn it off in GoDaddy's DNS settings now rather than troubleshooting a failed connection later.",
+      "image": { "file": "/screenshots/HXuEqF6h1mY/03.webp", "caption": "A domain listed in GoDaddy's account, showing its registration details. Confirm this is the correct domain, and that DNSSEC is off, before starting the connection." }
+    },
+    {
+      "heading": "Start the connection from your Squarespace dashboard",
+      "body": "Log in to Squarespace and open the site you want the domain attached to. The site's home panel shows a \"Get a custom domain\" prompt when no custom domain is attached yet; that leads to the same place as opening Settings, then Domains, directly.\n\nEither route lands you in the Domains panel, where the actual connection begins. This is a Squarespace-side flow from here on, not something you drive from GoDaddy.",
       "image": { "file": "/screenshots/HXuEqF6h1mY/04.webp", "caption": "A Squarespace site's home dashboard, with a \"Get a custom domain\" prompt showing the site is still on its default Squarespace URL." }
     },
     {
-      "heading": "Find the domain in your GoDaddy account",
-      "body": "In GoDaddy, open My Products and locate the domain you want to use with Squarespace. Each domain listing shows its registration date and registrar, confirming you're looking at the right one before you touch any settings — a small check that matters if your GoDaddy account has more than one domain on it. Click into the domain's management page from here; this is where the connection options live.",
-      "image": { "file": "/screenshots/HXuEqF6h1mY/03.webp", "caption": "A domain listed in GoDaddy's account, showing its registration details. Confirm this is the correct domain before starting the connection." }
+      "heading": "Enter the domain, then sign in to GoDaddy when prompted",
+      "body": "In the Domains panel, click \"Use a domain I own,\" type the exact domain name, and click the arrow. Click Connect domain to continue. Squarespace then opens a \"Sign in to GoDaddy\" panel and asks you to log into your GoDaddy account right there, which is how it authorizes the nameserver change without you having to touch GoDaddy's DNS settings by hand.\n\nOnce you approve it, Squarespace sets two nameservers on the domain: connect1.squarespacedns.com and connect2.squarespacedns.com. This is called nameserver connect, and it's the method Squarespace recommends for GoDaddy domains that don't have custom DNS records already in place.",
+      "image": { "file": "/screenshots/HXuEqF6h1mY/02.webp", "caption": "The \"Use a Domain I Own\" panel in Squarespace's Domains settings, where you type in the exact domain name to connect." }
     },
     {
-      "heading": "Connect the domain to your Squarespace site",
-      "body": "From the domain's management page in GoDaddy, use the option to connect it to an existing website rather than starting a full registrar transfer — GoDaddy calls this connecting or forwarding your site. This points the domain's traffic at Squarespace without moving the actual registration, which is faster and avoids the waiting period that comes with a true transfer. GoDaddy handles the technical DNS changes on its end once you confirm."
+      "heading": "Wait for propagation",
+      "body": "Squarespace states the connection can take 24 to 48 hours to start working fully, longer than the few minutes some guides suggest. Seeing errors in the Domains panel, or when you load the domain directly, is normal during this window and isn't a sign that anything went wrong.\n\nLeave the settings alone on both sides while you wait. Making further changes on top of an unpropagated one is a common way to turn a normal wait into a genuine problem."
     },
     {
-      "heading": "Add the domain as a third-party domain in Squarespace",
-      "body": "Back in Squarespace, open Settings, then Domains & Email, and choose the option to use a domain you already own. You'll be prompted to type in the exact domain name — for example, yoursite.com — and Squarespace checks it against what it can see from GoDaddy's side. This is the step that actually links the two accounts together, so double-check the spelling before submitting; a typo here just returns an error rather than connecting anything.",
-      "image": { "file": "/screenshots/HXuEqF6h1mY/02.webp", "caption": "The \"Use a Domain I Own\" panel in Squarespace's Domains & Email settings, where you type in the exact domain name to connect." }
+      "heading": "Verify the connection",
+      "body": "Once the wait is over, load the domain directly in a browser and confirm it reaches your Squarespace site instead of a GoDaddy parking page. You can also reach domain settings again later from the account menu in Squarespace's top navigation, which lists Account Dashboard and Domains as a shortcut separate from Settings.",
+      "image": { "file": "/screenshots/HXuEqF6h1mY/05.webp", "caption": "Squarespace's navigation, with Domains listed both under the account menu and as its own section, a second path to the same settings." }
     },
     {
-      "heading": "Confirm the domain from Squarespace's account menu",
-      "body": "You can also reach domain management from the account menu in the top navigation, which lists Account Dashboard, Domains, and Log Out — a shortcut worth knowing if you ever need to jump straight to domain settings without digging through Settings again. Squarespace's own site navigation separates Domains from Ecommerce and Marketing, which is a useful reminder that domain connections are handled independently from anything you sell on the site.",
-      "image": { "file": "/screenshots/HXuEqF6h1mY/05.webp", "caption": "Squarespace's navigation, with Domains listed both under the account menu and as its own section — a second path to the same settings." }
+      "heading": "Contact GoDaddy support if it still isn't resolving",
+      "body": "If the domain still doesn't reach Squarespace 48 hours after you completed the connection, GoDaddy's support team can check the DNS records on their end by phone, text, or chat. A leftover DNS record from before you started is the most common cause, and it's faster for GoDaddy to spot than to diagnose by guessing."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Nameserver connect vs. DNS connect",
+      "columns": ["Method", "Where DNS records live", "Best for"],
+      "rows": [
+        ["Nameserver connect", "Squarespace", "Most GoDaddy domains with no custom DNS records; simplest, guided setup"],
+        ["DNS connect", "Stays with GoDaddy", "Domains with custom email, DNSSEC, multiple subdomains, or a service like Cloudflare"]
+      ],
+      "note": "Squarespace recommends nameserver connect for GoDaddy domains unless custom DNS records are already in use. Nameserver connect only supports A, AAAA, CNAME, MX, SRV and TXT records afterward, and custom setups outside that list can break."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The connection fails immediately with an error",
+      "cause": "GoDaddy's default nameservers were removed or changed before the Squarespace connection process started.",
+      "fix": "Restore GoDaddy's default nameservers, then restart the connection from Squarespace's Domains panel."
     },
     {
-      "heading": "Wait for propagation and verify the connection",
-      "body": "DNS changes don't take effect instantly — it can take anywhere from a few minutes to a few hours for the domain to fully point at Squarespace, depending on your previous settings and GoDaddy's propagation time. Avoid making further changes on either side while you wait, since stacking edits on top of an unpropagated change is a common cause of confusing errors. Once it resolves, load the domain directly in a browser to confirm it lands on your Squarespace site rather than a GoDaddy parking page."
+      "problem": "Squarespace won't complete the connection",
+      "cause": "DNSSEC is still active on the domain in GoDaddy.",
+      "fix": "Turn off DNSSEC in GoDaddy's DNS settings, then retry the connection."
     },
     {
-      "heading": "Troubleshoot with GoDaddy support if it doesn't connect",
-      "body": "If the domain still isn't resolving to Squarespace after propagation should have finished, GoDaddy's support team can check the DNS records from their side by phone, text, or chat — most connection issues trace back to a leftover DNS record from before you started, which GoDaddy can spot and clear faster than guessing on your own."
+      "problem": "Custom email or another GoDaddy-hosted service stops working after connecting",
+      "cause": "Nameserver connect moves DNS records to Squarespace, which supports only a limited set of record types, so custom records outside that set don't carry over.",
+      "fix": "Reconnect using DNS connect instead, which keeps DNS records at GoDaddy and preserves custom setups."
     }
   ],
   "faq": [
     {
       "question": "Do I need to fully transfer the domain, or can I just connect it?",
-      "answer": "Squarespace supports connecting a third-party domain from GoDaddy without a full registrar transfer, which is the quicker route shown in this guide and enough for most sites."
+      "answer": "Connecting is enough for most people. It points the domain at Squarespace without moving the registration off GoDaddy, and it's the process this guide covers."
     },
     {
-      "question": "Why would I move a domain from GoDaddy to Squarespace?",
-      "answer": "Connecting or registering your domain through Squarespace centralizes your website and domain settings instead of juggling two separate provider dashboards for renewals and DNS."
+      "question": "Where does the connection process actually start?",
+      "answer": "In Squarespace, not GoDaddy. Open the Domains panel, choose \"Use a domain I own,\" and Squarespace prompts you to sign in to GoDaddy partway through to authorize the change."
     },
     {
-      "question": "How long does it take for the domain to start working?",
-      "answer": "DNS propagation typically takes anywhere from a few minutes to a few hours after you connect the domain, though it can occasionally take longer depending on prior settings."
+      "question": "How long does the domain take to start working?",
+      "answer": "Squarespace states 24 to 48 hours. Seeing errors during that window is expected, not a sign of a failed connection."
     },
     {
-      "question": "What if I run into an issue during the connection?",
-      "answer": "Contact GoDaddy Support by phone, text, or chat — most connection problems come down to a leftover DNS record they can identify and remove from their side."
+      "question": "What is DNSSEC, and why does it matter here?",
+      "answer": "It's a domain security feature. If it's active on the GoDaddy side, Squarespace's connection process fails until you turn it off."
     },
     {
-      "question": "Do I need to already own the domain to use this process?",
-      "answer": "Yes, this guide covers connecting a domain you've already registered with GoDaddy. Registering a brand-new domain through Squarespace is a separate process."
+      "question": "Will connecting break my GoDaddy email?",
+      "answer": "It can, if that email relies on custom DNS records. Nameserver connect only keeps a limited set of record types; if you need custom records preserved, use DNS connect instead."
+    },
+    {
+      "question": "What if the connection still isn't working after two days?",
+      "answer": "Contact GoDaddy support by phone, text, or chat. A leftover DNS record from before you started is the most common cause, and they can identify it faster than trial and error."
     }
   ],
+  "references": [
+    {
+      "label": "Squarespace Help: Connecting a GoDaddy domain to your Squarespace site (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/206541747-Connecting-a-GoDaddy-domain-to-your-Squarespace-site"
+    },
+    {
+      "label": "Squarespace Help: Nameserver connect vs. DNS connect (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/8387079117581-Nameserver-connect-vs-DNS-connect"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The starting point of the flow, the DNSSEC prerequisite, the 24-48 hour propagation window, and the nameserver/DNS connect distinction were checked against Squarespace's official help articles in September 2026, correcting this guide's earlier claim that the process starts in GoDaddy and resolves within a few hours.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

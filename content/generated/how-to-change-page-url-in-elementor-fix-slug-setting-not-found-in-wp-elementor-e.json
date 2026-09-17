@@ -1,60 +1,96 @@
 {
   "slug": "how-to-change-page-url-in-elementor-fix-slug-setting-not-found-in-wp-elementor-e",
   "seoTitle": "How to Change Page URL in Elementor (Fix Slug)",
-  "metaDescription": "Learn how to change a page URL or slug in WordPress when using Elementor, and fix issues if the page doesn't load correctly after the change.",
-  "intro": "Many beginners assume Elementor controls the page URL, but the actual link or slug is managed through WordPress's own page settings, not the Elementor canvas. That's why searching Elementor's own panels for a URL field comes up empty. This guide shows exactly where the slug setting lives, walks through changing it on a real page, and covers what to check afterward so menus, internal links, and the page itself keep working.",
+  "metaDescription": "Change a page's URL or slug on a WordPress site built with Elementor: where the Slug field actually lives, the Quick Edit shortcut most guides skip, and what to check afterward.",
+  "intro": "Many beginners assume Elementor controls the page URL, but the link, or slug, is managed through WordPress's own page settings, not the Elementor canvas. That's why searching Elementor's panels for a URL field comes up empty.\n\nThis guide shows where the slug setting actually lives, including a Quick Edit shortcut that skips opening the full page editor, then covers what to check afterward so menus, internal links, and the page itself keep working.",
   "steps": [
     {
       "heading": "Find Elementor in your WordPress dashboard",
-      "body": "Elementor installs as a plugin, so it shows up as its own menu item in the WordPress admin sidebar, with Home, Settings, and Templates underneath it. This is a good place to get oriented, but it's worth saying upfront: nothing in this Elementor-specific menu controls a page's URL. That setting lives one level up, in WordPress's own Pages screen, which is the next stop.",
-      "image": { "file": "/screenshots/60wmTYKp6j0/01.webp", "caption": "The Elementor plugin's Home screen inside WordPress admin. Its own menu — Settings, Templates, Custom Fonts — doesn't include a URL or slug option." }
+      "body": "Elementor installs as a plugin, so it shows up as its own menu item in the WordPress admin sidebar, with Home, Settings, and Templates underneath it. This is a good place to get oriented, but nothing in Elementor's own menu controls a page's URL. That setting lives one level up, in WordPress's own Pages screen, which is the next stop.",
+      "image": { "file": "/screenshots/60wmTYKp6j0/01.webp", "caption": "The Elementor plugin's Home screen inside WordPress admin. Its own menu (Settings, Templates, Custom Fonts) doesn't include a URL or slug option." }
     },
     {
       "heading": "Open the Pages list in WordPress",
-      "body": "From the main WordPress sidebar (not Elementor's), click Pages to see every page on the site along with its status — Published, Draft, or Trash — and when it was last modified. Find the specific page whose URL you want to change and click into it. This list is also useful for a quick sanity check afterward, since a renamed slug will still show the same title here even though its link has changed underneath it.",
-      "image": { "file": "/screenshots/60wmTYKp6j0/02.webp", "caption": "The WordPress Pages screen, listing every page with its status and last-modified date — the normal entry point for editing a page's slug." }
+      "body": "From the main WordPress sidebar, not Elementor's, click Pages to see every page on the site with its status (Published, Draft, or Trash) and when it was last modified. Hovering over a page title reveals a Quick Edit link, which opens an inline form with a Slug field right there in the list, useful if you just need a fast change and don't need the full editor. For anything else, click into the page itself.",
+      "image": { "file": "/screenshots/60wmTYKp6j0/02.webp", "caption": "The WordPress Pages screen, listing every page with its status and last-modified date, the normal entry point for editing a page's slug." }
     },
     {
       "heading": "Locate the Slug field in the page settings",
-      "body": "Once you're editing the page, open the Page panel on the right (in the block editor, or the equivalent settings tab if you're editing through WordPress directly rather than the Elementor canvas). Scroll past Status and Publish date and you'll find Slug, showing the current URL segment — in a fresh page this usually defaults to something generic derived from the title. Clicking directly on the slug value makes it editable.",
+      "body": "Once you're editing the page, open the settings sidebar (in the block editor, or the equivalent panel if the site uses the classic editor rather than the Elementor canvas). Look for the Permalink section; inside it sits the Slug field, showing the current URL segment, which on a fresh page usually defaults to something generic derived from the title. Click the slug value to make it editable.",
       "image": { "file": "/screenshots/60wmTYKp6j0/04.webp", "caption": "The page settings panel with the Slug field visible, currently set to the default \"single-page.\"" }
     },
     {
       "heading": "Edit the slug and save",
-      "body": "Type the new slug you want — keep it lowercase, use hyphens instead of spaces, and avoid special characters, since WordPress will otherwise strip or encode them for you anyway. Press enter or click away to confirm the change, then hit Save or Update on the page. The slug field will now reflect your new URL segment, and that's the actual live address visitors and search engines will use going forward.",
+      "body": "Type the new slug: keep it lowercase, use hyphens instead of spaces, and skip special characters, since WordPress strips or encodes them automatically anyway. Press enter or click away to confirm, then hit Save or Update on the page itself; the slug field alone doesn't commit the change. That saved value becomes the live address visitors and search engines use going forward.",
       "image": { "file": "/screenshots/60wmTYKp6j0/05.webp", "caption": "The same Slug field after editing, now reading \"about-us-new\" instead of the original default." }
     },
     {
+      "heading": "Set up a redirect before, not after, if the page is already live",
+      "body": "If the page is new and unpublished, changing its slug carries no risk. If it's already published and indexed by search engines, changing the slug changes its URL, and the old one starts returning a 404 the moment you save. Set up a 301 redirect from the old URL to the new one as part of the change, not as a fix you scramble for once someone reports a broken link. This preserves most of the page's existing search ranking instead of losing it."
+    },
+    {
       "heading": "Fix a page that won't load after the change",
-      "body": "If the page throws a 404 or looks broken right after you save the new slug, the most common cause is a caching plugin or your host's server cache still serving the old URL structure. Clear any WordPress caching plugin you have active, and if you're on managed hosting, also clear the host-level cache from its own panel. If the problem persists, check Settings > Permalinks in WordPress and simply re-save that screen without changing anything — this forces WordPress to flush and rebuild its internal rewrite rules, which resolves most post-slug-change 404s."
+      "body": "If the page throws a 404 or looks broken right after saving, the most common cause is a caching plugin or the host's server cache still serving the old URL structure. Clear any active WordPress caching plugin, and on managed hosting, clear the host-level cache from its own panel too. If that doesn't resolve it, open Settings > Permalinks in WordPress and re-save that screen without changing anything; this flushes and rebuilds WordPress's internal rewrite rules, which clears most post-slug-change 404s."
     },
     {
       "heading": "Update menus and internal links",
-      "body": "Changing a slug doesn't automatically update navigation menus or internal links elsewhere on the site — those still point to the old URL as literal text or IDs, depending on how they were built. Check Appearance > Menus for any manually-added links using the old slug, and search through other pages or posts that might link to this one directly. If the page was already indexed by search engines, set up a redirect from the old URL to the new one so you don't lose that traffic or hand visitors a dead link."
+      "body": "Changing a slug doesn't automatically update navigation menus or internal links elsewhere on the site; those still point to the old URL as literal text or stored IDs, depending on how they were built. Check Appearance > Menus for any manually added links using the old slug, and look through other pages or posts that link to this one directly."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The page returns a 404 right after the slug is changed",
+      "cause": "A caching plugin, or the host's server-level cache, is still serving the previous URL structure.",
+      "fix": "Clear any WordPress caching plugin and the host-level cache if one exists. If that doesn't fix it, re-save Settings > Permalinks to flush WordPress's rewrite rules."
+    },
+    {
+      "problem": "A menu link or internal link still leads to the old URL",
+      "cause": "Menus and internal links store the old slug as literal text or an ID that doesn't update automatically when the page's slug changes.",
+      "fix": "Check Appearance > Menus and any pages or posts that link to this one, and update the link manually."
+    },
+    {
+      "problem": "Search results still show the old URL, or visitors hit a dead link",
+      "cause": "No redirect was set up from the old slug to the new one before or immediately after the change.",
+      "fix": "Add a 301 redirect from the old URL to the new one as soon as possible to preserve search ranking and avoid broken links for anyone with the old address bookmarked."
     }
   ],
   "faq": [
     {
       "question": "Does Elementor control the page URL?",
-      "answer": "No, the page URL or permalink is managed by WordPress's core page settings — specifically the Slug field — not Elementor's design editor."
+      "answer": "No. The URL, or slug, is managed by WordPress's core page settings, specifically the Slug field under Permalink, not Elementor's design editor."
     },
     {
       "question": "Where exactly is the Slug field?",
-      "answer": "Open the page in the WordPress editor, look in the Page panel on the right side, and scroll past the Status and Publish fields — Slug appears just below Publish date."
+      "answer": "Open the page in the WordPress editor, open the settings sidebar, and look for the Permalink section. The Slug field sits inside it."
+    },
+    {
+      "question": "Is there a faster way to change a slug without opening the full editor?",
+      "answer": "Yes. Hover over the page in the Pages list and click Quick Edit; it includes a Slug field you can edit inline, then save without opening the page itself."
+    },
+    {
+      "question": "Should I set up a redirect before or after changing the slug?",
+      "answer": "Before, if the page is already live and indexed. Setting the redirect up front, rather than after someone reports a broken link, preserves most of the page's existing search ranking."
     },
     {
       "question": "Why does my page show an error after changing the slug?",
-      "answer": "This is usually due to a caching plugin or host-level cache still serving the old URL. Clear your caches, and if the problem continues, re-save Settings > Permalinks in WordPress to flush the rewrite rules."
+      "answer": "Usually a caching plugin or host-level cache still serving the old URL. Clear the caches, and if that doesn't help, re-save Settings > Permalinks to flush the rewrite rules."
     },
     {
-      "question": "Should I redirect the old URL after changing it?",
-      "answer": "Yes, if the page was already live and indexed, setting up a redirect from the old URL to the new one helps preserve SEO value and avoid broken links for anyone who bookmarked the old address."
-    },
-    {
-      "question": "Can changing a URL break my Elementor template?",
-      "answer": "The Elementor design itself isn't affected by a slug change, but any dynamic or manually-added links referencing the old slug elsewhere on the site — menus included — will need updating separately."
+      "question": "Can changing a URL break my Elementor design?",
+      "answer": "No. The Elementor design itself isn't affected by a slug change, but menus and manually added links referencing the old slug elsewhere on the site need updating separately."
     }
   ],
+  "references": [
+    {
+      "label": "Elementor: What Is a Slug in WordPress? (official Elementor blog)",
+      "url": "https://elementor.com/blog/slug/"
+    },
+    {
+      "label": "WordPress.com Support: Edit a page or post link in WordPress (official)",
+      "url": "https://wordpress.com/support/permalinks-and-slugs/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough; the core claim, that Elementor doesn't control the URL and WordPress's own Slug field does, held up against both sources checked. Checking Elementor's own blog post on slugs and WordPress.com's support article in September 2026 added the Quick Edit shortcut, which the original guide didn't mention, and tightened the redirect advice to recommend setting it up before the slug changes on a live page rather than only after something breaks.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

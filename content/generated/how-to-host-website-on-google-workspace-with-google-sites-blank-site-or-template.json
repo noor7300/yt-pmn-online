@@ -1,58 +1,82 @@
 {
   "slug": "how-to-host-website-on-google-workspace-with-google-sites-blank-site-or-template",
   "seoTitle": "How to Host a Website on Google Workspace (Google Sites)",
-  "metaDescription": "Learn how to host your website using Google Sites within Google Workspace in 2026, starting from a blank page or a ready-made template.",
-  "intro": "Google Sites gives Workspace users a straightforward way to build and host a website without needing separate hosting or coding skills, and the whole thing starts from the same account you already use for Gmail and Drive. This guide covers signing into that account, landing on the Sites start screen, and choosing between a blank page and a template depending on how much design work you want to do yourself.",
+  "metaDescription": "Build and publish a website with Google Sites on a Google Workspace account: blank page vs template, and the admin-console step a Workspace custom domain actually needs.",
+  "intro": "Google Sites gives Workspace users a straightforward way to build and host a website without separate hosting or coding skills, starting from the same account already used for Gmail and Drive. This guide covers signing in, landing on the Sites start screen, choosing between a blank page and a template, and the one step that works differently on a Workspace account than on a personal Google one: connecting a custom domain.",
   "steps": [
     {
       "heading": "Sign in to your Google Workspace account",
-      "body": "Go to your Workspace login and enter the credentials for the account tied to your organization's domain — a business account looks the same as a personal Gmail login, just with your own domain in place of gmail.com. If you're signed into multiple Google accounts on the same browser, double-check which one you're entering a password for, since Sites created under the wrong account won't inherit your Workspace's storage, sharing permissions, or custom domain settings.",
+      "body": "Go to your Workspace login and enter the credentials for the account tied to your organization's domain. A business account looks the same as a personal Gmail login, just with your own domain in place of gmail.com. If several Google accounts are signed in on the same browser, check which one you're entering a password for: a site created under the wrong account won't inherit your Workspace's storage, sharing permissions, or domain settings.",
       "image": { "file": "/screenshots/e493T0eleCU/03.webp", "caption": "The Google sign-in screen prompting for a password on a Workspace account tied to a custom domain." }
     },
     {
       "heading": "Open Google Sites from your Workspace apps",
-      "body": "Once you're signed in, open the Google apps grid (the nine-dot icon) from any Google service and look for Sites, or go directly to sites.google.com. Because it's a native Workspace app, anything you build here is stored in the same Drive as your documents and spreadsheets, and it inherits your organization's sharing defaults automatically — useful if multiple people on your team need editing access."
+      "body": "Once signed in, open the Google apps grid (the nine-dot icon) from any Google service and look for Sites, or go directly to sites.google.com. Because it's a native Workspace app, anything built here is stored in the same Drive as your documents and spreadsheets, and it inherits your organization's sharing defaults automatically, which matters if more than one person on the team needs editing access."
     },
     {
       "heading": "Choose blank or start from a template",
-      "body": "The Sites home screen opens on \"Start a new site,\" with a Blank site tile marked by a colored plus icon sitting first in a row of starting points. Clicking Blank site drops you straight into an empty canvas with no pre-built sections, which is the right call if you want full control over layout from page one. The tiles next to it are template starting points — pre-arranged pages and sections you customize instead of building from nothing, which saves time if you'd rather adjust an existing layout than design one yourself.",
+      "body": "The Sites home screen opens on \"Start a new site,\" with a Blank site tile marked by a colored plus icon sitting first in a row of starting points. Blank site drops you into an empty canvas with no pre-built sections, the right call for full control over layout from page one. The tiles next to it are templates: pre-arranged pages and sections you customize instead of building from nothing, which saves time if adjusting an existing layout beats designing one from scratch.",
       "image": { "file": "/screenshots/e493T0eleCU/05.webp", "caption": "The \"Start a new site\" screen, with Blank site as the first option in a row of starting points you can build from." }
     },
     {
       "heading": "Build out your pages",
-      "body": "Whichever starting point you pick, the Sites editor works the same way: a right-hand panel for adding text boxes, images, embeds, and layout blocks, and a Pages tab for adding new pages and arranging them into your site's navigation. Keep the number of top-level pages manageable — a visitor should be able to see your whole site's structure in the navigation bar without scrolling through a long dropdown, so group related content under a single page with sections rather than creating a new page for every topic."
+      "body": "Whichever starting point you pick, the Sites editor works the same way: a right-hand panel for adding text boxes, images, embeds, and layout blocks, and a Pages tab for adding new pages and arranging them into your site's navigation. Keep the number of top-level pages manageable. A visitor should see the whole site's structure in the navigation bar without scrolling a long dropdown, so group related content under one page with sections instead of creating a new page for every topic."
     },
     {
-      "heading": "Preview before you publish",
-      "body": "Use the preview button in the editor's top bar to see the site as a visitor would, including how it collapses down for mobile screens. This is worth doing before every publish, not just the first one — a layout that looks fine on your wide editor window can crowd or overlap on a phone, and catching that in preview costs nothing compared to catching it after a visitor complains."
+      "heading": "Preview, publish, and connect a domain the right way",
+      "body": "Use Preview in the editor's top bar to see the site as a visitor would, mobile layout included, before every publish, not just the first one. A layout that looks fine on a wide editor window can crowd or overlap on a phone. When it looks right, click Publish. By default the site gets a Google-hosted address ending in sites.google.com.\n\nFor a custom domain, don't look in the site's own Settings; that panel is the personal-account flow and, for a Workspace account, only tells you to contact your administrator. A super admin instead maps it from the Admin console: Apps → Google Workspace → Sites → Custom URL → Add, choosing a domain already verified on the account, then pointing a CNAME record at the destination Google specifies for the site's current sites.google.com address. The site owner's email needs to be on that same domain, and DNS changes can take up to 24 hours to resolve."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no working \"Custom domains\" option inside the site's own Settings",
+      "cause": "That panel is the personal-account flow. A Workspace account is told to contact its administrator instead.",
+      "fix": "Have a super admin map the URL from the Admin console (Apps → Google Workspace → Sites → Custom URL) rather than from inside Sites."
     },
     {
-      "heading": "Publish and set your web address",
-      "body": "When you're ready, click Publish in the top-right corner. By default your site gets a Google-hosted address ending in sites.google.com, but if you want it to appear under your own domain, you can connect a custom domain from the site's settings — this typically involves adding a verification record through your domain registrar, so budget a little time for DNS changes to take effect before the custom address starts working."
+      "problem": "Mapping the custom URL fails or can't find a valid site owner",
+      "cause": "Google requires the site owner's email address to be on the domain being mapped. A secondary domain needs the owner to already have an account there.",
+      "fix": "Use a site owned by someone with an address on that domain, or transfer ownership before mapping."
+    },
+    {
+      "problem": "The custom address still doesn't resolve after setup",
+      "cause": "DNS propagation for the CNAME record can take up to 24 hours.",
+      "fix": "Wait out that window before assuming the mapping failed, and double-check the CNAME record matches what the Admin console specified."
     }
   ],
   "faq": [
     {
       "question": "Is Google Sites free with Google Workspace?",
-      "answer": "Google Sites is included with most Google Workspace plans at no extra cost, though storage for your site's images and files draws from your overall Workspace storage allowance."
+      "answer": "It's included with Workspace plans at no extra cost, though storage for a site's images and files draws from the organization's overall Workspace storage."
     },
     {
-      "question": "Can I use my own domain with a Google Sites website?",
-      "answer": "Yes, you can connect a custom domain you own to your Google Sites page instead of using the default sites.google.com address, through a verification step in the site's settings."
+      "question": "Can I use my own domain with a Google Sites website on Workspace?",
+      "answer": "Yes, but not from the site's own settings. A super admin maps it from the Admin console under Apps, Google Workspace, Sites, Custom URL, using a domain already verified on the account."
     },
     {
       "question": "Is it better to start with a blank site or a template?",
-      "answer": "Templates save time and offer a pre-arranged layout you customize, while a blank site is better if you want complete control over the structure from the very first page."
+      "answer": "A template saves time with a pre-arranged layout to customize. A blank site suits anyone who wants full control over the structure from the first page."
     },
     {
       "question": "Can multiple people in my organization edit the same site?",
-      "answer": "Yes, since Sites is a native Workspace app, it inherits your organization's sharing defaults, so teammates with the right permissions can edit the site together like any shared Drive file."
+      "answer": "Yes. As a native Workspace app, Sites inherits the organization's sharing defaults, so teammates with the right permissions can edit it together like any shared Drive file."
     },
     {
-      "question": "Where do I go to start a new site?",
-      "answer": "Sign into your Workspace account, open Sites from the Google apps grid or sites.google.com, and choose Blank site or a template from the \"Start a new site\" screen."
+      "question": "How long does a custom domain take to start working?",
+      "answer": "Google notes DNS changes for the CNAME record can take up to 24 hours to take effect after the Admin console mapping is set up."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Help: Map a new URL to a site in Google Sites (official)",
+      "url": "https://knowledge.workspace.google.com/admin/getting-started/map-a-new-url-to-a-site-in-google-sites"
+    },
+    {
+      "label": "Google Sites Help: Use a custom domain for your site (official)",
+      "url": "https://support.google.com/sites/answer/9068867?hl=en"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The custom-domain step was re-checked against Google's official documentation in September 2026 and rewritten: the original draft described the personal-account Settings flow, but a Workspace account's own Sites settings explicitly defer to an administrator, and mapping actually happens in the Admin console with a verified domain and a CNAME record, taking up to 24 hours. The sign-in, blank-site-versus-template, and page-building steps matched the recorded screens and were left as described.",
   "generatedAt": "2026-08-07T09:00:00Z",
   "deep": true
 }

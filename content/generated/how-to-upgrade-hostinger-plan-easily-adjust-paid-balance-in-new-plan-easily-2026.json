@@ -1,12 +1,16 @@
 {
   "slug": "how-to-upgrade-hostinger-plan-easily-adjust-paid-balance-in-new-plan-easily-2026",
   "seoTitle": "How to Upgrade Your Hostinger Plan and Balance",
-  "metaDescription": "See how to upgrade a Hostinger hosting plan in 2026, including moving to VPS or cloud hosting, and how unused subscription balance carries over.",
-  "intro": "As a website grows, a basic hosting plan can start to feel limiting, and upgrading on Hostinger doesn't have to mean losing money you've already paid. The upgrade screen automatically works out what you're owed from your current plan and knocks it off the new one, so the number you actually pay is almost never the sticker price. This guide walks through that comparison screen exactly as it appears — current plan versus upgrade, taxes, balance, and the final amount due — plus the billing-period choice that changes it all again.",
+  "metaDescription": "Upgrade a Hostinger hosting plan in 2026: how the comparison screen credits unused time from your current plan, why VPS isn't a direct upgrade option, and what changes if your IP address updates.",
+  "intro": "As a website grows, a basic hosting plan can start to feel limiting. Upgrading on Hostinger doesn't mean losing money already paid: the upgrade screen works out what's left on your current term and knocks it off the new plan's price, so the number you pay is almost never the sticker price. This guide walks through that comparison screen as it appears, current plan against upgrade target, balance credit, and the final amount due, plus one limit worth knowing before you start: this screen moves you between Web and Cloud tiers, not onto a VPS.",
+  "prerequisites": [
+    "An existing Hostinger Web or Cloud hosting plan with an active website on it"
+  ],
+  "costNote": "Upgrading costs money unless your existing balance fully covers it. Hostinger converts the unused value of your current term into a discount on the new plan, so the amount due is usually less than the plan's full price, but it is rarely zero.",
   "steps": [
     {
       "heading": "Open the upgrade comparison for your site",
-      "body": "From the Websites section of your Hostinger dashboard, find the upgrade option for the site whose plan you want to change. It opens a two-column comparison: your Current plan on the left, and the plan you're upgrading to on the right, with a dropdown at the top of the right column letting you pick exactly which tier to move to. Each column lists its own price, visit limits, storage, RAM, CPU cores, PHP workers, and database connections stacked directly against each other, so you can see precisely what more money buys before committing to anything.",
+      "body": "From the Websites section of your Hostinger dashboard, find the upgrade option for the site whose plan you want to change (the same screen is also reachable from Billing > Subscriptions). It opens a two-column comparison: your current plan on the left, the plan you're upgrading to on the right, with a dropdown at the top of the right column for picking the target tier. Each column lists price, visit limits, storage, RAM, CPU cores, PHP workers, and database connections side by side, so you can see what more money buys before committing.\n\nThis screen only moves you between Web and Cloud hosting tiers. It does not offer a direct path to a VPS plan or to Agency hosting; those require a separate purchase and a manual (or, for Agency, tool-assisted) migration of your site. Cloud Enterprise also has no upgrade path from here.",
       "image": {
         "file": "/screenshots/fVWETDMbZi4/03.webp",
         "caption": "The upgrade comparison screen. Current plan sits beside the upgrade target, with resource limits lined up row by row and the checkout summary on the right."
@@ -14,51 +18,79 @@
     },
     {
       "heading": "Pick the new plan from the dropdown",
-      "body": "The \"Choose hosting plan\" dropdown at the top of the right-hand column is where the actual selection happens — in this walkthrough it's set to Cloud Professional Hosting, one tier above the existing Cloud Startup plan. Changing this dropdown live-updates every number below it: the price, the resource table, and the checkout summary on the right all recalculate immediately, which makes it easy to flip between tiers and compare the real monthly cost of each before settling on one.",
+      "body": "The \"Choose hosting plan\" dropdown at the top of the right-hand column is where the selection happens. In this walkthrough it's set to Cloud Professional Hosting, one tier above the existing Cloud Startup plan. Changing this dropdown updates every number below it live: price, resource table, and checkout summary all recalculate at once, so it's easy to flip between tiers and compare the real monthly cost of each before settling on one.",
       "image": {
         "file": "/screenshots/fVWETDMbZi4/04.webp",
         "caption": "The plan dropdown set to Cloud Professional Hosting, with the resulting price, resource table, and checkout total updating on the right."
       }
     },
     {
-      "heading": "See how your existing balance is applied",
-      "body": "This is the part most people are actually looking for. The checkout panel on the right lists Taxes & Fees, a Total, and then a line labeled Hostinger balance shown as a negative amount — this is the unused, already-paid portion of your current subscription being credited straight toward the new plan. Below that sits an optional coupon code field, and finally Amount To Pay, which is the real number you'll be charged after the balance and any coupon are subtracted. In the example shown, a 12-month upgrade with a substantial existing balance brought the amount due down to under ₹200, a fraction of the plan's sticker price.",
+      "heading": "Check the balance credit and billing period together",
+      "body": "The checkout panel lists Taxes & Fees, a Total, then a Hostinger balance line shown as a negative amount: the unused, already-paid portion of your current term, credited against the new plan. Below that sits an optional coupon field, then Amount To Pay, the real number charged once the balance and any coupon are subtracted. Hostinger's own example is a $50 remaining balance against a $200 upgrade, leaving $150 due; the walkthrough shown here brought a 12-month upgrade down to under ₹200 because the existing balance covered most of it.\n\nAbove that summary, \"Choose billing period\" switches between terms, commonly 12 or 48 months. Each option changes both the monthly rate and how the balance gets applied, since a longer term spreads the same credit across a bigger total. Toggle between the available periods once before paying: the cheaper-looking monthly rate on a longer plan doesn't always mean a lower amount due today.",
       "image": {
         "file": "/screenshots/fVWETDMbZi4/05.webp",
         "caption": "Choose billing period expanded to show 48-month and 12-month options, sitting directly above the balance-adjusted Amount To Pay."
       }
     },
     {
-      "heading": "Compare billing periods before you confirm",
-      "body": "Above the checkout summary, a \"Choose billing period\" control lets you switch between terms — commonly 12 months or a longer 48-month commitment. Each option changes both the monthly rate and how your existing balance gets applied, since a longer term spreads the same balance credit across a bigger total. It's worth toggling between the available periods once before paying, because the cheaper-looking monthly rate on a longer plan doesn't always mean a lower amount due today — the balance adjustment can make either option come out ahead depending on how much credit you're carrying."
+      "heading": "Confirm, then check the new plan is live",
+      "body": "With the plan, billing period, and any coupon set, choosing a payment method finalizes the upgrade. The summary also shows the new expiration date and the rate the plan renews at afterward. Hostinger states upgrades take effect immediately, though moving files, email, and databases to the new plan can take a few hours to finish in the background, so give it a little time before assuming something is wrong.\n\nIf you upgraded from Web hosting to a Cloud plan, you'll also get a new dedicated IP address, visible on the Account details page. Update any FTP connections, remote database connections, or DNS A records that pointed at the old IP. Hostinger proxies traffic to the new server for 7 days after the transfer, which is the window to make that DNS change before anything breaks for visitors."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "VPS doesn't appear as an option in the upgrade dropdown",
+      "cause": "Web and Cloud hosting plans cannot be upgraded directly to a VPS through this screen.",
+      "fix": "Purchase a VPS plan separately from the Billing section, then migrate your site content to it manually."
     },
     {
-      "heading": "Confirm and verify the new plan is active",
-      "body": "Once the plan, billing period, and any coupon are set the way you want, choosing a payment method finalizes the upgrade. Hostinger's summary also shows the new expiration date and the rate the plan renews at afterward, so there's no guessing what happens once the current discounted or balance-adjusted period ends. After confirming, it's worth checking your site loads normally and that the new resource limits reflect in your dashboard — the upgrade is designed to apply without downtime, but a quick check costs nothing."
+      "problem": "The site or mailboxes stop resolving right after upgrading",
+      "cause": "Upgrading from Web hosting to a Cloud plan assigns a new dedicated IP address, different from the old Web hosting IP.",
+      "fix": "Update FTP connections, remote database connections, and DNS A records to the new IP on the Account details page. Traffic is proxied to the new server for 7 days, so there's a short grace window to make the DNS change."
+    },
+    {
+      "problem": "The new RAM, CPU, or storage limits don't show up straight after paying",
+      "cause": "Hostinger applies the upgrade immediately for billing purposes, but moving files, email, and databases to the new plan can still take a few hours.",
+      "fix": "Wait and refresh hPanel before assuming the upgrade failed."
+    },
+    {
+      "problem": "There's no upgrade button at all on a Cloud Enterprise or Agency plan",
+      "cause": "Those two plans don't support upgrades through this screen.",
+      "fix": "Agency plans move to a new plan using the Clone Website tool (available only on Agency); Cloud Enterprise has no upgrade path and would mean migrating to a VPS instead."
     }
   ],
   "faq": [
     {
-      "question": "Will I lose money if I upgrade my Hostinger plan?",
-      "answer": "No — the checkout screen shows a \"Hostinger balance\" line that credits the unused portion of your current subscription directly against the new plan's cost, rather than charging you from scratch."
+      "question": "Will I lose the money I've already paid if I upgrade?",
+      "answer": "No. The checkout screen shows a Hostinger balance line that credits the unused portion of your current term against the new plan's cost, instead of charging you from zero."
     },
     {
-      "question": "Can I upgrade from shared hosting to VPS or Cloud hosting?",
-      "answer": "Yes. The \"Choose hosting plan\" dropdown on the upgrade comparison screen lets you select higher shared tiers or move up to Cloud Professional and similar plans, with pricing and resources updating live as you switch."
+      "question": "Can I upgrade straight from shared or Cloud hosting to a VPS?",
+      "answer": "No. Hostinger's own documentation says Web and Cloud hosting plans can't be upgraded directly to a VPS through this screen; a VPS has to be purchased separately, with the site content migrated over manually."
+    },
+    {
+      "question": "Does upgrading change my site's IP address?",
+      "answer": "Only when moving from Web hosting to a Cloud plan. Cloud-to-Cloud upgrades, like Cloud Startup to Cloud Professional, keep the existing IP."
     },
     {
       "question": "Does the billing period I choose affect what I pay today?",
-      "answer": "Yes — switching between the available billing periods (for example 12 months versus 48 months) changes both the monthly rate and how your existing balance is applied, so it's worth comparing both before confirming."
+      "answer": "Yes. Switching between the available billing periods, for example 12 months versus 48, changes both the monthly rate and how the existing balance is applied. Compare both before confirming."
     },
     {
       "question": "Does upgrading cause downtime?",
-      "answer": "The process is designed to be smooth, though it's a good idea to verify your site is functioning normally right after the upgrade completes."
+      "answer": "Hostinger describes the upgrade as taking effect immediately, though the underlying file, email, and database transfer can take a few hours to finish."
     },
     {
-      "question": "Where do I see the exact amount I'll be charged?",
-      "answer": "The \"Amount To Pay\" line at the bottom of the checkout summary is the final number after taxes, your Hostinger balance credit, and any coupon code have all been applied."
+      "question": "Can Cloud Enterprise or Agency plans upgrade the same way?",
+      "answer": "No. Both are excluded from this upgrade screen; Agency plans move using the separate Clone Website tool, and Cloud Enterprise has no listed upgrade path."
     }
   ],
+  "references": [
+    { "label": "Hostinger Help: How to upgrade a hosting plan at Hostinger (official)", "url": "https://www.hostinger.com/support/1583459-how-to-upgrade-a-hosting-plan-at-hostinger/" },
+    { "label": "Hostinger Help: What happens after upgrading a hosting plan (official)", "url": "https://support.hostinger.com/en/articles/2512632-what-happens-after-upgrading-a-hosting-plan" },
+    { "label": "Hostinger Help: How to use Hostinger Balance (official)", "url": "https://www.hostinger.com/support/4334278-how-to-use-hostinger-balance/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2025. The upgrade mechanics, balance-credit behaviour, and plan restrictions were re-checked against Hostinger's official help articles in September 2026. That check removed the original claim that this screen can upgrade straight to a VPS (it cannot) and added the new-IP and Cloud Enterprise/Agency exclusions, which the original version did not mention.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

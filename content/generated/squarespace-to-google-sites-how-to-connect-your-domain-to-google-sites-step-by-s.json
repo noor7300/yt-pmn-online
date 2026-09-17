@@ -2,7 +2,11 @@
   "slug": "squarespace-to-google-sites-how-to-connect-your-domain-to-google-sites-step-by-s",
   "seoTitle": "Connect a Squarespace Domain to Google Sites",
   "metaDescription": "Learn how to point a domain bought on Squarespace to a Google Site, including domain verification, DNS records, and getting HTTPS working.",
-  "intro": "Moving your published site to Google Sites while keeping a domain you originally bought through Squarespace involves a specific sequence: publish the Google Site, prove you own the domain, point the right DNS records at Google, and wait for everything to propagate. None of that happens inside Squarespace or Google Sites alone — it's a handoff between the two, and skipping a step is the most common reason people end up staring at an unverified domain. This guide walks through that handoff in order, including what the domain-connection screen actually looks like when verification hasn't gone through yet.",
+  "intro": "Moving your published site to Google Sites while keeping a domain you originally bought through Squarespace involves a specific sequence: publish the Google Site, prove you own the domain, point the right DNS records at Google, and wait for everything to propagate. None of that happens inside Squarespace or Google Sites alone. It's a handoff between the two, and skipping a step is the most common reason people end up staring at an unverified domain. This guide walks through that handoff in order, including what the domain-connection screen looks like when verification hasn't gone through yet.",
+  "prerequisites": [
+    "A domain already registered through Squarespace, with access to its domain and DNS settings",
+    "A Google Site that's built and ready to go live — Google won't attach a custom domain to a site that hasn't been published yet"
+  ],
   "steps": [
     {
       "heading": "Publish your Google Site before touching DNS",
@@ -10,49 +14,81 @@
     },
     {
       "heading": "Open Custom domains in Site settings",
-      "body": "From your published site, open the settings menu and go to Custom domains. This is where Google Sites separates itself from the free `sites.google.com` address — the panel explains plainly that using your own domain means a domain you already own, and that you'll need to verify ownership with your domain provider before it takes effect. There's also a shortcut here to buy a new domain through Google Workspace if you don't already have one, but since the domain already exists on Squarespace, you'll use Connect domain instead.",
+      "body": "From your published site, open the settings menu and go to Custom domains. This is where Google Sites separates itself from the free `sites.google.com` address: the panel explains that using your own domain means a domain you already own, and that you'll need to verify ownership with your domain provider before it takes effect. There's also a shortcut here to buy a new domain through Google Workspace if you don't already have one, but since the domain already exists on Squarespace, you'll connect it instead of buying a new one. Google's own help center currently labels this button Start setup rather than Connect domain, so if your screen reads differently from the one pictured here, that's a rename, not a different feature.",
       "image": { "file": "/screenshots/vXvHtLh42Hk/03.webp", "caption": "The Google Sites Settings panel, with Custom domains selected and a Connect domain button leading into the verification flow." }
     },
     {
       "heading": "Enter your domain and expect the unverified warning",
-      "body": "Clicking Connect domain opens a two-part field — a subdomain prefix like www, and your root domain, for example pmntechfix.nl. The moment you enter it and try to continue, Google shows \"This domain is not verified. Please verify your ownership\" with a link straight into that flow. This message is expected at this stage, not an error — no domain passes this screen until you've proven ownership, which happens through a TXT record you add in Squarespace's DNS settings, not anything inside Google Sites itself.",
+      "body": "Clicking through opens a two-part field: a subdomain prefix like www, and your root domain, for example pmntechfix.nl. The moment you enter it and try to continue, Google shows a message that the domain isn't verified and needs your ownership confirmed. This is expected at this stage, not an error. No domain passes this screen until ownership is proven, which happens through a TXT record you add in Squarespace's DNS settings, not anything inside Google Sites itself.",
       "image": { "file": "/screenshots/vXvHtLh42Hk/04.webp", "caption": "The Set up custom domain dialog after entering www.pmntechfix.nl. Google flags the domain as not verified until ownership is confirmed." }
     },
     {
       "heading": "Verify ownership through Google Search Console",
-      "body": "Following the verify-ownership link takes you into Google Search Console's domain verification flow, which generates a TXT record containing a unique token. Copy that token exactly, then add it as a new TXT record in your Squarespace domain's DNS settings — found under Domains > DNS/Advanced in the Squarespace dashboard. Once that record is saved and has propagated, Search Console can confirm you control the domain, which unlocks the rest of the Google Sites connection flow."
+      "body": "Following the verify-ownership link takes you into Google Search Console's domain verification flow, which generates a TXT record containing a unique token. Copy that token exactly, then add it as a new TXT record in Squarespace's DNS settings. To get there, open your domains dashboard, click the domain, then click DNS in the side panel; Squarespace's own help center still titles the article for this page \"Opening Advanced DNS settings,\" even though the panel itself is now just labelled DNS. Once the record is saved and has propagated, Search Console can confirm you control the domain, which unlocks the rest of the Google Sites connection flow."
     },
     {
       "heading": "Point the domain at Google with a CNAME",
-      "body": "With ownership verified, add a CNAME record in Squarespace's DNS settings mapping your www subdomain to ghs.googlehosted.com — this is the record that actually tells browsers where to fetch your Google Site from. For the bare root domain (no www), Google Sites doesn't accept a CNAME the way subdomains do, so the more reliable approach is a 301 redirect from the root to your www address inside Squarespace's domain settings, rather than fighting with apex-record workarounds."
+      "body": "With ownership verified, add a CNAME record in the same DNS panel, mapping the www host to ghs.googlehosted.com. That's the record that tells browsers where to fetch your Google Site from. Google Sites doesn't accept a CNAME on a bare root domain at all; Google's documentation is explicit that a connected domain must include a subdomain such as www. For the root, use Squarespace's separate domain-forwarding feature instead: open the domain's Website tab, add a Domain Forwarding Rule with @ in the Subdomain field, point it at your www address, and set the redirect type to Permanent Redirect (301)."
     },
     {
       "heading": "Wait for propagation and confirm HTTPS",
-      "body": "Once the CNAME and any redirect are saved, DNS propagation can take anywhere from a few minutes up to 48 hours depending on your domain's settings and your ISP's caching. If the domain doesn't resolve right away, a DNS lookup tool will show you whether the CNAME has actually taken effect yet rather than leaving you guessing. When it does resolve, visit the domain directly and confirm it loads your Google Site over HTTPS with no certificate warning — Google issues the SSL certificate automatically once the domain mapping is confirmed, but that can lag slightly behind DNS propagation itself."
+      "body": "Once the CNAME and the forwarding rule are saved, DNS propagation can take anywhere from a few minutes up to 48 hours, depending on your domain's settings and your ISP's caching. If the domain doesn't resolve right away, a DNS lookup tool will confirm whether the CNAME has taken effect instead of leaving you guessing. When it does resolve, visit the domain directly and confirm it loads your Google Site over HTTPS with no certificate warning. Google issues the SSL certificate automatically once the domain mapping is confirmed, but that can lag slightly behind DNS propagation."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Google still shows the domain as not verified after adding the TXT record",
+      "cause": "DNS changes need time to propagate before Search Console can see the new record, and clicking Verify too early just returns the same failure.",
+      "fix": "Wait a few hours and retry. If it still fails after 24-48 hours, check the TXT record was saved with the exact host and value Search Console generated, with no extra characters."
+    },
+    {
+      "problem": "The bare root domain (no www) never loads the Google Site",
+      "cause": "Google Sites does not accept a CNAME on an apex/root domain, only on a subdomain like www.",
+      "fix": "Set up a Domain Forwarding Rule in Squarespace with @ as the subdomain, pointing the root at your www address, rather than trying to CNAME the root directly."
+    },
+    {
+      "problem": "The site loads but the browser flags a certificate warning",
+      "cause": "Google issues the SSL certificate after the domain mapping is confirmed, and that step can lag behind DNS propagation by some time.",
+      "fix": "Recheck after a few hours. If the warning persists well beyond that, confirm the CNAME still points to ghs.googlehosted.com exactly."
     }
   ],
   "faq": [
     {
       "question": "Do I need to keep my domain registered with Squarespace?",
-      "answer": "Yes, in this setup the domain stays registered with Squarespace while its DNS records are configured to point to Google Sites — you're not transferring the domain, just redirecting where it resolves."
+      "answer": "Yes. In this setup the domain stays registered with Squarespace while its DNS records are configured to point at Google Sites. You're not transferring the domain, just redirecting where it resolves."
     },
     {
       "question": "How long does DNS propagation take after adding the records?",
-      "answer": "DNS changes can take anywhere from a few minutes to 48 hours to fully propagate, depending on your domain's settings and caching along the way."
+      "answer": "Google's own documentation puts it at up to 48 hours, though it's often much faster depending on your domain's settings and caching along the way."
     },
     {
       "question": "Why does Google Sites say my domain isn't verified?",
-      "answer": "That message appears by default until you complete ownership verification through Google Search Console, usually via a TXT record added to your Squarespace DNS settings. It's an expected step, not a sign something is broken."
+      "answer": "That appears by default until ownership verification completes through Google Search Console, typically via a TXT record added to Squarespace's DNS settings. It's an expected step, not a sign something is broken."
     },
     {
       "question": "Should I point the root domain or the www version at Google Sites?",
-      "answer": "Google Sites accepts a CNAME for a subdomain like www, but not cleanly for a bare root domain. The common approach is to CNAME www to ghs.googlehosted.com and set up a 301 redirect from the root domain to www."
+      "answer": "Google Sites requires a subdomain such as www; it will not accept a CNAME on a bare root domain. The standard approach is to CNAME www to ghs.googlehosted.com and add a Domain Forwarding Rule sending the root to www."
     },
     {
       "question": "Will HTTPS work automatically on my custom domain?",
-      "answer": "Yes, once the domain is correctly verified and DNS has propagated, Google Sites issues and applies an SSL certificate automatically, though it can take a little longer than the DNS change itself to show up."
+      "answer": "Yes. Once the domain is verified and DNS has propagated, Google Sites issues and applies an SSL certificate automatically, though it can take a little longer to appear than the DNS change itself."
     }
   ],
+  "references": [
+    {
+      "label": "Google Sites: Use a custom domain for your site (official)",
+      "url": "https://support.google.com/sites/answer/9068867?hl=en"
+    },
+    {
+      "label": "Squarespace: Opening (Advanced) DNS settings (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/205812348-Opening-Advanced-DNS-settings"
+    },
+    {
+      "label": "Squarespace: Forwarding a Squarespace domain (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/214767107-Forwarding-a-Squarespace-domain"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded against Squarespace and Google Sites. Re-checked against Google's and Squarespace's official support pages in September 2026. Two corrections came out of that check: Squarespace's DNS panel is now reached via the domain's DNS tab rather than a page still called \"DNS/Advanced,\" and the root-domain workaround is Squarespace's own Domain Forwarding Rules feature (@ as the subdomain, Permanent Redirect) rather than a generic apex redirect. Also noted: Google's current help center calls the connect button Start setup, where the recording shows Connect domain.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

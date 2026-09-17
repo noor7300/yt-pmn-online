@@ -1,66 +1,119 @@
 {
   "slug": "shopify-access-token-how-to-get-access-token-on-shopify-storefront-admin-api-eas",
-  "seoTitle": "How to Get a Shopify Access Token (Storefront & Admin)",
-  "metaDescription": "Generate a Shopify Access Token for the Storefront or Admin API by creating a custom app in your Shopify admin, with scopes set correctly the first time.",
-  "intro": "Any custom integration, private script, or third-party tool that talks to your Shopify store needs an Access Token to authenticate — you can't just hand it your store password. Shopify issues these tokens through a custom app you create inside your own admin, and the setup trips people up mainly because Storefront API and Admin API tokens serve different purposes and are configured on different scope screens. This guide walks through creating that custom app and setting its permissions using the actual admin screens, so you end up with a token scoped correctly instead of one that's either too limited to work or too broad to be safe.",
+  "seoTitle": "How to Get a Shopify Access Token (2026 Update)",
+  "metaDescription": "Get a Shopify API access token the current way: legacy custom apps still issue a static token, but apps created after January 2026 use the Dev Dashboard's Client ID and Client secret with a token that expires every 24 hours.",
+  "intro": "Any custom integration, private script, or third-party tool that talks to your Shopify store needs a credential to authenticate; you can't hand it your store password. Until January 1, 2026, Shopify issued a permanent Access Token through a custom app built entirely inside your own admin. Since then, a new custom app is created in the Dev Dashboard instead, and it hands you a Client ID and Client secret to exchange for a token that expires every 24 hours, not one you copy once and keep. This guide covers both paths: what to do if you already have a pre-2026 custom app, how the current Dev Dashboard flow works if you're starting today, and the separate route for a Storefront API token.",
+  "prerequisites": [
+    "A Shopify admin account with permission to manage apps",
+    "For a Dev Dashboard app, the app and the target store must belong to the same Shopify organization"
+  ],
   "steps": [
     {
-      "heading": "Open Apps and sales channels in your admin",
-      "body": "From your Shopify admin's Settings menu, click Apps and sales channels. This page lists every app currently installed on your store — things like Online Store, Point of Sale, Buy Button, and any sales channels or third-party apps you've added — split into Installed and Uninstalled tabs. In the top-right corner sit two buttons: Shopify App Store, for browsing apps built by others, and Develop apps, which is the one you actually need to build your own custom app and issue an Access Token.",
+      "heading": "Check which path applies to you",
+      "body": "Shopify split this task into two paths depending on when your custom app exists. If you already have one from before January 1, 2026, skip ahead to the next step for its API credentials tab. If you're starting today, skip to the Dev Dashboard steps further down, because clicking Create an app from Develop apps no longer creates a new app. Shopify's own documentation says existing apps are unaffected and keep working, but new attempts are redirected.",
       "image": { "file": "/screenshots/yf7Ro3GD4-8/03.webp", "caption": "The Apps and sales channels page, listing every installed app, with the Develop apps button in the top-right corner." }
     },
     {
-      "heading": "Create a custom app",
-      "body": "Click Develop apps, then Create an app. A dialog opens asking for an App name and confirming the App developer account it's attached to — name it something that describes what it's actually for, since you may end up with several custom apps over time and a vague name gets confusing fast. Shopify notes that the app is only assignable to staff and collaborators with development permissions, and that it's subject to the Shopify API License and Terms of Use. Click Create app to continue.",
-      "image": { "file": "/screenshots/yf7Ro3GD4-8/04.webp", "caption": "The Create an app dialog, with an App name entered and the App developer account shown underneath." }
+      "heading": "Existing app: view or rotate its Admin API access token",
+      "body": "From Develop apps, click into your existing custom app, then open API credentials. If the app is installed, the Admin API access token is right there. Lost track of it, or need to invalidate one that leaked? Click Uninstall app, then Install app again; that issues a fresh token immediately and kills the old one. This path only applies to apps created before Shopify closed off new admin-created custom apps."
     },
     {
-      "heading": "Understand Storefront vs. Admin API scopes",
-      "body": "Once the app exists, you'll configure two separate sets of permissions: Admin API scopes control access to store management data like orders, products, and customers, while Storefront API scopes control what a public-facing storefront experience — a custom frontend, a mobile app, an in-game store — is allowed to read or write on behalf of a shopper. These are genuinely different credentials for different jobs, which is the single most common source of confusion people run into with Shopify tokens.",
-      "image": null
+      "heading": "What the retired Create an app dialog looked like",
+      "body": "Older guides, including earlier versions of this one, describe clicking Create an app from Develop apps, naming the app, and confirming the developer account it's attached to, shown below. That dialog stopped creating new apps on January 1, 2026. Shopify's documentation is direct about it: you can no longer create new admin-created custom apps, though existing ones are unaffected and continue to work exactly as before.",
+      "image": { "file": "/screenshots/yf7Ro3GD4-8/04.webp", "caption": "The Create an app dialog from Shopify's retired custom-app flow. It still explains how existing tokens were generated, but it no longer creates new apps as of January 2026." }
     },
     {
-      "heading": "Set the scopes your integration actually needs",
-      "body": "On the scopes screen, permissions are grouped by resource — selling plans, bulk operations, bundles, Shop Pay installments pricing, and many more — each with its own checkbox for read or write access, prefixed unauthenticated_ for Storefront API scopes since storefront requests aren't tied to a logged-in staff account. Only check the scopes your specific integration or script will use. A calculator tool that just reads selling plans, for example, needs nothing beyond that — leaving bulk operations, bundles, and everything else unchecked keeps the resulting token as narrow as possible.",
-      "image": { "file": "/screenshots/yf7Ro3GD4-8/05.webp", "caption": "The Storefront API scopes screen, with individual read and write checkboxes per resource — only Read selling plans is checked in this configuration." }
+      "heading": "New app: create it in the Dev Dashboard",
+      "body": "Go to dev.shopify.com/dashboard, or follow the Build apps in Dev Dashboard link that now sits where Create an app used to. Select Create app, name it, and open its Versions tab to choose the Admin API access scopes it needs; the same principle as before applies, check only what your integration will use. Select Release once the scopes are set, then install the app to a store from its Home tab. The app and the store need to belong to the same Shopify organization, which every store already has."
     },
     {
-      "heading": "Install the app and generate the token",
-      "body": "After saving your scopes, install the app on your store from the API credentials tab. Installing is what actually activates the app and makes its Access Token available — Shopify reveals the token once at that point, so copy it immediately into a password manager or secrets store rather than a plain text file or chat message, since you generally can't view the full token again after leaving the page.",
-      "image": null
+      "heading": "Get a Client ID and Client secret, then request a token",
+      "body": "A Dev Dashboard app doesn't hand you a static token to copy. Under Settings, it shows a Client ID and a Client secret instead. To turn those into something the Admin API accepts, send a POST request to https://{shop}.myshopify.com/admin/oauth/access_token with grant_type set to client_credentials, plus your client_id and client_secret. Shopify returns an access_token good for 24 hours (expires_in: 86399 seconds). There's no copy-paste step here: whatever calls the Admin API also has to request a new token before the old one expires."
     },
     {
-      "heading": "Fix an \"Invalid API Key or Access Token\" error",
-      "body": "If a request comes back with this error, the most common causes are: the app was created but never installed (uninstalled apps don't have an active token), the token was regenerated after the one your integration is using, the request is hitting the wrong endpoint for the token type (using an Admin token against a Storefront API URL or vice versa), or a scope needed for that specific request was never checked. Re-check the API credentials tab for the current token and confirm the scope you need is enabled before assuming the integration code itself is broken.",
-      "image": null
+      "heading": "Get a Storefront API token from the Headless channel",
+      "body": "A pre-2026 custom app still shows Storefront API scopes as checkboxes grouped by resource, prefixed unauthenticated_ since storefront requests aren't tied to a staff login, shown below. For anything built today, that screen isn't where a Storefront token comes from. Install the Headless channel from the Shopify App Store instead, then click Create storefront; it generates a public and a private Storefront API access token in one step. Go to Sales channels, then Headless, then Add storefront, for any additional ones you need.",
+      "image": { "file": "/screenshots/yf7Ro3GD4-8/05.webp", "caption": "The legacy per-app Storefront API scopes screen, kept here for context. Apps built after January 2026 get a Storefront token from the Headless channel instead, not from this screen." }
     },
     {
-      "heading": "Keep the token secure going forward",
-      "body": "Treat an Access Token like a password: never commit it to a public repository, never share it in a support ticket screenshot, and store it in environment variables or a secrets manager rather than hardcoding it into a script. If a token is ever exposed, go back into the app's API credentials tab and revoke or regenerate it immediately — the old one stops working the moment a new one is issued, which limits the damage of a leak to whatever happened before you caught it."
+      "heading": "Keep the credentials secure going forward",
+      "body": "Treat a Client secret, or a legacy Access Token, like a password: never commit it to a public repository, never paste it into a support ticket screenshot, and store it in environment variables or a secrets manager instead of hardcoding it into a script. If one is ever exposed, rotate it immediately: regenerate the Client secret in Dev Dashboard Settings, or uninstall and reinstall a legacy app. Either action invalidates whatever was issued before it."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Legacy custom app vs. Dev Dashboard app",
+      "columns": ["", "Legacy custom app (created before Jan 1, 2026)", "Dev Dashboard app (created after Jan 1, 2026)"],
+      "rows": [
+        ["Where you create it", "Settings > Apps and sales channels > Develop apps", "dev.shopify.com/dashboard"],
+        ["Credential shown", "Admin API access token", "Client ID and Client secret"],
+        ["Getting a usable token", "Copy it from API credentials", "POST a client_credentials request to /admin/oauth/access_token"],
+        ["Token lifetime", "Doesn't expire on its own", "24 hours (expires_in: 86399)"],
+        ["Storefront API token", "Configured on the app's own Storefront scopes screen", "Generated separately through the Headless sales channel"]
+      ],
+      "note": "Based on Shopify's developer documentation, checked September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Requests fail with \"Invalid API Key or Access Token\"",
+      "cause": "Common causes: the app was never installed, the token was regenerated after the one your integration is using, the request hits the wrong endpoint for that token type, or a needed scope was never checked.",
+      "fix": "Check the app's credentials, the API credentials tab for a legacy app, or Settings for a Dev Dashboard app, and confirm the scope is enabled before assuming the integration code is broken."
+    },
+    {
+      "problem": "A Dev Dashboard token stops working after about a day",
+      "cause": "Client-credentials-grant tokens expire 24 hours after they're issued. That's expected behavior, not a bug.",
+      "fix": "Build a refresh into the integration: request a new access_token with the same client_id and client_secret before the old one lapses."
+    },
+    {
+      "problem": "The client credentials grant request fails with a correct Client ID and secret",
+      "cause": "The app and the store aren't in the same Shopify organization. The grant only works within one organization.",
+      "fix": "Install the app to a store in the same organization as the app, or create the app inside the organization that owns the target store."
+    },
+    {
+      "problem": "Clicking Create an app under Develop apps doesn't create anything new",
+      "cause": "Shopify retired that flow for new apps on January 1, 2026.",
+      "fix": "Use the Dev Dashboard instead, at dev.shopify.com/dashboard, or the Build apps in Dev Dashboard link shown in its place."
     }
   ],
   "faq": [
     {
-      "question": "What's the difference between the Storefront and Admin API tokens?",
-      "answer": "The Storefront API token is used for public-facing storefront data like products and collections in custom shopping experiences, while the Admin API token grants access to manage store data such as orders and customers."
+      "question": "Can I still create a Shopify custom app the old way, from Develop apps, Create an app?",
+      "answer": "Not for a new app. Shopify closed that flow to new apps on January 1, 2026. Apps created before that date keep working; a new attempt today is redirected to the Dev Dashboard."
     },
     {
-      "question": "Can I regenerate an Access Token if it's compromised?",
-      "answer": "Yes — go to the custom app's API credentials tab and regenerate the token. The old token stops working immediately once the new one is issued."
+      "question": "What's the difference between a Client ID and Client secret versus an Access Token?",
+      "answer": "Client ID and Client secret are credentials from a Dev Dashboard app; you exchange them for an access token through the client credentials grant. An Access Token from a legacy custom app is the credential itself, with nothing further to request."
     },
     {
-      "question": "Do I need coding knowledge to create a custom app?",
-      "answer": "Creating the app and setting its scopes in the admin doesn't require coding, but actually using the resulting Access Token in an integration or script does require development knowledge."
+      "question": "Do Dev Dashboard access tokens expire?",
+      "answer": "Yes. Tokens from the client credentials grant last 24 hours (expires_in: 86399 seconds). An integration built on this needs to request a new one before that window closes. Legacy tokens don't expire on their own."
     },
     {
-      "question": "Is the Access Token the same as my Shopify password?",
-      "answer": "No — an Access Token is a separate credential scoped specifically for API authentication and should never be confused with, or shared like, a login password."
+      "question": "How do I get a Storefront API token today?",
+      "answer": "Install the Headless channel from the Shopify App Store and click Create storefront. That generates a public and a private Storefront API access token together, replacing the old per-app Storefront scopes screen for anything created after January 2026."
     },
     {
-      "question": "Why am I getting an \"Invalid API Key or Access Token\" error?",
-      "answer": "Usually because the app hasn't been installed yet, the token was regenerated, the request is using the wrong API endpoint for that token type, or a required scope wasn't checked when the app was configured."
+      "question": "Do I need to write code to get a token now?",
+      "answer": "For a legacy custom app, no: install it and read the token off the API credentials tab. For a Dev Dashboard app, yes: getting a token means sending a client-credentials request yourself, since nothing hands you a static one to copy."
+    },
+    {
+      "question": "Can I regenerate a token if it's compromised?",
+      "answer": "Yes, though the method depends on which kind of app you have. Uninstall and reinstall a legacy app to issue a fresh Access Token, or regenerate the Client secret in a Dev Dashboard app's Settings. Either way, the old credential stops working the moment the new one is issued."
+    },
+    {
+      "question": "Is an Access Token, or a Client secret, the same as my Shopify password?",
+      "answer": "No. Both are separate credentials scoped for API authentication and should never be confused with, or shared like, a login password."
     }
   ],
+  "references": [
+    { "label": "Shopify dev docs: Generate access tokens for admin-created custom apps (official)", "url": "https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/generate-app-access-tokens-admin" },
+    { "label": "Shopify Help Center: About apps, custom apps section (official)", "url": "https://help.shopify.com/en/manual/apps/app-types/custom-apps" },
+    { "label": "Shopify dev docs: Create apps using the Dev Dashboard (official)", "url": "https://shopify.dev/docs/apps/build/dev-dashboard/create-apps-using-dev-dashboard" },
+    { "label": "Shopify dev docs: Authenticate an app for stores in your organization, client credentials grant (official)", "url": "https://shopify.dev/docs/apps/build/authentication-authorization/client-credentials-grant" },
+    { "label": "Shopify dev docs: Getting started with the Storefront API (official)", "url": "https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api/getting-started" }
+  ],
+  "verifiedNote": "Click path and screens for the legacy custom-app flow come from a recorded walkthrough. Re-checked against Shopify's own developer documentation in September 2026, which surfaced a platform change the original draft didn't know about: Shopify closed the Develop apps, Create an app flow to new apps on January 1, 2026. A new custom app is now created in the Dev Dashboard, issues a Client ID and Client secret instead of a static Access Token, and needs a client-credentials request that expires every 24 hours. A Storefront API token for a new integration now comes from the Headless sales channel instead of a custom app's own scopes screen. Apps created before January 1, 2026 are unaffected, and the original click path still applies to them.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

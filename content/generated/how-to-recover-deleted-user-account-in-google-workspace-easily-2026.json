@@ -1,16 +1,17 @@
 {
   "slug": "how-to-recover-deleted-user-account-in-google-workspace-easily-2026",
   "seoTitle": "How to Recover a Deleted User in Google Workspace",
-  "metaDescription": "Learn how Google Workspace admins can recover a deleted user account and its data, and how long you have to act before it's gone for good.",
-  "intro": "Accidentally deleting a user account can feel like a crisis, especially if it happened before anyone thought to back up their data. Google Workspace doesn't erase a deleted account the instant you click delete — it holds it in a recovery state for a limited window, and a super admin can pull it back from the same Admin Console screen used to manage every other user. This guide covers where that recovery list actually lives, what the countdown means in practice, and the cleanup steps worth doing once the account is back.",
+  "metaDescription": "Restore a deleted Google Workspace user before the 20-day window closes: the exact Admin Console path, the license rule that blocks recovery, and how long data takes to come back.",
+  "intro": "Google Workspace doesn't erase a deleted account the moment you click delete. It holds the account in a recovery state for 20 days, and a super admin can pull it back from the same Admin Console screen used to manage every other user. The clock starts at deletion, not when someone notices they're locked out, so if a user reports missing access unexpectedly, checking the deleted-users list is worth doing early rather than as a last resort.\n\nThis guide covers where that recovery list lives, the license requirement that can quietly block a restore, and the cleanup worth doing once the account is back.",
+  "prerequisites": [
+    "Super admin access to the Google Admin console",
+    "The account must have been deleted within the last 20 days — Google does not keep the data past that window"
+  ],
+  "costNote": "Restoring a user costs nothing beyond your existing Workspace subscription. Google does require an available license matching the edition the user previously had before the restore will go through. If every seat is already assigned, free one up by suspending or deleting another account, or buy an additional seat first.",
   "steps": [
     {
-      "heading": "Act quickly after deletion",
-      "body": "Google Workspace only allows recovery of a deleted user within a limited window, so the sooner you start the process the better your chances of getting everything back intact. The clock starts the moment the account is deleted, not when someone notices it's missing, so if a user reports being locked out unexpectedly, checking the deleted-users list should be one of the first things you do rather than a last resort."
-    },
-    {
-      "heading": "Open the Admin Console dashboard",
-      "body": "Sign in with a super admin account and land on the Admin Console home screen, where the \"Manage Workspace\" section gives you shortcut cards for Users, Billing, Groups, and Support. The Users card itself has quick links to Add a user, Delete a user, and Reset password, but recovering a deleted account isn't one of the shortcuts here — you have to go into the full Users list and filter for it, which is the next step.",
+      "heading": "Open the Admin Console",
+      "body": "Sign in with a super admin account and land on the Admin Console home screen, where the \"Manage Workspace\" section gives you shortcut cards for Users, Billing, Groups, and Support. The Users card has quick links to Add a user, Delete a user, and Reset password, but recovering a deleted account isn't one of the shortcuts here. You need the full Users list, filtered down, which is the next step.",
       "image": {
         "file": "/screenshots/shfJ9m7xn_k/04.webp",
         "caption": "The Admin Console home screen, with the Users card offering shortcuts to add, delete, or reset a user's password."
@@ -18,7 +19,7 @@
     },
     {
       "heading": "Filter the Users list for recently deleted accounts",
-      "body": "From Directory → Users, apply the \"Recently deleted\" filter and the list changes to show only accounts in the recovery window, each with a \"Days to deletion\" column counting down how much time is left before that account is gone for good. This countdown is the single most important number on the whole page — an account with a handful of days left needs immediate action, while one that just entered the list gives you more breathing room to confirm with the user before restoring it.",
+      "body": "Go to Directory → Users, open the More options dropdown, and choose Recently deleted. The list changes to show only accounts still inside the recovery window, each with a \"Days to deletion\" column counting down. That countdown is the most important number on the page: an account with a handful of days left needs action now, while one that just entered the list gives you time to confirm with the user before restoring it.",
       "image": {
         "file": "/screenshots/shfJ9m7xn_k/05.webp",
         "caption": "The Users list filtered to \"Recently deleted,\" showing each account's email address alongside how many days are left to recover it."
@@ -26,35 +27,63 @@
     },
     {
       "heading": "Restore the account",
-      "body": "Click into the deleted account from that filtered list and choose the restore option. Google Workspace brings the account itself back along with its associated data — Gmail, Drive, and Calendar content — as long as none of it has already been purged by the recovery deadline or a separate retention policy. The account typically comes back with the same email address and settings it had before deletion, which matters if other services or shared documents were referencing that address."
+      "body": "Point to the deleted account in that filtered list and click Recover. A confirmation notice appears; read it, then click Continue. You'll be asked to pick an organizational unit for the restored account before a final Recover click completes the process.\n\nGoogle brings the account back along with its Gmail, Drive, and Calendar content, provided none of it has already been purged by the deadline or a separate retention policy. The restore only completes if a license is available for the service or edition the user previously had. Without one, free up a seat before trying again."
     },
     {
       "heading": "Verify data and access",
-      "body": "After restoring, don't just assume everything reconnected — check that Gmail, Drive, and Calendar data are actually intact and that the user can sign back in normally. It's worth having the user themselves confirm they can see their old emails and files, since some group memberships, shared drive access, or delegated permissions occasionally need to be reattached manually even after a successful restore."
+      "body": "Restoring the account doesn't mean everything is instantly usable. Google's own documentation notes the change usually takes up to 24 hours to fully take effect, and in rare cases up to 5 days. Once that window has passed, check that Gmail, Drive, and Calendar data are intact and that the user can sign in normally. Group memberships, shared drive access, or delegated permissions occasionally need to be reattached by hand even after a successful restore."
     },
     {
       "heading": "Update passwords and permissions",
-      "body": "As a final security step, reset the recovered account's password rather than leaving whatever it was before deletion, since you don't know why the account was deleted in the first place or whether the old password was compromised. Review the account's group memberships, organizational unit, and any admin roles it held before handing it back, so the user returns to exactly the access they're supposed to have — no more, no less."
+      "body": "As a final security step, reset the recovered account's password instead of leaving whatever it was before deletion; you don't know why the account was removed or whether the old password was exposed. Review the account's group memberships, organizational unit, and any admin roles it held, so the user comes back with exactly the access they're supposed to have."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The Recover option won't complete, or the restored user has no access to their old service",
+      "cause": "No license is available for the edition the user previously had assigned.",
+      "fix": "Free up a license by suspending or deleting an unused account, or buy an additional seat, then retry the recovery."
+    },
+    {
+      "problem": "Recovery fails with a message about the username or domain",
+      "cause": "Another account or group is already using that username, or the domain has since moved to a different Workspace account.",
+      "fix": "Free the username from whichever account or group holds it, or confirm the domain is still on this Workspace account, before recovering."
+    },
+    {
+      "problem": "The user is restored but can't see their old Gmail, Drive, or Calendar data right away",
+      "cause": "Google's documentation states restoration usually takes effect within 24 hours, occasionally up to 5 days.",
+      "fix": "Wait out the propagation window before troubleshooting further. If data is still missing after 5 days, contact Google Workspace support."
     }
   ],
   "faq": [
     {
       "question": "How long do I have to recover a deleted Google Workspace user?",
-      "answer": "Google Workspace generally gives admins about 20 days after deletion to restore an account, and the Recently Deleted filter shows the exact days remaining for each one so you're never guessing."
+      "answer": "Exactly 20 days from deletion. The Recently deleted filter in the Users list shows the days remaining for each account, so you don't have to track the deadline yourself."
     },
     {
       "question": "Will all the user's emails and files come back after recovery?",
-      "answer": "In most cases yes, as long as recovery happens within the allowed window, though very old or already-purged data may not be recoverable."
+      "answer": "Yes, provided recovery happens inside the 20-day window and a license is available for their previous edition. Data can take up to 24 hours to reappear, occasionally longer."
     },
     {
       "question": "Can a regular user recover their own deleted account?",
-      "answer": "No, account recovery for deleted users has to be initiated by a super admin through the Admin Console's Users list, not by the affected user themselves."
+      "answer": "No. Recovery has to be started by a super admin through the Admin Console's Users list, not by the affected user."
+    },
+    {
+      "question": "What happens if there's no license free to restore the user?",
+      "answer": "The recovery won't complete. Suspend or delete another account to release a matching license, or purchase an additional seat, then try again."
     },
     {
       "question": "What happens if I don't recover the account in time?",
-      "answer": "Once the recovery window closes, the account and its data are permanently removed and cannot be restored, which is why the days-remaining countdown is worth checking regularly."
+      "answer": "Once the 20-day window closes, the account and its data are removed for good. There is no extension."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Help: Restore a recently deleted user (official)",
+      "url": "https://knowledge.workspace.google.com/admin/users/restore-a-recently-deleted-user?hl=en"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The 20-day window, the license requirement, the username/domain constraints, and the up-to-24-hours (rarely 5-day) propagation delay were checked against Google's official Admin Console documentation in September 2026. The restore step was rewritten to match the documented hover-Recover-confirm-OU flow, which the original draft compressed into a single click.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

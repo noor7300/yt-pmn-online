@@ -1,64 +1,113 @@
 {
   "slug": "how-to-setup-stripe-instant-payouts-easily-2026-eligibility-fees-details",
   "seoTitle": "Stripe Instant Payouts: Setup, Eligibility & Fees",
-  "metaDescription": "Learn how to enable Stripe Instant Payouts, what eligibility requirements apply, and what fees you'll pay to move funds to your debit card in minutes.",
-  "intro": "Instant Payouts move your Stripe balance to a linked debit card in minutes instead of the usual multi-day payout cycle, but Stripe doesn't turn the feature on for everyone automatically. Your account has to clear a few checks first, and there's a real cost for the speed. This guide walks through where those checks live in your dashboard, what Stripe's own documentation says about eligibility and daily limits, and what to expect on fees and timing before you rely on Instant Payouts for anything time-sensitive.",
+  "metaDescription": "Enable Stripe Instant Payouts: the exact eligibility checks, the real fee by country (1% or 1.5%, not a vague percentage), the 10-per-day cap, and why it isn't always a debit card.",
+  "intro": "Instant Payouts move your Stripe balance to a payout method in minutes, typically within 30 minutes, instead of the usual multi-day payout cycle. Stripe doesn't turn the feature on for everyone automatically, and it isn't available in every country Stripe supports.\n\nThis guide walks through where the eligibility checks live in your dashboard, the exact fee and per-payout limits Stripe's documentation lists, and the daily cap that catches people who assume Instant Payouts has no ceiling.",
+  "prerequisites": [
+    "A Stripe account in a country where Instant Payouts is supported (the US, Canada, UK, most of the EU, Australia, New Zealand, Singapore, Hong Kong, and a handful of others; not every Stripe country is included)",
+    "A complete, verified business profile in the Stripe Dashboard",
+    "An eligible payout method added: a debit card in most supported countries, or in a few (including the US, UK, EU, Sweden, Denmark, Australia, Singapore and Hong Kong) certain bank accounts instead"
+  ],
+  "costNote": "Stripe charges 1% per Instant Payout in Canada, the EU, UK, Singapore, Norway, Hong Kong and Malaysia, and 1.5% in the US, Australia, New Zealand and UAE. The fee is deducted from the payout itself. A standard payout on your default schedule has no equivalent fee.",
   "steps": [
     {
       "heading": "Sign in to your Stripe dashboard",
-      "body": "Instant Payouts is managed entirely from your live Stripe dashboard, so the first step is just logging in with the email and password tied to your account. If you manage more than one Stripe account, double-check you're signed into the one that actually processes the payments you want to speed up — settings like payout method and eligibility are account-specific and don't carry over between them.",
+      "body": "Instant Payouts is managed entirely from your live Stripe dashboard, so the first step is logging in with the account tied to the payments you want to speed up. If you manage more than one Stripe account, confirm you're on the right one. Payout method and eligibility are account-specific and don't carry over between accounts.",
       "image": { "file": "/screenshots/OI9lLnkRzgI/02.webp", "caption": "The Stripe sign-in screen. Payout settings live inside the account you log into here, so confirm you're on the right one if you run more than one." }
     },
     {
-      "heading": "Check your Balances page first",
-      "body": "Once you're in, head to Balances from the left-hand menu. This page shows your Incoming and Available totals plus a Pay out button and a Manage payouts dropdown, and it's the same place you'll come back to once Instant Payouts is active to actually trigger a transfer. A Setup guide panel on the right also tracks whether you've finished the basic account steps — accepting payments, verifying your business, going live — all of which feed into whether faster payout options are even offered to you.",
-      "image": { "file": "/screenshots/OI9lLnkRzgI/03.webp", "caption": "The Balances page, with Pay out and Manage payouts controls and a Setup guide checklist on the right tracking account completion." }
+      "heading": "Check your Balances page",
+      "body": "Head to Balances from the left-hand menu. This page shows your Incoming and Available totals and a Pay out button, and it's the same place you'll return to once Instant Payouts is active. A Setup guide panel on the right tracks whether you've finished the basic account steps: accepting payments, verifying your business, going live. All of it feeds into whether faster payout options are offered to you at all.",
+      "image": { "file": "/screenshots/OI9lLnkRzgI/03.webp", "caption": "The Balances page, with the Pay out control and a Setup guide checklist on the right tracking account completion." }
     },
     {
-      "heading": "Confirm your business details are complete",
-      "body": "Eligibility for Instant Payouts is tied to your business profile, not just your bank details, so it's worth checking Settings > Business > Account details before assuming the feature is broken if it doesn't appear. Stripe wants your account name, business address, and related information filled in and consistent, since incomplete verification is one of the quiet reasons a feature like this stays greyed out. If anything here is missing or pending review, resolve it before troubleshooting further.",
+      "heading": "Confirm your business details and country eligibility",
+      "body": "Eligibility ties to your business profile and your account's country, not just your bank details. Check Settings > Business > Account details before assuming the feature is broken if it doesn't appear. Stripe wants your account name, business address, and related information complete and verified, since an incomplete profile is one of the quiet reasons this stays unavailable.\n\nInstant Payouts also isn't offered everywhere Stripe operates. It covers around three dozen countries, including the US, UK, Canada, most of the EU, Australia and Singapore, but a Stripe account outside that list won't see the option regardless of how complete its profile is.",
       "image": { "file": "/screenshots/OI9lLnkRzgI/04.webp", "caption": "The Business account details screen, where your account name and business address need to be complete and verified before some payout features unlock." }
     },
     {
       "heading": "Read the eligibility and daily limit rules",
-      "body": "Stripe's own documentation is blunt about this: new Stripe users aren't immediately eligible for Instant Payouts, and you should check your eligibility directly in the Dashboard or via the Balances API rather than assume. Even once eligible, each instant payout counts against a daily limit that resets at a fixed local time depending on your region — midnight US Central Time for the United States and Canada, midnight London time for the UK, and similar regional cutoffs elsewhere. A payout requested just before that reset still counts toward the prior day's limit, which matters if you're trying to squeeze out a second transfer near midnight.",
+      "body": "New Stripe users aren't immediately eligible for Instant Payouts. Check eligibility directly on the Balances page or via the Balances API rather than assuming. Even once eligible, two separate caps apply each day: a maximum dollar amount, which you can see in the Dashboard, and a hard limit of 10 Instant Payouts per day regardless of amount.\n\nBoth caps reset at a fixed local time by region: midnight US Central Time for the US and Canada, midnight London time for the UK, midnight Paris time across the EU, and similar regional cutoffs elsewhere. A payout requested a few minutes before that reset still counts toward the prior day's limit.",
       "image": { "file": "/screenshots/OI9lLnkRzgI/05.webp", "caption": "Stripe's documentation page on Instant Payouts eligibility, listing the daily reset time for each supported region." }
     },
     {
-      "heading": "Understand the fee before you rely on it",
-      "body": "Instant Payouts aren't free — Stripe charges a percentage fee on top of the transferred amount in exchange for skipping the standard payout schedule. That fee comes out of the transfer itself, so budget for it if you're moving a specific amount you need in full. For routine payroll or predictable expenses, a standard payout costs nothing extra and just takes longer; save Instant Payouts for the moments where the speed is worth paying for, like covering an unexpected shortfall same-day."
+      "heading": "Know the fee and the per-payout minimum and maximum",
+      "body": "Instant Payouts aren't free. Stripe takes 1% in Canada, the EU, UK, Singapore, Norway, Hong Kong and Malaysia, and 1.5% in the US, Australia, New Zealand and UAE, pre-deducted so the balance shown is what you'd actually receive. Each transfer also has a currency-specific floor and ceiling; in the US that's $0.50 minimum and $9,999 maximum per payout.\n\nSave Instant Payouts for moments where the speed is worth paying for, like covering a same-day shortfall. For routine payroll or predictable expenses, a standard payout costs nothing extra and just takes longer."
     },
     {
-      "heading": "Add and verify a debit card for the payout",
-      "body": "Instant Payouts land on a debit card rather than a bank account, so you'll need one added and verified under your payout methods before the option becomes usable. Stripe verifies the card automatically once added, and until that verification clears, the Manage payouts menu on the Balances page will keep defaulting to your standard bank payout schedule instead."
+      "heading": "Add a payout method, then trigger the transfer",
+      "body": "In most supported countries the eligible method is a debit card, but a few, including the US, UK, EU, Sweden, Denmark, Australia, Singapore and Hong Kong, also accept certain bank accounts. You only need to add a method once; until it's added and verified, the Balances page offers only your standard payout schedule.\n\nOnce it's in place, go to Balances and click Pay out. If you're eligible and have a positive balance, choose Instant, enter the amount, pick which balance to draw from and which method to pay out to, then click Review. The dashboard shows the fee and arrival time before you confirm."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Instant Payout fee and per-payout limits (selected countries)",
+      "columns": ["Country", "Fee", "Minimum per payout", "Maximum per payout"],
+      "rows": [
+        ["United States", "1.5%", "$0.50", "$9,999"],
+        ["Canada", "1%", "CA$0.60", "CA$9,999"],
+        ["United Kingdom", "1%", "£0.40", "£9,999"],
+        ["Euro area", "1%", "€0.40", "€9,999"],
+        ["Australia", "1.5%", "A$0.50", "A$9,999"],
+        ["Singapore", "1%", "S$0.50", "S$9,999"]
+      ],
+      "note": "From Stripe's official Instant Payouts pricing page. Other supported countries have their own currency-specific figures, and Stripe can change rates."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The instant-available balance shows less than expected, or zero",
+      "cause": "Card payment funds count toward Instant Payouts as soon as the charge completes, but funds from ACH or other bank debits only count after they fully settle.",
+      "fix": "Wait for bank-debit funds to settle, or check the instant_available field on the Balances API to see exactly what currently qualifies."
     },
     {
-      "heading": "Trigger your first instant transfer",
-      "body": "With eligibility confirmed, your business details complete, and a verified debit card on file, go back to Balances and use Manage payouts to select the instant option instead of the default schedule. The dashboard will show the fee and the reduced arrival time before you confirm, so you can see the exact tradeoff for that specific transfer before committing to it."
+      "problem": "Can't request another Instant Payout today",
+      "cause": "The account hit its daily cap: a maximum dollar amount, or the flat limit of 10 Instant Payouts per day, whichever comes first.",
+      "fix": "Wait for the regional reset time, or use a standard payout for anything beyond the cap."
+    },
+    {
+      "problem": "No debit card option appears when adding a payout method",
+      "cause": "A few countries, such as Hong Kong, support only certain bank accounts for Instant Payouts, not debit cards.",
+      "fix": "Add a supported bank account instead, and check Stripe's list of supported banks for that country."
     }
   ],
   "faq": [
     {
       "question": "How fast are Stripe Instant Payouts?",
-      "answer": "Instant Payouts move your available balance to a linked debit card within minutes, rather than the several business days a standard payout can take."
+      "answer": "Funds typically settle within 30 minutes of the request, rather than the several business days a standard payout can take."
     },
     {
-      "question": "Do Instant Payouts cost extra?",
-      "answer": "Yes, Stripe charges a fee for each Instant Payout transfer, which is the tradeoff for getting funds faster. A standard payout to your bank account has no equivalent fee."
+      "question": "What's the exact fee?",
+      "answer": "1% in Canada, the EU, UK, Singapore, Norway, Hong Kong and Malaysia. 1.5% in the US, Australia, New Zealand and UAE. It's deducted from the payout itself."
     },
     {
-      "question": "What do I need before I can use Instant Payouts?",
-      "answer": "You need an eligible account type, a complete and verified business profile, and a verified debit card linked to your Stripe account before the feature becomes available."
+      "question": "Is there a minimum or maximum amount per payout?",
+      "answer": "Yes, and it's currency-specific. In the US it's $0.50 minimum and $9,999 maximum per Instant Payout."
     },
     {
-      "question": "Can any Stripe account enable Instant Payouts?",
-      "answer": "No, eligibility depends on your account type, verification status, and location. Check the Dashboard or Balances API directly rather than assuming it's available."
+      "question": "Is there a daily limit?",
+      "answer": "Two: a maximum total dollar amount for the day, and a separate hard cap of 10 Instant Payouts per day. Both reset at a fixed local time for your region."
     },
     {
-      "question": "Is there a limit on how much I can move with Instant Payouts in one day?",
-      "answer": "Yes, Stripe caps instant payouts to a daily maximum that resets at a fixed local time depending on your region, and a payout requested just before that reset still counts toward the prior day."
+      "question": "Does Instant Payout always land on a debit card?",
+      "answer": "Not always. Most supported countries require a debit card, but a handful, including the US, UK, EU, Sweden, Denmark, Australia, Singapore and Hong Kong, also accept certain bank accounts."
+    },
+    {
+      "question": "Is Instant Payouts available in every country Stripe supports?",
+      "answer": "No. It's limited to roughly three dozen countries. A Stripe account outside that list won't see the option even with a fully verified profile."
+    },
+    {
+      "question": "Why does my instant-available balance not match my full balance?",
+      "answer": "Funds from bank debits like ACH only count once they've settled, since they can still be reversed before that. Card payment funds are available immediately."
     }
   ],
+  "references": [
+    {
+      "label": "Stripe Docs: Instant Payouts for Stripe Dashboard users (official)",
+      "url": "https://docs.stripe.com/payouts/instant-payouts"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Fee percentages, per-payout minimums and maximums, the 10-per-day cap, country availability, and the debit-card-versus-bank-account rule were checked against Stripe's official Instant Payouts documentation in September 2026, which corrected this guide's earlier claims of a vague unspecified fee and a debit-card-only requirement.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }
