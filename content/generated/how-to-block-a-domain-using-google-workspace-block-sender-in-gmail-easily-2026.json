@@ -1,8 +1,11 @@
 {
   "slug": "how-to-block-a-domain-using-google-workspace-block-sender-in-gmail-easily-2026",
   "seoTitle": "How to Block a Domain or Sender in Gmail (Workspace)",
-  "metaDescription": "Step-by-step guide to blocking a spam domain or specific sender in Gmail through Google Workspace's admin and user-level settings.",
-  "intro": "Unwanted emails from a spam domain or a persistent sender can clutter an inbox and, worse, pose a real phishing risk if left unchecked. Gmail gives individual users a quick way to block one sender, but that only protects their own inbox — stopping a domain for an entire organization means going into the Google Workspace Admin Console instead. This guide covers both paths: the personal block any user can do in seconds, and the admin-level route where domain-wide filtering rules actually live.",
+  "metaDescription": "Block a spam domain or sender in Gmail through personal filters or the Workspace Admin Console, and how long an org-wide block really takes to apply.",
+  "intro": "Unwanted emails from a spam domain or a persistent sender can clutter an inbox and, worse, carry a real phishing risk if left unchecked. Gmail gives individual users a quick way to block one sender, but that only protects their own inbox. Stopping a domain for an entire organization means going into the Google Workspace Admin Console instead. This guide covers both paths: the personal block any user can do in seconds, and the admin-level route where domain-wide filtering rules actually live.",
+  "prerequisites": [
+    "Super admin, or delegated Gmail-admin, access to the Google Workspace Admin Console; only needed for the org-wide block, not the personal one"
+  ],
   "steps": [
     {
       "heading": "Decide whether you need a personal block or an admin-level block",
@@ -10,47 +13,79 @@
     },
     {
       "heading": "Block a sender directly in Gmail",
-      "body": "Open the message from the unwanted sender, click the three-dot menu in the top right of the email, and choose \"Block [sender].\" Gmail moves future messages from that address straight to spam. This is the fastest fix for a one-off nuisance sender, but it's scoped to your account only — it won't stop the same sender from reaching a colleague, and it won't catch that sender if they simply switch to a different address at the same domain."
+      "body": "Open the message from the unwanted sender, click More (the three-dot menu) next to Reply, and choose \"Block [sender].\" Gmail moves future messages from that address straight to spam. This is the fastest fix for a one-off nuisance sender, but it's scoped to your account only. It won't stop the same sender from reaching a colleague, and it won't catch that sender if they simply switch to a different address at the same domain."
     },
     {
       "heading": "Set up a filter for more control",
-      "body": "For anything beyond a simple block, Gmail's filter system is more flexible: from the search bar, use the dropdown arrow to create a filter matching the sender's address or entire domain, then choose to skip the inbox, delete automatically, or apply a label. Filtering by domain (using an asterisk wildcard like *@spamdomain.com) catches senders who rotate addresses within the same domain, which a simple one-off block won't."
+      "body": "For anything beyond a simple block, Gmail's filter system is more flexible: from the search bar, use the dropdown arrow to create a filter matching the sender's address or entire domain, then choose to skip the inbox, delete automatically, or apply a label. Filtering by domain with a wildcard, such as *@spamdomain.com, catches senders who rotate addresses within the same domain, which a simple one-off block won't."
     },
     {
       "heading": "Open the Admin Console's Gmail settings for org-wide control",
-      "body": "For a domain that's targeting the whole organization, a super admin needs to go into the Admin Console, then Apps → Google Workspace → Gmail, which opens a settings page broken into sections: Setup, End-user access, Spam, phishing and malware, Compliance, and Routing. The \"Spam, phishing and malware\" section specifically is where domain-level blocking and safe/blocked sender lists are configured for everyone in the domain at once, rather than one inbox at a time.",
+      "body": "For a domain that's targeting the whole organization, a super admin needs to go into the Admin Console, then Apps > Google Workspace > Gmail, which opens a settings page broken into sections: Setup, End-user access, Spam, phishing and malware, Compliance, and Routing. The \"Spam, phishing and malware\" section is where domain-level blocking and allow/block lists are configured for everyone in the domain at once, instead of one inbox at a time.",
       "image": {
         "file": "/screenshots/ztTQCyxBVcw/05.webp",
         "caption": "Gmail's admin settings page, with Spam, phishing and malware listed as its own configurable section alongside Setup, End-user access, Compliance, and Routing."
       }
     },
     {
-      "heading": "Add the domain to a blocked senders list",
-      "body": "Inside the Spam, phishing and malware section, admins can maintain an explicit blocked-senders list scoped by domain or organizational unit, so the rule can apply to the whole company or just a specific team if that's all that's affected. Save the change and give it a few minutes to propagate — Workspace settings changes aren't always instant across every user's mail flow, so don't assume it failed if the first test email still lands within the first minute or two."
+      "heading": "Add the domain under Blocked senders",
+      "body": "Inside \"Spam, phishing and malware,\" scroll to Blocked senders and click Configure (or Add another rule if a blocklist already exists). Name the rule, add the domain or specific addresses you want to reject, and click Save. Google's own documentation is explicit that this can take up to 24 hours to fully apply, even though it typically happens faster, so a rule that hasn't caught a test email within the first few minutes hasn't necessarily failed."
     },
     {
       "heading": "Review and confirm the block is working",
-      "body": "Whichever route you used, check back afterward: personal users should look at their filter list or blocked-address settings in Gmail to confirm the rule is active, and admins should spot-check with a colleague or a test account to make sure mail from the blocked domain is actually landing in spam or being rejected rather than slipping through. If phishing was the original concern, it's also worth reporting the domain so Google's own spam filters get better at catching it for other Workspace customers too."
+      "body": "Whichever route you used, check back afterward: personal users should look at Settings > Filters and Blocked Addresses in Gmail to confirm the rule is active, and admins should spot-check with a colleague or a test account, and the Admin console's audit log, to make sure mail from the blocked domain is landing in spam or being rejected rather than slipping through. If phishing was the original concern, it's also worth reporting the domain so Google's spam filters improve for other Workspace customers too."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The blocked domain still delivers mail a few minutes after saving the rule",
+      "cause": "Google's own Workspace documentation states blocked-senders changes can take up to 24 hours to fully apply across the organization, even though they usually land sooner.",
+      "fix": "Wait up to a day before treating the rule as broken. Check the Admin console's audit log to confirm the change saved correctly."
+    },
+    {
+      "problem": "A sender is blocked for you, but a colleague still gets their email",
+      "cause": "A personal block or filter only applies to the Gmail account that created it; it has no effect on anyone else's inbox.",
+      "fix": "If the sender is a problem for more than one person, escalate to a super admin for an org-wide block under Spam, phishing and malware."
+    },
+    {
+      "problem": "Blocking one domain doesn't stop the phishing attempts",
+      "cause": "The sender is likely rotating across several look-alike domains rather than reusing the same one.",
+      "fix": "Report the messages to Google as phishing so its filters can catch the pattern, and add each new domain to the blocked senders list as it appears rather than assuming one entry covers all of them."
     }
   ],
   "faq": [
     {
       "question": "Can I block an entire domain in Gmail without admin access?",
-      "answer": "As an individual user you can filter out a domain using a wildcard filter, but a true organization-wide block usually requires admin-level access through the Workspace Admin Console."
+      "answer": "As an individual user you can filter out a domain using a wildcard filter, but a true organization-wide block needs admin-level access through the Workspace Admin Console."
     },
     {
       "question": "Will blocking a sender delete their previous emails too?",
-      "answer": "No, blocking only affects future emails — messages already in your inbox stay unless you delete them separately."
+      "answer": "No. Blocking only affects future emails; messages already in your inbox stay unless you delete them separately."
     },
     {
       "question": "Can a blocked sender still email other people in my organization?",
-      "answer": "Yes, unless the block is applied organization-wide by an admin through the Spam, phishing and malware settings, a personal block only affects your own inbox."
+      "answer": "Yes, unless the block is applied organization-wide by an admin through Spam, phishing and malware settings. A personal block only affects your own inbox."
+    },
+    {
+      "question": "How long does an org-wide block take to apply?",
+      "answer": "Google's documentation says up to 24 hours, though it typically happens faster. A test email still arriving a few minutes after saving the rule doesn't mean it failed."
     },
     {
       "question": "How do I unblock a domain or sender later?",
-      "answer": "You can remove the filter or blocked-sender entry from Gmail settings, or have an admin remove the entry from the blocked senders list in the Admin Console."
+      "answer": "Remove the filter or blocked-address entry from Gmail's Filters and Blocked Addresses settings, or have an admin edit the Blocked senders rule in the Admin Console."
     }
   ],
+  "references": [
+    {
+      "label": "Block messages from an email address or domain (official Google Workspace Admin Help)",
+      "url": "https://knowledge.workspace.google.com/admin/gmail/advanced/block-messages-from-an-email-address-or-domain"
+    },
+    {
+      "label": "Block an email address in Gmail (official Gmail Help)",
+      "url": "https://support.google.com/mail/answer/8151?hl=en"
+    }
+  ],
+  "verifiedNote": "Personal Gmail block and filter steps, and the Admin Console path (Apps > Google Workspace > Gmail > Spam, phishing and malware > Blocked senders), were checked in September 2026 against Google's official Workspace and Gmail help documentation. That check corrected the propagation guidance: Google's own docs say a blocked-senders change can take up to 24 hours to fully apply, not the couple of minutes the original draft implied.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

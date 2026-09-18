@@ -1,60 +1,132 @@
 {
   "slug": "how-to-transfer-domain-from-godaddy-to-namecheap-easily-2026",
   "seoTitle": "Transfer a Domain from GoDaddy to Namecheap",
-  "metaDescription": "Moving your domain from GoDaddy to Namecheap? Learn how to unlock it, get the EPP/Auth code, and complete the transfer step by step.",
-  "intro": "Moving a domain from GoDaddy to Namecheap can make sense for better pricing, cleaner privacy protection, or just having everything under one registrar, and the process itself is a five-step checklist rather than anything technical. The two things that trip people up are unlocking the domain before starting and getting the authorization code to the right place — everything else is filling in a form and waiting. This guide follows the actual screens on both sides: GoDaddy's transfer-out checklist and Namecheap's transfer intake.",
+  "metaDescription": "Moving your domain from GoDaddy to Namecheap? Unlock it, turn off GoDaddy's privacy protection, get the auth code, and complete the transfer step by step.",
+  "intro": "Moving a domain from GoDaddy to Namecheap can make sense for better pricing, cleaner privacy protection, or having everything under one registrar. The process is a short checklist, not anything technical. Where people get stuck is the two things GoDaddy quietly requires before it will hand over an authorization code: the domain has to be unlocked, and any privacy or protection plan has to be switched off. Skip either one and the transfer gets declined with no clear reason why.\n\nThis guide follows the actual screens on both sides: GoDaddy's transfer-out checklist and Namecheap's transfer intake, plus the DNS detail that decides whether your site stays up during the move.",
+  "prerequisites": [
+    "The domain registered at GoDaddy for at least 60 days, with no registration, transfer, or registrant contact-info change inside that window (120 days if the domain was part of a bundle)",
+    "Access to the administrative contact email on the domain, since that's where GoDaddy sends the authorization code",
+    "Any GoDaddy Domain Privacy or Domain Protection plan ready to be turned off before you request the code",
+    "A Namecheap account to receive the domain"
+  ],
+  "costNote": "Namecheap charges a one-time transfer fee at checkout, shown next to the domain alongside any discount for that TLD, and it typically adds a year to the registration. WHOIS privacy is bundled in at no extra cost, marked \"FREE FOREVER\" in the cart. GoDaddy doesn't charge to transfer out.",
   "steps": [
     {
-      "heading": "Start the transfer-out process in GoDaddy",
-      "body": "Log in to GoDaddy and go to Domains > Domain Portfolio, then find the domain and choose Domain Transfer Out. GoDaddy shows a banner first suggesting you may not need a full transfer if you're only trying to connect the domain to a third-party service — that's a different, simpler process. If you genuinely want to move the domain's registration, dismiss that banner and read the five-item transfer checklist GoDaddy lays out: confirm your admin contact email is current, verify the new registrar will set up DNS, start the transfer at the new registrar, authorize it with the code GoDaddy emails you, and expect confirmation within 5-7 days.",
-      "image": { "file": "/screenshots/JGTg5_0ZtgU/02.webp", "caption": "GoDaddy's Domain Transfer Out checklist, spelling out the five steps from confirming contact info to the 5-7 day completion window." }
+      "heading": "Open the transfer checklist in GoDaddy",
+      "body": "Log in to GoDaddy and go to Domains > Domain Portfolio, then find the domain and choose Transfer to Another Registrar under the Transfer section. GoDaddy shows a banner first suggesting you may not need a full transfer if you're only trying to connect the domain to a third-party service; that's a different, simpler process. If you genuinely want to move the domain's registration, dismiss the banner and read the checklist: confirm your administrative contact email is current since it's where the authorization code gets sent, verify the new registrar will set up DNS, start the transfer at the new registrar, authorize it with the code, and expect confirmation within 5-7 days.",
+      "image": {
+        "file": "/screenshots/JGTg5_0ZtgU/02.webp",
+        "caption": "GoDaddy's Domain Transfer Out checklist, spelling out the five steps from confirming contact info to the 5-7 day completion window."
+      }
     },
     {
-      "heading": "Unlock the domain and get its authorization code",
-      "body": "Click Continue with transfer, and GoDaddy walks you to the registrar lock setting — domains are locked by default specifically to block unauthorized transfers, so it has to be switched off before Namecheap can pull it. Once unlocked, request the EPP or Auth code; GoDaddy emails it to the administrative contact address on file, so this is the moment that email address needs to be one you can actually access right now."
+      "heading": "Unlock the domain and turn off privacy protection",
+      "body": "Two settings have to be off before GoDaddy will release a code. First, the registrar lock: open the domain's settings page and, under Transfer, switch the lock toggle from On to Off. GoDaddy notes this can take up to 90 minutes to take effect, so don't expect Namecheap to see it as unlocked right away.\n\nSecond, privacy. GoDaddy's own transfer policy declines requests outright while Domain Privacy or a paid Protection Plan is active. If you have a paid plan, downgrade it to Basic Privacy Protection first; then, in the domain's Overview tab, find Domain Privacy and switch it to Off. Neither step has anything to do with the checklist screen itself, which is why it's easy to skip both and only discover the problem when the transfer bounces."
+    },
+    {
+      "heading": "Get the authorization code",
+      "body": "Back on the checklist screen, click Continue with transfer. If Domain Protection is on your account, you'll need to verify your identity with a code sent by SMS, from an authenticator app, or a one-time password emailed to your GoDaddy account. Once through that, select \"Click here to see Authorization Code\" and copy it. GoDaddy also sends the same code to the administrative contact email on the domain, so it's there if you need it again."
     },
     {
       "heading": "Find the domain in your Namecheap account",
-      "body": "Log in to Namecheap and go to Domain List from the left sidebar, which shows every domain already in your account along with its status, auto-renew setting, and expiration date. This is also where the transferred domain will eventually land once the process completes, so it's worth knowing your way around this screen before you kick off the transfer.",
-      "image": { "file": "/screenshots/JGTg5_0ZtgU/03.webp", "caption": "The Namecheap Domain List, showing existing domains with their status and expiration — the same screen your transferred domain will appear on once it completes." }
+      "body": "Log in to Namecheap and go to Domain List from the left sidebar, which shows every domain already in your account along with its status, auto-renew setting, and expiration date. This is also where the transferred domain lands once the process completes.",
+      "image": {
+        "file": "/screenshots/JGTg5_0ZtgU/03.webp",
+        "caption": "The Namecheap Domain List, showing existing domains with their status and expiration — the same screen your transferred domain will appear on once it completes."
+      }
     },
     {
       "heading": "Enter the domain and the authorization code",
-      "body": "Start a new transfer through Namecheap's Transfer to Us flow and enter the domain name. Namecheap's transfer checklist confirms the current registrar (GoDaddy.com, LLC in this case) and shows the registrar lock status — it needs to read 'Unlocked' here, matching the step you just completed on GoDaddy's side, with a Refresh button if it still shows locked. Paste the authorization code GoDaddy emailed you into the Authorization Code field and click Verify Auth Code before moving on.",
-      "image": { "file": "/screenshots/JGTg5_0ZtgU/04.webp", "caption": "Namecheap's transfer checklist, confirming GoDaddy as the current registrar and an unlocked domain, with a field for the authorization code." }
+      "body": "Start a new transfer through Namecheap's Transfer to Us flow and enter the domain name. Namecheap's transfer checklist confirms the current registrar (GoDaddy.com, LLC in this case) and shows the registrar lock status. It needs to read Unlocked here, matching the step you completed earlier on GoDaddy's side; there's a Refresh button if it still shows locked while GoDaddy's change catches up. Paste the authorization code into the Authorization Code field and click Verify Auth Code before moving on.",
+      "image": {
+        "file": "/screenshots/JGTg5_0ZtgU/04.webp",
+        "caption": "Namecheap's transfer checklist, confirming GoDaddy as the current registrar and an unlocked domain, with a field for the authorization code."
+      }
     },
     {
       "heading": "Add the transfer to your cart and confirm the order",
-      "body": "Once the auth code verifies, add the domain transfer to your cart alongside any other items — privacy protection is commonly included free, and you'll see options like SSL certificates offered as add-ons you can skip if you don't need them. Review the subtotal, apply a promo code if you have one, and click Confirm Order. This purchase is what actually pays for and initiates the transfer on Namecheap's end; nothing moves until this order is placed.",
-      "image": { "file": "/screenshots/JGTg5_0ZtgU/05.webp", "caption": "The Namecheap checkout cart with the domain transfer line item and its authorization code attached, ready to confirm." }
+      "body": "Once the auth code verifies, add the domain transfer to your cart alongside anything else you want. Free WHOIS privacy is included by default, and you'll see optional add-ons like SSL certificates you can skip if you don't need them. Review the subtotal, apply a promo code if you have one, and click Confirm Order. Nothing moves on Namecheap's end until this order is placed.",
+      "image": {
+        "file": "/screenshots/JGTg5_0ZtgU/05.webp",
+        "caption": "The Namecheap checkout cart with the domain transfer line item and its authorization code attached, ready to confirm."
+      }
     },
     {
       "heading": "Approve the transfer by email and wait it out",
-      "body": "After confirming the order, watch your inbox for a confirmation email — Namecheap sends this to verify you actually requested the transfer, and GoDaddy may send its own notification too, since both registrars want confirmation before letting a domain change hands. Approve it, then check the transfer status periodically inside Namecheap's Domain List. Most transfers complete within the 5-7 day window GoDaddy quoted on the checklist, though ICANN's mandatory hold period means it's rarely faster than about 5 days even when everything goes smoothly."
+      "body": "After confirming the order, watch your inbox for a confirmation email; Namecheap sends this to verify you requested the transfer, and GoDaddy may send its own notice too, since both registrars want confirmation before a domain changes hands. You can speed things up from GoDaddy's side: under Domains, open the Transfer area, select Transfers Out, choose the domain, and select Approve Transfer. GoDaddy processes an approved transfer within about 15 minutes instead of the full window.\n\nOtherwise, check the transfer status inside Namecheap's Domain List. Most transfers complete within the 5-7 day window both registrars quote, though ICANN's mandatory hold period means it's rarely faster than about 5 days even when everything else goes smoothly."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "GoDaddy declines the transfer request or Namecheap's auth code check fails",
+      "cause": "GoDaddy's transfer policy blocks the request while Domain Privacy or a paid Protection Plan is still active on the domain.",
+      "fix": "Downgrade any paid Protection Plan to Basic Privacy Protection, then switch Domain Privacy off from the domain's Overview tab, before requesting the code."
+    },
+    {
+      "problem": "Namecheap's checklist still shows the domain as Locked after you switched it off",
+      "cause": "GoDaddy's own unlock toggle can take up to 90 minutes to take effect.",
+      "fix": "Wait, then click Refresh on Namecheap's transfer checklist instead of re-toggling the lock."
+    },
+    {
+      "problem": "GoDaddy won't unlock the domain or the transfer is rejected as ineligible",
+      "cause": "The domain is inside a 60-day lock after new registration, a previous transfer, or a change to registrant contact details (120 days if it was part of a bundle).",
+      "fix": "Wait out the lock window. If the domain shouldn't be locked and the transfer is urgent, GoDaddy's Review 60 team (review60@godaddy.com) can review and remove it."
+    },
+    {
+      "problem": "The site or email stops working right after the transfer completes",
+      "cause": "The domain was using GoDaddy's default nameservers, which stop answering once the transfer finishes.",
+      "fix": "Point the domain to Namecheap's nameservers (or your host's) before or immediately after the transfer. Domains already on custom or hosting DNS aren't affected, since those settings carry over unchanged."
     }
   ],
   "faq": [
     {
       "question": "Do I need to unlock my domain before transferring?",
-      "answer": "Yes. GoDaddy locks domains by default to prevent unauthorized transfers, and Namecheap's own transfer checklist checks the lock status and won't proceed until it reads Unlocked."
+      "answer": "Yes. GoDaddy locks domains by default to prevent unauthorized transfers, and Namecheap's checklist checks the lock status and won't proceed until it reads Unlocked. The unlock itself can take up to 90 minutes to show up on Namecheap's side."
     },
     {
-      "question": "What is an EPP/Auth code used for?",
-      "answer": "It's a security code from your current registrar that proves domain ownership. Namecheap's transfer form has a dedicated Authorization Code field and a Verify Auth Code button to confirm it before you can add the transfer to your cart."
+      "question": "What is an EPP/Auth code, and how do I get it?",
+      "answer": "It's a security code from your current registrar that proves domain ownership. On GoDaddy, it's revealed on the Transfer to Another Registrar screen after you click Continue with transfer, and GoDaddy also emails a copy to the domain's administrative contact address."
+    },
+    {
+      "question": "Does GoDaddy's privacy protection stop the transfer?",
+      "answer": "Yes, if it's still active. GoDaddy's policy is to decline transfer requests while Domain Privacy or a paid Protection Plan is on, so both need to be turned off before you request the auth code."
     },
     {
       "question": "How long does a domain transfer take?",
-      "answer": "GoDaddy's own checklist quotes 5-7 days for confirmation, and ICANN's mandatory hold period means it's rarely much faster than about 5 days even when the code and lock status are correct on the first try."
+      "answer": "Both registrars quote 5-7 days for the full process. Approving the transfer from GoDaddy's side (Transfers Out > Approve Transfer) speeds up GoDaddy's half to around 15 minutes, though ICANN's hold period still keeps the total close to 5 days at minimum."
     },
     {
       "question": "Will my website go down during the transfer?",
-      "answer": "Typically no, since DNS settings and hosting usually remain unaffected during a standard registrar transfer — you're changing who administers the domain, not where it points."
+      "answer": "It depends on the nameservers. If the domain already points to custom or hosting DNS, those settings carry over and nothing changes. If it's still using GoDaddy's default nameservers, they stop responding once the transfer completes, and you'll see downtime until you point the domain to Namecheap's DNS."
+    },
+    {
+      "question": "What if my domain isn't eligible for transfer yet?",
+      "answer": "GoDaddy blocks transfers within 60 days of new registration, a previous transfer, or a registrant contact-info change (120 days for domains registered as part of a bundle). Wait out the window, or contact GoDaddy's Review 60 team if you believe the lock shouldn't apply."
     },
     {
       "question": "What if GoDaddy shows a banner saying I don't need to transfer?",
-      "answer": "That banner refers to connecting your domain to a third-party service, which is a separate, simpler DNS change. If your goal is to actually move the domain's registration to Namecheap, dismiss it and continue with the transfer checklist."
+      "answer": "That banner refers to connecting your domain to a third-party service, which is a separate, simpler DNS change. If your goal is moving the domain's registration to Namecheap, dismiss it and continue with the transfer checklist."
     }
   ],
+  "references": [
+    {
+      "label": "GoDaddy: Transfer my domain away from GoDaddy (official)",
+      "url": "https://www.godaddy.com/help/transfer-my-domain-away-from-godaddy-3560"
+    },
+    {
+      "label": "GoDaddy: Get the auth code for my domain (official)",
+      "url": "https://www.godaddy.com/help/get-the-auth-code-for-my-domain-1685"
+    },
+    {
+      "label": "GoDaddy: Unlock or lock my domain (official)",
+      "url": "https://www.godaddy.com/help/unlock-or-lock-my-domain-410"
+    },
+    {
+      "label": "Namecheap: How to transfer a domain from GoDaddy (official)",
+      "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/876/83/how-to-transfer-a-domain-from-godaddy/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The on-screen GoDaddy checklist text was checked directly against its screenshot. The lock, privacy-protection, 60/120-day eligibility, unlock-delay, and nameserver-downtime details were re-checked against GoDaddy's and Namecheap's official support documentation in September 2026, which added the missing privacy-protection requirement and corrected this guide's earlier claim that the transfer never causes downtime.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

@@ -2,45 +2,68 @@
   "slug": "how-to-see-or-track-previous-sprint-history-in-jira-easily-2026",
   "seoTitle": "How to See Previous Sprint History and Reports in Jira",
   "metaDescription": "Find past sprint reports in Jira, read the burndown chart, and trace exactly when each issue was added, completed, or removed from a sprint.",
-  "intro": "Once a sprint closes in Jira, its board view empties out — but the data isn't gone, it just moves to Reports. That's where velocity, completed work, and the day-by-day burndown of a finished sprint actually live, and it's a section a lot of teams never open because nothing points you there directly from the board. This guide covers navigating from your project's board to its sprint reports, reading a burndown chart correctly, and using the detailed event log underneath it to see exactly when each issue moved, completed, or got pulled from the sprint.",
+  "intro": "Once a sprint closes in Jira, its board view empties out, but the data isn't gone. It moves to Reports, where velocity, completed work, and the day-by-day burndown of a finished sprint live. Many teams never open this section, since nothing on the board points you there directly. This guide covers navigating from your project's board to its sprint reports, reading a burndown chart correctly, and using the detailed event log underneath it to see exactly when each issue moved, completed, or got pulled from the sprint.",
+  "prerequisites": [
+    "A Scrum project. Burndown Chart, Sprint Report, and Velocity Chart are Scrum board reports; Kanban boards don't run sprints, so they use Cumulative Flow and Control Chart instead."
+  ],
   "steps": [
     {
       "heading": "Open your board and find the Reports tab",
-      "body": "From your project, open its board and look at the row of tabs across the top: Summary, Timeline, Backlog, Active sprints, List, Calendar, and Reports. Reports is where all historical sprint data lives, separate from Active sprints, which only shows what's currently in progress or not yet started. If your Active sprints view looks empty with a prompt to plan work in the backlog, that just means no sprint is currently running — it doesn't mean history isn't available, that's still sitting under Reports.",
-      "image": { "file": "/screenshots/QjIIbUl_L8M/02.webp", "caption": "The board's tab row, including Active sprints and Reports — Reports is where completed sprint history and charts live." }
+      "body": "From your project, open its board and look at the row of tabs across the top: Summary, Timeline, Backlog, Active sprints, List, Calendar, and Reports. Reports is where all historical sprint data lives, separate from Active sprints, which only shows what's currently in progress or not yet started. If Active sprints looks empty with a prompt to plan work in the backlog, that just means no sprint is running right now. History is still sitting under Reports.",
+      "image": { "file": "/screenshots/QjIIbUl_L8M/02.webp", "caption": "The board's tab row, including Active sprints and Reports; Reports is where completed sprint history and charts live." }
     },
     {
       "heading": "Select a past sprint from the Burndown Chart",
-      "body": "Inside Reports, choose Burndown Chart, then use the sprint dropdown at the top — labeled with the current or most recent sprint name — to switch to any earlier sprint your project has run. Next to it, a second dropdown lets you toggle how work is measured, typically Issue count or Story points, which changes what the vertical axis represents. Picking an older sprint here instantly reloads the chart with that sprint's specific data rather than requiring you to dig through a separate archive.",
-      "image": { "file": "/screenshots/QjIIbUl_L8M/04.webp", "caption": "The Burndown Chart's sprint selector, set to POS Sprint 1 — switching this dropdown loads the history for any past sprint." }
+      "body": "Inside Reports, choose Burndown Chart, then use the sprint dropdown at the top (labeled with the current or most recent sprint name) to switch to any earlier sprint your project has run. A second dropdown next to it toggles how work is measured, typically Issue count or Story points, which changes what the vertical axis represents. The chart's legend also marks Non-Working Days as hatched bands; uncheck Show Non-Working Days if you'd rather see a plain, continuous guideline. Picking an older sprint reloads the chart with that sprint's own data, no separate archive to dig through.",
+      "image": { "file": "/screenshots/QjIIbUl_L8M/04.webp", "caption": "The Burndown Chart's sprint selector, set to POS Sprint 1, with the Guideline, Remaining Values, and Non-Working Days legend visible." }
     },
     {
       "heading": "Read the chart correctly",
-      "body": "The burndown chart plots issue count (or story points) remaining against time across the sprint's date range. A gray guideline shows the ideal, steady pace needed to finish everything by the sprint's end date, while the colored line tracks what actually happened — work completed, added mid-sprint, or left over. Sudden jumps upward usually mean scope was added after the sprint started, while a flat line for several days points to a stretch where nothing was completed, both worth discussing in a retrospective rather than just noting in passing.",
+      "body": "The burndown chart plots issue count (or story points) remaining against time across the sprint's date range. A gray guideline shows the steady pace needed to finish everything by the sprint's end date. The colored line tracks what happened: work completed, added mid-sprint, or left over. A sudden jump upward usually means scope was added after the sprint started. A flat stretch of several days with no drop points to a period where nothing was completed. Both are worth raising in a retrospective, not just noting in passing.",
       "image": null
     },
     {
       "heading": "Check the detailed event log below the chart",
-      "body": "Scroll down past the chart itself to a table logging every event tied to the sprint by exact date and time — sprint start, sprint end, and each issue's movement in or out. Each row lists the issue keys involved, the event type, and columns for increase, decrease, and running remaining count, giving you a precise audit trail of what happened and when, down to the minute. This is the section to check when a sprint's outcome looks confusing from the chart alone — it answers exactly which ticket caused a jump or a stall.",
+      "body": "Scroll past the chart to a table logging every event tied to the sprint by exact date and time: sprint start, sprint end, and each issue's movement in or out. Each row lists the issue keys involved, the event type, and columns for increase, decrease, and running remaining count, an audit trail of what happened and when, down to the minute. Check this table when a sprint's outcome looks confusing from the chart alone; it names exactly which ticket caused a jump or a stall.",
       "image": { "file": "/screenshots/QjIIbUl_L8M/05.webp", "caption": "The burndown chart's event log, showing sprint start and end events with exact timestamps, issue keys, and remaining issue counts." }
     },
     {
       "heading": "Cross-reference with the Sprint Report and Velocity Chart",
-      "body": "Burndown Chart is one of several reports worth checking together — Sprint Report lists exactly which issues were completed versus not completed by the sprint's end, and Velocity Chart tracks completed work across multiple sprints so you can see whether your team's throughput is trending up, down, or holding steady. Looking at all three for the same sprint gives a fuller picture than any single chart alone, especially when explaining a missed sprint goal to stakeholders.",
+      "body": "Burndown Chart is one of three reports worth checking together. Sprint Report lists which issues were completed versus not completed by the sprint's end; it carries its own grey-and-red progress line too, not just a list. Velocity Chart tracks completed work across multiple sprints, so you can see whether your team's throughput is trending up, down, or holding steady. Looking at all three for the same sprint gives a fuller picture than any single chart alone, especially when explaining a missed sprint goal to stakeholders.",
       "image": null
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Story points in the burndown or velocity chart don't match what's estimated on subtasks",
+      "cause": "Both charts only count story points on the parent issue. Subtask estimates are excluded from the calculation entirely.",
+      "fix": "Estimate story points at the story or task level, not on subtasks, if you want these reports to reflect that work."
     },
     {
-      "heading": "Use the history to improve planning, not just to report on it",
-      "body": "The real value of sprint history isn't the chart itself, it's what you do with the pattern it reveals — if velocity has been declining for three sprints, or the same type of ticket keeps getting pulled mid-sprint, that's a planning signal worth acting on before the next sprint starts. Pull up the last three to five sprints' reports together during backlog grooming or sprint planning rather than only looking back after something's gone wrong."
+      "problem": "Burndown Chart, Sprint Report, or Velocity Chart aren't available on a board",
+      "cause": "The board is a Kanban board. These three reports are Scrum-only, since Kanban boards have no sprints to report on.",
+      "fix": "Check the Reports tab on a Scrum board instead, or use Cumulative Flow and Control Chart if the board is genuinely Kanban."
+    },
+    {
+      "problem": "A sprint's data looks incomplete or missing in Reports",
+      "cause": "The Burndown Chart only includes issues matching the board's current saved filter. If that filter changed after the sprint ran, issues from the sprint can drop out of the report even though the sprint itself still exists.",
+      "fix": "Check the board's saved filter under board settings and confirm it still matches the issues that were part of that sprint."
     }
   ],
   "faq": [
-    { "question": "Where do I find data for a sprint that already ended in Jira?", "answer": "Open your board and go to the Reports tab rather than Active sprints, which only shows current or upcoming work. Reports holds Burndown Chart, Sprint Report, and Velocity Chart for every past sprint." },
-    { "question": "What's the difference between the Burndown Chart and the Sprint Report?", "answer": "Burndown Chart shows work remaining over time as a visual trend line with a detailed event log. Sprint Report gives a simpler list view of exactly which issues were completed versus not completed when the sprint closed." },
-    { "question": "Why does the burndown line jump upward partway through a sprint?", "answer": "That indicates scope was added mid-sprint — a new issue was pulled in after the sprint started. Check the event log below the chart to see exactly which issue caused the jump and when." },
-    { "question": "Can I compare velocity across several past sprints at once?", "answer": "Yes — the Velocity Chart report plots completed story points or issue counts across multiple recent sprints in one view, which is the best report for spotting a trend rather than a single sprint's outcome." },
-    { "question": "Does switching the Burndown Chart's measurement from Issue count to Story points change historical data?", "answer": "No, it only changes how the same historical data is displayed. The underlying events — what was completed, added, or removed and when — stay identical regardless of which unit you view the chart in." }
+    { "question": "Where do I find data for a sprint that already ended in Jira?", "answer": "Open your board and go to the Reports tab, not Active sprints, which only shows current or upcoming work. Reports holds Burndown Chart, Sprint Report, and Velocity Chart for every past sprint." },
+    { "question": "What's the difference between the Burndown Chart and the Sprint Report?", "answer": "Burndown Chart is a trend line of work remaining over time, with a detailed event log underneath. Sprint Report lists exactly which issues were completed versus not completed when the sprint closed, though it includes its own grey-and-red progress line too, so the two overlap more than their names suggest." },
+    { "question": "Why does the burndown line jump upward partway through a sprint?", "answer": "That means scope was added mid-sprint, a new issue pulled in after the sprint started. Check the event log below the chart to see exactly which issue caused the jump and when." },
+    { "question": "Can I compare velocity across several past sprints at once?", "answer": "Yes. The Velocity Chart plots completed story points or issue counts across multiple recent sprints in one view, the best report for spotting a trend instead of reading a single sprint's outcome." },
+    { "question": "Does switching the Burndown Chart's measurement from Issue count to Story points change historical data?", "answer": "No, it only changes how the same historical data is displayed. The underlying events, what was completed, added, or removed and when, stay identical regardless of which unit you view the chart in." },
+    { "question": "How do I use this history instead of just reviewing it after a bad sprint?", "answer": "Pull up the last three to five sprints' reports together during backlog grooming or sprint planning, not only after something's gone wrong. If velocity has been declining for three sprints running, or the same kind of ticket keeps getting pulled mid-sprint, that's a planning signal worth acting on before the next sprint starts." }
   ],
+  "references": [
+    { "label": "Jira Cloud: View and understand the burndown chart (official)", "url": "https://support.atlassian.com/jira-software-cloud/docs/view-and-understand-the-burndown-chart/" },
+    { "label": "Jira Cloud: View and understand the velocity chart (official)", "url": "https://support.atlassian.com/jira-software-cloud/docs/view-and-understand-the-velocity-chart/" },
+    { "label": "Jira Cloud: View and understand the sprint report (official)", "url": "https://support.atlassian.com/jira-software-cloud/docs/view-and-understand-the-sprint-report/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2026. The report names, chart legend, and event-log structure matched what's shown on screen. Re-checked against Atlassian's official Jira Cloud documentation in September 2026, which surfaced two constraints this guide hadn't mentioned: these three reports are Scrum-only (Kanban boards use different reports), and subtask story points are excluded from both the burndown and velocity calculations.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

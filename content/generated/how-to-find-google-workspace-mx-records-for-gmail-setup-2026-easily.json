@@ -1,59 +1,115 @@
 {
   "slug": "how-to-find-google-workspace-mx-records-for-gmail-setup-2026-easily",
-  "seoTitle": "How to Find Google Workspace MX Records for Gmail",
-  "metaDescription": "Learn how to navigate to your Google Workspace MX record settings in the Admin console and add them to your domain's DNS to activate Gmail.",
-  "intro": "Getting Gmail to actually receive mail for your custom domain comes down to one thing your DNS provider needs: the MX records Google publishes for your account. The values themselves are easy enough to copy once you're looking at them, but the Admin console buries the page a few menus deep, and it's easy to end up in the wrong sub-section of Apps. This guide walks the exact navigation path from the Admin console home down to the Gmail settings area, then covers what to do with those records once you have them in hand.",
+  "seoTitle": "How to Find Google Workspace MX Records for Gmail (2026)",
+  "metaDescription": "Find the current Google Workspace MX record setup in the Admin console: where the setting lives now, why it's one record instead of five, and how to add it to your domain's DNS.",
+  "intro": "Getting Gmail to receive mail for a custom domain comes down to one DNS record: the MX value Google publishes for your account. Older guides send you hunting through the Apps menu for it. That isn't where it lives anymore. Google also cut the setup from five prioritized mail servers down to a single record, so if a guide or screenshot you're following lists five lines, it's describing an account set up before that change.\n\nThis guide covers where the setting sits today, what the one record you need looks like, and the two mistakes that cause mail to bounce after you've added it.",
+  "prerequisites": [
+    "A Google Workspace account with the domain already added and verified in the Admin console — Gmail can't be activated for a domain until ownership is verified",
+    "Access to your domain's DNS settings at whatever registrar or host manages that domain"
+  ],
   "steps": [
     {
       "heading": "Start from the Admin console home",
-      "body": "Sign in at admin.google.com and you'll land on the home dashboard, with a Manage Workspace section for Users and Billing front and center and the full navigation menu running down the left side. The MX record settings live under Apps rather than anywhere obviously labeled \"email\" or \"DNS,\" so resist the urge to search Billing or Directory for them.",
-      "image": { "file": "/screenshots/X2R-ekPGqIk/03.webp", "caption": "The Admin console home screen, with the Apps entry in the left-hand menu leading toward the Gmail settings." }
+      "body": "Sign in at admin.google.com and you land on the home dashboard: a Manage Workspace section for Users and Billing in the middle, and the full navigation menu down the left side. Two branches in that menu matter for MX setup, Account and Apps, and only one of them gets you there. Billing and Directory hold nothing related to email routing, so don't spend time in either.",
+      "image": { "file": "/screenshots/X2R-ekPGqIk/03.webp", "caption": "The Admin console home screen, with the left-hand navigation menu leading toward Apps and Account." }
     },
     {
-      "heading": "Open Apps, then Google Workspace",
-      "body": "Click Apps in the left menu and it expands into an Overview plus a Google Workspace section — click into Google Workspace and a second-level list unfolds underneath it, starting with Service status and Moderation. This is the correct branch for anything related to Gmail, Calendar, Drive, and the other core apps; a separate top-level \"Apps\" area elsewhere in the console covers third-party and custom apps instead, so don't confuse the two.",
+      "heading": "Apps > Google Workspace looks right, but it isn't",
+      "body": "Click Apps in the left menu and it expands into an Overview plus a Google Workspace section. Open Google Workspace and a second list unfolds below it, starting with Service status and Moderation. This branch covers the core apps, Gmail, Calendar, Drive, and more, and it's the natural place to look for anything Gmail-related. It's also a common wrong turn: none of the pages under it handle domain-level mail routing.",
       "image": { "file": "/screenshots/X2R-ekPGqIk/04.webp", "caption": "The Apps menu expanded to show Google Workspace, with Service status and Moderation as the first sub-items underneath it." }
     },
     {
-      "heading": "Scroll to Gmail in the app list",
-      "body": "Keep scrolling down the same expanded Google Workspace list — past AppSheet, Calendar, Cloud Search, and Drive and Docs — until you reach Gmail. Click it to open Gmail's dedicated settings area, which is where routing, spam, and the MX record instructions for your domain all live, separate from the general account and billing settings you'd find elsewhere in the console.",
+      "heading": "Gmail's own settings page doesn't have it either",
+      "body": "Scroll the same list past AppSheet, Calendar, Cloud Search, and Drive and Docs, and click Gmail. That page holds Gmail's operational settings: routing rules, spam and phishing controls, compliance, and similar. It's genuinely useful for running Gmail day to day, but the MX record for your domain isn't filed there. If you've landed here looking for it, back out and head to Account instead.",
       "image": { "file": "/screenshots/X2R-ekPGqIk/05.webp", "caption": "The Google Workspace app list scrolled to show Gmail, Google Chat, Google Meet, Google Vault, and Google Voice." }
     },
     {
-      "heading": "Copy the MX record values exactly",
-      "body": "Inside Gmail's settings, Google lays out a short list of mail server addresses along with a priority number for each — these are the records your domain's DNS needs to point at so incoming mail routes to Google instead of wherever it used to go. Copy every value character for character, including the priority numbers, since a typo or a swapped priority is one of the most common reasons Gmail setup fails silently with mail just never arriving."
+      "heading": "Open Account > Domains > Manage domains",
+      "body": "From the left menu, click Account, then Domains, then Manage domains. Each domain on the account is listed with an Activate Gmail link next to it. That link is the actual entry point: click it and the console walks you through the DNS record for that domain, generated for your account, not copied from a generic support page."
     },
     {
-      "heading": "Add the records at your domain provider",
-      "body": "Log in to wherever your domain's DNS is managed — GoDaddy, Namecheap, Squarespace, or your registrar of choice — and find the DNS or Advanced DNS section for that domain. Add each MX record Google gave you with its matching priority value, and remove any old MX records left over from a previous email provider, since two active sets of MX records competing for the same domain is a common cause of mail bouncing or splitting between two inboxes."
+      "heading": "Copy the one MX record Google gives you",
+      "body": "Current Google Workspace setups need a single MX record: smtp.google.com at priority 1. That replaced the older five-line set (ASPMX.L.GOOGLE.COM plus four ALT records at varying priorities) for new activations in 2023. If your domain was set up before then, you may still see the five-line version in the console; it still works, and there's no need to swap it out for the single record. Whichever version the console shows you, copy it exactly, including the priority number."
     },
     {
-      "heading": "Verify Gmail is actually receiving mail",
-      "body": "DNS changes need time to spread, so wait before assuming something's broken — anywhere from a few minutes up to 48 hours depending on your provider. Once enough time has passed, send a test email from an outside address to your custom domain address and confirm it lands in the Workspace inbox rather than bouncing, which is the only real proof the MX records took effect correctly."
+      "heading": "Add the record, remove the old ones, then wait",
+      "body": "Log in to wherever your domain's DNS is managed and open its MX records section. Add what Google gave you, then delete any MX records left over from a previous email provider. Two active sets of MX records on the same domain is the most common reason mail bounces or splits between two inboxes after this step.\n\nDNS changes take time to spread; Google's own documentation gives a window of up to 72 hours. Once that's passed, send a test email from an outside address to your custom domain and confirm it lands in the Workspace inbox instead of bouncing."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Mail bounces or splits between two inboxes after adding Google's record",
+      "cause": "MX records from the previous email provider are still active alongside Google's.",
+      "fix": "Delete every old MX record for the domain and keep only the one (or, on older domains, five) that Google's Admin console gives you."
+    },
+    {
+      "problem": "Apps > Google Workspace > Gmail doesn't show any MX or DNS information",
+      "cause": "That branch covers Gmail's operational settings, not domain-level mail routing. Domain and MX setup live in a separate part of the console.",
+      "fix": "Go to Account > Domains > Manage domains and click Activate Gmail next to the domain."
+    },
+    {
+      "problem": "The DNS provider's form won't accept the record as given",
+      "cause": "Some registrars want a trailing period after smtp.google.com, others put the priority and the value on the same line instead of in separate fields.",
+      "fix": "Check the registrar's own MX record format before assuming the value itself is wrong."
+    },
+    {
+      "problem": "Mail still isn't arriving after several hours",
+      "cause": "Either DNS hasn't finished propagating, or Activate Gmail was never clicked in the Admin console, so the domain isn't associated with the record.",
+      "fix": "Confirm Activate Gmail shows the domain as active, then wait out the full propagation window before troubleshooting further."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Legacy vs. current Google Workspace MX setup",
+      "columns": ["Setup", "Priority", "Value"],
+      "rows": [
+        ["Current (2023 onward)", "1", "smtp.google.com"],
+        ["Legacy", "1", "ASPMX.L.GOOGLE.COM"],
+        ["Legacy", "5", "ALT1.ASPMX.L.GOOGLE.COM"],
+        ["Legacy", "5", "ALT2.ASPMX.L.GOOGLE.COM"],
+        ["Legacy", "10", "ALT3.ASPMX.L.GOOGLE.COM"],
+        ["Legacy", "10", "ALT4.ASPMX.L.GOOGLE.COM"]
+      ],
+      "note": "Domains activated before Google's 2023 simplification may still show the six-line legacy set in the Admin console. It still works; there's no need to replace it with the single record."
     }
   ],
   "faq": [
     {
-      "question": "Where exactly do I find my Google Workspace MX records?",
-      "answer": "In the Admin console, under Apps → Google Workspace → Gmail — that settings page lists the mail server addresses and priority values ready to copy into your DNS provider."
+      "question": "Where do I find my Google Workspace MX record now?",
+      "answer": "In the Admin console under Account, then Domains, then Manage domains. Click Activate Gmail next to the domain. It is not under Apps > Google Workspace > Gmail, despite that being the more obvious guess."
     },
     {
-      "question": "How many MX records does Google Workspace require?",
-      "answer": "Google provides a small set of MX records with their own priority values; add all of the ones listed on the Gmail settings page rather than picking just one."
+      "question": "How many MX records does Google Workspace need?",
+      "answer": "One, for any domain activated since 2023: smtp.google.com at priority 1. Older domains may still run the legacy five-line set, which continues to work and doesn't need replacing."
     },
     {
-      "question": "How long does it take for MX record changes to work?",
-      "answer": "DNS propagation can take anywhere from a few minutes to 48 hours depending on your domain provider and existing settings, so give it time before troubleshooting."
+      "question": "Do I need to verify my domain before this works?",
+      "answer": "Yes. The Admin console won't let you click Activate Gmail for a domain until ownership has been verified."
     },
     {
-      "question": "What happens if I don't remove my old email provider's MX records?",
-      "answer": "Leaving old MX records in place can cause mail delivery conflicts or split delivery between two providers, so it's important to remove them when adding Google's records."
+      "question": "How long do MX changes take to work?",
+      "answer": "Google's documentation gives a window of up to 72 hours for DNS changes to propagate, though it's often much faster depending on the registrar."
     },
     {
-      "question": "Is the MX record page under Billing or Directory in the Admin console?",
-      "answer": "No — it's under Apps → Google Workspace → Gmail, a separate branch of the console from the Users, Directory, and Billing sections."
+      "question": "What happens if I leave my old provider's MX records in place?",
+      "answer": "Mail delivery can bounce or split between the old provider and Google. Remove the old records once Google's are added."
+    },
+    {
+      "question": "Do I need to touch anything under Apps > Google Workspace > Gmail for this?",
+      "answer": "No. That page manages Gmail's own settings, like routing and spam controls. Domain and MX setup are handled separately under Account."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Admin Help: Set up MX records for Google Workspace (official)",
+      "url": "https://support.google.com/a/answer/16004259?hl=en"
+    },
+    {
+      "label": "Google Workspace Admin Help: DNS basics (official)",
+      "url": "https://support.google.com/a/answer/48090?hl=en"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. The menu location, the single-record setup, and the 72-hour propagation window were re-checked against Google's official Workspace Admin Help documentation in September 2026 — that check is what corrected this guide's previous claim that MX settings live under Apps > Google Workspace > Gmail and that five prioritized records are required.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

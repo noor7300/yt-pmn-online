@@ -1,46 +1,114 @@
 {
   "slug": "how-to-enable-ssl-on-squarespace-solve-certificate-unavailable-processing-not-wo",
   "seoTitle": "How to Enable SSL on Squarespace and Fix Certificate Errors",
-  "metaDescription": "Turn on SSL in Squarespace's Security Preference settings and fix common certificate errors like Unavailable or stuck Processing.",
-  "intro": "Squarespace issues a free SSL certificate for every custom domain automatically, but that doesn't mean your site is actually serving traffic over HTTPS — that's a separate switch you have to flip yourself in Settings. Leave it on the default and search engines can index the insecure version of your site, visitors won't get automatically redirected to the secure one, and you lose the padlock icon that signals trust. This guide covers where that switch lives, what each option actually does, and what to check if the certificate shows as unavailable or gets stuck processing instead of activating.",
+  "metaDescription": "Turn on SSL in Squarespace's Security Preference settings and fix common certificate errors like Unavailable or stuck Processing, including the DNS and CAA record causes.",
+  "intro": "Squarespace issues a free SSL certificate for every connected custom domain automatically, but that doesn't mean your site is serving traffic over HTTPS. That's a separate setting you flip yourself. Leave it on the wrong option and search engines can index the insecure version of your site, visitors won't get redirected to the secure one, and you lose the padlock icon that signals trust.\n\nThis guide covers where that setting lives, what each option does per Squarespace's own documentation, and what to check if the certificate shows as unavailable or gets stuck processing instead of activating.",
+  "prerequisites": [
+    "A custom domain already connected to the Squarespace site; SSL only applies once a domain is connected",
+    "If the domain is registered elsewhere, its DNS records already pointed at Squarespace exactly as Squarespace's connection instructions specify"
+  ],
+  "costNote": "SSL is included at no extra cost on every Squarespace plan for a connected domain. There's nothing to buy or activate separately from the free certificate itself.",
   "steps": [
     {
       "heading": "Open Settings and find SSL",
-      "body": "From your Squarespace dashboard, go to Settings, then scroll down to Developer Tools and select SSL — it's easy to miss because it isn't grouped with Domains & Email, where most people look first for anything domain-security related. At the top of the SSL page you'll see Certificate Status, which should read Active if Squarespace has already issued a certificate for your connected domain. If it reads anything else — Unavailable, Pending, or Processing — the certificate itself hasn't finished issuing yet, and the security preference below won't matter until that resolves.",
+      "body": "From your Squarespace dashboard, go to Settings, then Developer Tools, then SSL; it's easy to miss because it isn't grouped with Domains & Email, where most people look first for anything domain-security related. At the top of the SSL page, Certificate Status should read Active if Squarespace has already issued a certificate for your connected domain. If it reads Unavailable or Processing instead, the certificate hasn't finished issuing, and the Security Preference below won't matter until that resolves.",
       "image": { "file": "/screenshots/QuET9Az3sTQ/04.webp", "caption": "The SSL settings page under Developer Tools, showing Certificate Status as Active and three Security Preference options, with Insecure currently selected." }
     },
     {
       "heading": "Understand the three security preference options",
-      "body": "Below the certificate status, Squarespace gives you three radio options: Secure (Preferred), HSTS Secure, and Insecure. Secure directs search engines to index the HTTPS version of your site and automatically redirects any visitor who lands on the insecure URL — this is the setting almost every site should use. HSTS Secure goes further, forcing browsers to only ever load the secure version and helping prevent downgrade attacks, but it's a stricter setting worth adding only after Secure has been running cleanly for a while. Insecure, the default on some older sites, leaves both versions live and indexable, which is the configuration that causes the missing-padlock complaints people search for.",
+      "body": "Below the certificate status, Squarespace gives three options. Secure (Preferred) directs search engines to index the HTTPS version of your site and automatically redirects visitors from the insecure URL; Squarespace's own documentation calls this the setting almost every site should use. HSTS Secure goes further, forcing browsers to only load the secure version and helping prevent downgrade attacks, and Squarespace's help center recommends enabling it together with Secure instead of waiting. Insecure is meant for legacy domains registered or connected before October 2016; it leaves both HTTP and HTTPS versions live and indexable, which is the configuration behind most missing-padlock complaints.",
       "image": null
     },
     {
       "heading": "Switch to Secure and save",
-      "body": "Click the radio button next to Secure (Preferred), then click Save in the top-right corner of the settings panel. The change applies immediately to new requests, but if your site was previously running Insecure, give it a little time for cached versions of your pages to clear out of search engines and browsers. Once saved, load your site in a fresh browser tab and confirm you see the padlock icon and an automatic redirect if you try to load the plain HTTP version of a page.",
+      "body": "Click the radio button next to Secure (Preferred), then click Save in the top-right corner. The change applies immediately to new requests, but if your site was previously running Insecure, give it a little time for cached versions of your pages to clear out of search engines and browsers. Once saved, load your site in a fresh browser tab and confirm you see the padlock icon and an automatic redirect if you try to load the plain HTTP version of a page.",
       "image": { "file": "/screenshots/QuET9Az3sTQ/05.webp", "caption": "Secure (Preferred) selected on the SSL settings page, with the Save button now active in the top-right corner." }
     },
     {
       "heading": "Fix a certificate stuck on Unavailable",
-      "body": "If Certificate Status shows Unavailable instead of Active, the most common cause is a DNS mismatch — your domain isn't pointing correctly at Squarespace's servers, so Squarespace's certificate authority can't verify ownership to issue one. Go to Domains & Email and confirm the domain's DNS records match what Squarespace's connection instructions specify exactly; even a stray or missing record blocks issuance. If you recently connected the domain, this is often simply a timing issue rather than a misconfiguration — see the next step.",
+      "body": "Squarespace's own troubleshooting guidance splits this by where the domain is registered. For a domain bought through Squarespace, check that the default DNS records under Domains & Email are still intact; something removing them is the usual cause. For a domain registered elsewhere, confirm its DNS records match Squarespace's connection instructions exactly, and also check whether your registrar has a CAA record restricting which certificate authorities can issue certificates for the domain; Squarespace specifically flags this as a reason issuance can fail even with otherwise correct DNS.",
       "image": null
     },
     {
       "heading": "Wait out a certificate stuck on Processing",
-      "body": "SSL certificates aren't instant — after connecting a new domain or making a DNS change, Squarespace typically needs anywhere from a few minutes up to 72 hours to issue and activate a certificate, depending on how quickly your DNS changes propagate. During this window the status will read Processing and the Security Preference options may be greyed out or unavailable to change, which is expected rather than a sign of failure. Resist changing DNS settings again during this window, since each change can restart the verification clock and extend the wait.",
+      "body": "Squarespace's documentation puts the window at up to 48 hours after connecting a domain or changing DNS, not longer. During that time, Certificate Status reads Processing and the Security Preference options may be greyed out; that's expected, not a sign of failure. Changing DNS settings again mid-wait restarts that clock, so leave them alone once they're correct.",
       "image": null
     },
     {
       "heading": "Verify SSL is working across devices",
-      "body": "Once status shows Active and Secure is selected, test the site on both desktop and mobile, and from a network you don't normally use if possible, since local DNS caching can make a fixed site look broken to you longer than to everyone else. Look for the padlock in the address bar and try loading a plain http:// version of a page to confirm it redirects to https:// automatically — that redirect confirms Secure is actually doing its job, not just switched on in settings."
+      "body": "Once status shows Active and Secure is selected, test the site on desktop and mobile, ideally from a network you don't normally use, since local DNS caching can make a fixed site look broken to you longer than to everyone else. Look for the padlock in the address bar and try loading a plain http:// page to confirm it redirects to https:// automatically. If it still doesn't, and the certificate is genuinely Active, Squarespace's troubleshooting guide also points at the visitor's browser: one that doesn't appear on Let's Encrypt's list of platforms trusting ISRG Root X1 won't show the site as secure regardless of your settings."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Security Preference options",
+      "columns": ["Option", "What it does", "Best for"],
+      "rows": [
+        ["Secure (Preferred)", "Indexes the HTTPS version and redirects visitors to it automatically", "Nearly every site"],
+        ["HSTS Secure", "Forces browsers to only ever load the secure version, blocking downgrade attacks", "Used together with Secure; Squarespace recommends enabling both"],
+        ["Insecure", "Leaves both HTTP and HTTPS versions live and indexable", "Legacy domains connected before October 2016"]
+      ]
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Certificate Status stays Unavailable past 48 hours on a third-party domain",
+      "cause": "DNS records don't exactly match Squarespace's connection instructions, or the registrar has a CAA record that blocks Squarespace's certificate authority from issuing a certificate.",
+      "fix": "Compare every DNS record against Squarespace's instructions, and check the domain's CAA records at the registrar for a restriction that excludes Squarespace's issuer."
+    },
+    {
+      "problem": "Certificate Status stays Unavailable on a domain bought through Squarespace",
+      "cause": "One of the domain's default DNS records was changed or removed.",
+      "fix": "Go to Domains & Email and confirm the default records are still intact."
+    },
+    {
+      "problem": "The site still shows Not Secure even though Certificate Status is Active",
+      "cause": "Security Preference is still set to Insecure, or the visitor's browser isn't on Let's Encrypt's list of platforms that trust ISRG Root X1.",
+      "fix": "Confirm Secure is selected and saved, then check the browser in question against Let's Encrypt's supported-platforms list."
+    },
+    {
+      "problem": "A domain using forwarding keeps showing an SSL warning",
+      "cause": "Forwarded domains have their own SSL toggle, separate from the Security Preference setting, and it can end up switched off.",
+      "fix": "Find the SSL toggle for that forwarding domain, switch it on, and save."
     }
   ],
   "faq": [
-    { "question": "Why does my Squarespace SSL certificate say Unavailable?", "answer": "Almost always a DNS mismatch — your domain's DNS records don't match what Squarespace needs to verify ownership and issue the certificate. Check Domains & Email and compare your records against Squarespace's connection instructions exactly." },
-    { "question": "How long does it take for Squarespace SSL to finish processing?", "answer": "Typically a few minutes to a few hours, but it can take up to 72 hours depending on DNS propagation. Avoid making further DNS changes during this window, since each change can restart the wait." },
-    { "question": "What's the difference between Secure and HSTS Secure?", "answer": "Secure redirects insecure traffic to the HTTPS version automatically. HSTS Secure adds a stricter enforcement that forces browsers to only ever load the secure version, which helps prevent downgrade attacks but is best added after Secure has already been working reliably." },
-    { "question": "Do I need to pay extra for SSL on Squarespace?", "answer": "No — Squarespace includes a free SSL certificate automatically with every custom domain connected to a site on any current plan; there's no separate purchase or app needed." },
-    { "question": "Why don't visitors see the padlock even though my certificate is Active?", "answer": "Check that Security Preference is actually set to Secure and not left on Insecure — an active certificate only secures traffic when that setting directs visitors to the HTTPS version, otherwise both versions stay live and unencrypted requests go through." }
+    {
+      "question": "Why does my Squarespace SSL certificate say Unavailable?",
+      "answer": "Usually a DNS mismatch, or, for domains registered elsewhere, a CAA record at the registrar blocking Squarespace's certificate authority. Check Domains & Email and compare your records against Squarespace's connection instructions exactly."
+    },
+    {
+      "question": "How long does it take for Squarespace SSL to finish processing?",
+      "answer": "Squarespace's own documentation says up to 48 hours after connecting a domain or changing DNS. Avoid making further DNS changes during that window, since each change can restart the wait."
+    },
+    {
+      "question": "What's the difference between Secure and HSTS Secure?",
+      "answer": "Secure redirects insecure traffic to the HTTPS version automatically. HSTS Secure adds stricter enforcement that forces browsers to only load the secure version, helping prevent downgrade attacks. Squarespace recommends enabling both together instead of adding HSTS later."
+    },
+    {
+      "question": "Do I need to pay extra for SSL on Squarespace?",
+      "answer": "No. Squarespace includes a free SSL certificate automatically with every connected custom domain, on any plan, with no separate purchase or app needed."
+    },
+    {
+      "question": "Why don't visitors see the padlock even though my certificate is Active?",
+      "answer": "Check that Security Preference is set to Secure and not left on Insecure; an active certificate only secures traffic when that setting directs visitors to the HTTPS version. If Secure is already set, the visitor's browser may not be on Let's Encrypt's supported-platforms list."
+    },
+    {
+      "question": "Is the Insecure option ever the right choice?",
+      "answer": "Squarespace describes it as intended for legacy domains registered or connected before October 2016. For any newer or newly connected domain, Secure is the setting to use."
+    }
   ],
+  "references": [
+    {
+      "label": "Squarespace: Understanding SSL certificates (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/205815898-Understanding-SSL-certificates"
+    },
+    {
+      "label": "Squarespace: Troubleshooting SSL (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/360028492471-Troubleshooting-SSL"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough, and the Developer Tools menu location was confirmed directly against the screenshots. The processing window, the Insecure option's intended use, the HSTS recommendation, and the Unavailable-status causes were re-checked against Squarespace's official Understanding SSL and Troubleshooting SSL pages in September 2026. That check corrected this guide's earlier 72-hour processing estimate to Squarespace's documented 48 hours, corrected the claim that HSTS should wait until Secure has run for a while (Squarespace recommends enabling both together), and added the CAA-record and browser-compatibility causes that were previously missing.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }
