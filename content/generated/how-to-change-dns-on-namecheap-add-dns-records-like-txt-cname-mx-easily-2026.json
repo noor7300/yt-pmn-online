@@ -1,45 +1,69 @@
 {
   "slug": "how-to-change-dns-on-namecheap-add-dns-records-like-txt-cname-mx-easily-2026",
   "seoTitle": "Change DNS on Namecheap: Add TXT, CNAME & MX Records",
-  "metaDescription": "Learn how to access Namecheap's Advanced DNS panel and add or edit TXT, CNAME, and MX records for email, domain verification, and hosting.",
-  "intro": "Managing DNS records in Namecheap lets you connect email services, verify domain ownership, and point subdomains at third-party hosting, but the panel packs a lot of record types into one screen and it's easy to edit the wrong row. This guide walks through finding a domain's Advanced DNS panel, reading the existing host records so you don't overwrite something that's already working, and adding a new TXT, CNAME, or MX record correctly.",
+  "metaDescription": "Access Namecheap's Advanced DNS panel to add TXT and CNAME records, and set up MX records the way Namecheap really manages them: through Mail Settings, not the same Add New Record flow.",
+  "intro": "Managing DNS records in Namecheap lets you connect email services, verify domain ownership, and point subdomains at third-party hosting, but the panel packs a lot into one screen and it's easy to edit the wrong row. This guide covers finding a domain's Advanced DNS panel, reading the records already there so you don't overwrite something working, and adding TXT, CNAME, and MX records correctly. MX records specifically don't work the same way as the other two.",
   "steps": [
     {
       "heading": "Open your domain list",
-      "body": "Log in to Namecheap and land on the Domain List screen in the dashboard, which shows every domain on your account along with its status, auto-renew setting, and expiration date. Find the domain you need to edit and confirm it shows as Active — a domain that's expired or in a locked state won't let DNS changes take effect properly. Click Manage next to the domain to move into its individual settings.",
+      "body": "Log in to Namecheap and land on the Domain List screen, which shows every domain on your account with its status, auto-renew setting, and expiration date. Confirm the domain you need shows as Active; an expired or locked domain won't let DNS changes take effect properly. Click Manage next to it to open its individual settings.",
       "image": { "file": "/screenshots/PqtYvU1erbU/01.webp", "caption": "The Domain List screen in Namecheap, showing a domain's active status and the Manage button that opens its individual settings." }
     },
     {
       "heading": "Go to Advanced DNS",
-      "body": "Inside the domain's detail page you'll see tabs for Domain, Products, Sharing & Transfer, and Advanced DNS — click Advanced DNS, since that's the only tab that exposes host records. The page briefly shows a loading state while it pulls the domain's current DNS configuration, which is normal and usually resolves within a second or two.",
-      "image": { "file": "/screenshots/PqtYvU1erbU/03.webp", "caption": "A domain's detail page in Namecheap with the tab bar visible — Advanced DNS is the tab that leads to host records." }
+      "body": "On the domain's detail page, click the Advanced DNS tab. Domain, Products, and Sharing & Transfer sit alongside it, but Advanced DNS is the only one that exposes host records. The page briefly shows a loading state while it pulls the domain's current configuration.",
+      "image": { "file": "/screenshots/PqtYvU1erbU/03.webp", "caption": "A domain's detail page in Namecheap with the tab bar visible. Advanced DNS is the tab that leads to host records." }
     },
     {
       "heading": "Read the existing host records before changing anything",
-      "body": "Once Advanced DNS loads, you'll see a Host Records table listing every record currently active on the domain, with columns for Type, Host, Value, and TTL. Take a moment to scan what's already there — in a typical setup you might find a CNAME record used for domain verification alongside URL Redirect records pointing the domain elsewhere — so you know what's safe to leave alone versus what you're actually here to add or edit.",
+      "body": "Once Advanced DNS loads, the Host Records table lists every record currently active, with columns for Type, Host, Value, and TTL. Scan what's there before touching anything, and keep one specific rule in mind: don't add a CNAME record on the bare domain (the @ host). Namecheap's own guidance warns that a CNAME there can disrupt MX records and break email, which is easy to do by accident if a service's setup instructions say to alias the root domain without mentioning the exception.",
       "image": { "file": "/screenshots/PqtYvU1erbU/04.webp", "caption": "The Host Records table under Advanced DNS, listing a domain's current CNAME and URL Redirect records with their type, host, value, and TTL." }
     },
     {
-      "heading": "Add a new TXT, CNAME, or MX record",
-      "body": "Click Add New Record at the bottom of the table, then use the Type dropdown to choose TXT Record, CNAME Record, or MX Record depending on what the service you're connecting requires. Fill in the Host field with the subdomain or prefix specified — often `@` for the root domain or a specific value like `www` — and paste the Value exactly as provided, since a single mismatched character will cause verification or mail delivery to fail. Leave TTL on Automatic unless a service specifically asks for a shorter value.",
+      "heading": "Add a TXT or CNAME record",
+      "body": "Click Add New Record, then use the Type dropdown to choose TXT Record or CNAME Record. Fill in Host with the subdomain or prefix the service specifies, often @ for the root or a value like www for CNAME, and paste Value exactly as provided; a single mismatched character breaks verification. Leave TTL on Automatic unless a service asks for something shorter.",
       "image": { "file": "/screenshots/PqtYvU1erbU/05.webp", "caption": "A new CNAME record being added in the Host Records table, with Host, Value, and TTL fields open and the Add New Record / Save All Changes buttons below." }
     },
     {
-      "heading": "Save and double-check the record",
-      "body": "Click the green checkmark next to the row, or Save All Changes if you added more than one record, and Namecheap will validate the entry immediately — a red warning icon next to a field means something in that row needs fixing before it saves. Once saved, reopen Advanced DNS and confirm the new record appears exactly as intended in the table, since a typo here is much easier to catch now than after a service has already failed to verify."
+      "heading": "Add an MX record: this one works differently",
+      "body": "MX records aren't just another row in Add New Record the way TXT and CNAME are. Further down the Advanced DNS page, Namecheap has a separate Mail Settings section with its own dropdown: No Email Service, Email Forwarding, MXE Record, Custom MX, Private Email, and Gmail (currently listed as unavailable; use Custom MX for Google Workspace instead). Setting up custom email hosting means switching this dropdown to Custom MX, then entering the mail server as the MX value with a priority number, plus a matching A record if the mail server address doesn't already resolve. Leaving Mail Settings on something else, like Email Forwarding, while also trying to add an MX record by hand is the most common reason mail routing doesn't behave as expected."
     },
     {
-      "heading": "Allow time for DNS propagation",
-      "body": "DNS changes on Namecheap don't take effect instantly everywhere — propagation can take anywhere from a few minutes to about 48 hours depending on the record's TTL and how various networks cache DNS data. If a service like Google Workspace or Microsoft 365 says it can't find your new record right after saving, wait before troubleshooting further; re-checking too early is the most common reason people assume a correctly entered record is broken."
+      "heading": "Save, verify, and give it time",
+      "body": "Click the green checkmark next to a row, or Save All Changes for several at once; a red warning icon means something in that row needs fixing first. Reopen Advanced DNS afterward and confirm the record looks exactly right. A typo here is far easier to catch now than after a service has already failed to verify.\n\nNamecheap's own systems typically reflect a newly saved record within about 30 minutes. Other DNS resolvers around the internet cache records according to their TTL, though, so a service checking from outside Namecheap can still take longer to see the change, especially if the previous record had a long TTL. If a check fails immediately after saving, that's usually just too soon to ask."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A new MX record was added, but mail still isn't delivering",
+      "cause": "MX records aren't controlled purely through Add New Record. The separate Mail Settings dropdown needs to be set to Custom MX; if it's still on Email Forwarding or another option, that setting overrides or conflicts with a manually added MX row.",
+      "fix": "Open Mail Settings, switch it to Custom MX, and re-enter the mail server there with its priority. Add an A record for the mail server's hostname if it doesn't already resolve."
+    },
+    {
+      "problem": "Email stopped working after adding a CNAME record",
+      "cause": "The CNAME was added on the bare domain (@ host). Namecheap warns this can disrupt MX records for that domain.",
+      "fix": "Remove the CNAME from the root host. If a service needs the root domain aliased, use an ALIAS record instead, which Namecheap supports specifically because it can coexist with MX records."
+    },
+    {
+      "problem": "A third-party service says it still can't find the record right after saving",
+      "cause": "Namecheap's own propagation is normally around 30 minutes, but resolvers elsewhere on the internet cache the domain's previous DNS state according to its TTL, which can run much longer than that.",
+      "fix": "Wait at least 30 minutes and recheck. If the previous record had a long TTL, allow more time before assuming the entry is wrong."
     }
   ],
   "faq": [
-    { "question": "What is a TXT record typically used for?", "answer": "TXT records are most often used to verify domain ownership for services like Google Workspace, Microsoft 365, or other third-party platforms that need proof you control the domain." },
-    { "question": "Why would I need to add an MX record?", "answer": "MX records tell the internet where to deliver email for your domain, so they're essential if you're setting up custom email hosting through a provider other than your registrar." },
-    { "question": "How can I speed up DNS propagation?", "answer": "You can't force it directly, but lowering the TTL value on a record ahead of a planned change can help updates take effect faster across the internet afterward." },
-    { "question": "What happens if I enter a DNS record incorrectly?", "answer": "An incorrect record can prevent domain verification or email delivery from working, so it's worth comparing your entry character-for-character against what the service provided before saving." },
-    { "question": "Do I need to touch existing records to add a new one?", "answer": "No — adding a new TXT, CNAME, or MX record is done through Add New Record, and your existing host records stay untouched unless you specifically edit or delete them." }
+    { "question": "What is a TXT record typically used for?", "answer": "Most often to verify domain ownership for services like Google Workspace, Microsoft 365, or other platforms that need proof you control the domain." },
+    { "question": "Can I add an MX record the same way as a TXT or CNAME record?", "answer": "Not exactly. Namecheap routes mail through a separate Mail Settings dropdown further down the Advanced DNS page. That needs to be set to Custom MX before a manually entered MX record will control mail delivery." },
+    { "question": "Why would I need to add an MX record?", "answer": "MX records tell the internet where to deliver mail for your domain, so they matter if you're setting up custom email hosting through a provider other than your registrar, via Namecheap's Custom MX option." },
+    { "question": "How long does a DNS change really take to apply?", "answer": "Namecheap says its own systems typically pick up a new record within about 30 minutes. Other resolvers across the internet can take longer, since they cache the domain's previous DNS answers according to that record's TTL." },
+    { "question": "What happens if I enter a DNS record incorrectly?", "answer": "An incorrect record can break domain verification or email delivery, so compare each field character-for-character against what the service provided before saving." },
+    { "question": "Do I need to touch existing records to add a new one?", "answer": "No. Adding a new TXT, CNAME, or MX record is done through Add New Record (or Mail Settings for MX), and existing host records stay untouched unless you edit or delete them directly." }
   ],
+  "references": [
+    { "label": "Namecheap: Which record type option should I choose? (official)", "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/579/2237/which-record-type-option-should-i-choose-for-the-information-im-about-to-enter/" },
+    { "label": "Namecheap: How can I set up MX records required for mail service? (official)", "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/322/2237/how-can-i-set-up-mx-records-required-for-mail-service/" },
+    { "label": "Namecheap: How long does it take for changes to take effect? (official)", "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/9776/10/how-long-does-it-take-for-changes-to-take-effect/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2026. In September 2026 the record-type behavior and propagation timing were re-checked against Namecheap's own knowledgebase. That check corrected the article's treatment of MX records as just another Add New Record entry (they route through the separate Mail Settings dropdown) and replaced the vague 'a few minutes to 48 hours' propagation claim with Namecheap's own stated figure plus the TTL caveat that explains the longer end of that range.",
   "generatedAt": "2026-08-08T09:10:00Z",
   "deep": true
 }

@@ -1,44 +1,68 @@
 {
   "slug": "how-to-set-up-subscription-payment-plans-on-stripe-create-recurring-payments-eas",
   "seoTitle": "Set Up Subscription Payment Plans on Stripe (2026)",
-  "metaDescription": "Create a subscription product in Stripe, set recurring pricing, and test the full billing flow in Sandbox before switching your store to live mode.",
-  "intro": "Subscriptions power everything from SaaS tools to membership sites, and Stripe makes the underlying billing manageable as long as you build and test it in the right order. The dashboard's Sandbox mode is the key piece most guides skip past — it lets you build a real test subscription with real pricing before a single live charge happens. This guide walks through creating a subscription product, setting recurring pricing, and using Stripe's built-in test-subscription tool to confirm everything works before you flip to live mode.",
+  "metaDescription": "Create a Stripe subscription product with a recurring price, test the full billing flow in Sandbox, and see why you can only cancel a subscription, never delete one.",
+  "intro": "Subscriptions power everything from SaaS tools to membership sites, and Stripe's Sandbox mode lets you build and test the whole flow with real pricing before a single live charge happens. The part that trips people up is where the recurring price lives: Stripe sets it on the product itself, not on the subscription you create afterward.\n\nThis guide covers creating a subscription product with its recurring price, testing it in Sandbox, and connecting it to a real checkout, plus a couple of Stripe's stricter rules, like the fact that a subscription can be cancelled or paused but never deleted.",
+  "costNote": "Stripe Billing carries its own fee on top of standard payment processing for subscription and invoicing features. Check Stripe's current Billing pricing page before committing a plan to it.",
   "steps": [
     {
-      "heading": "Create a subscription product in Stripe",
-      "body": "In your Stripe dashboard, open Product catalog and add a new product intended for recurring billing rather than a one-time charge. Give it a clear name and description, since this is what customers will see on their invoice every billing cycle — vague product names are a common source of \"what is this charge\" support tickets down the line."
+      "heading": "Create a product with a recurring price",
+      "body": "In your Stripe dashboard, open Product catalog and add a new product for recurring billing, not a one-time charge. The recurring price, meaning both the amount and the billing interval such as monthly or yearly, gets set right here, on the product, not later when you create a subscription. Give the product a clear name and description; that's what shows up on the customer's invoice every cycle, and a vague name is a common source of \"what is this charge\" support tickets."
     },
     {
-      "heading": "Open Billing and Subscriptions",
-      "body": "From the left sidebar, expand Billing and select Subscriptions, or use the Subscriptions shortcut near the top of the dashboard. Note the banner across the top of the screen confirming you're working in a sandbox — changes made here don't touch your live account, which makes this the safe place to build out your first subscription flow before anything goes live.",
+      "heading": "Open Billing, then Subscriptions",
+      "body": "From the left sidebar, expand Billing and select Subscriptions. Check the banner across the top confirming you're in Sandbox mode; changes made here don't touch live customers, so it's the safe place to build your first subscription flow.",
       "image": { "file": "/screenshots/NVyyXhvPFsQ/03.webp", "caption": "The Stripe dashboard in Sandbox mode, with Billing expanded to show Overview, Subscriptions, Invoices, and Usage-based in the left sidebar." }
     },
     {
-      "heading": "Set up recurring pricing on your product",
-      "body": "When creating a test subscription, Stripe walks you through Subscription details, where Pricing lists the product with its quantity and total — this is where the recurring price actually gets attached, whether that's a flat monthly fee or a metered rate. Add the product, confirm the price and quantity are correct, and use Add coupon here if you're testing a promotional rate before it goes live.",
+      "heading": "Create a test subscription and select your priced product",
+      "body": "Click Create subscription, find or add a customer, then add your product. Stripe only lets you select products that already carry a recurring price, so this step is choosing the price you set earlier, not configuring one from scratch. Confirm the quantity and total look right, and use Add coupon here if you're testing a promotional rate.",
       "image": { "file": "/screenshots/NVyyXhvPFsQ/04.webp", "caption": "Stripe's Create a test subscription screen, with a customer field, a Duration set to \"Forever,\" and a product priced at $11.00 USD under Pricing." }
     },
     {
-      "heading": "Set the billing start date and duration",
-      "body": "Scroll to Bill starting and pick the date the first charge should go out — Stripe defaults to today but lets you pick any future date from the calendar picker, which is useful if you're onboarding a customer mid-cycle or offering a delayed first charge. The Duration field above it controls whether the subscription runs indefinitely or for a fixed number of cycles, so set that intentionally rather than leaving it on whatever Stripe defaults to.",
+      "heading": "Set the billing start date",
+      "body": "Scroll to Bill starting and pick the date the first invoice should go out. Stripe defaults to today but lets you choose any future date, which helps if you're onboarding a customer mid-cycle. This same date controls every later invoice too, so it's worth setting correctly the first time instead of adjusting it once customers are already subscribed.",
       "image": { "file": "/screenshots/NVyyXhvPFsQ/05.webp", "caption": "The Bill starting date picker inside Create a test subscription, with August 20, 2025 selected as the start date." }
     },
     {
-      "heading": "Connect the price to your checkout page",
-      "body": "Once the recurring price exists on your product, link it to a Stripe Checkout session or Payment Link so customers can actually subscribe from your site rather than through the dashboard. This is the step that turns a price you configured internally into something a real customer can click and pay for — test it the same way you tested the subscription itself, by walking through the checkout flow as if you were the customer."
+      "heading": "Connect the price to a real checkout",
+      "body": "Once the recurring price exists on your product, link it to a Stripe Checkout session or a Payment Link so customers can subscribe from your site instead of through the dashboard. Walk through the checkout yourself in Sandbox first, the same way you tested the subscription itself."
     },
     {
-      "heading": "Test fully in Sandbox, then switch to Live Mode",
-      "body": "Before accepting a single real payment, run through the entire flow in Sandbox: create a test subscription, confirm the invoice generates correctly, and check that a cancellation actually stops future billing. Once everything behaves as expected, toggle from Sandbox to Live Mode in the dashboard — your subscription and pricing setup carries over, and from that point on the same flow processes real customer payments."
+      "heading": "Test fully, then switch to Live mode",
+      "body": "Run through the whole flow in Sandbox: create a test subscription, confirm the invoice generates, and cancel one to confirm billing stops. There's no delete option for a subscription in Stripe, only cancel or pause, so cancel is the button to look for either way. Once everything behaves as expected, toggle from Sandbox to Live mode; your product and pricing setup carries over and starts processing real payments."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no way to delete a subscription",
+      "cause": "Stripe doesn't support deleting a subscription at all, only cancelling or pausing it.",
+      "fix": "Use Cancel subscription, immediately, at period end, or on a custom date, from the subscription's overflow menu."
+    },
+    {
+      "problem": "A product doesn't show up when creating a subscription",
+      "cause": "Subscriptions can only use products that already have a recurring price attached; a one-time price isn't selectable here.",
+      "fix": "Edit the product in Product catalog and add a recurring price before trying again."
+    },
+    {
+      "problem": "Invoices are generating on the wrong date",
+      "cause": "The billing cycle date, set when the subscription was created, controls every future invoice, not just the first one.",
+      "fix": "Update the billing cycle date on the subscription directly instead of waiting for a later cycle to self-correct."
     }
   ],
   "faq": [
-    { "question": "What kinds of businesses benefit from Stripe subscriptions?", "answer": "Subscriptions work well for memberships, SaaS products, digital products, or any service billed on a recurring monthly or annual basis." },
-    { "question": "Can customers cancel their subscription themselves?", "answer": "Cancellations and billing cycles can be managed from your Stripe dashboard under Billing → Subscriptions, and you can also expose self-service cancellation through the customer portal." },
-    { "question": "Should I test subscriptions before going live?", "answer": "Yes — Stripe's Sandbox mode lets you build and run a full test subscription, including pricing, billing start date, and invoicing, so you can catch issues before switching to Live Mode." },
-    { "question": "How do I switch from Sandbox to Live Mode?", "answer": "Once you've confirmed your subscription setup works correctly in Sandbox, you toggle over to Live Mode in your Stripe dashboard, and your product and pricing configuration carries over to start accepting real payments." },
-    { "question": "Where do I set the billing start date for a subscription?", "answer": "Inside the Create a test subscription flow, the Bill starting field lets you pick any date from a calendar picker, defaulting to the current day if you don't change it." }
+    { "question": "Can I delete a subscription in Stripe?", "answer": "No. Stripe only lets you cancel or pause a subscription; there's no delete option at all." },
+    { "question": "Where do I actually set the recurring price?", "answer": "On the product itself, in Product catalog, when you first create it. Creating a subscription later just selects a price that already exists." },
+    { "question": "Does Stripe Billing cost extra?", "answer": "Yes, it carries its own fee on top of standard payment processing. Check Stripe's Billing pricing page for current rates." },
+    { "question": "Should I test subscriptions before going live?", "answer": "Yes. Stripe's Sandbox mode lets you build and run a full test subscription, including pricing, billing start date, and invoicing, before switching to Live mode." },
+    { "question": "How do I switch from Sandbox to Live mode?", "answer": "Toggle from Sandbox to Live mode in the dashboard once you've confirmed everything works; your product and pricing configuration carries over." },
+    { "question": "Where do I set the billing start date for a subscription?", "answer": "Inside the Create subscription flow, the Bill starting field offers a calendar picker and defaults to the current day if you don't change it." }
   ],
+  "references": [
+    { "label": "Stripe Docs: Create subscriptions (official)", "url": "https://docs.stripe.com/no-code/subscriptions" },
+    { "label": "Stripe Docs: Recurring pricing models (official)", "url": "https://docs.stripe.com/products-prices/pricing-models" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough in Stripe's Sandbox. The order of operations (the recurring price is set on the product, not the subscription), the billing-cycle behavior, and the fact that subscriptions can only be cancelled or paused, never deleted, were checked against Stripe's official documentation in September 2026. That check corrected how this guide previously described the pricing step and added the cancel-versus-delete distinction it left out.",
   "generatedAt": "2026-08-08T09:25:00Z",
   "deep": true
 }

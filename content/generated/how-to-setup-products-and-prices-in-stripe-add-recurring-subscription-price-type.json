@@ -1,67 +1,89 @@
 {
   "slug": "how-to-setup-products-and-prices-in-stripe-add-recurring-subscription-price-type",
   "seoTitle": "How to Set Up Products & Prices in Stripe (2026)",
-  "metaDescription": "Learn to create products in Stripe and add both one-time and recurring subscription prices, using the Add a product dialog's Recurring and One-off toggle.",
-  "intro": "Whether you're selling a single digital download or running a subscription business, Stripe's product and pricing setup is the foundation everything else builds on — checkout, invoices, and customer billing all trace back to how a product and its prices are configured. This guide walks through the actual Add a product dialog in the Stripe dashboard, including where the Recurring versus One-off toggle lives and how billing period and tax settings fit together.",
+  "metaDescription": "Create a product in Stripe and add a recurring or one-time price from the Product catalog, including the tax code field and the one thing you can never edit on a price once it's saved.",
+  "intro": "Checkout, invoices, and customer billing in Stripe all trace back to how a product and its prices are set up, which makes this the part worth getting right before building anything on top of it. This guide walks through the Product catalog in the Stripe dashboard, where the recurring-versus-one-time choice lives, and a constraint on editing prices later that catches people who expect to fix a typo the way they would in a spreadsheet.",
   "steps": [
     {
       "heading": "Sign in to your Stripe dashboard",
-      "body": "Go to Stripe and sign in with your account email and password, or use Google, a passkey, or SSO if your account is set up that way. Product and price management lives inside the dashboard rather than on Stripe's public marketing pages, so this is the first real step regardless of which pricing model you're building toward.",
+      "body": "Go to Stripe and sign in with your account email and password, or with Google, a passkey, or SSO if your account uses one of those. Product and price management lives inside the dashboard, not on Stripe's public marketing pages, so this is the first real step regardless of which pricing model you're building toward.",
       "image": { "file": "/screenshots/RFFvMMPY2lQ/02.webp", "caption": "The Stripe sign-in screen, with password, Google, passkey, and SSO options." }
     },
     {
       "heading": "Open Product catalog and start a new product",
-      "body": "In the left-hand menu, under Shortcuts, click Product catalog, then start adding a new entry. The Add a product panel opens with a live Preview alongside it that estimates totals based on the pricing model and quantity you set, which is a fast way to sanity-check a price before saving it. Fill in the Name field — this is what customers see at checkout, in the customer portal, and on quotes — and add a Description if you want more context to appear alongside it. You can also upload a product image (JPEG, PNG, or WEBP under 2MB) that shows up at checkout.",
+      "body": "In the left-hand menu, click Product catalog, then start adding a new entry. The Add a product panel opens with a live Preview alongside it, a fast way to sanity-check a price before saving. Fill in Name, which is what customers see at checkout, in the customer portal, and on quotes, and add a Description if you want more context to show alongside it. You can also upload a product image; Stripe's own limit is a JPEG, PNG, or WEBP file under 2MB, and the image shows up at checkout.",
       "image": { "file": "/screenshots/RFFvMMPY2lQ/03.webp", "caption": "The Add a product panel, with Name and Description fields filled in and a live checkout Preview building on the right." }
     },
     {
-      "heading": "Set the product tax code",
-      "body": "Below the image upload, Product tax code controls how Stripe calculates automatic tax for this item. Clicking the dropdown opens a searchable list grouped into categories like General (with sub-options such as Electronically Supplied Services, Services, and Tangible Goods) and Digital products. Leaving it on Use preset defaults to whatever your account's tax settings specify, which is fine for most stores, but picking the closest matching category here — especially Digital products or Electronically Supplied Services for anything non-physical — keeps your automatic tax calculations accurate from the start.",
+      "heading": "Set the product tax code, if you use Stripe Tax",
+      "body": "Below the image upload, Product tax code controls how Stripe calculates automatic tax for this item, but only if Stripe Tax is turned on for your account. If it isn't, this field has nothing to act on and can be skipped. When it does apply, the dropdown opens a searchable list grouped into categories like General (with sub-options such as Electronically Supplied Services, Services, and Tangible Goods) and Digital products. Leaving it on Use preset defaults to your account's general tax settings; picking the closest matching category here keeps automatic tax calculations accurate for that specific product from the start.",
       "image": { "file": "/screenshots/RFFvMMPY2lQ/04.webp", "caption": "The Product tax code dropdown, showing General and Digital products categories, with Billing period set to Monthly below it." }
     },
     {
       "heading": "Choose Recurring or One-off pricing",
-      "body": "Under More options, the pricing section splits into two tabs: Recurring and One-off. Recurring is what turns a product into a subscription — set the Amount (for example $11.00 USD) and choose the Billing period, such as Monthly or Yearly, and Stripe will automatically charge the customer on that schedule until they cancel. One-off works the same way but charges the amount a single time with no repeat billing, which is the right choice for a straightforward digital download or one-time service fee.",
+      "body": "The pricing section splits into two tabs: Recurring and One-off. Recurring turns a product into a subscription. Set the Amount (say, $11.00 USD) and a Billing period such as Monthly or Yearly, and Stripe charges the customer on that schedule until they cancel. One-off charges the amount a single time with no repeat billing, the right choice for a digital download or a one-time service fee.\n\nOne constraint worth knowing before you save: once a price exists, you can't edit its amount, in the dashboard or through the API. Stripe only lets you update a price's metadata, nickname, and active status afterward. Get the amount right here; the fix later is a new price, not a correction to this one.",
       "image": { "file": "/screenshots/RFFvMMPY2lQ/05.webp", "caption": "The Recurring and One-off price tabs, with Recurring selected, an $11.00 amount, and Billing period set to Yearly." }
     },
     {
       "heading": "Decide between monthly and yearly billing",
-      "body": "If you're offering a subscription, the billing period you choose has real business implications, not just a checkout label. Monthly billing lowers the barrier to a first purchase and gives you more frequent renewal touchpoints, while yearly billing improves cash flow up front and tends to reduce churn since customers commit for longer. Nothing stops you from creating both — a monthly price and a yearly price on the same product — so customers can pick the option that fits them.",
-      "image": null
+      "body": "For a subscription, the billing period has real business consequences beyond the checkout label. Monthly billing lowers the barrier to a first purchase and creates more frequent renewal touchpoints. Yearly billing improves cash flow up front and tends to reduce churn, since customers commit for longer. Nothing stops you from creating both a monthly and a yearly price on the same product, so customers can pick what fits."
     },
     {
-      "heading": "Add more than one price to the same product",
-      "body": "A single product in Stripe isn't limited to one price. Once your first price is saved, you can return to the product and add another — for instance, a Recurring monthly price alongside a Recurring yearly price, or a One-off price next to a subscription option for customers who'd rather pay once. Each price gets its own ID, so your checkout or billing code references whichever specific price you want to offer in a given context.",
-      "image": null
+      "heading": "Add more prices, or fix one you got wrong",
+      "body": "A product isn't limited to one price. Return to it later and add another: a Recurring monthly price alongside a Recurring yearly one, say, or a One-off price next to a subscription for customers who'd rather pay once. Each price gets its own ID, so your checkout or billing code references whichever one applies.\n\nFixing a wrong amount works the same way: create the new price, set it as the product's default price, then archive the old one instead of trying to edit it. Archiving stops it from being offered again without breaking the historical record for anyone already on it."
     },
     {
       "heading": "Connect the price to checkout or a customer",
-      "body": "With the product and its price (or prices) saved, the final step is putting them to use — either by adding the price ID to a Stripe Checkout session or Payment Link, or by attaching it directly to a customer record if you're billing them outside of a storefront flow. Recurring prices specifically require a subscription to be created against the customer, while one-off prices can be charged through a simple payment. Test the flow end to end before sending it to real customers, since a wrong billing period or amount is much easier to catch here than after someone's already been charged.",
-      "image": null
+      "body": "With the product and its price saved, put them to use: add the price ID to a Stripe Checkout session or Payment Link, or attach it directly to a customer record if you're billing outside a storefront flow. Recurring prices need a subscription created against the customer; one-off prices can be charged through a simple payment. Test the flow before sending it to real customers. A wrong billing period is much easier to catch here than after someone's been charged."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no way to edit a price's amount after saving it",
+      "cause": "This is by design. Stripe prices are immutable once created; only metadata, nickname, and active status can be changed afterward.",
+      "fix": "Create a new price with the correct amount, set it as the default price on the product, and archive the old one."
+    },
+    {
+      "problem": "Delete product is unavailable for a product with no active prices left",
+      "cause": "Stripe still won't delete a product that has any price attached to it, even an archived one. Only a product with zero associated prices can be deleted.",
+      "fix": "Delete the price first (only possible if it was never used), or leave the product archived instead of trying to delete it. Stripe keeps a record of both for historical transactions."
+    },
+    {
+      "problem": "Picking a Product tax code doesn't seem to change anything at checkout",
+      "cause": "Product tax code only affects calculations when Stripe Tax is enabled on the account. With it off, the field is saved but has nothing to act on.",
+      "fix": "Turn on Stripe Tax in account settings first if per-product tax categories need to matter."
     }
   ],
   "faq": [
     {
       "question": "What's the difference between one-time and recurring prices in Stripe?",
-      "answer": "In the Add a product panel, One-off charges a customer once with no repeat billing, while Recurring automatically bills them on a set Billing period — Monthly or Yearly, for example — until the subscription is canceled."
+      "answer": "In the Add a product panel, One-off charges a customer once with no repeat billing, while Recurring bills them automatically on a set Billing period, Monthly or Yearly for example, until the subscription is canceled."
     },
     {
       "question": "Can one product have both a one-time and recurring price?",
-      "answer": "Yes. A single product in Stripe can have multiple prices attached — for example a Recurring monthly price and a One-off price — each with its own ID that you reference separately at checkout."
+      "answer": "Yes. A single product can carry multiple prices, such as a Recurring monthly price and a One-off price, each with its own ID referenced separately at checkout."
+    },
+    {
+      "question": "Can I change a price's amount after I've created it?",
+      "answer": "No. Stripe only lets you edit a price's metadata, nickname, and active status once it's saved. To change an amount, create a new price and archive the old one; you can't delete a price that's already been used."
     },
     {
       "question": "Do I need to write code to set up products and prices?",
-      "answer": "No. Products and prices can be created entirely from the Add a product panel in the Stripe dashboard, including the Recurring/One-off toggle, amount, and billing period — no code required until you connect the price to your own checkout flow."
+      "answer": "No. Both can be created entirely from the Add a product panel in the dashboard, including the Recurring/One-off toggle, amount, and billing period. Code only comes in once you connect the price to your own checkout flow."
     },
     {
       "question": "How do I bill customers on a monthly vs. annual cycle?",
-      "answer": "When adding a Recurring price, use the Billing period dropdown to choose Monthly or Yearly (among other intervals). You can create separate prices for each interval on the same product if you want to offer both."
+      "answer": "When adding a Recurring price, use the Billing period dropdown to choose Monthly or Yearly, among other intervals. You can create separate prices for each interval on the same product to offer both."
     },
     {
       "question": "Why does Stripe ask for a Product tax code?",
-      "answer": "The Product tax code determines how Stripe calculates automatic tax for that item. Choosing a specific category, such as Digital products or General - Electronically Supplied Services, keeps tax calculations accurate instead of relying on your account's generic preset."
+      "answer": "It determines how Stripe calculates automatic tax for that item, but only matters if Stripe Tax is turned on for your account. If it is, a specific category like Digital products keeps calculations accurate instead of falling back to your account's generic preset."
     }
   ],
+  "references": [
+    { "label": "Stripe: Manage products and prices (official)", "url": "https://docs.stripe.com/products-prices/manage-prices" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2026. The pricing-model steps, the 2MB image limit, and the tax-code behavior were re-checked against Stripe's official documentation in September 2026, which is also where the price-immutability constraint and the archive-before-delete rule came from. Neither appeared in this article before.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }

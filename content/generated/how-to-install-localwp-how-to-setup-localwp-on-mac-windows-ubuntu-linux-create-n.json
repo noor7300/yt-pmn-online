@@ -1,67 +1,96 @@
 {
   "slug": "how-to-install-localwp-how-to-setup-localwp-on-mac-windows-ubuntu-linux-create-n",
   "seoTitle": "How to Install LocalWP on Mac, Windows, or Linux",
-  "metaDescription": "Learn how to download LocalWP, check system requirements, and create a new local WordPress site with automatic installation and SSL included.",
-  "intro": "LocalWP has become the default way developers spin up WordPress sites without paying for hosting or registering a domain first — everything runs on your own machine until you're ready to go live. This guide covers getting LocalWP from its official site, confirming your computer meets the minimum requirements, and what happens automatically once a new site is created, whether you're on Mac, Windows, or Linux.",
+  "metaDescription": "Download LocalWP, confirm your machine meets the minimum requirements, and create a new local WordPress site with automatic installation and SSL included.",
+  "intro": "LocalWP has become a default way developers spin up WordPress sites without paying for hosting or registering a domain first, since everything runs on your own machine until you're ready to go live. This guide covers getting LocalWP from its official site, confirming your computer meets the minimum requirements, and what happens automatically once a new site is created, whether you're on Mac, Windows, or Linux.",
+  "prerequisites": [
+    "A valid email address — LocalWP's download form requires one before it hands you the installer link"
+  ],
+  "costNote": "Local itself is free and always will be. The \"Get Hosting\" link on its site connects to WP Engine, which owns Local; connecting your site to WP Engine hosting is also free, and the only cost is whichever hosting plan you pick when you're ready to publish live.",
   "steps": [
     {
       "heading": "Download LocalWP from the official site",
-      "body": "LocalWP's homepage bills it plainly as \"The #1 local WordPress development tool\" and \"An effortless way to develop WordPress sites locally,\" with a single Download for Free button front and center. The site detects your operating system and offers the right installer automatically, whether that's a Mac .dmg, a Windows .exe, or a Linux .deb/.rpm package — there's no separate download page to hunt through for each platform. If you'd rather host instead of develop locally, there's also a Get Hosting link next to the download button, but that's a different product from the local tool this guide covers.",
+      "body": "LocalWP's homepage bills it plainly as \"The #1 local WordPress development tool,\" with a single Download for Free button front and center. The site detects your operating system and offers the matching installer: a Mac .dmg, a Windows .exe, or a Linux package. It asks for an email address before releasing the download link, so have one ready. If you'd rather host instead of develop locally, there's also a Get Hosting link next to the download button, but that's a separate product from the local tool covered here.",
       "image": { "file": "/screenshots/v_WO-u8hhA0/01.webp", "caption": "The LocalWP homepage, with the Download for Free button that serves the correct installer for your operating system." }
     },
     {
       "heading": "Check the minimum system requirements first",
-      "body": "Before installing, it's worth confirming your machine clears LocalWP's baseline requirements: at least 4GB of RAM and 1.5GB of free disk space, running macOS Monterey (12) or higher, Windows 10 64-bit or Windows 11, or a modern Linux distribution such as Ubuntu, Debian, or Fedora. These aren't demanding numbers by modern standards, but on an older laptop or a machine already tight on storage, checking first saves you from a failed install partway through. WordPress sites themselves are lightweight, so the requirement is really about running LocalWP's local server stack, not the site content.",
+      "body": "Before installing, confirm your machine clears LocalWP's baseline: at least 4GB of RAM and roughly 1.5GB of free disk space, running macOS Monterey (12) or higher, Windows 10 64-bit or Windows 11, or a 64-bit Linux distribution. Windows 7, 8, 8.1, and any 32-bit build are no longer supported. On Linux, Local ships both a Debian-based (.deb) build and an RPM-based (.rpm) build, but its own team formally tests only Ubuntu and Pop!_OS; other distributions such as Fedora or Debian itself will likely work but aren't officially verified. These aren't demanding numbers, but checking first saves a failed install partway through on an older laptop or a machine already tight on storage.",
       "image": null
     },
     {
       "heading": "Run the installer for your platform",
-      "body": "Installation follows the standard pattern for whichever OS you're on — open the downloaded file and walk through the setup prompts, which mostly ask where to install the app and whether to launch it once finished. Windows and Mac installs are typically the fastest since they're single-package installers; Ubuntu and other Linux distributions may involve installing a .deb or .rpm package through your system's package manager, which behaves the same way but looks a little different from a graphical installer wizard. Across all four platforms, LocalWP handles the underlying local server environment for you, so there's no separate step to install PHP, MySQL, or a web server by hand.",
+      "body": "Open the downloaded file and walk through the setup prompts, which mostly ask where to install the app and whether to launch it once finished. Mac and Windows installs are single-package installers and tend to be the fastest. Windows may show Defender pop-ups during setup; allow each one so Local's internal components can talk to each other. On Linux, double-click the .deb or .rpm file to hand it to your system's package manager, or install it from the command line. Across every platform, Local handles the underlying server environment itself, so there's no separate step to install PHP, MySQL, or a web server by hand.",
       "image": null
     },
     {
       "heading": "Create your first WordPress site",
-      "body": "Once LocalWP is open, creating a site is the reason the tool exists: name your site, and LocalWP provisions a complete WordPress install behind the scenes, ready to open in your browser or log into as an admin within a minute or two. This is the step that replaces what used to require a hosting account, a domain, and a manual WordPress installation just to start testing a theme or plugin.",
-      "image": null
+      "body": "Once Local is open, creating a site is the point of the tool: name your site, and Local provisions a complete WordPress install behind the scenes, ready to open in your browser or log into as an admin within a minute or two. This replaces what used to require a hosting account, a domain, and a manual WordPress installation just to test a theme or a plugin."
     },
     {
-      "heading": "See what LocalWP sets up automatically",
-      "body": "LocalWP's own feature list explains why the setup feels so fast: \"Local sets up WordPress for you. One click and your site is ready to go, SSL included\" — meaning you get a working HTTPS local site without configuring a certificate yourself. One-click admin logs you straight into the WordPress dashboard without juggling usernames and passwords for each site, and Live Links can generate a persistent, shareable URL for a site still running only on your machine, useful for showing a client or coworker a work-in-progress without deploying it anywhere. For anyone who needs to go further, Local also exposes root SSH access, WP-CLI, and the ability to hot-swap PHP environments for testing compatibility.",
+      "heading": "See what Local sets up automatically",
+      "body": "Local's own feature list explains why setup feels fast: one click and the site is ready, SSL included, so you get a working HTTPS local site without configuring a certificate yourself. One-click admin logs you straight into the WordPress dashboard without juggling usernames and passwords for each site. Live Links can generate a persistent, shareable URL for a site still running only on your machine, useful for showing a client or coworker a work in progress without deploying it anywhere. A database tool gives direct access to WordPress tables for anyone who needs to inspect or edit them without a separate app. For anyone who needs to go further, Local also exposes root SSH access, WP-CLI, and the ability to swap PHP versions for compatibility testing.",
       "image": { "file": "/screenshots/v_WO-u8hhA0/02.webp", "caption": "LocalWP's feature summary — automatic WordPress installation with SSL, Live Links for sharing a local site, one-click admin login, and advanced tools like SSH and WP-CLI." }
     },
     {
       "heading": "Install themes and plugins like you would on a live site",
-      "body": "Once your local site is running, the WordPress admin behaves exactly like a hosted install — you can search and install themes and plugins from the repository, upload a zip file, or activate a page builder like Elementor to test it before ever putting it on a production server. This is the main reason developers keep sites in LocalWP long after the initial build: it's a safe place to try a plugin update or theme change without any risk to a live site.",
-      "image": null
+      "body": "Once your local site is running, the WordPress admin behaves like a hosted install: search and install themes and plugins from the repository, upload a zip file, or activate a page builder like Elementor to test it before it ever reaches a production server. This is the main reason developers keep sites in Local long after the initial build — it's a safe place to try a plugin update or theme change with nothing on the line."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Local won't launch, or a site inside it won't load",
+      "cause": "Another program is occupying the same local port Local needs, or your system no longer meets the minimum requirements.",
+      "fix": "Restart Local, close any other local server software running on the same machine, and double-check the requirements from step two."
     },
     {
-      "heading": "Use the built-in SSL, database, and troubleshooting tools",
-      "body": "LocalWP bundles the utilities you'd otherwise have to set up separately: SSL is already enabled per site, and a database tool gives direct access for anyone who needs to inspect or edit WordPress tables without a separate app. If a site won't open or LocalWP itself won't launch, the usual fixes are restarting the app, checking that no other program is occupying the same local port, and confirming your system still meets the requirements from earlier in this guide — most \"not loading\" issues trace back to one of those three causes rather than anything wrong with the WordPress install itself.",
-      "image": null
+      "problem": "The installer refuses to run on Windows",
+      "cause": "You're on Windows 7, 8, 8.1, or a 32-bit build. Local dropped support for these starting with v8.0 and v8.3.",
+      "fix": "Upgrade to Windows 10 64-bit or Windows 11. If you're stuck on legacy hardware, an older Local release may still install, though it won't get current updates."
+    },
+    {
+      "problem": "The downloaded Linux package won't install",
+      "cause": "The .deb build doesn't run on an RPM-based distribution, and the .rpm build doesn't run on a Debian-based one.",
+      "fix": "Grab the build matching your distribution from the download page. Remember only Ubuntu and Pop!_OS are officially QA-tested; other distributions may need extra troubleshooting of their own."
     }
   ],
   "faq": [
     {
       "question": "Is LocalWP free to use?",
-      "answer": "Yes. LocalWP's own homepage offers it as a free download with a Get Hosting link alongside it for anyone who also needs live hosting, which is a separate paid product."
+      "answer": "Yes. Local is free and always will be, per its own site. The Get Hosting link nearby leads to WP Engine, which owns Local; that's a separate paid product for anyone who also wants live hosting."
     },
     {
       "question": "Does LocalWP work the same on Mac and Windows?",
-      "answer": "The core workflow — download, install, create a site — is the same across Mac, Windows, and Linux, though the installer format differs: a .dmg on Mac, an .exe on Windows, and a .deb or .rpm package on most Linux distributions."
+      "answer": "The core workflow — download, install, create a site — is the same across Mac, Windows, and Linux, though the installer format differs: a .dmg on Mac, an .exe on Windows, and a .deb or .rpm package on Linux."
     },
     {
       "question": "What are the minimum system requirements for LocalWP?",
-      "answer": "At least 4GB of RAM and 1.5GB of free disk space, with macOS Monterey (12) or higher, Windows 10 64-bit or Windows 11, or a modern Linux distribution such as Ubuntu, Debian, or Fedora."
+      "answer": "At least 4GB of RAM and about 1.5GB of free disk space, with macOS Monterey (12) or higher, Windows 10 64-bit or Windows 11, or a 64-bit Linux distribution. Windows 7, 8, 8.1, and any 32-bit build are no longer supported."
+    },
+    {
+      "question": "Does Local support Fedora and other Linux distributions?",
+      "answer": "Local ships an RPM-based build alongside its Debian-based one, so Fedora and similar distributions can install it. Local's team only formally QA-tests Ubuntu and Pop!_OS, though, so other distributions aren't officially verified even if they work in practice."
     },
     {
       "question": "Can I install Elementor or other plugins in LocalWP?",
-      "answer": "Yes. Once your local WordPress site is running, its admin dashboard works exactly like a live site's, so you can install any theme or plugin from the repository or upload one directly."
+      "answer": "Yes. Once your local WordPress site is running, its admin dashboard works like a live site's, so you can install any theme or plugin from the repository or upload one directly."
     },
     {
       "question": "What is Live Links in LocalWP used for?",
       "answer": "Live Links creates a persistent, shareable URL for a site that's only running on your local machine, letting you show a client or coworker your work without deploying it to a real host."
     }
   ],
+  "references": [
+    {
+      "label": "Local: Install Local (official help docs)",
+      "url": "https://localwp.com/help-docs/getting-started/installing-local/"
+    },
+    {
+      "label": "Local: Connect to WP Engine (official)",
+      "url": "https://localwp.com/connect-to-wp-engine/"
+    }
+  ],
+  "verifiedNote": "Download flow and the feature-summary screen come from a recorded walkthrough. System requirements, the Linux .deb/.rpm distinction, the Windows legacy-version cutoff, and the free-forever claim were re-checked against Local's own help docs in September 2026 — that check corrected the earlier claim that Fedora is tested the same as Ubuntu, and added the email-gate on downloads, which the original draft didn't mention.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }

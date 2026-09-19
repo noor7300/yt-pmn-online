@@ -1,45 +1,65 @@
 {
   "slug": "how-to-add-google-calendar-to-squarespace-easy-integration-2026",
   "seoTitle": "Add Google Calendar to Your Squarespace Site",
-  "metaDescription": "Learn how to get a Google Calendar embed code and add it to a Squarespace page using a code block, so events update automatically.",
-  "intro": "Embedding Google Calendar into a Squarespace site keeps visitors updated with real-time events, appointments, or class schedules without you touching the page every time something changes. The whole process happens in two places — Google Calendar's own sharing settings and Squarespace's page editor — and neither one is hard once you know where to look. This guide walks through picking the right calendar, generating its embed code, and dropping it into a Squarespace page with a code block.",
+  "metaDescription": "Embed Google Calendar into a Squarespace page with a Code Block, including the calendar-sharing setting and the Squarespace plan requirement that silently block the embed for other people.",
+  "intro": "Embedding Google Calendar into a Squarespace site keeps visitors updated on events, appointments, or class schedules without you touching the page every time something changes. The process happens in two places, Google Calendar's own sharing settings and Squarespace's page editor, and each one has a setting that will make the embed look fine to you while showing nothing to anyone else.\n\nThis guide covers generating the embed code, the calendar-sharing setting people miss, and the Squarespace plan tier the Code Block needs.",
+  "prerequisites": [
+    "A Google Calendar you're allowed to make public, or one already shared publicly",
+    "A Squarespace site on the Core plan or above; Code Blocks won't render an embedded calendar on the Personal plan"
+  ],
+  "costNote": "Embedding a Google Calendar is free on Google's side. The cost question sits with Squarespace: a Code Block only renders iframes and JavaScript on the Core, Plus, Advanced, Business, or Commerce plans. On the cheapest Personal plan, the block saves the code but doesn't display it, so this specific integration needs at least the Core tier.",
   "steps": [
     {
-      "heading": "Pick the calendar you want to share",
-      "body": "Open Google Calendar and look at the \"My calendars\" list in the left sidebar — most Google accounts have more than one, such as a primary calendar alongside a Birthdays or Tasks calendar. Decide which one actually belongs on your website; a business calendar used for appointments or classes is usually a separate calendar from your personal one, and you don't want to accidentally expose the wrong one. Untick any calendar in the sidebar you don't want included if you end up embedding multiple calendars together later.",
-      "image": { "file": "/screenshots/CDnRYoVB5O8/02.webp", "caption": "Google Calendar's day view with the \"My calendars\" list open in the sidebar — this is where you choose which calendar you're about to share." }
+      "heading": "Pick the calendar, and check it's shared publicly",
+      "body": "Open Google Calendar and look at the \"My calendars\" list in the sidebar. Most accounts have more than one, such as a primary calendar alongside a Birthdays or Tasks calendar. Pick the one that belongs on the site; a business calendar for appointments or classes is usually separate from a personal one.\n\nGoogle is explicit about this part: \"Your calendar is only visible to people you share it with. To make your calendar visible to everyone, make your calendar public.\" A calendar that isn't public will look correct to you, since you're signed in, and show nothing to an anonymous site visitor. Confirm this now, before generating the code.",
+      "image": { "file": "/screenshots/CDnRYoVB5O8/02.webp", "caption": "Google Calendar's day view with the \"My calendars\" list open in the sidebar. This is where you choose which calendar you're about to share." }
     },
     {
       "heading": "Open that calendar's settings",
-      "body": "Click the gear icon in Google Calendar and choose Settings, then find your calendar under \"Settings for my calendars\" in the left-hand list. Selecting it opens a set of sub-pages including Access permissions for events, Shared with, and — the one you need — Integrate calendar. Nothing here changes anything by itself; you're just navigating to the page that generates the embed code."
-    },
-    {
-      "heading": "Copy the embed code",
-      "body": "On the Integrate calendar page, you'll see a full HTML snippet starting with `<iframe src=\"https://calendar.google.com/calendar/embed?...\"`, along with a live preview of the calendar below it showing the current month's dates and any events. Google gives you options to adjust the calendar's title, which controls appear (navigation buttons, print icon, view menu), and its width and height — get those settings right here, since they carry over automatically once pasted into Squarespace. Click the copy icon next to the code once you're happy with the preview.",
-      "image": { "file": "/screenshots/CDnRYoVB5O8/04.webp", "caption": "The Integrate calendar screen, showing the embed code field and a live month-view preview of the calendar you're about to add to your site." }
-    },
-    {
-      "heading": "Find the calendar-settings shortcut inside your calendar",
-      "body": "It's worth knowing that \"Integrate calendar\" isn't the only route in — from the Settings screen for a specific calendar, the same sidebar also lists Calendar settings, Access permissions for events, and Shared with, all grouped under that calendar's name. If you ever need to revisit sharing permissions or regenerate the embed code later, this is the panel to come back to rather than searching from scratch.",
+      "body": "Click the gear icon and choose Settings, then find your calendar under \"Settings for my calendars.\" Selecting it opens sub-pages including Access permissions for events, Shared with, and Integrate calendar. If the calendar isn't public yet, this is also where Access permissions lives; turn on \"Make available to public\" before moving on.",
       "image": { "file": "/screenshots/CDnRYoVB5O8/03.webp", "caption": "The calendar-specific settings sidebar in Google Calendar, with Integrate calendar listed alongside Access permissions and Shared with." }
     },
     {
-      "heading": "Add a Code Block on your Squarespace page",
-      "body": "Switch to your Squarespace dashboard, open the page where the calendar should live, and click Edit. Choose Add Block from wherever you want the calendar to sit on the page, then select Code Block from the block menu — this is the block type built for pasting raw HTML like an iframe, and it's the only block that will render the embed correctly rather than displaying it as plain text.",
-      "image": { "file": "/screenshots/CDnRYoVB5O8/05.webp", "caption": "Squarespace's page editor in editing mode, with Add Section and Add Block controls visible. This is where you add a Code Block to hold the pasted iframe." }
+      "heading": "Copy the embed code",
+      "body": "On the Integrate calendar page, an HTML snippet starts with `<iframe src=\"https://calendar.google.com/calendar/embed?...\"`, with a live preview below it. Click Customize to adjust the title, which controls appear (navigation, print icon, view menu), and the dimensions. Google's own guidance is to keep width and height each at least 500 pixels, since a smaller box crops the month view awkwardly. Get these settings right here; they carry over once pasted into Squarespace. Click the copy icon once the preview looks right.",
+      "image": { "file": "/screenshots/CDnRYoVB5O8/04.webp", "caption": "The Integrate calendar screen, showing the embed code field and a live month-view preview of the calendar you're about to add to your site." }
     },
     {
-      "heading": "Paste the code and position it",
-      "body": "Click the pencil icon on the new Code Block, paste the embed code from Google Calendar, and save. Squarespace will render the live calendar in place of the code — drag the block up or down the page if it needs to sit somewhere else, then save the page. From this point on, any event you add, move, or delete in Google Calendar shows up on the site automatically, with nothing further to update on the Squarespace side."
+      "heading": "Add a Code Block on your Squarespace page and paste the code",
+      "body": "Switch to Squarespace, open the target page, and click Edit. Add Block, then Code Block, the block type built for raw HTML like an iframe. Click the pencil icon, paste the code from Google Calendar, and save. Squarespace renders the live calendar in place of the code; drag the block if it needs to sit elsewhere, then save the page.\n\nFrom here, anything added, moved, or deleted in Google Calendar shows up on the site automatically, with nothing to update on the Squarespace side.",
+      "image": { "file": "/screenshots/CDnRYoVB5O8/05.webp", "caption": "Squarespace's page editor in editing mode, with Add Section and Add Block controls visible. This is where you add a Code Block to hold the pasted iframe." }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The calendar looks right to you but visitors see a blank block or an error",
+      "cause": "The calendar's sharing setting isn't public. Google Calendar only shows a calendar to people it's explicitly shared with, and being signed into your own account hides that from you.",
+      "fix": "In Google Calendar Settings, under Access permissions for events, turn on \"Make available to public.\""
+    },
+    {
+      "problem": "The Code Block saves the pasted code but nothing renders on the live page",
+      "cause": "The site is on the Personal plan. Squarespace only renders iframes and JavaScript inside Code Blocks on the Core plan and above.",
+      "fix": "Check the site's plan under Billing and upgrade to at least Core if it's currently on Personal."
+    },
+    {
+      "problem": "The embedded calendar looks cramped or cuts off dates",
+      "cause": "The width or height set on the Integrate calendar screen is below Google's recommended minimum.",
+      "fix": "Reopen Integrate calendar, click Customize, and set both width and height to at least 500 pixels before copying the code again."
     }
   ],
   "faq": [
-    { "question": "Will my Squarespace calendar update automatically?", "answer": "Yes, any updates you make in Google Calendar — new events, changed times, cancellations — will automatically reflect on your Squarespace site once embedded, since the page is pulling live from Google." },
-    { "question": "Can I embed multiple calendars on different pages?", "answer": "Yes, you can generate a separate embed code for each calendar in \"My calendars\" and place them in different Code Blocks across different Squarespace pages." },
-    { "question": "What block do I use to embed the calendar?", "answer": "You use a Code Block in Squarespace and paste the Google Calendar embed code — specifically the iframe snippet — into it." },
-    { "question": "Can I customize how the calendar looks?", "answer": "Yes, the Integrate calendar screen in Google Calendar lets you adjust the title, view options, and dimensions before you copy the code, and those settings carry into the embedded version." },
-    { "question": "Is this useful for public event calendars?", "answer": "Yes, this method works well for a public event calendar, a class schedule, or an appointment calendar on your homepage, as long as the calendar's sharing settings allow it to be viewed publicly." }
+    { "question": "Will my Squarespace calendar update automatically?", "answer": "Yes. Any change in Google Calendar (a new event, a changed time, a cancellation) shows up on the Squarespace page automatically, since the embed pulls live from Google instead of storing a copy." },
+    { "question": "Do site visitors need the calendar to be public to see it?", "answer": "Yes. Google states plainly that a calendar is only visible to people it's shared with, so it has to be set to public, or the embed shows nothing to anyone who isn't you." },
+    { "question": "Does this work on every Squarespace plan?", "answer": "No. Code Blocks only render iframes and JavaScript on the Core plan and above. On the Personal plan, the block saves the pasted code but never displays it." },
+    { "question": "Can I embed multiple calendars on different pages?", "answer": "Yes. Generate a separate embed code for each calendar under \"My calendars,\" and place each one in its own Code Block on whichever page it belongs to." },
+    { "question": "What block do I use to embed the calendar?", "answer": "A Code Block, with the iframe snippet from Google's Integrate calendar screen pasted directly into it." },
+    { "question": "Can I customize how the calendar looks?", "answer": "Yes. The Customize option on the Integrate calendar screen sets the title, which controls show, and the dimensions before you copy the code, and those settings carry into the embedded version." }
   ],
+  "references": [
+    { "label": "Google Calendar Help: Add a calendar to your website (official)", "url": "https://support.google.com/calendar/answer/41207?hl=en" },
+    { "label": "Squarespace Help Center: Code blocks (official)", "url": "https://support.squarespace.com/hc/en-us/articles/206543167-Code-blocks" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2026. In September 2026 the sharing requirement and the Squarespace plan restriction were re-checked against Google's and Squarespace's own help documentation. The public-sharing requirement and the Personal-plan iframe restriction were both missing from the article before this pass.",
   "generatedAt": "2026-08-08T09:05:00Z",
   "deep": true
 }

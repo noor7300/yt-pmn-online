@@ -1,45 +1,62 @@
 {
   "slug": "how-to-cancel-google-workspace-domain-alias-deactivate-it-easily-2026",
   "seoTitle": "How to Cancel a Google Workspace Domain Alias",
-  "metaDescription": "Learn how to safely cancel and deactivate a domain alias in Google Workspace in 2026, including where to find it and what to clean up in DNS afterward.",
-  "intro": "A domain alias added by mistake, or left over from a sign-up flow you no longer need, clutters the Domains page and can confuse anyone else managing your Workspace account. This guide walks through exactly where to find domain aliases in the Admin Console, how to tell them apart from your primary and secondary domains, and how to deactivate one cleanly without disrupting mail on your real domains.",
+  "metaDescription": "Find and deactivate a domain alias in the Google Workspace Admin Console, see how it differs from removing a whole domain, and clean up DNS afterward.",
+  "intro": "A domain alias added by mistake, or left over from a sign-up flow you no longer need, clutters the Domains page and can confuse anyone else managing your Workspace account. This guide walks through where domain aliases live in the Admin Console, how to tell them apart from your primary and secondary domains, and how to deactivate one cleanly without disrupting mail on your real domains.",
   "steps": [
     {
       "heading": "Sign in with an admin account",
-      "body": "Domain management is an admin-only action, so start by confirming you're signed into the correct Google Account — click your profile circle in the top right of any Google page and check the account name and address shown, for example an address like admin@yourdomain.com under your organization's name. If you manage more than one Workspace organization, this check matters more than it seems, since making changes on the wrong account's domains is an easy mistake to make.",
+      "body": "Domain management is an admin-only action, so start by confirming you're signed into the correct Google Account. Click your profile circle in the top right of any Google page and check the account name and address shown, for example admin@yourdomain.com under your organization's name. If you manage more than one Workspace organization, check this carefully: making a domain change on the wrong account is an easy mistake.",
       "image": { "file": "/screenshots/xhDGVylLPm4/01.webp", "caption": "The Google Account switcher, confirming which admin account and organization you're currently signed into before making domain changes." }
     },
     {
       "heading": "Re-verify your identity if Google asks",
-      "body": "Navigating to admin.google.com sometimes triggers an extra identity check, especially after a period of inactivity — Google will ask you to re-enter your password to confirm it's really you before letting you into sensitive settings like domain management. This is expected behavior for an admin-level action and not a sign anything is wrong; enter your password and continue.",
+      "body": "Navigating to admin.google.com sometimes triggers an extra identity check, especially after a period of inactivity. Google asks you to re-enter your password to confirm it's really you before letting you into sensitive settings like domain management. This is expected for an admin-level action, not a sign anything is wrong. Enter your password and continue.",
       "image": { "file": "/screenshots/xhDGVylLPm4/03.webp", "caption": "Google's identity verification prompt, shown before granting access to admin.google.com." }
     },
     {
       "heading": "Open Domains and go to Manage domains",
-      "body": "Inside the Admin Console, expand Account in the left menu, then Domains, and select Manage domains. This page lists every domain associated with your Workspace organization in one table, with columns for Domain, Type, Status, and Actions — it's the single place to see your primary domain, any secondary domains, and any domain aliases side by side."
+      "body": "Inside the Admin Console, expand Account in the left menu, then Domains, and select Manage domains. This page lists every domain associated with your Workspace organization in one table, with columns for Domain, Type, Status, and Actions. It's the single place to see your primary domain, any secondary domains, and any domain aliases side by side."
     },
     {
-      "heading": "Identify the alias among your domains",
-      "body": "The Manage domains table separates domains by Type: a Primary domain (marked Verified and Gmail activated), Secondary domains that function as fully separate domains under the same account, and domain aliases such as a test domain alias that was set up automatically during sign-up. A tooltip next to an alias entry typically explains what it is — for example, clarifying that it's a temporary alias created during account setup rather than one you added deliberately. Only the alias row has a Deactivate action; primary and secondary domains show different actions like Set up redirect, Add users, or Remove, so it's worth reading the Type and Status columns carefully before clicking anything.",
+      "heading": "Identify the alias among your domains, not a domain you want to remove entirely",
+      "body": "The Manage domains table separates domains by Type: a Primary domain (marked Verified and Gmail activated), Secondary domains that function as fully separate domains with their own users under the same account, and domain aliases such as a test domain alias that Google sets up automatically during sign-up. A tooltip next to an alias entry usually explains what it is. Only the alias row shows a Deactivate action; primary and secondary domains show different actions like Set up redirect, Add users, or Remove. Deactivating an alias is much lighter than removing a domain outright: fully removing a primary or secondary domain deletes any sites built on it and stops mail for every user on it, and Google requires you to clean up groups, aliases, and renamed users first. Deactivating a plain domain alias touches none of that.",
       "image": { "file": "/screenshots/xhDGVylLPm4/05.webp", "caption": "The Manage domains page, listing a primary domain, a secondary domain, and a test domain alias with its own Deactivate action." }
     },
     {
       "heading": "Deactivate the alias",
-      "body": "Click Deactivate next to the alias you want to remove. Because this is a lighter-weight relationship than a full secondary domain, deactivating it doesn't touch your primary domain's mail, users, or verified status — it simply stops that alias from routing to your account. If the option is greyed out, it usually means the alias is still referenced somewhere else in your setup, such as an active user alias or a DNS record still pointing at it, and you'll need to clear that dependency first."
+      "body": "Click Deactivate next to the alias you want to remove. Because it's a lighter-weight relationship than a full secondary domain, deactivating it doesn't touch your primary domain's mail, users, or verified status; it stops that alias from routing to your account. If the option is greyed out, the alias is usually still referenced somewhere else in your setup, such as an active user alias or a DNS record still pointing at it, and you'll need to clear that dependency first."
     },
     {
       "heading": "Confirm mail behavior after deactivation",
-      "body": "Once an alias is deactivated, any mail sent to addresses on that alias domain will stop reaching your Workspace account, since it's no longer routed there. Test this deliberately if the alias was ever shared externally — send a message to an address on the old alias domain from a separate account and confirm it bounces or goes undelivered rather than quietly arriving, so you know for certain nobody can still reach you through it."
+      "body": "Once an alias is deactivated, mail sent to addresses on that alias domain stops reaching your Workspace account. If the alias was ever shared externally, test this deliberately: send a message to an address on the old alias domain from a separate account and confirm it bounces or goes undelivered, rather than quietly arriving."
     },
     {
       "heading": "Clean up any leftover DNS records",
-      "body": "Deactivating the alias inside Workspace doesn't automatically remove DNS records at your domain registrar. Go back to wherever that domain's DNS is managed and delete or update any MX, TXT, or CNAME records that were pointing traffic or verification at Google for that alias, so nothing is left half-configured. This step is easy to skip since the Admin Console itself won't flag it, but leaving stale DNS records behind is the most common cause of confusion the next time someone looks at that domain's setup."
+      "body": "Deactivating the alias inside Workspace doesn't remove DNS records at your domain registrar automatically. Go back to wherever that domain's DNS is managed and delete or update any MX, TXT, or CNAME records that were pointing traffic or verification at Google for that alias, so nothing is left half-configured. The Admin Console won't flag this step for you, and leaving stale DNS records behind is the most common cause of confusion the next time someone looks at that domain's setup."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The Deactivate option is greyed out for my domain alias",
+      "cause": "The alias still has an active dependency, such as a user alias built on it or a DNS record still pointing at it.",
+      "fix": "Clear those references first, then try deactivating again."
+    },
+    {
+      "problem": "I clicked Remove instead of Deactivate and now I'm worried about the whole domain",
+      "cause": "Primary and secondary domains carry a full Remove action that deletes any sites on that domain and stops mail for every user on it, unlike an alias's Deactivate action.",
+      "fix": "Google requires clearing groups, aliases, and renamed users before a domain removal completes, so a single accidental click won't finish the process on its own. Check the domain's Status column in Manage domains before proceeding further, and contact Google Workspace support if you're unsure what state it's in."
+    },
+    {
+      "problem": "Mail sent to the old alias address still seems to be arriving",
+      "cause": "Either the deactivation didn't fully propagate yet, or the sender's message went to a different address that only looks similar.",
+      "fix": "Wait a short while and re-test from a separate account, double-checking the exact address you're sending to."
     }
   ],
   "faq": [
     {
       "question": "What happens to emails sent to the alias after it's removed?",
-      "answer": "Once deactivated, the alias domain no longer routes mail to your Workspace account, so any emails sent there afterward won't be delivered — test this with a message from an outside account if the alias was ever shared publicly."
+      "answer": "Once deactivated, the alias domain no longer routes mail to your Workspace account, so any emails sent there afterward won't be delivered. Test this with a message from an outside account if the alias was ever shared publicly."
     },
     {
       "question": "Why is the Deactivate option greyed out for my domain alias?",
@@ -47,17 +64,28 @@
     },
     {
       "question": "Do I need to update DNS records after removing an alias?",
-      "answer": "Yes. Deactivating an alias in the Admin Console's Manage domains page doesn't remove DNS records at your registrar — you need to delete or update those separately to fully disconnect the domain."
+      "answer": "Yes. Deactivating an alias in the Admin Console's Manage domains page doesn't remove DNS records at your registrar; you need to delete or update those separately to fully disconnect the domain."
     },
     {
-      "question": "Can I remove a domain alias without affecting my primary domain?",
-      "answer": "Yes. On the Manage domains page, a domain alias has its own Deactivate action separate from your primary and secondary domains, so removing it doesn't touch your primary domain's mail or verification status."
+      "question": "Is deactivating a domain alias the same as removing a domain?",
+      "answer": "No, and the two are different in scope. Removing a primary or secondary domain deletes any sites built on it and stops mail for every user there, and Google requires cleaning up groups, aliases, and renamed users first. Deactivating a plain domain alias is much lighter: it only stops that alias from routing to your account."
     },
     {
       "question": "What's the difference between a secondary domain and a domain alias?",
-      "answer": "A secondary domain is a fully separate, verified domain in its own right, with actions like Set up redirect or Add users. A domain alias is a lighter relationship — often created automatically during sign-up — that simply routes to your existing account and can be deactivated on its own."
+      "answer": "A secondary domain is a fully separate, verified domain with its own users, and it shows actions like Set up redirect or Add users. A domain alias is a lighter relationship, often created automatically during sign-up, that simply routes to your existing account and can be deactivated on its own."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace: Remove a domain from your managed Google Account (official)",
+      "url": "https://knowledge.workspace.google.com/admin/domains/remove-a-domain-from-your-managed-google-account"
+    },
+    {
+      "label": "Google Workspace: Add a user alias domain or secondary domain (official)",
+      "url": "https://knowledge.workspace.google.com/admin/domains/add-a-user-alias-domain-or-secondary-domain"
+    }
+  ],
+  "verifiedNote": "The sign-in and Manage domains click path come from a recorded walkthrough. The menu path and the distinction between deactivating an alias and fully removing a domain were checked against Google's official domain-management documentation in September 2026; that check added the warning about full domain removal, which the original draft didn't cover.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }

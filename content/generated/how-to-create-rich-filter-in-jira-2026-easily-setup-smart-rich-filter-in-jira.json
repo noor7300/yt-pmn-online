@@ -1,45 +1,69 @@
 {
   "slug": "how-to-create-rich-filter-in-jira-2026-easily-setup-smart-rich-filter-in-jira",
   "seoTitle": "How to Create a Rich Filter in Jira (Setup Guide)",
-  "metaDescription": "Install Rich Filters for Jira Dashboards, build a smart filter with JQL clauses, and use it to power more dynamic reporting than a standard saved filter.",
-  "intro": "Standard Jira filters can only take your reporting so far — they're static lists that don't let you layer conditions or visualize results the way a real dashboard needs. Rich Filters for Jira Dashboards, an Atlassian Marketplace app, fills that gap by adding smart, JQL-backed filters that plug straight into dashboard gadgets. This guide covers installing the app, creating your first rich filter, and building the JQL-based clauses that make it \"smart\" rather than just another saved search.",
+  "metaDescription": "Install Rich Filters for Jira Dashboards, build a JQL-backed smart filter, and see what the app costs once its 30-day trial ends.",
+  "intro": "Standard Jira filters are static lists; they don't let you layer conditions or hand viewers a set of clickable options the way a real dashboard needs. Rich Filters for Jira Dashboards, an Atlassian Marketplace app built by Appfire, adds a smart filtering layer on top of your existing filters that plugs straight into dashboard gadgets.\n\nThis guide covers installing the app, building a rich filter around JQL-backed smart clauses, and adding it to a dashboard, along with what the app costs once its trial period ends, which the marketing copy doesn't mention upfront.",
+  "prerequisites": [
+    "Jira Cloud with permission to install Marketplace apps",
+    "An existing saved Jira filter to use as the rich filter's base"
+  ],
+  "costNote": "Rich Filters for Jira Dashboards is free to trial for 30 days, with a free tier for very small sites (roughly 1 to 10 users). Past that, Cloud pricing scales with user count. Appfire's 2026 pricing lists it well above $500 a year for a 25-user site, so check the current tier on the Marketplace listing before building a dashboard workflow your team depends on.",
   "steps": [
     {
       "heading": "Install Rich Filters from the Atlassian Marketplace",
-      "body": "From your Jira sidebar, open Apps, then Explore more apps, and search for Rich Filters for Jira Dashboards, built by Appfire. The listing shows its rating, install count, and a Cloud Fortified trust badge, along with an overview video demonstrating dynamic dashboards and gadgets — worth a quick watch before installing so you know what the finished result looks like. Click Add to install it into your site; once added, it shows up under Your apps in the sidebar as Rich Filters.",
+      "body": "From your Jira sidebar, open Apps, then Explore more apps, and search for Rich Filters for Jira Dashboards. The listing shows its rating and install count, plus an overview video of dynamic dashboards and gadgets, worth a quick watch before installing. Click Add to install; this step needs Jira site-admin permission. Once added, it shows up under the Apps menu as Rich Filters.",
       "image": { "file": "/screenshots/VIKaRifpPng/01.webp", "caption": "The Rich Filters for Jira Dashboards listing on the Atlassian Marketplace, showing its rating, install count, and an overview video of dynamic dashboards." }
     },
     {
       "heading": "Create a new rich filter",
-      "body": "Open Rich Filters from your app list and click Create rich filter. The dialog asks for a Name for the filter and a Jira filter to base it on — this base filter is what narrows down which issues the rich filter starts working with, so pick or search for an existing saved filter that already scopes to the right project, board, or issue type before building anything smarter on top of it.",
+      "body": "Open Rich Filters from the Apps menu and click Create rich filter. The dialog asks for a Name and a Jira filter to base it on. This base filter narrows down the issues the rich filter starts from, so pick an existing saved filter that already scopes to the right project or board. You need permission to use that filter, not ownership of it, so a shared team filter works fine here.",
       "image": { "file": "/screenshots/VIKaRifpPng/03.webp", "caption": "The Create rich filter dialog, with a Name field and a Jira filter dropdown used to select the base filter the rich filter will build on." }
     },
     {
       "heading": "Build a smart clause with JQL",
-      "body": "Inside the new rich filter, go to Static filters or Dynamic filters and click Create smart clause. Give the clause a name and color, then write the condition in the JQL field — as you type, Jira suggests matching values, for example autocompleting status names like Delivery, Discovery, or Done as you type `status = `. Each clause becomes a selectable filter option on the dashboard, so name them for what a viewer would actually want to click, not just their JQL syntax.",
+      "body": "Inside the new rich filter, open its filter configuration and click Create smart clause. Give the clause a name and color, then write the condition in the JQL field; Jira autocompletes matching values as you type, for example suggesting status names after typing `status = `. Name each clause for what a viewer would want to click, not for its JQL syntax, since that name is what appears on the dashboard.",
       "image": { "file": "/screenshots/VIKaRifpPng/04.webp", "caption": "The Create a smart clause dialog, with a JQL field showing autocomplete suggestions for a status condition." }
     },
     {
       "heading": "Edit clauses as your reporting needs change",
-      "body": "Any existing clause can be reopened through Edit smart clause, where you can rewrite the JQL entirely — for instance swapping a simple status condition for something more specific like tracking a chart's date range or a custom field. This is normal maintenance rather than a sign something broke; rich filters are meant to be refined as the questions your team is asking evolve.",
+      "body": "Reopen any clause through Edit smart clause to rewrite its JQL, for instance swapping a status condition for a date range or a custom field. This is routine maintenance, not a sign something broke. A clause built around a status or field that later gets renamed keeps running but quietly returns nothing, which is worth checking for now and then.",
       "image": { "file": "/screenshots/VIKaRifpPng/05.webp", "caption": "The Edit smart clause dialog, showing an existing clause's JQL being changed to reference a different condition." }
     },
     {
-      "heading": "Add the rich filter as a dashboard gadget",
-      "body": "From any Jira dashboard, click Add gadget and search for the Rich Filters gadget, then select the rich filter you built. Viewers see your named smart clauses as clickable filter options rather than a JQL box, and the gadget's results update instantly as they switch between clauses — this is the payoff for building clauses with clear, human-readable names in the earlier step."
+      "heading": "Add the rich filter to a dashboard",
+      "body": "From any Jira dashboard, click Add gadget, search for the Rich Filters gadget, and select the filter you built. Viewers see your named smart clauses as clickable options instead of a JQL box, and results update the moment they switch between them. This is the payoff for naming clauses clearly in the step above."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A rich filter's clause suddenly returns nothing",
+      "cause": "The JQL references a status, field, or value that no longer exists, usually after a workflow or scheme change.",
+      "fix": "Reopen the clause under Edit smart clause and update the JQL to match the current field or status names."
     },
     {
-      "heading": "Keep it useful for ongoing reporting",
-      "body": "Revisit the rich filter periodically as sprints, statuses, or team structure change, since a clause built around a status or field that no longer exists will just return empty results without any obvious warning. Treating the filter as a living part of your dashboard, rather than something you set up once and forget, is what keeps the reporting actually reflecting current project data."
+      "problem": "Rich Filters doesn't appear in the Apps menu after someone installed it",
+      "cause": "Installing a Marketplace app requires Jira site-admin permission. Without it, the install doesn't complete even though no error shows.",
+      "fix": "Have a site admin install it from Explore more apps."
+    },
+    {
+      "problem": "A teammate can see the app but can't build a rich filter",
+      "cause": "They don't have permission to use the base Jira filter that was selected.",
+      "fix": "Share the base filter with them, or have them build on a filter they already have access to."
     }
   ],
   "faq": [
-    { "question": "Do I need admin access to create rich filters?", "answer": "No — installing the Rich Filters app requires admin permissions, but once it's added to your site, most users with standard Jira permissions can create and save their own rich filters." },
-    { "question": "Can I share a rich filter with my team?", "answer": "Yes, rich filters are added as dashboard gadgets, so anyone with access to that dashboard can see and use the smart clauses you've built." },
-    { "question": "How is a rich filter different from a basic search?", "answer": "A rich filter is built from named, JQL-backed smart clauses that plug into a dashboard gadget, letting viewers click between saved conditions instead of typing or re-running a one-off JQL search." },
-    { "question": "What is a smart clause in Rich Filters?", "answer": "A smart clause is a named, colored JQL condition — for example a specific status or date range — that becomes a selectable filter option once added to a rich filter." },
-    { "question": "Can rich filters help track sprint velocity?", "answer": "Yes, when a rich filter's clauses are built around relevant statuses or date fields and paired with the right dashboard gadgets, they can support reporting on completed work and team velocity over time." }
+    { "question": "Is Rich Filters for Jira Dashboards free?", "answer": "Only for a 30-day trial, plus a free tier for very small sites of roughly 1 to 10 users. Beyond that it's a paid Marketplace subscription that scales with user count." },
+    { "question": "Do I need admin access to create rich filters?", "answer": "Installing the app requires Jira site-admin permission, but once it's added, anyone with permission to use the base filter can create their own rich filters." },
+    { "question": "Can I share a rich filter with my team?", "answer": "Yes. Rich filters get added to dashboards as gadgets, so anyone with access to that dashboard can see and use the smart clauses you built." },
+    { "question": "Why did a smart clause stop returning results?", "answer": "Usually because the JQL references a status or field that's since been renamed or removed. Reopen it under Edit smart clause and update the condition." },
+    { "question": "How is a rich filter different from a basic search?", "answer": "A rich filter is built from named, JQL-backed smart clauses plugged into a dashboard gadget, so viewers click between saved conditions instead of typing or re-running JQL." },
+    { "question": "Can I edit a clause after creating it?", "answer": "Yes, through Edit smart clause. You can rewrite the JQL entirely, for example changing a status condition into a date-range check." }
   ],
+  "references": [
+    { "label": "Appfire: Create and access Rich Filters (official docs)", "url": "https://appfire.atlassian.net/wiki/spaces/RFCDOC/pages/783941927/Create+and+access+Rich+Filters" },
+    { "label": "Rich Filters for Jira Dashboards on the Atlassian Marketplace (official)", "url": "https://marketplace.atlassian.com/apps/1214789/rich-filters-for-jira-dashboards" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The base-filter permission rule and the app's pricing were checked against Appfire's official Rich Filters documentation and its Atlassian Marketplace listing in September 2026. That check added the cost information this guide previously left out entirely and replaced a closing maintenance-reminder step with a specific stale-clause troubleshooting entry.",
   "generatedAt": "2026-08-08T09:30:00Z",
   "deep": true
 }
