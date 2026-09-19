@@ -1,48 +1,44 @@
 {
   "slug": "how-to-fix-model-not-found-chatgpt-error-100-working-solution",
   "seoTitle": "How to Fix the \"Model Not Found\" Error in ChatGPT",
-  "metaDescription": "Fix ChatGPT's \"Model Not Found\" error: clear chatgpt.com site data, log out and back in, disable VPN and extensions, and confirm your Go or Plus plan is active.",
-  "intro": "\"Model Not Found\" almost always means your browser is asking for a model your account can no longer see — usually because a plan changed, you switched accounts, or a stale session is still holding a model ID that has since been retired. It looks alarming, but nothing is broken on your side and nothing needs to be reinstalled in most cases. The fixes below run from the least disruptive to the most, and the two in the middle — clearing the site data for chatgpt.com and signing out and back in — resolve the overwhelming majority of cases. Work through them in order and stop as soon as the error clears, rather than doing all of them at once and never learning what actually caused it.",
+  "metaDescription": "Fix ChatGPT's \"Model Not Found\" error: check the model picker (a known bug in Projects and custom GPTs), clear chatgpt.com's site data, sign out and back in, and rule out a VPN or a lapsed plan.",
+  "intro": "\"Model Not Found\" is a genuine ChatGPT error, but OpenAI's own troubleshooting guide doesn't list it by name. The most documented case turned out to be a bug: in August 2025, OpenAI Support confirmed in its developer forum that the model picker could get stuck on a generic \"ChatGPT\" label instead of a specific version, mostly inside Projects and custom GPTs, and every message sent from that state failed. Switching to a named model cleared it for most people, and OpenAI later fixed the underlying cause on its own servers.\n\nIf you're still seeing the error today, the fixes below start with the model picker and move through the general connection and cache checks OpenAI's help centre recommends for stuck or misbehaving chats. Work through them in order and stop once the error clears, so you learn what caused it instead of resetting everything at once.",
   "steps": [
     {
-      "heading": "Check which model the picker is set to",
-      "body": "Before changing anything, look at the model name at the top-left of the chat window. That dropdown is where the error originates: if the session is still pointing at a model your current plan doesn't include, or one that has been retired, every message you send will fail. Open the picker and pick a different model from the list — often just switching to another available model and sending a message clears it instantly. If the dropdown itself is empty or won't open, that's a sign your session data is stale, which is what the next steps address.",
+      "heading": "Check the model picker, then rule out your connection",
+      "body": "Look first at the model name in the top-left of the chat window. That dropdown is where this error starts. In August 2025, OpenAI Support confirmed in its developer forum that the picker could get stuck on a generic \"ChatGPT\" label instead of a specific version, mostly inside Projects and custom GPTs, and every message sent from that state failed. Open the picker and choose a named model, such as ChatGPT 5. OpenAI later fixed the underlying bug on its servers, but picking a specific model clears a lingering stale session on the spot.\n\nWhile you're there, rule out the connection too. Load a different site to confirm you're online, then hard refresh the tab (Cmd or Ctrl, Shift, R) instead of a normal reload. An error that disappears on another network or after a hard refresh was never a model problem.",
       "image": {
         "file": "/screenshots/lYzUIxX-OZs/01.webp",
         "caption": "The ChatGPT chat window with the model name in the top-left corner. That dropdown is where the failing model selection lives."
       }
     },
     {
-      "heading": "Rule out the connection first",
-      "body": "It takes fifteen seconds and it saves you from chasing a fix you don't need. Load any other site to confirm you're actually online, then refresh the ChatGPT tab with a hard reload rather than a normal one. Patchy connections cause requests to die partway through, and ChatGPT sometimes surfaces that as a model error rather than a network error. If you're on mobile data or a shared office network, try a different network before assuming your account is at fault — an error that vanishes on a different connection was never a model problem in the first place."
-    },
-    {
-      "heading": "Clear the site data for chatgpt.com",
-      "body": "This is the highest-value fix and the one most people skip because it sounds destructive. You do not need to wipe your whole browser — you only need to clear the data for this one site. In Chrome, click the icon at the left of the address bar while on chatgpt.com to open the site panel, then choose \"Cookies and site data.\" That panel also shows the site's permissions and a link into full site settings, so you can confirm you're operating on chatgpt.com and not some other tab. Clearing here removes only the local session, not your conversations, which live on your account.",
+      "heading": "Open the site panel for chatgpt.com",
+      "body": "If the picker didn't fix it, clear the browser's stored data for this one site. You don't need to touch the rest of your browser. In Chrome, click the icon at the left of the address bar while on chatgpt.com to open the site panel, then choose \"Cookies and site data.\" OpenAI's own troubleshooting guide recommends the same step for blank or frozen pages, under the older chat.openai.com address it still uses in places. The panel also shows the site's permissions, so you can confirm you're looking at chatgpt.com and not a different tab.",
       "image": {
         "file": "/screenshots/lYzUIxX-OZs/03.webp",
         "caption": "The browser's site panel for chatgpt.com, with \"Cookies and site data\" sitting just below the connection and permission entries."
       }
     },
     {
-      "heading": "Delete the stored data and confirm",
-      "body": "Opening \"Cookies and site data\" brings up an on-device site data dialog listing every domain that has stored something for this page — chatgpt.com itself, realtime.chatgpt.com for voice and streaming, plus embedded domains like openai.com. Delete the chatgpt.com entries using the bin icon next to each, then press Done. Removing realtime.chatgpt.com as well is worth doing if voice mode has also been misbehaving. Close the tab completely and reopen chatgpt.com afterwards — leaving the tab open lets the old in-memory session survive the clear, which is why people sometimes report this step \"not working.\"",
+      "heading": "Delete the stored data and reopen the tab",
+      "body": "Opening \"Cookies and site data\" brings up an on-device dialog listing every domain that has stored something for this page: chatgpt.com itself, realtime.chatgpt.com for voice and streaming, and embedded domains like openai.com. Delete the chatgpt.com entries with the bin icon next to each, and do the same for realtime.chatgpt.com if voice mode has also been acting up. Press Done, then close the tab completely before reopening chatgpt.com. Leaving the old tab open lets the broken session survive the clear, which is why this step sometimes looks like it did nothing.",
       "image": {
         "file": "/screenshots/lYzUIxX-OZs/04.webp",
         "caption": "The on-device site data dialog listing chatgpt.com and realtime.chatgpt.com, each with a bin icon to remove its stored data."
       }
     },
     {
-      "heading": "Log out and log back in",
-      "body": "With the site data gone you'll usually be signed out already, but if not, sign out deliberately from your profile menu and sign back in. This is the step that actually re-fetches your account's model entitlements from OpenAI, which is why it fixes the error for people who changed plans or moved between a personal and a work account. Make sure you sign back into the same account that holds the subscription — signing in with Google when you originally used an email and password creates a separate account with no plan attached, and that alone produces the same error."
+      "heading": "Sign out and sign back in",
+      "body": "With the site data gone you'll usually already be signed out, but if not, sign out deliberately from your profile menu and sign back in. This is the step that re-fetches your account's model access from OpenAI's servers, which is why it resolves the error for people who recently changed plans or moved between a personal and a work account. Sign back into the account that holds the subscription. Signing in with Google when you originally used an email and password creates a separate account with no plan attached, and that alone produces the same error."
     },
     {
       "heading": "Turn off VPNs and interfering extensions",
-      "body": "If the error survives a clean login, something between your browser and ChatGPT is interfering. Switch off any VPN and reload, since routing through a region where a model isn't offered can make it genuinely unavailable to you. Then disable ad blockers and privacy extensions for this site, or open ChatGPT in a private window where extensions are off by default — if it works there, an extension is the culprit and you can re-enable them one at a time to find it. Corporate networks with content filtering can do the same thing, so test on a personal connection if you're on a work machine."
+      "body": "If the error survives a clean sign-in, something between your browser and ChatGPT is interfering. Switch off any VPN and reload; routing through a region where a model isn't offered can make it genuinely unavailable to you. Disable ad blockers and privacy extensions for this site next, or open ChatGPT in a private window, where extensions are off by default. If it works there, re-enable extensions one at a time to find the culprit. A corporate network with content filtering can cause the same symptom, so test on a personal connection if you're on a work machine."
     },
     {
-      "heading": "Confirm your plan is active and reinstall on mobile",
-      "body": "Open the upgrade page from your profile menu and check what your account actually holds. The plan panel marks your current tier — Go, Plus, or free — and lists what each includes, so you can see at a glance whether the model you're trying to use is covered. A lapsed payment or a subscription bought on a different account is a common and easily missed cause. If the error only happens in the mobile app while the browser works fine, delete and reinstall the app; that clears the cached model list the app stores locally, which nothing else on the phone will reset.",
+      "heading": "Confirm your plan, and reinstall the app if only mobile is failing",
+      "body": "Open the upgrade page from your profile menu and check what your account holds. The plan panel marks your current tier and lists what each one includes. A lapsed payment or a subscription bought on a different account is easy to miss. If the error only happens in the mobile app while the browser works fine, delete and reinstall it. OpenAI Support noted in its developer forum that a related bug affected Android app versions 126 through 203 specifically, fixed in version 203 and later; updating or reinstalling clears the cached model list those older builds were stuck holding.",
       "image": {
         "file": "/screenshots/lYzUIxX-OZs/02.webp",
         "caption": "The plan comparison showing Go marked as the current plan alongside Plus, with the model access each tier includes."
@@ -50,6 +46,10 @@
     }
   ],
   "faq": [
+    {
+      "question": "Is \"Model Not Found\" a known OpenAI bug?",
+      "answer": "The most documented case was. OpenAI Support confirmed in its developer forum in August 2025 that a bug affecting Projects and custom GPTs made the model picker default to a generic label, and fixed it on their end soon after. If it recurs today, treat it as a session or account issue first, using the steps above."
+    },
     {
       "question": "Why does ChatGPT show \"Model Not Found\" right after I upgrade?",
       "answer": "Your browser session is still holding the entitlements from before the upgrade. Signing out and back in re-fetches them from OpenAI, which is why that step fixes it for most people who just changed plans."
@@ -64,13 +64,24 @@
     },
     {
       "question": "The browser works but the mobile app still fails. What now?",
-      "answer": "Delete and reinstall the app. It keeps its own cached list of available models, and a reinstall is the only reliable way to reset that without touching your account."
+      "answer": "Delete and reinstall the app. OpenAI Support has pointed to a specific Android build range, versions 126 through 203, as carrying this bug; a reinstall or an update past 203 resets the cached model list that older builds got stuck holding."
     },
     {
       "question": "I tried everything and it still shows the error. What's left?",
-      "answer": "Check you're signed into the account that actually holds the subscription — a Google sign-in and an email sign-in with the same address can be two different accounts. If the plan is confirmed active, give it fifteen minutes and retry, since entitlement changes occasionally take a short while to propagate."
+      "answer": "Check you're signed into the account that holds the subscription; a Google sign-in and an email sign-in with the same address can be two different accounts. If the plan is confirmed active, wait a short while and retry, since entitlement changes occasionally take time to propagate."
     }
   ],
+  "references": [
+    {
+      "label": "OpenAI Help Center: Troubleshooting ChatGPT Error Messages (official)",
+      "url": "https://help.openai.com/en/articles/7996703-troubleshooting-chatgpt-error-messages"
+    },
+    {
+      "label": "OpenAI Developer Community: \"Model not found\" error thread, with fixes confirmed by OpenAI Support",
+      "url": "https://community.openai.com/t/model-not-found-error-message/1268125"
+    }
+  ],
+  "verifiedNote": "Click path and screenshots come from a walkthrough recorded in July 2025. The fixes were re-checked against OpenAI's official troubleshooting article in September 2026, which does not list \"Model Not Found\" among its named errors (\"Something went wrong,\" network errors, and a blank or frozen page are the ones it documents) but recommends the same clear-cache, sign-out, incognito and VPN checks used here. The specific \"Model not found\" bubble was also tracked in OpenAI's own developer community, where OpenAI Support confirmed in August 2025 it was a bug mostly hitting Projects and custom GPTs, tied to the model picker defaulting to a generic \"ChatGPT\" label, with a named-model workaround before OpenAI shipped a server-side fix. That finding replaced this guide's earlier framing of the error as mainly a plan or entitlement problem.",
   "generatedAt": "2026-08-31T00:00:00.000Z",
   "deep": true
 }

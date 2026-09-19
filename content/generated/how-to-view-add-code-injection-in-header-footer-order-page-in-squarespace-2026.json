@@ -1,41 +1,44 @@
 {
   "slug": "how-to-view-add-code-injection-in-header-footer-order-page-in-squarespace-2026",
   "seoTitle": "How to Use Code Injection in Squarespace Header & Footer",
-  "metaDescription": "Add analytics, tracking pixels, or custom scripts to your Squarespace site's header, footer, or order confirmation page with Code Injection — step by step.",
-  "intro": "Code Injection is the one place in Squarespace where you can drop raw HTML and JavaScript into your site without touching a single page or block. It is how analytics tags, advertising pixels, chat widgets, and conversion tracking get installed, and it is also the feature most people can't find, because it doesn't sit in an obvious menu. This guide shows exactly where the panel lives, what belongs in the header box versus the footer box, and how the separate Commerce fields let you fire a script only after someone has actually bought something. It also covers the two things that catch people out: the plan requirement, and the order variables Squarespace hands you for passing purchase data to a third party.",
+  "metaDescription": "Add analytics, tracking pixels, or custom scripts to your Squarespace site's header, footer, or order confirmation page with Code Injection, including which plan you need.",
+  "intro": "Code Injection is the one place in Squarespace where you can drop raw HTML and JavaScript into your site without touching a page or block. It is how analytics tags, advertising pixels, chat widgets, and conversion tracking get installed, and it is also the feature most people can't find, since it doesn't sit in an obvious menu. This guide shows where the panel lives, what belongs in the header box versus the footer box, and how the separate Commerce fields let a script fire only after someone has bought something. It also covers the two things that catch people out: the plan requirement, and the order variables Squarespace hands you for passing purchase data to a third party.",
+  "prerequisites": [
+    "A Squarespace plan of Core or higher (or Business and up on an older 7.0 site). Code Injection is a premium feature and won't apply on the entry-level plan."
+  ],
   "steps": [
     {
       "heading": "Log in and open the site you want to edit",
-      "body": "Start at squarespace.com and use the Log In link in the top-right corner. If your Squarespace account is tied to a Google profile, Continue with Google is the fastest route — just make sure you pick the right account, since agencies and side projects often end up under a second email. Once you're through, you land on the dashboard listing every site you own; open the one you're editing so the left-hand admin panel loads. Everything from here happens in that panel, not on the live page preview beside it."
+      "body": "Start at squarespace.com and use the Log In link in the top-right corner. If your account is tied to a Google profile, Continue with Google is the fastest route; just pick the right account, since agencies and side projects often end up under a second email. Once you're through, you land on the dashboard listing every site you own. Open the one you're editing so the left-hand admin panel loads. Everything from here happens in that panel, not on the live page preview beside it."
     },
     {
       "heading": "Search for \"code\" instead of hunting through menus",
-      "body": "Code Injection is buried several levels deep under Settings, and the quickest way in is the magnifying-glass search icon in the admin sidebar. Type \"code\" and Squarespace surfaces every code-related setting, with Code Injection at the top of the list. Click it and you get the panel shown here: a short warning that custom code isn't covered by Squarespace's compatibility guarantee, then a HEADER box and, below it, a FOOTER box. Note the small UPGRADE lock badge at the top of the panel — Code Injection is a premium-plan feature, so on a Personal plan you can view the page but not save anything into it.",
+      "body": "Code Injection sits several levels deep under Settings, and the quickest way in is the magnifying-glass search icon in the admin sidebar. Type \"code\" and Squarespace surfaces every code-related setting, with Code Injection at the top of the list. Click it and you get the panel shown here: a short warning that custom code isn't covered by Squarespace's compatibility guarantee, then a HEADER box and, below it, a FOOTER box. Note the small UPGRADE lock badge in the panel. On current Squarespace sites the plans run Basic, Core, Plus and Advanced, and Code Injection needs Core or higher; Basic can still open the panel and keep code typed into it for reference, but Squarespace won't apply it to the live site until you upgrade. Older sites still on the previous plan names see the same gate fall between Personal and Business.",
       "image": { "file": "/screenshots/GwGZHkWpH8o/03.webp", "caption": "The Code Injection panel, with the HEADER field open and the FOOTER field below it. The UPGRADE lock in the corner marks it as a premium-plan feature." }
     },
     {
       "heading": "Put early-loading scripts in the header box",
-      "body": "The header field injects whatever you paste into the <head> tag of every page on your site — Squarespace says as much in the helper text right above the box. That makes it the correct home for anything that has to run before the page paints: analytics libraries, Google Tag Manager, verification meta tags, custom fonts, and SEO tags. It also accepts plain HTML, which is how the site-wide announcement bar in the example gets built: a single styled div with a line of welcome text, injected once and rendered on every page. Paste the full snippet including its script or style tags, then use SAVE at the top-left of the panel — CANCEL sits right beside it, and it is easy to hit the wrong one.",
+      "body": "The header field injects whatever you paste into the <head> tag on every page of your site, per Squarespace's own helper text above the box. That makes it the right home for anything that has to run before the page paints: analytics libraries, Google Tag Manager, verification meta tags, custom fonts, and SEO tags. It also accepts plain HTML, which is how a site-wide announcement bar gets built in the example here: a single styled div with a line of text, injected once and rendered on every page. Paste the full snippet including its script or style tags, then use SAVE at the top-left of the panel. CANCEL sits right beside it, and it's easy to hit the wrong one.",
       "image": { "file": "/screenshots/GwGZHkWpH8o/04.webp", "caption": "A styled div pasted into the header field, which will render on every page of the site. SAVE and CANCEL sit at the top-left of the panel." }
     },
     {
       "heading": "Use the footer box for anything that can wait",
-      "body": "The footer field injects into the template-defined footer on every page, which means it runs late — after the visible content has already loaded. That is exactly what you want for live chat widgets, retargeting tags, cookie-consent banners, review popups, and any third-party embed that would otherwise slow down first paint. If a vendor's install instructions say \"paste this immediately before the closing body tag,\" the footer box is the field they mean. When in doubt, start in the footer: a script that loads late still works, while a heavy script in the header makes every page feel slower."
+      "body": "The footer field injects near the closing </body> tag on every page, so it runs after the visible content has already loaded. That suits live chat widgets, retargeting tags, cookie-consent banners, review popups, and any third-party embed that would otherwise slow down first paint. If a vendor's install instructions say to paste a snippet immediately before the closing body tag, this is the field they mean. When unsure, start in the footer: a script that loads late still works, while a heavy script in the header makes every page feel slower. Squarespace's checkout pages don't accept injected code at all, header or footer, which is why post-purchase tracking needs the separate Commerce fields below."
     },
     {
       "heading": "Add post-purchase scripts on the order confirmation page",
-      "body": "Site-wide injection isn't enough for conversion tracking, because you only want the tag to fire once, after a real order. Scroll further down the same Code Injection panel to the Commerce area and you'll find separate fields for the order confirmation page and the ORDER STATUS PAGE. This is where a Meta Pixel purchase event or a Google Ads conversion tag belongs. Squarespace also exposes order variables you can drop straight into your code — {orderId}, {orderSubtotal} and {orderSubtotalCents}, {orderGrandTotal} and {orderGrandTotalCents}, and {customerEmailAddress} — so the tag can report the actual order number and value rather than a flat event. The Cents variants exist because most ad platforms expect integer minor units, so pick the pair your platform's documentation asks for.",
-      "image": { "file": "/screenshots/GwGZHkWpH8o/05.webp", "caption": "The Commerce injection fields, listing the order variables — order ID, subtotal, grand total, and customer email — that can be passed into a post-purchase script." }
+      "body": "Site-wide injection isn't enough for conversion tracking, because you only want a tag to fire once, after a real order. Scroll further down the same Code Injection panel to the Commerce area and you'll find separate fields for the order confirmation page and the order status page. This is where a Meta Pixel purchase event or a Google Ads conversion tag belongs. Squarespace also exposes order variables you can drop straight into the code: {orderId}, {orderSubtotal} and {orderSubtotalCents}, {orderGrandTotal} and {orderGrandTotalCents}, and {customerEmailAddress}, so the tag reports the actual order number and value instead of a flat event. The Cents variants exist because most ad platforms expect integer minor units, so pick the pair your platform's documentation asks for.",
+      "image": { "file": "/screenshots/GwGZHkWpH8o/05.webp", "caption": "The Commerce injection fields, listing the order variables, order ID, subtotal, grand total, and customer email, that can be passed into a post-purchase script." }
     },
     {
       "heading": "Test the code before you rely on it",
-      "body": "Injected code runs on your live site, and a stray unclosed tag can break a page's layout for every visitor. Save, then load your site in a private window and check both a normal page and, if you added Commerce code, a real test order end to end — the confirmation page only renders after checkout, so it can't be previewed any other way. Use your browser's developer console to confirm the script actually loaded and threw no errors, and verify in the destination platform (Google Analytics real-time, Meta Events Manager) that the event arrived. Keep a copy of each snippet somewhere outside Squarespace before you edit it, so you can roll back instantly. Squarespace's own warning is worth taking seriously: custom code is outside their support scope, so if something breaks, restoring it is on you."
+      "body": "Injected code runs on your live site, and a stray unclosed tag can break a page's layout for every visitor. Save, then load your site in a private window and check both a normal page and, if you added Commerce code, a real test order end to end; the confirmation page only renders after checkout, so it can't be previewed any other way. Use your browser's developer console to confirm the script loaded and threw no errors, and check the destination platform (Google Analytics real-time, Meta Events Manager) to confirm the event arrived. Keep a copy of each snippet somewhere outside Squarespace before you edit it, so you can roll back instantly. Squarespace's own warning is worth taking seriously: custom code is outside their support scope, so if something breaks, fixing it is on you."
     }
   ],
   "faq": [
     {
       "question": "Is Code Injection available on all Squarespace plans?",
-      "answer": "No. It's a premium-plan feature — the panel shows an UPGRADE lock on lower plans, so you can open it but not save code until you upgrade."
+      "answer": "No. On current sites it needs the Core plan or higher; the entry-level Basic plan shows the panel with an UPGRADE lock and keeps whatever code is typed in for reference, but won't apply it to the live site. Older sites carry the same gate between Personal and Business."
     },
     {
       "question": "Where do I add a tracking pixel for the order confirmation page?",
@@ -43,17 +46,26 @@
     },
     {
       "question": "What's the difference between header and footer code injection?",
-      "answer": "Header code is injected into the <head> tag and loads before the page renders, which suits analytics and SEO tags. Footer code loads after the content, which suits chat widgets, retargeting tags, and anything non-critical."
+      "answer": "Header code goes into the <head> tag and loads before the page renders, which suits analytics and SEO tags. Footer code loads near the end of the page, after the content, which suits chat widgets, retargeting tags, and anything non-critical."
     },
     {
       "question": "Can I pass the order total to a third-party service?",
       "answer": "Yes. Squarespace exposes variables like {orderId}, {orderGrandTotal}, {orderGrandTotalCents}, and {customerEmailAddress} that you can place inside your confirmation-page code; most ad platforms want the Cents version."
     },
     {
+      "question": "Can I inject code on the checkout page itself?",
+      "answer": "No. Squarespace's checkout pages don't accept custom code at all. Post-purchase tracking has to go through the Commerce fields on the order confirmation or order status pages instead."
+    },
+    {
       "question": "Will custom code break my site?",
-      "answer": "It can. Squarespace states that compatibility isn't guaranteed with custom code, so test every snippet in a private window, keep a backup of what you paste, and remove anything that misbehaves."
+      "answer": "It can. Squarespace doesn't guarantee compatibility with custom code, so test every snippet in a private window, keep a backup of what you paste, and remove anything that misbehaves."
     }
   ],
+  "references": [
+    { "label": "Squarespace: Using code injection (official)", "url": "https://support.squarespace.com/hc/en-us/articles/205815908-Using-code-injection" },
+    { "label": "Squarespace: Premium features (official)", "url": "https://support.squarespace.com/hc/en-us/articles/115015517328-Premium-features" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The plan requirement, the header/footer injection points, the checkout-page restriction, and the Commerce order variables were re-checked against Squarespace's official support articles in September 2026. That check corrected the plan names to Squarespace's current Basic/Core/Plus/Advanced tiers and added the checkout-page restriction, which the previous version didn't mention; the order variables were confirmed accurate as written.",
   "generatedAt": "2026-08-31T00:00:00.000Z",
   "deep": true
 }

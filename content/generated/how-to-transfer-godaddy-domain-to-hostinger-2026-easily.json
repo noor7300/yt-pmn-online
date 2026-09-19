@@ -1,45 +1,67 @@
 {
   "slug": "how-to-transfer-godaddy-domain-to-hostinger-2026-easily",
   "seoTitle": "How to Transfer a GoDaddy Domain to Hostinger",
-  "metaDescription": "Move a domain from GoDaddy to Hostinger — check eligibility, unlock it, get the EPP code, turn off WHOIS privacy, and start the transfer without downtime.",
-  "intro": "Moving a domain between registrars sounds risky and rarely is, because a registrar transfer changes who bills you for the name — not where the name points. Get the DNS right beforehand and your website and email keep running throughout. What actually derails these transfers is the checklist at the start: a domain still locked at GoDaddy, an authorisation code that expired while you were reading the next step, or a registration that's under 60 days old and therefore ineligible no matter what you do. Hostinger states all three requirements on its transfer page, and this guide works through them in the order that avoids a rejected transfer and a wasted week.",
+  "metaDescription": "Move a domain from GoDaddy to Hostinger: check eligibility (including the 7-day expiry and DNSSEC rules Hostinger adds), unlock it, get the EPP code, and start the transfer without downtime.",
+  "intro": "Moving a domain between registrars sounds risky and rarely is, because a registrar transfer changes who bills you for the name, not where the name points. Get the DNS right beforehand and your website and email keep running throughout. What derails these transfers is the checklist at the start: a domain still locked at GoDaddy, an authorisation code that expired while you were reading the next step, or a registration too new to move under ICANN's rules. Hostinger states its requirements on the transfer page, and this guide works through them in the order that avoids a rejected transfer and a wasted week.",
+  "prerequisites": [
+    "Full owner or admin access to the domain at GoDaddy, not a delegated login with limited rights",
+    "A Hostinger account to receive the transferred domain"
+  ],
+  "costNote": "The transfer fee is simply what Hostinger charges to register that TLD; there is no separate moving charge on top. That fee also renews the domain for a year, which is how a standard registrar transfer works, not an extra cost. GoDaddy does not charge to unlock a domain or reveal its EPP code.",
   "steps": [
     {
-      "heading": "Confirm the domain is actually eligible",
-      "body": "Three conditions have to be true before anything else is worth doing. The domain must be more than 60 days past its initial registration or its last transfer — an ICANN rule, not a Hostinger one, and there is no way around it. It must be unlocked at the current registrar. And you must hold a valid authorisation code from GoDaddy. Hostinger lays out all three at the top of its transfer page, which makes it a useful checklist to read before you touch anything. Also check the expiry date: transferring adds a year to the registration, so a domain expiring in a few days is better renewed at GoDaddy first than transferred in a panic."
+      "heading": "Confirm the domain is eligible before you start",
+      "body": "Three ICANN rules apply to every registrar transfer, not just this one: the domain must be at least 60 days past its initial registration or its last transfer, it must be unlocked at GoDaddy, and you need a valid authorisation (EPP) code. Hostinger adds two conditions of its own on top: at least 7 days must remain before the domain expires, and DNSSEC has to be switched off, since DNSSEC keys don't carry across registrars automatically. If you renewed recently, wait at least 45 days after that renewal before transferring, since moving too soon can throw off how the new expiry date is calculated. Check all of this against Hostinger's transfer requirements page before touching anything in GoDaddy."
     },
     {
-      "heading": "Log in to GoDaddy and open your domain",
-      "body": "Sign in at GoDaddy and go to Domains, then your domain portfolio, and open the specific name you're moving. You need to be the account owner or have full domain permissions — delegate access with limited rights won't expose the settings you're about to change. While you're here, check the contact email listed on the domain, because GoDaddy sends the transfer authorisation there and it's very often an old address nobody reads any more. Fix it now if it's wrong; an unread approval email is the single most common reason a transfer times out.",
+      "heading": "Log in to GoDaddy and check the registrant email",
+      "body": "Sign in at GoDaddy and go to Domains, then your domain portfolio, then the specific name you're moving. You need full owner or admin access; a delegated login with limited rights won't expose the settings you're about to change. While you're on the domain's settings page, check the registrant contact email. GoDaddy sends both the authorisation code and the transfer confirmation request to that address, and it's often an inbox nobody checks anymore. Fix it now if it's wrong.",
       "image": { "file": "/screenshots/HCMbNzwLASw/01.webp", "caption": "GoDaddy with an account signed in. The Domains menu in the top navigation is where your portfolio and each domain's settings live." }
     },
     {
-      "heading": "Unlock the domain and turn off WHOIS privacy",
-      "body": "In the domain's settings, find the domain lock (GoDaddy labels it Domain Lock or Transfer Lock) and switch it off. Locking exists to stop unauthorised transfers, so leaving it on will cause your request to be rejected without much explanation. In the same panel, turn off WHOIS privacy or Domain Protection temporarily — privacy services mask the registrant email, which can block the verification message from reaching you. Both settings can be switched back on at Hostinger once the transfer finishes, and Hostinger includes free WHOIS privacy on most domains, so you're not giving anything up permanently."
+      "heading": "Unlock the domain and turn off privacy protection",
+      "body": "On the domain's settings page, find the lock toggle under the Transfer section and switch it off. GoDaddy's own help page is explicit that a locked domain is not eligible for transfer, so this isn't optional. In the same area, turn off Domain Protection or WHOIS privacy if it's enabled; Hostinger's own instructions flag this too, since a privacy service can mask the registrant email the transfer depends on. Both can be switched back on at Hostinger once the domain has finished moving, and Hostinger includes free WHOIS privacy on most domains, so you're not giving anything up permanently."
     },
     {
       "heading": "Get the EPP authorisation code",
-      "body": "Still in the domain's settings, request the transfer authorisation code — GoDaddy variously calls it the EPP code, auth code, or authorisation code, and they all mean the same thing. It's emailed to the registrant address rather than shown on screen in most cases, which is why fixing that email address first mattered. Copy it exactly, including case, and be aware the code can expire or be regenerated; if you request a second one, the first stops working. Have Hostinger's transfer page already open when you request it so you can paste it straight in rather than letting it go stale in an inbox."
+      "body": "From the domain's settings, choose Transfer domain away from GoDaddy. If Domain Protection has been on for at least 24 hours, GoDaddy asks for a one-time code sent by SMS or from an authenticator app before it will show you anything. Click through to reveal the code and copy it exactly, including case. GoDaddy also emails it to the registrant address you checked earlier. Codes can be regenerated, and doing so invalidates the previous one, so request it only when you're ready to paste it straight into Hostinger."
     },
     {
       "heading": "Record your current DNS records before you move",
-      "body": "This is the step most guides skip and the one that causes actual downtime. Open GoDaddy's DNS management for the domain and save a copy of every record — A records, CNAMEs, and especially MX records for email and any TXT records holding SPF, DKIM, or domain verification strings. A registrar transfer does not automatically carry custom DNS records across, and losing your MX records means email stops arriving with no obvious cause. Screenshot or paste them somewhere you'll find them, then recreate them at Hostinger after the transfer or point Hostinger's nameservers at the same values.",
+      "body": "This is the step most guides skip, and the one that causes real downtime. Open GoDaddy's DNS management for the domain and save a copy of every record: A records, CNAMEs, and especially the MX records that route your email, plus any TXT records holding SPF, DKIM or domain-verification strings. A registrar transfer doesn't automatically carry custom DNS records with it, so losing your MX records means email stops arriving with no obvious cause. Recreate them at Hostinger once the transfer completes, or point Hostinger's nameservers at the same values."
+    },
+    {
+      "heading": "Start the transfer from Hostinger",
+      "body": "In hPanel, open Domains, then Transfers. The page restates the same eligibility checklist (60 days elapsed, domain unlocked, code in hand) plus Hostinger's own expiry and DNSSEC conditions, and below that sits a single field where you type the domain name.",
       "image": { "file": "/screenshots/HCMbNzwLASw/03.webp", "caption": "The Hostinger dashboard with Domains expanded, showing Domain portfolio, Get a New Domain, and Transfers." }
     },
     {
-      "heading": "Start the transfer from Hostinger's Transfers page",
-      "body": "In hPanel, open Domains and choose Transfers. The page opens with the three requirements restated across the top — 60 days elapsed, domain unlocked, authorisation code in hand — and below them a single field where you type the domain and press Transfer. Pricing per extension is listed underneath, and this is worth reading before you commit: the transfer fee includes an additional year of registration, so you're buying a year rather than paying a pure moving charge. Enter the domain, paste the EPP code when prompted, and complete the payment.",
+      "heading": "Enter the domain, pay, and approve the confirmation email",
+      "body": "Type the domain, press Transfer, and paste the EPP code when prompted. Hostinger lists its per-extension pricing on this page, and that fee covers the added year of registration described above. After you submit and pay, GoDaddy emails the registrant asking to confirm release. Approving that email is what turns a five-to-seven day wait into something that often finishes within a day; ignoring it means waiting out the full automatic release window instead. Track progress in Hostinger's Transfers section, and once it completes, check that the DNS records you saved are in place and that your site and email still work before switching lock and privacy back on.",
       "image": { "file": "/screenshots/HCMbNzwLASw/04.webp", "caption": "Hostinger's Transfer Domain page listing the three requirements, with the domain entry field and per-extension pricing below." }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "GoDaddy won't let me unlock the domain or request the code",
+      "cause": "Most often the domain is still inside the 60-day post-registration or post-transfer lock, or DNSSEC is still enabled on the domain.",
+      "fix": "Check the domain's registration or last-transfer date and wait out the lock if needed, and turn off DNSSEC in GoDaddy's DNS settings before trying again."
     },
     {
-      "heading": "Approve the request and watch it complete",
-      "body": "Once submitted, GoDaddy emails the registrant asking to confirm the release. Approving it there is what turns a five-to-seven day wait into something that often finishes within a day — ignore it and the transfer sits in limbo until the automatic release window elapses. Track the status in Hostinger's Transfers section rather than refreshing your email. When it completes, check three things: the domain appears in your Hostinger domain portfolio, the DNS records you saved earlier are in place, and your site and email still work. Then re-enable domain lock and WHOIS privacy at Hostinger to protect the name you just moved."
+      "problem": "The transfer confirmation email from GoDaddy never arrives",
+      "cause": "The registrant contact email is out of date, or the message landed in spam.",
+      "fix": "Correct the registrant email in GoDaddy's domain settings, check spam, and approve the transfer directly from GoDaddy's own account interface if the email doesn't show up."
+    },
+    {
+      "problem": "Email stopped arriving after the domain moved",
+      "cause": "Custom MX and TXT records weren't carried over automatically by the registrar transfer.",
+      "fix": "Recreate the DNS records you saved before starting, using Hostinger's DNS zone editor, matching the values exactly."
     }
   ],
   "faq": [
     {
       "question": "Why won't Hostinger accept my domain for transfer?",
-      "answer": "Almost always one of the three stated requirements: fewer than 60 days since registration or the last transfer, the domain still locked at GoDaddy, or an authorisation code that's wrong or has expired."
+      "answer": "Usually one of five things: fewer than 60 days since registration or the last transfer, the domain still locked at GoDaddy, fewer than 7 days left before expiry, DNSSEC still enabled, or an authorisation code that's wrong or expired."
     },
     {
       "question": "How long does a GoDaddy to Hostinger transfer take?",
@@ -47,17 +69,28 @@
     },
     {
       "question": "Will my website or email go down during the transfer?",
-      "answer": "Not if you prepare. A registrar transfer changes who bills you, not where the domain points — but custom DNS records don't always carry across, so save your A, CNAME, MX and TXT records first and recreate them at Hostinger."
+      "answer": "Not if you prepare. A registrar transfer changes who bills you, not where the domain points, but custom DNS records don't always carry across, so save your A, CNAME, MX and TXT records first and recreate them at Hostinger."
     },
     {
       "question": "Do I have to disable WHOIS privacy?",
       "answer": "Usually yes, temporarily. Privacy services mask the registrant email that the verification message is sent to. You can switch privacy back on at Hostinger once the transfer completes."
     },
     {
+      "question": "Why is GoDaddy asking for a one-time code before it shows me the auth code?",
+      "answer": "If Domain Protection has been enabled for at least 24 hours, GoDaddy requires identity verification by SMS or authenticator app before it will reveal the EPP code, as an extra safeguard against unauthorised transfers."
+    },
+    {
       "question": "Do I lose the time left on my current registration?",
       "answer": "No. The transfer fee adds a year to the existing registration rather than resetting it, so the remaining time on your GoDaddy registration carries over."
     }
   ],
+  "references": [
+    { "label": "Hostinger: How to transfer a domain to Hostinger (official)", "url": "https://www.hostinger.com/support/1583436-how-to-transfer-a-domain-to-hostinger/" },
+    { "label": "Hostinger: How to get the EPP code from GoDaddy (official)", "url": "https://www.hostinger.com/support/1583437-how-to-get-the-epp-code-from-godaddy/" },
+    { "label": "GoDaddy: Unlock or lock my domain (official)", "url": "https://www.godaddy.com/help/unlock-or-lock-my-domain-410" },
+    { "label": "GoDaddy: Get the auth code for my domain (official)", "url": "https://www.godaddy.com/help/get-the-auth-code-for-my-domain-1685" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Eligibility rules, the unlock and EPP-code path, and the DNS-carryover behaviour were re-checked against Hostinger's and GoDaddy's official support pages in September 2026. That check added the 7-day expiry buffer, the DNSSEC requirement, and the identity-verification step GoDaddy applies to accounts with Domain Protection, none of which the previous version mentioned.",
   "generatedAt": "2026-08-31T00:00:00.000Z",
   "deep": true
 }

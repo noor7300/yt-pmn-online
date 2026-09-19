@@ -1,44 +1,72 @@
 {
   "slug": "how-to-connect-namecheap-domain-to-wix-website-easily-2026",
   "seoTitle": "Connect a Namecheap Domain to Your Wix Website",
-  "metaDescription": "Learn both the nameserver and manual DNS methods for connecting a Namecheap domain to Wix, plus verification tips and propagation timing.",
-  "intro": "Buying a domain on Namecheap and building a site on Wix means those two platforms have to be told to talk to each other, and the easiest way to do that is by pointing Namecheap's nameservers at Wix's. Wix walks you through this with a short numbered wizard that hands you the exact values to swap, and Namecheap's domain panel is where you actually paste them in. This guide follows that real flow end to end — from Wix's nameserver instructions to the Namecheap domain list where the change gets made and confirmed.",
+  "metaDescription": "Connect a Namecheap domain to Wix with the nameserver method: the Premium plan Wix requires first, the exact click path in both dashboards, and propagation timing.",
+  "intro": "Buying a domain on Namecheap and building a site on Wix means those two platforms have to be told to talk to each other, and the usual way to do that is by pointing Namecheap's nameservers at Wix's. There is one requirement worth checking before any of that: Wix only connects a custom domain on a paid plan. Once that's out of the way, Wix's own wizard hands you the exact values to swap, and Namecheap's domain panel is where you paste them in. This guide follows that flow end to end, from the plan check through propagation.",
+  "prerequisites": [
+    "A Wix Premium plan. Namecheap's own instructions state plainly that the site must be upgraded before a domain can be connected; the free Wix plan stays on a wix.com subdomain.",
+    "Owner access to the domain in your Namecheap account"
+  ],
+  "costNote": "Wix requires a paid Premium plan to connect any outside domain, so budget for that if the site is still on the free tier. Namecheap doesn't charge anything extra to point a domain you already own at another host.",
   "steps": [
     {
+      "heading": "Confirm the Wix site is on a Premium plan",
+      "body": "Wix's domain-connection option only becomes usable once the site is upgraded from the free plan; Namecheap's own support article states this as the first requirement. Check the plan under Wix Settings before doing anything else, and upgrade there if it's still free. Everything from this point assumes that's already done."
+    },
+    {
       "heading": "Open your Wix site dashboard",
-      "body": "Log into Wix and open the dashboard for the site you want the domain attached to. The left sidebar is your control center here — Video Library, Apps, Site & Mobile App, Marketing, Analytics, Settings, and further down, Developer Tools — and it's the same dashboard you'll return to later to confirm the domain connected successfully. If you're partway through Wix's setup checklist, as shown by the \"Let's set up your blog\" progress tracker at the top, you can still jump into domain settings without finishing every item on that list first.",
+      "body": "Log into Wix and open the dashboard for the site you want the domain attached to. The left sidebar is the control centre here: Video Library, Apps, Site & Mobile App, Marketing, Analytics, Settings, and further down, Developer Tools. It's the same dashboard you'll return to later to confirm the domain connected. If you're partway through Wix's setup checklist, as shown by a progress tracker at the top, you can still jump into domain settings without finishing every item on that list first.",
       "image": { "file": "/screenshots/79cdLzjNsbs/03.webp", "caption": "The Wix site dashboard, with the sidebar navigation you'll use throughout setup, including Settings where domain connection lives." }
     },
     {
       "heading": "Start the domain connection wizard in Wix",
-      "body": "From Settings, find the domain connection option and choose to connect a domain you already own rather than buying a new one through Wix. Wix runs you through a short numbered wizard — in this flow it's a four-step process, with step 3 asking you to find your current nameservers on your registrar's site (confirmed with an \"I found them\" checkbox) before moving you into the actual swap in step 4."
+      "body": "From Settings, find the domain connection option and choose to connect a domain you already own instead of buying a new one through Wix. Wix runs a short numbered wizard, four steps in this flow, with step 3 asking you to find your current nameservers on your registrar's site (confirmed with an \"I found them\" checkbox) before moving you into the actual swap in step 4."
     },
     {
-      "heading": "Copy the exact Wix nameservers",
-      "body": "Step 4 of the wizard, \"Replace your nameservers,\" lays out precisely what to remove and what to add, side by side, with copy buttons next to each value so you don't risk a typo. In this case the instructions call for removing dns2.registrar-servers.com and dns1.registrar-servers.com — Namecheap's default nameservers — and replacing them with ns1.wixdns.net and ns0.wixdns.net. The wizard is explicit that you should end up with exactly two nameserver records; if your domain has more than two listed, it tells you to remove the extras rather than leave them alongside Wix's.",
+      "heading": "Copy the nameservers your own wizard shows you",
+      "body": "Step 4, \"Replace your nameservers,\" lays out precisely what to remove and add, with copy buttons next to each value so you don't risk a typo. Wix is explicit that these values are account-specific: the pair shown to you may not match what someone else sees, so always copy the ones on your own screen instead of a pair quoted in a guide. In this recording the instructions called for removing dns1.registrar-servers.com and dns2.registrar-servers.com, Namecheap's default nameservers, and replacing them with the two Wix nameservers shown. The wizard also says you should end up with exactly two nameserver records; if your domain has more than two listed, remove the extras so only Wix's pair remains.",
       "image": { "file": "/screenshots/79cdLzjNsbs/05.webp", "caption": "Wix's nameserver swap instructions, showing the exact Namecheap default nameservers to remove and the two Wix nameservers to add in their place." }
     },
     {
       "heading": "Update the nameservers in Namecheap",
-      "body": "Log into Namecheap and open Domain List from the left sidebar, where every domain on the account is listed with its Status, Auto-Renew toggle, and Expiration date. Click Manage next to the domain you're connecting, find the Nameservers section on that domain's management page, switch it to Custom DNS, and enter the two Wix nameservers from the wizard exactly as copied — no trailing spaces, no extra entries.",
+      "body": "Log into Namecheap, open Domain List from the left sidebar, and click Manage next to the domain you're connecting. Under the Domain tab, find the Nameservers section and use the dropdown to switch it from the default option to Custom DNS. Enter the two Wix nameservers from the wizard exactly as copied, one per line, then confirm with the green checkmark. No trailing spaces, no extra entries.",
       "image": { "file": "/screenshots/79cdLzjNsbs/02.webp", "caption": "Namecheap's Domain List, showing an active domain with its expiration date and the Manage button that opens its nameserver settings." }
     },
     {
-      "heading": "Save and confirm back in Wix",
-      "body": "After saving the nameserver change in Namecheap, return to the Wix wizard and click \"I've replaced my nameservers\" to tell Wix the change is in. Wix can't verify it instantly since the update has to propagate first, but confirming this step lets Wix start checking in the background and move your domain connection status toward Connected once it detects the new nameservers."
+      "heading": "Confirm back in Wix and wait for propagation",
+      "body": "Return to the Wix wizard and click \"I've replaced my nameservers\" so Wix starts checking in the background; it can't verify the change instantly since it has to propagate first. Namecheap states changes typically take 24 to 48 hours to fully take effect, matching what Wix tells you to expect. Check the domain's status in Wix Settings periodically; it isn't broken just because it isn't instant. If it's still unconnected after two days, compare the nameservers in Namecheap against Wix's values character for character; a stray space or a leftover default entry is the usual cause."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The domain connection option isn't available in Wix",
+      "cause": "The site is still on Wix's free plan, and connecting an external domain requires a paid Premium plan.",
+      "fix": "Upgrade the site's plan from Wix Settings, then start the wizard again."
     },
     {
-      "heading": "Give it time to propagate",
-      "body": "Nameserver changes typically take anywhere from a few minutes to a few hours to fully propagate, though it can occasionally stretch close to 48 hours depending on your location and DNS caching along the way. Check the domain's status in Wix's Settings periodically rather than assuming something broke if it isn't instant — if it's still unconnected after a day or two, double-check that the nameservers in Namecheap match Wix's values exactly, including no leftover default entries."
+      "problem": "Namecheap shows the new nameservers saved, but Wix still says not connected after two days",
+      "cause": "Propagation is still catching up in some regions, or one of the entered values doesn't exactly match what Wix issued.",
+      "fix": "Compare each nameserver in Namecheap's Custom DNS fields against Wix's Settings page character for character, and wait out the full propagation window before assuming it's broken."
+    },
+    {
+      "problem": "Email stopped working after the nameserver switch",
+      "cause": "Custom nameservers hand over all DNS control, including MX records that used to route mail through a different provider.",
+      "fix": "Recreate the mail records inside Wix's own DNS settings, or use Namecheap's DNS-records method instead of the nameserver method if you want to keep DNS at Namecheap."
     }
   ],
   "faq": [
-    { "question": "Should I use the nameserver method or manual DNS method?", "answer": "The nameserver method shown here is simpler since Wix manages everything automatically once the two nameservers are set. A manual A-record and CNAME method exists too, for people who want to keep other DNS records under their own control at Namecheap." },
-    { "question": "Will switching nameservers affect my email?", "answer": "It can. Handing DNS control to Wix's nameservers means any email-related records (like MX records) you had at Namecheap no longer apply, so you'd need to recreate them through Wix's DNS settings instead." },
-    { "question": "How long does domain propagation typically take?", "answer": "It varies by domain and location, usually somewhere between a few minutes and a few hours, though it can occasionally take up to 48 hours in rarer cases." },
-    { "question": "What exactly do I remove and add in Namecheap?", "answer": "In this walkthrough, Wix's wizard specified removing Namecheap's default dns1.registrar-servers.com and dns2.registrar-servers.com and adding ns0.wixdns.net and ns1.wixdns.net in their place — always use the exact values your own Wix wizard shows you." },
-    { "question": "Can I switch methods later if I change my mind?", "answer": "Yes, you can move from the nameserver method back to manual DNS records or vice versa later, though switching back and forth unnecessarily just adds more propagation waiting time." }
+    { "question": "Does Wix require a paid plan to connect a domain?", "answer": "Yes. Namecheap's own instructions state that the Wix site must be on a Premium plan before a domain can be connected; the free plan keeps the site on a wix.com subdomain." },
+    { "question": "Should I use the nameserver method or a manual DNS method?", "answer": "The nameserver method here is simpler, since Wix manages everything once the two nameservers are set. Namecheap also offers a DNS-records method for domains left on its BasicDNS or PremiumDNS, for people who want to keep other records under their own control." },
+    { "question": "Will switching nameservers affect my email?", "answer": "It can. Handing DNS control to Wix means any email-related records, MX records especially, that you had at Namecheap stop applying, so you'd need to recreate them through Wix's DNS settings." },
+    { "question": "How long does propagation typically take?", "answer": "Namecheap states 24 to 48 hours for a nameserver change to fully take effect, which matches what Wix's wizard tells you to expect." },
+    { "question": "What exact values do I remove and add in Namecheap?", "answer": "That depends on your own Wix account. Wix assigns nameserver pairs per account, so always copy the values shown on your own wizard screen instead of a pair you've seen in another guide." },
+    { "question": "Can I switch connection methods later?", "answer": "Yes, you can move from the nameserver method to a manual DNS-records setup or back again, though switching unnecessarily just adds more propagation waiting time." }
   ],
+  "references": [
+    { "label": "Namecheap: How do I link my domain to my Wix account? (official)", "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/1247/2208/how-do-i-link-my-domain-to-my-wix-account/" },
+    { "label": "Wix: Connecting a Domain to the Wix Name Servers (official)", "url": "https://support.wix.com/en/article/connecting-a-domain-to-the-wix-name-servers" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The nameserver values, the Custom DNS steps in Namecheap, and the propagation window were re-checked against Namecheap's and Wix's official support pages in September 2026. That check surfaced the Premium-plan requirement this guide previously left out entirely, and confirmed that Wix's nameserver pairs are assigned per account, not fixed, which the earlier version presented as a single universal pair.",
   "generatedAt": "2026-08-31T00:00:00Z",
   "deep": true
 }
