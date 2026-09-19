@@ -1,59 +1,93 @@
 {
   "slug": "how-to-fix-this-app-isn-t-compatible-with-your-store-at-shopify-for-tiktok-other",
   "seoTitle": "Fix 'App Isn't Compatible' Error on Shopify",
-  "metaDescription": "Troubleshoot the Shopify error blocking TikTok and other app installs, from checking eligibility and country restrictions to fixing install issues.",
-  "intro": "The 'This app isn't compatible with your store' message shows up right when you're trying to move fast — connecting TikTok Shop, Facebook, or another sales channel — and Shopify doesn't explain what triggered it. Most of the time the cause isn't the app itself but a mismatch between the app's supported regions and your store's country setting. This guide walks through where that setting lives, how to confirm an app's requirements before you install, and what to check if a different app throws the same error later.",
+  "metaDescription": "Shopify checks five store settings before letting an app install. Find out which one is blocking TikTok, Facebook or another app, and how long a fix takes to take effect.",
+  "intro": "Shopify marks an app \"Not compatible\" when a specific setting on your store doesn't match what the app declares it needs. That's usually your store's country, but Shopify checks five separate things, and it's easy to fix the wrong one and conclude the app is broken.\n\nThis guide covers all five, where to find the exact mismatch on the app's own listing page, and the one detail most troubleshooting posts skip: changing a setting doesn't fix the error immediately.",
   "steps": [
     {
-      "heading": "Understand why this error happens",
-      "body": "Shopify blocks an install when the app you're adding doesn't support your store's configuration — most commonly its country, but sometimes its plan tier or the sales channels it already has connected. TikTok Shop in particular is only available to merchants based in a set list of supported countries, so a store outside that list will see the compatibility message even though the app itself installs fine everywhere else. Facebook and other social-commerce apps enforce similar regional rules tied to where the platform can process payments and shipping."
+      "heading": "Know the five things Shopify checks",
+      "body": "An app can require any combination of: Point of Sale (your store has the Shopify POS channel), Shipping countries (you ship to at least one country the app supports), Currency (you sell in a currency it supports), Business address (your store's registered country), and Online Store (the Online Store sales channel is active). Country restrictions like TikTok Shop's are the most common trigger, but currency and channel mismatches produce the identical \"not compatible\" message."
     },
     {
-      "heading": "Check your store's country in admin settings",
-      "body": "Your store's country lives under Settings → General, in the same section as your address, currency, and unit preferences. Because it's a long alphabetical list, it's easy to have picked the wrong entry when the store was first set up, or to have a business address in one country while genuinely operating in another — either one is enough to trip an app's eligibility check. Confirm this field matches where your business is actually registered before assuming the app itself is broken.",
-      "image": { "file": "/screenshots/ac1uGbwIQUw/03.webp", "caption": "The country selector under Settings, General — a long dropdown list where the wrong entry can silently block region-locked apps like TikTok Shop." }
+      "heading": "Find your specific mismatch on the app's own listing page",
+      "body": "Open the app in the Shopify App Store and look at its listing page instead of guessing. Shopify shows you, directly on that page, which of the five requirements your store fails. That's a faster and more accurate check than reading generic pricing text, since it's evaluated against your actual store settings, not a general description.",
+      "image": { "file": "/screenshots/ac1uGbwIQUw/04.webp", "caption": "The TikTok app listing in the Shopify App Store, showing pricing and the Install button; the requirements mismatch for your store shows above this section." }
     },
     {
-      "heading": "Review the app's own eligibility notes before installing",
-      "body": "Open the app's listing in the Shopify App Store and read the pricing and requirements section near the Install button — this is where TikTok, Facebook, and similar apps note if they're limited to businesses based in specific countries. If your store's country isn't on that list, no amount of retrying the install will fix it; the app is genuinely not available to you yet, and you'd need a different integration or a business entity registered in a supported region.",
-      "image": { "file": "/screenshots/ac1uGbwIQUw/04.webp", "caption": "The TikTok app listing in the Shopify App Store, showing pricing and the Install button — check the requirements text above this before installing." }
+      "heading": "Fix the setting, if it's fixable",
+      "body": "Your store's country lives under Settings → General, in the same section as your address, currency, and unit preferences. It's easy to have picked the wrong entry when the store was first set up. If that's the mismatch and your business genuinely operates from a different country than what's set, correct it here. If the requirement is Currency or Online Store, the fix is in Settings → General or Settings → Apps and sales channels respectively.\n\nBusiness address is the one that isn't always fixable: it should reflect where your business is legally registered, not wherever gets an app to install. If your business really is outside the app's supported countries, no setting change fixes that, and you need a different integration.",
+      "image": { "file": "/screenshots/ac1uGbwIQUw/03.webp", "caption": "The country selector under Settings, General, part of the business address Shopify checks against an app's supported countries." }
     },
     {
-      "heading": "Complete onboarding once the install succeeds",
-      "body": "If your store does meet the eligibility requirements, installing the app drops you into its own onboarding panel inside Shopify admin rather than finishing everything automatically. For TikTok, this means working through a task list — setting up TikTok Business and TikTok Ads Manager accounts, authorizing data sharing, and building out your presence — before ads or shop features actually go live. Skipping tasks in this checklist is a separate, common reason people think the app is 'still not working' when really it's just unfinished setup, not a compatibility error at all.",
+      "heading": "Wait before retrying the install",
+      "body": "After changing a store setting to meet a requirement, Shopify can take up to an hour to recognize it. The app stays marked Not compatible during that window even though your settings are already correct. Retrying immediately, clearing cache, or switching browsers won't speed this up; give it the hour, then try the install again."
+    },
+    {
+      "heading": "Finish the app's own onboarding once it installs",
+      "body": "A successful install drops you into the app's own onboarding panel inside Shopify admin; it doesn't finish everything automatically. For TikTok, that means an eight-step task list covering TikTok Business and Ads Manager accounts, authorizing data sharing, and building out your presence, before ads or shop features go live. Skipping tasks here is a separate, common reason people think an app is \"still not working\" when it's really just unfinished setup, not a compatibility error.",
       "image": { "file": "/screenshots/ac1uGbwIQUw/05.webp", "caption": "The TikTok app's onboarding panel inside Shopify admin, showing an 8-step task list to connect accounts and authorize data sharing." }
+    }
+  ],
+  "tables": [
+    {
+      "title": "The five Shopify app installation requirements",
+      "columns": ["Requirement", "What it checks", "Where to fix it"],
+      "rows": [
+        ["Business address", "The country your store is registered in", "Settings → General"],
+        ["Shipping countries", "Whether you ship to at least one country the app supports", "Settings → Shipping and delivery"],
+        ["Currency", "Whether you sell in a currency the app supports", "Settings → General"],
+        ["Online Store", "Whether the Online Store sales channel is active", "Settings → Apps and sales channels"],
+        ["Point of Sale", "Whether the Shopify POS channel is added to your store", "Settings → Apps and sales channels"]
+      ],
+      "note": "Based on Shopify's official Help Center documentation as of September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Store settings match the requirement but install still fails",
+      "cause": "Shopify can take up to an hour to recognize a changed setting.",
+      "fix": "Wait an hour after the change, then retry. Don't assume the app itself is broken."
     },
     {
-      "heading": "Troubleshoot other apps with the same error",
-      "body": "For non-TikTok apps showing this same message, work through the same two checks: confirm your store's country under Settings → General, then read the app's own requirements on its App Store listing page. If both look fine and the error persists, try removing and reinstalling the app, clear your browser cache, or attempt the install from a different browser, since a stuck session can occasionally cause a false compatibility message. If it still fails after that, the app's own support team — reachable from its App Store listing — can confirm whether your store type is genuinely unsupported."
+      "problem": "App installed, but its features (ads, shop tab) don't work",
+      "cause": "A successful install just adds the app. Most sales-channel apps, TikTok included, need their own onboarding checklist completed, account authorization and business verification among them, before anything goes live.",
+      "fix": "Open the app from Shopify admin and work through every step of its own setup checklist, not just the install."
     },
     {
-      "heading": "Avoid the error on future installs",
-      "body": "Before installing any new sales-channel app, get in the habit of checking its requirements section first rather than clicking Install and troubleshooting after the fact. It takes a few seconds and saves you from chasing a phantom bug when the real issue is simply that the app doesn't operate in your store's country yet. Keeping your store's country setting accurate from day one also prevents a whole category of these errors before they start."
+      "problem": "The mismatch is your business address, and you can't just change it",
+      "cause": "Business address has to reflect where the business is legally registered, not a field you can edit freely to unlock an app.",
+      "fix": "If your business genuinely operates from a supported country, correct the address to match. If it doesn't, the app isn't available to your store yet, and a setting change won't fix that."
     }
   ],
   "faq": [
     {
       "question": "Why does Shopify say an app isn't compatible with my store?",
-      "answer": "This typically relates to store eligibility, country restrictions, or configuration mismatches between your store and the app's requirements — check the app's listing page for its supported regions."
+      "answer": "One of five store settings doesn't match what the app requires: business address, shipping countries, currency, Online Store channel status, or Point of Sale channel status."
     },
     {
       "question": "Is this error specific to TikTok?",
-      "answer": "No, while TikTok is a common example, the same compatibility error can appear when installing Facebook or other third-party sales-channel apps that enforce regional availability."
+      "answer": "No. The same message appears for Facebook and other sales-channel apps that enforce their own country, currency, or channel requirements."
     },
     {
-      "question": "Can country restrictions cause this error?",
-      "answer": "Yes, some apps are only available in certain countries, and your store's country is set under Settings → General — installing from an unsupported region will trigger this compatibility error regardless of your plan."
+      "question": "I fixed my store's country, so why is the app still showing as not compatible?",
+      "answer": "Shopify can take up to an hour to recognize a settings change before the App Store reflects it. Wait, then retry the install."
     },
     {
-      "question": "What should I check first when I see this error?",
-      "answer": "Start by checking your store's country under Settings → General, then compare it against the requirements listed on the app's own Shopify App Store page."
+      "question": "Where do I see exactly which requirement my store fails?",
+      "answer": "On the app's own listing page in the Shopify App Store. It shows the specific mismatch against your store's current settings, not just a general requirements list."
     },
     {
-      "question": "The app installed but features aren't working — is that the same error?",
-      "answer": "Usually not. A successful install with missing features almost always means an onboarding task, like account authorization, hasn't been completed yet rather than a compatibility block."
+      "question": "The app installed but features aren't working, is that the same error?",
+      "answer": "Usually not. A successful install with missing features almost always means an onboarding task, like account authorization, hasn't been completed, not a compatibility block."
     }
   ],
+  "references": [
+    {
+      "label": "Shopify Help Center: Finding and choosing apps (official)",
+      "url": "https://help.shopify.com/en/manual/apps/finding-choosing-apps"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The cause of the compatibility error was re-checked against Shopify's official Help Center in September 2026, which corrected this guide's earlier focus on country alone. Shopify evaluates five separate requirements (business address, shipping countries, currency, Online Store channel, Point of Sale channel), and a fixed setting can take up to an hour to be recognized before a retry works.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }

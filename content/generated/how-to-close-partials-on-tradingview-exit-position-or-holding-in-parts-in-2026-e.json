@@ -1,46 +1,78 @@
 {
   "slug": "how-to-close-partials-on-tradingview-exit-position-or-holding-in-parts-in-2026-e",
   "seoTitle": "Close Partial Positions on TradingView",
-  "metaDescription": "Learn how to exit a TradingView trade in parts, adjusting quantity and setting multiple targets to lock in profits and manage risk gradually.",
-  "intro": "Closing a position in parts, rather than all at once, lets you lock in profits gradually and manage risk more precisely instead of betting everything on one exit price. This guide covers using TradingView's on-chart order line and the Paper Trading panel to scale out of a position, adjust quantity mid-trade, and set take-profit and stop-loss levels that apply to what's left open. The examples here use a simulated Paper Trading account on a crypto pair, but the same order-line controls apply whether you're connected to a live broker or practicing first.",
+  "metaDescription": "Exit a TradingView trade in parts using the close button's partial-close option, one setting you need to turn off first, and where broker support varies.",
+  "intro": "Closing a position in parts lets you lock in profits gradually and manage risk more precisely, instead of betting everything on one exit price. This guide covers TradingView's on-chart order line and the Paper Trading panel for scaling out of a position, plus the one setting that has to be off before a partial close is even offered as an option. The examples use a simulated Paper Trading account on a crypto pair, but the same controls apply on a live broker connection that supports partial closes.",
   "steps": [
     {
       "heading": "Open a position and find the order line on your chart",
-      "body": "Once you're in a trade, TradingView draws a horizontal line across your chart at the entry price with a small toolbar attached — TP and SL buttons for take-profit and stop-loss, a quantity box showing your current position size, and an X to close it entirely. This line is your main control surface for managing the trade without leaving the chart, and it's the same interface whether the position came from a live broker connection or a Paper Trading account.",
+      "body": "Once you're in a trade, TradingView draws a horizontal line across your chart at the entry price with a small toolbar attached: TP and SL buttons for take-profit and stop-loss, a quantity figure showing your current position size, and an X to close it. This line is your main control surface for managing the trade without leaving the chart, whether the position came from a live broker connection or Paper Trading.",
       "image": { "file": "/screenshots/DrABeqzXw5A/03.webp", "caption": "An open position's order line on the chart, showing TP and SL buttons, a quantity field, and a close (X) control." }
     },
     {
-      "heading": "Edit the quantity to scale out",
-      "body": "Click into the quantity field on the order line and change the number to less than your full position size, then confirm — this closes exactly that portion of your position at the current market price while leaving the remainder open. In one example here the quantity field shows 22 units with additional controls next to it, including what functions as a delete or adjust action, letting you resize the position directly from the chart rather than opening a separate order form.",
+      "heading": "Turn off Instant order placement first",
+      "body": "TradingView's own support documentation is specific about this: a partial close only offers a quantity option when Instant order placement is switched off. With it on, clicking the X closes the whole position immediately, with no prompt. Open Settings from the chart's toolbar, go to Trading, and uncheck Instant order placement before you try to scale out."
+    },
+    {
+      "heading": "Exit part of a position with the close button",
+      "body": "Click the X on the order line to close the position. With Instant order placement off, a confirmation popup appears; check \"partial close\" inside it and enter the number of units or contracts you want to exit. Confirm, and only that portion closes at the current market price, leaving the rest of the position open. This popup-and-checkbox flow, not editing the quantity field directly, is the mechanism TradingView documents for closing part of an already-open position."
+    },
+    {
+      "heading": "Or resize a working order from the chart's quantity calculator",
+      "body": "Before an order fills, the order line carries its own calculator, and you can change the quantity there directly on the chart instead of opening a separate order form. In this example the field shows 22 units with adjustment controls beside it. This changes the size of the order itself, which is a different action from partially closing a position that has already filled: use this to resize a pending order, and the close-button popup above to exit part of one you're already in.",
       "image": { "file": "/screenshots/DrABeqzXw5A/04.webp", "caption": "The order line's quantity field being adjusted, with additional controls next to it for modifying or closing part of the position." }
     },
     {
-      "heading": "Set take-profit and stop-loss for what remains",
-      "body": "After scaling out of part of a position, the TP and SL levels attached to the order line apply to whatever quantity is still open, so revisit them once you've partially closed. Dragging the TP line to a new price sets a limit order that will close the remaining position automatically if it's hit, while the SL line does the same on the downside — this is how you set up a second or third target without manually watching the chart for each one.",
-      "image": null
-    },
-    {
-      "heading": "Use the Paper Trading panel to track positions and orders",
-      "body": "The Paper Trading panel at the bottom of the screen, next to Pine Editor, Strategy Tester, and Replay Trading, shows your account's Balance, Equity, Realized and Unrealized P&L, and margin figures at a glance, with a Positions tab listing every open trade. Placing or adjusting an order also shows up here as a ticket — for example a Buy order with its own Stop, TP, and SL fields — so you can confirm a partial close registered correctly instead of relying on the chart alone.",
+      "heading": "Set new targets for what remains, and track it in Paper Trading",
+      "body": "After scaling out of part of a position, the TP and SL levels on the order line apply to whatever quantity is still open, so revisit them once you've partially closed. Dragging the TP line to a new price sets a limit order that closes the remainder automatically if it's hit; the SL line does the same on the downside. The Paper Trading panel at the bottom of the screen, next to Pine Editor, Strategy Tester and Replay Trading, shows Balance, Equity, Realized and Unrealized P&L and margin, with a Positions tab listing every open trade, so you can confirm a partial close registered correctly instead of relying on the chart alone.",
       "image": { "file": "/screenshots/DrABeqzXw5A/05.webp", "caption": "The Paper Trading panel, showing account balance and margin figures alongside an order ticket with Stop, TP, and SL fields." }
     },
     {
-      "heading": "Decide between manual exits and limit orders",
-      "body": "You can manage partial exits two ways: manually, by watching price action and adjusting the quantity field yourself when conditions change, or automatically, by setting multiple limit orders in advance at different price levels so portions of the position close without you needing to be at the screen. Automated limit orders suit a defined plan with clear targets, while manual scaling suits a trade where you want to react to how price is actually behaving.",
-      "image": null
+      "heading": "Know the limits before you rely on it",
+      "body": "Not every broker connection supports partial close; TradingView's documentation notes plainly that if a broker doesn't support it, the option simply won't appear on the confirmation popup. Paper Trading does support it, which makes it a reasonable place to test a scaling-out plan first. Even so, treat Paper Trading fills as directionally useful, not an exact match for a live broker, and confirm the mechanics again once you're connected to a real account."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Two ways to reduce a position's size",
+      "columns": ["Method", "What it acts on", "Requires"],
+      "rows": [
+        ["On-chart quantity calculator", "A working order that hasn't filled yet", "Editing the order line's quantity field, then confirming"],
+        ["Close (X) button with partial close", "A position that's already open", "Instant order placement turned off, and broker support for the feature"]
+      ]
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "No \"partial close\" checkbox appears when you click X",
+      "cause": "Instant order placement is still turned on, which closes the whole position immediately instead of showing a confirmation popup.",
+      "fix": "Go to Settings > Trading and turn off Instant order placement, then click X again to see the popup with the partial close option."
     },
     {
-      "heading": "Know the limits if you're on Paper Trading",
-      "body": "Paper Trading is a simulated environment, and some brokers' partial-close mechanics don't translate perfectly into the simulation — order behavior around partial fills can differ slightly from what a live broker connection would do. If you're testing a scaling-out strategy before going live, treat the Paper Trading results as directionally useful rather than an exact match, and confirm the mechanics again once connected to a real broker."
+      "problem": "Partial close still isn't offered even with Instant order placement off",
+      "cause": "Not every broker connection supports partial close; TradingView's documentation confirms the option won't appear if the broker doesn't.",
+      "fix": "Check your broker's support for partial closes, or test the workflow on Paper Trading, which does support it."
+    },
+    {
+      "problem": "Resizing the quantity on the order line doesn't seem to close anything",
+      "cause": "The on-chart calculator resizes a working order before it fills. It isn't the same control as the X button's partial close, which acts on a position that's already open.",
+      "fix": "Use the close button's confirmation popup to exit part of an open position, and the calculator only to change a pending order's size."
     }
   ],
   "faq": [
-    { "question": "Can I close only part of a position on TradingView?", "answer": "Yes — edit the quantity field on the position's order line on the chart, or adjust it from the order ticket, to exit a smaller amount than your full position." },
-    { "question": "Does partial closing work with paper trading?", "answer": "It works, but Paper Trading is simulated and partial-fill mechanics can behave slightly differently than a live broker connection, so treat results as directionally useful rather than exact." },
-    { "question": "Can I set multiple profit targets for one trade?", "answer": "Yes — after scaling out of part of a position, you can drag the TP line to a new price for the remainder, effectively setting a new target for what's left open." },
-    { "question": "Is partial closing useful for volatile markets?", "answer": "Yes, it helps manage risk and lock in gains gradually, which is especially useful when trading volatile crypto or forex markets." },
+    { "question": "Can I close only part of a position on TradingView?", "answer": "Yes. Click the X on the position's order line, and with Instant order placement turned off, check \"partial close\" in the confirmation popup and enter the quantity to exit." },
+    { "question": "Why don't I see a partial close option when I click the X?", "answer": "Instant order placement is most likely still on, which closes the whole position without a prompt. Turn it off in Settings > Trading." },
+    { "question": "Does partial close work with every broker?", "answer": "No. TradingView's documentation notes that if your broker connection doesn't support partial close, the option won't appear on the confirmation popup at all." },
+    { "question": "Does partial closing work with Paper Trading?", "answer": "Yes, Paper Trading supports it, which makes it a reasonable place to test a scaling-out plan. Treat the fills as directionally useful, not an exact match for a live broker." },
+    { "question": "Can I set multiple profit targets for one trade?", "answer": "Yes. After scaling out of part of a position, drag the TP line on the order line to a new price for the remainder, which sets a fresh target for what's left open." },
     { "question": "Where do I see my current position size and P&L?", "answer": "The Paper Trading panel at the bottom of the screen shows Account Balance, Equity, Realized and Unrealized P&L, and a Positions tab listing every open trade." }
   ],
+  "references": [
+    { "label": "TradingView Support: How to make a partial close? (official)", "url": "https://www.tradingview.com/support/solutions/43000703856-how-to-make-a-partial-close/" },
+    { "label": "TradingView Support: Paper trading — main functionality (official)", "url": "https://www.tradingview.com/support/solutions/43000516466-paper-trading-main-functionality/" },
+    { "label": "TradingView Support: Chart trading (official)", "url": "https://www.tradingview.com/support/solutions/43000766334/" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded Paper Trading walkthrough. The partial-close mechanism, the Instant order placement requirement, and the broker-dependent availability were checked against TradingView's own support articles in September 2026. That check corrected the previous version, which described dragging the position's quantity field as the way to partially close; TradingView documents that as a separate control for resizing a working order, while an open position is partially closed through the X button's confirmation popup instead.",
   "generatedAt": "2026-08-08T09:00:00Z",
   "deep": true
 }

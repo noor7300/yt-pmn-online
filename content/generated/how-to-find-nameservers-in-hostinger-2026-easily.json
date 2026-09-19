@@ -1,59 +1,90 @@
 {
   "slug": "how-to-find-nameservers-in-hostinger-2026-easily",
   "seoTitle": "Find Your Nameservers in Hostinger (2026)",
-  "metaDescription": "Locate Hostinger's default nameservers in hPanel so you can point a domain registered elsewhere to your hosting.",
-  "intro": "If you bought a domain through one registrar and want it pointed at hosting on Hostinger, you need two things: Hostinger's nameserver addresses, and the right screen in your registrar's dashboard to paste them into. This guide walks the Hostinger side of that job — logging in, opening your site's dashboard, and finding the DNS/Nameservers section where the connection status and the values themselves live. The whole process takes about five minutes once you know which menu to open.",
+  "metaDescription": "Locate Hostinger's nameservers in hPanel so you can point a domain registered elsewhere to your hosting, plus where the screen moves on VPS plans.",
+  "intro": "If you bought a domain through one registrar and want it pointed at hosting on Hostinger, you need two things: Hostinger's nameserver addresses, and the right screen in your registrar's dashboard to paste them into. This guide covers the Hostinger side of that job: logging in, opening your site's dashboard, and finding the DNS/Nameservers section where the connection status and the values live. This is the path for Hostinger's Website and Cloud hosting; VPS plans keep the equivalent screen somewhere else, noted below.",
+  "prerequisites": [
+    "A domain already registered somewhere other than Hostinger",
+    "An active Hostinger hosting plan with a website already set up, since the DNS/Nameservers page lives under that site's dashboard"
+  ],
   "steps": [
     {
       "heading": "Log in to your Hostinger account",
-      "body": "Go to hostinger.com and click Log in at the top right of the homepage. The marketing homepage itself changes with whatever promotion is running, but the Log in button stays in the same spot in the top-right corner regardless. Enter your account email and password to land in hPanel, Hostinger's control panel for everything tied to your account.",
+      "body": "Go to hostinger.com and click Log in at the top right of the homepage. The marketing homepage changes with whatever promotion is running, but the Log in button stays in the same spot regardless. Enter your account email and password to land in hPanel, Hostinger's control panel for everything tied to your account.",
       "image": { "file": "/screenshots/wNG4NcfOXJQ/03.webp", "caption": "The Hostinger homepage with the Log in button in the top-right corner, the entry point into hPanel." }
     },
     {
       "heading": "Open your website's dashboard",
-      "body": "Once inside hPanel, select the website you're working on from the Websites list. This drops you into that site's own Dashboard, which shows an overview card for the site — its WordPress admin link if applicable, creation date, and quick-access tiles for Domain, Hosting, Backups, File manager, and Databases. The Domain tile is worth noting here since it will often flag \"Action required\" if the domain isn't yet connected, which is exactly the situation a nameserver change fixes.",
+      "body": "Once inside hPanel, select the website you're working on from the Websites list. This drops you into that site's own Dashboard, which shows an overview card for the site, its WordPress admin link if applicable, creation date, and quick-access tiles for Domain, Hosting, Backups, File manager, and Databases. Check the Domain tile first; it often flags \"Action required\" when the domain isn't yet connected, which is exactly what a nameserver change fixes.",
       "image": { "file": "/screenshots/wNG4NcfOXJQ/04.webp", "caption": "A site's hPanel dashboard, with quick-access tiles for Domain, Hosting, Backups, File manager, and Databases." }
     },
     {
       "heading": "Open the DNS / Nameservers section",
-      "body": "From the left-hand menu, expand Domains and select DNS / Nameservers. If your domain was registered outside Hostinger and hasn't been pointed here yet, this page will say plainly that your domain isn't connected to Hostinger, with two options: Transfer the domain entirely, or Connect it by updating nameservers at your current registrar. For most people who bought the domain elsewhere and just want to host it on Hostinger, Connect domain is the path that leads to the nameserver values.",
+      "body": "From the left-hand menu, expand Domains and select DNS / Nameservers for your domain. If the domain was registered outside Hostinger and hasn't been pointed here yet, the page says plainly that it isn't connected, with two options: Transfer the domain entirely, or Connect it by updating nameservers at your current registrar. For most people who bought the domain elsewhere and just want to host it on Hostinger, Connect domain is the path that leads to the nameserver values. This screen sits under Website and Cloud hosting; VPS plans keep the equivalent under VPS > Manage > DNS Manager, and legacy cPanel accounts list nameservers under Manage > Nameservers and IP address.",
       "image": { "file": "/screenshots/wNG4NcfOXJQ/05.webp", "caption": "The DNS / Nameservers page, showing a domain not yet connected to Hostinger with Transfer and Connect domain options." }
     },
     {
       "heading": "Copy the nameserver addresses",
-      "body": "Choosing Connect domain surfaces Hostinger's default nameservers for your account, typically listed as ns1.dns-parking.com and ns2.dns-parking.com. Copy these exactly — nameserver values are unforgiving of typos, and even a dropped character will keep your domain from resolving to Hostinger's servers. If your plan uses different nameserver addresses, always copy what's actually displayed in your own account rather than assuming the defaults apply."
+      "body": "Choosing Connect domain surfaces Hostinger's nameservers for your account. These are commonly ns1.dns-parking.com and ns2.dns-parking.com, though Hostinger is explicit that the exact values can vary by account and hosting type. Copy what's actually shown on your own DNS/Nameservers page instead of assuming the two addresses above always apply. Nameserver values are unforgiving of typos, and a single dropped character will keep the domain from resolving to Hostinger's servers."
     },
     {
       "heading": "Paste them into your domain registrar",
-      "body": "Log in to wherever the domain itself is registered — GoDaddy, Namecheap, or any other provider — and find that registrar's nameserver settings, usually under the domain's DNS or Nameservers section. Replace the existing entries with Hostinger's two addresses and save. Propagation isn't instant; it can take anywhere from a few minutes to 24 hours for the change to take effect globally, so don't panic if the site doesn't switch over immediately."
+      "body": "Log in to wherever the domain itself is registered, such as GoDaddy or Namecheap, and find that registrar's nameserver settings, usually under the domain's DNS or Nameservers section. Replace the existing entries with Hostinger's two addresses and save. Propagation is not instant. It can take anywhere from a few minutes up to 24 hours to take effect globally, so don't assume something is wrong if the site doesn't switch over right away."
     },
     {
       "heading": "Verify the connection back in hPanel",
-      "body": "Once propagation completes, return to the DNS / Nameservers page in hPanel. The \"not connected\" message should be replaced with confirmation that the domain is active on Hostinger, and the Domain tile on your dashboard should no longer flag action required. If it still shows disconnected after a day, double-check the nameserver values at your registrar for typos before contacting support."
+      "body": "Once propagation completes, return to the DNS / Nameservers page in hPanel. The \"not connected\" message should be replaced with confirmation that the domain is active, and the Domain tile on your dashboard should stop flagging action required. If it still shows disconnected after a full day, double-check the nameserver values at your registrar for typos before contacting support."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The DNS/Nameservers page won't show any nameserver values",
+      "cause": "Temporary or trial domains can't be managed this way; their DNS records aren't editable the way a fully registered domain's are.",
+      "fix": "Register the domain properly, with Hostinger or elsewhere, before trying to point it."
+    },
+    {
+      "problem": "The nameservers on my account don't match ns1/ns2.dns-parking.com",
+      "cause": "Hostinger's exact nameserver addresses can differ by account and hosting plan.",
+      "fix": "Copy the values shown on your own DNS/Nameservers page instead of assuming the commonly cited pair applies."
+    },
+    {
+      "problem": "Still shows \"not connected\" after 24+ hours",
+      "cause": "Either a typo in the values entered at the registrar, or the registrar hasn't fully applied the change on its end.",
+      "fix": "Re-check the two nameserver values character by character at the registrar. If they're correct, contact the registrar's support, since Hostinger is waiting on the change from that side."
     }
   ],
   "faq": [
     {
       "question": "What are Hostinger's default nameservers?",
-      "answer": "They're typically listed as ns1.dns-parking.com and ns2.dns-parking.com, though you should always confirm the exact values shown on your own account's DNS / Nameservers page."
+      "answer": "Commonly ns1.dns-parking.com and ns2.dns-parking.com, but Hostinger notes this can vary by account and hosting type, so confirm the exact values on your own DNS/Nameservers page before copying them."
     },
     {
       "question": "Why do I need my nameservers?",
-      "answer": "You need them to point a domain registered with another provider, like GoDaddy or Namecheap, to your Hostinger hosting so it can serve your site."
+      "answer": "To point a domain registered with another provider, such as GoDaddy or Namecheap, at your Hostinger hosting so it can serve your site."
     },
     {
       "question": "How do I know if my domain still needs connecting?",
-      "answer": "The DNS / Nameservers page in hPanel will say \"Your domain is not connected to Hostinger\" and offer Transfer or Connect domain options until the nameservers are updated and propagated."
+      "answer": "The DNS / Nameservers page in hPanel says \"Your domain is not connected to Hostinger\" and offers Transfer or Connect domain options until the nameservers are updated and have propagated."
     },
     {
       "question": "What happens if I copy the nameservers incorrectly?",
-      "answer": "Even a small typo can cause your domain connection to fail, so copy them exactly as shown in your hPanel dashboard rather than typing them from memory."
+      "answer": "Even a small typo can break the domain connection, so copy them exactly as shown in your hPanel dashboard instead of typing them from memory."
     },
     {
       "question": "How long does it take for nameserver changes to work?",
       "answer": "Propagation can take anywhere from a few minutes up to 24 hours, so give it time before assuming something is wrong."
+    },
+    {
+      "question": "Is this the same screen for VPS hosting?",
+      "answer": "No. VPS plans manage nameservers under VPS > Manage > DNS Manager instead of the Websites dashboard's DNS/Nameservers page."
     }
   ],
+  "references": [
+    { "label": "Hostinger: Where to find your Hostinger nameservers (official)", "url": "https://www.hostinger.com/support/1583247-where-to-find-hostinger-nameservers/" },
+    { "label": "Hostinger: How to change nameservers at Hostinger (official)", "url": "https://www.hostinger.com/support/1696789-how-to-change-nameservers-at-hostinger/" },
+    { "label": "Hostinger: How to point a domain to Hostinger (official tutorial)", "url": "https://www.hostinger.com/in/tutorials/how-to-point-domain-to-hostinger/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2025, covering Hostinger's Website/Cloud hosting dashboard. Nameserver values, the temporary-domain limitation, and the VPS/legacy-cPanel path differences were checked against three of Hostinger's official pages in September 2026. The note that exact nameservers can vary by account was added because Hostinger's own documentation is explicit about that and doesn't commit to a single universal pair.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }

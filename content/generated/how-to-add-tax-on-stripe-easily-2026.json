@@ -1,58 +1,102 @@
 {
   "slug": "how-to-add-tax-on-stripe-easily-2026",
-  "seoTitle": "How to Add Tax on Stripe Easily (2026 Guide)",
-  "metaDescription": "Enable Stripe Tax, register in the states or countries where you owe tax, and let Stripe calculate sales tax, VAT, and GST automatically at checkout.",
-  "intro": "Manually tracking sales tax, VAT, and GST across every region you sell in is tedious and easy to get wrong, but Stripe Tax handles the calculation and monitoring once it's actually set up in your dashboard. This guide walks through the real Tax section inside Stripe — Overview, Thresholds, Registrations, and Transactions — using a sandbox account, so you can see exactly what's involved in going from a disconnected account to one that's tracking obligations and collecting correctly. It also covers the distinction between testing this in sandbox mode and turning it on for real transactions.",
+  "seoTitle": "How to Add Tax on Stripe (2026 Guide)",
+  "metaDescription": "Set up Stripe Tax: what it actually calculates versus what you still have to register for, what it costs beyond your usual Stripe fees, and where the dashboard has changed.",
+  "intro": "Manually tracking sales tax, VAT, and GST across every region you sell in is tedious and easy to get wrong. Stripe Tax handles the calculation and monitoring once it's set up, but the setup itself has a part that's easy to skip: registering with the tax authorities that actually apply to your business. This guide walks through the real Tax section inside Stripe using a sandbox account, what Stripe's own documentation says has changed in the dashboard since, and what Stripe Tax costs beyond the payment processing fees you're already paying.",
   "steps": [
     {
-      "heading": "Understand what Stripe Tax actually automates",
-      "body": "Stripe Tax doesn't set tax rates for you out of nowhere — it calculates the correct sales tax, VAT, or GST for a transaction based on where your business is registered to collect and where the customer is located, then applies it automatically at checkout. The part that still requires you is registration: telling Stripe (and the relevant tax authority) which states, provinces, or countries you're actually obligated to collect in. Skipping that step means Stripe has nothing to calculate against, even with Tax turned on."
+      "heading": "Understand what Stripe Tax automates, and what it doesn't",
+      "body": "Stripe Tax doesn't invent tax rates. It calculates the correct sales tax, VAT, or GST for a transaction based on where your business is registered to collect and where the customer is located, then applies it automatically at checkout. Registration is the part that still requires you: telling Stripe, and the relevant tax authority, which states, provinces, or countries you're obligated to collect in. Skip that step and Stripe has nothing to calculate against, even with Tax turned on."
     },
     {
       "heading": "Open the Tax section and start setup",
-      "body": "In your Stripe Dashboard, Tax sits under Products in the left sidebar, alongside Payments, Billing, and Reporting, and it's also pinned as a shortcut once you've opened it before. The Overview tab greets you with \"Continue Tax setup\" and an explanation that activating your account lets Stripe monitor, register, and automatically collect sales tax, VAT, and GST — along with an Activate your account button that's the actual starting point for a live setup.",
+      "body": "In the Stripe Dashboard, Tax sits in the left sidebar's More menu alongside Payments, Billing, and Reporting, and it gets pinned under Shortcuts once you've opened it before. The Overview tab greets you with \"Continue Tax setup\" and an explanation that activating your account lets Stripe monitor, register, and automatically collect sales tax, VAT, and GST, with an Activate your account button as the starting point for a live setup.",
       "image": { "file": "/screenshots/axFZfrGaKHg/05.webp", "caption": "The Tax Overview tab inside Stripe Dashboard, with \"Continue Tax setup\" and an Activate your account button as the entry point." }
     },
     {
-      "heading": "Check your obligations under Thresholds",
-      "body": "Before registering anywhere, use the Thresholds tab to see where Stripe's monitoring suggests you may already have a tax obligation based on your transaction volume in that location — this is what the Overview page's \"Tax obligations\" panel is pointing you toward. Thresholds work differently by jurisdiction (some are based on revenue, others on transaction count), so treat Stripe's monitoring as a heads-up to investigate rather than a legal determination on its own."
+      "heading": "Check where you might already owe tax",
+      "body": "Before registering anywhere, the Thresholds tab shows where Stripe's monitoring suggests a tax obligation based on transaction volume in that location. Stripe sends a notification once your account crosses $10,000 in yearly revenue and hits a new threshold somewhere, by email and in the dashboard. Thresholds work differently by jurisdiction — some are based on revenue, others on transaction count, over different rolling windows — so treat Stripe's monitoring as a heads-up to investigate, not a legal determination on its own.\n\nStripe's own current documentation describes this monitoring and registration management as living together under a single Locations tab, grouped by status (Needs attention, Collecting tax, Not collecting tax, and so on), rather than the separate Thresholds and Registrations tabs shown in the screenshots below. If your dashboard shows Locations instead, the same information is there; it's just organized by status rather than split across tabs."
     },
     {
-      "heading": "Register in the locations where you owe tax",
-      "body": "The Registrations tab is where you formally add a tax registration, and Stripe lays the process out as three steps right on the page: first confirm your registration thresholds for a state, province, or country; second, either let Stripe help with the registration or follow local guides to register directly with the tax authority; third, once you're registered, add that registration into Stripe so it starts collecting for that location. In sandbox mode, a banner reminds you that these test registrations can be copied over to live mode once you're ready, so you can practice the flow risk-free before doing it for real.",
+      "heading": "Register in the locations where you owe tax, then add it to Stripe",
+      "body": "The Registrations tab (or the Locations tab on newer accounts) lays out the process in three steps: first confirm registration thresholds for a state, province, or country; second, either register directly with the local tax authority or let Stripe's registration partners handle it for supported jurisdictions; third, once registered, add that registration into Stripe so it starts collecting for that location. Adding a registration to Stripe doesn't itself register your business anywhere — it tells Stripe to start calculating and collecting for a location you've confirmed you're already registered in, unless you used Stripe's own registration service, in which case the registration appears automatically once it's processed.\n\nIn sandbox mode, a banner reminds you these test registrations can be copied over to live mode once you're ready, so the whole flow can be practiced risk-free before doing it for real.",
       "image": { "file": "/screenshots/axFZfrGaKHg/04.webp", "caption": "The Registrations tab under Tax, with \"Add a tax registration\" and the three-step process: check thresholds, register, then add the registration to Stripe." }
     },
     {
-      "heading": "Add the registration to Stripe and let it start collecting",
-      "body": "Once you've completed the actual registration with the tax authority — Stripe can hand off to their registration partners for some jurisdictions, or you follow their guide to do it yourself — the final step is entering that registration into Stripe via Add registration. From that point, Stripe applies the correct rate automatically to transactions in that location without you maintaining a separate rate table for every product or region by hand."
+      "heading": "Keep monitoring, and know that expiring a registration isn't the same as deregistering",
+      "body": "Tax obligations aren't a one-time setup. New states or countries you sell into can cross new thresholds over time, which is what ongoing monitoring is for. One thing worth knowing before it comes up: expiring a registration in Stripe stops Stripe from calculating and collecting tax for that location, but it doesn't deregister the business with the local tax authority. That's a separate step with the authority itself, and Stripe's documentation recommends confirming there's no further obligation before or after expiring the registration on Stripe's side."
+    }
+  ],
+  "costNote": "Stripe Tax isn't included free once you're past the sandbox. It runs on one of two pricing models: Tax Basic, a pay-as-you-go rate of roughly 0.5% of the transaction volume processed in jurisdictions where you're registered (or a flat per-API-call rate for a custom integration), or Tax Complete, a monthly subscription from about $90 to $1,500 that bundles a set number of registrations and filings per year. Registrations beyond that bundle, and most registrations outside the US, carry their own per-location fee on top. None of this pricing is shown inside the Tax section itself; it's on Stripe's separate pricing and support pages.",
+  "tables": [
+    {
+      "title": "Stripe Tax pricing models",
+      "columns": ["Model", "How it's priced", "What's included"],
+      "rows": [
+        ["Tax Basic (pay-as-you-go)", "~0.5% of volume in registered jurisdictions, or per-API-call for a custom integration", "Calculation and collection only"],
+        ["Tax Complete (subscription)", "$90–$1,500/mo, billed monthly under an annual contract", "A set number of registrations and filings per year, plus calculation and collection"]
+      ],
+      "note": "Figures from Stripe's own pricing support page, current as of September 2026. Registrations beyond the included allowance, and most non-US registrations, carry separate per-location fees."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The dashboard shows a Locations tab instead of separate Thresholds and Registrations tabs",
+      "cause": "Stripe's current documentation describes threshold monitoring and registration management as consolidated into one Locations page, grouped by status, replacing the four-tab layout shown in older walkthroughs.",
+      "fix": "Nothing is missing — the same monitoring and registration tools are there, just organized under status groups (Needs attention, Collecting tax, and so on) instead of split across tabs."
     },
     {
-      "heading": "Keep monitoring as your sales grow",
-      "body": "Tax obligations aren't a one-time setup — as you sell into new states or countries, you'll cross new thresholds and need new registrations, which is exactly what the Thresholds and Transactions tabs are for tracking over time. Check back periodically rather than assuming your initial registrations cover you indefinitely, especially if your business is expanding into new markets or scaling quickly in ones you're already in."
+      "problem": "A location shows \"Needs attention\" for a place you've barely sold into",
+      "cause": "Stripe's threshold monitoring flags a location once Stripe-processed sales there cross that jurisdiction's registration threshold, even without a physical presence there, and thresholds vary by jurisdiction.",
+      "fix": "Open the location's threshold detail before assuming it's wrong; it's a flag to investigate against your own obligations, not a final legal answer."
+    },
+    {
+      "problem": "A registration was expired, but there's still a filing obligation with the tax authority",
+      "cause": "Expiring a registration in Stripe only stops Stripe from calculating and collecting tax for that location. It doesn't deregister the business with the local tax authority.",
+      "fix": "Confirm deregistration separately and directly with the tax authority; don't treat expiring the Stripe registration as the end of the obligation."
     }
   ],
   "faq": [
     {
       "question": "Do I need a third-party app to manage tax on Stripe?",
-      "answer": "No, Stripe Tax handles calculation, monitoring, and registration guidance directly inside the Dashboard's Tax section, so a separate tool isn't required."
+      "answer": "No — Stripe Tax handles calculation, monitoring, and registration guidance directly inside the Dashboard's Tax section, so a separate tool isn't required."
     },
     {
       "question": "Can Stripe apply different tax rates for different countries?",
-      "answer": "Yes — once you've registered in a given state, province, or country under the Registrations tab, Stripe applies the correct sales tax, VAT, or GST rate for that location automatically."
+      "answer": "Yes. Once a registration for a given state, province, or country is added under Registrations (or Locations on newer accounts), Stripe applies the correct sales tax, VAT, or GST rate for that location automatically."
     },
     {
       "question": "What's the difference between sandbox and live mode for Tax?",
-      "answer": "Sandbox lets you test the full registration and collection flow without affecting real transactions; Stripe lets you copy your test registrations over to live mode once you're ready to activate for real."
+      "answer": "Sandbox lets you test the full registration and collection flow without touching real transactions. Stripe lets you copy test registrations over to live mode once you're ready to activate for real."
     },
     {
-      "question": "How do I know where I need to register for tax?",
-      "answer": "The Thresholds tab monitors your transaction activity and flags locations where you may have crossed a registration threshold — treat it as a starting point for research, not a final legal answer."
+      "question": "How do I know where I need to register?",
+      "answer": "Threshold monitoring (under Thresholds or the newer Locations view) flags locations where your Stripe-processed sales may have crossed a registration threshold, and Stripe emails a notification once your account passes $10,000 in yearly revenue and hits a new one. Treat it as a starting point for research, not a final legal answer."
     },
     {
-      "question": "Does this work for subscriptions as well as one-time purchases?",
-      "answer": "Yes, Stripe Tax calculates tax on both one-time payments and subscription billing once you're registered in the relevant location."
+      "question": "Does Stripe Tax cost anything on top of Stripe's usual fees?",
+      "answer": "Yes. It's priced separately, either as a pay-as-you-go rate of roughly 0.5% of volume in registered jurisdictions (Tax Basic) or a monthly Tax Complete subscription from about $90 to $1,500 that bundles a set number of registrations and filings. Extra registrations, and most non-US ones, cost more on top."
     }
   ],
+  "references": [
+    {
+      "label": "Stripe Docs: Tax overview (official)",
+      "url": "https://docs.stripe.com/tax"
+    },
+    {
+      "label": "Stripe Docs: Register for sales tax, VAT, and GST (official)",
+      "url": "https://docs.stripe.com/tax/registering"
+    },
+    {
+      "label": "Stripe Docs: Monitor your obligations (official)",
+      "url": "https://docs.stripe.com/tax/monitoring"
+    },
+    {
+      "label": "Stripe Support: Understanding Stripe Tax pricing (official)",
+      "url": "https://support.stripe.com/questions/understanding-stripe-tax-pricing"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a sandbox walkthrough showing Overview, Thresholds, Registrations, and Transactions as separate tabs. Re-checked against Stripe's own documentation in September 2026: current docs describe a consolidated Locations tab for both threshold monitoring and registrations, so newer accounts may see one merged view instead of four separate tabs — noted in this guide rather than silently updated, since the sandbox screenshots still show the older layout. Pricing, the $10,000 revenue notification threshold, and the distinction between expiring a registration and deregistering with a tax authority were added from Stripe's registration, monitoring, and pricing documentation, none of which the previous version of this guide covered.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }

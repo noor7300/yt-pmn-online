@@ -1,59 +1,94 @@
 {
   "slug": "how-to-verify-identity-on-stripe-go-live-activate-payments-account-fully-2026",
   "seoTitle": "How to Verify Your Identity on Stripe and Go Live",
-  "metaDescription": "Complete Stripe's Activate your account flow — verify your business, link an existing account, add extras like tax calculation, and move to live mode.",
-  "intro": "A brand-new Stripe account can generate test API keys and simulate charges right away, but nothing collected in test mode turns into real money until the account is activated. That activation is its own guided flow — Verify your business, Add your bank, Add extras, Review and submit — and skipping details in any of those four steps is what stalls a Stripe account in limbo. This guide follows that flow screen by screen, from the dashboard prompt that starts it to the tax-category setting that trips up a lot of first-time sellers.",
+  "metaDescription": "Complete Stripe's account activation flow: verify your business, link an existing account, add extras like tax calculation, and switch from test keys to live mode.",
+  "intro": "A brand-new Stripe account can generate test API keys and simulate charges immediately, but nothing collected in test mode turns into real money until the account is activated. Stripe calls this verifying your business: it collects identity documents, a home address, and legal-entity information under Know Your Customer rules that apply to every account, not just larger ones.\n\nThis guide follows that flow screen by screen, from the dashboard prompt that starts it to the tax-category setting that trips up a lot of first-time sellers, and flags one decision Stripe won't let you undo later.",
+  "prerequisites": [
+    "A government-issued photo ID for identity verification",
+    "A document showing your home address",
+    "Business registration or legal-entity documents; the exact ones depend on your country and entity type",
+    "A bank account to receive payouts once you're live"
+  ],
+  "costNote": "Activating an account costs nothing. Stripe's own pricing page states plainly that it doesn't charge setup fees, monthly fees, or closure fees. Once you're live, per-transaction processing fees apply on every charge; those rates vary by country and payment method, so check Stripe's pricing page for your own region instead of assuming a flat number.",
   "steps": [
     {
       "heading": "Find the activation prompt on your dashboard",
-      "body": "Your Stripe dashboard Home shows Gross volume, USD balance, and Payouts at a glance, but the piece that matters before you can accept real money is the Recommendations panel and the Setup guide in the corner, which lists Verify your business, Complete your profile, and similar unchecked items. Until those are done, the account stays capable of test transactions only — the API keys shown in Recommendations are prefixed pk_test_ and sk_test_ specifically because live keys don't exist until activation is finished.",
+      "body": "Your Stripe dashboard Home shows Gross volume, USD balance, and Payouts at a glance, but the piece that matters before you can accept real money is the Recommendations panel and the Setup guide in the corner, listing Verify your business, Complete your profile, and similar unchecked items. Until those are done, the account only processes test transactions. The API keys shown in Recommendations are prefixed pk_test_ and sk_test_ for exactly that reason: live keys don't exist until activation finishes.",
       "image": { "file": "/screenshots/WxprImM0tb0/03.webp", "caption": "The Stripe dashboard Home, with the Recommendations panel and Setup guide checklist prompting business verification before test-mode API keys become live ones." }
     },
     {
       "heading": "Start Activate your account and link or create a business",
-      "body": "Clicking into activation opens a dedicated flow with four numbered steps on the left: Verify your business, Add your bank, Add extras, and Review and submit. The first real question it asks is whether to link the new account to an existing business already on your Stripe profile — shown as a card with the business name, creation date, and registered address — or start fresh with Create a new business. Linking an existing business carries over tax details, ownership, and management information automatically, which saves re-entering everything if you're opening a second Stripe account for the same company.",
+      "body": "Clicking into activation opens a flow with four numbered steps on the left: Verify your business, Add your bank, Add extras, and Review and submit. The first real question is whether to link the account to an existing business already on your Stripe profile, shown as a card with the business name, creation date, and registered address, or start fresh with Create a new business. Linking an existing one carries over tax details, ownership, and management information automatically.\n\nOne decision here is permanent: once a service is activated on a live account, Stripe won't let you change the business's origin country. If you're opening this account for a business based in a different country than the one you're about to select, get that right before you submit, not after you've gone live.",
       "image": { "file": "/screenshots/WxprImM0tb0/04.webp", "caption": "The Verify your business step, asking whether to link the account to an existing registered business or create a new one." }
     },
     {
       "heading": "Complete your business and banking details accurately",
-      "body": "Once you've selected or created the business, Stripe walks through the specific identity and business details it needs — legal name, address, and the information tied to whichever KYC requirements apply in your country. The single biggest source of delay here is a mismatch: if the name or address you type doesn't exactly match what's on your official documents, Stripe's automated checks can't confirm the match and the review takes longer or gets kicked to manual review. Add your bank comes right after, since that's the account payouts will eventually land in once you're live."
+      "body": "Stripe then walks through the identity and business details it needs: legal name, address, and whatever KYC information applies in your country. The most common source of delay is a mismatch. If the name or address you type doesn't exactly match your official documents, Stripe's automated checks can't confirm it, and the review either takes longer or gets kicked to a human. Document-based checks on legal-entity paperwork specifically can take up to 24 hours once submitted.\n\nThis section also sets the business name, support contact and statement descriptor your customers see on their card statement or receipt. A vague or unrecognizable descriptor is a common cause of customers disputing a charge as unfamiliar, so pick something customers will recognize. Add your bank comes right after, since that's the account payouts will land in once you're live."
     },
     {
       "heading": "Set your tax category during Add extras",
-      "body": "The Add extras step includes an optional but easy-to-get-wrong screen: Automate tax collection on your sales, where Stripe pre-fills a product category like \"General - Electronically Supplied Services\" based on what it knows about your business. That default description explicitly covers a generic digital item like downloaded music, but the screen recommends picking something more specific — software, digital goods, cloud services, or website services — if that better describes what you actually sell, since the category affects how tax gets calculated on every transaction going forward.",
-      "image": { "file": "/screenshots/WxprImM0tb0/05.webp", "caption": "The Add extras step's tax calculation screen, with a pre-filled product category you can narrow to match what you actually sell." }
+      "body": "The Add extras step includes an optional screen, Automate tax collection on your sales, where Stripe pre-fills a product category based on what it knows about your business. The default often covers only a generic digital item. The screen recommends picking something more specific, software, digital goods, cloud services, website services, if that better matches what you sell, since the category affects how tax is calculated on every future transaction.",
+      "image": { "file": "/screenshots/WxprImM0tb0/05.webp", "caption": "The Add extras step's tax calculation screen, with a pre-filled product category you can narrow to match what you sell." }
     },
     {
-      "heading": "Review everything before submitting",
-      "body": "The final step, Review and submit, is the last chance to catch a typo in a business address or a mismatched name before it goes to Stripe for verification. Go through each section methodically rather than skimming — business details, bank account, and the tax category you just set — since resubmitting after a rejection takes longer than getting it right the first time."
+      "heading": "Review, submit, then wait for approval",
+      "body": "Review and submit is the last chance to catch a typo in an address or a mismatched name before it goes to Stripe for verification. Go through business details, the bank account, and the tax category methodically; resubmitting after a rejection takes longer than getting it right the first time.\n\nVerification times vary by country and account type, from a few minutes to a few business days, and Stripe emails you once it's resolved. Once approved, check the dashboard for the toggle between test and live mode. Real transactions only process in live mode, and running one small real payment yourself confirms money reaches your bank before you send customers to a live checkout."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Verification review is taking days and money is stuck",
+      "cause": "Usually a typo or formatting difference between what you typed and your official documents, or your country requires extra KYC information Stripe hasn't collected yet.",
+      "fix": "Check every field against the exact wording on your documents before submitting. If Stripe flags something, it emails specific instructions; respond with corrected documents instead of starting over."
     },
     {
-      "heading": "Wait for approval, then confirm you're in live mode",
-      "body": "Verification times vary by country and account type, from a few minutes to a few business days, and Stripe emails you once it's resolved either way. Once approved, check the dashboard for the toggle between test and live mode — real transactions only process in live mode, and it's worth doing a small real payment yourself to confirm money actually reaches your bank account before pointing customers at a live checkout."
+      "problem": "Need to switch the business's country after going live",
+      "cause": "Stripe locks the business origin country the moment a service is activated on a live account.",
+      "fix": "There's no edit path for this. If the business is based elsewhere, you need to create a separate Stripe account under the correct country."
+    },
+    {
+      "problem": "A customer disputes a charge as unrecognized",
+      "cause": "The statement descriptor or public business name on their card statement doesn't clearly match your brand.",
+      "fix": "Update the statement descriptor and public business details under Account settings so charges are instantly recognizable."
     }
   ],
   "faq": [
     {
       "question": "What documents does Stripe require for verification?",
-      "answer": "Requirements vary by account type and country, but individuals and businesses are generally asked for identification and business registration details as part of the Verify your business step."
+      "answer": "A government-issued photo ID, a document showing your home address, and legal-entity paperwork appropriate to your country and business type, such as a certificate of incorporation or partnership agreement."
     },
     {
       "question": "How long does Stripe identity verification take?",
-      "answer": "Verification times vary, but it can range from a few minutes to a few business days depending on your documents and account type."
+      "answer": "From a few minutes to a few business days overall. Legal-entity document reviews specifically can take up to 24 hours once submitted."
     },
     {
-      "question": "Can I accept payments before verification is complete?",
-      "answer": "You can test your integration in test mode using the pk_test_/sk_test_ API keys, but real payments require completed verification and an activated account in live mode."
+      "question": "Can I accept real payments before verification finishes?",
+      "answer": "No. You can build and test your integration with the pk_test_/sk_test_ keys, but real charges require an activated account in live mode."
     },
     {
-      "question": "What happens if my verification is rejected?",
-      "answer": "Stripe will usually explain the reason for rejection, and you can resubmit corrected or clearer documents to try again."
+      "question": "Can I change my business's country after I go live?",
+      "answer": "No. Stripe locks the business origin country once you've activated a service on a live account. Getting this right during Verify your business matters, since there's no edit path afterward."
     },
     {
       "question": "Do I need to set a tax category during activation?",
-      "answer": "It's optional but recommended — the Add extras step pre-fills a general category, and picking a more specific one that matches what you sell improves how accurately tax gets calculated on your transactions."
+      "answer": "It's optional. Stripe pre-fills a general category during Add extras, but narrowing it to match what you sell improves how accurately tax is calculated."
     }
   ],
+  "references": [
+    {
+      "label": "Stripe: Set up your account (official documentation)",
+      "url": "https://docs.stripe.com/get-started/account/set-up"
+    },
+    {
+      "label": "Stripe Support: Documents for business verification (official)",
+      "url": "https://support.stripe.com/questions/documents-for-business-verification"
+    },
+    {
+      "label": "Stripe: Pricing (official)",
+      "url": "https://stripe.com/pricing"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The KYC document requirements, review timing, the no-setup-fee claim, and the permanent business-country lock were re-checked against Stripe's official documentation and support pages in September 2026; the country lock and the statement-descriptor dispute risk were not in the previous version of this guide.",
   "generatedAt": "2026-08-08T00:00:00Z",
   "deep": true
 }
