@@ -2,58 +2,81 @@
   "slug": "how-to-archive-google-workspace-email-instead-of-deleting-user-gmail-save-bill-2",
   "seoTitle": "How to Archive Workspace Email Instead of Deleting a User",
   "metaDescription": "Learn how to archive a Google Workspace user's email instead of deleting the account, preserving data for compliance while saving on billing.",
-  "intro": "When an employee leaves, the instinct is often to delete their account right away and stop paying for the seat. The problem is that deleting a user can also delete their mailbox and Drive files, which is a real risk if you ever need those emails for legal, financial, or reference purposes. Google Workspace has a middle path built for exactly this situation: suspend the account, manage its data properly, and move it to a lower-cost archived state instead of erasing it. This guide walks through the Admin console screens where that actually happens, starting from the same Directory the video works from.",
+  "intro": "When an employee leaves, the instinct is to delete their account and stop paying for the seat right away. The problem is that deleting a Google Workspace user can also delete their mailbox and Drive files, which is a real risk if you ever need that data for legal, financial, or reference purposes. Google Workspace has a built-in alternative: archive the account instead of deleting it. Archiving blocks sign-in and frees the account's active license immediately, while keeping the mailbox and files intact for an admin to search or export later. It isn't free on every plan, and the button you need is filed in a different place depending on your edition, both of which this guide covers alongside the retention and file-ownership steps that come before and after it.",
+  "prerequisites": [
+    "An administrator account on Business Starter, Business Standard, Business Plus, Enterprise Standard, Enterprise Plus, or an Education edition — archiving isn't available on every Workspace plan",
+    "An Archived User subscription already on your billing account, or be ready to buy one when prompted (Flexible Plan customers are billed automatically per archived account instead)"
+  ],
+  "costNote": "Archiving isn't free on Business or Enterprise plans. It requires an Archived User subscription, purchased separately through Billing > Subscriptions or billed automatically per account on the Flexible Plan. It costs less than an active license, but Google doesn't publish a fixed rate; check your own Billing > Subscriptions screen for the actual figure. Education editions include Archived User licenses at no extra charge.",
   "steps": [
     {
-      "heading": "Open the Admin console and find Manage Workspace",
-      "body": "Sign in to admin.google.com with an administrator account — Google requires an admin-level login here, not a regular user login, since these settings affect the whole organization. The Admin console home shows a Manage Workspace panel with Users and Billing side by side, which is a useful reminder that user management and your subscription cost are directly connected: every active seat is billed, and an archived or suspended user is where you go to change that.",
+      "heading": "Open the Admin console",
+      "body": "Sign in to admin.google.com with an administrator account. Google requires an admin-level login for this, not a regular user's own sign-in, because archiving changes something that affects your organization's billing. The Admin console home shows a Manage Workspace panel with Users and Billing side by side, a reminder that every active seat is billed and that archiving a user is really a billing change dressed up as a user-management one.",
       "image": { "file": "/screenshots/RAsUgexwPR0/03.webp", "caption": "The Admin console home, with Users and Billing panels next to each other under Manage Workspace." }
     },
     {
       "heading": "Go to Directory and open Users",
-      "body": "From the left-hand menu, expand Directory and click Users to see the full list of accounts in your organization, along with each person's email, status, last sign-in, and email usage. This is the same list you'd use to add a new hire, and it's also where the departing employee's account lives. Before doing anything else, locate their row and confirm the email address matches the account you actually intend to change — a wrong click here affects a real mailbox.",
+      "body": "From the left-hand menu, expand Directory and click Users to see every account in your organization, along with each person's status, last sign-in, and email usage. Find the departing employee's row and confirm the address matches the account you mean to change before doing anything else. A wrong click here reaches a real mailbox.",
       "image": { "file": "/screenshots/RAsUgexwPR0/04.webp", "caption": "The Users list in Directory, showing each account's status, last sign-in time, and email storage usage." }
     },
     {
-      "heading": "Select the user and open More options",
-      "body": "Check the box next to the departing user's name — the toolbar changes to show \"1 user selected\" along with options like Email selected users and More options. Click More options to reach the actions relevant to offboarding, including suspending the account. Suspending, rather than deleting, is the critical first move: it immediately blocks the person from signing in while leaving their mailbox and files completely intact for you to manage.",
+      "heading": "Select the user and archive the account",
+      "body": "Check the box next to the person's name so the toolbar shows \"1 user selected,\" then click More options. What happens next depends on your edition. On Enterprise Standard, Enterprise Plus, and Education plans, More options lists Archive user directly. On Business Starter, Standard, and Plus, select Delete user first: Google's dialog surfaces an Archive user button inside that flow instead of listing it as its own menu entry, and if your organization has no Archived User subscription yet you'll be prompted to buy one there. Either path ends the same way: the account is blocked from signing in and stops receiving new mail immediately, its mailbox and Drive files stay in place, and its original license is freed for reassignment. This is a different action from Suspend, which also blocks sign-in but leaves the full-price license attached to the account.",
       "image": { "file": "/screenshots/RAsUgexwPR0/05.webp", "caption": "A single user selected in the Users list, with the More options menu open to reveal offboarding actions like suspending the account." }
     },
     {
-      "heading": "Apply a retention policy before you change the license",
-      "body": "Once the account is suspended and safe from accidental deletion, decide how long you're required to keep the data — this depends on your industry and location, so check with whoever handles compliance if you're not sure. If your plan includes Google Vault, set a retention rule there so the mailbox is preserved and searchable independent of what happens to the license afterward. Retention should be locked in before you touch billing settings, not after."
-    },
-    {
-      "heading": "Move the account to an archived user license",
-      "body": "Google Workspace offers an archived-user license type specifically for this situation — it costs significantly less than a full active license while keeping the mailbox accessible to admins for search and export. Assign this license from the same Billing or Licenses area you'd use to change any other user's plan. The account stays fully suspended from an end-user login standpoint; only admins can reach the data going forward."
+      "heading": "Set a Vault retention hold if you need one",
+      "body": "If your organization must keep the mailbox for a set period, apply a retention rule in Google Vault before archiving, so the mail stays searchable independent of whatever else happens to the license. How long to keep it depends on your industry and location, so check with whoever handles compliance if you're unsure. Vault is a separate add-on; archiving on its own does not create a retention hold."
     },
     {
       "heading": "Transfer ownership of shared Drive files",
-      "body": "Before you consider the offboarding finished, check what Drive files the departing user owned and reassign ownership of anything the team still needs to an active teammate. An archived account can still hold files, but transferring ownership of shared documents avoids a scenario where a live project file becomes orphaned under an account nobody but an admin can touch. This last step is easy to forget in the moment but is usually the one that causes problems weeks later."
+      "body": "Check what Drive files the departing user owned and reassign anything the team still needs to an active teammate. An archived account still holds its files, but leaving ownership as it is means only an admin can reach them afterward, which orphans a live project the moment someone else needs to edit it. This step is easy to skip in the moment and usually the one that causes problems weeks later."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "More options has no Archive user entry",
+      "cause": "On Business Starter, Standard, and Plus, Archive user isn't a separate menu item. It's inside the Delete user dialog, or your edition doesn't support archiving at all.",
+      "fix": "Click Delete user and look for an Archive user button before confirming. If it isn't there, check that your plan is Business Starter/Standard/Plus, Enterprise Standard/Plus, or an Education edition."
+    },
+    {
+      "problem": "The console prompts you to buy an Archived User subscription",
+      "cause": "No Archived User subscription exists yet on the billing account, and Business and Enterprise plans require one before you can archive anyone.",
+      "fix": "Buy the subscription when prompted, or check Billing > Subscriptions first if you're not sure one already exists. Flexible Plan accounts skip this step and are billed automatically per archived user."
+    },
+    {
+      "problem": "A shared file goes missing from a live project after archiving",
+      "cause": "Ownership of that file was never transferred, and only an admin can reach an archived account's Drive data now.",
+      "fix": "Transfer ownership to an active teammate before you archive, or have a super admin do it afterward from the archived account's Drive files."
     }
   ],
   "faq": [
     {
-      "question": "How long does archived data stay accessible in Google Workspace?",
-      "answer": "Archived data generally remains accessible for as long as the account stays in archived status, subject to your organization's retention policy and any Vault holds you've applied."
+      "question": "What's the difference between suspending and archiving a user?",
+      "answer": "Suspend blocks sign-in immediately but leaves the account on its full-price license, still billed as active. Archive also blocks sign-in, but swaps the account onto a separate Archived User license and frees the original one for reassignment. Suspending is instant and reversible with one click; archiving is the step that changes what you're billed for a departing employee."
     },
     {
-      "question": "Is archiving cheaper than keeping a full user license active?",
-      "answer": "Yes, an archived-user license typically costs less than a standard active license while still preserving the mailbox and Drive data for admin access."
+      "question": "Does archiving a user cost anything?",
+      "answer": "On Business and Enterprise plans, yes — it needs an Archived User subscription, bought separately or billed automatically per account on the Flexible Plan. It costs less than an active license, though Google doesn't publish a fixed price; your Billing > Subscriptions screen shows the actual rate for your account. On Education plans, Archived User licenses are included at no extra charge."
     },
     {
-      "question": "Do I need Google Vault to archive a user's email?",
-      "answer": "Google Vault makes retention and legal hold easier and more searchable, but you can suspend a user and preserve their data through an archived license without it, depending on your plan."
+      "question": "On Business plans, doesn't clicking Delete user delete the account?",
+      "answer": "No. On Business Starter, Standard, and Plus, Delete user is the dialog that contains the Archive user button, not a separate deletion. Choose Archive, not the delete option, and the account is archived, not removed."
+    },
+    {
+      "question": "Do I need Google Vault to preserve an archived user's email?",
+      "answer": "Vault makes retention and legal hold easier to apply and search, but archiving itself already blocks sign-in and keeps the mailbox intact for an admin. Add Vault when you have a specific retention period to enforce, not as a requirement for archiving to work."
     },
     {
       "question": "What happens to Drive files owned by an archived user?",
-      "answer": "The files remain associated with that account, but it's best to transfer ownership of important shared files to an active user before archiving so collaborators keep smooth access."
-    },
-    {
-      "question": "Should I suspend the account before or after setting up retention?",
-      "answer": "Suspend first — it blocks sign-in immediately and protects the data — then apply your retention policy, and only after that change the license to the lower-cost archived type."
+      "answer": "They stay attached to the account and remain accessible to admins, but nobody else can reach or edit them unless you transfer ownership first. Do that before you archive, for any file the team still needs."
     }
   ],
+  "references": [
+    { "label": "Google Workspace Admin Help: Archive former employee accounts (official)", "url": "https://knowledge.workspace.google.com/admin/users/archive-former-employee-accounts" },
+    { "label": "Google Workspace Admin Help: Add Archived User licenses (official)", "url": "https://knowledge.workspace.google.com/admin/billing/add-archived-user-licenses" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in August 2026. The suspend-versus-archive distinction, the edition-dependent More options flow, the Archived User subscription requirement, and the Vault/retention behaviour were re-checked in September 2026 against Google's own Admin Help pages on archiving former employees and adding Archived User licenses. That check corrected this guide's earlier framing of archiving as simply \"suspend, then relicense.\"",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

@@ -1,44 +1,76 @@
 {
   "slug": "namecheap-redirect-domain-guide-to-fix-namecheap-redirect-not-working-2026-easil",
   "seoTitle": "Fix Namecheap Redirect Not Working: Full Guide",
-  "metaDescription": "Namecheap domain redirect not working? Learn how to properly set up domain forwarding, choose 301 vs 302, and fix common DNS-related redirect issues.",
-  "intro": "When a Namecheap domain redirect refuses to work, the cause is almost always sitting in the Nameservers field rather than in the redirect settings themselves. Namecheap's built-in Redirect Domain tool only functions when the domain is pointed at Namecheap's own nameservers — if it's on custom DNS, the redirect option is visible but silently inactive. This guide walks through the Domain List, the exact spot where redirects live inside a domain's management page, and the nameserver setting that has to be correct before forwarding will actually send visitors anywhere.",
+  "metaDescription": "Namecheap domain redirect not working? Set up domain forwarding correctly, get real control over 301 vs 302, and fix common DNS-related redirect issues.",
+  "intro": "When a Namecheap domain redirect refuses to work, the cause is almost always sitting in the Nameservers field, not in the redirect settings themselves. Namecheap's redirect tools only function when the domain is pointed at one of Namecheap's own DNS options. On custom third-party DNS, the redirect option is visible but silently inactive. This guide walks through the Domain List, the exact spot where redirects live inside a domain's management page, the nameserver setting that has to be correct before forwarding will send visitors anywhere, and the separate method Namecheap gives you for choosing between a 301 and a 302.",
   "steps": [
     {
       "heading": "Open your domain from the Domain List",
-      "body": "Log in to Namecheap and go to Domain List in the left-hand dashboard menu. You'll see every domain you own with its status, auto-renew setting, and expiration date, and a Manage button on the right side of each row. Click Manage on the domain whose redirect isn't working — that takes you into the domain's full settings page, which is where nameservers, DNS records, and the redirect tool all live together.",
+      "body": "Log in to Namecheap and go to Domain List in the left-hand dashboard menu. You'll see every domain you own with its status, auto-renew setting, and expiration date, and a Manage button on the right side of each row. Click Manage on the domain whose redirect isn't working. That takes you into the domain's full settings page, where nameservers, DNS records, and the redirect tool all live together.",
       "image": { "file": "/screenshots/X76fIwX_30U/02.webp", "caption": "The Domain List, showing an active domain with a Manage button that opens its full settings page." }
     },
     {
       "heading": "Check what your nameservers are set to",
-      "body": "Scroll to the Nameservers section on the domain's management page. If it shows Custom DNS with values like ns1.dns-parking.com and ns2.dns-parking.com, that's very likely why forwarding isn't working — Namecheap's page spells this out directly next to Redirect Domain and Redirect Email, noting you must first change your nameservers to Namecheap default before those functions will run. Custom or third-party nameservers hand DNS resolution off to another provider entirely, so Namecheap's redirect tool has no way to intercept the traffic.",
-      "image": { "file": "/screenshots/X76fIwX_30U/03.webp", "caption": "Nameservers set to Custom DNS pointing at dns-parking.com. Both Redirect Domain and Redirect Email are disabled until this is switched to Namecheap's default nameservers." }
+      "body": "Scroll to the Nameservers section on the domain's management page. If it shows Custom DNS with values like ns1.dns-parking.com and ns2.dns-parking.com, that's very likely why forwarding isn't working. Namecheap's own support documentation is direct about this: Domain Redirect and Email Redirect records only work on Namecheap BasicDNS, PremiumDNS, or FreeDNS, and stay inactive on any third-party nameserver. Custom nameservers hand DNS resolution off to another provider entirely, so Namecheap's redirect tool has no way to intercept the traffic.",
+      "image": { "file": "/screenshots/X76fIwX_30U/03.webp", "caption": "Nameservers set to Custom DNS pointing at dns-parking.com. Both Redirect Domain and Redirect Email are disabled until this is switched to one of Namecheap's own DNS options." }
     },
     {
       "heading": "Switch to Namecheap BasicDNS",
-      "body": "Open the Nameservers dropdown and select Namecheap BasicDNS (or Namecheap PremiumDNS if you already own that add-on). This tells Namecheap to handle DNS resolution itself, which unlocks the Redirect Domain section that was previously grayed out with an explanatory note. Give the change a little time to propagate — nameserver updates aren't instant — before assuming the redirect still isn't taking effect."
+      "body": "Open the Nameservers dropdown and select Namecheap BasicDNS (FreeDNS and PremiumDNS also unlock redirects, if you already use one of those). This tells Namecheap to handle DNS resolution itself, which unlocks the Redirect Domain section that was previously grayed out. Give the change real time to take effect: Namecheap's support pages put a move away from third-party nameservers at up to 24 hours to propagate globally, occasionally 48. Switching later between Namecheap's own DNS options (BasicDNS, PremiumDNS, Web Hosting DNS) is faster, typically within an hour."
     },
     {
       "heading": "Set the redirect's source and destination URL",
-      "body": "With BasicDNS active, the Redirect Domain section becomes a working form: a Source URL column showing your domain, and a Destination URL field where you type the full address you want visitors sent to, including the http:// or https:// prefix. Click Add Redirect if there isn't an entry yet, type the destination, and confirm it. In the example shown here, the domain forwards to its own www version — the same mechanism works identically for sending visitors to a completely different domain.",
-      "image": { "file": "/screenshots/X76fIwX_30U/04.webp", "caption": "A working redirect once nameservers are set to Namecheap BasicDNS — Source URL on the left, Destination URL on the right, editable inline." }
+      "body": "With Namecheap DNS active, the Redirect Domain section on the Domain tab becomes a working form: a Source URL column showing your domain, and a Destination URL field where you type the full address you want visitors sent to, including the http:// or https:// prefix. Click Add Redirect if there isn't an entry yet, type the destination, and confirm it. In the example shown here, the domain forwards to its own www version. The same mechanism works the same way for sending visitors to a completely different domain. Namecheap notes the record itself typically activates within about 30 minutes once saved.",
+      "image": { "file": "/screenshots/X76fIwX_30U/04.webp", "caption": "A working redirect once nameservers are set to Namecheap BasicDNS. Source URL on the left, Destination URL on the right, editable inline." }
     },
     {
-      "heading": "Choose 301 versus 302 based on permanence",
-      "body": "Namecheap's basic redirect tool applies a standard forward rather than exposing a dropdown for redirect type on every plan, but the distinction still matters conceptually: a 301 tells browsers and search engines the move is permanent and transfers SEO value to the destination, while a 302 signals a temporary change that doesn't pass that value along. If you need explicit control over which type fires, that's typically configured at the DNS or hosting level rather than in the basic domain forwarding panel, so factor that into your choice of redirect method if SEO continuity matters."
+      "heading": "Get real 301 vs 302 control through Advanced DNS",
+      "body": "The Redirect Domain panel on the Domain tab doesn't expose a redirect-type choice; it applies a standard forward. If the distinction matters to you, and it does whenever SEO continuity is on the line, use the other official method instead: open the Advanced DNS tab, go to Host Records, click Add New Record, and choose URL Redirect Record as the type. That form includes a Redirect Type dropdown with Unmasked, Masked, and Permanent (301). A 301 tells browsers and search engines the move is permanent and passes SEO value to the destination. Unmasked is a standard temporary (302-style) forward. Masked keeps your original domain visible in the address bar while displaying the destination's content, which search engines generally treat less favorably than a clean 301."
     },
     {
       "heading": "Clear out conflicting DNS records",
-      "body": "If the redirect still doesn't fire after nameservers are correct, check the Advanced DNS tab for leftover A records or CNAME entries pointing your root domain or www subdomain somewhere else. A stray A record pointing at an old host will often win out over the redirect rule, since browsers resolve DNS records directly rather than going through Namecheap's forwarding logic. Delete anything that conflicts with the destination you've set, then retest in a fresh incognito window to rule out cached results from before the fix."
+      "body": "If the redirect still doesn't fire after nameservers are correct, check the Advanced DNS tab for leftover A records or CNAME entries pointing your root domain or www subdomain somewhere else. A stray A record pointing at an old host will often win out over the redirect rule, since browsers resolve DNS records directly instead of going through Namecheap's forwarding logic. Delete anything that conflicts with the destination you've set, then retest in a fresh incognito window to rule out cached results from before the fix."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The Redirect Domain and Redirect Email sections are greyed out",
+      "cause": "The domain is on custom or third-party nameservers. Namecheap's redirect and email-forwarding records only work on Namecheap BasicDNS, PremiumDNS, or FreeDNS.",
+      "fix": "Switch the Nameservers section to one of those three options and wait for it to take effect before trying again."
+    },
+    {
+      "problem": "A redirect was just set up but visitors still land on the old page",
+      "cause": "Either the nameserver change hasn't finished propagating, or a leftover A/CNAME record on the same host is overriding the redirect.",
+      "fix": "Allow up to 24 hours after a nameserver change (up to an hour if you were already on a Namecheap DNS option), then check Advanced DNS for conflicting A or CNAME records and remove them."
+    },
+    {
+      "problem": "The redirect works but doesn't preserve SEO value the way a 301 should",
+      "cause": "The basic Redirect Domain panel on the Domain tab doesn't let you choose a redirect type; it isn't set up as a 301.",
+      "fix": "Delete that entry and instead add a URL Redirect Record from Advanced DNS > Host Records, where the Redirect Type dropdown includes Permanent (301)."
     }
   ],
   "faq": [
-    { "question": "Why isn't my Namecheap redirect working even though I set it up?", "answer": "The most common cause is custom or third-party nameservers. Namecheap's redirect tool only works when the domain uses Namecheap BasicDNS or PremiumDNS nameservers — it stays inactive on any other DNS provider." },
-    { "question": "Should I use a 301 or 302 redirect?", "answer": "A 301 redirect is best for permanent moves and passes SEO value to the destination, while a 302 is better suited to temporary redirects that you plan to change back later." },
-    { "question": "Why isn't my Namecheap redirect working right away after I fix the nameservers?", "answer": "DNS propagation delays are common after a nameserver change, so give it some time and retest in a fresh browser session before assuming the setup is still broken." },
-    { "question": "Can conflicting DNS records break a redirect?", "answer": "Yes, leftover A or CNAME records on your root domain or www subdomain can override the redirect, since browsers resolve those records directly. Check the Advanced DNS tab and remove anything that conflicts." },
-    { "question": "Does redirecting a domain affect its SEO?", "answer": "A 301 redirect generally passes SEO value to the destination, while a 302 does not carry the same permanence for search engines, so pick based on whether the move is meant to be permanent." }
+    { "question": "Why isn't my Namecheap redirect working even though I set it up?", "answer": "The most common cause is custom or third-party nameservers. Namecheap's redirect tools only work when the domain uses BasicDNS, PremiumDNS, or FreeDNS, and stay inactive on any other DNS provider." },
+    { "question": "Should I use a 301 or 302 redirect?", "answer": "A 301 is for permanent moves and passes SEO value to the destination; a 302 (or the Unmasked option) suits a temporary redirect. The basic Redirect Domain panel doesn't let you pick, so add a URL Redirect Record from Advanced DNS > Host Records instead, where the Redirect Type dropdown includes Permanent (301)." },
+    { "question": "How long does a Namecheap nameserver or redirect change take to work?", "answer": "Moving away from a third-party nameserver can take up to 24 hours to propagate globally, occasionally 48. Switching between Namecheap's own DNS options is usually within an hour, and a newly added redirect record typically activates within about 30 minutes." },
+    { "question": "Can conflicting DNS records break a redirect?", "answer": "Yes. Leftover A or CNAME records on your root domain or www subdomain can override the redirect, since browsers resolve those records directly. Check the Advanced DNS tab and remove anything that conflicts." },
+    { "question": "What's the difference between Masked and Unmasked redirects?", "answer": "Unmasked sends visitors to the destination URL and changes the address bar, similar to a standard 302. Masked keeps your original domain showing in the address bar while displaying the destination's content, which search engines generally treat less favorably than a clean 301." }
   ],
+  "references": [
+    {
+      "label": "Namecheap: How to set up a URL redirect for a domain (official)",
+      "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/385/2237/how-to-set-up-a-url-redirect-for-a-domain/"
+    },
+    {
+      "label": "Namecheap: Why can't I modify Email, Domain Redirect, and Host Records? (official)",
+      "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/323/46/why-cant-i-modify-email-domain-redirect-and-host-records-in-my-namecheap-account/"
+    },
+    {
+      "label": "Namecheap: How do I set my domain to use Namecheap BasicDNS? (official)",
+      "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/782/10/how-do-i-set-my-domain-to-use-namecheap-basicdns/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in mid-2025. Re-checked against three of Namecheap's own knowledgebase articles in September 2026. That check corrected the article's claim that 301 vs 302 control isn't available on Namecheap's basic tools: a Redirect Type dropdown (Unmasked, Masked, Permanent 301) does exist, on the Advanced DNS > Host Records > URL Redirect Record form, separate from the simpler Redirect Domain panel on the Domain tab. It also added FreeDNS as a third nameserver option that unlocks redirects, and replaced the vague propagation warning with Namecheap's actual stated windows.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

@@ -2,58 +2,94 @@
   "slug": "how-to-transfer-domain-from-squarespace-to-cloudflare-easily-2026",
   "seoTitle": "Transfer a Domain From Squarespace to Cloudflare",
   "metaDescription": "Move your domain registration from Squarespace to Cloudflare for lower pricing and simpler DNS or CDN management. Full walkthrough.",
-  "intro": "Transferring a domain from Squarespace to Cloudflare can lower your registration costs and simplify management if you already use Cloudflare for DNS or CDN services, since your registration and your DNS end up sitting in the same dashboard. The move isn't instant and it isn't just a matter of clicking one button in Cloudflare — you need an authorization code from Squarespace first, and your domain has to meet a few eligibility rules before it can move. This guide walks through where to find that code, what the domain's current state looks like in Squarespace, and where the transfer actually starts on the Cloudflare side.",
+  "intro": "Transferring a domain from Squarespace to Cloudflare can lower your registration cost and simplify management if you already use Cloudflare for DNS or CDN, since registration and DNS end up in the same dashboard. The move isn't instant, and it isn't just a matter of pasting a code into Cloudflare. Squarespace won't issue that code until you unlock the domain, Cloudflare won't start the transfer until your DNS is active there, and your domain has to clear a few eligibility rules first. This guide walks through all of that in order, from the domain's current state in Squarespace to where the registration transfer starts on the Cloudflare side.",
+  "prerequisites": [
+    "DNSSEC turned off at Squarespace at least 24 hours before you start — Cloudflare's own transfer guide requires it disabled first",
+    "A Cloudflare account with a verified email and a valid payment method on file",
+    "The domain registered at least 60 days ago, with no transfer or registrant-detail change (name, organization, or email) in the last 60 days"
+  ],
+  "costNote": "Transferring in adds one year of registration, at Cloudflare's at-cost price, onto the domain's current expiration date. Cloudflare states registrar pricing at cost rather than marking it up the way most registrars do.",
   "steps": [
     {
       "heading": "Check your domain's status in Squarespace first",
-      "body": "Before starting anything in Cloudflare, go to Squarespace's Domains section and open the domain's Overview. This shows the domain's current status as Active, its provider (Squarespace), and its expiration date — note this date, since a domain very close to expiring can complicate a transfer. The Registration Information panel here also lists the Admin, Billing, Owner, and Tech contacts, which is worth reviewing since transfer emails go to whichever contact is on file.",
+      "body": "Before starting anything in Cloudflare, go to Squarespace's Domains section and open the domain's Overview. This shows the domain's current status as Active, its provider (Squarespace), and its expiration date; note the date, since a domain very close to expiring can complicate a transfer. The Registration Information panel here also lists the Admin, Billing, Owner, and Tech contacts, worth reviewing since transfer emails go to whichever contact is on file.",
       "image": { "file": "/screenshots/ZvxEcaIQk8A/02.webp", "caption": "The domain's Overview in Squarespace, showing it as Active under Squarespace as the provider, with its expiration date and registration contact details." }
     },
     {
+      "heading": "Unlock the domain before requesting a code",
+      "body": "Squarespace locks every domain by default to stop unauthorized transfers, and it won't issue an authorization code while that lock is on. In the domain's settings, find the Domain Lock control and toggle it off. This is a separate action from requesting the code itself, and skipping it is the most common reason the next step fails."
+    },
+    {
       "heading": "Get your domain authorization code from Squarespace",
-      "body": "Every domain transfer requires an authorization code (sometimes called an EPP or auth code) issued by the current registrar — Squarespace emails this directly to the domain's registered contact when you request it, in a message titled something like \"Your Domain Authorization Code.\" The email states plainly that this code can be used to move your domain between providers and tells you to keep it secure. You'll need to paste this exact code into Cloudflare later in the process, so keep the email accessible rather than requesting a fresh code each time.",
+      "body": "With the domain unlocked, click Request transfer code. You may need to confirm your password or complete two-factor authentication. Squarespace's own documentation says the code should arrive by email within 24 hours, in a message titled something like \"Auth code for yourdomain.com,\" sent to whichever contact is registered as the domain's owner. Copy the code exactly; you'll paste it into Cloudflare later, so keep the email accessible instead of requesting a fresh code each time.",
       "image": { "file": "/screenshots/ZvxEcaIQk8A/03.webp", "caption": "Squarespace's domain authorization code email, showing the auth-code tied to the domain — the code Cloudflare will ask for to complete the transfer." }
     },
     {
       "heading": "Confirm your domain meets transfer eligibility",
-      "body": "Domains generally need to be at least 60 days old and not recently transferred or renewed before another registrar will accept them — this is an ICANN-level rule, not something specific to Cloudflare, so there's no way around it if your domain is too new. You'll also need domain privacy protection disabled during the transfer window, since some registrars block transfers while privacy protection masks the contact details a gaining registrar needs to verify."
+      "body": "Cloudflare's transfer requirements match the general ICANN rule: the domain needs to be registered at least 60 days ago, not transferred in the last 60 days, and not have a changed registrant name, organization, or email in that same window. There's no way around any of this if your domain is too new or was recently updated. Domain privacy protection does not need to be disabled for a Squarespace-to-Cloudflare transfer, though Squarespace notes that some older registrar systems on the receiving end may still ask for it."
     },
     {
-      "heading": "Start adding the domain in Cloudflare",
-      "body": "Log in to Cloudflare and, from the dashboard, enter your existing domain into the \"Boost your site's speed and security\" field rather than registering a new one. Cloudflare defaults to a Quick scan for DNS records, which automatically detects and imports your current records so nothing breaks the moment the domain points at Cloudflare's nameservers — leave this on unless you have a specific reason to enter records manually.",
+      "heading": "Turn off DNSSEC, then set up Cloudflare DNS for the domain",
+      "body": "Cloudflare's own transfer guide asks you to disable DNSSEC at your current registrar first and wait 24 hours before adding the domain. After that wait, add the domain in Cloudflare and let the Quick scan option detect and import your existing DNS records, so nothing breaks once the domain points at Cloudflare's nameservers. Cloudflare then assigns you a pair of nameservers; update those at Squarespace, and wait for the domain's status in the Cloudflare dashboard to change from Pending to Active, which usually takes minutes but can run up to 24 hours. You can't start the registration transfer until it shows Active.",
       "image": { "file": "/screenshots/ZvxEcaIQk8A/04.webp", "caption": "Cloudflare's add-a-domain screen with the Squarespace domain entered and Quick scan for DNS records selected as the recommended option." }
     },
     {
-      "heading": "Initiate the actual registration transfer",
-      "body": "Once your domain's DNS is set up in Cloudflare, go to Domain Registration in the Cloudflare sidebar and choose Manage Domains to find the option to transfer a domain in. If the transfer option isn't visible, verify your Cloudflare account email first — this is a common blocker that has nothing to do with the domain itself. When prompted, enter the authorization code from the Squarespace email you saved earlier."
+      "heading": "Start the registration transfer in Cloudflare",
+      "body": "Once the domain shows Active, go to the Transfer domains page in the Cloudflare dashboard, select the domain, and enter the authorization code from the Squarespace email. Confirm your payment method, enter the contact information for the new registration, and select Confirm transfer. If the domain doesn't appear as an option here, it usually means its DNS status hasn't reached Active yet, not that anything is wrong with the code."
     },
     {
       "heading": "Approve the transfer and wait it out",
-      "body": "After submitting the code, Squarespace typically sends a confirmation email asking you to approve or decline the outgoing transfer; approving it (or simply not declining within the response window) lets the transfer proceed. Registry-level domain transfers commonly take five to seven days to complete even after every step is submitted correctly, so don't expect the domain to appear as active in Cloudflare immediately — check back rather than repeating the request."
+      "body": "Squarespace typically sends a confirmation email asking you to approve or decline the outgoing transfer; approving it, or simply not declining within the response window, lets the transfer proceed. Cloudflare's own timeline puts the active work at about 30 minutes but the total process at up to 10 days depending on your previous registrar, while Squarespace's page allows for the full handoff to run up to 15 days in some cases. Check back rather than repeating the request."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Squarespace won't issue an authorization code",
+      "cause": "The domain is still locked. Squarespace requires Domain Lock switched off before Request transfer code produces a usable code.",
+      "fix": "Open the domain's settings in Squarespace, toggle Domain Lock off, then request the code again."
+    },
+    {
+      "problem": "Cloudflare's Transfer domains page won't accept the domain",
+      "cause": "The domain's DNS in Cloudflare is still Pending, not Active, which happens until the nameservers are updated at Squarespace and finish propagating.",
+      "fix": "Check the domain's status on the Cloudflare dashboard overview and wait for it to read Active before starting the registration transfer."
+    },
+    {
+      "problem": "The transfer stalls or gets rejected without a clear reason",
+      "cause": "DNSSEC was still enabled at Squarespace when the transfer was requested. Cloudflare's own guide says to disable it and wait 24 hours first.",
+      "fix": "Turn off DNSSEC at Squarespace, wait a full day, then re-initiate the transfer."
     }
   ],
   "faq": [
     {
       "question": "Why transfer a domain from Squarespace to Cloudflare?",
-      "answer": "Cloudflare often has more competitive domain pricing and lets you consolidate registration with DNS and CDN management in one place."
+      "answer": "Cloudflare registers and renews domains at cost, and consolidating registration with DNS and CDN management in one dashboard simplifies day-to-day changes."
+    },
+    {
+      "question": "Do I need to unlock the domain before I can transfer it?",
+      "answer": "Yes. Squarespace locks domains by default, and Request transfer code won't produce a usable code until you switch Domain Lock off in the domain's settings."
     },
     {
       "question": "Are there requirements before I can transfer my domain?",
-      "answer": "Yes — the domain generally needs to be at least 60 days old, not recently transferred or renewed, and have privacy protection disabled."
+      "answer": "The domain needs to be at least 60 days old, not transferred in the last 60 days, and not have a changed registrant name, organization, or email in that window. Privacy protection doesn't need to be off, though some older systems on the receiving end may still ask for it."
     },
     {
       "question": "Where do I get the authorization code Cloudflare asks for?",
-      "answer": "Squarespace emails it to your domain's registered contact when you request a transfer — look for an email titled something like \"Your Domain Authorization Code\" containing the code for that specific domain."
+      "answer": "Squarespace emails it once you unlock the domain and click Request transfer code, usually within 24 hours, in a message addressed to the domain's owner contact."
     },
     {
-      "question": "Is the transfer process technical?",
-      "answer": "No, Cloudflare handles most of the technical steps automatically once you enter the domain, let it scan your existing DNS records, and submit the authorization code."
+      "question": "Do I need to touch DNSSEC?",
+      "answer": "Yes, if it's enabled. Cloudflare's transfer guide has you disable DNSSEC at Squarespace and wait 24 hours before adding the domain, or the transfer can stall."
     },
     {
-      "question": "How long does the transfer actually take?",
-      "answer": "Even after every step is submitted correctly, registry-level transfers commonly take five to seven days to fully complete, so don't expect the domain to move instantly."
+      "question": "How long does the transfer take?",
+      "answer": "Cloudflare puts the hands-on work at about 30 minutes but the full process at up to 10 days depending on your previous registrar. Squarespace's own page allows for the complete handoff to take up to 15 days in some cases, so don't expect the domain to move instantly."
     }
   ],
+  "references": [
+    { "label": "Squarespace Help: Transferring a domain away from Squarespace (official)", "url": "https://support.squarespace.com/hc/en-us/articles/205812338-Transferring-a-domain-away-from-Squarespace" },
+    { "label": "Cloudflare Registrar docs: Transfer your domain to Cloudflare (official)", "url": "https://developers.cloudflare.com/registrar/get-started/transfer-domain-to-cloudflare/" }
+  ],
+  "verifiedNote": "Screens and the on-screen flow come from a walkthrough recorded in 2026. The Domain Lock requirement, the DNSSEC prerequisite, the eligibility rules, the correct Cloudflare menu name (Transfer domains), and the timing ranges were re-checked in September 2026 against Squarespace's own domain-transfer help page and Cloudflare's own Registrar documentation. The unlock and DNSSEC steps weren't in the previous version of this guide, and the privacy-protection claim was softened to match what Squarespace's page actually says.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

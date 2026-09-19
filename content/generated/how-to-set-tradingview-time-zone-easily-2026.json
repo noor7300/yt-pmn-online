@@ -2,58 +2,84 @@
   "slug": "how-to-set-tradingview-time-zone-easily-2026",
   "seoTitle": "How to Set the Correct Time Zone in TradingView",
   "metaDescription": "Learn how to change your chart time zone in TradingView, understand exchange time vs local time, and fix candle misalignment for accurate analysis.",
-  "intro": "When your chart's candles don't line up with your local market hours, the time zone setting is usually the culprit, and it's an easy thing to overlook because the chart still loads and looks normal — the data is just displayed against the wrong clock. This guide covers exactly where the time zone control lives on a TradingView chart, what changing it actually does to the candles, and the difference between exchange time and your own local time zone. It's aimed at intraday and swing traders who need their sessions to line up correctly before they trust any time-based analysis.",
+  "intro": "When your chart's clock and axis timestamps don't match your local market hours, the time zone setting is the fix, and it's easy to overlook because the chart still loads and looks normal; the times are just labeled against a different clock. This guide covers where the time zone control lives on a TradingView chart, what changing it does and doesn't affect, and the difference between Exchange time and your own local time zone. It's aimed at intraday and swing traders who want their session times to read correctly before they trust any time-based analysis.",
   "steps": [
     {
       "heading": "Start from a live chart",
-      "body": "Open any symbol on TradingView — the example here uses BTCUSD on the weekly timeframe with TEMA moving averages plotted — and locate the timestamp control in the bottom-right corner of the chart, next to the price scale. This is a small clock-style control that's easy to miss among the drawing tools and indicator panel, but it's the entry point for every time zone change on the chart.",
+      "body": "Open any symbol on TradingView. The example here uses BTCUSD on the weekly timeframe with TEMA moving averages plotted. Locate the timestamp control in the bottom-right corner of the chart, next to the price scale: a small clock-style control that's easy to miss among the drawing tools and indicator panel, and the entry point for every time zone change on the chart. You can also reach the same setting from the gear icon at the top of the chart, under Chart settings, in the Symbol tab.",
       "image": { "file": "/screenshots/e24KQdyzmR0/02.webp", "caption": "A weekly BTC/USD chart on TradingView with TEMA moving averages plotted — the starting point before the time zone control is opened." }
     },
     {
       "heading": "Open the time zone list",
-      "body": "Clicking that timestamp control opens a dropdown list of time zones, starting with UTC and Exchange at the top, followed by a long alphabetical-by-offset list of cities — Honolulu, Anchorage, Los Angeles, Denver, Chicago, New York, and onward through every major UTC offset. The current selection is marked with a checkmark, so you can confirm exactly what your chart is set to before changing anything.",
+      "body": "Clicking that timestamp control opens a dropdown list of time zones, starting with UTC and Exchange at the top and followed by a long list of cities grouped by UTC offset: Honolulu, Anchorage, Los Angeles, Denver, Chicago, New York, and onward through every major offset. The current selection carries a checkmark, so you can confirm what your chart is set to before changing anything.",
       "image": { "file": "/screenshots/e24KQdyzmR0/03.webp", "caption": "The time zone dropdown open on a TradingView chart, listing UTC and Exchange at the top followed by cities grouped by their UTC offset." }
     },
     {
       "heading": "Choose Exchange time or your local time zone",
-      "body": "Selecting Exchange sets the chart to the local time of whatever venue the symbol actually trades on — Bitstamp, in this example, or NYSE hours for a US stock — which is the standard choice if you're timing entries around a specific market's open and close. Selecting a city instead, like New York or Chicago, displays candle times converted to that zone, which is more convenient if you think in your own local time but don't need to track exchange-specific session boundaries precisely."
+      "body": "Selecting Exchange sets the chart to the local time of whatever venue the symbol trades on, Bitstamp in this example, or NYSE hours for a US stock, the standard choice if you're timing entries around a specific market's open and close. Selecting a city instead, like New York or Chicago, displays times converted to that zone, more convenient if you think in your own local time and don't need to track exchange-specific session boundaries precisely."
     },
     {
-      "heading": "Confirm the candles shifted correctly",
-      "body": "After picking a time zone, switch to a lower timeframe like 15 minutes and check the x-axis timestamps at the bottom of the chart — they should now read in the zone you selected, and the timestamp readout near your cursor confirms the exact time of any candle you hover over. On the example chart here, after the change the candle timestamps read against a specific date and time in the new zone, which is the confirmation that the setting actually applied rather than just closing the menu.",
+      "heading": "See what the display changes",
+      "body": "After picking a time zone, switch to a lower timeframe like 15 minutes and check the x-axis timestamps at the bottom of the chart: they now read in the zone you selected, and the readout near your cursor confirms the exact time of any candle you hover over. This is a relabeling, not a data change. TradingView's own Pine Script documentation describes the chart time zone as a visual preference for how the chart displays time, not something that recalculates or regroups the underlying candles.",
       "image": { "file": "/screenshots/e24KQdyzmR0/04.webp", "caption": "A 15-minute BTC/USD chart after the time zone change, with candle timestamps along the bottom now reflecting the newly selected zone." }
     },
     {
-      "heading": "Watch for shifts on higher timeframes",
-      "body": "Time zone changes matter most on daily and weekly charts, where a shift of even a few hours can move which calendar day a candle's open and close get attributed to — this can make a candle that closed at 11 PM in one zone appear to close the next day in another. If your strategy depends on daily candle closes, recheck your higher-timeframe charts specifically after any time zone change, since this is the timeframe where a mismatch is most likely to distort your read of the market."
+      "heading": "Know what stays fixed to the exchange, not your display zone",
+      "body": "Daily and weekly candles are grouped by session boundaries that belong to the instrument's exchange, not your chart's display setting. Switching your personal time zone doesn't move a candle to a different calendar day, and it doesn't touch Pine Script time functions, alert timing, or session-based indicators, which use the exchange's own time zone regardless of what the chart displays. If a daily candle's close looks like it's attributed to the wrong day, that's a question about the exchange's session hours, not something the time zone dropdown controls."
     },
     {
       "heading": "Avoid mixing time zones across tools",
-      "body": "A common mistake is setting TradingView to one time zone while a broker platform, alert service, or trading journal runs on another — session-based indicators, economic calendar alerts, and manually logged trade times can all drift out of sync with your chart if they're not aligned. Once you've picked a time zone in TradingView, standardize on the same one everywhere else you track time-sensitive market activity."
+      "body": "A common mistake is setting TradingView's display to one time zone while a broker platform, alert service, or trading journal runs on another. Session-based indicators, economic calendar alerts, and manually logged trade times can drift out of sync with what your chart shows if they're not aligned. Once you've picked a display time zone in TradingView, standardize on the same one everywhere else you track time-sensitive market activity, and remember that Pine Script alerts and indicators follow the exchange's time zone regardless of your display choice."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A daily candle still looks like it closed on the 'wrong' day after changing the time zone",
+      "cause": "Candle grouping and session boundaries are fixed to the instrument's exchange time zone. The chart's display time zone is a visual setting only and doesn't change it.",
+      "fix": "Switch to the Exchange time zone if you want the display to match the venue's own session hours, rather than expecting your personal zone to change the grouping."
+    },
+    {
+      "problem": "An alert or session-based indicator fires at an unexpected time after changing the chart's time zone",
+      "cause": "Session-based indicators and Pine Script time functions use the instrument's exchange time zone by default, regardless of what the chart displays.",
+      "fix": "Check the indicator or alert's own time zone parameter instead of assuming it follows the chart's display setting."
+    },
+    {
+      "problem": "Two chart layouts in the same account show different times for the same candle",
+      "cause": "Time zone is set per chart layout, not account-wide, so different layouts can carry different settings at once.",
+      "fix": "Set a default time zone in your TradingView profile if you want new charts to start from the same zone, and check each layout individually for existing ones."
     }
   ],
   "faq": [
     {
       "question": "Why do my candles look shifted after changing symbols?",
-      "answer": "Different symbols can trade on different exchanges with their own local hours, so switching between them may require rechecking your time zone setting, especially if you rely on Exchange time."
+      "answer": "Different symbols trade on different exchanges with their own local hours, so the Exchange time zone option shows a different clock for each one. It's worth rechecking your time zone setting after switching symbols if you rely on Exchange time."
     },
     {
       "question": "Should I use exchange time or my local time zone?",
-      "answer": "This depends on personal preference; some traders prefer exchange time for consistency with market hours, while others prefer their own local time for convenience."
+      "answer": "This comes down to preference. Traders timing entries around a specific market's open and close often prefer Exchange time for consistency with that venue's hours; others prefer their own local time for everyday convenience."
     },
     {
-      "question": "Does the time zone setting affect indicator calculations?",
-      "answer": "Time zone settings mainly affect how time is displayed and how candles are grouped on certain timeframes, rather than the core calculation logic of most indicators."
+      "question": "Does the time zone setting affect indicator calculations or candle grouping?",
+      "answer": "No. TradingView's own Pine Script documentation describes the chart's time zone as a visual preference: it changes how times are displayed on the axis and clock, not the underlying data. Candle grouping, session boundaries, and indicator or alert calculations all use the instrument's exchange time zone regardless of what your chart displays."
     },
     {
       "question": "Will my time zone setting be saved for future sessions?",
-      "answer": "Yes, once you set your preferred time zone and save your chart layout, it should persist the next time you open TradingView."
+      "answer": "Yes, per chart layout, so different layouts can carry different time zones at once. You can also set a default time zone in your TradingView profile, which new charts will start from."
     },
     {
       "question": "Where exactly is the time zone control on the chart?",
-      "answer": "It's the small timestamp control in the bottom-right corner of the chart, next to the price scale — clicking it opens the full list of UTC, Exchange, and city-based time zones."
+      "answer": "Click the small timestamp control in the bottom-right corner, next to the price scale, or open Chart settings from the gear icon and use the Time Zone field under the Symbol tab. Both reach the same UTC, Exchange, and city-based list."
+    },
+    {
+      "question": "Does changing the display time zone move my candles to a different day?",
+      "answer": "No. That grouping is fixed to the instrument's exchange time zone. Changing your personal display setting relabels the axis and clock; it doesn't reassign which session or calendar day a candle belongs to."
     }
   ],
+  "references": [
+    { "label": "TradingView Pine Script Docs: Concepts / Time (official)", "url": "https://www.tradingview.com/pine-script-docs/concepts/time/" },
+    { "label": "TradingView Help Center: Is there a way to change chart timezone or clock time at the bottom of the chart? (official)", "url": "https://www.tradingview.com/support/solutions/43000476526-is-there-a-way-to-change-chart-timezone-or-clock-time-at-the-bottom-of-the-chart/" }
+  ],
+  "verifiedNote": "Screens and click path come from a walkthrough recorded in 2026. What the time zone setting changes, and what it doesn't, was re-checked in September 2026 against TradingView's own Pine Script documentation and Help Center, which state that the chart's time zone is a visual preference: it relabels the axis and clock but does not move candles to a different day, regroup sessions, or affect indicator and alert calculations. That correction replaces this guide's earlier claim that changing time zone can shift which day a daily or weekly candle closes on.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

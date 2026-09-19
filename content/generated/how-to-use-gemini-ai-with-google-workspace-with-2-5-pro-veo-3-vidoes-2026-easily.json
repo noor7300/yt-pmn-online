@@ -1,58 +1,94 @@
 {
   "slug": "how-to-use-gemini-ai-with-google-workspace-with-2-5-pro-veo-3-vidoes-2026-easily",
   "seoTitle": "How to Use Gemini AI with Google Workspace (2026)",
-  "metaDescription": "See how to turn on Gemini AI inside Google Workspace's Admin console, control who can access it, and start using its 2.5 Pro and Veo 3 features.",
-  "intro": "Gemini shows up as an app icon next to Gmail and Docs in every Workspace account, but whether it actually works for your users depends on a setting most people never open: the Gemini app controls inside the Google Admin console. This guide covers the real path to turning it on — from the Google apps launcher where Gemini first appears, into the Admin console where an administrator sets service status and user access, and out the other side to actually using the 2.5 Pro model and Veo 3 video generation day to day. If Gemini looks greyed out or missing for some of your team, this is almost always where the fix lives.",
+  "metaDescription": "Turn on Gemini inside Google Workspace's Admin console, fix the access setting that leaves some users without it, and find out where Veo video generation really lives.",
+  "intro": "Gemini shows up as an app icon next to Gmail and Docs in every Workspace account, but whether it works for your users depends on a setting most people never open: the Gemini app controls inside the Google Admin console.\n\nThis guide covers the real path — from the apps launcher where Gemini first appears, into the Admin console where an administrator sets service status and user access, and out to using the current Gemini model day to day. It also covers something a lot of 2026 guides still get wrong: video generation doesn't live inside the general Gemini panel. It's a separate feature of Google Vids, gated by its own plan rules.",
+  "prerequisites": [
+    "A Google Workspace account with Admin console access, or an administrator on hand who can flip the settings below"
+  ],
+  "costNote": "The Gemini app ships included with most current Business, Enterprise, Education, and Frontline editions. Heavier reasoning and higher usage limits sit behind the separate AI Expanded Access add-on Google introduced in 2026. Video generation eligibility is edition-specific too: Google gave Business Starter, Enterprise Starter, and Nonprofit accounts temporary free access to Veo through Google Vids, running only through May 31, 2026. That window has since closed, so check current eligibility on Google's Workspace plan page instead of assuming it still applies.",
   "steps": [
     {
       "heading": "Find Gemini in the Google apps launcher",
-      "body": "Gemini sits in the grid you get from the nine-dot apps launcher in the top corner of any Google page, right alongside Drive, Docs, Sheets, and — for admins — the Admin console itself. This is the fastest way to jump between the consumer-facing Gemini app and the Workspace admin tools without hunting through bookmarks. If you don't see Gemini in that grid at all, that's the first sign it hasn't been turned on for your account yet, which is exactly what the next steps fix.",
+      "body": "Gemini sits in the grid from the nine-dot apps launcher in the top corner of any Google page, alongside Drive, Docs, Sheets, and, for admins, the Admin console itself. This is the fastest way to jump between the consumer-facing Gemini app and the Workspace admin tools without hunting through bookmarks.\n\nIf Gemini isn't in that grid at all, that's the first sign it hasn't been turned on for the account yet, which the next two steps fix.",
       "image": { "file": "/screenshots/sMoVuawfsww/03.webp", "caption": "The Google apps launcher open on google.com, showing Gemini listed alongside Admin, Gmail, Drive, Docs, and Sheets." }
     },
     {
       "heading": "Open Generative AI settings in the Admin console",
-      "body": "From the launcher, admins go into Admin, then find Generative AI in the left-hand navigation — it expands into Gemini app, Gemini for Workspace, NotebookLM, and Gemini reports. Gemini app specifically controls the standalone gemini.google.com experience, while Gemini for Workspace governs the AI features embedded inside Docs, Sheets, and Gmail; they're configured separately, so check both if something works in one place but not the other."
+      "body": "From the launcher, admins go into Admin, then Generative AI in the left-hand navigation. It expands into Gemini app, Gemini for Workspace, NotebookLM, and Gemini reports. Gemini app controls the standalone gemini.google.com experience; Gemini for Workspace governs the AI features embedded inside Docs, Sheets, and Gmail. They're configured separately, so check both if something works in one place and not the other."
     },
     {
-      "heading": "Check the service status",
-      "body": "The Gemini app settings page opens on a Status panel that reads either \"ON for everyone\" or something more restricted, with a Service status section just below it that repeats and expands on that same toggle. This is the master switch — if it's off, nothing else on the page matters, since no user in the organization can reach Gemini regardless of their individual permissions. Flipping it on is usually the single fix when a whole team reports Gemini missing at once.",
+      "heading": "Check the service status and user access",
+      "body": "The Gemini app settings page opens on Service status, showing either On for everyone or a more restricted setting. This is the master switch: if it's off, nothing else on the page matters, since no one in the organization can reach Gemini regardless of their individual permissions. Changing it can take up to 24 hours to apply, though it's usually faster. Making this change requires the Gemini Settings administrator privilege.\n\nBelow Service status, the User access panel controls per-user rules — for example, whether access follows license assignment or is opened to everyone regardless of license. It's common to gate a new AI feature to a licensed group before rolling it out further, so if some users can't reach Gemini while the service itself is on, this panel is the next thing to check.",
       "image": { "file": "/screenshots/sMoVuawfsww/04.webp", "caption": "The Gemini app settings screen in the Google Admin console, showing service status set to ON for everyone and a User access panel below it." }
     },
     {
-      "heading": "Set user access below the service status",
-      "body": "Below Service status, the User access panel is where per-organization rules live — the setting shown here has \"Allow all users to access the Gemini app, regardless of licence\" turned off and applied at a specific organizational unit, which means access is being gated by license rather than opened to everyone. If certain users can't reach Gemini even though the service is on overall, this is the setting to check next, since it's common to restrict a new AI feature to a pilot group before rolling it out company-wide."
+      "heading": "Confirm the licence behind the access toggle",
+      "body": "Because access is commonly tied to licence, confirm which Workspace edition each user is on before assuming a toggle is broken. Flipping User access to on for someone without the right licence attached won't produce a working Gemini app for that person; the licence has to be assigned first, and the deeper reasoning features behind AI Expanded Access need that add-on specifically."
     },
     {
-      "heading": "Separate the licence question from the access toggle",
-      "body": "Because access here is tied to licence, confirm which Workspace edition each user is on before assuming the toggle is broken — some plans include Gemini by default, while others need it added as a separate SKU before the access setting has anything to grant. An admin flipping User access to 'on' for a user without the right licence attached won't produce a working Gemini app for that person; the licence has to be assigned first."
+      "heading": "Use the current model, and find Veo in the right place",
+      "body": "Google rolled Gemini 3 Pro out to the Gemini app for Workspace customers in November 2025, selectable from the model dropdown; it's replaced the older Gemini 2.5 Pro that most 2026 guides still describe as current, and the update applies automatically without any per-user setup beyond the access already granted above.\n\nVideo generation is not part of that same panel. Veo lives specifically inside Google Vids: open the Generate video icon in the right sidebar of the Vids editor, choose Veo, and describe the clip. It's a different app with its own edition rules, which is why turning on Gemini elsewhere doesn't automatically make Veo appear."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Gemini is missing for the whole organization",
+      "cause": "Service status under Generative AI > Gemini app is set to off, or only recently switched on.",
+      "fix": "Set Service status to On for everyone and Save. Allow up to 24 hours for the change to reach every user, though it's typically quicker."
     },
     {
-      "heading": "Put 2.5 Pro and Veo 3 to work",
-      "body": "Once access is confirmed, Gemini's 2.5 Pro model handles the heavier lifting — drafting longer documents in Docs, summarizing long email threads in Gmail, or working through more involved data questions in Sheets — with noticeably better follow-through on multi-step requests than earlier Gemini versions. Veo 3 is the video-generation side of the same Gemini interface, turning a text prompt into a short clip you can drop into a presentation or an internal update without leaving your Google account. Both are reached from the same Gemini entry point you just unlocked, so there's no separate setup once the app itself is turned on and licensed correctly."
+      "problem": "Service status is on, but some users still don't see Gemini",
+      "cause": "The User access setting is scoped to license, and those specific users don't have a qualifying Workspace edition assigned.",
+      "fix": "Check the User access panel and either assign the licence those users need or turn on access regardless of licence, if that fits the organization's rollout plan."
+    },
+    {
+      "problem": "Veo video generation doesn't appear anywhere",
+      "cause": "Looking for it inside the Gemini side panel instead of Google Vids, or being on an edition whose temporary free access window (Business Starter, Enterprise Starter, Nonprofit, through May 31, 2026) has ended.",
+      "fix": "Open Google Vids directly and use the Generate video icon in the editor's right sidebar. If it's still missing, check current edition eligibility on Google's Workspace plans page instead of assuming last year's access still holds."
     }
   ],
   "faq": [
     {
-      "question": "Is Gemini AI included in all Google Workspace plans?",
-      "answer": "Availability depends on your specific Workspace edition — some plans include Gemini by default while others require it as an add-on, and the Admin console's User access setting can further restrict it even on a licensed plan."
+      "question": "Which Gemini model runs inside Workspace now?",
+      "answer": "Gemini 3 Pro, rolled out to the Gemini app for Workspace customers in November 2025 and selectable from the model dropdown. It replaced Gemini 2.5 Pro and updates automatically, so there's nothing to manually upgrade once Gemini app access is on."
     },
     {
-      "question": "What's the difference between Gemini 2.5 Pro and earlier versions?",
-      "answer": "2.5 Pro is built to handle more complex, multi-step requests — like drafting longer documents or working through data in Sheets — with greater accuracy compared to earlier Gemini models."
+      "question": "Is Gemini included in all Google Workspace plans?",
+      "answer": "It ships with most current Business, Enterprise, Education, and Frontline editions, but the Admin console's User access setting can still restrict it, and the heaviest reasoning limits sit behind the separate AI Expanded Access add-on."
     },
     {
-      "question": "Can I use Veo 3 to create videos directly inside Workspace apps?",
-      "answer": "Veo 3's video generation is accessed through Gemini's interface, the same app you enable in the Admin console, letting you create short clips from text prompts once access is turned on."
+      "question": "Where do I find Veo video generation?",
+      "answer": "Inside Google Vids, not the general Gemini panel. Open the Vids editor, use the Generate video icon in the right sidebar, and select Veo."
     },
     {
       "question": "Why can't some users see Gemini even though it's turned on?",
-      "answer": "Check the User access panel under Generative AI → Gemini app in the Admin console — access can be scoped to a specific organizational unit or gated by licence rather than opened to everyone by default."
+      "answer": "Check the User access panel under Generative AI > Gemini app. Access can be scoped to a specific organizational unit or gated by licence instead of opened to everyone by default."
+    },
+    {
+      "question": "My organization was on Business Starter and had free Veo access. Is that still active?",
+      "answer": "Google's own announcement scoped that free access, for Business Starter, Enterprise Starter, and Nonprofit accounts, through May 31, 2026. That date has passed, so check the current Workspace plans page instead of assuming it still applies."
     },
     {
       "question": "Do I need any special training to use Gemini in Workspace?",
-      "answer": "No special training is required once access is enabled — Gemini is designed to work through natural prompts inside the apps you already use daily."
+      "answer": "No. Once access is enabled, Gemini works through plain-language prompts inside the apps already in daily use."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Help: Turn the Gemini app on or off (official)",
+      "url": "https://knowledge.workspace.google.com/admin/gemini/turn-the-gemini-app-on-or-off"
+    },
+    {
+      "label": "Google Workspace Updates: Introducing Gemini 3 Pro for Gemini app (official)",
+      "url": "https://workspaceupdates.googleblog.com/2025/11/introducing-gemini-3-pro-for-gemini-app.html"
+    },
+    {
+      "label": "Google Workspace Updates: Generate video clips with sound using Veo 3 in Google Vids (official)",
+      "url": "https://workspaceupdates.googleblog.com/2025/06/generate-video-clips-with-sound-using-veo3-google-vids.html"
+    }
+  ],
+  "verifiedNote": "Click path and screens (apps launcher, Gemini app settings, User access) come from a walkthrough recorded in 2026 and match the current Admin console navigation. The model and Veo claims were re-checked against Google's official Workspace Updates blog in September 2026: Gemini 3 Pro replaced Gemini 2.5 Pro in the Gemini app in November 2025, and Veo video generation lives inside Google Vids, not the general Gemini panel this guide previously implied. Both corrections are reflected above; the seoTitle/slug still reference 2.5 Pro and Veo 3 because they carry the original published URL.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }

@@ -1,58 +1,100 @@
 {
   "slug": "how-to-transfer-squarespace-domain-to-hostinger-2026-easy-guide",
   "seoTitle": "Transfer a Squarespace Domain to Hostinger (2026)",
-  "metaDescription": "Move your domain from Squarespace to Hostinger for better hosting performance, lower costs, and more DNS control — full step-by-step guide.",
-  "intro": "If you bought your domain through Squarespace but want to host your site elsewhere, moving it to Hostinger gives you more control over DNS and often a lower renewal cost. The transfer itself happens in two places — first unlocking and starting the move from Squarespace's Domains panel, then choosing how Hostinger should handle your name servers on the receiving end. This guide covers both sides of that handoff, including the one DNS decision that determines whether your site stays online during the switch or goes dark.",
+  "metaDescription": "Move your domain from Squarespace to Hostinger: the unlock and EPP code steps, the eligibility windows that block a transfer, and the name server choice that decides if your site stays online.",
+  "intro": "If you bought your domain through Squarespace but want to host your site elsewhere, moving it to Hostinger gives you more control over DNS and often a lower renewal cost. The transfer happens in two places: unlocking and starting the move from Squarespace's Domains panel, then choosing how Hostinger should handle your name servers on the receiving end. This guide covers both sides, the eligibility windows that quietly block a transfer, and one thing people assume incorrectly: moving the domain does not move your Squarespace website.",
+  "prerequisites": [
+    "At least 60 days since the domain was registered or last transferred, and at least 45 days since its last renewal",
+    "The domain unlocked in Squarespace, with no suspension or redemption status on it"
+  ],
+  "costNote": "Hostinger's transfer flow asks for payment before it asks for the EPP code. A domain transfer is treated like a purchase and typically extends the registration by a year, the same as most registrars.",
   "steps": [
     {
-      "heading": "Find your domain in Squarespace's Domains panel",
-      "body": "Log in to Squarespace and open Domains from the top navigation. You'll see every domain on the account listed with its status, current provider, and expiration date. Locate the one you're moving, confirm its status shows Active, and note the expiration date — most registrars, Squarespace included, won't let you transfer a domain within a certain window of when it was registered or last transferred, so check this before going further.",
+      "heading": "Check your domain is genuinely eligible to transfer",
+      "body": "Log in to Squarespace and open Domains from the top navigation. Every domain on the account is listed with its status, current provider, and expiration date. Confirm the one you're moving shows Active, then check two windows Squarespace enforces before it will let a transfer proceed: 60 days since the domain was registered or last transferred to Squarespace, and 45 days since its last renewal. If either window hasn't closed yet, the transfer option won't work no matter what you do on Hostinger's side.",
       "image": { "file": "/screenshots/zOfx-3TazS4/01.webp", "caption": "The Squarespace Domains panel, listing an active domain with its provider and expiration date, and a Transfer a Domain button in the top right." }
     },
     {
-      "heading": "Unlock the domain and get the authorization code",
-      "body": "Domains are locked by default to prevent unauthorized transfers, so open the domain's settings in Squarespace and turn off transfer lock before starting anything on the Hostinger side. From the same settings area, request the EPP or authorization code — Squarespace typically emails this to the account holder rather than displaying it directly on screen, so check your inbox after requesting it. Hostinger will ask for this exact code to verify you're authorized to move the domain."
+      "heading": "Unlock the domain and request the authorization code",
+      "body": "Open the domain's settings in Squarespace and toggle Domain Lock off. Click Request transfer code, confirm with your password or two-factor authentication, and Squarespace sends an email titled \"Auth code for [yourdomain.com]\" from no-reply@squarespace.com, usually within 24 hours. Hostinger will ask for this exact code to verify you're authorized to move the domain, so keep the email until you've entered it."
     },
     {
-      "heading": "Start the transfer request in Hostinger",
-      "body": "In your Hostinger account, begin a domain transfer and enter the domain name along with the authorization code from Squarespace. Hostinger will confirm the domain is eligible and unlocked before proceeding — if it isn't, you'll get an error pointing back to whichever step in Squarespace still needs to be completed, usually the lock status or a mismatched code."
+      "heading": "Start the transfer at Hostinger and pay before entering the code",
+      "body": "In Hostinger, go to Domains, then Transfers, and choose Transfer to Hostinger. Enter the domain name, and you'll be asked to pay for the transfer before the EPP code field appears. That order is easy to miss if you expect the code first. Once payment is through, enter the authorization code from Squarespace. Hostinger checks the domain is unlocked and eligible and marks it Ready to transfer; if it isn't, the error points back to whichever Squarespace-side condition still needs fixing, usually the lock status or the 60/45-day windows."
     },
     {
       "heading": "Choose how Hostinger should handle your name servers",
-      "body": "Partway through the transfer, Hostinger presents two options for name servers: \"Use existing name servers,\" which keeps DNS zone management wherever it currently lives — useful if you have hosting or email at another provider, or you use a CDN like Cloudflare — or \"Use Hostinger's name servers and keep existing DNS records,\" which switches your name servers to Hostinger while copying over your current DNS records. Hostinger also recommends turning off DNSSEC before transferring, since an active DNSSEC configuration can cause the transfer to fail or your domain to briefly stop resolving.",
-      "image": { "file": "/screenshots/zOfx-3TazS4/05.webp", "caption": "Hostinger's name server choice during transfer — keep DNS management at your current provider, or switch to Hostinger's name servers while preserving existing records." }
+      "body": "Hostinger presents two options: \"Use existing name servers,\" which leaves DNS zone management wherever it currently lives, the choice if you have hosting or email at another provider or you use a CDN like Cloudflare, or \"Use Hostinger's name servers and keep existing DNS records,\" which switches your name servers to Hostinger while copying your current DNS records over. Hostinger also recommends turning DNSSEC off before transferring, since an active DNSSEC configuration can cause the transfer to fail or your domain to briefly stop resolving.\n\nIf your site and email are staying exactly where they are and you're only moving domain registration, pick existing name servers since nothing about your live DNS changes. If you're consolidating everything at Hostinger, switch to its name servers and check the copied records look right afterward. A missed record here is the most common cause of email or site downtime after a transfer.",
+      "image": { "file": "/screenshots/zOfx-3TazS4/05.webp", "caption": "Hostinger's name server choice during transfer, with a reminder to turn DNSSEC off before transferring." }
     },
     {
-      "heading": "Pick the option that matches your setup",
-      "body": "If your website and email are staying exactly where they are and you're only moving domain registration for cost or convenience, \"Use existing name servers\" is the safer choice since nothing about your live DNS changes. If you're also moving hosting to Hostinger and want everything managed in one place going forward, choose the Hostinger name servers option — just confirm your existing DNS records look correct once they've copied over, since a missed record here is the most common cause of email or site downtime after a domain transfer."
+      "heading": "Confirm the transfer, and remember it doesn't move your website",
+      "body": "Click Transfer domain to submit. Squarespace's own documentation puts the whole process at up to 15 days: transfers through a Tucows-registered domain can be confirmed by email link to speed things along, or the transfer starts automatically after 5 business days if nobody responds. Add extra time for DNS propagation if you switched name servers.\n\nThe detail that catches people out: transferring the domain registration does not touch your Squarespace website or its hosting. If you're leaving Squarespace hosting too, you need to separately cancel or downgrade that site subscription, or you'll keep paying for it after the domain has already moved."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The transfer option is missing or grayed out in Squarespace",
+      "cause": "The domain is inside the 60-day window since registration or its last transfer, or the 45-day window since its last renewal.",
+      "fix": "Check the exact registration, transfer, and renewal dates on the Domains panel and wait until both windows have closed."
     },
     {
-      "heading": "Confirm the transfer and watch for the approval email",
-      "body": "Click Transfer domain to submit the request. Domain transfers aren't instant — expect an approval email from your current registrar (or an automatic approval after a few days if you don't respond) before the move completes, plus additional time for DNS propagation if you switched name servers. Keep an eye on both your Squarespace and Hostinger dashboards during this window, and avoid making further DNS changes at the old provider until Hostinger confirms the transfer has finished."
+      "problem": "The authorization code email never arrives",
+      "cause": "It can take up to 24 hours, and it's easy to miss since it comes from no-reply@squarespace.com instead of a person.",
+      "fix": "Check spam, wait the full 24 hours, and request the code again from the domain's settings if it still hasn't shown up."
+    },
+    {
+      "problem": "Site or email stopped working after switching name servers",
+      "cause": "A DNS record didn't copy over correctly during the switch, or DNSSEC was still enabled at the time of transfer.",
+      "fix": "Compare the DNS records now showing at Hostinger against what you had before, and confirm DNSSEC was turned off prior to transferring."
+    },
+    {
+      "problem": "Still being billed by Squarespace after the domain moved",
+      "cause": "Moving the domain doesn't cancel or move the Squarespace website subscription. The two are billed separately.",
+      "fix": "Cancel or downgrade the Squarespace site plan directly if you're not keeping the site hosted there."
     }
   ],
   "faq": [
     {
       "question": "Why transfer a domain from Squarespace to Hostinger?",
-      "answer": "Common reasons include lower renewal costs, hosting performance, and more direct control over DNS settings than Squarespace offers by default."
+      "answer": "Common reasons are lower renewal costs, hosting performance, and more direct control over DNS than Squarespace offers by default."
     },
     {
       "question": "What is an EPP code and why do I need it?",
-      "answer": "It's an authorization code that proves you own the domain and authorizes the new registrar to accept the transfer. Squarespace typically sends it by email once you request it from the domain's settings."
+      "answer": "It's an authorization code that proves you own the domain and lets the new registrar accept the transfer. Squarespace emails it once you request it from the domain's settings, usually within 24 hours."
+    },
+    {
+      "question": "Do I have to pay to transfer a domain to Hostinger?",
+      "answer": "Yes. Hostinger's transfer flow has you pay before it asks for the EPP code, and the payment typically extends the domain's registration by a year, the standard practice across registrars."
+    },
+    {
+      "question": "Why won't Squarespace let me transfer my domain yet?",
+      "answer": "Squarespace blocks transfers within 60 days of registration or a previous transfer, and within 45 days of the domain's last renewal. Check those dates on the Domains panel before troubleshooting anything else."
     },
     {
       "question": "Will my website go down during the transfer?",
-      "answer": "Not necessarily. Choosing \"Use existing name servers\" during the Hostinger transfer keeps your current DNS setup untouched, which is the safest option if your site and email are staying where they are."
-    },
-    {
-      "question": "Should I turn off DNSSEC before transferring?",
-      "answer": "Yes — Hostinger explicitly recommends disabling DNSSEC before the transfer, since an active DNSSEC configuration can cause the transfer to fail or briefly break domain resolution."
+      "answer": "Not if you choose \"Use existing name servers\" during the Hostinger transfer, which leaves your current DNS setup untouched. Separately, the domain transfer never moves your Squarespace website itself; that stays on its own subscription."
     },
     {
       "question": "How long does a domain transfer usually take?",
-      "answer": "Domain transfers commonly take a few days to complete once approved, plus additional time for DNS propagation if you switched to Hostinger's name servers."
+      "answer": "Up to 15 days by Squarespace's own estimate. Confirming by the email link speeds it up; without a response, the transfer starts automatically after 5 business days. Add time for DNS propagation if you switched name servers."
     }
   ],
+  "references": [
+    {
+      "label": "Squarespace Help: Transferring a domain away from Squarespace (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/205812338-Transferring-a-domain-away-from-Squarespace"
+    },
+    {
+      "label": "Hostinger: How to transfer a domain to Hostinger (official)",
+      "url": "https://www.hostinger.com/support/1583436-how-to-transfer-a-domain-to-hostinger/"
+    },
+    {
+      "label": "Hostinger: Which nameservers to choose when transferring a domain to Hostinger (official)",
+      "url": "https://www.hostinger.com/support/8925103-which-nameservers-to-choose-when-transferring-a-domain-to-hostinger/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough; the name-server choice screen matched Hostinger's current wording exactly on inspection. Re-checked against Squarespace's and Hostinger's official documentation in September 2026, which added specifics the earlier version lacked: the 60-day and 45-day eligibility windows, the 24-hour auth-code email timing, the payment step before EPP-code entry, the 15-day/5-business-day transfer timeline, and the fact that a domain transfer never moves the Squarespace website itself.",
   "generatedAt": "2026-08-07T00:00:00Z",
   "deep": true
 }
