@@ -1,58 +1,92 @@
 {
   "slug": "how-to-enable-parallax-effect-in-scrolling-disable-it-on-squarespace-2026",
   "seoTitle": "How to Enable or Disable Parallax Scrolling on Squarespace",
-  "metaDescription": "Turn the parallax scrolling effect on for a Squarespace section background — or switch it back off — through the section's Background and Image Effect settings.",
-  "intro": "Parallax makes a section's background image drift more slowly than the text sitting on top of it, so the page gains a sense of depth as a visitor scrolls. On Squarespace it's a per-section setting rather than a site-wide toggle, which means you can use it on a hero banner and leave every other section perfectly still. The setting lives three clicks deep inside the section editor, and there is one quirk that makes people think it isn't working at all. This guide covers turning it on, checking it properly, switching it back off, and knowing when it's the wrong choice for a page.",
+  "metaDescription": "Turn parallax on for a Squarespace section background, or switch it off. Covers the real click path, the WebGL requirement, and why the effect sometimes doesn't show up at all.",
+  "intro": "Parallax makes a section's background image drift more slowly than the text sitting on top of it, so the page gains a sense of depth as a visitor scrolls. On Squarespace it's a per-section setting, not a site-wide toggle, so you can use it on a hero banner and leave every other section still. The setting lives a few clicks deep inside the section editor, and two real limits explain most of the 'it isn't working' reports.\n\nThis guide covers turning it on, checking it properly, switching it back off, and knowing when it's the wrong choice for a page. The setting itself takes under a minute to change. Whether a visitor actually sees it move depends on two constraints most guides skip.",
+  "prerequisites": [
+    "A section with a background image already added; Image Effect doesn't apply to background video or Squarespace's Background Art",
+    "A browser with WebGL support, to see the effect while editing and while checking the published page"
+  ],
   "steps": [
     {
-      "heading": "Log in and open the page in the editor",
-      "body": "Sign in at squarespace.com — Continue with Google is the quickest route if your account is linked to a Google profile — and open the site you want to change from your dashboard. Navigate to the page carrying the background image you want to animate, then click Edit to switch from the preview into the page editor. You'll know you're in edit mode when a toolbar appears across the top with SAVE and EXIT on the left, undo and redo arrows beside them, and desktop and mobile view icons on the right. Parallax is a section property, so it can only be set from inside this editor, not from Site Styles."
+      "heading": "Open the page in the editor and hover the section",
+      "body": "Sign in at squarespace.com and open the site from your dashboard (Continue with Google is quickest if your account is linked to one). Navigate to the page with the background image you want to animate and click Edit to leave the preview and enter the page editor. You're in edit mode once a toolbar appears across the top, with Save and Exit on the left, undo and redo beside them, and desktop and mobile view icons on the right.\n\nMove the cursor over the section that holds the image and a small menu opens at its right edge. Edit Section sits at the top; View Layouts, a row of icons for duplicating and reordering, and Remove sit below it. Check you're hovering the right section before clicking. On a hero banner the menu can overlap the navigation, and Remove sits close enough to be a real hazard. The blue Add Section buttons above and below mark where the section actually starts and ends.",
+      "image": {
+        "file": "/screenshots/T0QFXIXaimA/01.webp",
+        "caption": "The section hover menu on a hero banner, with Edit Section at the top and the reorder and remove controls beneath it."
+      }
     },
     {
-      "heading": "Hover the section and open Edit Section",
-      "body": "Move your cursor over the section with the background image and a small floating menu appears at its right-hand edge. The top entry is EDIT SECTION, which is the one you want; below it sit VIEW LAYOUTS, a row of icons for duplicating, saving and reordering the section, and REMOVE at the bottom. Take a moment to confirm you're hovering the right section before clicking — on a hero banner the menu can overlap the navigation, and REMOVE sits close enough to be a genuine hazard. Blue ADD SECTION buttons mark the boundaries above and below, which is a reliable way to see where the section you're editing actually starts and ends.",
-      "image": { "file": "/screenshots/T0QFXIXaimA/01.webp", "caption": "The section hover menu on a hero banner, with Edit Section at the top and the reorder and remove controls beneath it." }
+      "heading": "Open Background, then pick an effect",
+      "body": "Edit Section opens a panel on the right with tabs for the section's layout, colors and background. Choose Background, where the image or video behind the section is managed, then click into Image Effect. Squarespace files this one level below the image itself, which is why people go looking for a parallax switch in Site Styles and never find one. It isn't there. It's a per-section setting.\n\nThe panel shows the options as a grid of thumbnails rendered with your own photo, so you can see roughly what each one does before committing. Squarespace currently offers six: None (the default, and what you return to for a static background), Parallax, Liquid, Film Grain, Refracted Circles and Refracted Lines. Click the Parallax tile to apply it.\n\nTwo limits matter here, and neither is obvious from the panel itself. Image effects need a browser with WebGL support; on an older phone, or a browser without it, the section just shows the static photo with no animation, which is the most common reason someone assumes the effect isn't working. Effects also apply only to a background image: if the section's background is a video, or Squarespace's own Background Art (patterns and gradients), Image Effect has nothing to act on.",
+      "image": {
+        "file": "/screenshots/T0QFXIXaimA/02.webp",
+        "caption": "The Image Effect grid, previewed with the section's own photo. None sits top left, the tile you return to for a static background."
+      }
     },
     {
-      "heading": "Open Background, then Image Effect",
-      "body": "Edit Section opens a settings panel on the right with tabs for the section's layout, colours and background. Choose Background — this is where the image or video behind the section is managed — and then click into Image Effect. Squarespace keeps this one level deeper than the image itself, which is why so many people go looking for a parallax switch in Site Styles and never find one. The panel that opens has a BACK link at the top left so you can step back up to the background settings without closing the section editor."
-    },
-    {
-      "heading": "Pick the effect from the visual grid",
-      "body": "The Image Effect panel presents the options as a grid of thumbnails rendered with your own background image rather than as a text list, so you can see roughly what each one does to your photo. The first tile is NONE, which is the default and the state you return to when you want the background static. The remaining tiles are the available effects, and the currently selected one is highlighted with two small icons for shuffling and fine-tuning its settings. Click the parallax tile to apply it. A note under the grid points out that image effects only render in certain contexts — which is the quirk worth knowing about before you decide it isn't working.",
-      "image": { "file": "/screenshots/T0QFXIXaimA/02.webp", "caption": "The Image Effect grid, previewed with the section's own photo. The NONE tile at the top left is what you return to when switching the effect off." }
-    },
-    {
-      "heading": "Save, then check it on the live page",
-      "body": "Click SAVE in the top-left toolbar — nothing you changed applies until you do, and clicking EXIT first will discard the change. Then leave the editor and scroll the actual published page, because the editor's preview does not reproduce the scrolling motion faithfully: the effect depends on the page scrolling normally, which the editor's canvas doesn't do. Check the section on a phone as well as a desktop browser. Parallax is deliberately reduced or ignored on some mobile browsers and for visitors who have switched on a reduced-motion accessibility preference, so a background that drifts on your laptop may sit still on a phone — that's expected behaviour, not a bug in your setup."
+      "heading": "Save, then check the live page",
+      "body": "Click Save in the top-left toolbar. Nothing applies until you do, and clicking Exit first discards the change. Leave the editor afterward and scroll the actual published page, because the editor's own preview doesn't reproduce the scrolling motion faithfully: the effect depends on the page scrolling normally, and the editor's canvas doesn't do that.\n\nCheck the section on a phone as well as a desktop browser. Beyond the WebGL requirement above, Squarespace also respects a visitor's reduced-motion accessibility setting, so a background that drifts on your laptop can sit still on someone else's phone. That's expected behavior, not a bug in your setup."
     },
     {
       "heading": "Turn it off again, and use it sparingly",
-      "body": "Disabling is the same path in reverse: hover the section, Edit Section, Background, Image Effect, and choose NONE (or a different effect), then SAVE. It's worth doing on any section where the effect fights the content — parallax works on a large, simple hero image with plenty of empty space, and looks cheap on a busy photo or a short section where the background barely moves before it scrolls past. One or two parallax sections per page is the practical limit; beyond that the page feels unsteady and, because each effect adds scroll-linked work for the browser, slower on mid-range phones. If a background image is doing a job — showing a product, carrying text — leave it static."
+      "body": "Disabling is the same path in reverse: hover the section, Edit Section, Background, Image Effect, then choose None (or a different effect) and Save. Do this on any section where the effect fights the content. Parallax suits a large, simple hero image with room to breathe, and looks cheap on a busy photo or a short section where the background barely moves before it scrolls past.\n\nOne or two animated sections per page is a reasonable ceiling. Each one adds scroll-linked work for the browser, and a page with five or six drifting backgrounds feels unsteady, not polished. If a background image is doing a job, showing a product, carrying text, leave it static."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The background looks completely static even though Parallax is selected",
+      "cause": "The browser or device doesn't support WebGL, which image effects require. Unsupported browsers fall back to a plain static image.",
+      "fix": "Test the browser at get.webgl.org, or check the section on a different browser or a newer phone."
+    },
+    {
+      "problem": "Parallax is selected but nothing happens on a video or patterned background",
+      "cause": "Image effects only apply to background images. Video backgrounds and Squarespace's Background Art aren't affected.",
+      "fix": "Swap the section's background to a static image if the effect matters, or accept that video and art backgrounds stay still."
+    },
+    {
+      "problem": "The effect looks fine on a laptop but not on a colleague's phone",
+      "cause": "Some visitors have reduced motion turned on at the OS level, and Squarespace respects that preference by disabling scroll animations for them.",
+      "fix": "Nothing to fix. This is intentional accessibility behavior, not a bug."
     }
   ],
   "faq": [
     {
       "question": "Where is the parallax setting on Squarespace?",
-      "answer": "Inside the page editor: hover the section, click Edit Section, open Background, then Image Effect. The effects appear as a grid of thumbnails previewed with your own image."
+      "answer": "Inside the page editor: hover the section, click Edit Section, open Background, then Image Effect. The six effects, including Parallax, appear as a grid of thumbnails previewed with your own image."
     },
     {
       "question": "Can I apply parallax to just one section instead of the whole page?",
-      "answer": "Yes — it's set per section, so you can animate a hero banner and leave every other section's background completely static."
+      "answer": "Yes. It's set per section, so you can animate a hero banner and leave every other section's background completely static."
     },
     {
       "question": "How do I turn parallax off?",
-      "answer": "Go back to the same Image Effect panel and select the NONE tile, then click Save. Choosing a different effect works too if you want a different look rather than a static background."
+      "answer": "Go back to the same Image Effect panel, select None, then click Save. Choosing a different effect works too if you want a different look instead of a static background."
     },
     {
       "question": "Why can't I see the parallax effect?",
-      "answer": "Two common reasons: you haven't saved yet, or you're judging it inside the editor. The motion depends on real page scrolling, so check the published page. Mobile browsers and reduced-motion accessibility settings can also suppress it by design."
+      "answer": "The most common reason is a browser or device without WebGL support, which image effects require; the section falls back to a static image. Also check that you saved and are viewing the published page, not the editor's own preview, and that reduced-motion isn't turned on for that visitor."
+    },
+    {
+      "question": "Does parallax work on background video or Background Art?",
+      "answer": "No. Image effects, including Parallax, apply only to a section's background image. A video background or Squarespace's own Background Art pattern won't animate."
     },
     {
       "question": "Does parallax slow my site down?",
-      "answer": "A single section is fine, but each scroll-linked effect adds work for the browser on every frame. Keep it to one or two sections per page, especially if your background images are large."
+      "answer": "A single section is fine, but each scroll-linked effect adds work for the browser on every frame. Keep it to one or two sections per page, especially with large background images."
     }
   ],
+  "references": [
+    {
+      "label": "Squarespace Help Center: Section background images (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/4424798177549-Section-background-images"
+    },
+    {
+      "label": "Squarespace Help Center: Making audio, images, and videos more accessible (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/13630857891981-Making-audio-images-and-videos-more-accessible"
+    }
+  ],
+  "verifiedNote": "Click path and both screenshots come from a walkthrough recorded in 2025 on Squarespace 7.1. The list of image effects, the WebGL requirement, and the video/Background Art limitation were re-checked against Squarespace's own 'Section background images' and accessibility documentation in September 2026; the WebGL and background-type constraints weren't in the original draft.",
   "generatedAt": "2026-08-31T00:00:00.000Z",
   "deep": true
 }

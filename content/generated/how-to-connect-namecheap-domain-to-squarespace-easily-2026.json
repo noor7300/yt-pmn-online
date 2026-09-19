@@ -1,72 +1,99 @@
 {
   "slug": "how-to-connect-namecheap-domain-to-squarespace-easily-2026",
   "seoTitle": "Connect a Namecheap Domain to Squarespace",
-  "metaDescription": "Built your site on Squarespace but bought your domain on Namecheap? Learn how to connect them with Squarespace's guided nameserver setup, no domain transfer needed.",
-  "intro": "If your domain lives at Namecheap but your website is built on Squarespace, you don't need to transfer the domain to connect the two. Squarespace's own domain-connection wizard walks you through pointing your existing domain at your site using its nameservers, which is the path it defaults to and the simplest to follow if you don't have other services depending on Namecheap's DNS. This guide follows that wizard screen by screen alongside the Namecheap side you'll need open in a second tab.",
+  "metaDescription": "Built your site on Squarespace but bought your domain on Namecheap? Connect them with Squarespace's nameserver setup, no domain transfer or shared login needed.",
+  "intro": "If your domain lives at Namecheap but your website is built on Squarespace, you don't need to transfer the domain to connect the two. Squarespace's own domain-connection wizard walks you through pointing your existing domain at your site using its nameservers, which is the path it recommends for a Namecheap domain unless you have a reason to keep DNS control elsewhere. This guide follows that wizard screen by screen alongside the Namecheap side you'll need open in a second tab.",
+  "prerequisites": [
+    "A Namecheap account with the domain showing as Active, not expired or mid-transfer",
+    "A note of any custom DNS records you rely on at Namecheap for this domain — email (MX) routing, subdomains, or verification TXT records — since Nameserver Connect hands DNS control to Squarespace and doesn't carry these over automatically"
+  ],
   "steps": [
     {
       "heading": "Confirm your domain is active in Namecheap",
-      "body": "Before starting on the Squarespace side, log in to Namecheap and open Domain List to confirm the domain you want to connect is Active and not sitting in an expired or pending state. The list shows each domain's status, whether Auto-Renew is on, and its expiration date, plus a note if Domain Privacy protection is enabled. Keep this tab open — you'll come back to it once Squarespace hands you the nameserver values to enter.",
+      "body": "Before starting on the Squarespace side, log in to Namecheap and open Domain List to confirm the domain you want to connect is Active, not sitting in an expired or pending state. The list shows each domain's status, whether Auto-Renew is on, and its expiration date, plus a note if Domain Privacy protection is enabled. Keep this tab open. You'll come back to it once Squarespace hands you the nameserver values to enter.",
       "image": {
         "file": "/screenshots/9Nyj3tT9khk/02.webp",
         "caption": "Namecheap's Domain List showing an active domain with auto-renew on and domain privacy protection enabled."
       }
     },
     {
-      "heading": "Start the connection from Squarespace's domain settings",
-      "body": "In your Squarespace site, go to Settings → Domains & Email and choose Use a Domain I Own. A panel opens asking you to type in the domain name exactly as registered — the same domain you just confirmed is active in Namecheap. Enter it and continue; Squarespace will look it up and move you into its guided setup for that specific domain.",
+      "heading": "Start the connection from Squarespace's Domains panel",
+      "body": "In your Squarespace site, open the Domains panel and choose Use a Domain I Own. A field opens asking for the domain name exactly as registered, the same one you just confirmed is active in Namecheap. Type it in, click the arrow, then click Connect Domain to move into Squarespace's guided setup for that domain.",
       "image": {
         "file": "/screenshots/9Nyj3tT9khk/03.webp",
         "caption": "Squarespace's \"Use a Domain I Own\" dialog, where you type in the domain name you already registered elsewhere."
       }
     },
     {
-      "heading": "Choose the nameserver setup path",
-      "body": "Squarespace then presents \"Let's Connect Your Domain Provider Domain,\" a short explainer that it can set up the connection using nameservers if you provide your domain provider's sign-in details, or you can decline and use DNS records instead via the \"No, use DNS records\" button. The nameserver route is the simpler of the two for most people, since Squarespace manages the records for you afterward rather than you adding individual entries — but if you already rely on Namecheap's DNS for email or other services, DNS records may be the safer choice since switching nameservers hands that control to Squarespace entirely.",
+      "heading": "Choose Nameserver Connect",
+      "body": "Squarespace explains it can walk you through connecting via nameservers, which it recommends for domains from GoDaddy, Namecheap or Network Solutions, unless the domain has custom DNS records, DNSSEC enabled, several subdomains, or depends on a service like Cloudflare that needs to keep DNS control. If any of that applies to you, use DNS records instead so Namecheap keeps managing the records; otherwise nameservers is the simpler route since Squarespace manages everything for you afterward. Squarespace does not ask for your Namecheap password at any point in this flow — the next step has you log into Namecheap yourself to paste in the values it gives you.",
       "image": {
         "file": "/screenshots/9Nyj3tT9khk/04.webp",
-        "caption": "Squarespace's domain connection intro screen, step 1 of 3, offering a choice between connecting via nameservers or sticking with DNS records."
+        "caption": "Squarespace's domain connection intro screen, offering a choice between connecting via nameservers or sticking with DNS records."
       }
     },
     {
       "heading": "Update your nameservers in Namecheap",
-      "body": "Following the nameserver path, step 3 of 3 gives you explicit instructions: open your domain dashboard, scroll to Nameservers, toggle it to Custom DNS, and paste in the two values Squarespace provides — connect1.squarespacedns.com and connect2.squarespacedns.com. In Namecheap specifically, that Nameservers section is on the domain's management page; replace whatever is currently listed (including Namecheap's own BasicDNS nameservers) with these two, click the green checkmark to save, then return to Squarespace and click Finish to complete the wizard.",
+      "body": "Squarespace gives you two values to enter: connect1.squarespacedns.com and connect2.squarespacedns.com. In Namecheap, open the domain's management page, find the Nameservers section, and switch its dropdown to Custom DNS. Paste in the two Squarespace values in place of whatever's currently listed, including Namecheap's own BasicDNS nameservers, then click the green checkmark to save. Back in Squarespace, click Finish to complete the wizard.",
       "image": {
         "file": "/screenshots/9Nyj3tT9khk/05.webp",
         "caption": "Squarespace's final setup step, listing the two custom nameservers to paste into your domain provider's nameserver fields."
       }
     },
     {
-      "heading": "Allow propagation before troubleshooting",
-      "body": "Nameserver changes take longer to propagate than a single DNS record update, commonly a few hours and sometimes up to 24-48 hours depending on your domain's TTL history. Squarespace won't fully activate the connection — including issuing SSL — until it can see the new nameservers resolving, so a domain that shows as not-yet-connected shortly after saving is expected, not necessarily broken."
+      "heading": "Allow propagation, then verify SSL and site loading",
+      "body": "Nameserver changes propagate more slowly than a single DNS record update; Squarespace's own guidance is to allow 24 to 48 hours, though it's often faster. Squarespace won't fully activate the connection, including issuing SSL, until it can see the new nameservers resolving, so a domain that still shows as pending shortly after saving is expected, not necessarily broken. Once it resolves, Squarespace provisions an SSL certificate automatically; visit the domain directly to confirm the site loads over HTTPS without a warning. If it still hasn't connected after a day or two, double-check the two nameserver values in Namecheap match exactly what Squarespace gave you, since a typo there is the most common reason the connection stalls."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Email or subdomains stop working after switching nameservers",
+      "cause": "Nameserver Connect moves DNS management to Squarespace. Any MX records, subdomains, or TXT records that lived at Namecheap aren't carried over automatically when you switch.",
+      "fix": "Recreate those records in Squarespace's own DNS settings once the connection is live, or use DNS records instead of nameservers if you'd rather keep managing them at Namecheap."
     },
     {
-      "heading": "Verify SSL and site loading once connected",
-      "body": "Once the nameservers propagate, Squarespace automatically provisions an SSL certificate for the domain, so there's no separate certificate step to complete on the Namecheap side. Visit your domain directly to confirm the Squarespace site loads over HTTPS without a browser warning. If it doesn't resolve after a day or so, double check the two nameserver values in Namecheap match exactly what Squarespace gave you, since a typo here is the most common reason the connection stalls."
+      "problem": "The domain still shows as not connected after two days",
+      "cause": "Either the nameserver values in Namecheap have a typo, or propagation is still working through resolvers that cached the old records for longer.",
+      "fix": "Confirm both values read exactly connect1.squarespacedns.com and connect2.squarespacedns.com in Namecheap, then wait; Squarespace won't issue SSL until it can see them resolving."
     }
   ],
   "faq": [
     {
       "question": "Do I need to transfer my domain to use it with Squarespace?",
-      "answer": "No, you can keep your domain registered with Namecheap and simply point its nameservers (or DNS records) to Squarespace."
+      "answer": "No. You can keep the domain registered with Namecheap and point its nameservers, or its DNS records, at Squarespace instead."
     },
     {
       "question": "Should I use nameservers or DNS records to connect?",
-      "answer": "Nameservers are simpler since Squarespace manages the records for you, but if you rely on Namecheap's DNS for email or other services, DNS records let you keep that control instead of handing it all to Squarespace."
+      "answer": "Nameservers is simpler, since Squarespace manages the records for you afterward. Use DNS records instead if you rely on Namecheap's DNS for email, subdomains, or a service like Cloudflare, since switching nameservers hands that control to Squarespace."
     },
     {
-      "question": "How long does DNS propagation take for this setup?",
-      "answer": "Nameserver changes commonly take a few hours and can take up to 24-48 hours, so it's worth allowing time rather than assuming an issue right away."
+      "question": "Does Squarespace need my Namecheap login to set this up?",
+      "answer": "No. Squarespace gives you two nameserver values to paste in, but you log into Namecheap and make the change yourself. It never asks for your domain provider's password."
     },
     {
-      "question": "Will SSL be set up automatically?",
-      "answer": "Yes, Squarespace automatically provisions an SSL certificate once it can see the domain's nameservers pointed to its own, with no separate step required in Namecheap."
+      "question": "How long does propagation take for this setup?",
+      "answer": "Squarespace's own guidance is 24 to 48 hours, though it's often quicker. SSL won't activate until the new nameservers are visible, so a pending status right after saving is normal."
     },
     {
-      "question": "What if my domain doesn't connect right away?",
-      "answer": "Double-check that the two nameserver values in Namecheap match exactly what Squarespace provided (connect1.squarespacedns.com and connect2.squarespacedns.com), as a small typo here is the most common cause of delays."
+      "question": "What if my domain doesn't connect after a day or two?",
+      "answer": "Double-check that the two nameserver values in Namecheap match exactly what Squarespace provided (connect1.squarespacedns.com and connect2.squarespacedns.com). A small typo there is the most common cause of delays."
     }
   ],
+  "references": [
+    {
+      "label": "Squarespace: Connecting a Namecheap domain to your Squarespace site (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/205812448-Connecting-a-Namecheap-domain-to-your-Squarespace-site"
+    },
+    {
+      "label": "Squarespace: Nameserver connect vs. DNS connect (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/8387079117581-Nameserver-connect-vs-DNS-connect"
+    },
+    {
+      "label": "Namecheap: How to Change DNS For a Domain (official)",
+      "url": "https://www.namecheap.com/support/knowledgebase/article.aspx/767/10/how-to-change-dns-for-a-domain/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The nameserver values, propagation timing, and the connection flow were re-checked against Squarespace's and Namecheap's official documentation in September 2026. That check corrected a claim this guide previously made — that Squarespace can set up the connection automatically if you hand over your domain provider's sign-in details — which Squarespace's own documentation says it never does.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

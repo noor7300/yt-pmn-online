@@ -1,40 +1,72 @@
 {
   "slug": "how-to-close-google-workspace-account-2026",
   "seoTitle": "How to Close a Google Workspace Account in 2026",
-  "metaDescription": "Close a Google Workspace account properly — export your data, cancel the subscription, clear Marketplace apps, and delete the organisation before the next bill.",
-  "intro": "Closing a Google Workspace account is not one button, and that surprises people who assume cancelling the subscription is the end of it. Google separates the two deliberately: cancelling stops the billing, while deleting the organisation removes the users, the data, and the domain association — and it will not let you do the second until the first has finished. There is also a waiting period built in, because Google starts deleting your data the moment you cancel and won't close the account until that finishes. That timing is the whole reason to start this at least a week before your renewal date rather than the night before. This guide walks the full sequence in the order the Admin console actually enforces, with the two irreversible moments flagged clearly.",
+  "metaDescription": "Close a Google Workspace account properly: save billing records, export your data, remove Google Cloud projects, cancel every subscription, and delete the organisation before the next bill.",
+  "intro": "Closing a Google Workspace account is not one button, and that surprises people who assume cancelling the subscription is the end of it. Google separates the two deliberately: cancelling stops the billing, while deleting the organisation removes the users, the data, and the domain association, and it won't let you do the second until the first has finished. There's also a waiting period built in, because Google starts deleting your data the moment you cancel and won't close the account until that finishes.\n\nThat timing is the whole reason to start this at least a week before your renewal date, not the night before. This guide walks the full sequence in the order the Admin console enforces, with the two irreversible moments flagged clearly, plus two requirements Google's own deletion guide lists that are easy to miss because they don't live in the in-app checklist.",
+  "prerequisites": [
+    "Access to a super admin (or domain settings administrator) account on the Workspace domain itself, not a personal Gmail address",
+    "Time to run a full data export and clear out any Google Cloud projects before you cancel anything, since cancelling starts Google's data-deletion clock"
+  ],
   "steps": [
     {
-      "heading": "Sign in with a super admin account",
-      "body": "Go to admin.google.com and choose the right account — this is the step that trips people up, because a personal Gmail address cannot administer a Workspace organisation. Google says so directly on the sign-in page: you need an administrator account for a managed Google service. If the account picker shows several identities, pick the one on your Workspace domain, not the gmail.com one. You also need super admin rights specifically; a delegated admin with billing access can cancel a subscription but cannot delete the organisation, and you'll only discover that halfway through.",
+      "heading": "Sign in with an admin account on the Workspace domain",
+      "body": "Go to admin.google.com and pick the right identity. A personal Gmail address can't administer a Workspace organisation, and Google says so directly on the sign-in page: you need an administrator account for a managed Google service. If the account picker shows several identities, choose the one on your Workspace domain, not the gmail.com one.\n\nBilling access alone isn't enough, either. A delegated admin with billing rights can cancel a subscription, but deleting the organisation needs the domain settings administrator privilege specifically, which most people only hold if they're a super admin. Confirm you have that before going further, or you'll find out halfway through.",
       "image": { "file": "/screenshots/_wZlwazAtlk/01.webp", "caption": "The admin.google.com sign-in, noting that an administrator account is required and listing the signed-in identities to choose from." }
     },
     {
       "heading": "Find your way around the Admin console",
-      "body": "The console home shows a Manage Workspace panel with Users and Billing cards side by side, and the Billing card tells you when your paid service starts or renews. Note that date now — it's your deadline. Everything in this process lives in two places on the left-hand menu: Billing, which holds Subscriptions and Payment accounts, and Account, which holds Account settings. Expand both before you go any further so you can move between them without hunting. If Billing shows a trial rather than a paid subscription, the same sequence applies; a trial that isn't cancelled converts to a paid plan on the date shown.",
+      "body": "The console home shows a Manage Workspace panel with Users and Billing cards side by side, and the Billing card shows when your paid service starts or renews. Note that date now; it's your deadline. Everything in this process lives in two places on the left-hand menu: Billing, which holds Subscriptions and Payment accounts, and Account, which holds Account settings. Expand both before going further so you can move between them without hunting. If Billing shows a trial instead of a paid subscription, the same sequence applies, since a trial that isn't cancelled converts to a paid plan on the date shown.",
       "image": { "file": "/screenshots/_wZlwazAtlk/02.webp", "caption": "The Admin console home, with the Billing card showing the paid service start date and the Account section expanded in the left menu." }
     },
     {
-      "heading": "Export everything you want to keep — first",
-      "body": "Do this before you cancel anything, because cancellation starts the clock on data deletion. Use the data export tool in Account settings to pull mail, Drive files, contacts, and calendars for every user in the organisation, and remember it can take days to produce the archive for a large account. If a single user's mailbox is what matters, Google Takeout for that account is faster. Also transfer ownership of any shared Drive files to an account you're keeping, since files owned by a deleted user disappear even if other people could see them. Once the export lands, open it and confirm it contains what you expect rather than trusting the completion email."
+      "heading": "Export everything you want to keep, and clear out Cloud resources, first",
+      "body": "Do this before cancelling anything, since cancellation starts the clock on data deletion. Use the data export tool in Account settings to pull mail, Drive files, contacts, and calendars for every user, and expect it to take days to produce the archive for a large account. If one user's mailbox is what matters, Google Takeout for that account is faster. Transfer ownership of any shared Drive files to an account you're keeping too, since files owned by a deleted user disappear even if others could see them.\n\nGoogle's own deletion checklist also expects two things this guide didn't originally cover: saving your billing records (payment receipts and monthly invoices, since you lose access to them after deletion), and removing any Google Cloud projects, folders, or Apps Script projects still attached to the organisation. Both are easy to miss because neither lives in the export tool. Once the export lands, open it and confirm it holds what you expect instead of trusting the completion email alone."
     },
     {
       "heading": "Open Account settings and find Account management",
-      "body": "In the left menu, go to Account, then Account settings. Scroll past the personalisation and smart-features panels to the Account management section — it's an unremarkable collapsed row that carries the plainest warning in the whole console: deleting the account will permanently delete all user accounts, their data, and their access to services. Expand it. This section is the actual closure workflow, and it presents itself as a numbered checklist of things Google requires you to finish before the delete button becomes usable.",
+      "body": "In the left menu, go to Account, then Account settings. Scroll past the personalisation and smart-features panels to the Account management section: an unremarkable collapsed row carrying the plainest warning in the whole console, that deleting the account will permanently delete all user accounts, their data, and their access to services. Expand it. This section is the actual closure workflow, presented as a numbered checklist of things Google requires you to finish before the delete button becomes usable.",
       "image": { "file": "/screenshots/_wZlwazAtlk/05.webp", "caption": "Account settings scrolled to the Account management row, warning that deletion permanently removes all user accounts and their data." }
     },
     {
       "heading": "Clear the required blockers",
-      "body": "The checklist marks each unfinished item with a red icon and refuses to let you proceed until they're green. Two are near-universal: cancelling your organisation's active subscriptions, and uninstalling any Marketplace apps. Google spells out the consequence in the subscription item — cancelling starts deleting your organisation's data, and you have to wait for that deletion to finish before the account itself can be removed. Each item gives you a direct link through to where it's handled, so use \"Go to Subscriptions\" and \"Uninstall installed Marketplace apps\" rather than navigating there yourself and losing your place in the list. There's also an export-other-Google-data prompt above the checklist, which is your last reminder if you skipped the previous step.",
+      "body": "The checklist marks each unfinished item with a red icon and won't let you proceed until every one turns green. Two are near-universal: cancelling your organisation's active subscriptions, and uninstalling any Marketplace apps. Google spells out the consequence on the subscription item directly: cancelling starts deleting your organisation's data, and you have to wait for that deletion to finish before the account itself can be removed. Each item links straight through to where it's handled (\"Go to Subscriptions,\" \"Uninstall installed Marketplace apps\"), so use those instead of navigating there yourself and losing your place in the list.",
       "image": { "file": "/screenshots/_wZlwazAtlk/03.webp", "caption": "The account management checklist, flagging active subscriptions and installed Marketplace apps as required steps with direct links to each." }
     },
     {
-      "heading": "Cancel the subscription itself",
-      "body": "Under Billing, Subscriptions lists every plan on the account with its status, licence count, payment plan, and when payment is due — and there is often more than one row, since archived-user storage and add-ons bill separately from the main plan. Cancel each of them, not just the headline subscription, or the account will keep a live plan and refuse to close. Watch the payment-due column as you go: a plan showing paid service starting in a few days is one you want cancelled today. Save or screenshot the cancellation confirmation for each, because that is your evidence if a charge appears later."
+      "heading": "Cancel every subscription row, not just the main plan",
+      "body": "Under Billing, Subscriptions lists every plan on the account with its status, licence count, payment plan, and when payment is due, and there's often more than one row, since archived-user storage and add-ons bill separately from the main plan. Cancel each of them, or the account keeps a live plan and refuses to close. One exception: Google won't let you cancel the Cloud Identity Free subscription, and that's expected, not a bug. Watch the payment-due column as you go. A plan showing paid service starting in a few days is one you want cancelled today. Save or screenshot each cancellation confirmation as evidence if a charge appears later."
     },
     {
       "heading": "Delete the account and confirm nothing is left",
-      "body": "Once the checklist is clear and Google's data deletion has run its course, return to Account management and complete the deletion. This is irreversible: the users, their mail, and their files are gone, and the account cannot be restored afterwards. Before you press it, check three things — that your domain's MX records are pointed somewhere else if you still own the domain, that any third-party services using Workspace as a single sign-on have been migrated, and that no automatic payment remains active on the payment account. Then watch your card statement through the date you noted at the start; a closed account should produce no further charge on the next cycle."
+      "body": "Once the checklist is clear and Google's data deletion has finished, return to Account management and complete the deletion. This is permanent: the users, their mail, and their files are gone, and nothing here can be restored. Before you press it, check three things: that your domain's MX records point elsewhere if you still own the domain, that any third-party service using Workspace for single sign-on has been migrated, and that no automatic payment remains active on the payment account. Google frees the domain for reuse within roughly 24 hours of deletion. Watch your card statement through the date you noted at the start; a closed account should produce no further charge on the next cycle."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Cancelling vs. deleting: what each one does",
+      "columns": ["Action", "What it does", "Can you undo it?"],
+      "rows": [
+        ["Cancel a subscription", "Stops billing for that plan and starts Google deleting the organisation's data", "No, once the deletion window has started"],
+        ["Delete the organisation's account", "Removes every user, their data, and the domain association entirely", "No, this is permanent"]
+      ],
+      "note": "Google requires cancellation to finish, and the resulting data deletion to complete, before Account management will let you delete the organisation itself."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The delete option in Account management stays greyed out",
+      "cause": "One or more required items on the checklist is still red, most often an active subscription, an installed Marketplace app, or a Google Cloud project still attached to the organisation.",
+      "fix": "Work down the checklist in Account management using its own \"Go to Subscriptions\" and \"Uninstall installed Marketplace apps\" links, and separately delete any Google Cloud projects, folders or Apps Script projects tied to the account."
+    },
+    {
+      "problem": "A billing admin can cancel the subscription but can't delete the account",
+      "cause": "Deleting the organisation needs the domain settings administrator privilege specifically; billing access alone doesn't include it.",
+      "fix": "Sign in with, or ask for, an account that holds super admin or domain settings administrator rights before starting the deletion step."
+    },
+    {
+      "problem": "A charge appears after you thought you'd cancelled everything",
+      "cause": "Archived-user storage and add-ons often bill as separate subscription rows from the main plan, and it's easy to cancel only the headline one.",
+      "fix": "Check every row under Billing, Subscriptions, not just the main plan. Cloud Identity Free is the one exception Google won't let you cancel, and that's expected."
     }
   ],
   "faq": [
@@ -44,11 +76,11 @@
     },
     {
       "question": "Why won't the Admin console let me delete my account?",
-      "answer": "Something on the required checklist is still outstanding — most often an active subscription or an installed Marketplace app. Both are flagged in Account management with direct links to resolve them."
+      "answer": "Something on the required checklist is still outstanding, most often an active subscription or an installed Marketplace app. Google's own deletion guide also expects any Google Cloud projects or Apps Script projects tied to the organisation to be removed first; that isn't part of the in-app checklist but will still block you if it's missed."
     },
     {
       "question": "Will I be charged again after I cancel?",
-      "answer": "Not if the cancellation completes before the payment-due date shown against each subscription. Cancel every subscription row, not just the main plan, and keep the confirmations in case a charge appears anyway."
+      "answer": "Not if the cancellation completes before the payment-due date shown against each subscription. Cancel every subscription row, not just the main plan, and keep the confirmations in case a charge appears anyway. Cloud Identity Free is the one subscription Google won't let you cancel at all, which is normal."
     },
     {
       "question": "Can I get my data back after closing the account?",
@@ -56,9 +88,24 @@
     },
     {
       "question": "Do I need to be a super admin to do this?",
-      "answer": "Yes. A delegated admin with billing rights can cancel subscriptions but cannot delete the organisation. Sign in with a super admin account on the Workspace domain — a personal Gmail address cannot administer the organisation at all."
+      "answer": "You need whichever role holds the domain settings administrator privilege, which is usually a super admin. A delegated admin with only billing rights can cancel subscriptions but can't delete the organisation, and a personal Gmail address can't administer it at all."
+    },
+    {
+      "question": "How soon can I reuse the domain after deleting the account?",
+      "answer": "Google's documentation states the domain becomes available for reuse within about 24 hours of deletion completing."
     }
   ],
+  "references": [
+    {
+      "label": "Google Workspace Admin Help: Delete your organisation's Google Account (official)",
+      "url": "https://support.google.com/a/answer/9468554?hl=en"
+    },
+    {
+      "label": "Google Workspace Admin Help: Cancel a subscription or your account (official)",
+      "url": "https://knowledge.workspace.google.com/admin/billing/cancel-a-subscription-or-your-account"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The requirements and sequence were re-checked against Google's own \"Delete your organisation's Google Account\" and \"Cancel a subscription or your account\" help pages in September 2026. That check added two steps the original draft missed (saving billing records and removing Google Cloud projects and Apps Script projects before deletion), corrected \"super admin\" to the more precise domain settings administrator privilege the deletion itself needs, and added the Cloud Identity Free exception and the roughly 24-hour domain-release window, none of which the original draft stated.",
   "generatedAt": "2026-08-31T00:00:00.000Z",
   "deep": true
 }
