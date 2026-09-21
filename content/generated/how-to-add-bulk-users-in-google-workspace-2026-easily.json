@@ -1,60 +1,78 @@
 {
   "slug": "how-to-add-bulk-users-in-google-workspace-2026-easily",
   "seoTitle": "How to Add Bulk Users in Google Workspace (2026)",
-  "metaDescription": "Learn how Google Workspace admins can add many users at once using CSV import in the Admin Console, from file prep to verifying the new accounts.",
-  "intro": "Adding accounts one at a time in the Admin Console is fine for a single new hire, but it falls apart the moment you're onboarding a whole department or migrating a company onto Workspace. Google's answer is a CSV-based bulk upload built directly into the admin console — no third-party tool required. This guide walks through signing in as a super admin, finding the right corner of the console, filling out the CSV correctly, and confirming the import actually landed before you tell anyone their account is ready.",
+  "metaDescription": "Add many Google Workspace users at once with a CSV import: the five columns the Admin Console requires, the file size and row limits, and how to fix rows that fail.",
+  "intro": "Adding accounts one at a time in the Admin Console is fine for a single new hire, but it falls apart the moment you're onboarding a whole department or migrating a company onto Workspace. Google's answer is a CSV-based bulk upload built into the admin console, no third-party tool required. This guide covers signing in as a super admin, finding the right corner of the console, filling out the CSV with the columns Google's documentation requires, and confirming the import landed before you tell anyone their account is ready.",
   "steps": [
     {
       "heading": "Sign in with a super admin account",
-      "body": "Bulk operations are gated behind admin permissions, so the first step is authenticating with an account that has super admin rights on the domain — not a regular user login. Google will ask for the password and may add a verification step depending on your domain's security settings. If you're managing the account for a client or employer, make sure you're using the actual admin address (something like admin@yourdomain.com) rather than a personal Gmail, since a standard account simply won't see the admin console option at all.",
-      "image": {
-        "file": "/screenshots/rhSfyn8GWD4/03.webp",
-        "caption": "The Google sign-in screen asking for the admin account password before the console will load."
-      }
+      "body": "Bulk operations sit behind admin permissions, so the first step is signing in with an account that has super admin rights on the domain, not a regular user login. Google may add a verification step depending on your domain's security settings. If you're managing the account for a client or employer, use the actual admin address (something like admin@yourdomain.com) instead of a personal Gmail; a standard account won't show the admin console option at all.",
+      "image": { "file": "/screenshots/rhSfyn8GWD4/03.webp", "caption": "The Google sign-in screen asking for the admin account password before the console will load." }
     },
     {
-      "heading": "Find your way to the right section of the Admin Console",
-      "body": "Once you're in, the console opens with a left-hand sidebar organized into Directory, Devices, Apps, Security, and more — Directory is where Users, Groups, and Organisational units all live. It's easy to end up on the wrong list at first, since Groups and Users sit right next to each other in the same menu and both support a similar bulk-CSV workflow. Take a second to confirm you're under Directory → Users before you start uploading, especially if your organization also manages mailing groups through the same console, since the two bulk-upload dialogs look nearly identical.",
-      "image": {
-        "file": "/screenshots/rhSfyn8GWD4/04.webp",
-        "caption": "The Admin Console's Directory section, with Users, Groups, and Organisational units listed in the left sidebar."
-      }
+      "heading": "Go to Directory, Users, then Bulk update users",
+      "body": "Once you're in, the console opens with a left sidebar organized into Directory, Devices, Apps, Security, and more. Directory is where Users, Groups, and Organizational units all live. Open Users, and you'll find a Bulk update users button at the top of the page, the actual entry point for this whole process. Groups sits right next to Users in the same sidebar and supports a similar-looking bulk-CSV workflow for group membership, so confirm you're under Users specifically before you start, especially if your organization also manages mailing groups through the same console.",
+      "image": { "file": "/screenshots/rhSfyn8GWD4/04.webp", "caption": "The Admin Console's Directory section, with Users, Groups, and Organisational units listed in the left sidebar." }
     },
     {
-      "heading": "Download the CSV template and fill it in",
-      "body": "Rather than guessing at a file format, download Google's own CSV template from the bulk upload panel — it already has the correct column headers for first name, last name, username, and password, plus optional fields like organizational unit. Fill in one row per new user, keeping usernames and any characters in names consistent with what Workspace accepts, since a single malformed row can stop that row from importing while the rest proceed normally. Save the file as a plain CSV, not as an Excel workbook, or the upload will reject it outright."
+      "heading": "Download the template and fill in the required columns",
+      "body": "Google's Admin Help lists five required columns: First Name, Last Name, Email Address, Password, and Org Unit Path. Download the template from the Bulk update users panel so the headers are already correct instead of typing them yourself. First and last name can each run up to 60 characters, passwords need at least 8, and Org Unit Path takes / for the top-level unit or /DepartmentName for a specific one. Optional columns cover things like recovery email and employee ID.\n\nSave the file as a plain CSV, not an Excel workbook, or the upload gets rejected outright. There's a ceiling too: Google caps a single file at 35MB and 150,000 rows, dropping to 200 rows if that same file also assigns new licenses."
     },
     {
-      "heading": "Attach and upload the CSV file",
-      "body": "Back in the admin console, open the bulk upload dialog, which gives you an option to attach your completed CSV directly or download a fresh template and a sample members list if you want to double check the expected format first. Click Attach CSV, select your finished file, and hit Upload. Google Workspace processes every row in the background and will flag which ones succeeded and which failed, rather than aborting the whole batch over one bad entry. This same dialog structure — attach, review, upload — is what you'll see whether you're bulk-adding standalone user accounts or, as pictured here, bulk-adding members to an existing group, so the mechanics carry over even if the destination list is different.",
-      "image": {
-        "file": "/screenshots/rhSfyn8GWD4/05.webp",
-        "caption": "The bulk upload dialog, with an Attach CSV button and links to download a blank template or a sample file before you upload."
-      }
+      "heading": "Attach and upload the CSV",
+      "body": "Back in the admin console, open the bulk upload dialog. It offers an option to attach your completed CSV directly, plus links to download a fresh template or a sample file if you want to double-check the format first. Click Attach CSV, select your finished file, and hit Upload. Google Workspace processes every row in the background and flags which ones succeeded and which failed instead of aborting the whole batch over one bad entry. The same attach-review-upload structure shows up whether you're bulk-adding standalone user accounts or, as pictured here, bulk-adding members to an existing group, so the mechanics carry over even though the destination list differs.",
+      "image": { "file": "/screenshots/rhSfyn8GWD4/05.webp", "caption": "The bulk upload dialog, with an Attach CSV button and links to download a blank template or a sample file before you upload." }
     },
     {
-      "heading": "Verify every account came through cleanly",
-      "body": "After the import finishes, go back to the Users list and check the count against how many rows you submitted. Google Workspace surfaces any rows that failed to import — usually because of a duplicate username, a missing required field, or an invalid character — so you can fix just those entries and re-upload a smaller file rather than starting over. It's worth opening a couple of the new accounts individually to confirm the organizational unit and any group memberships landed where you expected, since a wrong OU early on can mean the wrong policies and app access silently apply to that user."
+      "heading": "Check the Tasks list and fix anything that failed",
+      "body": "Your Tasks list opens automatically once the upload starts and tracks progress from there. When it finishes, Google emails a report and, if any rows failed, makes a downloadable error log available from the same Tasks entry; common causes are a duplicate username, a missing required column, or an invalid character. Fix just those rows in your CSV and re-upload a smaller file instead of redoing the whole batch. Open a couple of the new accounts too, and confirm the organizational unit and any group memberships landed where expected; a wrong OU early on means the wrong policies and app access apply silently."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The upload is rejected before it even starts",
+      "cause": "The file isn't a plain CSV, often it was saved as an Excel workbook, or it exceeds the 35MB or 150,000-row ceiling Google documents for this feature.",
+      "fix": "Re-save the file as CSV, and split it into smaller batches if it's over the row or size limit."
+    },
+    {
+      "problem": "Some rows import, others don't",
+      "cause": "A per-row problem: a duplicate username, a missing required column such as Org Unit Path, or an invalid character in a name.",
+      "fix": "Open the downloadable error log from the Tasks list, fix only the flagged rows, and re-upload just those."
+    },
+    {
+      "problem": "An existing user's password changed when you only meant to update their org unit",
+      "cause": "The Password column was left blank or filled with a new value instead of Google's placeholder for leaving it unchanged.",
+      "fix": "Enter **** in the Password column for any row where the password shouldn't be touched."
     }
   ],
   "faq": [
+    { "question": "What columns does the CSV need?", "answer": "Five required columns: First Name, Last Name, Email Address, Password, and Org Unit Path. Google's own template ships with all five headers already in place." },
+    { "question": "Is there a limit to how many users I can add in one CSV upload?", "answer": "Yes. Up to 150,000 rows per file, or 200 rows if that same upload also assigns new licenses, and the file itself is capped at 35MB." },
+    { "question": "Does the file have to be a plain CSV?", "answer": "Yes. Saving it as an Excel workbook instead makes the Admin Console reject the upload outright." },
+    { "question": "What happens if a row in my CSV has an error?", "answer": "The Admin Console flags it in a downloadable error log from your Tasks list, and emails a report once processing finishes, so you can correct and re-upload just the failed rows instead of redoing the whole file." },
+    { "question": "Do bulk-added users need to change their password on first login?", "answer": "You can require a password reset on first sign-in as part of the CSV import, which is standard practice so new hires never end up on a password an admin chose for them." },
+    { "question": "Can I use bulk import to update existing users instead of just adding new ones?", "answer": "Yes. The same tool updates certain fields on existing accounts, not only new ones. Put **** in the Password column for any row where you don't want to change that user's password." }
+  ],
+  "tables": [
     {
-      "question": "Is there a limit to how many users I can add in one CSV upload?",
-      "answer": "Google Workspace supports bulk uploads of hundreds of users per file, though very large organizations may need to split imports into multiple batches to keep any failed rows easy to isolate and fix."
-    },
-    {
-      "question": "What happens if a row in my CSV has an error?",
-      "answer": "The Admin Console flags rows with formatting or data errors after processing so you can correct and re-upload just those entries, rather than redoing the whole file."
-    },
-    {
-      "question": "Do bulk-added users need to change their password on first login?",
-      "answer": "You can require a password reset on first sign-in as part of the CSV import, which is standard practice so new hires never end up on a password an admin chose for them."
-    },
-    {
-      "question": "Can I use bulk import to update existing users instead of just adding new ones?",
-      "answer": "Yes — the same bulk upload tool in the admin console supports updating certain fields for existing accounts, not just creating new ones, using a similarly formatted CSV."
+      "title": "CSV columns for bulk user upload",
+      "columns": ["Column", "Required?", "Notes"],
+      "rows": [
+        ["First Name", "Yes", "Up to 60 characters"],
+        ["Last Name", "Yes", "Up to 60 characters"],
+        ["Email Address", "Yes", "username@yourdomain.com; this is the field Google requires, not a separate username column"],
+        ["Password", "Yes", "At least 8 characters; use **** to leave an existing user's password unchanged on an update"],
+        ["Org Unit Path", "Yes", "/ for the top-level org unit, or /DepartmentName for a specific one"],
+        ["Change Password at Next Sign-In", "No", "Set to TRUE to force a password reset on first login"],
+        ["New Primary Email, New Status, New Licenses", "No", "Update-only columns; not used when creating new accounts"]
+      ],
+      "note": "Column names and requirements from Google Workspace Admin Help, checked September 2026."
     }
   ],
+  "references": [
+    { "label": "Google Workspace Admin Help: Add or update multiple users from a CSV file (official)", "url": "https://knowledge.workspace.google.com/admin/users/add-or-update-multiple-users-from-a-csv-file" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The Bulk update users entry point, the five required CSV columns, the 35MB and 150,000-row limits, and the Tasks-list error log were re-checked against Google Workspace's official Admin Help article on CSV user uploads in September 2026. The original draft listed only four columns and called Org Unit Path optional; the documentation lists it as required.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

@@ -1,42 +1,73 @@
 {
   "slug": "how-to-set-the-correct-outlook-smtp-settings-to-send-emails-easily-2026",
   "seoTitle": "How to Set Correct Outlook SMTP Settings for Sending",
-  "metaDescription": "Learn the correct Outlook SMTP settings for sending mail in 2026, including server hostnames, port 587, STARTTLS, and the shift to OAuth 2.0 auth.",
-  "intro": "Outbound mail failures from third-party apps, website contact forms, or a device like a scanner usually come down to a mismatched SMTP configuration rather than anything wrong with your Outlook account itself. These settings don't live inside Outlook's own interface — they're values you type into the other application's connection screen so it can send mail through Microsoft's servers on your behalf. This guide covers the exact server hostname, port, and encryption settings needed, plus how Microsoft's 2026 move away from Basic Authentication changes what credentials that external app needs to use.",
+  "metaDescription": "The correct Outlook SMTP settings for 2026: server hostname by account type, port 587, STARTTLS, and how personal and Microsoft 365 accounts now differ on auth.",
+  "intro": "Outbound mail failures from a third-party app, a website contact form, or a device like a scanner usually come down to a mismatched SMTP configuration, not anything wrong with your Outlook account itself. These settings don't live inside Outlook's own interface; they're values you type into the other application's connection screen so it can send mail through Microsoft's servers on your behalf. This guide covers the exact hostname, port, and encryption settings, plus how personal outlook.com accounts and Microsoft 365 business accounts now differ on what credentials that external app needs.",
+  "prerequisites": [
+    "For personal outlook.com or hotmail.com accounts: two-step verification turned on, which is required before you can generate an app password"
+  ],
   "steps": [
     {
       "heading": "Understand what SMTP settings are for",
-      "body": "SMTP stands for Simple Mail Transfer Protocol, and it's the standard a mail client, plugin, or device uses to hand off a message for delivery. You won't find an \"SMTP settings\" screen inside Outlook.com or the desktop app itself — instead, you're feeding these values into the outgoing mail configuration of whatever external tool you're connecting, whether that's a legacy email client, a WordPress contact form plugin, or an office scanner set up to email scanned documents. Outlook's own account settings, reached through the gear icon, cover things like layout and message handling rather than outbound server details.",
+      "body": "SMTP stands for Simple Mail Transfer Protocol, the standard a mail client, plugin, or device uses to hand off a message for delivery. There's no \"SMTP settings\" screen inside Outlook.com or the desktop app itself. Instead, you feed these values into the outgoing mail configuration of whatever external tool you're connecting, whether that's a legacy email client, a WordPress contact form plugin, or an office scanner set up to email scanned documents. Outlook's own account settings, reached through the gear icon, cover things like layout and message handling, not outbound server details.",
       "image": { "file": "/screenshots/x_c2jVzCFjE/05.webp", "caption": "The Outlook on the web Settings panel, with Account, General, and Mail listed on the left — the account area that connects to the outbound server config living in a separate app." }
     },
     {
       "heading": "Identify your account type",
-      "body": "The correct server hostname depends on whether you have a free personal account or a business account tied to a company domain. Free personal outlook.com or hotmail.com accounts use smtp-mail.outlook.com, while corporate Microsoft 365 profiles typically require smtp.office365.com instead. Using the wrong one is one of the most common reasons a connection fails outright before it even reaches an authentication error."
+      "body": "The correct server hostname depends on whether you have a free personal account or a business account tied to a company domain. Free outlook.com or hotmail.com accounts use smtp-mail.outlook.com; corporate Microsoft 365 accounts use smtp.office365.com instead. Using the wrong one is a common reason a connection fails outright before it even reaches an authentication error."
     },
     {
       "heading": "Enter the server hostname and port",
-      "body": "Open the external application's connection or account setup dashboard, locate the Outgoing Mail (SMTP) section, and paste in the correct server address for your account type. Directly below that, set the connection port to 587 — this is the standard submission port for authenticated outgoing mail and is what Microsoft's servers expect, as opposed to older ports still used by some legacy or self-hosted mail systems."
+      "body": "Open the external application's connection or account setup screen, find the Outgoing Mail (SMTP) section, and enter the correct address for your account type. Set the connection port to 587, the standard submission port for authenticated outgoing mail, and what Microsoft's servers expect, as opposed to older ports some legacy or self-hosted mail systems still use."
     },
     {
       "heading": "Enable STARTTLS encryption",
-      "body": "With the hostname and port set, find the encryption dropdown and select STARTTLS, or check the equivalent TLS/SSL upgrade box if your application phrases it differently. This step encrypts the connection between the app and Microsoft's mail server, and skipping it is a common cause of connections that seem correctly configured but still get silently rejected."
+      "body": "With the hostname and port set, find the encryption dropdown and select STARTTLS, or check the equivalent TLS/SSL box if the application phrases it differently. This encrypts the connection between the app and Microsoft's mail server. Skipping it is a common cause of connections that look correctly configured but still get silently rejected."
     },
     {
       "heading": "Turn on outgoing authentication",
-      "body": "Most mail clients have a separate checkbox, often labeled something like \"My outgoing server (SMTP) requires authentication,\" that has to be explicitly enabled. Toggling this on is what tells the application to actually send your credentials along with the message rather than attempting an anonymous relay, which Microsoft's servers will reject regardless of how correct the hostname and port are."
+      "body": "Most mail clients have a separate checkbox, often labeled something like \"My outgoing server (SMTP) requires authentication,\" that has to be explicitly enabled. Turning this on tells the application to send your credentials along with the message instead of attempting an anonymous relay, which Microsoft's servers reject regardless of how correct the hostname and port are."
     },
     {
-      "heading": "Choose the right credential method",
-      "body": "This is the step most likely to trip people up in 2026: Microsoft has retired legacy Basic Authentication for SMTP client submissions, so a plain username-and-password combination often won't work anymore. Where the application supports it, select OAuth 2.0 as the authentication method and sign in with your full email address. For older tools that can't handle modern tokens, log into your Microsoft account's Advanced Security settings and generate a dedicated App Password to paste into the password field instead — it functions like a password but is scoped specifically for that one app. For a business account, also confirm your administrator has enabled SMTP AUTH client submissions at the tenant level, since it's often disabled by default. Once everything is set, send a test email from the application to confirm it clears the handshake."
+      "heading": "Choose the right credential method for your account type",
+      "body": "This is where personal and business accounts split, and it's the step most 2026 guides get wrong by treating them as one thing. For personal outlook.com and hotmail.com accounts, Microsoft already requires Modern Authentication: a plain password typically won't authenticate an SMTP connection from a third-party app or device. Turn on two-step verification in your Microsoft account's security settings, then generate an app password and paste that into the application's password field instead of your normal one.\n\nFor a Microsoft 365 business account, Basic Authentication for SMTP client submission is being retired, but hasn't been yet. Microsoft pushed the cutoff back to December 31, 2026, and even past that date administrators can temporarily re-enable it while they finish migrating; a full, permanent removal date hasn't been announced. Until your organization disables it, a correctly entered username and password can still work on a business account. Where it doesn't, or once Basic Auth is switched off ahead of the deadline, the application needs OAuth 2.0 support, or your admin needs to confirm SMTP AUTH client submission is enabled for the mailbox in the Microsoft 365 admin center; it's often off by default. Once everything is set, send a test email from the application to confirm it clears the handshake."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A personal outlook.com password that used to work now gets rejected",
+      "cause": "Microsoft requires Modern Authentication for outlook.com SMTP connections from most third-party apps and devices; a plain account password is no longer accepted.",
+      "fix": "Turn on two-step verification, then generate an app password in your Microsoft account's advanced security settings and use that instead."
+    },
+    {
+      "problem": "A scanner or older device on a Microsoft 365 account returns error 550 5.7.30",
+      "cause": "The tenant has already disabled Basic Authentication for SMTP client submission ahead of Microsoft's December 31, 2026 cutoff, or you're testing after that date.",
+      "fix": "Ask the device vendor about OAuth support, since only the vendor can update the device's firmware, or route mail through an SMTP relay that handles OAuth on the device's behalf."
+    },
+    {
+      "problem": "Hostname, port, and STARTTLS are all correct, but authentication still fails on a business account",
+      "cause": "SMTP AUTH client submission is disabled at the tenant level, which is the default in many Microsoft 365 environments regardless of an individual mailbox's password.",
+      "fix": "Have an administrator enable SMTP AUTH client submission for the mailbox in the Microsoft 365 admin center, or via PowerShell."
     }
   ],
   "faq": [
-    { "question": "Can I still use a regular password for SMTP?", "answer": "Microsoft has retired legacy Basic Authentication for SMTP client submissions, so most setups now require OAuth 2.0 or a generated App Password instead of your normal account password." },
+    { "question": "Can I still use a regular password for SMTP?", "answer": "It depends on the account. Personal outlook.com and hotmail.com accounts already require an app password or OAuth. Microsoft 365 business accounts can still use a plain password until Microsoft's Basic Authentication retirement takes effect, currently set for December 31, 2026, and even then an admin can temporarily re-enable it." },
     { "question": "What port should I use for outgoing mail?", "answer": "Port 587 with STARTTLS encryption is the standard configuration for sending through Outlook's outgoing servers." },
-    { "question": "Why does my business account fail even with correct settings?", "answer": "Your organization's administrator may need to enable SMTP AUTH client submissions at the tenant level for the connection to succeed, even when the hostname, port, and encryption are all correct." },
-    { "question": "Where do I actually enter these SMTP settings?", "answer": "Not inside Outlook itself — you enter them into the outgoing mail configuration of the external app, plugin, or device you're connecting, such as a legacy email client or a website's contact form." },
-    { "question": "How do I know if my configuration actually works?", "answer": "Send a test email from your third-party application and confirm it arrives without a server handshake or authentication error being reported back." }
+    { "question": "Why does my business account fail even with correct settings?", "answer": "Your organization's administrator may need to enable SMTP AUTH client submission at the tenant level for the connection to succeed, even when the hostname, port, and encryption are all correct." },
+    { "question": "When does Microsoft retire Basic Authentication for SMTP?", "answer": "For Microsoft 365 business tenants, the current cutoff is December 31, 2026, delayed from an earlier date Microsoft had originally planned. Personal outlook.com and hotmail.com accounts already require app passwords or OAuth today; this deadline is specifically about business accounts." },
+    { "question": "Where do I enter these SMTP settings?", "answer": "Not inside Outlook itself. You enter them into the outgoing mail configuration of the external app, plugin, or device you're connecting, such as a legacy email client or a website's contact form." }
   ],
+  "references": [
+    {
+      "label": "Microsoft Support: POP, IMAP, and SMTP settings for Outlook.com (official)",
+      "url": "https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040"
+    },
+    {
+      "label": "Microsoft Tech Community: Exchange Online to retire Basic auth for Client Submission (SMTP AUTH) (official)",
+      "url": "https://techcommunity.microsoft.com/blog/exchange/exchange-online-to-retire-basic-auth-for-client-submission-smtp-auth/4114750"
+    }
+  ],
+  "verifiedNote": "Server hostnames, port 587, and STARTTLS were re-checked against Microsoft's own Outlook.com support page in September 2026 and are unchanged. The authentication step needed a real correction: the original version stated flatly that Microsoft \"has retired\" Basic Authentication for SMTP, which is true only for personal outlook.com accounts. For Microsoft 365 business accounts, Microsoft's own Tech Community post confirms the retirement was delayed to December 31, 2026 and hasn't happened as of this check, with admins able to temporarily re-enable it afterward. The guide now separates the two account types instead of treating them as one.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

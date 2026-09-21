@@ -1,60 +1,89 @@
 {
   "slug": "how-to-bulk-edit-issues-in-jira-bulk-change-tickets-status-easily-2026",
   "seoTitle": "How to Bulk Edit Issues in Jira Easily",
-  "metaDescription": "Learn how to select multiple Jira issues at once and use the bulk change feature to update fields, status, and assignees faster.",
-  "intro": "Editing Jira tickets one at a time works fine for a handful of tasks, but it falls apart once a backlog grows into dozens of tickets that all need the same update. Jira's bulk operation tool solves this: select any number of issues from a list, walk through a short four-step wizard, and apply the same field changes to all of them at once. This guide follows that wizard screen by screen, from selecting issues in a real project view through the confirmation screen that shows exactly what's about to change before you commit.",
+  "metaDescription": "Select multiple Jira work items and run the bulk change wizard to update fields, status, or assignees at once, including the 1,000-item cap most guides skip.",
+  "intro": "Editing Jira tickets one at a time works fine for a handful of tasks, but it falls apart once a backlog grows into dozens of tickets that all need the same update. Jira's bulk change wizard solves this: select any number of items from a list, walk through a four-step wizard, and apply the same field changes to all of them at once.\n\nOne note before you start: Atlassian renamed \"issues\" to \"work items\" across Jira Cloud through 2025, so current screens mostly say \"work item\" where older guides, and Jira's own APIs and JQL, still say \"issue.\" This guide uses whichever term the screen in front of you shows.",
+  "prerequisites": [
+    "The global \"Make bulk changes\" permission on your Jira site, plus the normal project permission for whatever you're doing (edit, transition, move, or delete)"
+  ],
   "steps": [
     {
       "heading": "Start from your Jira homepage",
-      "body": "Jira's landing view lists the boards you belong to across projects, along with a \"Worked on\" feed of recently touched tickets — bugs, tasks, and stories with their keys, project, and reporter. This is a useful starting point when the issues you need to bulk-edit are spread across more than one board, since you can jump into the right project directly from here rather than hunting through the sidebar.",
+      "body": "Jira's landing view lists the boards you belong to across projects, along with a \"Worked on\" feed of recently touched tickets: bugs, tasks, and stories with their keys, project, and reporter. This is a useful starting point when the items you need to bulk-edit are spread across more than one board, since you can jump into the right project directly from here instead of hunting through the sidebar.",
       "image": { "file": "/screenshots/jcYU1Y_mySA/01.webp", "caption": "The Jira homepage, showing recent boards and a worked-on feed of tickets across projects." }
     },
     {
-      "heading": "Select the issues you want to edit",
-      "body": "Open a project's work item list — Summary, Timeline, Kanban board, or the All work tab all lead here — and use the checkboxes on the left of each row to select the tickets you want to change. Selecting the header checkbox grabs everything currently filtered into view, which pairs well with the Type, Status, and More filters above the list if you first narrow it down to, say, every unassigned \"To Do\" ticket. Once issues are checked, open the \"...\" menu in the top right of the list and choose \"Bulk change work items\" to launch the wizard.",
+      "heading": "Select the work items you want to edit",
+      "body": "Open a project's list view, whether Summary, Timeline, Kanban board, or the All work tab, and use the checkboxes on the left of each row to select the items you want to change. Selecting the header checkbox grabs everything currently filtered into view, which pairs well with the Type, Status, and other filters above the list if you first narrow it down to, say, every unassigned \"To Do\" item. A single bulk operation tops out at 1,000 items; past that, run it again on the remainder. Once items are checked, open the \"...\" menu in the top right of the list and choose \"Bulk change work items\" to launch the wizard.",
       "image": { "file": "/screenshots/jcYU1Y_mySA/03.webp", "caption": "A project's work item list with seven issues checked and the \"...\" menu open, showing Bulk change work items among the list options." }
     },
     {
       "heading": "Choose your bulk action",
-      "body": "The wizard opens on \"Step 2 of 4: Choose bulk action,\" confirming how many issues you selected and from how many projects. From here you pick what kind of change to make: Edit Issues to update field values, Move Issues to shift them to a different project or issue type, Transition Issues to push them through workflow statuses, or Watch/Stop Watching to manage notifications. Delete Issues appears too, though it's grayed out with a permissions note if your account isn't allowed to delete — a safeguard worth noticing before you assume it's available.",
+      "body": "The wizard opens on \"Step 2 of 4: Choose bulk action,\" confirming how many items you selected and from how many projects. From here you pick the kind of change: Edit to update field values, Move to shift items to a different project or type, Transition to push them through workflow statuses, or Watch/Stop Watching to manage notifications. Delete appears too, though it's grayed out with a permissions note if your account can't delete in the selected projects, worth noticing before you assume it's available.",
       "image": { "file": "/screenshots/jcYU1Y_mySA/04.webp", "caption": "Step 2 of the Bulk Operation wizard, choosing between Edit Issues, Move Issues, Transition Issues, and other bulk actions." }
     },
     {
       "heading": "Set the field values to apply",
-      "body": "Choosing Edit Issues moves you to Operation Details, where you pick which fields to change and what to change them to — Priority, Assignee, Labels, and similar fields are typical candidates. This is the step where a bulk update earns its time savings: setting Priority to Medium and Assignee to a specific teammate here applies to every selected issue in one pass instead of seven separate edits."
+      "body": "Choosing Edit moves you to Operation Details, where you pick which fields to change and what to change them to. Priority, Assignee, and Labels are typical candidates. This is where a bulk update earns its time savings: setting Priority to Medium and Assignee to a specific teammate here applies to every selected item in one pass instead of seven separate edits."
     },
     {
       "heading": "Review the confirmation before committing",
-      "body": "The final screen, Confirmation, lays out exactly what's about to happen: an Updated Fields table listing each field name, the action (Change to), and the new value, plus a note on whether email notifications will fire for the update. Below that, a full table lists every affected issue by key, summary, assignee, reporter, priority, and status, so you can scan for anything you didn't mean to include before clicking Confirm.",
+      "body": "The final screen, Confirmation, lays out exactly what's about to happen: an Updated Fields table listing each field name, the action, and the new value, plus a note on whether email notifications will fire. Below that, a full table lists every affected item by key, summary, assignee, reporter, priority, and status, so you can scan for anything you didn't mean to include before clicking Confirm.",
       "image": { "file": "/screenshots/jcYU1Y_mySA/05.webp", "caption": "The Confirmation screen, showing Priority and Assignee changes queued for seven issues, with the full list of affected tickets below." }
     },
     {
       "heading": "Confirm and verify the results",
-      "body": "Click Confirm to apply the changes. Jira processes all selected issues in the background and returns you to the list, where the updated priority, assignee, or status should now be visible across every ticket you included. It's worth spot-checking a couple of issues afterward, especially the first time you use bulk operations on a workflow with restricted transitions, since a status change that's blocked for one issue can behave differently than the rest of the batch."
+      "body": "Click Confirm to apply the changes. Jira processes all selected items in the background and returns you to the list, where the updated priority, assignee, or status should now be visible across every ticket you included. Spot-check a couple afterward, especially the first time you run a bulk operation on a workflow with restricted transitions, since a status change blocked for one item can behave differently than the rest of the batch."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The wizard won't let you select any more items past a certain point",
+      "cause": "Jira caps a single bulk operation at 1,000 work items.",
+      "fix": "Narrow your filter (by sprint, date range, or status) and run the bulk change wizard again on the rest in a second pass."
+    },
+    {
+      "problem": "Delete, Move, or Transition is grayed out in the Choose bulk action step",
+      "cause": "Bulk operations need the global \"Make bulk changes\" permission plus the matching project permission for that specific action.",
+      "fix": "Ask a Jira admin to grant the missing permission, or run the operation on only the projects where you already have it."
+    },
+    {
+      "problem": "A status change applies to most items but silently skips one",
+      "cause": "Workflow transition restrictions can block a status change for a specific item even when the bulk operation as a whole succeeds.",
+      "fix": "Spot-check the affected items after confirming, and transition the skipped one individually to see the specific restriction that blocked it."
     }
   ],
   "faq": [
     {
       "question": "How many Jira issues can I bulk edit at once?",
-      "answer": "Jira supports selecting and bulk editing a large number of issues at once — the wizard shows the exact count you've selected on the Choose Issues step, and very large batches simply take longer to process."
+      "answer": "Up to 1,000 in a single bulk operation. The wizard shows your exact selected count on the Choose Issues step; past 1,000, split the batch and run the wizard again."
     },
     {
       "question": "Can I change assignees in bulk in Jira?",
-      "answer": "Yes, Assignee is one of the standard fields available on the Edit Issues path of the bulk operation wizard, letting you reassign every selected issue in one pass."
+      "answer": "Yes. Assignee is one of the standard fields on the Edit path of the bulk operation wizard, letting you reassign every selected item in one pass."
     },
     {
       "question": "Does bulk changing status trigger workflow transitions?",
-      "answer": "Yes, the Transition Issues bulk action moves tickets through your workflow the same way an individual transition would, so any restrictions on who can make that transition still apply."
+      "answer": "Yes. The Transition bulk action moves items through your workflow the same way an individual transition would, so any restrictions on who can make that transition still apply."
     },
     {
       "question": "Will bulk edits send notifications to watchers?",
-      "answer": "The confirmation screen tells you upfront whether email notifications will be sent for that specific update, so you can check before confirming rather than guessing."
+      "answer": "The confirmation screen tells you upfront whether email notifications will be sent for that update, so you can check before confirming instead of guessing."
     },
     {
       "question": "Can I bulk delete issues in Jira?",
-      "answer": "Delete Issues appears as an option in the bulk operation wizard, but it's only available if your account has delete permission on the selected issues — otherwise it's shown as unavailable with a note explaining why."
+      "answer": "Delete appears as an option in the wizard, but only if your account has delete permission on the selected items in every project involved. Otherwise it shows as unavailable with a permissions note."
+    },
+    {
+      "question": "Why do some Jira screens say \"work item\" and others say \"issue\"?",
+      "answer": "Atlassian renamed \"issue\" to \"work item\" across Jira Cloud's interface through 2025. The underlying data, APIs, and JQL still use \"issue\" for backward compatibility, so the two terms describe the same thing depending on which layer you're looking at."
     }
   ],
+  "references": [
+    { "label": "Atlassian Support: Edit multiple work items (official)", "url": "https://support.atlassian.com/jira-software-cloud/docs/edit-multiple-issues/" },
+    { "label": "Atlassian Community: \"Work\" is the new collective term for all items you track in Jira (official Atlassian announcement)", "url": "https://community.atlassian.com/forums/Jira-articles/It-s-here-Work-is-the-new-collective-term-for-all-items-you/ba-p/2954892" }
+  ],
+  "verifiedNote": "Wizard screens and click path come from a walkthrough recorded in July 2025, when Jira's UI still labeled everything \"Issues.\" Re-checked against Atlassian's Support docs in September 2026: Atlassian's issue-to-work-item rename had finished rolling out by then, so this version now uses \"work item\" for current UI labels while noting the older term. The 1,000-item cap on a single bulk operation and the global permission requirement were both missing from the original version and are added here.",
   "generatedAt": "2026-08-31T00:00:00Z",
   "deep": true
 }

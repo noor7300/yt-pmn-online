@@ -1,60 +1,92 @@
 {
   "slug": "how-to-fix-wordpress-ssl-error-this-site-can-t-provide-a-secure-connection-2026",
   "seoTitle": "Fix WordPress \"Can't Provide Secure Connection\" Error",
-  "metaDescription": "Learn how to fix the WordPress SSL error where your site can't provide a secure connection, covering certificate installation, DNS, and mixed content.",
-  "intro": "The 'This site can't provide a secure connection' error on a WordPress site almost always points to one of four things: a missing or expired SSL certificate, a domain that isn't pointing where it should, mixed-content resources still loading over HTTP, or a hosting-side configuration issue. This guide walks through each cause in the order worth checking them, so you fix the actual problem instead of reinstalling a certificate that was never the issue. It applies whether you're on Hostinger, Bluehost, SiteGround, GoDaddy, Cloudflare, or a self-managed cPanel or Nginx server, since the underlying causes are the same across hosts even though the exact settings screens differ.",
+  "metaDescription": "Fix the WordPress SSL error where your site can't provide a secure connection: check DNS, install or renew the certificate, force HTTPS, and fix mixed content.",
+  "intro": "\"This site can't provide a secure connection\" is Chrome's own wording for what's technically an SSL handshake failure: the browser and your server couldn't agree on an encrypted connection, so Chrome blocks the page instead of loading it unprotected. On a WordPress site that almost always comes down to one of four things: a missing or expired SSL certificate, a domain that isn't pointing where it should, mixed-content resources still loading over HTTP, or a hosting-side configuration issue. This guide works through each cause in the order worth checking, so you fix the actual problem instead of reinstalling a certificate that was never broken. It applies whether you're on Hostinger, Bluehost, SiteGround, GoDaddy, Cloudflare, or a self-managed cPanel or Nginx server, since the causes are the same across hosts even when the settings screens look different.",
   "steps": [
     {
-      "heading": "Understand why the error actually appears",
-      "body": "Browsers throw this specific error — rather than a generic 'page not loading' message — when they can't establish a trusted encrypted connection to your server. That narrows the cause to a short list: no SSL certificate installed at all, a certificate that's expired or was issued for the wrong domain (like www vs. non-www mismatch), your domain's DNS not pointing at the server that actually holds the certificate, or a hosting/server configuration that isn't serving HTTPS correctly even though a certificate exists. Ruling these in or out in order saves you from chasing the wrong fix."
-    },
-    {
       "heading": "Check your domain and DNS settings first",
-      "body": "Before touching SSL at all, confirm your domain's A record or CNAME actually points to your current hosting provider's IP or Cloudflare's proxy. A recently migrated site, a changed nameserver, or a DNS record still pointing at an old host is one of the most common root causes of this error, and no amount of reinstalling a certificate will fix it if the domain isn't even reaching the server that holds it. Most registrars show DNS propagation status directly in their dashboard, and it can take anywhere from a few minutes to 24-48 hours to fully update."
+      "body": "Before touching SSL at all, confirm your domain's A record or CNAME points to your current hosting provider's IP, or to Cloudflare's proxy if you use it. A recently migrated site, a changed nameserver, or a DNS record still pointing at an old host is one of the most common root causes of this error. No amount of reinstalling a certificate fixes it if the domain isn't reaching the server that holds it. Most registrars show DNS propagation status in their own dashboard; a change can take anywhere from a few minutes to 24-48 hours to fully update."
     },
     {
       "heading": "Install or renew the SSL certificate",
-      "body": "Log into your hosting control panel and look for an SSL/TLS section — most current hosts (Hostinger, Bluehost, SiteGround, GoDaddy) provision a free Let's Encrypt certificate automatically, but it can fail to auto-renew or fail to issue in the first place if DNS wasn't correctly pointed at the time. Reissuing the certificate from that panel, or manually triggering a renewal, resolves the error immediately if an expired or missing certificate was the cause."
+      "body": "Log into your hosting control panel and look for an SSL/TLS section. Most current hosts, including Hostinger, Bluehost, SiteGround, and GoDaddy, provision a free Let's Encrypt certificate automatically, but it can fail to auto-renew, or fail to issue in the first place, if DNS wasn't correctly pointed at the time. Reissuing the certificate from that panel, or manually triggering a renewal, resolves the error immediately if a missing or expired certificate was the cause."
     },
     {
       "heading": "Force HTTPS in WordPress and your hosting panel",
-      "body": "Even with a valid certificate, WordPress needs to be told to actually use it. In Settings → General, both the WordPress Address (URL) and Site Address (URL) fields need to start with https://, not http://. Most hosts also offer a 'Force HTTPS' toggle in their panel that adds a server-level redirect, which is worth enabling alongside the WordPress setting rather than instead of it — relying on only one of the two can leave some pages loading insecurely."
+      "body": "Even with a valid certificate, WordPress needs to be told to use it. In Settings → General, both the WordPress Address (URL) and Site Address (URL) fields need to start with https://, not http://. Most hosts also offer a \"Force HTTPS\" toggle that adds a server-level redirect. Enable it alongside the WordPress setting, not instead of it; relying on only one of the two can leave some pages loading insecurely."
     },
     {
       "heading": "Fix mixed content and URL conflicts",
-      "body": "If HTTPS loads for the page itself but the browser still shows a warning, the cause is usually mixed content — images, scripts, or stylesheets hardcoded with http:// URLs inside old posts, theme files, or a page builder like Elementor. Search your database for lingering http:// references to your own domain and update them to https://, or use a plugin built for this if you're not comfortable running a direct database search-and-replace."
+      "body": "If HTTPS loads for the page itself but the browser still flags it, the cause is usually mixed content: images, scripts, or stylesheets hardcoded with http:// URLs inside old posts, theme files, or a page builder like Elementor. Search your database for lingering http:// references to your own domain and update them to https://, or use a plugin built for this if you're not comfortable running a direct database search-and-replace."
     },
     {
-      "heading": "Check Cloudflare's SSL mode if you're using it",
-      "body": "If your domain is proxied through Cloudflare, the SSL/TLS mode setting has to match your origin server's actual certificate state. 'Flexible' mode encrypts only between the visitor and Cloudflare, not between Cloudflare and your origin server, which can itself trigger secure-connection errors or redirect loops if your host also forces HTTPS. Switching to 'Full' or 'Full (strict)' — provided your origin has a valid certificate — is the setting that avoids this conflict."
+      "heading": "Check Cloudflare's SSL/TLS mode, if you use it",
+      "body": "If your domain is proxied through Cloudflare, the SSL/TLS mode setting has to match your origin server's actual certificate state. Flexible mode encrypts only the leg between visitor and Cloudflare, not between Cloudflare and your origin. That mismatch is a known cause of secure-connection errors and redirect loops when the origin host also forces HTTPS. Switching to Full or Full (strict), provided your origin already has a valid certificate, is what clears the conflict. See the table below for what each mode does."
     },
     {
       "heading": "Clear cache and browser-side conflicts last",
-      "body": "Once the certificate, DNS, forced HTTPS, and mixed content are all confirmed correct, a browser or CDN can still show a stale error from before the fix. Clear your WordPress caching plugin's cache, purge Cloudflare's cache if you're using it, and clear the browser's own SSL state and cached files — this step comes last because clearing cache before the underlying issue is fixed just brings the same error right back."
+      "body": "Once the certificate, DNS, forced HTTPS, and mixed content are all confirmed correct, a browser or CDN can still show a stale error from before the fix. Clear your WordPress caching plugin's cache, purge Cloudflare's cache if you're using it, and clear the browser's own SSL state and cached files. Do this step last; clearing cache before the underlying issue is fixed just brings the same error straight back."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Cloudflare SSL/TLS modes",
+      "columns": ["Mode", "Visitor to Cloudflare", "Cloudflare to your origin"],
+      "rows": [
+        ["Flexible", "Encrypted (HTTPS)", "Not encrypted (HTTP); no origin certificate required"],
+        ["Full", "Encrypted (HTTPS)", "Encrypted, but Cloudflare doesn't validate the origin's certificate"],
+        ["Full (strict)", "Encrypted (HTTPS)", "Encrypted, and Cloudflare validates a properly issued certificate on your origin"]
+      ],
+      "note": "From Cloudflare's own SSL/TLS mode documentation, checked September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Every setting above checks out, but Chrome still shows the error",
+      "cause": "SSL certificates are only valid within a date range. If the computer's system clock is wrong, a perfectly valid certificate can look expired or not-yet-valid to the browser.",
+      "fix": "Check the device's date, time, and timezone, correct them if they're off, then reload the page."
+    },
+    {
+      "problem": "The site works through Cloudflare but breaks (or loops) when HTTPS is forced at the origin",
+      "cause": "SSL/TLS mode is set to Flexible while the origin host also forces HTTPS, so the two ends disagree about whether the connection between them should be encrypted.",
+      "fix": "Switch the mode to Full or Full (strict) in Cloudflare, once the origin has its own valid certificate installed."
+    },
+    {
+      "problem": "The certificate keeps failing to auto-renew",
+      "cause": "DNS wasn't pointed at the host at the moment Let's Encrypt tried to renew, so the domain-validation check failed.",
+      "fix": "Confirm DNS is correctly pointed now, then manually trigger a reissue from the hosting panel instead of waiting for the next automatic attempt."
     }
   ],
   "faq": [
     {
       "question": "Why does the error show on some devices but not others?",
-      "answer": "This can happen when cached SSL data or DNS records differ between devices, or when mixed content only gets flagged by certain browsers' security settings."
+      "answer": "Cached SSL data or DNS records can differ between devices, or a device's system clock can be wrong on just one machine, which is enough to make a valid certificate look invalid there."
     },
     {
       "question": "Do I need to buy an SSL certificate for WordPress?",
-      "answer": "Most hosts provide free SSL certificates through Let's Encrypt, so a paid certificate usually isn't necessary unless you have specific requirements like extended validation."
+      "answer": "Most hosts provide a free certificate through Let's Encrypt, so a paid certificate usually isn't necessary unless you have a specific requirement like extended validation."
     },
     {
       "question": "What is mixed content and why does it cause errors?",
-      "answer": "Mixed content happens when a secure HTTPS page still loads some resources — images, scripts, or stylesheets — over HTTP, which browsers flag as a security risk even though the main page is encrypted."
+      "answer": "It's what happens when a secure HTTPS page still loads some resources, such as images, scripts, or stylesheets, over plain HTTP. Browsers flag that even though the main page itself is encrypted."
     },
     {
-      "question": "Can Cloudflare cause this SSL error?",
-      "answer": "Yes — an SSL/TLS mode set to 'Flexible' when your origin server also forces HTTPS is a common cause of secure-connection errors or redirect loops. Switching to 'Full' or 'Full (strict)' usually resolves it."
+      "question": "Can Cloudflare cause this error?",
+      "answer": "Yes. An SSL/TLS mode set to Flexible while your origin server also forces HTTPS is a common cause of secure-connection errors or redirect loops. Switching to Full or Full (strict) usually resolves it."
     },
     {
       "question": "Should I check DNS before reinstalling my SSL certificate?",
-      "answer": "Yes — if your domain's DNS isn't pointing at the server holding the certificate, reinstalling or renewing the certificate won't fix anything, since the browser is connecting to the wrong place entirely."
+      "answer": "Yes. If your domain's DNS isn't pointing at the server holding the certificate, reinstalling or renewing it won't fix anything, because the browser is connecting to the wrong place entirely."
     }
   ],
+  "references": [
+    {
+      "label": "Cloudflare: SSL/TLS encryption modes (official)",
+      "url": "https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/"
+    }
+  ],
+  "verifiedNote": "This guide spans multiple hosts, so there's no single vendor doc to check it against. The Cloudflare SSL/TLS mode behavior (Flexible/Full/Full strict) was re-checked against Cloudflare's own documentation in September 2026, which is also where the added mode-comparison table comes from. The system-clock failure mode was added as a genuine, separate cause of Chrome's ERR_SSL_PROTOCOL_ERROR that the original version didn't mention. The step ordering and host-panel behavior (Let's Encrypt auto-issue, Force HTTPS toggles) reflect general, widely-documented WordPress hosting practice, not one vendor's docs.",
   "generatedAt": "2026-08-01T09:00:00.000Z",
   "deep": true
 }
