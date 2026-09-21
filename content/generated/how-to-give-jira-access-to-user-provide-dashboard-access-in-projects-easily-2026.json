@@ -1,46 +1,72 @@
 {
   "slug": "how-to-give-jira-access-to-user-provide-dashboard-access-in-projects-easily-2026",
   "seoTitle": "How to Give Jira Access to a User (Dashboard & Projects)",
-  "metaDescription": "Invite new users to Jira, assign roles and permissions, and provide dashboard access to projects with this step-by-step guide.",
-  "intro": "Adding a teammate to Jira is more than firing off an invite — until you set the right project role, they can't open a board, and until you share a dashboard, they can't see the reports it's tracking. This guide walks through the actual admin screens: inviting someone into your organization, confirming the invite landed, and then setting their role on a specific project so their access matches what they're supposed to be doing. It also covers the follow-up step most people skip — deciding who can see which dashboards once the account exists. By the end you'll know exactly where each of these settings lives instead of hunting through Jira's admin menus.",
+  "metaDescription": "Invite new users to your Jira organization, add them to a project's role, and share a dashboard with them — the three separate steps real access needs.",
+  "intro": "Adding a teammate to Jira is more than firing off an invite. Until you set the right project role, they can't open a board, and until you share a dashboard, they can't see the reports it's tracking. This guide walks through the actual admin screens: inviting someone into your organization, confirming the invite landed, and setting their role on a specific project so their access matches what they're supposed to be doing. It also covers the step most people skip — sharing dashboards once the account exists. By the end you'll know where each setting lives instead of hunting through Jira's admin menus.",
   "steps": [
     {
       "heading": "Open your organization's admin settings",
-      "body": "User access in Jira isn't managed from inside a project — it starts at the organization level. Click the gear icon in the top-right corner of Jira to reach Settings, which is also where Atlassian surfaces account-wide features like Jira Service Management. From here you're one click away from the Admin area that lists every user and product in your organization, so this is the starting point any time you need to add, remove, or audit who has access.",
+      "body": "User access in Jira isn't managed from inside a project — it starts at the organization level. Click the gear icon in the top-right corner of Jira to reach Settings, which is also where Atlassian surfaces account-wide features like Jira Service Management. From here you're one click from the Admin area that lists every user and product in your organization, so this is the starting point any time you need to add, remove, or audit access.",
       "image": { "file": "/screenshots/3OxPh3zigdc/02.webp", "caption": "The Settings gear in the top navigation bar is the entry point to organization-wide user administration, separate from any single project's settings." }
     },
     {
       "heading": "Invite the new user",
-      "body": "From the admin area, use Invite users to open the invite form. Type the person's email address, and you'll see a table listing every app in your organization — Projects, Goals, Jira, Jira Product Discovery, Confluence, and so on — each with its own Role dropdown defaulted to User. Leave the defaults if they need standard access, or narrow individual apps down before sending the invite. Jira sends the recipient an email asking them to complete their account details, so nothing is granted until they accept.",
+      "body": "From the admin area, use Invite users to open the invite form. Type the person's email address and you'll see a table listing every app in your organization — Projects, Goals, Jira, Jira Product Discovery, Confluence, and so on — each with its own Role dropdown defaulted to User. Leave the defaults if they need standard access, or narrow individual apps down before sending. Jira emails the recipient asking them to complete their account, so nothing is granted until they accept.",
       "image": { "file": "/screenshots/3OxPh3zigdc/03.webp", "caption": "The invite form lists every app in the organization with its own role selector, so you can control what a new user can reach before the invite even goes out." }
     },
     {
       "heading": "Confirm the invite in the Users list",
-      "body": "After sending the invite, head back to Admin → Users to verify it went through. The new account shows up with an Invited status until they accept, at which point it flips to Active. This screen is also your ongoing roster — it shows total users, active users, and organization admins at a glance, and you can search by name or filter by role and app access whenever you need to check who currently has access to what.",
+      "body": "After sending the invite, head back to Admin > Users to verify it went through. The new account shows an Invited status until accepted, at which point it flips to Active. This screen is also your ongoing roster: it shows total users, active users, and organization admins at a glance, and you can search by name or filter by role and app access whenever you need to check who currently has access to what.",
       "image": { "file": "/screenshots/3OxPh3zigdc/04.webp", "caption": "The organization's Users page after an invite is sent — the new account appears with an Invited status, and a success confirmation shows the invite went out." }
     },
     {
       "heading": "Assign the user's project role",
-      "body": "Being invited to the organization doesn't automatically put someone inside a project — that's a separate step done from within the project itself. Open the project, go to Project settings → Access, and use Add people to search for the person by name or email. The Role dropdown here is project-specific: Administrator gives full control including people and settings, Creator can use every feature except admin-only settings, and Contributor gets read-only access plus the ability to add ideas, comments, and reactions. Pick the narrowest role that still lets them do their job.",
-      "image": { "file": "/screenshots/3OxPh3zigdc/05.webp", "caption": "Adding someone to a specific project through Project settings → Access, with the Administrator, Creator, and Contributor roles and their descriptions shown in the Role dropdown." }
+      "body": "Being invited to the organization doesn't put someone inside a project — that's a separate step, done from within the project itself, at Project settings > Access (sometimes labelled People), using Add people to search by name or email. What roles you're offered here depends on the kind of project. The Administrator, Creator, and Contributor set pictured below is specific to Jira Product Discovery: Administrator gives full control including people and settings, Creator can use every feature except admin-only settings, and Contributor gets read-only access plus the ability to add ideas, comments, and reactions. A standard Jira Software or Jira Work Management project instead offers whatever roles your site's permission scheme defines, commonly Administrators and Members, so don't assume this exact three-tier list will appear on every project type — check what's actually in the dropdown and pick the narrowest role that still lets the person do their job.",
+      "image": { "file": "/screenshots/3OxPh3zigdc/05.webp", "caption": "Adding someone to a Jira Product Discovery project through Project settings > Access, with the Administrator, Creator, and Contributor roles and their descriptions shown in the Role dropdown." }
     },
     {
       "heading": "Share the dashboard they need",
-      "body": "Project access controls boards and issues, but dashboards are shared separately. Open the dashboard, use its Share or Edit permissions option, and add the individual, a group, or the whole project as a viewer or editor. This is what actually lets the new teammate see burndown charts, sprint reports, or custom gadgets without you having to walk them through building their own.",
-      "image": null
+      "body": "Project access controls boards and issues, but dashboards are shared separately. Open the dashboard, select More actions > Rename or share, and add the individual, a group, or the whole project under Viewers or Editors. This is what actually lets a new teammate see burndown charts, sprint reports, or custom gadgets without you walking them through building their own. Sharing a dashboard needs its own permission — Share dashboards and filters — so if that option is missing for you, an admin will need to either grant it or share the dashboard on your behalf."
     },
     {
       "heading": "Review access before you move on",
-      "body": "Once the invite, project role, and dashboard sharing are all in place, take thirty seconds to log in as a test or ask the new user to confirm what they can see. Grant only what someone's role genuinely requires — an admin role for a contributor-level task is the kind of over-provisioning that becomes a security headache later, and it's far easier to widen access when it's actually needed than to track down and revoke it after the fact."
+      "body": "Once the invite, project role, and dashboard sharing are all in place, take thirty seconds to log in as a test or ask the new user to confirm what they can see. Grant only what someone's role genuinely requires. An admin role for a contributor-level task is over-provisioning that becomes a security headache later, and it's far easier to widen access when it's actually needed than to track down and revoke it afterward."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A new user accepted the organization invite but still can't open the project",
+      "cause": "The organization invite only creates the account and sets which apps it can reach. It does not add the person to any specific project.",
+      "fix": "Go to Project settings > Access on the project itself and add them there with Add people."
+    },
+    {
+      "problem": "A teammate can't see a dashboard you thought you shared",
+      "cause": "Dashboard sharing is a separate action from project access, and granting it yourself requires the Share dashboards and filters permission.",
+      "fix": "Reopen the dashboard, use More actions > Rename or share, and check the person or group is listed under Viewers. If you can't edit sharing at all, ask an admin to do it or grant you that permission."
     }
   ],
   "faq": [
     { "question": "Who can invite new users to Jira?", "answer": "Typically only organization or site administrators can send invites and manage app-level roles from the Admin area." },
-    { "question": "Does inviting someone to the organization give them project access?", "answer": "No. The organization invite only creates the account and sets which apps they can open. You still need to add them inside each specific project through Project settings → Access." },
-    { "question": "What's the difference between Administrator, Creator, and Contributor roles?", "answer": "Administrator has full control of the project including settings and people. Creator can use nearly every feature except admin-only settings. Contributor is read-only with the ability to add ideas, comments, and reactions — the safest default for most new teammates." },
-    { "question": "How do I share a dashboard with a specific user?", "answer": "Open the dashboard and use its share or edit-permissions option to add the individual, a group, or an entire project as a viewer or editor." },
-    { "question": "What happens if I remove a user's access?", "answer": "Removing them from a project or app immediately revokes their ability to view or edit it, though their historical activity and past contributions remain in the project's history." }
+    { "question": "Does inviting someone to the organization give them project access?", "answer": "No. The organization invite only creates the account and sets which apps they can open. You still need to add them inside each specific project through Project settings > Access." },
+    { "question": "What roles show up when I add someone to a project?", "answer": "It depends on the project type. Jira Product Discovery projects use Administrator, Creator, and Contributor. Jira Software and Jira Work Management projects use whatever roles the site's permission scheme defines — commonly Administrators and Members — so check the actual dropdown rather than assuming one fixed set." },
+    { "question": "How do I share a dashboard with a specific user?", "answer": "Open the dashboard and use More actions > Rename or share to add the individual, a group, or an entire project as a Viewer or Editor." },
+    { "question": "What happens if I remove a user's access?", "answer": "Removing them from a project or app immediately revokes their ability to view or edit it, though their historical activity and past contributions stay in the project's history." }
   ],
+  "references": [
+    {
+      "label": "Atlassian Support: Invite a user (official)",
+      "url": "https://support.atlassian.com/user-management/docs/invite-a-user/"
+    },
+    {
+      "label": "Atlassian Support: Manage space roles (Jira Product Discovery, official)",
+      "url": "https://support.atlassian.com/jira-product-discovery/docs/add-people-to-your-team-or-change-project-roles/"
+    },
+    {
+      "label": "Atlassian Support: Share a dashboard or filter (official)",
+      "url": "https://support.atlassian.com/jira/kb/how-to-share-a-dashboard-or-filter-ie-make-it-public-change-its-viewers-and-editor-permissions/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Re-checked against Atlassian's official documentation in September 2026, which corrected a real mismatch: the Administrator/Creator/Contributor role set the original draft described as a general Jira project role is specific to Jira Product Discovery. Standard Jira Software and Jira Work Management projects use roles defined by the site's permission scheme instead, which the article now states plainly rather than presenting one role set as universal. Dashboard-sharing permissions and the exact Rename or share menu label were confirmed against the same documentation.",
   "generatedAt": "2026-08-31T00:00:00Z",
   "deep": true
 }

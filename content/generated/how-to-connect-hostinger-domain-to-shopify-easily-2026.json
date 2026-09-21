@@ -1,43 +1,91 @@
 {
   "slug": "how-to-connect-hostinger-domain-to-shopify-easily-2026",
   "seoTitle": "How to Connect a Hostinger Domain to Shopify",
-  "metaDescription": "Point your Hostinger domain to Shopify by updating A and CNAME records in the DNS Zone Editor, then verify the connection in Shopify admin.",
-  "intro": "Buying your domain through Hostinger but running your store on Shopify is a common combination, and it works fine — you just have to manually connect the two through DNS instead of relying on a one-click transfer. Shopify tells you exactly what records it needs; the work is logging into Hostinger and typing those values in correctly. This guide walks through checking Shopify's domain settings, reading its DNS instructions, and updating the A and CNAME records in Hostinger so the storefront resolves under your own domain.",
+  "metaDescription": "Point your Hostinger domain to Shopify: set the A record to Shopify's IP, add the www CNAME, and clear the two Hostinger-side settings that quietly block the connection.",
+  "intro": "Buying your domain through Hostinger while running the store on Shopify works fine, but the two platforms don't talk to each other automatically. Shopify tells you exactly which DNS records it needs; the work is logging into Hostinger and entering those values correctly, and clearing a couple of Hostinger defaults that get in the way if you skip them. This guide walks through reading Shopify's DNS instructions, updating the A and CNAME records in Hostinger, and two settings Hostinger's own documentation says to check first: an active CDN and a leftover AAAA record.",
+  "prerequisites": [
+    "A domain managed at Hostinger, with the store already added under Shopify admin > Settings > Domains > Connect existing domain",
+    "Admin access to hPanel for the domain in question"
+  ],
   "steps": [
     {
       "heading": "Check your domain's status in Shopify admin",
-      "body": "In Shopify, go to Settings then Domains to see every domain connected to your store. A fresh connection attempt shows your custom domain — pmnonline.shop in this example — sitting alongside the two default myshopify.com addresses that come with every store. The custom domain's status column tells you where things stand: \"Checking DNS\" means Shopify is still waiting on the records you're about to set, while \"Connected\" means a given address is already working.",
+      "body": "In Shopify, go to Settings then Domains to see every domain connected to your store. A fresh connection attempt shows your custom domain (pmnonline.shop in this example) sitting alongside the two default myshopify.com addresses that come with every store. The status column tells you where things stand: \"Checking DNS\" means Shopify is still waiting on the records you're about to set, and \"Connected\" means that address already works.",
       "image": { "file": "/screenshots/T7wVJ_HeKls/03.webp", "caption": "The Domains page in Shopify admin, showing a custom domain in \"Checking DNS\" status next to two connected myshopify.com addresses." }
     },
     {
       "heading": "Open the domain and read Shopify's DNS instructions",
-      "body": "Click into the domain to see the specific problem and fix. Shopify flags \"Invalid DNS\" when your A record doesn't point to its servers yet, and it spells out exactly what to change — in this case, an A record with name @ needs its value updated from one Shopify IP to another, alongside a button to log into Hostinger directly from that panel. Copy this exact value; it's the number you'll be typing into Hostinger next, and using an outdated or mistyped IP is the most common reason this step fails.",
+      "body": "Click into the domain to see the specific problem and the fix. Shopify flags \"Invalid DNS\" when your A record doesn't point to its servers yet, and it names the exact value to change. In this case, an A record with name @ needs a new IP address. Copy this value exactly as shown. Shopify's own support documentation notes the address is usually 23.227.38.65, but a domain can be assigned a different valid IP with the same trailing digits, so use whatever your own Shopify panel displays instead of a number from a guide.",
       "image": { "file": "/screenshots/T7wVJ_HeKls/04.webp", "caption": "Shopify's domain connection screen showing \"Invalid DNS\" with the exact A record change it's waiting for." }
     },
     {
-      "heading": "Log into Hostinger and open DNS / Nameservers",
-      "body": "In hPanel, go to Domains and select the domain you're connecting, then open the DNS / Nameservers section. This page has its own tabs for DNS records, child nameservers, redirects, and DNSSEC — you want DNS records specifically, not the nameservers view, since you're editing individual records rather than switching your domain to a different nameserver provider entirely.",
+      "heading": "Open Hostinger's DNS records and clear the defaults that block a clean switch",
+      "body": "In hPanel, go to Domains, select the domain, and open DNS / Nameservers, then the DNS records tab. Before touching the A record, Hostinger's own support documentation lists two things to check first: turn off Hostinger's CDN if it's enabled for the domain, since a proxied connection can mask the DNS change from Shopify, and delete any existing AAAA record on the root domain (@) instead of leaving it pointing at Hostinger's old IPv6 address. Neither is obvious from the DNS records screen alone, which is why a technically correct A record sometimes still doesn't connect.",
       "image": { "file": "/screenshots/T7wVJ_HeKls/05.webp", "caption": "Hostinger's DNS / Nameservers panel, with DNS records, Child nameservers, Redirects, and DNSSEC as separate tabs." }
     },
     {
-      "heading": "Update the A record to Shopify's IP",
-      "body": "Find the existing A record with name @ and edit its value to match the exact IP address Shopify showed you in the previous step. Leave the record type and name field alone — only the value changes. If there's an old A record pointing somewhere else entirely (a previous host, a parking page), remove it so there's no conflicting record telling browsers two different places to look."
+      "heading": "Set the A record and add the www CNAME",
+      "body": "Find the existing A record with name @ and edit its value to the IP address Shopify showed you. If an old A record points somewhere else entirely, such as a previous host or a parking page, remove it, since Shopify only recognizes one A record per domain. Then add a CNAME record with host www pointing to shops.myshopify.com, so the www version of your domain resolves the same way the bare domain does."
     },
     {
-      "heading": "Add or update the www CNAME record",
-      "body": "Alongside the A record, add a CNAME record with the host set to www that points to shops.myshopify.com, so that both the bare domain and the www version resolve to your store. This is what makes a link to www.yourdomain.com behave the same as the root domain instead of returning an error."
+      "heading": "Add the verification TXT record, if Shopify asks for one",
+      "body": "For some domains Shopify requests an extra ownership check: a TXT record with host shopify_verification and a value it generates for you in the Domains panel. Not every connection needs this step, so only add it if Shopify's admin shows the request. Paste the value exactly; a partial copy is the usual reason this record fails verification."
     },
     {
       "heading": "Wait for propagation and confirm in Shopify",
-      "body": "DNS changes don't apply instantly — Hostinger's own DNS page notes it can take anywhere from 15 minutes to 24 hours for a domain to come online after a change. Head back to Shopify's Domains page periodically and refresh; once the records are picked up, the status moves from \"Checking DNS\" to \"Connected,\" and Shopify will automatically start provisioning an SSL certificate. If SSL sits at pending for more than a few hours after DNS shows connected, that's usually still just propagation catching up rather than a real error."
+      "body": "DNS changes don't apply instantly. Shopify's help documentation states it can take up to 48 hours for a domain to come online after a change, though Hostinger's own guide puts its typical window closer to 24. Check back on Shopify's Domains page periodically; once the records are picked up, the status moves from \"Checking DNS\" to \"Connected,\" and Shopify starts provisioning an SSL certificate automatically. SSL sitting at pending for a few hours after DNS shows connected is normal and not a separate problem."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The A record and CNAME are set correctly but the domain still won't connect",
+      "cause": "Hostinger's CDN is enabled for the domain, which proxies traffic instead of letting Shopify see the DNS records directly.",
+      "fix": "Disable the CDN for this domain in hPanel, then give the DNS check another pass. Hostinger's own instructions list this as a required step before pointing a domain to Shopify."
+    },
+    {
+      "problem": "Connection is flaky or the storefront loads inconsistently",
+      "cause": "A leftover AAAA record on the root domain is still pointing at Hostinger's IPv6 address, so some visitors resolve to the old host and others to Shopify.",
+      "fix": "Delete the AAAA record on @ in Hostinger's DNS records tab; Shopify's connection only needs the A and CNAME records."
+    },
+    {
+      "problem": "Shopify shows an unverified or failed domain check after DNS looks correct",
+      "cause": "Shopify asked for a TXT verification record and it either wasn't added or the value was copied incorrectly.",
+      "fix": "Go back to Shopify's Domains panel for the exact TXT value, then add or correct a TXT record in Hostinger with host shopify_verification."
+    },
+    {
+      "problem": "Shopify's DNS check reports multiple A records",
+      "cause": "An old A record from a previous host or parking page is still present alongside the new one.",
+      "fix": "Delete every A record on the root domain except the single one pointing to the IP Shopify gave you."
     }
   ],
   "faq": [
-    { "question": "How long does it take for the domain to connect?", "answer": "DNS propagation can take anywhere from a few minutes to 48 hours, so it's normal for the SSL status to show as pending right after the change." },
-    { "question": "Do I need to remove my old A record before adding the new one?", "answer": "Yes, removing the existing A record before adding Shopify's IP address helps prevent conflicts in the DNS Zone Editor." },
-    { "question": "What if my domain shows as not connected after updating DNS?", "answer": "Double-check that both the A record and CNAME record were updated correctly, and allow time for DNS propagation before troubleshooting further." },
-    { "question": "Can I use a domain purchased from Hostinger with Shopify without transferring it?", "answer": "Yes, you can keep the domain registered with Hostinger and simply point its DNS records to Shopify rather than transferring the domain itself." }
+    {
+      "question": "What IP address does the A record need?",
+      "answer": "Use whatever address Shopify's own Domains panel shows you. It's usually 23.227.38.65, but Shopify's documentation notes a domain can be issued a different valid address, so treat the panel as the source of truth over any number in a guide."
+    },
+    {
+      "question": "Why does Hostinger say to disable the CDN and remove the AAAA record first?",
+      "answer": "Hostinger's CDN proxies the domain instead of exposing the DNS records Shopify checks for, and a stale AAAA record can send some visitors to the old IPv6 address. Both are listed in Hostinger's own instructions for pointing a domain at an external service."
+    },
+    {
+      "question": "Do I need to remove my old A record before adding Shopify's?",
+      "answer": "Yes. Shopify only recognizes one A record per domain, so an old one pointing elsewhere needs to be deleted, not left alongside the new one."
+    },
+    {
+      "question": "Does every domain need the TXT verification record?",
+      "answer": "No. Shopify only requests it for some connections. If your Domains panel shows a TXT value, add it with host shopify_verification; if it doesn't ask, skip this step."
+    },
+    {
+      "question": "How long before the domain shows as connected?",
+      "answer": "Shopify's documentation allows up to 48 hours, and Hostinger's guide suggests changes are often picked up within 24. Either way, check back on the Domains page instead of assuming it failed within the first hour."
+    }
   ],
+  "references": [
+    { "label": "Shopify Help Center: Connecting a Hostinger domain to Shopify (official)", "url": "https://help.shopify.com/en/manual/domains/add-a-domain/connecting-domains/connecting-to-hostinger" },
+    { "label": "Shopify Help Center: Connect your third-party domain to Shopify manually (official)", "url": "https://help.shopify.com/en/manual/domains/add-a-domain/connecting-domains/connect-domain-manual" },
+    { "label": "Hostinger Support: How to point a domain to Shopify (official)", "url": "https://www.hostinger.com/support/1583434-how-to-point-a-domain-to-shopify" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. DNS record values, the propagation windows, and the CDN/AAAA-record and TXT-verification steps were re-checked against Shopify's and Hostinger's official documentation in September 2026. The CDN and AAAA-record steps, plus the note that the A-record IP can legitimately differ from the commonly cited default, were missing from this guide's previous version.",
   "generatedAt": "2026-08-01T12:00:00Z",
   "deep": true
 }

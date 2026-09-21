@@ -1,64 +1,83 @@
 {
   "slug": "how-to-change-card-color-in-jira-customize-with-work-type-priority-jql-code-quer",
   "seoTitle": "How to Change Card Color in Jira Using JQL",
-  "metaDescription": "Customize Jira board card colors by priority or a JQL query so you can spot what needs attention at a glance, right from Board settings.",
-  "intro": "A board full of same-colored cards forces you to read every title just to figure out what's urgent, which slows down standups and makes triage harder than it needs to be. Jira lets you assign color to cards automatically, based on priority or on a JQL query you write yourself, so the board tells you what matters before you read a single word. This guide walks through the actual settings screen, the built-in priority option, and the JQL route for more specific rules.",
+  "metaDescription": "Customize Jira board card colors by priority, work type, assignee, or a JQL query you write yourself, from Board settings > Layout > Card colors.",
+  "intro": "A board full of same-colored cards forces you to read every title just to figure out what's urgent, which slows down standups and makes triage harder than it needs to be. Jira can color cards automatically using priority, work type, assignee, or a JQL query you write yourself, so the board signals what matters before you read a single word. This guide walks through the actual settings screen, the three built-in methods, and the JQL route for rules those can't express.",
   "steps": [
     {
       "heading": "Start from your project's board",
-      "body": "Card color settings live at the board level, so open the Jira project you want to customize and go to its Kanban or Scrum board. From the For you dashboard, your recent projects and boards are listed with quick links to open work items, which is the fastest way back into a board you've worked on recently. Note which board you're on before changing anything, since color rules apply per board rather than globally across your whole Jira instance.",
+      "body": "Card color settings live at the board level, so open the Jira project you want to customize and go to its Kanban or Scrum board. From the For you dashboard, your recent projects and boards are listed with quick links back into them, which is the fastest way into a board you've worked on recently. Note which board you're on before changing anything, since color rules apply per board, not globally across your Jira instance.",
       "image": { "file": "/screenshots/TkcvN9Ga9CA/01.webp", "caption": "The Jira \"For you\" dashboard, listing recent projects and boards. Card color settings are configured per board, so open the specific one you want to customize." }
     },
     {
       "heading": "Know the requirement before you start",
-      "body": "Custom card colors through board settings are only available on company-managed software projects, not team-managed ones — if your board doesn't show a Card colors option in settings at all, that's the likely reason rather than something being broken. Check which project type your board belongs to before spending time hunting for a setting that may not exist on that board."
+      "body": "Custom card colors through board settings are only available on company-managed software projects, not team-managed ones. If your board doesn't show a Card colors option at all, that's the likely reason, not something broken. Check which project type your board belongs to before hunting for a setting that may not exist there."
     },
     {
       "heading": "Open Board settings and find Card colors",
-      "body": "With the board open, go to Board settings and look under Layout in the left-hand list for Card colors. The panel that opens starts with a Select method dropdown defaulted to None, meaning every card is the same neutral color until you choose a method. Jira also surfaces a permissions note here: changing this setting requires being either a project administrator for the board's location or a board administrator for the board itself, so if the dropdown is greyed out, that's almost certainly why.",
+      "body": "With the board open, go to Board settings and look under Layout for Card colors. The panel opens with a Select method dropdown defaulted to None, so every card stays the same neutral color until you choose a method. Jira also notes the permission needed here: you must be a project administrator for the board's project, or a board administrator for the board itself, so a greyed-out dropdown almost always means one of those roles is missing.",
       "image": { "file": "/screenshots/TkcvN9Ga9CA/03.webp", "caption": "The Card colors panel under Board settings > Layout, with Select method set to None and Jira's help panel explaining the admin permissions required to change it." }
     },
     {
       "heading": "Color cards by priority",
-      "body": "Switch Select method to Priorities and Jira lays out a table pairing each priority level — Highest, High, Medium, and so on — with a color swatch you can click to change. Assign your highest urgency levels the most attention-grabbing colors, like red or pink, and let lower priorities use muted tones so the board's hottest items pull the eye first. Changes apply immediately and Jira confirms each one with a small \"Your card color has been updated\" toast, so you can adjust and check the result without leaving the settings screen.",
+      "body": "Switch Select method to Priorities and Jira lays out a table pairing each priority level — Highest, High, Medium, and so on — with a color swatch you can click to change. Give your highest urgency levels the most attention-grabbing colors, red or pink, and let lower priorities use muted tones so the board's hottest items pull the eye first. Changes apply immediately, with a small \"Your card color has been updated\" toast confirming each one. If you want to undo a change without picking a new color, Jira also lets you reset an individual priority back to the site-wide default it inherits from Settings > Work items > Priorities.",
       "image": { "file": "/screenshots/TkcvN9Ga9CA/04.webp", "caption": "Card colors set to the Priorities method, with a color assigned to each priority level from Highest down to Medium, and a confirmation toast after saving." }
     },
     {
-      "heading": "Color cards by work type",
-      "body": "If priority isn't the distinction your team cares about most, switch the method to work type instead so cards are colored by issue type — bug, task, story, and so on. This is often more useful for teams that triage by kind of work rather than urgency, for example keeping bugs visually distinct from new feature stories so a scan of the board shows the balance of work in progress at a glance."
+      "heading": "Color by work type or assignee instead",
+      "body": "If priority isn't the distinction your team cares about most, switch the method to Work type to color by issue kind — bug, task, story — or to Assignees to color by who owns each card. Work type suits teams that triage by kind of work; assignee coloring suits teams checking at a glance how work is spread across people. Only one method is active at a time, so pick whichever distinction the board actually needs."
     },
     {
       "heading": "Build custom rules with JQL queries",
-      "body": "For anything the built-in methods can't express, switch to the Queries method and click Add card color. This opens a dialog with a full color palette and a JQL query field — write a query describing exactly which cards should get that color, such as items assigned to a specific person, overdue by due date, or matching a label, and Jira colors every card that matches. You can add multiple color rules this way, each with its own query, which is the most flexible option when priority or work type alone doesn't capture what you actually want highlighted.",
+      "body": "For anything the built-in methods can't express, switch to Queries and select Add card color. This opens a dialog with a color palette and a JQL field — write a query describing exactly which cards should get that color, such as items assigned to a specific person, overdue by due date, or matching a label. You can add multiple color rules this way, each with its own query. Cards that don't match any of your queries fall back to grey rather than staying whatever color they had before, which makes a typo'd or too-narrow query easy to spot: the cards it was meant to catch simply go neutral.",
       "image": { "file": "/screenshots/TkcvN9Ga9CA/05.webp", "caption": "The Add card color dialog under the Queries method, pairing a color swatch with a JQL query field that defines which cards receive it." }
     },
     {
       "heading": "Review the board and refine",
-      "body": "Back out to the board view and check that the new colors read clearly at actual size, not just in the settings preview — a palette that looks fine in a table of swatches can still be hard to tell apart on small kanban cards. Adjust individual colors as needed, and revisit the setup after a week of real use, since the categories that felt important when you set it up aren't always the ones your team ends up scanning for daily."
+      "body": "Back on the board view, check that the new colors read clearly at actual card size, not just in the settings preview. A palette that looks fine as a row of swatches can still be hard to tell apart on small kanban cards. Revisit the setup after a week of real use, too — the categories that felt important when you set it up aren't always the ones your team ends up scanning for daily."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no Card colors option under Board settings > Layout",
+      "cause": "Custom card colors are only available on company-managed Jira Software projects. Team-managed projects don't expose this setting at all.",
+      "fix": "Check the project type. On a team-managed project, this option won't appear regardless of your permissions."
+    },
+    {
+      "problem": "The Select method dropdown is greyed out",
+      "cause": "Changing card colors requires project administrator access for the board's project, or board administrator access for that specific board.",
+      "fix": "Ask someone with one of those roles to make the change, or to grant it to you."
     }
   ],
   "faq": [
     {
       "question": "Can I combine priority and work type coloring?",
-      "answer": "No — the Card colors setting uses one method at a time (None, Priorities, work type, or Queries), so pick whichever distinction is most useful for your team's board."
+      "answer": "No. Card colors uses one method at a time: None, Priorities, Work type, Assignees, or Queries. Pick whichever distinction is most useful for your board."
     },
     {
       "question": "Do I need JQL knowledge to set custom card colors?",
-      "answer": "Only for the Queries method. Jira's built-in Priorities and work-type options need no query writing at all — JQL is just for rules those two options can't express."
+      "answer": "Only for the Queries method. Priorities, Work type, and Assignees need no query writing at all — JQL is just for rules those built-in options can't express."
     },
     {
-      "question": "Why don't I see a Card colors option in my board settings?",
-      "answer": "Custom card colors are only available on company-managed software projects. If your board is on a team-managed project, this specific setting won't appear under Board settings."
+      "question": "What happens to cards that don't match any of my JQL rules?",
+      "answer": "They render in grey instead of keeping their previous color, so a query that's too narrow or has a typo is obvious: the cards it should have caught just go neutral."
     },
     {
-      "question": "Who can change card color settings on a board?",
-      "answer": "You need to be either a project administrator for the board's project or a board administrator for that specific board — Jira notes this requirement directly in the Card colors help panel."
+      "question": "Can I reset a priority's color without picking my own?",
+      "answer": "Yes. Jira lets you reset an individual priority back to whatever color it's assigned at the site level, under Settings > Work items > Priorities, instead of requiring you to define that color yourself."
     },
     {
       "question": "Will card color changes affect other team members' views?",
-      "answer": "Yes, board-level color settings apply to everyone who views that board, so the visual system stays consistent across the whole team rather than being a personal preference."
+      "answer": "Yes. Board-level color settings apply to everyone who views that board, so the visual system stays consistent across the team rather than being a personal preference."
     }
   ],
+  "references": [
+    {
+      "label": "Atlassian Support: Customize cards (Jira Cloud, official)",
+      "url": "https://support.atlassian.com/jira-software-cloud/docs/customize-cards/"
+    }
+  ],
+  "verifiedNote": "Click path, screens, and the priority and JQL mechanics come from a recorded walkthrough. Re-checked against Atlassian's official \"Customize cards\" documentation in September 2026, which surfaced one thing the earlier draft missed — Assignees is a fourth built-in coloring method alongside Priorities and Work type, not just those two plus Queries — and confirmed the company-managed-only restriction, the admin permission requirement, and that unmatched JQL cards render grey.",
   "generatedAt": "2026-08-31T00:00:00Z",
   "deep": true
 }

@@ -1,59 +1,84 @@
 {
   "slug": "how-to-enable-apple-pay-in-stripe-add-setup-easily-2026",
   "seoTitle": "How to Enable Apple Pay in Stripe (Setup Guide 2026)",
-  "metaDescription": "Turn on Apple Pay in your Stripe dashboard step by step — find it in Payment methods, register and verify your domain, add an iOS certificate, and test checkout.",
-  "intro": "Apple Pay is the single cheapest conversion win on most checkouts: the customer authenticates with Face ID instead of typing a card number, and the drop-off between \"add to cart\" and \"paid\" shrinks. Stripe supports it natively, so there is nothing to install — but the switch is buried in the payment methods list, and it will not actually render on your site until Stripe has verified the domain you serve checkout from. This guide follows the real order the dashboard imposes: sign in, find Apple Pay in the payment methods table, turn it on, register your domain, and only then test. It also covers the separate iOS certificate flow, which is what you need if you're taking Apple Pay inside a native app rather than a website — the two are easy to confuse and only one of them involves Apple's developer site.",
+  "metaDescription": "Turn on Apple Pay in your Stripe dashboard: find the wallet toggle, register your domain (Stripe now handles Apple's verification for you), and test on a real device.",
+  "intro": "Apple Pay is one of the cheapest conversion wins available on a checkout: the customer authenticates with Face ID instead of typing a card number, and drop-off between \"add to cart\" and \"paid\" tends to shrink. Stripe supports it natively, so there's nothing to install, but it won't render on your site until Stripe has registered the domain you serve checkout from. This guide follows the order the dashboard imposes: sign in, turn on the wallet, register your domain, and only then test. It also covers the separate iOS certificate flow, needed only if you're taking Apple Pay inside a native app rather than a website.",
+  "costNote": "Turning on Apple Pay is free. Apple Pay transactions settle at your normal Stripe card processing rate, with no separate enablement fee or ongoing charge for the wallet itself.",
   "steps": [
     {
       "heading": "Sign in to the Stripe account that owns your checkout",
-      "body": "Start at the Stripe sign-in page and log in with the account that actually processes your live payments — not a personal test account you spun up to try something. If your organisation uses Google or SSO, use those buttons rather than a password, because Apple Pay settings sit behind account-level permissions and a second, disconnected account will send you round in circles later when the domain won't verify. Once you're in, check the account switcher at the top-left of the dashboard: Stripe keeps a sandbox and a live account side by side, and Apple Pay has to be configured separately in each. Enabling it in the sandbox is the sensible place to start, but remember to repeat the domain step on the live account before you announce anything.",
+      "body": "Start at the Stripe sign-in page and log in with the account that processes your live payments, not a personal test account. If your organization uses Google or SSO, use those buttons instead of a password: Apple Pay settings sit behind account-level permissions, and a second, disconnected account will send you in circles later when the domain won't verify. Once you're in, check the account switcher at the top left. Stripe keeps a sandbox and a live account side by side, and Apple Pay has to be registered separately in each.",
       "image": { "file": "/screenshots/8H0BM6e9ZLs/03.webp", "caption": "The Stripe sign-in page. Use whichever method is tied to the account that runs your live checkout — Apple Pay settings are per-account." }
     },
     {
-      "heading": "Open Settings and find the payment methods table",
-      "body": "Apple Pay isn't a top-level menu item. It lives in Settings under Payment methods, which opens a long table of every method Stripe can offer you: card networks, bank debits, buy-now-pay-later options, and a Wallet group that includes Apple Pay, Google Pay, Cash App Pay, Link, and several region-specific wallets. Each row shows the method's type, the regions it's popular in, and a status on the right — either a green Active tick or a Turn on button. Scroll to the Wallet rows and look at Apple Pay's status honestly: if it already says Active, your remaining problem is almost certainly domain registration, not the toggle.",
+      "heading": "Turn on Apple Pay in payment methods",
+      "body": "Apple Pay isn't a top-level menu item. It sits in Settings under Payment methods, in a Wallet group alongside Google Pay, Cash App Pay, Link, and several region-specific wallets. Each row shows a status on the right, either a green Active tick or a Turn on button. Click Turn on for Apple Pay and Stripe enables it at the account level immediately: there's no application queue for the web version. What the toggle doesn't do is make the button appear on your storefront. Stripe only serves it to a domain it has registered, so a freshly toggled account still shows nothing on the live site.",
       "image": { "file": "/screenshots/8H0BM6e9ZLs/04.webp", "caption": "The payment methods table with the wallet options grouped together. Apple Pay shows a Turn on button here, while Cash App Pay and Link are already active." }
     },
     {
-      "heading": "Turn Apple Pay on",
-      "body": "Click Turn on in the Apple Pay row. Stripe enables it at the account level immediately — there's no application or approval queue for the web version, and no extra fee, since Apple Pay transactions settle at your normal card processing rate. What the toggle does not do is make the button appear on your site. Stripe will only serve the Apple Pay button to a domain it has verified, so a freshly toggled account still shows nothing on the storefront. While you're in this table, it's worth turning on Google Pay in the same pass: it's the Android-side equivalent, the setup cost is the same click, and offering only one wallet leaves half your mobile traffic typing card numbers.",
-      "image": { "file": "/screenshots/8H0BM6e9ZLs/05.webp", "caption": "Stripe's Apple Pay settings, with Web domains at the top and the iOS certificate dialog open — the certificate route is only needed for native apps." }
-    },
-    {
-      "heading": "Register and verify the domain your checkout runs on",
-      "body": "This is the step that catches everyone. From the Apple Pay settings page, open the web domains area and add the exact domain your checkout is served from — including the subdomain, so `shop.example.com` and `example.com` are two separate registrations. Stripe then needs to prove you control it, which means downloading the association file it gives you and hosting it at `/.well-known/apple-developer-merchantid-domain-association` on that domain, reachable over HTTPS with no redirect. If you use Stripe Checkout or Payment Links, Stripe hosts the page itself and this is handled for you; the manual file only applies when you're embedding Elements or the Payment Request button on your own pages. Verify, and the domain flips to a verified state in the list."
+      "heading": "Register your domain",
+      "body": "If your checkout runs on Stripe Checkout or a Payment Link, skip this step: Stripe hosts that page itself, so Apple Pay works with no domain setup at all. If you're embedding Elements or a Payment Request button on your own pages, open the Payment method domains area (reachable from the Apple Pay settings screen or directly under Settings) and add the exact domain your checkout runs on, including the subdomain: shop.example.com and example.com count as two separate registrations. Stripe's current process handles Apple's merchant validation for you: there's no Certificate Signing Request to generate and no association file to download and host yourself. Enter the domain, save, and it moves to a registered state in the list. This replaces the older manual well-known-file process some guides still describe.",
+      "image": { "file": "/screenshots/8H0BM6e9ZLs/05.webp", "caption": "Stripe's Apple Pay settings, with the domain registration area at the top and the iOS certificate dialog open. The certificate route is only needed for native apps." }
     },
     {
       "heading": "Add an iOS certificate only if you have a native app",
-      "body": "The Apple Pay settings page has a second section, iOS certificates, and it exists for a completely different purpose than the domain list above it. Adding one starts with downloading a Certificate Signing Request from Stripe, which you exchange for a certificate on Apple's developer site and upload back — that's the flow that genuinely requires an Apple Developer account. You only need this if you're taking Apple Pay inside an iOS app you publish. If your store is a website, the section will simply say there are no iOS applications, and that's the correct end state — leave it alone rather than working through a certificate you don't need."
+      "body": "The same settings area has a second section, iOS certificates, for a different purpose entirely. Adding one starts with downloading a Certificate Signing Request from Stripe, exchanging it for a certificate on Apple's developer site, then uploading it back. That flow does require an Apple Developer account. You only need this if you're taking Apple Pay inside an iOS app you publish. For a website, leave this section alone; there is nothing to configure here."
     },
     {
       "heading": "Test on a real Apple device before you announce it",
-      "body": "Apple Pay will not appear in Chrome on Windows, in a desktop browser without a card in Wallet, or in most emulators — so a test that shows nothing tells you very little. Open your checkout on an iPhone in Safari, signed into an Apple ID with at least one card added to Wallet, and confirm the black Pay button renders above the card fields. Run the transaction in your sandbox first, then repeat the whole check on the live account, because the domain registration doesn't carry over between them. Finally, look at the payment in the Transactions list and confirm it's recorded as a wallet payment — that's how you'll later tell how much of your revenue the button is actually earning."
+      "body": "Apple Pay won't appear in Chrome on Windows, in a desktop browser without a card in Wallet, or in most emulators, so a test that shows nothing tells you little. Open your checkout on an iPhone in Safari, signed into an Apple ID with at least one card in Wallet, and confirm the black Pay button renders above the card fields. Run the transaction in your sandbox first, then repeat the check on the live account, since domain registration doesn't carry over between them. Afterward, look at the payment in the Transactions list and confirm it's recorded as a wallet payment."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Apple Pay is toggled on but the button never appears on the storefront",
+      "cause": "The domain serving checkout isn't registered yet. This only matters for Elements or a self-hosted Payment Request button; Checkout and Payment Links don't need it.",
+      "fix": "Add the exact host, subdomain included, to the Payment method domains list and confirm it shows as registered."
+    },
+    {
+      "problem": "The button works in the sandbox but not on the live site",
+      "cause": "Sandbox and live are separate Stripe environments, and a domain registered in one doesn't carry over to the other.",
+      "fix": "Repeat the domain registration step on the live account before launch."
+    },
+    {
+      "problem": "Testing shows nothing at all",
+      "cause": "Apple Pay only renders on Apple hardware, in a supported browser, with a card already added to Wallet. It won't appear in Chrome on Windows, most emulators, or a browser with no saved card.",
+      "fix": "Test on a physical iPhone or Mac in Safari with a card in Wallet, and use Stripe's dedicated wallet test page if the button still won't render."
+    },
+    {
+      "problem": "The iOS certificate section looks like it's required to launch",
+      "cause": "It's easy to assume this step applies to every integration, but it only matters for a native iOS app.",
+      "fix": "If your checkout is a website, skip it entirely. An empty iOS certificates section is the expected state."
     }
   ],
   "faq": [
     {
       "question": "Do I need an Apple Developer account to enable Apple Pay in Stripe?",
-      "answer": "Not for a website. Stripe handles the Apple merchant registration for web domains, so a normal Stripe account is enough. You only need an Apple Developer account for the iOS certificate flow, which applies when you're accepting Apple Pay inside a native iPhone app."
+      "answer": "Not for a website. Stripe handles Apple's merchant validation for web domains itself, so a normal Stripe account is enough. An Apple Developer account is only needed for the iOS certificate flow, which applies to a native iPhone app."
     },
     {
       "question": "Why isn't the Apple Pay button showing on my site after I turned it on?",
-      "answer": "Almost always an unverified domain. Stripe only serves the button to domains registered and verified under Apple Pay settings, and subdomains count separately. Check that the exact host serving your checkout is in that list and verified on the same account — sandbox and live are configured independently."
+      "answer": "Almost always an unregistered domain. Stripe only serves the button to domains added under Payment method domains, and subdomains count separately. Checkout and Payment Links are the exception — they need no domain setup at all."
     },
     {
-      "question": "Is domain verification required for Apple Pay?",
-      "answer": "Yes for a website. If you use Stripe Checkout or Payment Links, Stripe hosts the page and verifies for you; if you embed Elements on your own pages, you host the association file Stripe supplies at the /.well-known path over HTTPS."
+      "question": "Do I have to host a verification file myself?",
+      "answer": "No, not with Stripe's current process. You register the domain in the dashboard and Stripe handles the Apple merchant validation behind the scenes. Older guides describing a manual .well-known file upload are describing a process Stripe has since simplified."
     },
     {
       "question": "Can customers use Apple Pay on Android devices?",
-      "answer": "No — it appears only on Apple hardware with a card in Wallet, and only in supported browsers such as Safari. Turn on Google Pay in the same payment methods table to cover Android shoppers with an equivalent one-tap flow."
+      "answer": "No. It appears only on Apple hardware with a card in Wallet, in a supported browser such as Safari. Google Pay is the equivalent for Android and sits in the same payment methods table."
     },
     {
-      "question": "Does enabling Apple Pay cost extra on Stripe?",
-      "answer": "No. Apple Pay transactions are charged at your standard Stripe processing rate, with no separate enablement fee or monthly cost for the wallet itself."
+      "question": "Does domain registration carry over between sandbox and live?",
+      "answer": "No. Register the domain separately in each environment, and remember to repeat the step on the live account before launch even if it already works in the sandbox."
     }
   ],
+  "references": [
+    { "label": "Stripe Docs: Apple Pay (official)", "url": "https://docs.stripe.com/apple-pay?platform=web" },
+    { "label": "Stripe Docs: Register domains for payment methods (official)", "url": "https://docs.stripe.com/payments/payment-methods/pmd-registration.md?dashboard-or-api=dashboard" },
+    { "label": "Stripe Support: Pricing for Apple Pay with Stripe (official)", "url": "https://support.stripe.com/questions/pricing-for-apple-pay-with-stripe" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. Re-checked against Stripe's official documentation in September 2026, which corrected a real change in this guide: Stripe no longer asks merchants to download and host an apple-developer-merchantid-domain-association file for web domains. That verification now happens automatically when you register the domain in the dashboard. The no-extra-fee claim was confirmed against Stripe's own pricing support article.",
   "generatedAt": "2026-08-31T00:00:00.000Z",
   "deep": true
 }

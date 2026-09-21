@@ -1,58 +1,80 @@
 {
   "slug": "how-to-fix-domain-error-in-shopify-needs-attention-dns-server-error-in-custom-we",
   "seoTitle": "Fix Shopify Domain Error: Needs Attention & DNS Fix",
-  "metaDescription": "Shopify domain showing \"Needs Attention\" or a DNS server error? Learn how to fix it by correcting your A record at the registrar so your custom domain connects properly.",
-  "intro": "A red \"Needs Attention\" badge next to your custom domain in Shopify means customers may be hitting a broken connection instead of your store, and the cause is almost always sitting in your domain registrar's DNS settings rather than in Shopify itself. This guide walks through reading Shopify's own diagnosis of the problem, understanding the two most common A record mistakes it flags, and fixing them at the registrar so the domain reconnects cleanly.",
+  "metaDescription": "Shopify domain showing \"Needs Attention\" or a DNS error? Fix it by correcting the A record at your registrar to the IP Shopify names, using automatic connect where it's offered.",
+  "intro": "A red \"Needs Attention\" badge next to your custom domain in Shopify means customers may be hitting a broken connection instead of your store, and the cause is almost always sitting in your domain registrar's DNS settings, not in Shopify itself. This guide walks through reading Shopify's own diagnosis of the problem, understanding the two most common A record mistakes it flags, and fixing them at the registrar so the domain reconnects.",
   "steps": [
     {
       "heading": "Open Domains in your Shopify admin",
-      "body": "From the Shopify admin, go to Settings and then Domains, and click into the domain that's showing a problem. You'll land on a page named after the domain itself, with a status tag next to it — Needs setup or Needs Attention — along with who the domain is managed by and when it was added. This detail page is where Shopify tells you precisely what's wrong instead of leaving you to guess.",
+      "body": "From Shopify admin, go to Settings then Domains, and click into the domain showing a problem. You'll land on a page named after the domain, with a status tag next to it (Needs setup or Needs Attention), plus who the domain is managed by and when it was added. This detail page tells you precisely what's wrong instead of leaving you to guess.",
       "image": { "file": "/screenshots/rryKF4Ffv60/01.webp", "caption": "The domain's detail page inside Shopify admin. The left sidebar shows Domains selected under Settings, with a red banner listing the specific DNS problems found." }
     },
     {
       "heading": "Read the specific error Shopify reports",
-      "body": "The red banner spells out the exact issue rather than a vague error code. Two common messages appear together: \"Your domain has too many A records,\" meaning more than one A record exists for the domain and they conflict with each other, and \"Your domain's A record doesn't point to Shopify,\" meaning whatever A record is set currently points somewhere other than Shopify's servers. Both messages come with the exact IP address Shopify wants the A record set to, so there's no ambiguity about what value to enter."
+      "body": "The red banner spells out the exact issue rather than a vague error code. Two messages appear together most often: \"Your domain has too many A records,\" meaning more than one A record exists and they conflict, and \"Your domain's A record doesn't point to Shopify,\" meaning the current A record points somewhere else. Both come with the IP address Shopify wants the A record set to. Shopify's own documentation notes 23.227.38.65 is the default value here, but your banner can legitimately show a different address with a different host ID — use whatever your own error message displays, not a number copied from elsewhere."
     },
     {
       "heading": "Log in to your domain registrar",
-      "body": "The fix happens outside Shopify, at whichever company you registered or manage the domain through — GoDaddy, Namecheap, Cloudflare, or another provider. Find the DNS management section for that specific domain, which is usually labeled DNS Records, DNS Management, or Zone Editor depending on the registrar. This is the same place you'd go to set up email records or point the domain anywhere else, so if you've touched DNS before, the layout will look familiar."
+      "body": "The fix happens outside Shopify, at whichever company you registered or manage the domain through: GoDaddy, Namecheap, Cloudflare, or another provider. Find the DNS management section for that domain, usually labeled DNS Records, DNS Management, or Zone Editor. If you've edited DNS before, the layout will look familiar; it's the same place you'd set up email records or point the domain anywhere else."
     },
     {
       "heading": "Delete extra A records and set the correct one",
-      "body": "Look through the existing A records for the domain. If you see more than one, that's the \"too many A records\" issue — delete every A record except the one you're about to correct. Then set the remaining A record's value to the exact IP address Shopify's error page displayed, using @ or the root domain as the host/name field depending on your registrar's convention. Leaving stray A records in place, even ones that look harmless, is what causes intermittent connection failures where the store loads sometimes and not other times."
+      "body": "Look through the existing A records for the domain. More than one is the \"too many A records\" issue, so delete every A record except the one you're about to correct. Set the remaining record's value to the exact IP address shown on your Shopify error banner, using @ or the root domain as the host field depending on your registrar's convention. Stray A records left in place cause intermittent failures where the store loads sometimes and not others, since browsers can pick either address."
     },
     {
-      "heading": "Consider Shopify's automatic connection option",
-      "body": "If your registrar is one Shopify has a direct integration with, the domain page offers a Connect automatically option that updates the DNS records on your behalf without you touching the registrar's dashboard at all. It's worth checking for this button before doing the manual edit, since it removes the risk of a typo in the IP address entirely. If your registrar isn't supported for automatic connection, the manual A record fix above is the reliable fallback."
+      "heading": "Check for an automatic connection option",
+      "body": "If your registrar is one Shopify integrates with directly, such as GoDaddy, Cloudflare, or IONOS, the domain page offers a Connect automatically option that updates the DNS records for you without touching the registrar's own dashboard. Check for this before doing the manual edit; it removes the risk of a typo in the IP address entirely. For registrars outside that list, the manual A record fix above is the normal path, not a fallback for something gone wrong."
     },
     {
       "heading": "Save changes and wait for propagation",
-      "body": "Save the DNS changes at the registrar and be patient — Shopify's own note on the domain page states DNS updates can take up to 48 hours to fully take effect, even though most changes propagate much faster in practice. Come back to the same Domains page in Shopify admin periodically; once the records are correctly picked up, the Needs Attention badge and the red banner both clear on their own, and there's nothing further to click or confirm inside Shopify itself.",
+      "body": "Save the DNS changes at the registrar, then be patient. Shopify's own note on the domain page states DNS updates can take up to 48 hours to fully take effect, though many changes propagate faster in practice. Check back on the same Domains page periodically; once the records are picked up, the Needs Attention badge and the red banner clear on their own, with nothing further to click inside Shopify.",
       "image": { "file": "/screenshots/rryKF4Ffv60/05.webp", "caption": "The lower part of the same error banner, with Shopify's chat prompt offering help setting up the domain if the DNS fix doesn't resolve on its own." }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Shopify reports \"too many A records\"",
+      "cause": "A leftover A record from a previous host or a parking page is still present alongside a newer one, and the two conflict.",
+      "fix": "Delete every A record on the domain except a single one set to the exact IP shown on your Shopify error banner."
+    },
+    {
+      "problem": "The IP address Shopify wants doesn't match 23.227.38.65",
+      "cause": "23.227.38.65 is Shopify's commonly cited default, but Shopify's own documentation confirms a domain can be assigned a different, equally valid address.",
+      "fix": "Use the exact value shown on your own domain's error banner rather than a fixed number from a guide."
+    },
+    {
+      "problem": "There's no Connect automatically option on the domain page",
+      "cause": "Automatic connection only works for the specific registrars Shopify has a direct integration with, such as GoDaddy, Cloudflare, and IONOS.",
+      "fix": "This is expected for other registrars, not a sign anything's broken. Use the manual A record edit at your registrar instead."
     }
   ],
   "faq": [
     {
       "question": "Why does my Shopify domain say \"Needs Attention\"?",
-      "answer": "It usually means the A record at your registrar doesn't match what Shopify expects — either it points to the wrong IP address or there's more than one A record set for the domain, both of which Shopify's domain page will name specifically."
+      "answer": "Usually the A record at your registrar doesn't match what Shopify expects: either it points to the wrong IP address, or there's more than one A record set for the domain. Shopify's own error banner names which one applies."
     },
     {
       "question": "Does this work for domains bought outside Shopify?",
-      "answer": "Yes. This fix applies to third-party domains managed through registrars like GoDaddy, Namecheap, or Cloudflare — you just need to update the A record in that registrar's DNS settings, not inside Shopify."
+      "answer": "Yes. This fix applies to third-party domains managed through registrars like GoDaddy, Namecheap, or Cloudflare; you update the A record in that registrar's DNS settings, not inside Shopify."
     },
     {
       "question": "What IP address should my A record point to?",
-      "answer": "Use the exact IP address shown on your own domain's error banner inside Shopify admin — it's listed directly in the error message, so there's no need to guess or search for a generic value."
+      "answer": "Use the exact address shown on your own domain's error banner inside Shopify admin. It's usually 23.227.38.65, but Shopify can issue a different valid address, so treat your own banner as the source of truth."
     },
     {
       "question": "How long does it take for the fix to work?",
-      "answer": "Shopify states DNS updates can take up to 48 hours to fully propagate, though in practice many changes are picked up within a few hours."
+      "answer": "Shopify states DNS updates can take up to 48 hours to fully propagate, though many changes are picked up within a few hours in practice."
     },
     {
       "question": "Will changing my A record affect my email?",
-      "answer": "It shouldn't, since email typically runs on separate MX records, but double-check your registrar's DNS list before deleting anything to make sure you're only removing extra A records, not MX or other unrelated entries."
+      "answer": "It shouldn't, since email typically runs on separate MX records. Double-check your registrar's DNS list before deleting anything, so you're only removing extra A records and not MX or other unrelated entries."
     }
   ],
+  "references": [
+    { "label": "Shopify Help Center: Troubleshooting issues with domains connected to Shopify (official)", "url": "https://help.shopify.com/en/manual/domains/troubleshoot-issues-with-domains" },
+    { "label": "Shopify Help Center: Connecting a third-party domain to Shopify (official)", "url": "https://help.shopify.com/en/manual/domains/add-a-domain/connecting-domains" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. The A record value, the too-many-A-records error, the automatic-connect registrar list, and the 48-hour propagation window were re-checked against Shopify's official Help Center in September 2026. The note that Shopify's A record can validly differ from 23.227.38.65 was added from that same check.",
   "generatedAt": "2026-08-31T00:00:00Z",
   "deep": true
 }
