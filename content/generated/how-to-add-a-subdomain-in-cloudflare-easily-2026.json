@@ -1,20 +1,24 @@
 {
   "slug": "how-to-add-a-subdomain-in-cloudflare-easily-2026",
   "seoTitle": "How to Add a Subdomain in Cloudflare (2026 Guide)",
-  "metaDescription": "Create a custom subdomain like blog or shop in Cloudflare by adding an A record or CNAME alias, then decide whether to proxy it for caching and security.",
-  "intro": "A subdomain lets you carve out a separate section of your site, like shop.yoursite.com or blog.yoursite.com, without buying a new domain. This guide covers adding that subdomain from a real Cloudflare account's DNS panel — reaching the domain's Overview screen, opening the DNS Records section, and filling in the Add record form, whether you're pointing it directly to a server IP or aliasing it to another URL.",
+  "metaDescription": "Create a custom subdomain like blog or shop in Cloudflare by adding an A record or CNAME alias, then decide whether to proxy it for caching, security, and a free SSL certificate.",
+  "intro": "A subdomain lets you carve out a separate section of your site, like shop.yoursite.com or blog.yoursite.com, without buying a new domain. In Cloudflare that just means adding one more row to the DNS records already sitting on your zone: no separate signup, no extra domain purchase, and it works the same on every plan including Free. This guide covers reaching the domain's Overview screen, opening DNS Records, and filling in the Add record form, whether you're pointing it directly at a server IP or aliasing it to another URL.",
+  "prerequisites": [
+    "The parent domain already added to Cloudflare with its nameservers pointed there (the Overview page should show DNS Setup: Full)",
+    "The IPv4 address or target hostname you want the subdomain to point to"
+  ],
   "steps": [
     {
       "heading": "Open your domain's Overview in Cloudflare",
-      "body": "After logging in, selecting a domain from your account drops you on its Overview screen, which shows unique visitors, total requests, and cache percentage over the last 24 hours, 7 days, or 30 days, alongside a DNS panel on the right confirming your DNS Setup is Full. The left sidebar is where every other section lives — Records, AI Crawl Control, Investigate, Analytics, DNS, Email, SSL/TLS, Security, and more, all scoped to whichever domain is currently selected at the top of the page.",
+      "body": "After logging in, selecting a domain from your account drops you on its Overview screen, which shows unique visitors, total requests, and cache percentage over the last 24 hours, 7 days, or 30 days, alongside a DNS panel on the right confirming your DNS Setup is Full. The left sidebar is where every other section lives: Records, AI Crawl Control, Investigate, Analytics, DNS, Email, SSL/TLS, Security, and more, all scoped to whichever domain is currently selected at the top of the page.",
       "image": {
         "file": "/screenshots/u5XeIpgTiFI/02.webp",
         "caption": "A domain's Overview page in Cloudflare, showing traffic analytics and the DNS Setup status before opening the DNS section."
       }
     },
     {
-      "heading": "Expand DNS in the sidebar",
-      "body": "Clicking DNS in the left sidebar expands it into three sub-items: Records, Analytics, and Settings. Records is what you want for adding a subdomain — it's the actual list of every A, AAAA, CNAME, MX, and TXT entry currently configured for the domain. The same page also surfaces an Active Subscriptions panel showing your current plan (Free, in a lot of small-site setups) and an API section with your Zone ID and Account ID, which matter if you're ever scripting DNS changes instead of using the dashboard.",
+      "heading": "Expand DNS in the sidebar and open Records",
+      "body": "Clicking DNS in the left sidebar expands it into three sub-items: Records, Analytics, and Settings. Records is what you want; it's the list of every A, AAAA, CNAME, MX, and TXT entry already configured for the domain. The same page surfaces an Active Subscriptions panel showing your current plan (Free, on a lot of small-site setups) and an API section with your Zone ID and Account ID, useful if you ever script DNS changes instead of using the dashboard.",
       "image": {
         "file": "/screenshots/u5XeIpgTiFI/03.webp",
         "caption": "The DNS menu expanded in the sidebar to reveal Records, Analytics, and Settings, alongside the account's Active Subscriptions and API details."
@@ -22,51 +26,75 @@
     },
     {
       "heading": "Click Add record and choose the type",
-      "body": "On the DNS records page, the Add record button opens a modal titled simply \"Add record,\" with a live description underneath that updates as you fill in the form — for example, \"[name] points to [IPv4 address] and has its traffic proxied through Cloudflare.\" The Type dropdown lists every record kind Cloudflare supports: A, AAAA, CAA, CERT, CNAME, DNSKEY, DS, HTTPS, LOC, MX, NAPTR, NS, OPENPGPKEY, and PTR among them. For a subdomain, the two you'll actually use are A, if you're pointing straight at a server's IPv4 address, or CNAME, if you're aliasing to another domain or a third-party platform's URL.",
+      "body": "On the DNS records page, the Add record button opens a modal titled \"Add record,\" with a live description underneath that updates as you fill in the form, for example \"[name] points to [IPv4 address] and has its traffic proxied through Cloudflare.\" The Type dropdown lists every record kind Cloudflare supports: A, AAAA, CAA, CERT, CNAME, DNSKEY, DS, HTTPS, LOC, MX, NAPTR, NS, OPENPGPKEY, and PTR among them. For a subdomain, the two you'll actually use are A, if you're pointing straight at a server's IPv4 address, or CNAME, if you're aliasing to another domain or a third-party platform's URL.",
       "image": {
         "file": "/screenshots/u5XeIpgTiFI/04.webp",
         "caption": "The Add record modal with the Type dropdown open, listing A, AAAA, CNAME, MX, and the rest of Cloudflare's supported record types."
       }
     },
     {
-      "heading": "Fill in the name, value, and proxy status",
-      "body": "With Type set to A, the form settles into its final shape: a Name field with placeholder text reminding you to \"use @ for root\" — meaning you only type the subdomain prefix, like blog or shop, not the whole domain — an IPv4 address field below it, a Proxy status toggle defaulting to on (the orange cloud, labeled Proxied), and a TTL field set to Auto. A collapsible Record Attributes section sits below for anything more advanced you don't need for a basic subdomain.",
+      "heading": "Fill in the name and value, then set the proxy status",
+      "body": "With Type set to A, the form settles into its final shape: a Name field with placeholder text reminding you to \"use @ for root\", meaning you only type the subdomain prefix like blog or shop, an IPv4 address field below it, a Proxy status toggle, and a TTL field set to Auto. The proxy toggle only appears for A, AAAA, and CNAME records; record types like MX or TXT skip it entirely because they never route through Cloudflare's edge.\n\nOrange cloud (Proxied) sends traffic through Cloudflare first, which enables caching, DDoS protection, hides your origin server's real IP, and is also the only way Cloudflare can issue a free SSL certificate for that hostname. Gray cloud (DNS only) resolves straight to the IP with none of that, which is correct for records like a mail server, but means your own origin has to supply a valid certificate if the subdomain will be browsed over HTTPS. For a typical web-facing subdomain, leaving it proxied is the standard choice.",
       "image": {
         "file": "/screenshots/u5XeIpgTiFI/05.webp",
         "caption": "The completed Add record form for an A record, showing the Name and IPv4 address fields plus the orange Proxied toggle and Auto TTL."
       }
     },
     {
-      "heading": "Decide on proxy status before you save",
-      "body": "The Proxy status toggle is the one decision on this form worth pausing on. Orange cloud (Proxied) routes traffic through Cloudflare first, which enables caching, DDoS protection, and hides your origin server's real IP address. Gray cloud (DNS only) just resolves the name to the IP directly, with none of Cloudflare's edge features in front of it — the right choice for records like a mail server that shouldn't be proxied. For a typical web-facing subdomain like blog or shop, leaving it proxied is the standard choice."
+      "heading": "Save and confirm the record resolves",
+      "body": "Click Save on the modal and the new row appears in your DNS records table immediately. Cloudflare's own edge network picks up the change right away since it's authoritative for the zone; full propagation to every resolver worldwide can occasionally take a little longer, so give it a few minutes before assuming something's wrong if the subdomain doesn't resolve on the first try. This is a plain DNS record inside your existing zone. Cloudflare also sells a separate, Enterprise-only \"subdomain setup\" that spins up an entirely independent zone for a subdomain when a different team needs to manage its own settings; almost nobody adding a single blog or shop subdomain needs that feature."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The subdomain doesn't resolve at all after saving",
+      "cause": "Either the parent domain's nameservers haven't finished pointing to Cloudflare, or the record was saved on the wrong zone.",
+      "fix": "Check that the Overview page shows DNS Setup: Full, confirm the new row is listed under DNS > Records, then wait a few minutes for propagation before re-testing."
     },
     {
-      "heading": "Save and confirm the record resolves",
-      "body": "Clicking Save on the modal adds the new row to your DNS records table immediately, and Cloudflare's own edge network picks up the change right away since it's authoritative for the zone. Full propagation to every DNS resolver worldwide can still take a little longer in rare cases, so give it a few minutes before assuming something's wrong if the subdomain doesn't resolve on the very first try. Once it does, your new subdomain is live and, if proxied, already benefiting from Cloudflare's caching and security layer."
+      "problem": "The subdomain throws a certificate warning even though it loads",
+      "cause": "The record is set to DNS only. Cloudflare can issue an SSL certificate for a hostname only when its proxy status is Proxied; a DNS-only record depends entirely on the origin server's own certificate.",
+      "fix": "Switch the record to Proxied so Cloudflare covers it, or install a valid certificate on the origin server yourself if it needs to stay DNS only."
+    },
+    {
+      "problem": "There's no Proxy status toggle on the record you're adding",
+      "cause": "Proxying only applies to A, AAAA, and CNAME records. Every other type, MX and TXT included, is DNS only by design.",
+      "fix": "Nothing to fix; that's expected. If the record needs Cloudflare's edge features, it has to be an A, AAAA, or CNAME record."
     }
   ],
   "faq": [
     {
       "question": "What's the difference between an A record and a CNAME for a subdomain?",
-      "answer": "An A record points your subdomain directly to a server's IPv4 address, while a CNAME aliases it to another domain name, which is common when pointing at a third-party platform."
+      "answer": "An A record points your subdomain directly to a server's IPv4 address. A CNAME aliases it to another domain name instead, which is common when pointing at a third-party platform."
     },
     {
       "question": "Should I proxy my new subdomain through Cloudflare?",
-      "answer": "Proxying (orange cloud) enables Cloudflare's caching and security features. DNS-only mode (gray cloud) routes traffic directly to your origin without those benefits, which is usually right for things like mail servers."
+      "answer": "Proxying (orange cloud) enables caching, DDoS protection, and a Cloudflare-issued SSL certificate. DNS-only mode (gray cloud) routes traffic straight to your origin with none of that, which is usually right for records like a mail server."
     },
     {
       "question": "How long does it take for a new subdomain to start working?",
       "answer": "Cloudflare's own edge network picks up the change almost immediately, though full global DNS propagation to every resolver can occasionally take longer."
     },
     {
-      "question": "Can I add multiple subdomains to the same domain?",
-      "answer": "Yes. You can add as many A or CNAME records as you need from the same DNS Records page, each with its own unique subdomain prefix in the Name field."
+      "question": "Do I need an Enterprise plan to add a subdomain?",
+      "answer": "No. Adding a DNS record for a subdomain works on every Cloudflare plan, Free included. The paid, Enterprise-only \"subdomain setup\" feature is a different thing: a fully separate zone for cases where another team needs independent Cloudflare settings for that subdomain."
     },
     {
-      "question": "Where do I find the Add record button?",
-      "answer": "From your domain's Overview page, expand DNS in the left sidebar, click Records, and the Add record button sits above the existing records table."
+      "question": "Can I add multiple subdomains to the same domain?",
+      "answer": "Yes. Add as many A or CNAME records as you need from the same DNS Records page, each with its own subdomain prefix in the Name field."
     }
   ],
+  "references": [
+    {
+      "label": "Cloudflare Docs: Create a subdomain record (official)",
+      "url": "https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-subdomain/"
+    },
+    {
+      "label": "Cloudflare Docs: Subdomain setup, and how it differs from a plain DNS record (official)",
+      "url": "https://developers.cloudflare.com/dns/zone-setups/subdomain-setup/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. Record-type behavior, the proxy/SSL relationship, and the distinction between a plain DNS record and Cloudflare's Enterprise-only subdomain setup were re-checked against Cloudflare's official DNS documentation in September 2026, which is also where the certificate-warning troubleshooting entry came from.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

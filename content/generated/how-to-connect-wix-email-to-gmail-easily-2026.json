@@ -1,24 +1,24 @@
 {
   "slug": "how-to-connect-wix-email-to-gmail-easily-2026",
   "seoTitle": "How to Connect Your Gmail Account to Wix Inbox",
-  "metaDescription": "Learn how to connect Gmail to your Wix Inbox so ongoing customer conversations from your Wix site sync directly with your Gmail account.",
-  "intro": "There are two different things people mean by \"connect Wix email to Gmail,\" and it matters which one you're after. Manually forwarding a custom-domain mailbox into Gmail via POP3 is one route, but Wix also ships a built-in Gmail integration that works the other direction: it links your Gmail account to the Wix Inbox so conversations that start on your site — through forms, live chat, or messages — continue in your Gmail without you having to log into two places. This guide covers that native connection, exactly as it appears in the Wix dashboard.",
+  "metaDescription": "Connect Gmail to your Wix Inbox so conversations that start on your site sync into Gmail, and see exactly what does and doesn't carry over.",
+  "intro": "There are two different things people mean by \"connect Wix email to Gmail,\" and it matters which one you're after. Manually forwarding a custom-domain mailbox into Gmail over POP3 is one route, but Wix also ships a built-in Gmail integration that works the other direction: it links your Gmail account to the Wix Inbox so conversations that start on your site, through forms, live chat, or messages, continue in your Gmail without logging into two places. This guide covers that native connection, exactly as it appears in the Wix dashboard.",
   "steps": [
     {
       "heading": "Open the Wix Inbox",
-      "body": "From your site dashboard, click Inbox in the left-hand menu. This is the central hub for every message a visitor sends you, whether it arrives through a contact form, live chat widget, or another connected channel. The Inbox is the piece Gmail actually connects to, so it's worth knowing your way around it before setting anything up — features like saved replies and automations live here too, and they'll apply to messages regardless of whether you're reading them in Wix or in Gmail after connecting.",
+      "body": "From your site dashboard, click Inbox in the left-hand menu. This is the central hub for every message a visitor sends you, whether it arrives through a contact form, live chat widget, or another connected channel. It's worth knowing your way around it before setting anything up: saved replies and automations live here too, and they apply to messages no matter whether you're reading them in Wix or in Gmail after connecting.",
       "image": {
         "file": "/screenshots/wJ5Q3KUbmV4/03.webp",
         "caption": "The Wix Inbox, which centralizes messages from email, live chat, and other site channels into one place."
       }
     },
     {
-      "heading": "Go to Settings and find the Gmail Account page",
-      "body": "Navigate to Settings, then Communication Channels, then Gmail Account. This dedicated page is where the connection lives, separate from your general site settings. It's not grouped with billing or domain settings, so if you're hunting for it the Communication Channels section is the one to check first."
+      "heading": "Open Communication Channels and manage the Gmail app",
+      "body": "Inside the Inbox, open the Settings dropdown in the top right, click Communication Channels, then click Manage App next to Gmail account. This dedicated page is where the connection lives, separate from your general site settings, so if you're hunting for it, Communication Channels is the section to check first."
     },
     {
-      "heading": "Review what connecting actually does before you click through",
-      "body": "Before you connect, Wix shows two conditions worth reading carefully. First, emails from your personal Gmail account will not appear in the Wix Inbox — this only syncs conversations that started on your site. Second, to send emails from your Gmail address through Wix, you need to grant Wix access to your Google account. Click Continue with Google once you understand the scope, and you'll be sent through Google's standard OAuth consent flow rather than typing in a password anywhere inside Wix.",
+      "heading": "Grant Google access and connect",
+      "body": "Before connecting, Wix lays out two things worth reading carefully. First, emails from your personal Gmail account will not appear in the Wix Inbox; this only syncs conversations that started on your site. Second, sending emails from your Gmail address through Wix means granting Wix access to your Google account. Click Continue with Google, choose the account to connect, then check the boxes for what Wix can access and continue. You're sent through Google's own OAuth consent screen rather than typing a password anywhere inside Wix.",
       "image": {
         "file": "/screenshots/wJ5Q3KUbmV4/04.webp",
         "caption": "The Gmail Account connection dialog, spelling out that only site conversations sync and that sending requires Google account access."
@@ -26,7 +26,7 @@
     },
     {
       "heading": "Confirm the connection is active",
-      "body": "After granting access, you'll land back on the Gmail Account page with the connected address displayed and its status showing Connected. A Disconnect button sits right next to it if you ever need to unlink the account, which is worth knowing since there's no separate confirmation step buried in a different menu — disconnecting here immediately breaks the sync.",
+      "body": "After granting access, you land back on the Gmail Account page with the connected address shown and its status reading Connected. A Disconnect button sits right next to it, worth knowing about since there's no separate confirmation step buried in another menu: disconnecting here takes effect immediately, and any future replies you send from that Gmail address stop showing up in the Wix Inbox.",
       "image": {
         "file": "/screenshots/wJ5Q3KUbmV4/05.webp",
         "caption": "The Gmail Account page once connected, showing the linked address, a Connected status, and a Disconnect option."
@@ -34,21 +34,29 @@
     },
     {
       "heading": "Understand what syncs and what doesn't",
-      "body": "The built-in FAQ on this page answers the question most people get wrong: only emails that continue a conversation already started in Wix Inbox will appear there. A brand-new email you send from your personal Gmail account, unrelated to any Wix conversation, will not show up in the Inbox. This is a continuation sync, not a full mailbox import, so don't expect your entire Gmail history to populate inside Wix."
+      "body": "Only messages that continue a conversation already started in the Wix Inbox appear there. A brand-new email you send from your personal Gmail, unrelated to any Wix conversation, will not show up in the Inbox. This is a continuation sync, not a full mailbox import, so don't expect your entire Gmail history to populate inside Wix. Gmail isn't the only channel Wix will connect this way either; Outlook can be linked separately through the Outlook for Inbox app in the Wix App Market, and both can be connected to the same site at once."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Gmail was connected but conversations stopped syncing",
+      "cause": "Wix's own guidance points to expired or revoked Google permissions as the usual cause.",
+      "fix": "Disconnect fully from the Gmail Account settings page, then run through Continue with Google again from scratch rather than trying to patch a half-connected state."
     },
     {
-      "heading": "Reconnect if the sync stops working",
-      "body": "If your Gmail account stops connecting after you've reconnected it, Wix's own troubleshooting notes point to permissions or token expiry as the usual cause — disconnect fully, then run through the Continue with Google flow again from scratch rather than trying to patch a half-connected state. The same Gmail Account settings page also answers whether other providers like Yahoo or AOL can be connected, so check there if Gmail isn't your primary address."
+      "problem": "A personal email you sent from Gmail never showed up in the Wix Inbox",
+      "cause": "That's expected behavior, not a bug. The sync only carries messages that continue a conversation the site started; anything else stays in Gmail only.",
+      "fix": "None needed. Check the message in Gmail directly rather than looking for it in Wix."
     }
   ],
   "faq": [
     {
       "question": "Will my personal Gmail emails show up in the Wix Inbox after connecting?",
-      "answer": "No. Wix states directly on the connection screen that emails from your personal Gmail account will not appear in the Wix Inbox — only conversations that started on your site sync through."
+      "answer": "No. Wix states directly on the connection screen that emails from your personal Gmail account will not appear in the Wix Inbox; only conversations that started on your site sync through."
     },
     {
       "question": "Do I need to enter a password to connect Gmail to Wix?",
-      "answer": "No. The connection uses Google's standard OAuth flow — you click Continue with Google and grant access through Google's own consent screen, never typing a password into Wix."
+      "answer": "No. The connection uses Google's standard OAuth flow. You click Continue with Google and grant access through Google's own consent screen, never typing a password into Wix."
     },
     {
       "question": "What happens if I send a new email from Gmail that isn't related to a Wix conversation?",
@@ -56,13 +64,24 @@
     },
     {
       "question": "Can I disconnect Gmail from Wix later?",
-      "answer": "Yes, the Gmail Account settings page has a Disconnect button right next to the connected address, and disconnecting takes effect immediately."
+      "answer": "Yes. The Gmail Account settings page has a Disconnect button right next to the connected address, and disconnecting takes effect immediately."
     },
     {
       "question": "Can I connect other email providers besides Gmail?",
-      "answer": "Wix addresses this in the same settings page's FAQ section, so check Settings → Communication Channels → Gmail Account for current provider support, including options like Yahoo or AOL."
+      "answer": "Outlook can be connected through the separate Outlook for Inbox app in the Wix App Market, and it can run alongside Gmail on the same site. Wix's help center doesn't list support for other consumer providers like Yahoo or AOL."
     }
   ],
+  "references": [
+    {
+      "label": "Wix Help Center: Wix Inbox – Connecting Your Gmail Account (official)",
+      "url": "https://support.wix.com/en/article/wix-inbox-connecting-your-gmail-account"
+    },
+    {
+      "label": "Wix Help Center: Connecting an Email Provider Other Than Gmail to Wix Inbox (official)",
+      "url": "https://support.wix.com/en/article/request-connecting-an-email-provider-other-than-gmail-to-wix-inbox"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The navigation, sync behavior, and supported-provider claims were re-checked against Wix's official Help Center in September 2026. That check corrected the earlier FAQ's unverified mention of Yahoo and AOL support, replacing it with what Wix's own documentation actually confirms: Outlook via a separate App Market app, and no listed support for other consumer providers.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

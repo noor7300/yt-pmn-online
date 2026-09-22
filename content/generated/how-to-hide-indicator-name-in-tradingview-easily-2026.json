@@ -1,55 +1,77 @@
 {
   "slug": "how-to-hide-indicator-name-in-tradingview-easily-2026",
   "seoTitle": "Hide Indicator Names in TradingView for a Clean Chart",
-  "metaDescription": "Learn how to hide indicator titles and labels in TradingView using the chart settings panel, so your layout stays clean without losing the indicators.",
-  "intro": "A chart running several indicators can quickly fill up with title text and status-line labels stacked in the corner, making it harder to actually read price action underneath. This guide shows exactly where that clutter comes from and how to turn it off using TradingView's chart settings panel, without removing or disabling the indicators themselves. It's aimed at traders who want a cleaner, more minimal chart, especially anyone running multiple overlays and oscillators at once.",
+  "metaDescription": "Hide indicator titles and values in TradingView, chart-wide or for just one indicator, using the Status Line settings and each indicator's own Style tab.",
+  "intro": "A chart running several indicators can quickly fill up with title text and status-line labels stacked in the corner, making it harder to read the price action underneath. This guide covers two ways to clear that clutter in TradingView: a chart-wide setting that hides every indicator's name at once, and a per-indicator setting for when you only want to quiet down one of them. Neither disables the indicators themselves; they keep calculating exactly as before.",
   "steps": [
     {
       "heading": "See what indicator labels look like by default",
-      "body": "With a couple of indicators active — an EMA overlaid on price and moving-average-cross signals plotted as arrows with plus/minus labels — the top-left corner of the chart fills up fast. Each indicator writes its name and current value on its own line: 'EMA 20 close 3.29', 'MovingAvgCross 9 1', and so on, stacking downward as you add more. On a chart with several tools running, this label stack alone can cover a meaningful chunk of the price pane.",
+      "body": "With a couple of indicators active (an EMA overlaid on price and a moving-average-cross signal plotted as arrows), the top-left corner of the chart fills up fast. Each indicator writes its name and current value on its own line: \"EMA 20 close 3.29\", \"MovingAvgCross 9 1\", and so on, stacking downward as more get added. On a chart running several tools at once, this label stack alone can cover a meaningful chunk of the price pane.",
       "image": { "file": "/screenshots/YmJHSGtHvjc/02.webp", "caption": "A chart with an EMA and a moving-average-cross indicator active. Their names and live values stack in the top-left corner: 'EMA 20 close 3.29' and 'MovingAvgCross 9 1'." }
     },
     {
-      "heading": "Open the chart Settings panel",
-      "body": "Right-click anywhere on the chart and choose Settings, or click the gear icon in the top toolbar. The Settings dialog opens with a left-hand list of sections — Symbol, Status line, Scales and lines, Canvas, Trading, Alerts, Events — and the Status line tab is the one that controls what text appears docked in the corner of your chart, including everything indicators write there.",
+      "heading": "Open the chart's Status Line settings",
+      "body": "Right-click anywhere on the chart and choose Settings, or click the gear icon in the top toolbar, then open the Status Line tab. This is the tab that controls what text sits docked in the corner of the chart, including everything indicators write there. TradingView also has a faster, blunter shortcut for the same corner: hovering over the legend reveals a small plus/minus toggle that collapses the whole label block in one click. That's fine for a quick look, but it hides titles and values together and doesn't remember your choice, so it's not a substitute for the settings below if you want a specific combination kept.",
       "image": { "file": "/screenshots/YmJHSGtHvjc/03.webp", "caption": "The chart Settings panel on the Status line tab, showing checkboxes for Title, Chart values, Bar change values, and, under Indicators, Titles with an Inputs sub-option." }
     },
     {
       "heading": "Uncheck Titles and Values under Indicators",
-      "body": "Scroll to the Indicators section within Status line and you'll find two relevant checkboxes: Titles, which controls whether each indicator's name and input arguments are printed on the chart, and Values, which controls whether the live numeric readout is shown. Uncheck Titles and its Inputs sub-checkbox disappears along with it — that's the setting doing the actual work here. Leave Values checked if you still want to glance at the live number without the name label cluttering the same line."
+      "body": "Scroll to the Indicators section within Status Line and you'll find two relevant checkboxes: Titles, which controls whether each indicator's name and input arguments print on the chart, and Values, which controls the live numeric readout. Uncheck Titles and its Inputs sub-checkbox disappears with it, since there's no title line left for it to attach to. Leave Values checked if you still want the live number without the name cluttering the same line. Click OK to apply."
     },
     {
       "heading": "Confirm the labels are gone",
-      "body": "With Titles and Values both unchecked, the same chart that had 'EMA 20 close' and 'MovingAvgCross 9 1' stacked in the corner now shows just the indicator lines and signal markers themselves, with no text label attached. The indicators are still fully active and calculating in the background — nothing about how they function changes, only what gets printed on screen.",
+      "body": "With Titles and Values both unchecked, the same chart that had \"EMA 20 close\" and \"MovingAvgCross 9 1\" stacked in the corner now shows just the indicator lines and signal markers, with no text label attached. The indicators are still fully active and calculating in the background; only what gets printed on screen has changed.",
       "image": { "file": "/screenshots/YmJHSGtHvjc/05.webp", "caption": "The same Status line settings with Titles and Values both unchecked. The Inputs sub-option disappears along with Titles, since there's no title line left to attach it to." }
     },
     {
-      "heading": "Decide what to keep for readability",
-      "body": "A fully bare chart isn't always the goal — if you're running five or six indicators, keeping Values checked while hiding Titles can strike a better balance, letting you glance at a live number without the name clutter, while still knowing which line is which by color or position on the chart."
+      "heading": "Hide just one indicator's label instead of all of them",
+      "body": "The Status Line panel above is chart-wide: turning off Titles hides every indicator's name at once. If you only want to quiet one indicator and keep the rest labeled, that setting lives somewhere else. Open that specific indicator's own settings (hover over it in the legend and click its gear icon), go to the Style tab, and uncheck \"Labels on the price scale\" and \"Values in the status line\". Those two checkboxes are separate from the chart-wide Status Line panel and apply only to that indicator."
     },
     {
       "heading": "Save the layout so it sticks",
-      "body": "Click Ok to apply the settings, then save your layout from the toolbar so the hidden-label configuration persists the next time you open that chart. This setting lives with the layout rather than your account globally, so a different saved layout will keep its own separate Titles and Values preference."
+      "body": "Save your layout from the toolbar so the hidden-label configuration persists the next time you open that chart. This setting lives with the layout, not your account, so a different saved layout keeps its own separate Titles and Values preference."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Titles are unchecked in Status Line settings, but one indicator's name still shows",
+      "cause": "That indicator has its own \"Labels on the price scale\" or \"Values in the status line\" option turned on in its own Style tab, which is a separate setting from the chart-wide Status Line panel.",
+      "fix": "Open that indicator's own settings (hover over it in the legend, click the gear icon), go to Style, and uncheck those two boxes as well."
+    },
+    {
+      "problem": "The labels are back after reopening TradingView",
+      "cause": "Status Line settings are saved per chart layout, not per account. A different or unsaved layout loads its own Titles/Values state.",
+      "fix": "Re-apply the change on that layout and save it explicitly. Don't assume it carries over to every chart you open."
     }
   ],
   "faq": [
     {
       "question": "Will hiding the indicator name affect how it functions?",
-      "answer": "No — hiding the Titles or Values label in Status line settings only changes what's displayed visually and doesn't change how the indicator calculates or behaves."
+      "answer": "No. Hiding the Titles or Values label in Status Line settings only changes what's displayed. It doesn't change how the indicator calculates or behaves."
     },
     {
-      "question": "Can I hide labels for all indicators at once?",
-      "answer": "Yes, within one chart — the Titles and Values checkboxes under the Indicators section of Status line settings apply to every active indicator on that chart at once, not one at a time."
+      "question": "Can I hide labels for all indicators at once, or just one?",
+      "answer": "Both. The Titles and Values checkboxes under Status Line settings apply to every active indicator on the chart at once. To hide just one indicator's label while keeping the rest visible, use that indicator's own Style tab instead."
+    },
+    {
+      "question": "Is there a quicker way to temporarily hide all labels?",
+      "answer": "Yes. Hovering over the legend reveals a plus/minus toggle that collapses the whole label block in one click, but it hides titles and values together and doesn't save as a preference the way the Status Line settings do."
     },
     {
       "question": "Does this setting reset when I reload TradingView?",
-      "answer": "If you save your layout after making the change, the hidden labels persist the next time you open that same chart layout."
+      "answer": "Not if you save your layout after making the change. Load a different layout, though, and it can carry its own separate setting."
     },
     {
       "question": "Why would I want to hide indicator names?",
-      "answer": "Hiding titles reduces visual clutter, especially when running multiple indicators, making it easier to focus on price and key signals instead of a stack of label text in the corner."
+      "answer": "Hiding titles reduces visual clutter, especially with multiple indicators running, making it easier to focus on price and key signals instead of a stack of label text in the corner."
     }
   ],
+  "references": [
+    { "label": "Indicator titles, parameters & values disappeared from the legend (official)", "url": "https://www.tradingview.com/support/solutions/43000473925-indicator-titles-parameters-values-disappeared-from-the-legend-top-left-corner-of-the-chart/" },
+    { "label": "How to show Hide, Settings and Remove options of an indicator (official)", "url": "https://www.tradingview.com/support/solutions/43000539711-how-to-show-hide-settings-and-remove-options-of-an-indicator-or-ticker-symbol/" },
+    { "label": "I want to hide the values of individual indicators (official)", "url": "https://www.tradingview.com/support/solutions/43000659666-i-want-to-hide-the-values-of-individual-indicators/" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough of the chart-wide Status Line settings. The mechanism, plus the separate per-indicator method (that indicator's own Style tab) and the quick legend toggle, were checked against TradingView's own support articles in September 2026. The per-indicator method was added; the original write-up only covered the chart-wide toggle.",
   "generatedAt": "2026-08-01T09:00:00.000Z",
   "deep": true
 }
