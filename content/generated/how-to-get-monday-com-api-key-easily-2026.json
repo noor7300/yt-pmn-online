@@ -1,46 +1,67 @@
 {
   "slug": "how-to-get-monday-com-api-key-easily-2026",
   "seoTitle": "How to Get Your Monday.com API Key (2026 Guide)",
-  "metaDescription": "Find, generate, and copy your personal Monday.com API token from the Administration settings, plus how to keep it secure or regenerate it if it leaks.",
-  "intro": "Every custom script, automation agent, or third-party integration that talks to Monday.com needs a personal API token to authenticate. Monday.com doesn't put this anywhere near the boards you use daily — it lives inside account-level Administration settings, which is exactly why people go looking under Developer menus or Apps first and come up empty. This guide walks the real click path from your profile avatar to the token screen, explains what you're looking at once you're there, and covers the security habits worth building in before you paste that token into anything.",
+  "metaDescription": "Find, generate, and copy your personal Monday.com API token. The click path differs by role: Developers works for everyone, Administration only for account admins.",
+  "intro": "Every custom script, automation agent, or third-party integration that talks to Monday.com needs a personal API token to authenticate. Monday.com doesn't put this anywhere near the boards you use daily, and the route to it depends on your account role, which is exactly why people go looking under one menu and never find it. This guide covers both click paths, explains what you're looking at once you're there, and covers the security habits worth building in before you paste that token into anything.",
   "steps": [
     {
-      "heading": "Open the account menu from your profile avatar",
-      "body": "Click your avatar in the top-right corner of any Monday.com workspace to open the account panel. It's split into two columns — Account on the left with items like My profile, Import data, and Developers, and Explore on the right with the app marketplace and mobile app links. The item you actually want, Administration, sits in the Account column below Developers, which trips people up because \"Developers\" looks like the obvious choice but leads to a separate app-building area instead of your personal token.",
+      "heading": "Open the account menu",
+      "body": "Click your avatar in the top-right corner of any Monday.com workspace to open the account panel. It's split into two columns: Account on the left, with items like My profile, Developers, and Administration, and Explore on the right, with the app marketplace and mobile app links. Which of those two Account items you need, Developers or Administration, depends on your role, which the next step covers.",
       "image": {
         "file": "/screenshots/5LHMhref7P4/02.webp",
-        "caption": "The account panel opened from the avatar menu, with Administration listed under Account alongside My profile and Developers."
+        "caption": "The account panel opened from the avatar menu. Regular members reach their token through Developers; only account admins also see Administration."
       }
     },
     {
-      "heading": "Go to Connections, then Personal API token",
-      "body": "Inside Administration, the left sidebar groups settings under headings like General, Customization, Directory, Security, and Connections. Expand Connections and you'll find three entries: Automation connections, On-premise profiles, and Personal API token — the last one is where you're headed. Clicking it loads the Monday.com API page, which has a single input labeled Personal API Token, a Generate link above it, and a Copy button beside it. A blue note links out to the API documentation, and a red banner warns that the token grants powerful access to your account, so it needs to be treated like a password.",
+      "heading": "Find your token screen: Developers for most people, Administration for admins",
+      "body": "If you are not an account admin, click Developers in the avatar menu. It opens the Developer Center in a new tab; from there, click API token, then Show, to reveal your personal token. If you are an account admin, you have a second route: Administration in the same avatar menu, then Connections in the left sidebar, then Personal API token. That's the screen shown here, with a single input labeled Personal API Token, a Generate link, and a Copy button. A blue note links to the API documentation, and a red banner warns that the token grants powerful access to your account, so treat it like a password. Both routes point at the same personal token, tied to your own user account rather than to a board or workspace.",
       "image": {
         "file": "/screenshots/5LHMhref7P4/03.webp",
-        "caption": "The Personal API Token screen under Administration → Connections, showing the empty token field, the Generate link, and Monday's warning about keeping it secure."
+        "caption": "The Personal API Token screen reached through Administration → Connections. Non-admin members reach an equivalent screen through Developers → API token instead."
       }
     },
     {
       "heading": "Generate the token and copy it immediately",
-      "body": "With the field empty, click Generate. Monday.com fills the box with a long signed string — this is your personal token, tied to your user account and its permission level, not to a specific board or workspace. Click Copy right away and paste it straight into wherever it needs to live, such as an environment variable, a secrets manager, or the header of your script. Don't leave it sitting in a chat message or a plain text file; once it's copied, move it into secure storage before doing anything else with it."
+      "body": "With the field empty, click Generate (or Show, on the Developers path, once a token already exists). Monday.com fills the box with a long signed string, your personal token, tied to your user account and its permission level, not to a specific board or workspace. Click Copy right away and paste it straight into wherever it needs to live: an environment variable, a secrets manager, or the header of your script. Don't leave it sitting in a chat message or a plain text file. Move it into secure storage before doing anything else with it."
     },
     {
       "heading": "Understand what the token can and can't do",
-      "body": "A personal API token inherits your own user permissions across the account — if you can see a board, edit an item, or manage automations manually, your token can do the same thing through the API. This is different from an OAuth app credential, which is scoped to whatever permissions a user explicitly grants during an install flow. For a personal script or a local automation agent only you will run, the personal token is the simpler path. For anything you plan to distribute to other users or connect on their behalf, look at building an OAuth app instead so you're not handing out access tied to your own account."
+      "body": "A personal API token inherits your own user permissions across the account. If you can see a board, edit an item, or manage automations manually, your token can do the same thing through the API. This is different from an OAuth app credential, which is scoped to whatever permissions a user explicitly grants during an install flow. For a personal script or a local automation agent only you will run, the personal token is the simpler path. For anything you plan to distribute to other users or connect on their behalf, look at building an OAuth app instead, so you're not handing out access tied to your own account."
     },
     {
       "heading": "Test the connection before building on top of it",
-      "body": "Before wiring the token into a larger workflow, send one simple authenticated request to Monday.com's GraphQL API endpoint — a query for your own account name or user ID is enough to confirm the token works and that you're pointed at the right API URL. Catching an authentication problem at this stage, with one request, is far faster than debugging it inside a half-built integration with multiple moving parts."
+      "body": "Before wiring the token into a larger workflow, send one simple authenticated request to Monday.com's GraphQL API endpoint. A query for your own account name or user ID is enough to confirm the token works and that you're pointed at the right API URL. Catching an authentication problem at this stage, with one request, is far faster than debugging it inside a half-built integration with multiple moving parts."
     },
     {
       "heading": "Regenerate the token if it's ever exposed",
-      "body": "If a token ends up somewhere it shouldn't — committed to a public repository, pasted into a shared document, or used in a script that got copied around — go back to the same Personal API token screen and click Generate again. Monday.com issues a fresh token and immediately invalidates the old one, which cuts off anything still using it. Update every place that referenced the old token afterward, since regenerating breaks those connections until you swap in the new value, and check your workspace's activity log for anything that looks like it came from the compromised key."
+      "body": "If a token ends up somewhere it shouldn't, committed to a public repository, pasted into a shared document, or used in a script that got copied around, go back to the same token screen and click Generate again. Monday.com issues a fresh token and immediately invalidates the old one, which cuts off anything still using it. Update every place that referenced the old token afterward, since regenerating breaks those connections until you swap in the new value, and check your workspace's activity log for anything that looks like it came from the compromised key."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Administration isn't in your avatar menu",
+      "cause": "Administration only appears for account admins; regular members don't get it at all.",
+      "fix": "Use Developers in the same avatar menu instead, then API token → Show, which works for every role."
+    },
+    {
+      "problem": "A script or integration suddenly stops authenticating",
+      "cause": "The personal token was regenerated, intentionally or by someone else with admin access, which immediately invalidates the previous value.",
+      "fix": "Generate a fresh token from the same screen and update every place that referenced the old one."
+    },
+    {
+      "problem": "API calls return a permissions error even though the token is valid",
+      "cause": "A personal token mirrors your own user permissions exactly; if your account has read-only access to a board, the token can't write to it either.",
+      "fix": "Check what your own user account can do on that board first. If you need broader or narrower access than your account has, that's a permissions change, not a token problem."
     }
   ],
   "faq": [
     {
       "question": "Where do I find my Monday.com API key?",
-      "answer": "Click your profile avatar, choose Administration, then open Connections → Personal API token. Click Generate to create one and Copy to grab it."
+      "answer": "It depends on your role. Most people click their avatar, then Developers, which opens the Developer Center; click API token, then Show. Account admins can also reach the same token through Administration → Connections → Personal API token."
+    },
+    {
+      "question": "Why don't I see Administration in my avatar menu?",
+      "answer": "Administration is only shown to account admins. If it's missing, you're a regular member, and Developers → API token in the same avatar menu gets you to your own personal token instead."
     },
     {
       "question": "Is a personal API token the same as an OAuth token?",
@@ -53,12 +74,12 @@
     {
       "question": "Can I limit what my API token can access?",
       "answer": "A personal token mirrors your own user permissions across the account rather than offering granular scopes. If you need tighter, per-integration access control, build an OAuth app instead."
-    },
-    {
-      "question": "Is it safe to put my Monday.com token in a script?",
-      "answer": "Only if it's stored as an environment variable or in a secrets manager, never hardcoded in plain text or committed to version control. Treat it with the same caution as a password, since it grants full access to whatever your account can see."
     }
   ],
+  "references": [
+    { "label": "Monday.com Developer Docs: Authentication (official)", "url": "https://developer.monday.com/api-reference/docs/authentication" }
+  ],
+  "verifiedNote": "Click path re-checked against Monday.com's official developer documentation in September 2026. That check found the original draft's Administration-only path works for account admins but not for regular members, who need Developers → API token instead; the steps and FAQ here now cover both.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

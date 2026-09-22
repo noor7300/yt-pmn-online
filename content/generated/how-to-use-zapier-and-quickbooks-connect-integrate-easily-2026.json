@@ -1,45 +1,63 @@
 {
   "slug": "how-to-use-zapier-and-quickbooks-connect-integrate-easily-2026",
   "seoTitle": "Connect Zapier and QuickBooks Online",
-  "metaDescription": "How to build a Zap that watches QuickBooks Online for changes like new accounts, then filters and routes that data automatically without manual checking.",
+  "metaDescription": "Build a Zap that watches QuickBooks Online for changes like a new account, filters what matters, and routes it automatically — plus the plan tier, polling delay, and API limits that catch people out.",
   "intro": "Zapier connects to QuickBooks Online the same way it connects to hundreds of other apps: as a trigger you can watch, or an action you can fire. This guide focuses on the trigger side — setting QuickBooks Online as the app a Zap watches for changes, such as a new account appearing in your chart of accounts — then narrowing what actually moves forward with a filter step. It's the foundation any QuickBooks automation is built on, whether the end goal is a Slack alert, a spreadsheet row, or another accounting action entirely.",
+  "costNote": "QuickBooks Online is tagged Premium in Zapier's app catalogue. Using it as a trigger or action needs Zapier's Professional plan or higher (Team and Enterprise also work); the Free plan doesn't include it, no matter which QuickBooks Online subscription you're paying for separately.",
   "steps": [
     {
-      "heading": "Check your existing integrations from the QuickBooks dashboard",
-      "body": "Before building anything in Zapier, it's worth glancing at QuickBooks Online's own dashboard — the profile menu in the top right includes a My Integrations panel that lists what's already connected to your company file. This is a good sanity check if you're troubleshooting later, since a duplicate or conflicting integration here can cause a new Zap to behave unpredictably. The main dashboard itself, with its bank accounts, profit and loss, and invoice widgets, is also the place you'll come back to in order to confirm a Zap actually did what it was supposed to.",
+      "heading": "Check your existing QuickBooks integrations first",
+      "body": "Before building anything in Zapier, glance at QuickBooks Online's own dashboard. The profile menu in the top right holds a My Integrations panel listing everything already connected to your company file. Check it if you're troubleshooting later, since a duplicate or conflicting integration here can make a new Zap behave unpredictably. The main dashboard, with its bank accounts, profit and loss, and invoice widgets, is also where you'll come back to confirm a Zap did what it was supposed to.",
       "image": { "file": "/screenshots/Fmh9Yj3faXk/01.webp", "caption": "The QuickBooks Online home dashboard, with the My Integrations panel open from the profile menu in the top right." }
     },
     {
-      "heading": "Start a Zap and set QuickBooks Online as the trigger app",
-      "body": "In Zapier, create a new Zap and search for QuickBooks Online as the first step's app. Zapier flags whether you're on a plan tier that supports it — QuickBooks Online shows up here tagged Premium — so confirm your Zapier plan covers it before building further. Under Trigger event, you'll find options like New Account among others; picking one determines exactly what condition in QuickBooks will kick off the rest of the workflow.",
+      "heading": "Start a Zap and connect QuickBooks Online as the trigger",
+      "body": "In Zapier, create a new Zap and search for QuickBooks Online as the first step's app. Zapier tags it Premium, meaning it needs a paid plan tier — Professional, Team, or Enterprise — not the free one, regardless of your own QuickBooks Online subscription. Under Trigger event, pick from options including New Account, New Bill, New Expense, and New Vendor; whichever you choose determines exactly what condition in QuickBooks kicks off the rest of the workflow.\n\nClick Sign In next to the Account field to open QuickBooks' own authorization screen, log in, and grant Zapier permission to read your company file's data. This runs through Intuit's standard OAuth flow, so your QuickBooks password never touches Zapier itself. Once authorized, the account field shows your connected company and the step's status updates to an active link rather than just a configured one.",
       "image": { "file": "/screenshots/Fmh9Yj3faXk/02.webp", "caption": "The first Zap step with QuickBooks Online selected as the app, the trigger event dropdown still empty, and a Filter by Zapier step waiting below." }
     },
     {
-      "heading": "Connect your QuickBooks account",
-      "body": "Click Sign In next to the Account field to open QuickBooks' own authorization screen, where you log in and grant Zapier permission to read your company file's data. This uses Intuit's standard OAuth flow, so your QuickBooks password is never entered inside Zapier itself. Once authorized, the account field shows your connected company, and the step's status updates to reflect that Zapier is actively linked rather than just configured."
-    },
-    {
       "heading": "Test the trigger against real records",
-      "body": "Switch to the Test tab and click Find New Records to have Zapier pull sample data from your actual QuickBooks account. It's the fastest way to confirm the trigger is watching the right thing — if you set the event to New Account, you should see real accounts from your chart of accounts listed here, each with the date the record was originally pulled. Select one and continue, which lets you reference its fields later in the workflow instead of guessing what data shape to expect.",
+      "body": "Switch to the Test tab and click Find New Records to pull sample data from your actual QuickBooks account. It's the fastest way to confirm the trigger is watching the right thing: set the event to New Account and you should see real accounts from your chart of accounts listed here. Select one to continue, which lets later steps reference its fields instead of guessing at the data shape.\n\nOnly one QuickBooks Online trigger fires instantly: New Paid Invoice. Every other trigger, New Account included, polls on a schedule, roughly every 5 to 15 minutes. Don't expect the Zap to react the moment a record changes.",
       "image": { "file": "/screenshots/Fmh9Yj3faXk/04.webp", "caption": "The trigger's Test tab, showing three real QuickBooks accounts pulled in as sample records to build the rest of the Zap against." }
     },
     {
       "heading": "Add a filter to control what continues",
-      "body": "Below the QuickBooks trigger, a Filter by Zapier step lets you set conditions that stop the Zap from running on records you don't care about — for example, only continuing if an account's type or balance matches something specific. This matters because a trigger like New Account can fire on records you don't actually want to act on, and a filter is far simpler than building conditional logic into every downstream step. Configure the filter's conditions, then the trigger step shows a green checkmark once both setup and test are complete.",
+      "body": "Below the QuickBooks trigger, a Filter by Zapier step lets you set conditions that stop the Zap running on records you don't care about — only continuing, say, if an account's type or balance matches something specific. This matters because a trigger like New Account can fire on records you never meant to act on, and a filter is simpler than building conditional logic into every downstream step. Configure the filter's conditions and the trigger step shows a green checkmark once both setup and test are complete.",
       "image": { "file": "/screenshots/Fmh9Yj3faXk/05.webp", "caption": "The completed QuickBooks Online trigger step, marked done with a green checkmark, sitting above an unconfigured Filter by Zapier step." }
     },
     {
-      "heading": "Add your next action and publish",
-      "body": "With the trigger tested and the filter conditions set, add whatever action should happen next — creating a record in another app, sending a notification, or even a second QuickBooks action elsewhere in your stack. Run a full test through every step before publishing, then flip the Zap on from the top-right Publish control. From here, QuickBooks Online will keep feeding real account changes into the workflow without anyone checking manually."
+      "heading": "Add your next action, test it, and publish",
+      "body": "With the trigger tested and the filter set, add whatever action should happen next: a record in another app, a notification, or even a second QuickBooks action elsewhere in your stack. Run a full test through every step before publishing, then flip the Zap on from the Publish control top right. From here, QuickBooks Online keeps feeding real account changes into the workflow without anyone checking manually.\n\nQuickBooks itself caps how hard you can hit it: up to 500 API requests per minute per company file, and no more than 10 concurrent requests per second. A workflow that creates records in bulk can run into those limits."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "QuickBooks Online doesn't show up, or looks locked, when picking a trigger app",
+      "cause": "It's tagged Premium in Zapier. Free-plan accounts can't use it, no matter which QuickBooks Online subscription you hold.",
+      "fix": "Upgrade to Zapier's Professional plan or higher (Team or Enterprise both work)."
+    },
+    {
+      "problem": "The Zap doesn't fire the moment a record changes in QuickBooks",
+      "cause": "Every trigger except New Paid Invoice polls on a schedule, roughly every 5 to 15 minutes, instead of reacting instantly.",
+      "fix": "Build in tolerance for that delay, or use New Paid Invoice if a near-instant response matters."
+    },
+    {
+      "problem": "A Create action fails with a duplicate-name error",
+      "cause": "QuickBooks requires display names for customers, vendors, and employees to be unique across the whole company file.",
+      "fix": "Check for an existing record with that name before the Zap tries to create one, or route likely duplicates through a filter first."
     }
   ],
   "faq": [
-    { "question": "Do I need coding skills to set this up?", "answer": "No — Zapier's trigger, filter, and action steps are all built for no-code use, mostly picking options from dropdowns and connecting accounts through standard sign-in screens." },
-    { "question": "Why does Zapier show QuickBooks Online as a Premium app?", "answer": "Some app integrations, including QuickBooks Online, require a paid Zapier plan tier — check the badge next to the app name when you select it to confirm your plan supports it." },
-    { "question": "What does the Filter by Zapier step actually do?", "answer": "It stops the Zap from continuing unless the record matches conditions you set, which keeps a broad trigger like New Account from firing your automation on records you don't want to act on." },
-    { "question": "How do I know the trigger is watching the right data?", "answer": "Use the Test tab's Find New Records option to pull real sample records from your QuickBooks account before building the rest of the Zap — it's the clearest way to confirm the trigger event is correct." },
-    { "question": "What happens if I turn the Zap off later?", "answer": "Turning it off simply stops new automated runs going forward — any records already processed while it was live are unaffected." }
+    { "question": "Do I need coding skills to set this up?", "answer": "No. Zapier's trigger, filter, and action steps are all built for no-code use, mostly picking options from dropdowns and connecting accounts through standard sign-in screens." },
+    { "question": "Why does Zapier show QuickBooks Online as a Premium app?", "answer": "QuickBooks Online needs a paid Zapier plan: Professional, Team, or Enterprise. It isn't available on Zapier's Free plan, regardless of which QuickBooks Online subscription you're paying for separately." },
+    { "question": "What does the Filter by Zapier step do?", "answer": "It stops the Zap continuing unless the record matches conditions you set, which keeps a broad trigger like New Account from firing your automation on records you don't want to act on." },
+    { "question": "How do I know the trigger is watching the right data?", "answer": "Use the Test tab's Find New Records option to pull real sample records from your QuickBooks account before building the rest of the Zap. It's the clearest way to confirm the trigger event is correct." },
+    { "question": "What happens if I turn the Zap off later?", "answer": "It simply stops new automated runs going forward. Records already processed while it was live are unaffected." }
   ],
+  "references": [
+    { "label": "Zapier: How to get started with QuickBooks Online on Zapier (official)", "url": "https://help.zapier.com/hc/en-us/articles/8495935103885-How-to-get-started-with-QuickBooks-Online-on-Zapier" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The Premium plan gate, the trigger list, the polling delay (only New Paid Invoice is instant), and QuickBooks' API rate limits were re-checked against Zapier's official QuickBooks Online help article in September 2026, which is also where the rate-limit and polling detail came from.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

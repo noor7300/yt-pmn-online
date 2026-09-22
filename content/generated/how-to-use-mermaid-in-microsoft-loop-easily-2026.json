@@ -1,24 +1,24 @@
 {
   "slug": "how-to-use-mermaid-in-microsoft-loop-easily-2026",
   "seoTitle": "How to Use Mermaid Diagrams in Microsoft Loop",
-  "metaDescription": "Add live Mermaid.js flowcharts and diagrams to Microsoft Loop pages using slash commands, and fix common preview rendering glitches.",
-  "intro": "Instead of building process flows in a separate diagramming tool and re-uploading static images every time something changes, Microsoft Loop lets you write Mermaid.js code directly on the page and render it as a live diagram. Because the diagram is just text underneath, anyone with edit access can tweak a box label or add a step without touching a drawing tool at all — the shape updates itself. This guide covers inserting a Mermaid block, writing basic flowchart syntax, and reading the code-and-preview layout Loop renders it in.",
+  "metaDescription": "Add live Mermaid.js flowcharts and diagrams to Microsoft Loop pages using a code block, and fix the gray blank-preview glitch when it shows up.",
+  "intro": "Instead of building process flows in a separate diagramming tool and re-uploading static images every time something changes, Microsoft Loop lets you write Mermaid.js code directly on the page and render it as a live diagram. Microsoft added Mermaid as a supported language for Loop's code blocks in 2024, so the diagram is just text underneath: anyone with edit access can tweak a box label or add a step without touching a drawing tool. This guide covers inserting a Mermaid block, writing basic flowchart syntax, and reading the code-and-preview layout Loop renders it in.",
   "steps": [
     {
       "heading": "Open the diagram block on a free line",
-      "body": "Click onto an empty line in your Loop page and type the slash command for Mermaid, which swaps that line for a code entry module instead of a plain text block. This is the same slash-command pattern Loop uses for tables, images, and other structured content, so it feels familiar once you've used it once. The block opens with a language selector already set — visible in the corner of the module — confirming you're in a Mermaid-aware code block rather than a generic one."
+      "body": "Click onto an empty line in your Loop page and type the slash command for Mermaid, which swaps that line for a code entry module instead of a plain text block. This is the same slash-command pattern Loop uses for tables, images, and other structured content, so it feels familiar once you've used it once. The block opens with a language selector already set, visible in the corner of the module, confirming Mermaid is the active language, not a generic code block."
     },
     {
       "heading": "Write basic flowchart syntax",
-      "body": "A minimal flowchart starts with a direction declaration like flowchart TD for top-down, followed by node definitions and arrows on the next lines. Something as short as A[Need Diagrams?] -->|use| B[Mermaid] defines two labeled boxes and an arrow between them tagged with the word \"use\" — three lines of plain text producing a fully rendered flowchart with no drawing involved. Node names on the left of the brackets (A, B) are just internal identifiers; the text inside the brackets is what actually shows up in the box, so you can rename labels freely without breaking the connections between them.",
+      "body": "A minimal flowchart starts with a direction declaration like flowchart TD for top-down, followed by node definitions and arrows on the next lines. Something as short as A[Need Diagrams?] -->|use| B[Mermaid] defines two labeled boxes and an arrow between them tagged with the word \"use\": three lines of plain text producing a fully rendered flowchart with no drawing involved. Node names on the left of the brackets (A, B) are just internal identifiers; the text inside the brackets is what shows up in the box, so labels can be renamed freely without breaking the connections between them. Those identifiers are case-sensitive, and a typo in one creates a new disconnected node instead of throwing an error, which is worth knowing before you spend time hunting for a missing arrow.",
       "image": {
         "file": "/screenshots/oMVBXuRtVnc/04.webp",
-        "caption": "A three-line Mermaid flowchart — flowchart TD plus one connection — rendered live below the code editor as two labeled boxes joined by a \"use\" arrow."
+        "caption": "A three-line Mermaid flowchart, flowchart TD plus one connection, rendered live below the code editor as two labeled boxes joined by a \"use\" arrow."
       }
     },
     {
       "heading": "Read the code-and-diagram layout",
-      "body": "Loop renders the Mermaid block as a code editor on top with line numbers down the left side, and the compiled diagram appears directly underneath it in the same container, with small toolbar icons and a language dropdown along the top edge for managing the block. This means you don't have to hunt for a separate preview pane — editing the code and watching the shape change happen in the same visual space, which makes it easy to iterate on a diagram by trial and error. Scrolling the page keeps both the code and its rendered output together as one unit rather than splitting them apart.",
+      "body": "Loop renders the Mermaid block as a code editor on top with line numbers down the left side, and the compiled diagram appears directly underneath it in the same container, with small toolbar icons and a language dropdown along the top edge. There's no separate preview pane to hunt for; editing the code and watching the shape change happen in the same visual space, which makes it easy to iterate on a diagram by trial and error. Scrolling the page keeps the code and its rendered output together as one unit instead of splitting them apart.",
       "image": {
         "file": "/screenshots/oMVBXuRtVnc/05.webp",
         "caption": "The Mermaid code block and its rendered flowchart sitting together in one container, with the language dropdown and small toolbar icons visible along the top."
@@ -26,35 +26,52 @@
     },
     {
       "heading": "Extend the diagram with more nodes and connections",
-      "body": "Once the basic two-box flowchart works, add more lines following the same pattern — another node definition and arrow per line — to build out a longer process. Mermaid also supports other diagram types beyond flowcharts, including sequence diagrams for showing interactions over time and Gantt charts for timelines, all written with their own similarly compact syntax. Because everything is plain text, restructuring a diagram is just editing lines rather than dragging shapes around a canvas, which is faster once you're comfortable with the syntax."
+      "body": "Once the basic two-box flowchart works, add more lines following the same pattern: another node definition and arrow per line, to build out a longer process. Mermaid also supports other diagram types beyond flowcharts, including sequence diagrams for showing interactions over time and Gantt charts for timelines, all written with their own compact syntax. Because everything is plain text, restructuring a diagram is just editing lines instead of dragging shapes around a canvas, which is faster once you're comfortable with the syntax."
     },
     {
       "heading": "Let teammates edit the live script together",
-      "body": "Because the diagram lives as an actual code block on a shared Loop page rather than an exported image, any teammate with edit access can open it and change a label, add a branch, or fix a typo directly in the syntax. The rendered diagram updates immediately for whoever is looking at the page, without anyone needing to re-export or re-upload anything. This is the real advantage over a diagram built in external drawing software — the source and the visual are the same object, so they can never drift out of sync."
+      "body": "Because the diagram lives as a code block on a shared Loop page instead of an exported image, any teammate with edit access can open it and change a label, add a branch, or fix a typo directly in the syntax. The rendered diagram updates immediately for whoever is looking at the page, without anyone needing to re-export or re-upload anything. The source and the visual are the same object, so they can never drift out of sync the way an external drawing file and its exported copy can."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The diagram area shows a blank gray box, and Preview or Split Mode are grayed out",
+      "cause": "Users on Microsoft's own support forum traced this to browser cache corruption, not a licensing or account issue; only the Code option stays clickable.",
+      "fix": "Clear recent browsing data in your browser, or test in a private/incognito window with any other open Loop tabs or the Loop app closed first. If it keeps recurring after switching apps and back, a full browser restart is the next step before contacting Microsoft 365 support."
+    },
+    {
+      "problem": "Two boxes that should connect show up as unrelated nodes",
+      "cause": "The identifier on the left of one node's brackets doesn't exactly match the identifier used in the arrow line elsewhere; Mermaid treats a mismatched ID as a brand-new node instead of flagging an error.",
+      "fix": "Check that every reference to a node uses the identical identifier, including capitalization, everywhere it appears in the block."
     }
   ],
   "faq": [
     {
       "question": "Do I need to know how to code to use Mermaid in Loop?",
-      "answer": "You need to learn basic Mermaid syntax like flowchart TD or sequence diagrams, but it's much simpler than general programming and mostly involves naming nodes and connecting them with arrows."
+      "answer": "You need to learn basic Mermaid syntax like flowchart TD or sequence diagrams, but it's simpler than general programming and mostly involves naming nodes and connecting them with arrows."
     },
     {
       "question": "Can I make more than flowcharts with Mermaid in Loop?",
-      "answer": "Yes, Mermaid supports several diagram types including flowcharts, sequence diagrams, and Gantt charts, all written as text."
+      "answer": "Yes. Mermaid supports several diagram types including flowcharts, sequence diagrams, and Gantt charts, all written as text in the same kind of code block."
     },
     {
       "question": "Why is my Mermaid diagram stuck showing a blank or gray box?",
-      "answer": "This is usually a rendering glitch that can often be fixed by clearing your browser cache or refreshing the page."
+      "answer": "This has been reported as a browser cache issue. Clearing your browser's cached data or opening the page in a private window usually clears it; a full browser restart is the next step if it keeps coming back."
     },
     {
       "question": "Can teammates edit the same Mermaid diagram together?",
-      "answer": "Yes, since it's a live code block on a shared Loop page, teammates can edit the underlying script and see updates reflected for everyone."
+      "answer": "Yes. Since it's a live code block on a shared Loop page, teammates can edit the underlying script and see updates reflected for everyone with access."
     },
     {
-      "question": "What does the arrow label syntax like -->|use| actually mean?",
+      "question": "What does the arrow label syntax like -->|use| mean?",
       "answer": "The pipes around a word on an arrow, like |use|, add a label to that specific connection, so the flowchart shows not just that two boxes are linked but what the relationship between them is."
     }
   ],
+  "references": [
+    { "label": "Microsoft 365 Developer Blog: Mermaid added as a Loop code block language (official)", "url": "https://devblogs.microsoft.com/microsoft365dev/microsoft-loop-transforms-the-way-developer-teams-work/" },
+    { "label": "Microsoft Q&A: Mermaid preview grayed out in Loop (Microsoft support forum thread)", "url": "https://learn.microsoft.com/en-us/answers/questions/5895788/microsoft-loop-mermaid-preview-grayed-out-preview" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. Re-checked in September 2026 against Microsoft's own developer blog post announcing Mermaid support for Loop code blocks, and against a Microsoft Q&A thread describing the gray blank-preview bug and its browser-cache cause. The troubleshooting entry for that bug replaces the previous version's vaguer \"clear your cache or refresh\" answer with the specific fix steps from that thread (private window, closing duplicate Loop instances).",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
