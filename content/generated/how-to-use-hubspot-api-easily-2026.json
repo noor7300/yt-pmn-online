@@ -1,42 +1,79 @@
 {
   "slug": "how-to-use-hubspot-api-easily-2026",
   "seoTitle": "How to Use the HubSpot API: 2026 Guide",
-  "metaDescription": "Learn how HubSpot's date-based API works, from generating a Private App token to fetching CRM records with batch requests and handling rate limits.",
-  "intro": "HubSpot moved from numbered API versions like v3 and v4 to date-based endpoint paths such as /2026-03/, and that shift changes how you structure requests if your integration still points at the old numeric routes. This guide covers where authentication lives inside a HubSpot account, how a Private App generates the bearer token your requests need, and the batching and retry logic that keeps a CRM integration from tripping HubSpot's rate limits. It's written for developers building or maintaining a connection to HubSpot's CRM objects, not for anyone just clicking through the marketing or sales tools.",
+  "metaDescription": "How HubSpot's API versioning works in 2026, how to authenticate now that legacy Private App creation is being phased out for Service Keys, and how to batch and retry CRM requests without tripping rate limits.",
+  "intro": "HubSpot is rolling out date-based API versioning, dated segments like /2026-03/ meant to eventually replace the old numeric v1 through v4 paths, but the switch is gradual and most CRM object endpoints still run on /crm/v3/ today. A more urgent change for anyone building a new integration right now: HubSpot is closing the door on creating new legacy private apps within days, and steering everyone toward a different mechanism called Service Keys instead.\n\nThis guide covers what's live today versus what's still rolling out: where authentication lives, which credential you should generate depending on the date you're reading this, and the batching and retry logic that keeps a CRM integration from tripping HubSpot's rate limits. It's written for developers building or maintaining a connection to HubSpot's CRM objects, not for anyone just clicking through the marketing or sales tools.",
+  "prerequisites": [
+    "Super admin permissions on the HubSpot account. Only a super admin can create a legacy private app or a Service Key."
+  ],
   "steps": [
     {
-      "heading": "Understand why the date-based versioning shift matters",
-      "body": "HubSpot's older API paths used simple numeric versions, like /crm/v3/objects/contacts, but the 2026 architecture replaces that with a dated segment, like /crm/objects/2026-03/. The practical effect is that a request built against a numeric path from an older tutorial or SDK example may silently break or route to deprecated behavior. Before writing any new integration code, confirm which dated version your account and any client library are actually targeting, since mixing an old numeric call with new authentication scopes is a common source of confusing errors."
+      "heading": "Know which versioning scheme applies to the endpoint you're using",
+      "body": "HubSpot's older API paths use plain numeric versions, like /crm/v3/objects/contacts. In 2026, HubSpot introduced a parallel date-based scheme, where a version is a release date instead of a number, formatted as /YYYY-MM/, for example /2026-03/. Beta releases carry a -beta suffix, like /2026-09-beta/.\n\nThe two schemes coexist. HubSpot's own versioning guide says existing v1 through v4 endpoints keep working at their current URLs during the transition, and as of this check the core CRM Objects API, contacts, deals, companies, and so on, is still documented at /crm/v3/objects/, not a dated path. Don't assume a dated URL for an endpoint until you've confirmed it in HubSpot's own API reference. Guessing at a /2026-03/ path for an endpoint that hasn't moved yet will 404."
     },
     {
-      "heading": "Create a Private App or configure OAuth scopes",
-      "body": "Authentication for a custom integration starts in your account's Settings, under the Integrations section, where you can either set up a Private App for a single-account connection or configure a full OAuth flow if you're building something that other HubSpot accounts will install. A Private App is the simpler route for most internal tooling: you name the app, then grant it only the specific object scopes it needs, like read and write access to Contacts or Deals, rather than blanket account access."
+      "heading": "Choose your authentication path",
+      "body": "Authentication for a custom integration starts in different places depending on which mechanism you use, and which one is right for you changed very recently. Legacy private apps, the option most existing tutorials describe, live under Development, then Legacy apps, in the left sidebar, not under Settings and Integrations as older guides say. Click Create legacy app, then Private.\n\nHubSpot has announced it's disabling the creation of new legacy private apps: from September 28, 2026 for accounts created on or after that date, and from October 26, 2026 for accounts that already existed. Apps created before those dates keep working; only new creation is blocked. In their place, HubSpot is pushing Service Keys, created at Settings, then Integrations, then Service Keys, now described as the modern route for a system-to-system integration."
     },
     {
-      "heading": "Generate your bearer token",
-      "body": "Once the Private App's scopes are set, HubSpot issues a Service Key you copy once and store securely — this is the bearer token every request needs in its Authorization header. If you're building an app for OAuth instead of a Private App, the equivalent step is exchanging your authorization code at the dated token endpoint, such as /oauth/2026-03/token, to receive an access token with the same role. Either way, treat this string like a password: it's the only credential standing between the public internet and your CRM data."
+      "heading": "Generate your credential",
+      "body": "Whichever path applies to you, name the app or key and grant it only the specific scopes it needs, like read and write access to Contacts or Deals, not blanket account access.\n\nA legacy private app issues an access token. That's the credential's real name; \"Service Key\" belongs to the newer mechanism, a separate thing entirely, despite how often the two get conflated in older tutorials. Either credential goes into your requests the same way, as a bearer token: Authorization: Bearer YOUR_TOKEN. If you're building an OAuth app instead, the equivalent step is exchanging your authorization code at HubSpot's token endpoint, https://api.hubapi.com/oauth/v1/token, a plain numbered path that hasn't moved to the dated scheme. Treat whichever token you get like a password. It's the only credential standing between the public internet and your CRM data."
     },
     {
-      "heading": "Build requests against the updated endpoint paths",
-      "body": "With a token in hand, a basic GET request to fetch a contact now points at the dated CRM objects path rather than a numeric one, with the bearer token injected into the request's header array. Whether you're using a plain HTTP client, an API testing tool, or a server-side SDK, the shape of the call is the same: method, dated URL, Authorization header, and a JSON body for anything beyond a simple read. Test a single-object GET request first before moving on to batch or bulk calls, so you can confirm your token's scopes actually cover the object type you're targeting."
+      "heading": "Build requests against the right endpoint paths",
+      "body": "With a token in hand, a basic GET request to fetch a contact points at /crm/v3/objects/contacts/{contactId} today, the same numbered path integrations have used for years, not a dated one. Whether you're using a plain HTTP client, an API testing tool, or a server-side SDK, the shape of the call is the same: method, URL, Authorization header, and a JSON body for anything beyond a simple read.\n\nTest a single-object GET request first before moving on to batch or bulk calls, so you can confirm your token's scopes cover the object type you're targeting. Check HubSpot's own API reference for the endpoint you need before building against it; that's the only reliable way to know whether it has already moved to a dated path or still sits on v3."
     },
     {
       "heading": "Use batch endpoints and handle pagination",
-      "body": "For anything beyond a handful of records, HubSpot's batch read endpoints let you fetch up to 100 records in a single payload, which is far more efficient than looping single-object requests. Responses beyond that limit include a paging.next.after token in the response body — pass that value into your next request's parameters to walk through the full result set page by page instead of guessing at offsets. Skipping pagination logic is one of the fastest ways to silently miss records in a large sync job."
+      "body": "For anything beyond a handful of records, HubSpot's batch read endpoints, such as POST /crm/v3/objects/contacts/batch/read, let you fetch up to 100 records in a single payload, far more efficient than looping single-object requests. Responses beyond that limit include a paging.next.after value carrying the ID of the next record. Pass it into your next request's after parameter to walk through the full result set page by page instead of guessing at offsets. Skipping pagination logic is one of the fastest ways to silently miss records in a large sync job."
     },
     {
       "heading": "Plan for rate limit errors with exponential backoff",
-      "body": "Even with batching and pagination handled correctly, high-volume integrations will eventually hit a 429 response when they exceed HubSpot's rate limits. The standard fix is exponential backoff: catch the 429, wait a short interval, retry, and double that interval on each subsequent failure rather than hammering the endpoint at a fixed rate. Building this retry loop in from the start, rather than bolting it on after a production integration starts failing, saves a lot of debugging later."
+      "body": "Even with batching and pagination handled correctly, high-volume integrations will eventually hit a 429 response when they exceed HubSpot's rate limits. The standard fix is exponential backoff: catch the 429, wait a short interval, retry, and double that interval on each subsequent failure instead of hammering the endpoint at a fixed rate. Build this retry loop in from the start. Bolting it on after a production integration starts failing costs a lot more debugging time later."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Legacy private app vs. Service Key",
+      "columns": ["", "Legacy private app", "Service Key"],
+      "rows": [
+        ["Where to create it", "Development > Legacy apps > Create legacy app > Private", "Settings > Integrations > Service Keys"],
+        ["Credential name", "Access token", "Service Key"],
+        ["New creation allowed?", "No, from Sept 28, 2026 (new accounts) or Oct 26, 2026 (existing accounts)", "Yes; this is the mechanism HubSpot is steering new integrations toward"],
+        ["Existing credentials", "Keep working; HubSpot isn't revoking them", "Not applicable, this is the new mechanism"]
+      ],
+      "note": "Dates and details from HubSpot's developer changelog, checked in September 2026. Confirm current status on HubSpot's changelog before building against either path, since sunset timelines can move."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A request to a numeric path like /crm/v3/objects/contacts returns a 404 or an unexpected error",
+      "cause": "This usually means an old numeric endpoint is mixed with scopes or an app created under the newer platform, or the endpoint has genuinely moved to a dated path. The two versioning schemes coexist, so which one applies depends on the specific endpoint.",
+      "fix": "Check HubSpot's own API reference for that exact endpoint before assuming its path. Don't guess at a dated /YYYY-MM/ URL for an endpoint you haven't confirmed has moved."
+    },
+    {
+      "problem": "\"Create legacy app\" isn't available, or only a Service Key option shows up",
+      "cause": "HubSpot disables new legacy private app creation from September 28, 2026 for new accounts, or October 26, 2026 for existing accounts. Once an account crosses that date, the legacy creation flow disappears and only Service Keys remain for new credentials.",
+      "fix": "Create a Service Key instead, from Settings, Integrations, Service Keys. Existing legacy private apps keep working; only new creation is blocked."
+    },
+    {
+      "problem": "Requests fail with a 429 during a large sync",
+      "cause": "The integration is sending requests faster than HubSpot's rate limit allows, often because batching and backoff weren't built in from the start.",
+      "fix": "Batch requests up to the 100-record limit, and add exponential backoff: catch the 429, wait, retry, and double the wait on each subsequent failure."
     }
   ],
   "faq": [
     {
       "question": "What changed with HubSpot's API versioning?",
-      "answer": "HubSpot moved from numeric versions like v3 to date-based endpoints such as /2026-03/, so integrations need to target the correct dated path instead of an older numeric one."
+      "answer": "HubSpot introduced date-based endpoints, like /2026-03/, alongside its older numeric versions. The two coexist: legacy v1 through v4 paths keep working, and most CRM object endpoints, contacts and deals among them, are still on /crm/v3/ as of this check. Confirm an endpoint's path in HubSpot's reference before assuming it has moved to a dated URL."
     },
     {
       "question": "How do I authenticate HubSpot API requests?",
-      "answer": "Create a Private App in Settings under Integrations, grant it specific object scopes, and use the Service Key it issues as a bearer token in your requests' Authorization header. OAuth apps use an equivalent dated token endpoint instead."
+      "answer": "Create a legacy private app under Development, Legacy apps, or a Service Key under Settings, Integrations, Service Keys, grant it specific scopes, and use the token it issues as a bearer token in your requests' Authorization header. Which one you should create depends on the date: HubSpot is disabling new legacy private app creation from late September 2026."
+    },
+    {
+      "question": "Is a Service Key the same thing as a Private App token?",
+      "answer": "No, and this is a common mix-up. A legacy private app issues an access token. Service Key is the name of a separate, newer authentication mechanism that HubSpot is steering new integrations toward as legacy private app creation gets phased out."
     },
     {
       "question": "How many records can I fetch in one batch call?",
@@ -44,13 +81,20 @@
     },
     {
       "question": "What should I do if I get a 429 error?",
-      "answer": "Implement exponential backoff: catch the 429 response, wait, retry, and increase the wait time on each subsequent failure rather than retrying at a fixed interval."
+      "answer": "Implement exponential backoff: catch the 429 response, wait, retry, and increase the wait time on each subsequent failure instead of retrying at a fixed interval."
     },
     {
       "question": "How do I paginate through large result sets?",
-      "answer": "Read the paging.next.after token from the response body and pass it into your next request's parameters to move through results page by page."
+      "answer": "Read the paging.next.after value from the response body and pass it into your next request's after parameter to move through results page by page."
     }
   ],
+  "references": [
+    { "label": "HubSpot: Developer platform and API versioning (official)", "url": "https://developers.hubspot.com/docs/developer-tooling/platform/versioning" },
+    { "label": "HubSpot Developer Changelog: Legacy Private App Creation Being Disabled (official)", "url": "https://developers.hubspot.com/changelog/legacy-private-app-creation-sunset" },
+    { "label": "HubSpot: Legacy private apps overview (official docs)", "url": "https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview" },
+    { "label": "HubSpot: CRM API, Contacts reference (official docs)", "url": "https://developers.hubspot.com/docs/api/crm/contacts" }
+  ],
+  "verifiedNote": "Checked against HubSpot's official developer documentation in September 2026, days before HubSpot disables new legacy private app creation (September 28 for new accounts, October 26 for existing ones). Three corrections came out of that check: the OAuth token endpoint is the plain oauth/v1/token, not a dated path as the draft implied; the CRM Objects API most integrations use is still on /crm/v3/, not a dated one, as of this check; and the credential the original draft called a \"Service Key\" is an access token issued by a legacy private app, a different thing from HubSpot's separate, newer Service Keys mechanism.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

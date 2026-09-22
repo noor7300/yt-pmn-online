@@ -1,21 +1,22 @@
 {
   "slug": "how-to-export-webflow-code-and-host-it-online-easily-2026",
   "seoTitle": "How to Export Webflow Code and Host It Elsewhere",
-  "metaDescription": "Learn how to export clean HTML, CSS, and JavaScript from Webflow and deploy it to a free static host, plus what actually breaks once you leave Webflow's platform.",
-  "intro": "Exporting a Webflow project into plain HTML, CSS, and JavaScript is the escape hatch for anyone who wants their design without an ongoing Webflow hosting bill — but the export panel itself has a catch that trips up a lot of people the first time they try it. This guide walks through opening the Export Code dialog, understanding what you actually get on your current plan, and moving the result onto a static host. It also covers the two things that quietly stop working the moment you leave Webflow's platform: forms and CMS content — so you're not surprised by a broken contact form on launch day.",
+  "metaDescription": "Learn how to export clean HTML, CSS, and JavaScript from Webflow and deploy it to a free static host, plus what breaks once you leave Webflow's platform.",
+  "intro": "Exporting a Webflow project into plain HTML, CSS, and JavaScript is the escape hatch for anyone who wants their design without an ongoing Webflow hosting bill. The export panel itself has a catch that trips up a lot of people the first time they try it.\n\nThis guide walks through opening the Export Code dialog, understanding what your current plan gets you, and moving the result onto a static host. It also covers what quietly stops working the moment you leave Webflow's platform: forms, CMS content, password protection, and site search, so a broken contact form or a page that used to be gated isn't a surprise on launch day.",
+  "costNote": "Code export needs a Workspace plan. A Site plan by itself doesn't unlock it, no matter which tier. Workspace plans and Site plans are billed separately in Webflow, so exporting code is a cost on top of whatever you're already paying for the site itself.",
   "steps": [
     {
       "heading": "Open the Export Code panel and check what your plan allows",
-      "body": "In the Designer, select an element or open the site-level menu to trigger Export Code, which opens a dialog with tabs for HTML, CSS, JS, and Assets. The HTML tab shows your actual markup — navigation links, class names like w-nav-link and w-button, and the structure Webflow generated from your visual layout, which is clean and semantic rather than the bloated output some visual builders produce. Read the notice below the code before you plan your workflow around it, though: on a workspace without the right plan, what you're seeing is explicitly labeled a limited preview, not the full downloadable package. The dialog spells out two upgrade paths — a Workspace plan for full code export and DevLink React components, and a Site plan for CMS, ecommerce, forms, and search — so check which one applies before assuming you can download today.",
+      "body": "In the Designer, open the Main menu (click the W logo top left) and choose Code export, or use the Shift+E shortcut. That opens a dialog with tabs for HTML, CSS, JS, and Assets. The HTML tab shows your actual markup: navigation links, class names like w-nav-link and w-button, and the structure Webflow generated from your visual layout. It reads cleaner than the output some visual builders produce.\n\nRead the notice below the code before you plan a workflow around it. Code export is a Workspace-plan feature, not something a Site plan alone unlocks, and on a workspace without it, what you're seeing is a limited preview rather than a downloadable package. The dialog spells out the upgrade path plainly: a Workspace plan unlocks full code export and DevLink React components, while Site-plan features like CMS, ecommerce, forms, and search are a separate, per-site matter. Check which one applies before assuming you can download today.",
       "image": { "file": "/screenshots/YKwzzMljodY/03.webp", "caption": "The Export Code dialog on the HTML tab, with a notice underneath that this snippet is a limited preview and full export needs a plan upgrade." }
     },
     {
       "heading": "Download the export and check the folder",
-      "body": "Once you're on a plan that supports full export, downloading gives you a zip with separate folders for CSS, JS, and images alongside your HTML pages. Open it and skim for anything obviously missing — a stylesheet that didn't generate, an image folder that's empty, a script reference pointing somewhere that doesn't exist. Catching this before you deploy saves a round of debugging on the live host later, where errors are harder to trace back to the source."
+      "body": "Once you're on a plan that supports full export, downloading gives you a zip with separate folders for CSS, JS, and images alongside your HTML pages. Open it and skim for anything obviously missing: a stylesheet that didn't generate, an empty image folder, a script reference pointing nowhere real. Catching this before you deploy saves a round of debugging on the live host later, where errors are harder to trace back to the source."
     },
     {
       "heading": "Pick a static host and upload the files",
-      "body": "Any host built for static files works: Netlify, Vercel, GitHub Pages, or something simpler like a drag-and-drop uploader such as Tiiny Host, which accepts a folder or a zip and gives you a live link almost immediately. The upload screen typically shows a drop zone alongside integration shortcuts for services like GitHub or Dropbox, plus a spot to claim a custom subdomain before you go live. Whichever you choose, the workflow is the same shape — drop the exported folder in, wait for the deploy to finish, and get back a URL.",
+      "body": "Any host built for static files works: Netlify, Vercel, GitHub Pages, or something simpler like a drag-and-drop uploader such as Tiiny Host, which accepts a folder or a zip and gives you a live link almost immediately. The upload screen typically shows a drop zone alongside integration shortcuts for services like GitHub or Dropbox, plus a spot to claim a custom subdomain before you go live. Whichever you choose, the workflow is the same shape: drop the exported folder in, wait for the deploy to finish, and get back a URL.",
       "image": { "file": "/screenshots/YKwzzMljodY/05.webp", "caption": "A static hosting dashboard's upload screen — drag the exported files in, or connect GitHub or Dropbox, then publish to get a live link." }
     },
     {
@@ -24,16 +25,53 @@
     },
     {
       "heading": "Replace forms and dynamic features that no longer work",
-      "body": "This is the step most people forget until launch day: Webflow's native form submissions, CMS collections, and interactions that rely on Webflow's backend do not function on exported static files, because there's no Webflow server behind them anymore. Point any forms at an external handler like Formspree or your static host's own form service, and if your site leaned on CMS collections for blog posts or products, plan to rebuild that content as static pages or wire up a headless CMS instead. Skipping this check is the single most common reason an exported site looks perfect but quietly stops taking form submissions."
+      "body": "This is the step most people forget until launch day. Webflow disables native form submissions, CMS-bound content, and interactions tied to its own backend on exported sites, since there's no Webflow server behind the static files anymore. Forms specifically are turned off to comply with GDPR, not left broken by accident. Point any forms at an external handler like Formspree or your static host's own form service. If pages relied on CMS Collections for blog posts or products, that content needs rebuilding as static pages, or a headless CMS wired up separately, since Collection lists and pages just render empty on the exported site.\n\nCheck password-protected pages too. Webflow enforces that protection on its own hosting; it isn't part of the exported HTML, so a page that required a password before export is publicly readable after it, unless you add your own access control on the new host."
+    }
+  ],
+  "tables": [
+    {
+      "title": "What survives a Webflow code export",
+      "columns": ["Feature", "Works after export?"],
+      "rows": [
+        ["HTML, CSS, JavaScript, responsive layout", "Yes"],
+        ["Images and other static assets", "Yes"],
+        ["Native Webflow forms", "No — needs an external form handler; disabled specifically for GDPR compliance"],
+        ["CMS Collections (blog posts, products, etc.)", "No — renders empty state; rebuild as static pages or a headless CMS"],
+        ["Password-protected pages", "No — protection isn't included; add your own access control"],
+        ["Site search", "No"]
+      ],
+      "note": "Based on Webflow's own code-export documentation, checked September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A page that was password protected in Webflow is publicly viewable after export",
+      "cause": "Webflow's password protection is enforced by Webflow's own hosting. It isn't part of the exported HTML at all.",
+      "fix": "Add your own auth, a hosting-provider password gate or server-side auth, before publishing the exported files anywhere the old content shouldn't be public."
+    },
+    {
+      "problem": "Forms silently stop submitting after export, with no error in the browser",
+      "cause": "Webflow disables native form handling in exported code to comply with GDPR, not because of a bug.",
+      "fix": "Point the form's action at an external handler like Formspree or your host's own form service."
+    },
+    {
+      "problem": "Collection-bound content just disappears (empty state shows instead)",
+      "cause": "CMS Collections rely on Webflow's database, which doesn't travel with the export. Collection lists render their empty state, and Collection pages show no bound content.",
+      "fix": "Rebuild that content as static pages before exporting, or connect a headless CMS to the exported site afterward."
     }
   ],
   "faq": [
-    { "question": "Will my Webflow forms still work after export?", "answer": "No. Native Webflow forms rely on Webflow's own backend, so once the site is static you need to point form submissions to an external service like your host's form handler or a service such as Formspree." },
-    { "question": "Is exporting code available on every Webflow plan?", "answer": "No — the Export Code dialog itself shows a limited preview on lower-tier plans and requires a Workspace plan upgrade to download the full HTML, CSS, and JS package." },
+    { "question": "Will my Webflow forms still work after export?", "answer": "No. Webflow turns off native form handling on exported sites to comply with GDPR, so point form submissions to an external service like your host's form handler or something like Formspree." },
+    { "question": "Is exporting code available on every Webflow plan?", "answer": "No. Code export needs a Workspace plan; Site plans alone don't unlock it, and on a workspace without that plan the Export Code dialog only shows a limited preview." },
     { "question": "Will my responsive layout still work after export?", "answer": "Yes, the exported CSS preserves your breakpoints, so your responsive design renders the same outside Webflow." },
-    { "question": "What happens to CMS content when I export?", "answer": "It doesn't come with the export. Webflow's CMS collections rely on Webflow's own database, so dynamic content needs to be rebuilt as static pages or connected to a different backend after you move off the platform." },
-    { "question": "Can I still edit the site visually after exporting?", "answer": "No — once exported, the code is static. Future design changes need to happen back in Webflow with a fresh export, or directly in the downloaded code by hand." }
+    { "question": "What happens to CMS content when I export?", "answer": "It doesn't come with the export. CMS Collections rely on Webflow's own database, so Collection lists show their empty state and Collection pages show no bound content until you rebuild it as static pages or connect a different backend." },
+    { "question": "What happens to password-protected pages after export?", "answer": "They stop being protected. Webflow enforces that password on its own hosting, and it isn't part of the exported HTML, so add your own access control if that content still needs to be gated." },
+    { "question": "Can I still edit the site visually after exporting?", "answer": "No. Once exported, the code is static. Future design changes need to happen back in Webflow with a fresh export, or directly in the downloaded code by hand." }
   ],
+  "references": [
+    { "label": "Webflow Help Center: How do I export my Webflow site code? (official)", "url": "https://help.webflow.com/hc/en-us/articles/33961386739347-How-do-I-export-my-Webflow-site-code" }
+  ],
+  "verifiedNote": "Click path, screenshots, and the hosting workflow come from a walkthrough recorded in July 2025. The Export Code entry point, the Workspace-vs-Site plan requirement, and what does and doesn't travel with the export were re-checked against Webflow's own help center in September 2026 (fetched via search indexing after Webflow's site blocked a direct page load; the quoted content came from its own official URL). That check added two things the article didn't previously mention: forms are disabled specifically for GDPR compliance, and password-protected pages lose their protection entirely on export.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

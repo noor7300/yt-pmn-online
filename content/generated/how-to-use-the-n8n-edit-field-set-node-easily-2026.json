@@ -2,31 +2,31 @@
   "slug": "how-to-use-the-n8n-edit-field-set-node-easily-2026",
   "seoTitle": "How to Use the n8n Edit Fields (Set) Node",
   "metaDescription": "Add n8n's Edit Fields (Set) node to a workflow, switch between Manual Mapping and JSON modes, and shape data before it hits the next node.",
-  "intro": "The Edit Fields node, still widely known by its old name Set, is one of the most-used building blocks in n8n for reshaping data as it moves through a workflow. Rather than letting whatever an upstream node returns pass through untouched, Edit Fields lets you add, rename, or restructure values into exactly what the next node expects. This guide walks through the actual node interface — its Manual Mapping and JSON modes, the Add Field option, and where to run it against real input — starting from an empty n8n workspace.",
+  "intro": "The Edit Fields node, still widely known by its old name Set, is one of the most-used building blocks in n8n for reshaping data as it moves through a workflow. It doesn't just let whatever an upstream node returns pass through untouched: Edit Fields lets you add, rename, or restructure values into exactly what the next node expects.\n\nThis guide walks through the node's interface: its Manual Mapping and JSON modes, the Add Field option, and where to run it against real input, starting from an empty n8n workspace.",
   "steps": [
     {
       "heading": "See what's already in your n8n workspace",
-      "body": "Opening n8n lands you on the Overview page, listing every workflow you have access to alongside execution stats like production executions, failure rate, and average run time. An account with some history might already show a couple of workflows — a research pipeline, an AI chat flow — while a brand-new one will be empty aside from the Create workflow button. Either way, this is your starting point before you build or edit anything.",
+      "body": "Opening n8n lands you on the Overview page, listing every workflow you have access to alongside execution stats like production executions, failure rate, and average run time. An account with some history might already show a couple of workflows, a research pipeline, an AI chat flow, while a brand-new one will be empty aside from the Create workflow button. Either way, this is the starting point before you build or edit anything.",
       "image": { "file": "/screenshots/3pLFBPRtW6c/02.webp", "caption": "The n8n Overview page, listing existing workflows with execution and failure-rate stats above the list." }
     },
     {
       "heading": "Start a new workflow",
-      "body": "Inside a fresh workflow, the canvas offers two starting points: \"Add first step,\" which opens the manual node picker, or \"Build with AI,\" which opens a chat panel where you describe what you want automated and n8n suggests a starting structure. For learning exactly what the Edit Fields node does, Add first step is the more direct route, since it lets you place and configure nodes one at a time instead of accepting a generated flow.",
+      "body": "Inside a fresh workflow, the canvas offers two starting points: \"Add first step,\" which opens the manual node picker, or \"Build with AI,\" which opens a chat panel where you describe what you want automated and n8n suggests a starting structure. For learning exactly what the Edit Fields node does, Add first step is the more direct route: it lets you place and configure nodes one at a time instead of accepting a generated flow.",
       "image": { "file": "/screenshots/3pLFBPRtW6c/03.webp", "caption": "A brand-new workflow canvas, with the choice between manually adding the first step or generating one with the Build with AI panel." }
     },
     {
       "heading": "Add a trigger before you add Edit Fields",
-      "body": "Every workflow needs something to start it, so the first node picker you'll see is \"What triggers this workflow?\" with options like Trigger manually, On a schedule, On webhook call, On form submission, and When executed by another workflow. For testing the Edit Fields node in isolation, Trigger manually is the simplest choice — it runs the flow on a button click in the n8n editor, which is described right in the picker as good for getting started.",
+      "body": "Every workflow needs something to start it, so the first node picker you'll see is \"What triggers this workflow?\" with options like Trigger manually, On a schedule, On webhook call, On form submission, and When executed by another workflow. For testing the Edit Fields node in isolation, Trigger manually is the simplest choice: it runs the flow on a button click in the editor, described right in the picker as good for getting started.",
       "image": { "file": "/screenshots/3pLFBPRtW6c/04.webp", "caption": "The trigger picker shown when starting a new workflow, listing manual, scheduled, webhook, form, and cross-workflow trigger options." }
     },
     {
       "heading": "Add the Edit Fields node and pick a mode",
-      "body": "With a trigger in place, search for and add Edit Fields to the canvas, then open it to see its Parameters tab. The first setting is Mode, with two options: Manual Mapping, described as editing item fields one by one, and JSON, for customizing the item's output with raw JSON instead. Manual Mapping is the more approachable option for straightforward field changes, while JSON mode is faster once you're comfortable writing the data structure directly.",
+      "body": "With a trigger in place, search for and add Edit Fields to the canvas, then open it to see its Parameters tab. The first setting is Mode, with two options: Manual Mapping, described as editing item fields one by one, and JSON, for customizing the item's output with raw JSON instead. Manual Mapping is the more approachable option for straightforward field changes; JSON mode is faster once you're comfortable writing the data structure directly.",
       "image": { "file": "/screenshots/3pLFBPRtW6c/05.webp", "caption": "The Edit Fields node's Parameters panel, with the Mode dropdown open showing Manual Mapping and JSON as the two available options." }
     },
     {
       "heading": "Build your fields in Manual Mapping mode",
-      "body": "In Manual Mapping mode, the node shows a drop zone for input fields plus an \"Add Field\" link — click it to define a field name, type it as a string, number, boolean, or object, and set its value, either typed directly or pulled from an upstream node through an expression. There's also an \"Include Other Input Fields\" toggle, which controls whether fields you haven't explicitly touched still pass through to the output, or whether only the fields you've defined here survive."
+      "body": "In Manual Mapping mode, the node shows a drop zone for input fields plus an \"Add Field\" link. Click it to define a field name, type it as a string, number, boolean, or object, and set its value, either typed directly or pulled from an upstream node through an expression.\n\nA toggle controls whether fields you haven't explicitly touched still pass through to the output. Depending on your n8n version this shows up as \"Include Other Input Fields,\" or, in current n8n documentation, as \"Keep Only Set Fields\" alongside a separate \"Include in Output\" setting. The naming has shifted, but the effect is the same: deciding whether only the fields you've defined here survive, or everything else rides along too.\n\nOne setting is easy to miss: field names support dot notation by default, so a field named \"address.city\" creates a nested address object with a city key, not a single field literally called address.city. If that's not what you want, look for \"Support Dot Notation\" in the node's Options and turn it off."
     },
     {
       "heading": "Switch to JSON mode for bulk changes",
@@ -34,16 +34,21 @@
     },
     {
       "heading": "Test the node before moving on",
-      "body": "The node's Input and Output panels sit on either side of the parameters and start out showing \"No input data\" and \"No output data\" until you run something through them. Click \"Execute previous nodes\" to pull real data in from whatever comes before Edit Fields on the canvas, or use \"Execute step\" to run the node itself and see your configured fields in the Output panel — confirming the shape is correct before you connect anything downstream."
+      "body": "The node's Input and Output panels sit on either side of the parameters and start out showing \"No input data\" and \"No output data\" until you run something through them. Click \"Execute previous nodes\" to pull real data in from whatever comes before Edit Fields on the canvas, or use \"Execute step\" to run the node itself and see your configured fields in the Output panel, confirming the shape is correct before you connect anything downstream."
     }
   ],
   "faq": [
-    { "question": "What is the Edit Fields (Set) node used for in n8n?", "answer": "It reshapes the data passing through a workflow — adding, updating, or restructuring fields before the next node receives them." },
+    { "question": "What is the Edit Fields (Set) node used for in n8n?", "answer": "It reshapes the data passing through a workflow, adding, updating, or restructuring fields before the next node receives them." },
     { "question": "What's the difference between Manual Mapping and JSON mode?", "answer": "Manual Mapping lets you add and type individual fields one at a time; JSON mode lets you write or paste the entire output structure directly." },
     { "question": "How do I reference data from a previous node?", "answer": "Use an expression when setting a field's value in Manual Mapping, or reference upstream data directly inside the JSON when using JSON mode." },
-    { "question": "Can the Edit Fields node remove data I don't need?", "answer": "Yes. Turn off \"Include Other Input Fields\" so only the fields you've explicitly defined in the node carry through to the output." },
-    { "question": "How do I see what the node actually outputs?", "answer": "Use \"Execute previous nodes\" to pull in real input, then \"Execute step\" to run Edit Fields itself and check the Output panel." }
+    { "question": "Can the Edit Fields node remove data I don't need?", "answer": "Yes. Depending on your n8n version, turn off \"Include Other Input Fields,\" or enable \"Keep Only Set Fields\" in current versions, so only the fields you've explicitly defined in the node carry through to the output." },
+    { "question": "How do I check what the node outputs?", "answer": "Use \"Execute previous nodes\" to pull in real input, then \"Execute step\" to run Edit Fields itself and check the Output panel." },
+    { "question": "Why did my field with a period in the name turn into a nested object?", "answer": "n8n's Edit Fields node supports dot notation by default, so a name like address.city becomes a nested object. Turn off \"Support Dot Notation\" in the node's Options if you want the literal field name instead." }
   ],
+  "references": [
+    { "label": "n8n Docs: Edit Fields (Set) node (official)", "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.set" }
+  ],
+  "verifiedNote": "Click path and screenshots come from a walkthrough recorded in July 2025, and they match the current n8n UI. Mode names, the Manual Mapping options, and dot-notation behaviour were re-checked against n8n's official Edit Fields (Set) node documentation in September 2026. That check found the field-retention toggle now goes by different names (\"Keep Only Set Fields\" / \"Include in Output\") than the \"Include Other Input Fields\" label this article used, and it added the dot-notation default, which the original didn't mention.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

@@ -2,11 +2,16 @@
   "slug": "how-to-configure-mx-spf-and-dkim-for-a-cloudflare-easily-2026",
   "seoTitle": "Configure MX, SPF, and DKIM in Cloudflare (2026)",
   "metaDescription": "Set up mail routing and email authentication in Cloudflare by adding MX records, an SPF TXT rule, and DKIM keys to stop spoofing and delivery issues.",
-  "intro": "If your domain's DNS lives in Cloudflare, that's also where you have to fix email once you move providers or launch a new mailbox — pointing MX records at your mail host and proving your outgoing mail is legitimate with SPF and DKIM. Get any one of the three wrong and mail either stops arriving or starts landing in spam. This guide walks through finding the right domain in a Cloudflare account, opening its DNS panel, and adding all three record types correctly, including the one setting that trips people up every time: keeping mail records off Cloudflare's orange-cloud proxy.",
+  "intro": "If your domain's DNS lives in Cloudflare, that's also where you fix email once you move providers or launch a new mailbox: pointing MX records at your mail host, and proving your outgoing mail is legitimate with SPF and DKIM. Get any one of the three wrong and mail either stops arriving or starts landing in spam.\n\nThis guide walks through finding the right domain in a Cloudflare account, opening its DNS panel, and adding all three record types correctly, including the one thing that catches people out: MX and TXT records have no proxy toggle in Cloudflare at all, so the real risk to check is any separate A or CNAME record your mail provider also asks for.",
+  "prerequisites": [
+    "A domain already added to Cloudflare, with Cloudflare set as its authoritative DNS",
+    "The mail host, SPF, and DKIM values from your email provider (Google Workspace, Microsoft 365, or similar) — Cloudflare doesn't generate these for you"
+  ],
+  "costNote": "Adding DNS records costs nothing on any Cloudflare plan, including the free tier. Cost only enters the picture through whichever mail provider issued the MX, SPF, and DKIM values you're pasting in.",
   "steps": [
     {
       "heading": "Find your domain in the Cloudflare dashboard",
-      "body": "Log into Cloudflare and land on the Domains page, which lists every site connected to the account with its status, security insights, and plan. If you manage more than one domain, this is where you confirm you're about to edit DNS for the right one — a status of anything other than \"Active\" (like \"Invalid nameservers\") means DNS changes won't take effect until that's resolved first. Click the domain you need to configure mail for to open its overview.",
+      "body": "Log into Cloudflare and land on the Domains page, listing every site connected to the account with its status, security insights, and plan. If you manage more than one domain, confirm you're about to edit DNS for the right one. A status other than \"Active\" (for example, \"Invalid nameservers\") means DNS changes won't take effect until that's resolved first. Click the domain you need to configure mail for to open its overview.",
       "image": {
         "file": "/screenshots/39Iozp0YkuY/03.webp",
         "caption": "The Domains list in Cloudflare, showing each connected site's status and plan. Click through to the domain you're setting up mail for."
@@ -14,7 +19,7 @@
     },
     {
       "heading": "Open the domain overview and jump to DNS",
-      "body": "The domain's Overview page shows traffic and request stats at a glance, but what you actually need is in the right-hand column: a DNS Setup indicator and a DNS Records link. That's the entry point for every record you're about to add. The left sidebar also has a dedicated DNS section further down if you'd rather navigate there directly instead of using the shortcut link.",
+      "body": "The domain's Overview page shows traffic and request stats at a glance, but what you need is in the right-hand column: a DNS Setup indicator and a DNS Records link. That's the entry point for every record you're about to add. The left sidebar also has a dedicated DNS section further down, if you'd rather navigate there directly.",
       "image": {
         "file": "/screenshots/39Iozp0YkuY/04.webp",
         "caption": "A domain's Overview page in Cloudflare. The DNS Records link in the top-right panel is the fastest way into the records editor."
@@ -22,29 +27,42 @@
     },
     {
       "heading": "Add the MX record for your mail host",
-      "body": "In DNS Records, click Add Record and switch the type dropdown to MX. Leave the name as your root domain (or the @ symbol, depending on how Cloudflare labels it) unless your mail provider tells you to use a subdomain, then paste in the mail server host address they gave you — something like mail.yourprovider.com. Set the priority number they specify; lower numbers are tried first, which matters if your provider gives you more than one MX record for redundancy."
+      "body": "In DNS Records, click Add record and switch the type dropdown to MX. Leave the name as your root domain (or the @ symbol, depending on how Cloudflare labels it) unless your mail provider tells you to use a subdomain, then paste in the mail server host address they gave you, something like mail.yourprovider.com. Set the priority number they specify. Lower numbers are tried first, which matters if your provider gives you more than one MX record for redundancy.\n\nMX records in Cloudflare have no proxy option at all. The cloud icon next to them is fixed to grey, so there's nothing to configure there beyond the record itself."
     },
     {
       "heading": "Create the SPF record as a TXT entry",
-      "body": "SPF isn't its own record type in Cloudflare — it's a TXT record with a specific string format. Add a new TXT record on your root domain with a value starting v=spf1, followed by the include or ip4 entries your mail provider requires, and ending in ~all or -all depending on how strict you want failed checks to be. If a TXT record already exists at that name for a different purpose, don't create a second one — most providers only read the first SPF string they find, so you may need to merge entries."
+      "body": "SPF isn't its own record type in Cloudflare. It's a TXT record with a specific string format. Add a new TXT record on your root domain with a value starting v=spf1, followed by the include or ip4 entries your mail provider requires, and ending in ~all or -all depending on how strict you want failed checks to be. If a TXT record already exists at that name for a different purpose, don't create a second SPF entry: most receiving mail servers only read the first SPF string they find at a name, so two conflicting records can break authentication instead of adding to it."
     },
     {
       "heading": "Add your DKIM selector and public key",
-      "body": "DKIM also goes in as a TXT record, but at a selector subdomain your provider assigns, something like selector1._domainkey.yourdomain.com. Copy the exact selector name and the public key string from your mail service's admin panel and paste the key as the record's value without adding line breaks. A single missing character in that key is the most common reason DKIM validation fails after everything else looks right."
+      "body": "DKIM also goes in as a TXT record, but at a selector subdomain your provider assigns, something like selector1._domainkey.yourdomain.com. Copy the exact selector name and the public key string from your mail service's admin panel and paste the key as the record's value without adding line breaks. A single stray line break or space in that key is the most common reason DKIM validation fails after everything else looks right."
     },
     {
-      "heading": "Set every mail record to DNS Only",
-      "body": "Once MX, SPF, and DKIM are all saved, scroll through the list and check the cloud icon next to each one. It needs to be gray (DNS Only), not orange (Proxied) — Cloudflare's proxy is built for web traffic over HTTP, and mail servers querying these records directly will fail if the answer comes back proxied. TXT and MX records are usually DNS-only by default, but it's worth confirming after any bulk import or migration, since a stray proxied record is a quiet way to break mail delivery without any obvious error."
+      "heading": "Check proxy status, then confirm delivery",
+      "body": "MX and TXT records, which is what SPF and DKIM both are, don't have a proxy toggle in Cloudflare at all. The cloud icon next to them is always grey, and there's nothing to switch. The record type that can quietly break mail is anything your provider also asks for as an A or CNAME record, such as an autodiscover or webmail hostname: those do have a toggle, default to Proxied for new records, and need to be set to DNS Only manually when they're mail-related.\n\nOnce everything is saved, give it time. DNS changes can take anywhere from minutes to a few hours to propagate fully, so don't panic if a test email doesn't authenticate right away. Send yourself a message from an external address and check the headers, or use your mail provider's own SPF/DKIM verification tool, to confirm all three checks pass before you consider the migration done."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Mail stops delivering after adding records in bulk or migrating providers",
+      "cause": "An A or CNAME record used for mail, like an autodiscover or webmail host, got left on Proxied. MX and TXT records can't be proxied at all in Cloudflare, so the real risk is any other record type your mail provider also asks for.",
+      "fix": "Open DNS Records, find any A/CNAME record tied to mail (autodiscover, webmail, or a literal mail server hostname), and switch its cloud icon to grey (DNS Only)."
     },
     {
-      "heading": "Confirm delivery is working",
-      "body": "DNS changes can take anywhere from a few minutes to a few hours to propagate fully, so don't panic if a test email doesn't authenticate right away. Send yourself a message from an external address and check the headers, or use your mail provider's built-in DKIM/SPF verification tool if they have one, to confirm all three checks pass before you consider the migration done."
+      "problem": "DKIM fails validation even though the record looks right",
+      "cause": "A line break or stray space inside the pasted public key. Cloudflare's TXT value field doesn't tolerate them.",
+      "fix": "Paste the key as one unbroken string, copied directly from your mail provider's admin panel rather than retyped."
+    },
+    {
+      "problem": "SPF check fails even though a record is there",
+      "cause": "A second TXT record already exists at the same name. Most receiving mail servers only read the first SPF string they find, so two records conflict.",
+      "fix": "Merge both sets of mechanisms into a single TXT record instead of adding a second one."
     }
   ],
   "faq": [
     {
-      "question": "Why do my mail records need to stay on 'DNS Only' instead of proxied?",
-      "answer": "Cloudflare's proxy is built for web traffic; mail-related records like MX, SPF, and DKIM need to resolve directly (DNS Only) so mail servers can read them correctly."
+      "question": "Why do MX and TXT records not show a 'Proxied' option in Cloudflare?",
+      "answer": "Cloudflare's proxy only works for A, AAAA, and CNAME records, which is why MX and TXT entries (SPF and DKIM are both TXT records) show a cloud icon that's always grey. If your mail provider also asks for an A or CNAME record, like an autodiscover or webmail hostname, that's the one that needs a manual check, since new A/CNAME records default to Proxied."
     },
     {
       "question": "What happens if I skip SPF or DKIM?",
@@ -63,6 +81,11 @@
       "answer": "Cloudflare usually applies DNS changes within minutes, but full propagation across every mail server that queries your domain can take a few hours, so wait before troubleshooting a failed test."
     }
   ],
+  "references": [
+    { "label": "Cloudflare DNS docs: Set up email records (official)", "url": "https://developers.cloudflare.com/dns/manage-dns-records/how-to/email-records/" },
+    { "label": "Cloudflare DNS docs: Proxy status use cases (official)", "url": "https://developers.cloudflare.com/dns/proxy-status/use-cases/" }
+  ],
+  "verifiedNote": "Click path and record fields come from a walkthrough recorded in July 2025. Proxy-status behaviour for MX, TXT, and mail-related A/CNAME records was re-checked against Cloudflare's own DNS documentation in September 2026. That check corrected the original advice to manually check MX and TXT records' cloud icons: those record types have no proxy toggle in Cloudflare at all, so the real risk sits with any auxiliary A or CNAME record a mail provider also asks for.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

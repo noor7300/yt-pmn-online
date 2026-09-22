@@ -2,37 +2,46 @@
   "slug": "how-to-start-and-join-a-zoom-call-from-slack-easily-2026",
   "seoTitle": "How to Start and Join a Zoom Call From Slack",
   "metaDescription": "Launch instant Zoom meetings directly from Slack channels using the /zoom slash command after installing the official Zoom app.",
-  "intro": "Copying a Zoom link into a channel, waiting for everyone to notice it, and then losing the thread once the call starts is the exact friction the Zoom app for Slack removes. Once it's installed, starting a meeting is a single slash command typed into the channel you're already in, and joining is a click on the card it generates — no separate app switch, no hunting for the right link. This guide covers finding the Zoom app in Slack's marketplace, what authorizing it actually involves, and how the day-to-day slash command works once it's connected.",
+  "intro": "Copying a Zoom link into a channel, waiting for everyone to notice it, and then losing the thread once the call starts is the exact friction the Zoom app for Slack removes. Once it's installed, starting a meeting is a single slash command typed into the channel you're already in, and joining is a click on the card it generates. No separate app switch, no hunting for the right link.\n\nThis guide covers finding the Zoom app in Slack, what authorizing it involves, the Zoom plan the integration needs, and how the day-to-day slash command works once it's connected.",
+  "prerequisites": [
+    "A Zoom account on a Pro, Business, or Enterprise plan. Zoom's own support documentation excludes free Basic accounts from the Slack integration.",
+    "Permission to install apps in your Slack workspace, or a workspace admin willing to approve the install"
+  ],
+  "costNote": "Adding the Zoom app to Slack costs nothing by itself, but using it needs a paid Zoom account. Zoom's support documentation lists the Slack integration as requiring a Pro, Business, or Enterprise plan; a free Basic Zoom account can't connect for hosting purposes.",
   "steps": [
     {
-      "heading": "Open the Slack Marketplace to find Zoom",
-      "body": "Slack's app ecosystem now runs through a full marketplace site rather than just the in-app Apps panel — reachable from the same Tools menu, or directly if a teammate shares a listing link. The marketplace homepage leads with featured and AI-focused apps, but a plain search for \"Zoom\" in the search bar at the top surfaces the official listing directly, the same way you'd search for any other integration.",
+      "heading": "Find the Zoom app in Slack",
+      "body": "Slack app installs go through Apps in the left sidebar, or the fuller Marketplace site under the Tools menu if a teammate shares a listing link instead. Either route, a plain search for \"Zoom\" surfaces the official listing directly, the same way you'd search for any other integration.",
       "image": { "file": "/screenshots/0kiCshD7GaY/05.webp", "caption": "Slack's Marketplace homepage, where searching by app name is how you find the official Zoom listing among the featured apps." }
     },
     {
       "heading": "Install the official Zoom app",
-      "body": "Open the verified Zoom listing and click Add to Slack. Slack shows you the specific permissions the app is requesting before anything is finalized — typically the ability to post messages, create meeting links, and read basic channel information — and you'll need to click Allow to move forward. Skimming this screen matters more than it seems, since it's the only place you'll see exactly what access you're granting before the integration goes live."
+      "body": "Open the verified listing and click Add to Slack. If you're a workspace admin, Slack asks whether to install for the whole organization or just for you; either way, review the permissions screen that follows before clicking Allow. It typically lists the ability to post messages, create meeting links, and read basic channel information, and it's the only place you'll see exactly what access you're granting before the integration goes live.\n\nSome workspaces also require a Zoom account admin to pre-approve the app in the Zoom Marketplace first. If the install stalls partway through, that's usually why."
     },
     {
       "heading": "Sign in to your Zoom account",
-      "body": "After approving the permissions, Slack redirects you to Zoom's own login page to connect your account. Use your organization's Zoom credentials here, then accept the security consent screen that follows — this is the step that actually links your specific Zoom license to your Slack workspace, so the meetings you generate later are tied to your account's settings and plan limits."
+      "body": "After approving the permissions, Slack redirects you to Zoom's own sign-in page to connect your account. Use your organization's Zoom credentials, then accept the consent screen that follows. This is the step that ties your Zoom license to your Slack workspace, so meetings you generate later carry your account's settings and plan limits.\n\nThat connected account needs to be on a Zoom Pro, Business, or Enterprise plan. It will connect on a free Basic account, but Zoom's own support documentation excludes Basic accounts from the Slack integration, and hosting through /zoom typically won't work from one."
     },
     {
       "heading": "Launch a call with the /zoom slash command",
-      "body": "Back in Slack, go to any channel or direct message, type /zoom, and press Enter. This instantly posts a meeting card with a Join button, generated fresh for that moment rather than reusing a static personal meeting link — useful for keeping unrelated calls from colliding. Anyone in the channel can click Join straight from the card without needing to open Zoom separately first."
+      "body": "Back in Slack, go to any channel or direct message, type /zoom, and press Enter. This posts a meeting card with a Join button, generated fresh for that moment instead of reusing a static personal link, which keeps unrelated calls from colliding. Anyone in the channel can click Join straight from the card without opening Zoom separately first."
     },
     {
       "heading": "Set Zoom as your default call trigger",
-      "body": "If your team leans on Zoom more than Slack's built-in Huddles, workspace settings let you map the phone or video call icon at the top of a channel to launch Zoom automatically instead of prompting you to choose every time. This is a small setting but it removes a click from the most common action in a fast-moving channel, and it's worth doing once your team has settled on Zoom as the default rather than an occasional alternative."
+      "body": "If your team leans on Zoom more than Slack's built-in Huddles, a workspace admin can set it as the default: Administration > Workspace Settings > Settings tab > Calls, then choose Zoom for video calls and, if your plan includes Zoom Phone, for phone calls too. After that, the call icon at the top of any channel starts a Zoom meeting immediately instead of asking which tool to use. It's a small setting, but it removes a click from the most common action in a fast-moving channel."
     }
   ],
   "faq": [
-    { "question": "Do all participants need a Zoom account to join?", "answer": "No, teammates can join through the generated link without needing their own Zoom account, though hosting and admin features vary by role and license." },
-    { "question": "Can I set Zoom as my default call option in Slack?", "answer": "Yes, workspace settings let you map the phone or video icon so it automatically launches Zoom instead of prompting you to pick a tool each time." },
-    { "question": "Does the integration work in direct messages too?", "answer": "Yes, the /zoom command works the same way in both public channels and direct messages." },
-    { "question": "What happens if my Zoom license doesn't support the meeting length?", "answer": "The meeting follows whatever limits your connected Zoom account's plan has, so check your subscription if calls are cutting off earlier than expected." },
-    { "question": "Where do I find the Zoom app if it's not in my sidebar shortcuts?", "answer": "Search for it directly in the Slack Marketplace or the in-app Apps panel under the Tools menu — it doesn't need to be pinned to a shortcut to be installed or used." }
+    { "question": "Does the Zoom Slack integration work with a free Zoom account?", "answer": "No. Zoom's own support documentation for the Slack app lists a Pro, Business, or Enterprise account as a requirement. A free Basic Zoom account can connect to Slack but isn't supported for hosting meetings through /zoom." },
+    { "question": "Do all participants need a Zoom account to join?", "answer": "No. Anyone in the channel can join through the generated link without a Zoom account of their own. Only the host's connected account needs the Pro-or-higher plan." },
+    { "question": "Can I set Zoom as my default call option in Slack?", "answer": "Yes. A workspace admin can do this under Administration > Workspace Settings > Calls, mapping the channel's call button to start a Zoom meeting instead of Slack's own Huddles." },
+    { "question": "Does the integration work in direct messages too?", "answer": "Yes, /zoom works the same way in both public channels and direct messages." },
+    { "question": "Where do I find the Zoom app if it isn't in my sidebar shortcuts?", "answer": "Search for it directly in Slack's Apps panel or Marketplace site; it doesn't need to be pinned to a shortcut to be installed or used." }
   ],
+  "references": [
+    { "label": "Zoom Support: Using the Zoom app for Slack (official)", "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065290" }
+  ],
+  "verifiedNote": "Click path, screenshots, and the day-to-day slash-command behaviour come from a recording made in 2026. Account and plan requirements, and the Administration > Workspace Settings > Calls path for setting a default, were checked in September 2026 against Zoom's own support article for the Slack app. That check caught that a free Basic Zoom account isn't supported for hosting through /zoom, a constraint the article previously didn't mention.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

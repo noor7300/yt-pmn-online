@@ -1,12 +1,17 @@
 {
   "slug": "how-to-integrate-notion-with-slack-connect-use-easily-2026",
   "seoTitle": "How to Integrate Notion with Slack: Connect and Use",
-  "metaDescription": "Connect Notion and Slack from either side of the integration — install Slack's connections from Notion's settings or the Notion AI app from Slack's directory.",
-  "intro": "Bridging your Notion workspace with your Slack channels cuts down on the tab-switching that slows down project handoffs. There are actually two doors into this integration: you can install Slack connections from inside Notion's own settings, or add a Notion app from Slack's App Directory. This guide walks through both, plus what you actually get once they're connected — link previews with AI-generated summaries, and an AI connector that lets Notion answer questions using what's in your Slack history.",
+  "metaDescription": "Connect Notion and Slack from either side of the integration, and see which pieces are free for everyone versus gated behind a Notion Business or Enterprise plan.",
+  "intro": "Bridging your Notion workspace with your Slack channels cuts down on the tab-switching that slows down project handoffs. There are two doors into this integration: install Slack connections from inside Notion's own settings, or add a Notion app from Slack's App Directory. This guide walks through both, plus what you get once they're connected — link previews with AI-generated summaries, and an AI connector that lets Notion answer questions using your Slack history. The two pieces aren't priced the way they look at first glance.",
+  "prerequisites": [
+    "A Notion workspace and a Slack workspace you already belong to",
+    "Owner-level access on both sides if you're setting up the AI connector specifically"
+  ],
+  "costNote": "Link preview cards are free on every Notion plan. The AI connector that lets Notion search Slack messages needs a Business or Enterprise Notion plan. The \"paid\" label on the Notion AI listing inside Slack's own App Directory reflects that plan requirement, not a separate charge stacked on top of Notion.",
   "steps": [
     {
       "heading": "Open Notion's settings and find Connections",
-      "body": "Click your workspace name in Notion to open the Account & Settings modal, then look under the Features section in the left sidebar for Connections, sitting between Notion AI and Notion MCP. This is the central place Notion manages every third-party app it talks to, not just Slack, so it's worth knowing this menu exists even if Slack is the only one you need right now. From here you can see what's already connected and open the Discover page to browse everything available.",
+      "body": "Click your workspace name in Notion to open Account & Settings, then look under the Features section in the left sidebar for Connections, sitting between Notion AI and Notion MCP. This is the central place Notion manages every third-party app it talks to, not just Slack. From here you can see what's already connected and open Discover connections to browse everything available.",
       "image": {
         "file": "/screenshots/E6_rug945-c/04.webp",
         "caption": "Notion's settings modal with Connections listed under Features, next to Notion AI and Notion MCP."
@@ -14,55 +19,79 @@
     },
     {
       "heading": "Install Slack from Discover connections",
-      "body": "Opening Discover connections shows a searchable gallery of apps, and Slack's card lists exactly what it offers: Link preview, which shows a rich card when you paste a Notion page into Slack, and AI connector, which lets Notion AI search and answer using content from your Slack workspace. Clicking into the Slack card starts an OAuth handshake — a small popup window opens to Slack, you sign in and approve the requested scopes, and the modal shows \"Processing authentication\" while it waits for you to finish in that popup. Once it completes, the connection count updates from \"0 of 2 connection types installed\" to reflect whichever pieces you turned on.",
+      "body": "Discover connections shows a searchable gallery of apps, and Slack's card lists what it offers: Link preview, a rich card that appears when you paste a Notion page into Slack, and an AI connector toggle that lets Notion AI search and answer using Slack content. Clicking into the card starts an OAuth handshake: a popup opens to Slack, you sign in and approve the requested scopes, and the modal shows \"Processing authentication\" while it waits. Link preview turns on for anyone on any plan. The AI connector toggle only works if your workspace is on Notion Business or Enterprise; on lower plans it stays visible but won't complete.",
       "image": {
         "file": "/screenshots/E6_rug945-c/05.webp",
         "caption": "The Slack connection card inside Notion's Discover connections modal, mid-authentication with a popup window open to Slack."
       }
     },
     {
-      "heading": "Understand what Link preview actually does",
-      "body": "Slack also publishes its own integration page describing the same connection from the other direction, under the heading \"Connect Slack & Notion — Share Notion links with useful context and AI summaries.\" The example on that page shows a teammate dropping a Notion link into a channel message, and Slack automatically expanding it into a card with the document's title, a short AI-written summary of the key takeaways, and metadata showing who created it and when. That unfurling only works for pages your Slack workspace has been given access to, so a link to a private, unshared page will post as plain text instead of a rich card."
+      "heading": "Know what Link preview shows",
+      "body": "Slack publishes its own integration page describing the same connection from the other direction. Drop a Notion link into a channel and Slack expands it into a card with the document's title, an AI-written summary of the key points, and metadata showing who created it and when. That unfurling only works for pages your Slack workspace has been given access to. A link to a private, unshared page posts as plain text instead."
     },
     {
-      "heading": "Add the Notion AI app from Slack's directory instead",
-      "body": "The second path starts from Slack. Inside Slack's AgentExchange app directory, searching for Notion surfaces a listing for Notion AI, separate from the basic link-preview connection — it's marked as a paid app under Pricing. Its description explains that Notion AI works across your workspace's docs, projects, and meetings, and that in Slack specifically it can summarize threads, find next steps, and pull in relevant context using Slack's Real-time Search API. Clicking Add to Slack from this listing installs the AI-focused integration rather than the free link-preview one, so check which listing you're on before installing if you specifically want the no-cost option.",
+      "heading": "Or add the Notion AI app from Slack's own directory",
+      "body": "The second path starts from Slack. Searching Notion inside Slack's AgentExchange app directory surfaces a listing for Notion AI, separate from the basic link-preview connection and marked Paid. Its description explains that Notion AI works across your workspace's docs, projects, and meetings, and that in Slack it can summarize threads, find next steps, and pull in context from Slack's search. This is the same underlying AI connector as the toggle inside Notion's own Discover page; installing from Slack's side is just a second door to it, gated by the same Business/Enterprise plan requirement, not a separate fee.",
       "image": {
         "file": "/screenshots/E6_rug945-c/02.webp",
         "caption": "The Notion AI listing inside Slack's AgentExchange app directory, showing it as a paid Featured and Productivity app."
       }
     },
     {
-      "heading": "Know the difference before you commit",
-      "body": "It's easy to assume \"connect Notion to Slack\" is a single toggle, but what you're actually choosing between is a free, page-level link preview and a paid, workspace-wide AI connector. If your team just wants shared links to look good in chat, the free Link preview connection from Notion's Discover page is enough. If you want Notion AI to actually answer questions inside Slack using content from both platforms, you need the separate Notion AI app installed from Slack's directory, which carries its own subscription cost on top of your existing plans."
+      "heading": "Verify the connection and check the setup requirements",
+      "body": "Test either connection by pasting a link to a shared Notion page into a Slack channel; it should unfurl into a rich card within a second or two. If you set up the AI connector, ask Notion AI a question in Slack that references something discussed in a channel to confirm it's pulling in Slack content. Setting up the AI connector specifically requires being an owner of both the Slack workspace and the Notion workspace, and the workspace needs more than one member. Both connections can be managed or removed later from the same two places: Notion's Connections settings, or Slack's Apps section."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The AI connector toggle won't complete, or isn't there",
+      "cause": "Notion's Slack AI connector needs a Business or Enterprise Notion plan. On Free, Plus, or standard Business-tier gaps it either doesn't appear or fails after authentication.",
+      "fix": "Check your workspace's plan in Notion's billing settings, and upgrade or ask a workspace admin to."
     },
     {
-      "heading": "Verify the connection in either direction",
-      "body": "After installing from either side, test it by pasting a link to a Notion page you know is shared into a Slack channel — it should unfurl into the card style shown on Slack's integration page within a second or two. If you installed the AI connector, try asking Notion AI a question in Slack that references something discussed in a channel to confirm it's pulling in Slack content. Both connections can be managed or removed later from the same two places: Notion's Connections settings, or Slack's Apps section in your workspace sidebar."
+      "problem": "The Slack authorization popup closes without finishing the connection",
+      "cause": "The AI connector requires you to be an owner of both the Slack workspace and the Notion workspace, and the workspace needs more than one member.",
+      "fix": "Complete the setup from an account that owns both workspaces, or hand it to someone who does."
+    },
+    {
+      "problem": "Notion AI can't answer questions about a Slack conversation from earlier today",
+      "cause": "Indexing after setup can take up to 36 hours, and only covers roughly the past year of messages in channels that were included when the connector was configured.",
+      "fix": "Wait for indexing to finish, and confirm the specific channel was selected during setup, not left out."
     }
   ],
   "faq": [
     {
       "question": "Is the Notion and Slack integration free?",
-      "answer": "The basic Link preview connection, managed from Notion's Discover connections page, is free. The separate Notion AI app listed in Slack's directory is a paid product on top of your existing Notion and Slack plans."
+      "answer": "The Link preview connection is free on every plan. The AI connector that lets Notion AI search Slack requires a Business or Enterprise Notion plan, whichever side you install it from."
     },
     {
       "question": "Do I need to give Slack access to my entire Notion workspace?",
-      "answer": "No. Notion's connection flow is scoped per app, and pages need to be explicitly shared before they'll unfurl as rich previews or be searchable through the AI connector."
+      "answer": "No. Pages need to be explicitly shared before they'll unfurl as rich previews or be searchable through the AI connector, and the Slack side lets you pick specific channels or all future public ones."
     },
     {
       "question": "Why isn't my Notion link showing a preview in Slack?",
-      "answer": "Check that the page is shared and that the Link preview connection is installed and authenticated in Notion's Connections settings — unshared pages post as plain text links instead of rich cards."
+      "answer": "Check that the page is shared and that the Link preview connection is installed and authenticated in Notion's Connections settings. Unshared pages post as plain text instead of rich cards."
     },
     {
       "question": "What's the difference between installing from Notion versus from Slack?",
-      "answer": "Installing from Notion's Discover connections page gets you the free Link preview and AI connector toggles for Slack. Installing Notion AI from Slack's own App Directory adds the paid AI product, which is a separate listing entirely."
+      "answer": "They lead to the same two features. Notion's Discover connections page toggles Link preview and the AI connector for Slack; Slack's own App Directory lists the same AI connector as a separate, Paid app. The Paid label reflects Notion's Business/Enterprise plan requirement, not an extra Slack-side charge."
     },
     {
-      "question": "Can Notion AI answer questions using my Slack messages?",
-      "answer": "Yes, if you install the AI connector — either through Notion's Discover connections modal or the paid Notion AI app in Slack's directory — it can search Slack using Slack's real-time search API to pull in relevant context."
+      "question": "Do I need to be an admin to set this up?",
+      "answer": "For the AI connector, yes. You need owner-level access on both the Slack workspace and the Notion workspace, and the workspace must have more than one member."
     }
   ],
+  "references": [
+    {
+      "label": "Notion Help: Connect Slack to Notion (official)",
+      "url": "https://www.notion.com/help/slack"
+    },
+    {
+      "label": "Notion Help: Notion AI connector for Slack (official)",
+      "url": "https://www.notion.com/help/notion-ai-connectors-for-slack"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. Plan requirements, the owner/member conditions, and the indexing window were re-checked against Notion's own help center in September 2026 — that check corrected the earlier claim that the AI connector's cost comes from a separate Slack-side purchase. It's gated by Notion's own Business/Enterprise plan on either install path.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
