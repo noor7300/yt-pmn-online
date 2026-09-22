@@ -1,72 +1,62 @@
 {
   "slug": "how-to-do-a-subitem-rollup-in-monday-com-easily-2026",
   "seoTitle": "Roll Up Subitem Data in Monday.com to Parent Items",
-  "metaDescription": "Summarize subitem status and progress onto parent rows in Monday.com using the Show Summary on Parent Item rollup feature, step by step.",
-  "intro": "When a task has several subitems tracking their own status or progress, checking each one individually to gauge overall progress gets tedious fast. Monday.com's rollup feature solves this by summarizing subitem data directly onto the parent row, so a glance at the main board tells you what would otherwise take opening every subitem to piece together. This guide follows the actual click path on a sprint board — from a task with a subitem attached, through the column setting that turns on the rollup, to the summary showing up on the parent row.",
+  "metaDescription": "Summarize subitem Status, Numbers, Date, and Tags data onto the parent row in monday.com with the Show Summary on Parent Item toggle, and what to do when it won't appear.",
+  "intro": "When a task has several subitems, opening each one to gauge overall progress gets tedious fast. monday.com's rollup feature summarizes subitem data straight onto the parent row, so a glance at the board tells you what would otherwise take expanding every subitem to piece together. This guide follows the click path on a sprint board: from a task with a subitem attached, through the column setting that turns rollups on, to the summary appearing on the parent row.",
   "steps": [
     {
       "heading": "Find a task that already has subitems",
-      "body": "On a working board like a sprint backlog, tasks with subitems attached show a small count badge next to their name — a task called \"Updata APK V2\" with a \"1\" badge means one subitem is nested underneath it, collapsed by default. Hovering over the row surfaces an expand control so you can open it up and see what's inside. This is the starting point for a rollup: you need at least one subitem with a trackable column, like Status or Numbers, before there's anything to summarize.",
-      "image": {
-        "file": "/screenshots/TOGD-maDcXY/01.webp",
-        "caption": "A sprint board where a task shows a subitem count badge, with an \"Expand this item\" tooltip appearing on hover."
-      }
+      "body": "On a working board like a sprint backlog, a task with subitems shows a small count badge next to its name. A task called \"Updata APK V2\" with a \"1\" badge has one subitem nested underneath it, collapsed by default. Hovering over the row surfaces an expand control. You need at least one subitem with a column worth summarizing, like Status, Numbers, or Date, before there's anything to roll up.",
+      "image": { "file": "/screenshots/TOGD-maDcXY/01.webp", "caption": "A sprint board where a task shows a subitem count badge, with an \"Expand this item\" tooltip appearing on hover." }
     },
     {
       "heading": "Expand the subitem table",
-      "body": "Clicking the expand arrow opens a mini table nested directly under the parent task, with its own header row: Subitem, Owner, Status, Date, and an option to add more columns. In this example, the subitem \"How to Master Subitem\" already has its Status column set to Done. This nested table behaves like a small board of its own — you can add more subitems, assign owners, and set statuses independently of the parent task above it.",
-      "image": {
-        "file": "/screenshots/TOGD-maDcXY/02.webp",
-        "caption": "An expanded subitem table under a parent task, showing a Subitem, Owner, and Status column with one subitem marked Done."
-      }
+      "body": "Clicking the expand arrow opens a mini table nested under the parent task, with its own header row: Subitem, Owner, Status, Date, and an option to add more columns. Here, the subitem \"How to Master Subitem\" already has its Status set to Done. This nested table behaves like a small board of its own; subitems, owners, and statuses are set independently of the parent task above it. Subitem columns are shared board-wide, though. Every subitem on the board uses the same column structure, so a column added under one task exists under all of them.",
+      "image": { "file": "/screenshots/TOGD-maDcXY/02.webp", "caption": "An expanded subitem table under a parent task, showing a Subitem, Owner, and Status column with one subitem marked Done." }
     },
     {
-      "heading": "Open the column menu and turn on the rollup",
-      "body": "Click the three-dot menu on the subitem Status column header to open its settings. Beyond the expected Filter, Sort, and Collapse options, and a set of AI-powered actions, you'll find Show Summary on Parent Item partway down the list. This single toggle is the entire rollup setup — no separate configuration screen, no formula to write. Clicking it tells Monday.com to compute a summary from every subitem under that column and surface it on the parent row.",
-      "image": {
-        "file": "/screenshots/TOGD-maDcXY/03.webp",
-        "caption": "The subitem Status column's settings menu, with \"Show Summary on Parent Item\" listed below Filter, Sort, and Collapse."
-      }
+      "heading": "Turn on the rollup from the column menu",
+      "body": "Click the three-dot menu on the subitem Status column header. Beyond Filter, Sort, and Collapse, and a set of AI-powered actions, Show Summary on Parent Item sits partway down the list. The toggle is the whole setup; there's no separate configuration screen. monday.com's own documentation lists Status, Numbers, Date, Tags, and Time Tracking among the column types this works on, so the feature isn't limited to the two shown here.",
+      "image": { "file": "/screenshots/TOGD-maDcXY/03.webp", "caption": "The subitem Status column's settings menu, with \"Show Summary on Parent Item\" listed below Filter, Sort, and Collapse." }
     },
     {
-      "heading": "See the summary appear on the parent row",
-      "body": "Once enabled, a new column — labeled something like \"Subitems Sta...\" when truncated — appears on the parent-level board view, sitting alongside the task's other columns like Type, Task ID, and Timeline. For a Status column, the summary shows the subitem's status value directly (Done, in this case), rendered with the same color as it has at the subitem level. Now you can scan the whole board and know which tasks have finished subitems without expanding a single one.",
-      "image": {
-        "file": "/screenshots/TOGD-maDcXY/04.webp",
-        "caption": "The parent row now showing a \"Subitems Sta...\" column with the rolled-up Done status pulled from the subitem below it."
-      }
+      "heading": "See the summary on the parent row",
+      "body": "Once enabled, a new column appears at the parent level, labeled something like \"Subitems Sta...\" when the header truncates, sitting alongside the task's other columns. For a Status column, the summary shows the subitem's value directly, in the same color it carries at the subitem level. Widen the column if the truncated label is confusing; there's no separate way to rename it.",
+      "image": { "file": "/screenshots/TOGD-maDcXY/04.webp", "caption": "The parent row now showing a \"Subitems Sta...\" column with the rolled-up Done status pulled from the subitem below it." }
     },
     {
-      "heading": "Match the rollup type to the column",
-      "body": "What the rollup actually calculates depends on the column type you're summarizing. A Status column rolls up as the underlying value or, with multiple subitems in different states, as a progress indicator. A Numbers column set to track hours or budget rolls up as a sum, average, min, max, or count, configurable from the same column settings — a budget column would typically use sum, while an estimate column might use average. Pick the aggregation that answers the question you actually care about, since a sum and an average tell very different stories from the same subitem data."
+      "heading": "Match the calculation to the column, then put it to work",
+      "body": "What a rollup shows depends on the column type. A Status column rolls up as the value itself or, with subitems in different states, a completion indicator. A Numbers column tracking hours or budget can roll up as a sum, minimum, or maximum, depending on the calculation you pick in the same column settings. Once the rollup column exists at the parent level, it behaves like any other column: filter the board by it, sort by it, or reference it as a condition inside an automation recipe."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Show Summary on Parent Item doesn't do anything, or the column never appears at the parent level",
+      "cause": "No subitem under that task has a value in the column yet, or the parent task has no subitems at all.",
+      "fix": "Add at least one subitem and set a value in that column first. The rollup summarizes existing data; it doesn't create any."
     },
     {
-      "heading": "Put the rolled-up column to work",
-      "body": "Once a rollup column exists at the parent level, it behaves like any other column for filtering and sorting — you can filter the board to only show tasks where the rolled-up status isn't Done yet, or sort by rolled-up budget to see which parent tasks are running heaviest. It's also available as a trigger or condition inside automation recipes, so you could notify a manager the moment every subitem under a task reaches Done. This is where the rollup earns its keep: it's not just a display convenience, it's live data you can build logic around."
+      "problem": "The new parent-level column header is cut off, like \"Subitems Sta...\"",
+      "cause": "monday.com truncates long auto-generated column names to fit the board's default column width.",
+      "fix": "Widen the column by dragging its right edge. The summary itself isn't affected, only the label."
+    },
+    {
+      "problem": "I want a rollup for a column that only exists on one subitem",
+      "cause": "Subitem columns apply to the whole board. Every subitem shares the same column structure, so there's no per-task column.",
+      "fix": "Add the column once, board-wide, from any subitem's column settings. It can't be scoped to a single task."
     }
   ],
   "faq": [
-    {
-      "question": "How do I get subitem data to show on the parent row?",
-      "answer": "Open the three-dot menu on the subitem column you want to summarize and click Show Summary on Parent Item. A matching column appears at the parent level showing the rolled-up value."
-    },
-    {
-      "question": "What kinds of rollup calculations are available?",
-      "answer": "It depends on the column type. Numbers columns can roll up as sum, average, min, max, or count; Status columns roll up as the value itself or a completion indicator across subitems."
-    },
-    {
-      "question": "Do I need a subitem before I can set up a rollup?",
-      "answer": "Yes. The rollup summarizes existing subitem data, so at least one subitem with the column you want to track needs to exist under the parent task first."
-    },
-    {
-      "question": "Can I filter or sort a board by rolled-up subitem data?",
-      "answer": "Yes. Once the summary column appears on the parent row, it behaves like any other column and can be used in filters, sorting, and automation recipes."
-    },
-    {
-      "question": "Does the rollup update automatically when a subitem changes?",
-      "answer": "Yes. The parent-level summary reflects the current state of its subitems, so updating a subitem's status or number updates the rollup on the parent row without any manual refresh."
-    }
+    { "question": "How do I get subitem data to show on the parent row?", "answer": "Open the three-dot menu on the subitem column you want to summarize and select Show Summary on Parent Item. A matching column appears at the parent level." },
+    { "question": "Which column types support a rollup?", "answer": "monday.com's documentation lists Status, Numbers, Date, Tags, and Time Tracking, among others. What the summary shows depends on the column type: a value or completion indicator for Status, an aggregate like sum or max for Numbers." },
+    { "question": "Do I need a subitem before setting up a rollup?", "answer": "Yes. The feature summarizes existing subitem data, so at least one subitem with the target column populated needs to exist first." },
+    { "question": "Can I filter or sort by the rolled-up value?", "answer": "Yes. Once the summary column exists at the parent level, it works like any other column for filtering, sorting, and as a trigger or condition inside automations." },
+    { "question": "Does the rollup update automatically when a subitem changes?", "answer": "Yes. It reflects the current state of the subitems underneath it without a manual refresh." }
   ],
+  "references": [
+    { "label": "monday.com Support: All about subitems (official)", "url": "https://support.monday.com/hc/en-us/articles/360011905480-All-about-subitems" }
+  ],
+  "verifiedNote": "Re-checked against monday.com's official \"All about subitems\" support article in September 2026. That check broadened the list of column types the rollup supports beyond Status and Numbers, and added the board-wide column-structure constraint, which explains a common point of confusion the earlier draft didn't cover.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

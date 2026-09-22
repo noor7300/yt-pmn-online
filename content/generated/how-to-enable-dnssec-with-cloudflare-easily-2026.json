@@ -1,12 +1,16 @@
 {
   "slug": "how-to-enable-dnssec-with-cloudflare-easily-2026",
   "seoTitle": "How to Enable DNSSEC With Cloudflare (2026)",
-  "metaDescription": "Turn on DNSSEC in Cloudflare, copy your DS record details, and add them at your registrar to protect your domain from spoofing and cache poisoning.",
-  "intro": "DNSSEC adds a cryptographic layer of trust to your domain's DNS responses, making it much harder for attackers to spoof records or poison caches. In Cloudflare, turning it on is a single click, but finishing the job means copying a handful of cryptographic values into a completely different system — your domain registrar. This guide walks through where DNSSEC lives inside Cloudflare's DNS settings, what the generated DS record actually contains, and why that second step at the registrar is the part people skip and then wonder why validation fails.",
+  "metaDescription": "Turn on DNSSEC in Cloudflare, copy the DS record it generates, and add it at your registrar. Covers the fields you'll be asked for and what breaks if a digit is wrong.",
+  "intro": "DNSSEC adds a cryptographic chain of trust to your domain's DNS responses, making it much harder for an attacker to spoof records or poison a resolver's cache. In Cloudflare, turning it on is a single click, but finishing the job means copying a handful of cryptographic values into a completely different system, your domain registrar. This guide covers where DNSSEC lives inside Cloudflare's DNS settings, what the generated DS record contains, and why the registrar step is the part people skip and then can't work out why validation fails.",
+  "prerequisites": [
+    "Your domain already using Cloudflare's nameservers, with DNS Setup showing Full, not Partial",
+    "DNSSEC turned off at your registrar first, if you're migrating a domain that had it enabled with a previous DNS provider"
+  ],
   "steps": [
     {
       "heading": "Open your domain's Overview in Cloudflare",
-      "body": "After logging into your Cloudflare account and selecting a domain, you land on its Overview page — traffic charts for unique visitors, total requests, and cache percentage, plus a DNS panel on the right confirming DNS Setup is Full. This is also where you'd notice if your domain isn't yet using Cloudflare's nameservers, which DNSSEC depends on, since the DNS Setup status needs to read Full rather than Partial before signing will work correctly.",
+      "body": "After logging into your Cloudflare account and selecting a domain, you land on its Overview page: traffic charts for unique visitors, total requests and cache percentage, plus a DNS panel confirming DNS Setup is Full. If it reads Partial instead, DNSSEC signing won't work correctly yet, since Cloudflare isn't fully authoritative for the zone.",
       "image": {
         "file": "/screenshots/0yN6_V3zHfY/03.webp",
         "caption": "A domain's Overview page in Cloudflare, showing traffic stats and a DNS Setup status of Full before opening DNS Settings."
@@ -14,15 +18,15 @@
     },
     {
       "heading": "Go to DNS Settings and find the DNSSEC card",
-      "body": "From the left sidebar, expand DNS and click Settings rather than Records — this is a distinct sub-page from the records list, dedicated to zone-level configuration. Scrolling down, you'll see a Cloudflare Nameservers card listing your two assigned NS values, then directly below it a DNSSEC card with a short explanation — \"DNSSEC uses a cryptographic signature of published DNS records to protect your domain against forged DNS answers\" — and a single Enable DNSSEC button. Further down the same page are related but separate toggles for Multi-signer DNSSEC and Multi-provider DNS, which most single-provider setups can ignore.",
+      "body": "From the left sidebar, expand DNS and click Settings, not Records; this is a separate sub-page dedicated to zone-level configuration. Scrolling down shows a Cloudflare Nameservers card listing your two assigned NS values, then a DNSSEC card directly below it with a short explanation and a single Enable DNSSEC button. Further down the same page are related but separate toggles for Multi-signer DNSSEC and Multi-provider DNS, which a single-provider setup like this one can ignore.",
       "image": {
         "file": "/screenshots/0yN6_V3zHfY/04.webp",
         "caption": "The DNS Settings page, showing Cloudflare Nameservers and the DNSSEC card with its Enable DNSSEC button, above Multi-signer DNSSEC and Multi-provider DNS."
       }
     },
     {
-      "heading": "Click Enable DNSSEC and review the DS Record",
-      "body": "Clicking Enable DNSSEC immediately opens a DS Record modal instructing you to copy the details below and add them to your domain registrar. The modal lists several values: the full DS Record string in registrar-ready format, a separate Digest field, a Digest Type field (SHA256 in this case), an Algorithm field (13), a Public Key, a Key Tag, and Flags (257, marked KSK for Key Signing Key). Every field has its own copy icon, and most registrars will ask for the Key Tag, Algorithm, Digest Type, and Digest as four separate fields rather than the single combined DS Record string, so read your registrar's form carefully before pasting.",
+      "heading": "Click Enable DNSSEC and review the DS record",
+      "body": "Clicking Enable DNSSEC opens a DS Record modal instructing you to copy the details below into your registrar. It lists the full DS Record string in registrar-ready format, plus its parts broken out separately: Digest, Digest Type (SHA-256), Algorithm (13), Public Key, Key Tag, and Flags (257, marked KSK for Key Signing Key). Algorithm 13 is Cloudflare's preferred cipher; if your registrar's form doesn't list \"13\", look for its other name, ECDSA Curve P-256 with SHA-256. Most registrars ask for the Key Tag, Algorithm, Digest Type and Digest as four separate fields instead of the single combined string, so read your registrar's form before pasting anything.",
       "image": {
         "file": "/screenshots/0yN6_V3zHfY/05.webp",
         "caption": "The DS Record modal after enabling DNSSEC, listing the Digest, Digest Type, Algorithm 13, Public Key, Key Tag, and Flags values to copy."
@@ -30,39 +34,77 @@
     },
     {
       "heading": "Add the DS record at your domain registrar",
-      "body": "DNSSEC only works once the DS record exists in two places: Cloudflare, where it already is, and your registrar's parent zone, which is what actually tells the rest of the internet to trust your signed records. Log into whichever registrar manages your domain — GoDaddy, Namecheap, and Porkbun all have a dedicated DNSSEC section — and paste in the Key Tag, Algorithm, Digest Type, and Digest values exactly as Cloudflare generated them. A single mistyped digit in the Digest field will break validation entirely rather than just degrading it, so copy each value with its copy icon instead of retyping by hand."
+      "body": "DNSSEC only works once the DS record exists in two places: Cloudflare, where it already is, and your registrar's parent zone, which is what tells the rest of the internet to trust your signed records. Log into whichever registrar manages your domain and find its DNSSEC section, then paste in the Key Tag, Algorithm, Digest Type and Digest values exactly as Cloudflare generated them. Use each field's copy icon instead of retyping by hand; a single mistyped digit in the Digest breaks validation outright instead of just degrading it."
     },
     {
       "heading": "Confirm the record inside Cloudflare",
-      "body": "Back in the DS Record modal, clicking Confirm tells Cloudflare you've completed the registrar-side step, which changes the DNSSEC card's status from pending to active. This confirmation doesn't verify the registrar actually has the correct values — it just acknowledges you've done your part — so a typo at the registrar can still leave your domain in a broken, half-signed state even after you click Confirm here."
+      "body": "Back in the DS Record modal, clicking Confirm tells Cloudflare you've completed the registrar-side step, which moves the DNSSEC card's status from pending to active. This confirmation doesn't check that the registrar has the correct values; it only acknowledges you've done your part. A typo at the registrar can still leave the domain in a broken, half-signed state after you click Confirm."
     },
     {
-      "heading": "Validate the signed status externally",
-      "body": "Once both sides show DNSSEC as enabled, use an external tool like DNSViz to independently confirm the chain of trust is intact from the root down to your domain. This step matters because Cloudflare's own dashboard can only tell you what it sees on its end — an independent validator checks the whole path, including the registrar's parent zone, which is exactly where a bad copy-paste would show up as a broken link in the chain."
+      "heading": "Validate the signed status independently",
+      "body": "Once both sides show DNSSEC enabled, use an external tool like DNSViz to confirm the chain of trust from the root down to your domain. Cloudflare's dashboard can only report what it sees on its own end; an independent validator checks the whole path, including the registrar's parent zone, which is exactly where a bad copy-paste would surface as a broken link in the chain."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "My registrar's DNSSEC form doesn't list Algorithm 13",
+      "cause": "Some registrars label Cloudflare's preferred algorithm by its full cryptographic name instead of the number.",
+      "fix": "Look for \"ECDSA Curve P-256 with SHA-256\" in the algorithm dropdown; it's the same setting as Algorithm 13. If it isn't offered at all, your registrar doesn't support Cloudflare's signing algorithm and DNSSEC can't be completed there."
+    },
+    {
+      "problem": "The domain became unreachable right after switching nameservers to Cloudflare",
+      "cause": "DNSSEC was already enabled with the previous DNS provider, and its old DS record is still sitting at the registrar pointing to keys that no longer exist.",
+      "fix": "Disable DNSSEC at the registrar before or during the nameserver switch, confirm the domain resolves normally on Cloudflare, then follow this guide to re-enable it with Cloudflare's own DS record."
+    },
+    {
+      "problem": "DNSViz or a resolver reports a broken chain of trust after setup",
+      "cause": "A field was mistyped at the registrar, most often the Digest, or Confirm was clicked in Cloudflare before the registrar's own DNS had propagated the new record.",
+      "fix": "Re-copy each field from Cloudflare's DS Record modal using its copy icon instead of retyping, and give the registrar's change a few hours to propagate before validating again."
+    }
+  ],
+  "tables": [
+    {
+      "title": "DS record fields Cloudflare generates",
+      "columns": ["Field", "Typical value", "What it's for"],
+      "rows": [
+        ["Digest", "A long hex string", "The cryptographic hash your registrar stores to verify Cloudflare's signing key"],
+        ["Digest Type", "SHA-256", "Which hashing algorithm produced the Digest"],
+        ["Algorithm", "13 (ECDSA Curve P-256 with SHA-256)", "Which cipher Cloudflare used to sign the zone"],
+        ["Key Tag", "A short numeric ID", "Identifies which of Cloudflare's keys the record refers to"],
+        ["Flags", "257 (KSK)", "Marks this as the Key Signing Key, not a Zone Signing Key"]
+      ],
+      "note": "Most registrar forms want Key Tag, Algorithm, Digest Type and Digest as four separate fields, not the combined DS Record string."
     }
   ],
   "faq": [
     {
-      "question": "What does DNSSEC actually protect against?",
-      "answer": "DNSSEC establishes an authenticated chain of trust for DNS responses, protecting against attacks like cache poisoning and DNS spoofing."
+      "question": "What does DNSSEC protect against?",
+      "answer": "It establishes an authenticated chain of trust for DNS responses, which protects against cache poisoning and DNS spoofing attacks that rely on forging DNS answers."
     },
     {
       "question": "Do I need to enable DNSSEC at both Cloudflare and my registrar?",
-      "answer": "Yes. Cloudflare generates the signing keys and DS record when you click Enable DNSSEC, but you still need to copy that DS record's Key Tag, Algorithm, Digest Type, and Digest into your registrar's DNSSEC settings to complete the chain of trust."
+      "answer": "Yes. Cloudflare generates the signing keys and DS record when you click Enable DNSSEC, but the chain of trust isn't complete until you copy that record's Key Tag, Algorithm, Digest Type and Digest into your registrar's own DNSSEC settings."
     },
     {
       "question": "How long does it take for DNSSEC to become active after enabling it?",
-      "answer": "Once the DS record is added at your registrar, activation can take anywhere from a few minutes to a couple of hours depending on propagation and your registrar's processing time."
+      "answer": "Once the DS record is added at your registrar, activation typically takes anywhere from a few minutes to a couple of hours, depending on propagation and how quickly your registrar processes the change."
     },
     {
-      "question": "What happens if I enter the wrong DS record values at my registrar?",
-      "answer": "Incorrect values, especially in the Digest field, can cause your domain to fail DNS validation entirely, making it unreachable. Copy each field with Cloudflare's copy icon rather than retyping to avoid this."
+      "question": "What happens if I migrate a domain that already had DNSSEC enabled elsewhere?",
+      "answer": "Disable DNSSEC at the old provider or the registrar before switching nameservers to Cloudflare. An old DS record left pointing at keys that no longer exist will make the domain unreachable until it's removed."
     },
     {
       "question": "How can I confirm DNSSEC is fully working after setup?",
-      "answer": "Use an independent tool like DNSViz to check the full chain of trust from the root down to your domain, since it verifies the registrar's side too, not just what Cloudflare's dashboard shows."
+      "answer": "Use an independent tool like DNSViz to check the full chain of trust from the root down to your domain. It verifies the registrar's side too, not just what Cloudflare's own dashboard reports."
     }
   ],
+  "references": [
+    {
+      "label": "DNSSEC (Cloudflare DNS docs, official)",
+      "url": "https://developers.cloudflare.com/dns/dnssec/"
+    }
+  ],
+  "verifiedNote": "Click path, field names and screenshots were re-checked against Cloudflare's own DNSSEC documentation in September 2026 and matched what this guide already described. Two things the original version left out were added from that same documentation: the prerequisite to disable DNSSEC at the registrar before migrating a domain that already had it enabled elsewhere, and Algorithm 13's alternate name, ECDSA Curve P-256 with SHA-256, for registrars that don't list it by number.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

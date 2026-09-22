@@ -1,16 +1,16 @@
 {
   "slug": "how-to-create-a-landing-page-in-power-bi-dashboard-pro-first-page-easily-2026",
   "seoTitle": "Create a Landing Page in Power BI Dashboards",
-  "metaDescription": "Learn how to build a professional landing page for your Power BI dashboard, from selecting visuals to arranging a layout that engages viewers.",
-  "intro": "The first page of a Power BI dashboard sets the tone for how stakeholders engage with your data, and it's the one page almost everyone will see whether they explore further or not. Rather than dropping viewers straight into a dense chart-filled report the moment it opens, a dedicated landing page gives them a title, a sense of what's inside, and clear navigation to the pages that actually matter to them personally. This is especially true for reports shared broadly across a team, where different viewers care about different sections and a plain, well-labeled entry point saves everyone from hunting through unfamiliar tabs. This guide covers building that first page from an empty canvas — placing a title, adding a placeholder visual, configuring which report pages actually show up in navigation, and keeping the whole thing current without extra manual work.",
+  "metaDescription": "Build a landing page for a Power BI report: a title, a placeholder visual, and Power BI's built-in page navigator, plus how its page visibility settings really work.",
+  "intro": "The first page of a Power BI dashboard sets the tone for how stakeholders engage with your data, and it's the one page almost everyone sees whether they explore further or not. Instead of dropping viewers straight into a dense, chart-filled report the moment it opens, a dedicated landing page gives them a title, a sense of what's inside, and clear navigation to the pages that matter to them. That matters most for reports shared broadly across a team, where different viewers care about different sections and a plain, well-labeled entry point saves everyone from hunting through unfamiliar tabs.\n\nThis guide covers building that first page from an empty canvas: placing a title, adding a placeholder visual, wiring up Power BI's built-in page navigator, and keeping the whole thing current without extra manual work.",
   "steps": [
     {
       "heading": "Set up a dedicated landing page in your report",
-      "body": "Start from your Power BI report and add a new page specifically for this purpose — name it something like \"LANDING PAGE\" so it's unmistakable in the page tab list, and drag it to the far left so it's the first thing anyone sees when the report opens. Keep this page visually separate from your working report pages; its job is orientation, not analysis, so resist the urge to cram a full chart onto it just because there's empty space available. Think of it more like a table of contents than another data page."
+      "body": "Start from your Power BI report and add a new page specifically for this purpose. Name it something like \"LANDING PAGE\" so it's unmistakable in the page tab list, and drag it to the far left so it's the first thing anyone sees when the report opens. Keep this page visually separate from your working report pages; its job is orientation, not analysis, so resist the urge to cram a full chart onto it just because there's empty space available. Think of it as a table of contents, not another data page."
     },
     {
       "heading": "Add a visual placeholder to anchor the layout",
-      "body": "Drop a visual onto the canvas before you've decided exactly what data it will show — Power BI displays it as an empty gray placeholder with \"Select or drag fields to populate this visual,\" which is a normal and useful intermediate state rather than something to worry about. Use it to block out the layout, deciding how much of the page a hero visual or summary chart should occupy relative to the surrounding whitespace, before committing to specific fields. Resize and reposition the placeholder a few times until the overall balance of the page feels right — it's much faster to move an empty box around than to keep rebuilding a fully populated chart every time you want to try a different layout.",
+      "body": "Drop a visual onto the canvas before you've decided exactly what data it will show. Power BI displays it as an empty gray placeholder reading \"Select or drag fields to populate this visual,\" which is a normal, useful intermediate state and not something to worry about. Use it to block out the layout, deciding how much of the page a hero visual or summary chart should occupy relative to the surrounding whitespace, before committing to specific fields. Resize and reposition it a few times until the balance of the page feels right. It's faster to move an empty box around than to keep rebuilding a fully populated chart every time you want to try a different layout.",
       "image": {
         "file": "/screenshots/tXKFx9DwCQo/02.webp",
         "caption": "An empty visual placeholder dropped onto the landing page canvas, used to block out the layout before any data fields are added."
@@ -18,55 +18,63 @@
     },
     {
       "heading": "Add a clear title to the page",
-      "body": "Place a text box or title element at the top of the page with your organization or dashboard name — something short and immediately legible, since this is the first text a viewer reads before anything else on the page registers. Keep it visually distinct from your data visuals with its own font weight or size, so it reads as a page heading rather than another chart label competing for attention. A one-line subtitle underneath, noting what the dashboard covers or how often it refreshes, adds useful context without turning the page into a wall of text.",
+      "body": "Place a text box or title element at the top of the page with your organization or dashboard name. Keep it short and immediately legible, since it's the first text a viewer reads before anything else on the page registers. Give it its own font weight or size so it reads as a page heading, not another chart label competing for attention. A one-line subtitle underneath, noting what the dashboard covers or how often it refreshes, adds useful context without turning the page into a wall of text.",
       "image": {
         "file": "/screenshots/tXKFx9DwCQo/03.webp",
         "caption": "The landing page with a title added above the placeholder visual, giving the page a clear point of entry before any data is shown."
       }
     },
     {
-      "heading": "Control which pages appear in navigation",
-      "body": "Open the Format pane and look under Pages, then Options, where you'll find toggles for showing hidden pages, showing tooltip pages, and showing all pages by default. Below that, a Show list lets you individually toggle visibility for every page in the report — your landing page, and each working page like Page 1 through Page 4. Turn off any page that's a work-in-progress or a tooltip-only helper page so your navigation only exposes what's actually ready for viewers.",
+      "heading": "Insert a page navigator",
+      "body": "This is the part a lot of landing pages skip, then end up faking with a row of hand-built buttons. On the Insert tab, select Buttons > Navigator > Page navigator (in the Power BI service, it's the same path from the menu bar in edit mode). Power BI builds a row of buttons for you, one per report page, and keeps it in sync on its own: button labels match each page's display name, their order matches your page order, and both update automatically as you rename, add, or reorder pages. In Desktop or service edit mode, hold Ctrl and select a button to test where it navigates."
+    },
+    {
+      "heading": "Control which pages the navigator shows",
+      "body": "With the navigator selected, open the Format navigator pane and look under Pages, where you'll find toggles for showing hidden pages and showing tooltip pages, plus a Show list that lets you turn the button for any individual page on or off. Turn off the button for anything that's a work-in-progress or a tooltip-only helper page, so the navigator only exposes what's ready for viewers.\n\nThat Show list only controls the navigator's own buttons. It doesn't hide the underlying page. A page can still be reached by URL, by another navigator, or by a manually placed button even with its navigator entry turned off. To remove a page from the report's tab strip, right-click that page's tab and choose Hide instead.",
       "image": {
         "file": "/screenshots/tXKFx9DwCQo/04.webp",
-        "caption": "The Format pane's Pages section, with Show toggles for the landing page and each individual report page, controlling what appears in the navigation."
+        "caption": "The Format navigator pane's Pages section, with Show toggles for the landing page and each individual report page, controlling what appears in the navigator."
       }
     },
     {
       "heading": "Set up automated refresh so the page stays current",
-      "body": "A landing page loses credibility fast if the summary numbers on it go stale while the detail pages behind it stay current — a viewer who spots a stale headline number tends to distrust the rest of the report too, even if the deeper pages are perfectly up to date. Configure a scheduled refresh for the underlying dataset in the Power BI service, so the figures a viewer sees on first load are never more than a refresh cycle old. This matters more on a landing page than anywhere else in the report, since it's the number people remember even if they never click through to see anything else."
+      "body": "A landing page loses credibility fast if the summary numbers on it go stale while the detail pages behind it stay current. A viewer who spots a stale headline number tends to distrust the rest of the report too, even if the deeper pages are perfectly up to date. Configure a scheduled refresh for the underlying dataset in the Power BI service, so the figures a viewer sees on first load are never more than a refresh cycle old. This matters more on a landing page than anywhere else in the report, since it's the number people remember even if they never click through to see anything else."
     },
     {
       "heading": "Design for the audience that only looks once",
-      "body": "Many viewers will open a dashboard, glance at the landing page, and leave without navigating further — treat that reality as a design constraint, not a failure state to fight against. Put the one or two numbers that matter most front and center, keep navigation buttons obvious and few, and save deep drill-down detail for the pages behind the landing page rather than trying to fit everything onto the first screen. If you find yourself wanting to add a fifth or sixth summary tile, that's usually a sign it belongs on a dedicated overview page one click deeper, not on the landing page itself."
+      "body": "Many viewers will open a dashboard, glance at the landing page, and leave without navigating further. Treat that as a design constraint, not a failure state to fight. Put the one or two numbers that matter most front and center, keep navigation obvious and sparse, and save deep drill-down detail for the pages behind the landing page instead of trying to fit everything onto the first screen. If you find yourself wanting to add a fifth or sixth summary tile, that's usually a sign it belongs on a dedicated overview page one click deeper, not on the landing page itself."
     },
     {
-      "heading": "Add simple navigation buttons to the pages behind it",
-      "body": "Beyond Power BI's built-in page tabs, adding a few labeled buttons directly on the landing page — \"Sales Overview,\" \"Product Details,\" \"Customer Insights\" — gives viewers an obvious, guided path instead of leaving them to guess which small page tab corresponds to what they're looking for. Set each button's action to navigate to a specific page, and keep the labels in plain business language rather than internal page names, since the person reading the landing page usually isn't the person who built the report."
+      "heading": "Add custom-labeled buttons when page names aren't enough",
+      "body": "The page navigator is the fastest path to working navigation, but its button text always matches a page's technical display name. When you want business-friendly labels instead, like \"Sales Overview\" instead of \"Page 3,\" build individual buttons by hand: Insert > Buttons > Blank, then in the Format button pane turn Action on, set Type to Page navigation, and pick the destination page. Unlike the navigator, these buttons don't relabel themselves if you rename a page later, so budget a few minutes to check them after any page rename."
     }
   ],
   "faq": [
     {
       "question": "What makes a good landing page for a Power BI dashboard?",
-      "answer": "A good landing page prioritizes clarity: a clear title, one or two headline metrics, and simple navigation to the pages behind it, rather than trying to show every visual at once."
+      "answer": "A clear title, one or two headline metrics, and simple navigation to the pages behind it work better than trying to show every visual at once."
     },
     {
       "question": "Can I make my Power BI landing page update automatically?",
-      "answer": "Yes, by setting up a scheduled refresh for the underlying dataset in the Power BI service, so the landing page's summary numbers stay current without manual intervention."
+      "answer": "Yes. Set up a scheduled refresh for the underlying dataset in the Power BI service, so the landing page's summary numbers stay current without manual intervention."
     },
     {
       "question": "How many visuals should I include on a landing page?",
-      "answer": "Fewer, well-chosen visuals generally work better than a crowded page — the goal is a quick, clear overview and obvious navigation, not every possible detail."
+      "answer": "Fewer, well-chosen visuals generally work better than a crowded page. The goal is a quick overview and obvious navigation, not every possible detail."
     },
     {
-      "question": "Is designing a landing page difficult for Power BI beginners?",
-      "answer": "No. The core steps — adding a page, placing a title and a placeholder visual, then controlling page visibility in the Format pane — are approachable even for a first-time report builder."
+      "question": "Do the page navigator's buttons update automatically when I rename or reorder pages?",
+      "answer": "Yes, that's what separates it from hand-built buttons. Labels, order, and the selected state all sync automatically as the report's pages change."
     },
     {
-      "question": "How do I hide draft pages from viewers while I keep working on them?",
-      "answer": "Use the Show toggles in the Format pane's Pages section to turn off visibility for any page that isn't ready, so your landing page's navigation only exposes finished work."
+      "question": "How do I keep a work-in-progress page away from viewers?",
+      "answer": "Right-click that page's tab and choose Hide. Turning off its entry in a navigator's Show list only removes its button from that one navigator; the page itself stays reachable by URL or another button until it's hidden that way."
     }
   ],
+  "references": [
+    { "label": "Microsoft Learn: Create page and bookmark navigators in Power BI (official)", "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/button-navigators" }
+  ],
+  "verifiedNote": "Screens and layout choices come from a walkthrough recorded in July 2025. Re-checked against Microsoft's official Power BI documentation in September 2026, which showed the Format-pane page-visibility step this guide described only works after inserting a page navigator object (Insert > Buttons > Navigator > Page navigator) — a step the guide previously skipped — and that its Show toggles control a navigator's buttons, not the page's actual visibility, which is set separately via right-click > Hide.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

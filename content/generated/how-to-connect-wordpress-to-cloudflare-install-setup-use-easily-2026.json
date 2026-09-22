@@ -1,12 +1,12 @@
 {
   "slug": "how-to-connect-wordpress-to-cloudflare-install-setup-use-easily-2026",
   "seoTitle": "How to Connect WordPress to Cloudflare (2026)",
-  "metaDescription": "Route your WordPress site through Cloudflare, install the official plugin, connect an API token, and apply recommended caching and SSL settings.",
-  "intro": "Cloudflare sits in front of a WordPress site and takes over the jobs your host shouldn't have to handle alone: caching pages at the edge, absorbing traffic spikes, and forcing HTTPS across every page. None of that happens automatically just because your domain resolves — you have to add the site to a Cloudflare account, point your registrar's nameservers at it, and then bridge WordPress itself to that account with the official plugin and an API token. This guide walks through each of those pieces in order, including where the setup actually happens inside both the Cloudflare dashboard and the WordPress admin.",
+  "metaDescription": "Route your WordPress site through Cloudflare: add the domain, switch nameservers, and connect the official plugin with a correctly scoped API token.",
+  "intro": "Cloudflare sits in front of a WordPress site and takes over jobs your host shouldn't have to handle alone: caching pages at the edge, absorbing traffic spikes, and forcing HTTPS across every page. None of that happens just because your domain resolves. You have to add the site to a Cloudflare account, point your registrar's nameservers at it, and then bridge WordPress to that account with the official plugin and a scoped API token. This guide walks through each piece in order, including where the setup happens inside both the Cloudflare dashboard and the WordPress admin.",
   "steps": [
     {
       "heading": "Start from your Cloudflare account home",
-      "body": "Log into Cloudflare and you land on Account home, which lists every domain already connected along with quick stats — security insights, cache rate, and web traffic for the last 24 hours. If this is your first site, that Domains panel will be empty, which is your cue to add one. This dashboard is also where you'll come back to later for DNS and caching settings once WordPress is talking to Cloudflare, so it's worth getting familiar with the sidebar layout now.",
+      "body": "Log into Cloudflare and you land on Account home, which lists every domain already connected along with quick stats: security insights, cache rate, and web traffic for the last 24 hours. If this is your first site, that Domains panel is empty, which is your cue to add one. You'll come back to this dashboard later for DNS and caching settings once WordPress is talking to Cloudflare, so take a minute to get familiar with the sidebar layout now.",
       "image": {
         "file": "/screenshots/Xnkv_Le58dE/03.webp",
         "caption": "Cloudflare's Account home, listing connected domains with live traffic and security stats. A new account starts with this list empty."
@@ -14,23 +14,23 @@
     },
     {
       "heading": "Add your WordPress domain to Cloudflare",
-      "body": "From Domains in the sidebar, choose to connect a domain rather than transfer or buy one — you're keeping your existing registrar, just routing DNS through Cloudflare. Type in your WordPress site's domain and Cloudflare scans your current DNS records automatically, then offers a free plan to start on. Review the imported records before continuing; a missed record here is the most common reason a site breaks briefly during migration.",
+      "body": "From Domains in the sidebar, choose to connect a domain instead of transferring or buying one. You're keeping your existing registrar, just routing DNS through Cloudflare. Type in your WordPress site's domain and Cloudflare scans your current DNS records automatically, then offers a free plan to start on. Review the imported records before continuing. A missed record here is the most common reason a site breaks briefly during migration.",
       "image": {
         "file": "/screenshots/Xnkv_Le58dE/04.webp",
-        "caption": "The Add a site screen. Connecting an existing domain — rather than transferring or buying one — is the right choice for a site already live on WordPress hosting."
+        "caption": "The Add a site screen. Connecting an existing domain, instead of transferring or buying one, is the right choice for a site already live on WordPress hosting."
       }
     },
     {
       "heading": "Update your nameservers at the registrar",
-      "body": "Cloudflare gives you two new nameservers to replace whatever your registrar currently has on file. Log into wherever you registered the domain — that's often a different company than your WordPress host — and paste the new nameservers into its DNS or nameserver settings. This is the step that actually reroutes traffic through Cloudflare, and it can take anywhere from a few minutes to 24 hours to fully propagate, so don't be alarmed if the change isn't instant."
+      "body": "Cloudflare gives you two new nameservers to replace whatever your registrar currently has on file. Log into wherever you registered the domain, often a different company than your WordPress host, and paste the new nameservers into its DNS or nameserver settings. This is the step that reroutes traffic through Cloudflare. It can take anywhere from a few minutes to 24 hours to fully propagate, so don't be alarmed if the change isn't instant."
     },
     {
       "heading": "Generate a WordPress-scoped API token",
-      "body": "Back in Cloudflare, open your account profile and create an API Token rather than using your global API key — scoping it to just what the WordPress plugin needs (zone read and cache purge permissions, typically) limits the damage if the token ever leaks. Copy the token immediately after generating it, since Cloudflare only shows the full value once."
+      "body": "Back in Cloudflare, open My Profile > API Tokens and select Create Token, instead of reusing your account's global API key. A scoped token limits the damage if it ever leaks. The plugin only needs two permissions: Zone > Zone > Read, which lets it load your list of domains, and Zone > Cache Purge > Purge, which lets it clear cached pages when you publish or edit content. Cloudflare's own token templates don't currently include one built specifically for the WordPress plugin, so build a custom token with just those two permissions scoped to your zone. Copy the token immediately after generating it; Cloudflare only shows the full value once."
     },
     {
       "heading": "Install the official plugin in WordPress",
-      "body": "Log into your WordPress admin — note this is the same dashboard whether you access it directly or through your hosting provider's own onboarding panel, as many hosts like Hostinger wrap it in their own interface. From Plugins, search for the official Cloudflare plugin, install it, and activate it. If your host's onboarding flow is still asking you to pick a theme or finish site setup, you can safely skip past those prompts to get to the Plugins menu.",
+      "body": "Log into your WordPress admin. It's the same dashboard whether you access it directly or through your hosting provider's own onboarding panel, since many hosts like Hostinger wrap it in their own interface. From Plugins, search for the official Cloudflare plugin, install it, and activate it. If your host's onboarding flow is still asking you to pick a theme or finish site setup, you can safely skip past those prompts to get to the Plugins menu.",
       "image": {
         "file": "/screenshots/Xnkv_Le58dE/05.webp",
         "caption": "A WordPress admin dashboard, here wrapped in Hostinger's own onboarding panel. The Plugins menu on the left is where the Cloudflare plugin gets installed."
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Connect the token and apply recommended settings",
-      "body": "Open the Cloudflare plugin's settings page inside WordPress and paste in the API token you generated. Once it authenticates, the plugin exposes an \"Apply Recommended Settings\" button — click it to enforce strict SSL and pick up Cloudflare's suggested performance defaults in one pass instead of configuring each setting manually. Finish by toggling on the plugin's automatic cache-purge option, so publishing or editing a post clears the cached version at the edge instead of leaving visitors looking at stale content."
+      "body": "Open the Cloudflare plugin's settings page inside WordPress. Activation asks for both the email address on your Cloudflare account and the API token you just generated, not the token alone, so have both ready. Once it authenticates, the plugin exposes a button to apply Cloudflare's recommended settings for WordPress: click it to enforce strict SSL and pick up the suggested performance defaults in one pass instead of configuring each setting by hand. Automatic cache purging is included at no extra cost and isn't gated behind a paid plan; confirm it's toggled on so publishing or editing a post clears the cached version at the edge instead of leaving visitors looking at stale content."
     }
   ],
   "faq": [
@@ -47,22 +47,27 @@
       "answer": "Switching nameservers alone routes your DNS through Cloudflare, but the plugin adds WordPress-specific integration, like automatic cache purging when you update content."
     },
     {
-      "question": "What does 'Apply Recommended Settings' actually change?",
-      "answer": "It applies a set of Cloudflare-suggested performance and security defaults, including enforcing strict SSL modes for your site, in a single click instead of configuring each option by hand."
+      "question": "What does the recommended-settings button change?",
+      "answer": "It applies Cloudflare's suggested performance and security defaults, including enforcing strict SSL, in a single click instead of configuring each option by hand."
     },
     {
       "question": "Will connecting Cloudflare slow down my WordPress admin dashboard?",
-      "answer": "No, Cloudflare's caching is generally configured to bypass the WordPress admin area so you can still manage your site normally."
+      "answer": "No. Cloudflare's caching is configured to bypass the WordPress admin area, so you can still manage your site normally."
     },
     {
       "question": "Can I use Cloudflare with WordPress without an API token?",
-      "answer": "Basic DNS-level protection works without the plugin, but the WordPress-specific features like automatic cache purging require the API token connection."
+      "answer": "Basic DNS-level protection works without the plugin, but WordPress-specific features like automatic cache purging need the plugin connected with an API token."
     },
     {
       "question": "Why generate a scoped API token instead of using my global API key?",
-      "answer": "A scoped token limits what it can access — typically just zone reads and cache purges for the WordPress plugin — so if it's ever exposed, the damage is contained instead of exposing your whole Cloudflare account."
+      "answer": "A scoped token limits what it can access, just Zone Read and Cache Purge for this plugin, so if it's ever exposed, the damage is contained instead of exposing your whole Cloudflare account."
     }
   ],
+  "references": [
+    { "label": "Cloudflare: Create an API token (official)", "url": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" },
+    { "label": "Cloudflare – WordPress plugin (official, WordPress.org)", "url": "https://wordpress.org/plugins/cloudflare/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The API token permission requirements (Zone Read plus Cache Purge, not the global API key) and the claim that automatic cache purging is free on every plan were checked against Cloudflare's official token documentation and the plugin's WordPress.org listing in September 2026. The guide previously described the token's permissions only vaguely as 'zone read and cache purge, typically.'",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

@@ -1,43 +1,69 @@
 {
   "slug": "how-to-set-up-a-whatsapp-campaign-in-brevo-easily-2026",
   "seoTitle": "How to Set Up a WhatsApp Campaign in Brevo",
-  "metaDescription": "Launch a WhatsApp marketing campaign in Brevo: check plan eligibility, name the campaign, choose a sender, and build the message from Marketing > Campaigns.",
-  "intro": "WhatsApp reaches more than 2 billion people, and Brevo lets you run marketing broadcasts on it from the same dashboard you already use for email and SMS, without touching Meta's developer console directly. The setup is short but plan-gated and a little scattered across sections of the help center, so it helps to know exactly which menu holds each step before you start clicking around. This guide walks through starting a campaign the way Brevo's own documentation lays it out, plus the plan and compliance details that trip people up before a single message goes out.",
+  "metaDescription": "Launch a WhatsApp marketing campaign in Brevo: check plan eligibility, link your WhatsApp Business account, get a template approved, then build and schedule the send.",
+  "intro": "Brevo lets you run WhatsApp marketing broadcasts from the same dashboard you already use for email and SMS, without touching Meta's developer console directly. The setup is short but plan-gated, and it depends on a piece most guides skip over: WhatsApp marketing messages have to use a template Meta has already approved, so you can't just type a message and hit send the way you would with email. This guide follows Brevo's own documentation for the setup, plus the plan, cost and approval details that catch people out before a single message goes out.",
+  "prerequisites": [
+    "A Brevo plan that includes WhatsApp campaigns (Professional or Enterprise)",
+    "A WhatsApp Business account linked to Brevo, with at least one verified phone number connected",
+    "A WhatsApp message template that has already been approved by Meta"
+  ],
+  "costNote": "WhatsApp campaigns aren't included on Free, Starter or Standard; Brevo lists it as an add-on on Professional and Enterprise. On top of the plan itself, WhatsApp messages are billed separately from your email subscription through prepaid credits, priced per message and varying by country and message type. Confirm current per-message pricing on Brevo's own pricing page before estimating the cost of a large send.",
   "steps": [
     {
       "heading": "Confirm your plan supports WhatsApp campaigns",
-      "body": "WhatsApp campaigns are not available on every Brevo tier. Brevo's own comparison marks Free, Starter, and Standard with an X, while Professional and Enterprise show it as an available add-on. If you're on a lower plan, the Marketing > Campaigns > WhatsApp path described below simply won't have anything to click. It's worth checking this first rather than working through the rest of the setup and hitting a wall at the send step.",
+      "body": "Brevo's own plan comparison marks Free, Starter and Standard with an X for WhatsApp campaigns, while Professional and Enterprise show it as an available add-on. If you're on a lower plan, the Marketing > Campaigns > WhatsApp path described below simply won't have anything to click, so it's worth checking this before working through the rest of the setup.",
       "image": { "file": "/screenshots/wr8NwKbHAsE/01.webp", "caption": "The Brevo help article for sending a WhatsApp campaign, showing which plans include it as a base feature versus a paid add-on." }
     },
     {
-      "heading": "Link your WhatsApp Business account first",
-      "body": "Before any of the campaign screens matter, Brevo needs your WhatsApp Business account linked and at least one phone number connected. This is a separate setup flow from the campaign builder itself, so if you haven't done it yet, expect to be redirected there before you can proceed. Brevo also explicitly prohibits sending passwords in readable form or any content that requires authentication, such as auto-login links, inside a WhatsApp message, so plan your message content with that restriction in mind from the start."
+      "heading": "Link your WhatsApp Business account and get a template approved",
+      "body": "Before any of the campaign screens matter, Brevo needs your WhatsApp Business account linked and at least one phone number connected; verifying that account also raises your daily sending limits. Separately, you'll need at least one WhatsApp template, since Brevo's own documentation is explicit that a campaign can only be scheduled once its associated template shows Approved status. Templates go through Meta's own review, not Brevo's, so build and submit one before you plan a send date. Brevo also prohibits sending passwords in readable form or any content requiring authentication, such as auto-login links, inside a WhatsApp message; keep that in mind while drafting the template."
     },
     {
       "heading": "Create the campaign and give it an internal name",
-      "body": "Go to Marketing, then Campaigns, then WhatsApp, and click Create campaign. Choose WhatsApp as the campaign type, then name it in the text field that appears — up to 60 characters. This name is only visible to you inside the Brevo dashboard; your recipients never see it, so use something that will help you find the campaign later rather than anything customer-facing. Click Start to move into the actual campaign setup.",
+      "body": "Go to Marketing, then Campaigns, then WhatsApp, and click Create campaign. Name it in the text field that appears, up to 60 characters. This name is visible only to you inside the Brevo dashboard; recipients never see it, so use something that helps you find the campaign later, not anything customer-facing.",
       "image": { "file": "/screenshots/wr8NwKbHAsE/05.webp", "caption": "The Create a WhatsApp campaign panel, where you name the campaign before moving on to choosing a sender and recipients." }
     },
     {
-      "heading": "Choose the sender",
-      "body": "In the From section, click Edit to pick which of your connected, verified WhatsApp numbers the campaign sends from. If you manage more than one brand or region through the same Brevo account, this is where you make sure the right number is attached, since recipients will see this as the contact they can reply to directly on WhatsApp."
+      "heading": "Choose the sender and recipients",
+      "body": "In the From section, pick which of your connected, verified WhatsApp numbers the campaign sends from; recipients see this as the number they can reply to directly. In the To section, choose the contact list or segment that receives the campaign, and optionally exclude specific lists. Because WhatsApp marketing is opt-in and Meta actively polices unsolicited messages, only send to contacts who've explicitly consented to WhatsApp communication and who already have the WHATSAPP attribute populated on their record; reusing an email list without checking that consent is a fast way to get a sender number flagged."
     },
     {
-      "heading": "Select your recipients",
-      "body": "Move to the To section and choose which contact list or segment receives the campaign. Because WhatsApp marketing is opt-in and Meta actively polices unsolicited messages, only send to contacts who've explicitly consented to WhatsApp communication — reusing an email list without checking WhatsApp consent is a fast way to get a sender number flagged or suspended."
+      "heading": "Attach the approved template and schedule the send",
+      "body": "Click Start creating to open the template selection modal, then choose your already-approved template instead of composing free text from scratch. Once it's attached, use the scheduling section to send immediately or set a future date and time. One limitation worth checking before you plan a US-focused send: Meta suspended WhatsApp marketing template sends to US-coded numbers starting April 1, 2025, and as of this writing that pause is still in effect with no announced end date, so verify current status if your list includes US contacts."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The campaign won't let me schedule a send",
+      "cause": "Its attached WhatsApp template hasn't reached Approved status with Meta yet.",
+      "fix": "Check the template's status in Brevo before scheduling. Submit it for Meta review early, since approval isn't instant, and don't plan a send date around a template still pending review."
     },
     {
-      "heading": "Design the message and schedule the send",
-      "body": "In Message content, build the actual text your recipients will see, keeping Brevo's content restrictions in mind. Once the message is ready, use the Schedule your campaign section to send immediately or set a future time. One current limitation worth knowing before you plan a US-focused send: Brevo's documentation notes that as of April 1, 2025, Meta has temporarily suspended WhatsApp marketing templates to numbers with a United States country code, so check Meta's own documentation if your list includes US contacts."
+      "problem": "Messages to US contacts are being rejected or never send",
+      "cause": "Meta's ongoing suspension of WhatsApp marketing template sends to US-coded phone numbers, in place since April 1, 2025.",
+      "fix": "Check Meta's own current guidance before including US numbers in a marketing send. Utility and authentication templates aren't affected by this suspension the same way."
+    },
+    {
+      "problem": "A template gets rejected during Meta's review",
+      "cause": "The message likely violates a content rule, commonly including a password, an auto-login link, or other content that requires authentication to access, all of which Brevo and Meta explicitly disallow in WhatsApp messages.",
+      "fix": "Remove the offending content and resubmit. Keep templates to plain marketing copy and links that don't require the recipient to already be signed in."
     }
   ],
   "faq": [
-    { "question": "Do I need a Meta Business account to use WhatsApp campaigns in Brevo?", "answer": "Yes. Your WhatsApp Business account and at least one phone number must be linked to Brevo before the campaign builder is usable, which happens through a separate connection flow, not inside the campaign screen itself." },
-    { "question": "Which Brevo plans include WhatsApp campaigns?", "answer": "According to Brevo's plan comparison, Free, Starter, and Standard do not include it. Professional and Enterprise include it as an add-on." },
-    { "question": "Can I send WhatsApp marketing messages to US phone numbers right now?", "answer": "As of April 1, 2025, Meta temporarily suspended WhatsApp marketing template sends to US-coded numbers, according to Brevo's help documentation. Check Meta's official documentation for the current status before planning a US send." },
-    { "question": "Will my recipients see the campaign name I choose?", "answer": "No. The campaign name you set when creating it (up to 60 characters) is only visible to you inside Brevo — it's for internal organization, not customer-facing content." },
-    { "question": "Can I put login links or passwords in a WhatsApp campaign message?", "answer": "No. Brevo strictly prohibits sending passwords in readable format or content requiring authentication, such as auto-login links, in WhatsApp messages." }
+    { "question": "Do I need a Meta Business account to use WhatsApp campaigns in Brevo?", "answer": "Yes. Your WhatsApp Business account and at least one phone number must be linked and verified in Brevo before the campaign builder is usable, through a separate connection flow, not inside the campaign screen itself." },
+    { "question": "Which Brevo plans include WhatsApp campaigns?", "answer": "Free, Starter and Standard don't include it, according to Brevo's own plan comparison. Professional and Enterprise offer it as a paid add-on, billed separately from the plan through prepaid message credits." },
+    { "question": "Why can't I just type a message and send it?", "answer": "WhatsApp marketing requires a template that Meta has pre-approved. Brevo's documentation confirms a campaign can only be scheduled once its template shows Approved status, so drafting and submitting the template is a separate step that has to happen before you build the campaign." },
+    { "question": "Can I send WhatsApp marketing messages to US phone numbers right now?", "answer": "Meta paused WhatsApp marketing template sends to US-coded numbers on April 1, 2025, and that pause was still active as of this check in September 2026 with no end date announced. Confirm current status with Meta before planning a US-focused send." },
+    { "question": "Will my recipients see the campaign name I choose?", "answer": "No. The internal campaign name, up to 60 characters, is for your own organization inside Brevo and never appears to the person receiving the message." }
   ],
+  "references": [
+    {
+      "label": "Send a WhatsApp campaign (Brevo, official)",
+      "url": "https://help.brevo.com/hc/en-us/articles/4416169133074-Send-a-WhatsApp-campaign"
+    }
+  ],
+  "verifiedNote": "Steps, plan gating and content restrictions were re-checked against Brevo's own help article on sending a WhatsApp campaign in September 2026. The original version of this guide treated message composition as free text; Brevo's documentation makes clear a campaign can only be scheduled once its attached template has Meta's Approved status, which this rewrite adds as a prerequisite and a troubleshooting entry. The US marketing-template suspension was confirmed still active as of this check, with no end date announced.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

@@ -1,42 +1,82 @@
 {
   "slug": "how-to-add-custom-domain-on-gumroad-create-easily-2026",
   "seoTitle": "How to Add a Custom Domain on Gumroad",
-  "metaDescription": "Connect your own domain name to Gumroad from Settings > Advanced, verify it, and point your DNS records so your storefront loads under your own URL.",
-  "intro": "Using your own domain instead of the default gumroad.com link makes your storefront look more established and gives you a URL that's actually easy to hand out. The setting itself is small — a single field tucked in an advanced settings tab — but getting it to verify depends on DNS work happening outside Gumroad entirely, which is where most people get stuck. This guide covers exactly where the field lives, what it expects, and what to check when a domain refuses to verify.",
+  "metaDescription": "Connect your own domain to a Gumroad profile or product: the exact DNS records to add at your registrar, where to verify inside Gumroad, and what to check when verification won't pass.",
+  "intro": "Gumroad hosts your storefront at yourname.gumroad.com by default, but you can point a domain you already own at it instead. The setting inside Gumroad is a single field under Settings, Advanced. Getting it to verify depends on DNS records you add somewhere else entirely, at whatever registrar sold you the domain, and that's where most setups stall.\n\nThis guide gives the exact record values Gumroad's own documentation specifies for a root domain, a www subdomain, and a custom subdomain, plus what to check when Verify keeps failing after the records look right.",
+  "prerequisites": [
+    "A domain name already registered somewhere other than Gumroad, since Gumroad doesn't sell domains",
+    "Access to that registrar's DNS settings, where the new record gets added"
+  ],
+  "costNote": "Connecting a custom domain doesn't cost anything extra on Gumroad, and Gumroad issues the domain's SSL certificate automatically once it verifies. The only expense is whatever your registrar charges for the domain itself.",
   "steps": [
     {
-      "heading": "Find the custom domain field in Settings",
-      "body": "In your Gumroad account, open Settings, then click over to the Advanced tab — custom domain isn't under Profile or Payments, which is the first place most people look. The Advanced tab groups it alongside unrelated developer-facing options like mass-blocking emails, ping endpoints, and API applications, so scroll only as far as the first section: Custom domain, with a single Domain input field and a Verify button next to it. Whatever you type there is the exact address Gumroad will check against your DNS records, so accuracy matters more than it looks like it should for one text box.",
-      "image": { "file": "/screenshots/ijcU9YyTdZc/04.webp", "caption": "The Custom domain field inside Settings > Advanced, with the domain entry box and a Verify button — this is the entire in-app side of the setup." }
+      "heading": "Find the Custom domain field",
+      "body": "In your Gumroad account, open Settings and click into the Advanced tab. Custom domain isn't under Profile or Payments, which is where most people look first. It sits near the top of Advanced, above unrelated developer options like email blocklists and API applications: a single Domain field with a Verify button beside it.\n\nGumroad supports two separate setups. A domain entered here, in the profile-level Advanced settings, points your entire storefront at that domain. You can instead open one product's edit page and enter a domain in its own Custom domain field, which routes only that product's page and leaves the rest of your profile on the default gumroad.com address.",
+      "image": { "file": "/screenshots/ijcU9YyTdZc/04.webp", "caption": "The Custom domain field inside Settings, Advanced, with the domain entry box and a Verify button." }
     },
     {
-      "heading": "Point your domain's DNS at Gumroad",
-      "body": "Before that Verify button will succeed, you need to update DNS records at wherever you registered the domain — not inside Gumroad. Gumroad's documentation specifies the exact CNAME or A record values to add, and those need to be entered precisely, since a mistyped record is the single most common reason verification fails. If you're using a subdomain like shop.yoursite.com rather than the bare root domain, double-check you're editing the right record type for that structure, since root and subdomain setups sometimes use different record types."
+      "heading": "Add the matching DNS record at your registrar",
+      "body": "Before Verify will pass, add a record at wherever you registered the domain, not inside Gumroad. The exact record depends on how you want the domain to look. For www.example.com, add a CNAME record with host www pointing to domains.gumroad.com, plus a second record, a URL redirect from the bare @ host to https://www.example.com, so visitors who leave off the www still land on your store. For a bare root domain like example.com with no www, add a CNAME on the @ host pointing to domains.gumroad.com. For a subdomain such as store.example.com, add a CNAME on the store host pointing to the same target.\n\nIn every case the value is the literal text domains.gumroad.com, not yourusername.gumroad.com. Typing your own Gumroad subdomain there instead is a common mistake, and it won't verify. A few registrars ask for an IP address instead of a CNAME target; Gumroad publishes 34.198.93.169 for that case."
     },
     {
-      "heading": "Enter the domain and verify it",
-      "body": "Once your DNS records are saved at the registrar, go back to the Custom domain field, type the domain exactly as you configured it, and click Verify. This step checks whether Gumroad can see the DNS records you just added, so if you click Verify immediately after saving DNS changes, don't be surprised if it fails on the first try — that's a propagation issue, not necessarily a mistake on your part."
+      "heading": "Verify, then save",
+      "body": "Back in the Custom domain field, type the domain exactly as you configured it in DNS and click Verify. If the domain is behind Cloudflare, turn off the orange proxy cloud on the record first and set it to DNS only; Gumroad can't verify through a Cloudflare proxy. Once Verify succeeds, click the pink Update settings button. Verifying and saving are two different actions, and stopping after the first is a common reason a domain looks connected but never goes live."
     },
     {
-      "heading": "Wait out DNS propagation",
-      "body": "DNS changes don't take effect everywhere instantly. Depending on your registrar and the record's TTL setting, propagation can take anywhere from a few minutes to a full day or two. If verification fails right after you've made changes, the correct move is usually to wait rather than start second-guessing and re-editing records, since repeated changes just restart the propagation clock."
+      "heading": "Give DNS time to propagate",
+      "body": "A record that fails Verify a few minutes after you add it isn't necessarily wrong. DNS changes can take anywhere from a few minutes to 24-48 hours to spread, depending on your registrar and the record's TTL. Editing the record again every time a check fails restarts that clock, so waiting an hour before retrying is usually faster than repeated changes."
     },
     {
-      "heading": "Test the domain once it verifies",
-      "body": "After Gumroad confirms verification, open the custom domain directly in a browser, ideally in a private or incognito window so cached DNS doesn't give you a false result. It should load your storefront exactly as it appears at your default Gumroad URL. If it loads a registrar parking page or an error instead, the DNS records likely still haven't fully propagated on your network, even if Gumroad's own check has already passed."
+      "heading": "Load the domain to confirm it's live",
+      "body": "Open the domain directly in a browser, in a private or incognito window so a cached DNS lookup can't give you a false result. It should load your storefront exactly as it appears at the default gumroad.com address. Your original gumroad.com link keeps working afterward. Adding a custom domain doesn't replace or redirect it, so anything you've already shared under the old link still resolves."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Verify keeps failing even though the DNS record looks correct",
+      "cause": "The domain is proxied through Cloudflare (the orange cloud icon), and Gumroad can't read DNS records behind a proxy.",
+      "fix": "Switch the record to DNS only in Cloudflare (grey cloud), then click Update settings again on Gumroad's Advanced page."
     },
     {
-      "heading": "Troubleshoot a domain that won't verify",
-      "body": "If Verify keeps failing well past a reasonable propagation window, go back to the DNS records at your registrar and compare them character by character against what Gumroad's documentation asked for — trailing dots, wrong record types, and typos in the target value are the usual culprits. Also confirm you're editing the DNS for the exact domain or subdomain you typed into Gumroad's field, since editing the wrong record on a multi-subdomain setup is an easy mistake to make and won't throw an obvious error on either side."
+      "problem": "The CNAME record was added but the domain still won't verify",
+      "cause": "The CNAME target was set to a personal Gumroad subdomain, like yourusername.gumroad.com, instead of the fixed value domains.gumroad.com that Gumroad expects.",
+      "fix": "Edit the record so the value reads exactly domains.gumroad.com, then wait for propagation before verifying again."
+    },
+    {
+      "problem": "www.example.com works but example.com without the www doesn't",
+      "cause": "A root domain needs its own record. The www CNAME only covers requests that include www.",
+      "fix": "Add a second record on the @ host, either a CNAME to domains.gumroad.com or a URL redirect to https://www.example.com, matching what Gumroad's documentation specifies for root domains."
+    },
+    {
+      "problem": "My registrar's DNS form won't accept a CNAME value, only an IP address",
+      "cause": "Some registrars restrict certain host records to A records.",
+      "fix": "Use the IP address Gumroad publishes for this case, 34.198.93.169, instead of the CNAME target."
+    }
+  ],
+  "tables": [
+    {
+      "title": "DNS record by domain type",
+      "columns": ["Domain looks like", "Host to edit", "Record type", "Value"],
+      "rows": [
+        ["www.example.com", "www", "CNAME", "domains.gumroad.com"],
+        ["example.com (no www)", "@", "CNAME", "domains.gumroad.com"],
+        ["store.example.com", "store", "CNAME", "domains.gumroad.com"]
+      ],
+      "note": "The bare @ host also needs a URL redirect to https://www.example.com if visitors who leave off the www should still reach the site. Values from Gumroad's official documentation, checked September 2026."
     }
   ],
   "faq": [
-    { "question": "Do I need to buy a domain separately to use this feature?", "answer": "Yes. You need to own a domain name through a separate registrar before you can connect it in Settings > Advanced on Gumroad." },
-    { "question": "Where exactly is the custom domain setting in Gumroad?", "answer": "Settings > Advanced, in the Custom domain section near the top of the tab — it's a single domain field with a Verify button." },
-    { "question": "How long does it take for a custom domain to activate?", "answer": "DNS changes can take anywhere from a few minutes to 24-48 hours to fully propagate before Gumroad's verification succeeds." },
-    { "question": "What's the most common reason a custom domain fails to verify?", "answer": "Incorrectly entered DNS records at the registrar, or not waiting long enough for propagation, are the most frequent causes." },
-    { "question": "Can I switch back to the default Gumroad URL later?", "answer": "Yes. Connecting a custom domain doesn't remove your default Gumroad URL — you can clear the Advanced settings field again if you want to revert." }
+    { "question": "Do I need to buy a domain through Gumroad?", "answer": "No. Gumroad doesn't sell domains. Buy one from any registrar, then connect it from Settings, Advanced." },
+    { "question": "Where exactly does the custom domain setting live?", "answer": "Settings, Advanced tab, in the Custom domain section near the top, above the unrelated developer settings further down the page." },
+    { "question": "How long does verification take?", "answer": "Gumroad's own check usually runs in seconds once you click Verify. What takes longer is DNS propagation beforehand, which Gumroad estimates at up to 24-48 hours after you first add the record." },
+    { "question": "Why does Verify keep failing?", "answer": "The two most common reasons: the domain is proxied through Cloudflare, which blocks Gumroad from reading the record, or the CNAME target was typed as a personal gumroad.com subdomain instead of the fixed value domains.gumroad.com." },
+    { "question": "Can I connect a domain to just one product instead of my whole profile?", "answer": "Yes. Product pages have their own Custom domain field on the edit page, separate from the profile-level one in Settings, Advanced." },
+    { "question": "Will my old gumroad.com link stop working once I connect a custom domain?", "answer": "No. Both addresses stay live and show the same content, so links you've already shared under the gumroad.com URL keep working." }
   ],
+  "references": [
+    { "label": "Gumroad Help Center: Setting up a custom domain (official)", "url": "https://gumroad.com/help/article/153-setting-up-a-custom-domain" }
+  ],
+  "verifiedNote": "Re-checked against Gumroad's official help article on custom domains in September 2026. That check supplied the exact CNAME values for root, www, and subdomain setups (the earlier draft described the DNS step only in general terms), added the profile-versus-product distinction, the IP-address fallback, and the Cloudflare proxy issue, none of which the previous version mentioned.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

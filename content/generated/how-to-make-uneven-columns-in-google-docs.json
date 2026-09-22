@@ -1,64 +1,61 @@
 {
   "slug": "how-to-make-uneven-columns-in-google-docs",
   "seoTitle": "How to Make Uneven Columns in Google Docs",
-  "metaDescription": "Learn how to create asymmetrical, unequal-width columns in Google Docs for newsletters, brochures, or side-by-side comparisons.",
-  "intro": "Google Docs defaults to equal-width columns the moment you turn on multi-column layout, which is fine for a simple newsletter but wrong for a brochure with a wide feature section next to a narrow sidebar, or a comparison page where one side needs more room than the other. The override lives a click deeper than the basic Columns menu, in a dialog most people never open. This guide walks through unlocking variable widths, typing exact measurements for each side, and using breaks and the ruler to keep the layout under control once it's applied.",
+  "metaDescription": "Google Docs' column tool only creates equal-width columns. Here's the workaround that produces a genuinely uneven, newspaper-style layout: a borderless table with independently sized cells.",
+  "intro": "Format, Columns in Google Docs only ever produces equal-width columns: one, two, or three, with adjustable spacing and an optional dividing line. There's no setting, in More options or anywhere else, that lets one column run wider than another. Google's own support forum confirms this directly: dragging the column marker on the ruler resizes both sides together, and a Google product expert's answer to someone asking for uneven columns is to use a table instead.\n\nA table is also the practical fix. Insert a two-column table, set each cell to the width you want, and turn off the borders so it reads as text in two columns instead of a grid. This guide covers that path, plus where the native Columns feature reaches its limit.",
   "steps": [
     {
-      "heading": "Open the document you want to reformat",
-      "body": "Start from your Google Docs home screen, where recent documents and starter templates are listed, and open the file that needs the column treatment. If you're building this layout from scratch, a blank document works too — the column settings apply to whichever paragraphs you have selected, so you can format part of a page differently from the rest once you're inside.",
-      "image": {
-        "file": "/screenshots/hg4HX1bHTPI/01.webp",
-        "caption": "The Google Docs home screen, showing template options and recent documents — the starting point before opening the file you plan to reformat."
-      }
+      "heading": "Open the document you're formatting",
+      "body": "Start from your Google Docs home screen and open the file that needs the layout. A blank document works too if you're building from scratch.",
+      "image": { "file": "/screenshots/hg4HX1bHTPI/01.webp", "caption": "The Google Docs home screen, showing template options and recent documents, the starting point before opening the file you plan to reformat." }
     },
     {
-      "heading": "Select your text and open the column options",
-      "body": "Highlight the paragraph or block of text you want to split into columns, then click Format in the top menu, hover over Columns, and click More options at the bottom of the flyout. The quick presets in that flyout only offer one, two, or three equal-width columns, so More options is the only path to anything asymmetrical — skipping it and clicking a preset locks you into equal widths with no way to adjust them afterward.",
-      "image": {
-        "file": "/screenshots/hg4HX1bHTPI/03.webp",
-        "caption": "A document open in the editor with the ruler visible along the top edge — the same ruler used later to drag column width handles once multi-column formatting is applied."
-      }
+      "heading": "Check where Format, Columns stops",
+      "body": "Select some text, click Format, hover over Columns, and choose More options. The dialog that opens has exactly three controls: number of columns, spacing between them in inches, and an optional line between columns. There's no field for individual column width anywhere in it. Drag the column marker on the ruler above a two-column layout instead, and both columns resize together. Google's product experts have confirmed on the support forum that this is a hard limit of the feature, not a setting you've missed."
     },
     {
-      "heading": "Unlock variable widths",
-      "body": "In the More options dialog, set the number of columns to two, then clear the checkbox labeled Equal column widths. This single checkbox is the difference between a symmetrical layout and a custom one — once it's unchecked, two separate width fields become editable instead of being locked together and updating in sync."
+      "heading": "Insert a two-column table instead",
+      "body": "Click Insert, hover over Table, and choose a 2x1 grid: two columns, one row. Table cells hold their width independently of each other, unlike the newspaper-style Columns feature, which is what makes an uneven layout possible at all. Type or paste your narrow-column content into the left cell and the wider content into the right one.",
+      "image": { "file": "/screenshots/hg4HX1bHTPI/03.webp", "caption": "A document open in the editor with the formatting ruler visible along the top edge." }
     },
     {
-      "heading": "Type precise widths for each column",
-      "body": "With equal widths unlocked, enter inch values into each column's width field — for example, 4 inches for a wide feature column and 2 inches for a narrow sidebar, adjusting the spacing field between them to control the gap. Google Docs will warn you if your combined widths and spacing exceed the page's usable area, so leave a little room rather than maxing out every inch of the margin."
+      "heading": "Set each column's exact width",
+      "body": "Hover over the vertical line between the two cells until the cursor turns into a two-way arrow, then drag it to roughly the split you want. For an exact measurement, click into a cell, open Format, then Table, then Table options, and type a width in inches for that cell. If the layout gets scrambled, right-click inside the table and choose Distribute columns to reset both cells to equal width and start over."
     },
     {
-      "heading": "Add a dividing line if the layout needs one",
-      "body": "Check the Line Between Columns box in the same dialog if you want a visible vertical rule separating the two sections — useful for a comparison layout where readers need a clear boundary, less necessary for a magazine-style feature spread where whitespace alone does the job. Click Apply once everything is set, and Docs commits the formatting immediately to the selected text."
+      "heading": "Remove the table's visible lines",
+      "body": "With the table selected, open the border tool, or Format, Table, Table options, and set the border width to 0pt, or set the border color to match the page background. Either way, the grid disappears and the layout reads as two plain columns of text instead of a table. Text wrapping around an image inside a cell can behave inconsistently, so for a photo in one column, give it its own line in the cell instead of relying on wrap."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Dragging the ruler marker to narrow one column also narrows the wrong side, or resizes both",
+      "cause": "Google Docs' native Columns feature only supports equal-width columns. The two sides are linked; there's no independent width control.",
+      "fix": "Use a table instead of Format, Columns for anything asymmetrical."
     },
     {
-      "heading": "Control where text breaks and fine-tune with the ruler",
-      "body": "Once the uneven columns are live, place your cursor wherever you want a new column to start, click Insert, hover over Break, and choose Column Break to push everything after that point into the next column instead of letting it flow naturally. If you need to isolate the multi-column section to just one part of a longer document, wrap it in Section Breaks before and after, so the rest of the page stays single-column. For small visual adjustments afterward, drag the margin markers directly on the ruler at the top of the page rather than reopening the dialog each time."
+      "problem": "The layout still looks like a table, with visible grid lines",
+      "cause": "Tables default to a visible 1pt border.",
+      "fix": "Select the table and set the border width to 0pt, or match the border color to the page background."
+    },
+    {
+      "problem": "An image in one column doesn't wrap the way it would in a real newspaper-style column",
+      "cause": "Text wrapping around images inside table cells is inconsistent.",
+      "fix": "Give the image its own line inside the cell instead of relying on wrap, or place it above or below the paragraph text."
     }
   ],
   "faq": [
-    {
-      "question": "Can I apply uneven columns to just part of a page?",
-      "answer": "Yes, using Section Breaks before and after the block lets you isolate a multi-column layout to a specific portion of your document rather than the whole page."
-    },
-    {
-      "question": "How do I force text into the next column early?",
-      "answer": "Place your cursor where you want the break, then insert a Column Break from the Insert menu to push the remaining text into the next column."
-    },
-    {
-      "question": "Can I adjust column widths with my mouse instead of typing values?",
-      "answer": "Yes, once columns are applied, the interactive ruler at the top of the page lets you drag margin markers to adjust widths visually."
-    },
-    {
-      "question": "Does this work the same on mobile?",
-      "answer": "Advanced column formatting, including unequal widths, is only available through the desktop web version of Google Docs — it's not exposed in the mobile app."
-    },
-    {
-      "question": "Why can't I set different widths using the quick Columns preset?",
-      "answer": "The presets in the Format > Columns flyout only offer equal-width layouts; you have to open More options to unlock the Equal column widths checkbox and type custom values."
-    }
+    { "question": "Does Google Docs support uneven columns natively?", "answer": "No. Format, Columns, including its More options dialog, only offers equal-width layouts of one, two, or three columns. There's no per-column width setting." },
+    { "question": "What does the More options dialog let me change?", "answer": "Three things: the number of columns, the spacing between them, and whether a line appears between columns. Column width isn't one of them." },
+    { "question": "So how do people get an uneven, side-by-side layout in Docs?", "answer": "With a table. A two-column, one-row table holds each cell's width independently, then you turn off the visible borders so it reads as columns instead of a grid." },
+    { "question": "Can I set an exact width instead of dragging?", "answer": "Yes. Click into a cell, open Format, Table, Table options, and type a width in inches." },
+    { "question": "Does this table workaround behave the same on the mobile app?", "answer": "Inserting a table works on mobile, but setting an exact width and adjusting borders is easier on the desktop web version, where the Format menu gives direct access to Table options." }
   ],
+  "references": [
+    { "label": "Google Docs Help: Add or delete columns in a document (official)", "url": "https://support.google.com/docs/answer/7029052" },
+    { "label": "Google Docs Help: Add and edit tables (official)", "url": "https://support.google.com/docs/answer/1696711" }
+  ],
+  "verifiedNote": "The earlier draft of this guide described an 'Equal column widths' checkbox inside Format, Columns, More options that would unlock independent widths per column. That checkbox doesn't exist. Checked against Google's official Help Center articles on columns and tables, and against the Google Docs Editors Community, where a Google product expert confirms the columns feature only supports equal widths, in September 2026. The guide was rewritten around the table-based method that genuinely produces an uneven layout.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
