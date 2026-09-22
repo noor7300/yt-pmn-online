@@ -2,7 +2,12 @@
   "slug": "can-smartsheet-send-automated-emails-easily-2026",
   "seoTitle": "Can Smartsheet Send Automated Emails? Yes, Here's How",
   "metaDescription": "Set up automated email alerts in Smartsheet with the Automation menu, a trigger template, conditional filters, and a personalized message.",
-  "intro": "Smartsheet can absolutely send automated emails, and the whole setup happens inside a single visual workflow builder without any scripting. This guide covers opening the Automation menu from a live sheet, starting from a ready-made template instead of building from scratch, and narrowing the trigger down to something specific, like a task hitting 100% complete, so the right people get notified at the right moment instead of on every single row change.",
+  "intro": "Smartsheet can send automated emails, and the setup happens inside a visual workflow builder with no scripting involved. This guide covers opening the Automation menu from a live sheet, starting from a ready-made template instead of building from scratch, and narrowing the trigger down to something specific, like a task hitting 100% complete, so the right people get notified at the right moment instead of on every row change.",
+  "prerequisites": [
+    "Owner or Admin permissions on the sheet, since Editor access alone can't build or edit a workflow",
+    "A paid Smartsheet plan that includes Automation (Pro or above; it isn't part of the Free tier)"
+  ],
+  "costNote": "Automation requires a paid Smartsheet plan. Pro includes it but caps automated runs at 250 a month; Business, Enterprise, and Advanced Work Management all provide unlimited runs, and there's no automation on the Free tier at all.",
   "steps": [
     {
       "heading": "Open the Automation menu from your sheet",
@@ -14,7 +19,7 @@
     },
     {
       "heading": "Start from a template instead of a blank workflow",
-      "body": "The Automation Template Gallery lists pre-built options grouped by purpose, and \"Alert someone when specified criteria are met\" is one of the most useful starting points for email reminders. The template preview explains what it's good for, like notifying stakeholders about at-risk statuses or alerting teammates when a task's phase changes, and spells out the three pieces you'll configure: a trigger, optional conditions, and an action. Clicking Use Template drops a working skeleton into the builder that you then customize rather than assembling one from an empty canvas.",
+      "body": "The Automation Template Gallery lists pre-built options grouped by purpose. \"Alert someone when specified criteria are met\" is one of the most useful starting points for email reminders. The template preview explains what it's good for, like notifying stakeholders about at-risk statuses or alerting teammates when a task's phase changes, and spells out the three pieces you'll configure: a trigger, optional conditions, and an action. Clicking Use Template drops a working skeleton into the builder that you then customize instead of assembling one from an empty canvas.",
       "image": {
         "file": "/screenshots/ak2O8KfFBJg/03.webp",
         "caption": "The Automation Template Gallery's preview panel for the \"Alert someone when specified criteria are met\" template, explaining its use cases and setup steps."
@@ -22,7 +27,7 @@
     },
     {
       "heading": "Set the trigger and the recipient",
-      "body": "In the workflow builder, the Trigger block defaults to \"When rows are changed,\" watching any field for changes and running the workflow as soon as one is detected. Below it, the Alert someone action lets you send to specific people by typing a name or email, or route the message to everyone shared to the sheet. A Customize message link and a note confirming the email will be sent from Smartsheet Automation round out the action block, and a small plus button below lets you chain additional steps onto the same workflow.",
+      "body": "In the workflow builder, the Trigger block defaults to \"When rows are changed,\" watching any field and running the workflow as soon as one is detected. Below it, the Alert someone action lets you send to specific people by typing a name or email, or route the message to everyone shared to the sheet. Building or editing a workflow needs Owner or Admin permissions on the sheet; Editor access alone isn't enough. A Customize message link and a note confirming the email will be sent from Smartsheet Automation round out the action block, and a small plus button below lets you chain additional steps onto the same workflow.",
       "image": {
         "file": "/screenshots/ak2O8KfFBJg/04.webp",
         "caption": "The workflow builder showing a Trigger block set to \"When rows are changed\" connected to an Alert someone action."
@@ -30,7 +35,7 @@
     },
     {
       "heading": "Narrow the trigger to a specific condition",
-      "body": "A workflow that fires on any field change will get noisy fast, so change the trigger's When condition to something specific, such as % Complete changes to 100%. That turns a generic \"something happened\" alert into a targeted one that only fires when a task actually finishes, which is exactly the kind of signal a project manager wants in their inbox instead of a flood of minor edits. You can click \"Specify another change\" to stack multiple conditions on the same trigger if you need it even more precise.",
+      "body": "A workflow that fires on any field change gets noisy fast, so change the trigger's When condition to something specific, such as % Complete changes to 100%. That turns a generic \"something happened\" alert into a targeted one that fires only when a task finishes, not on every minor edit. You can click \"Specify another change\" to stack multiple conditions on the same trigger for more precision.",
       "image": {
         "file": "/screenshots/ak2O8KfFBJg/05.webp",
         "caption": "The same trigger reconfigured to fire only when the % Complete field changes to 100%, with the Alert someone action still attached below it."
@@ -38,35 +43,61 @@
     },
     {
       "heading": "Personalize the message content",
-      "body": "Open Customize message to pull dynamic row data, like Task Name or Status, directly into the email's subject or body instead of sending a generic notification. This is what makes the alert actually useful to the recipient, since they see which task changed and what its new state is without having to open the sheet first."
+      "body": "Open Customize message to pull dynamic row data, like Task Name or Status, directly into the email's subject or body using double curly braces, for example {{Task Name}}. The placeholder has to match the column name exactly; a typo or a renamed column drops the value silently instead of throwing an error. This same screen also lets you choose who the email appears to come from: Smartsheet Automation, your organization, or the person who triggered the workflow. Pulling in real row data instead of a generic notice is what makes the alert useful to someone who hasn't opened the sheet yet."
     },
     {
       "heading": "Review delivery permissions and test it",
-      "body": "Before turning the workflow on, check whether it should be restricted to people already shared to the sheet or opened up to external stakeholders, since that setting controls who's even eligible to receive the alert. Once it looks right, save the workflow and make a live test change, like flipping a task's % Complete to 100%, to confirm the email actually arrives the way you configured it before relying on it for real deadlines."
+      "body": "Before turning the workflow on, check whether delivery should be restricted to people already shared to the sheet or opened up to external stakeholders; that setting controls who's even eligible to receive the alert. Once the workflow looks right, save it and make a live test change, like flipping a task's % Complete to 100%, to confirm the email arrives the way it was configured before relying on it for real deadlines."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Recipients never receive the email.",
+      "cause": "Delivery permissions restrict alerts to people already shared to the sheet, and the address typed into Alert someone wasn't one of them.",
+      "fix": "Open the delivery permission setting and either share the sheet with that person or open delivery up to external stakeholders."
+    },
+    {
+      "problem": "The workflow stops running partway through the month.",
+      "cause": "Pro-plan automations are capped at 250 runs a month; a workflow that fires on every row change can burn through that fast on an active sheet.",
+      "fix": "Tighten the trigger condition so it fires less often, or move to a Business or higher plan for unlimited runs."
+    },
+    {
+      "problem": "The email arrives with blank fields where the data should be.",
+      "cause": "A field placeholder like {{Task Name}} has to match the column name exactly; a typo or a later column rename breaks it silently.",
+      "fix": "Reopen Customize message and re-insert the placeholder from the field picker instead of typing it by hand."
     }
   ],
   "faq": [
     {
       "question": "Does Smartsheet support automated email notifications?",
-      "answer": "Yes, the Automation menu on any sheet lets you build workflows that send emails based on triggers like a field changing or a due date approaching."
+      "answer": "Yes. The Automation menu on any sheet builds workflows that send emails based on triggers like a field changing or a due date approaching."
+    },
+    {
+      "question": "Does automation cost extra?",
+      "answer": "It requires a paid plan. Pro includes it with a 250-run-per-month cap; Business, Enterprise, and Advanced Work Management give unlimited runs. There's no automation on the Free tier."
     },
     {
       "question": "Can I personalize the automated email content?",
-      "answer": "Yes, the Customize message option lets you dynamically pull row data like Task Name and Status into the subject or body of the email."
+      "answer": "Yes. Customize message lets you pull row data like Task Name and Status into the subject or body using double curly braces that match the column name exactly."
     },
     {
       "question": "Can automated emails go to people outside my organization?",
-      "answer": "Delivery controls let you choose whether messages are restricted to people already shared to the sheet or sent to external stakeholders as well."
+      "answer": "Delivery controls let you choose whether messages are restricted to people already shared to the sheet or opened up to external stakeholders."
     },
     {
-      "question": "Can I limit reminders to only specific task conditions?",
-      "answer": "Yes, setting the trigger's When condition to a specific value, like % Complete reaching 100%, keeps the workflow from firing on every minor edit."
+      "question": "Can I limit reminders to specific task conditions?",
+      "answer": "Yes. Setting the trigger's When condition to a specific value, like % Complete reaching 100%, keeps the workflow from firing on every minor edit."
     },
     {
       "question": "Do I have to build the workflow from scratch?",
-      "answer": "No, the Automation Template Gallery includes ready-made templates like \"Alert someone when specified criteria are met\" that you can customize instead of starting blank."
+      "answer": "No. The Automation Template Gallery includes ready-made templates like \"Alert someone when specified criteria are met\" that you customize instead of starting blank."
     }
   ],
+  "references": [
+    { "label": "Smartsheet Learning Center — Send automated email notifications (official)", "url": "https://help.smartsheet.com/2483226/automated-email-notifications" },
+    { "label": "Smartsheet — Pricing (official)", "url": "https://www.smartsheet.com/pricing" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The permission requirement, the {{Field}} placeholder syntax, the sender options, and the plan-based automation limits (250 runs a month on Pro, unlimited on Business and above, none on Free) were re-checked against Smartsheet's own Learning Center article and pricing page in September 2026, and added since the original draft didn't mention cost or the run cap at all.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

@@ -1,36 +1,52 @@
 {
   "slug": "how-to-create-asana-task-from-email-easily-2026",
   "seoTitle": "How to Create an Asana Task From Email Easily",
-  "metaDescription": "Turn forwarded emails into Asana tasks using your project's unique email address, so subject lines and message bodies map straight into new task rows.",
-  "intro": "Every Asana project has a hidden email address that turns a forwarded message into a task, which is a faster way to capture an action item than opening a browser tab, finding the right project, and filling out a form by hand. This guide covers finding that address, formatting the email so the subject and body land in the right fields, and using CC to set an assignee — then shows what the project looks like once the task is sitting there next to everything else on the board.",
+  "metaDescription": "Turn a forwarded email into an Asana task with the project's own email address, and use To versus CC correctly to assign it instead of just notifying someone.",
+  "intro": "Every Asana project has a hidden email address that turns a forwarded message into a task, a faster way to capture an action item than opening a browser tab, finding the right project, and filling out a form by hand. This guide covers finding that address, formatting the email so the subject and body land in the right fields, and using the To and CC fields correctly, since mixing them up is the most common reason an emailed task doesn't come out the way you expected.",
+  "prerequisites": [
+    "You must already be a member of the destination project, or the project and its team must be public. Asana drops emailed tasks from accounts without access."
+  ],
   "steps": [
     {
       "heading": "Open the project that should receive the task",
-      "body": "Start from the Asana project you want new tasks to land in — in this example, a \"YT Project\" board organized into To do, Doing, and Done sections, with columns for Assignee, Due date, Priority, and Status. Knowing this structure ahead of time matters, because a task created by email drops into the project's default section with none of these fields set beyond the title and description, so you'll want to move and configure it afterward unless you set values through email syntax.",
+      "body": "Start from the Asana project you want new tasks to land in, in this example a \"YT Project\" board organized into To do, Doing, and Done sections, with columns for Assignee, Due date, Priority, and Status. A task created by email drops into the project's default section with none of these fields set beyond the title, description, and whatever you specify through To and CC, so you'll likely move and configure it afterward.",
       "image": {
         "file": "/screenshots/7qjR6pJ7iB0/05.webp",
-        "caption": "The destination Asana project — a To do / Doing / Done board with Assignee, Due date, Priority, and Status columns already in use."
+        "caption": "The destination Asana project, a To do / Doing / Done board with Assignee, Due date, Priority, and Status columns already in use."
       }
     },
     {
       "heading": "Locate the project's Add Tasks via Email address",
-      "body": "Open the project's menu (the \"...\" or options icon near the project name) and look for Add Tasks via Email. Clicking it reveals a long, unique address tied specifically to that project — not your personal Asana account, and not shared across other projects. Copy it somewhere you can paste from, since you'll need it every time you want to route an email into this particular project."
+      "body": "Open the project's menu (the \"...\" or options icon near the project name) and look for Add Tasks via Email. Clicking it reveals a long, unique address tied specifically to that project, not your personal Asana account, and not shared across other projects. Copy it somewhere you can paste from, since you'll need it every time you want to route an email into this particular project."
     },
     {
       "heading": "Draft the email like you're writing to a person",
-      "body": "Open your regular email client — Gmail, Outlook, whichever you already use — and start a new message addressed to the project's copied address, exactly as you'd email a colleague. There's no special app or plugin required on the sending side; Asana's mail server on the receiving end does the parsing once the message arrives."
+      "body": "Open your regular email client, Gmail, Outlook, whichever you already use, and start a new message addressed to the project's copied address, exactly as you'd email a colleague. No special app or plugin is required on the sending side; Asana's mail server does the parsing once the message arrives.\n\nWrite the subject as you'd want the task to read on the board: short and specific, not a full sentence. The body becomes the task description, so context, links, or instructions for whoever picks it up can go there instead of Asana's description field."
     },
     {
-      "heading": "Write the subject as the task title",
-      "body": "Asana takes your email's subject line and uses it directly as the new task's title, so write it the way you'd want the task to read on the board — short and specific, not a full sentence. The body of your email becomes the task description, so anything you'd normally type into Asana's description field can go there instead: context, links, or instructions for whoever picks it up."
+      "heading": "Assign through To, not CC",
+      "body": "Any extra address you add to the To field, alongside the project's own address, is set as the task's assignee. The CC field does something different: addresses there become followers, who get notified about the task but aren't assigned to it. Either way, the address has to match an existing Asana account with access to the project, or the effect silently doesn't apply."
     },
     {
-      "heading": "CC an assignee and add attachments",
-      "body": "To assign the task on creation, CC the email address tied to the intended assignee's Asana account — it has to match an existing account with access to that project, or the assignment silently won't apply. Any files attached to the email carry over and attach to the new task automatically, which makes this a fast way to log a task and hand off a reference document — a spec, a screenshot, a PDF — in the same action."
+      "heading": "Attach files, then send",
+      "body": "Any files attached to the email carry over and attach to the new task automatically, which makes this a fast way to log a task and hand off a reference document, a spec, a screenshot, a PDF, in the same action. Send it, then switch back to Asana and refresh the project; the new task should appear in the default section with the subject as its title and the body as its description. If nothing shows up after a minute or two, check the sender has access to the project before assuming the address was wrong."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The person I CC'd wasn't assigned the task.",
+      "cause": "CC only adds followers. Assignment happens through the To field instead.",
+      "fix": "Add the intended assignee's Asana-linked email address to the email's To field, alongside the project's own address."
     },
     {
-      "heading": "Send it and check the project for the new task",
-      "body": "Send the email, then switch back to Asana and refresh the project. The new task should appear in the default section — often the first one, like To do — with the subject as its title and the body as its description, ready to be dragged into the right section, assigned a due date, or given a priority if those weren't set through CC or syntax. If nothing shows up after a minute or two, double-check that you copied the exact project email address rather than a truncated or outdated one."
+      "problem": "Sending the email did nothing; no task ever appeared.",
+      "cause": "The sender usually isn't a member of that project or its team, and Asana drops mail from accounts without access unless the project and team are public.",
+      "fix": "Confirm the sender has access to the project, or make the project and team public if that fits your workspace."
+    },
+    {
+      "problem": "The task appeared with no due date, priority, or status set.",
+      "cause": "Email-created tasks only fill in the title, description, attachments, and whoever you put in To or CC. Nothing else transfers.",
+      "fix": "Set those fields manually in Asana afterward, or have a rule in the project fill in common defaults for anything created this way."
     }
   ],
   "faq": [
@@ -39,22 +55,26 @@
       "answer": "Open the project's options menu inside Asana and look for Add Tasks via Email, which reveals the project-specific address to copy."
     },
     {
+      "question": "How do I assign the task through email?",
+      "answer": "Add the assignee's Asana-linked address to the To field, not CC. CC only makes someone a follower who gets notified; it doesn't assign the task."
+    },
+    {
       "question": "Can I attach files by forwarding an email?",
       "answer": "Yes. Any attachments included in the email carry over and attach to the newly created task automatically."
     },
     {
       "question": "Does this work from any email provider?",
-      "answer": "Yes. It works from any email client, including Gmail and Outlook, since it relies only on sending a message to the project's address."
-    },
-    {
-      "question": "Why didn't my task pick up the assignee I CC'd?",
-      "answer": "The CC'd address must match an email tied to an existing Asana account that has access to that project, otherwise the assignment doesn't apply."
+      "answer": "Yes, from any client, including Gmail and Outlook, since it relies only on sending a message to the project's address."
     },
     {
       "question": "Which section of the project does the new task land in?",
-      "answer": "A task created by email drops into the project's default section rather than a specific one you choose, so you'll typically need to move it afterward."
+      "answer": "A task created by email drops into the project's default section, not one you choose, so you'll typically need to move it afterward."
     }
   ],
+  "references": [
+    { "label": "Email tasks to Asana (official Help Center)", "url": "https://help.asana.com/hc/en-us/articles/14111999838363-Email-tasks-to-Asana" }
+  ],
+  "verifiedNote": "Click path and the board layout come from a recorded walkthrough of a real project set up to receive emailed tasks. The To-versus-CC behavior was checked against Asana's official Help Center in September 2026 and corrects the earlier draft, which had CC doing the assigning; in Asana's own documentation, To assigns and CC only adds a follower.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

@@ -1,12 +1,16 @@
 {
   "slug": "how-to-autofill-jotform-using-excel-easily-2026",
   "seoTitle": "How to Autofill Jotform Fields Using Excel Data",
-  "metaDescription": "Use Jotform's Spreadsheet to Form widget to pre-populate form fields from an Excel file with a unique access code, cutting manual data entry for users.",
-  "intro": "Asking a returning customer to retype their name, address, and order history into a form every single time is friction nobody needs, especially when that data already sits in a spreadsheet you maintain. Jotform's Spreadsheet to Form widget closes that gap by letting a form field autofill from an uploaded Excel file the moment a user enters a matching access code. This guide follows the real path through the Form Builder — opening the widgets panel, finding the widget by search, and what it takes to prepare the spreadsheet behind it.",
+  "metaDescription": "Use Jotform's Spreadsheet to Form widget to pre-populate form fields from an uploaded Excel file with a unique access code, once column headers match your field labels.",
+  "intro": "Asking a returning customer to retype their name, address, and order history into a form every time is friction nobody needs, especially when that data already sits in a spreadsheet you maintain. Jotform's Spreadsheet to Form widget closes that gap: upload an Excel file, and a form field autofills the moment a user enters a matching access code. This guide follows the real path through the Form Builder, including the one setup detail that trips people up most, getting the spreadsheet's column headers to match the form's field labels exactly.",
+  "prerequisites": [
+    "A Jotform form with the fields you want to autofill already added",
+    "Your data saved as an XLS or XLSX file, since the widget does not accept CSV or Google Sheets exports"
+  ],
   "steps": [
     {
       "heading": "Open your form in the Form Builder",
-      "body": "Start from an existing form — in this walkthrough, a Product Order Form with Full Name and E-mail fields already laid out — and make sure you're on the BUILD tab rather than Settings or Publish. The Add Element control sits in the top-left corner of the canvas; that's the entry point for adding any new field or widget, including the one that handles autofill.",
+      "body": "Start from an existing form, in this walkthrough a Product Order Form with Full Name and E-mail fields already laid out, and make sure you're on the BUILD tab rather than Settings or Publish. Add Element sits in the top-left corner of the canvas; that's the entry point for any new field or widget, including the one that handles autofill.",
       "image": {
         "file": "/screenshots/2HOzQm-mb8M/04.webp",
         "caption": "The Form Builder's BUILD tab open on a Product Order Form, with Add Element in the top-left ready to bring in a new field or widget."
@@ -14,51 +18,71 @@
     },
     {
       "heading": "Search the Widgets tab for Spreadsheet to Form",
-      "body": "Clicking Add Element opens the Form Elements panel, split into Basic, Payments, and Widgets tabs. Switch to Widgets and type into the search box — searching \"spread\" surfaces Spreadsheet, Spreadsheet to Form, and Rss Reader as matches. Spreadsheet to Form is the one built specifically for this use case: it reads an uploaded file and uses it to populate other fields on the same form based on a lookup value.",
+      "body": "Clicking Add Element opens the Form Elements panel, split into Basic, Payments, and Widgets tabs. Switch to Widgets and search: typing \"spread\" surfaces Spreadsheet, Spreadsheet to Form, and Rss Reader as matches. Spreadsheet to Form is the one built for this job. Add it and the widget drops onto your canvas with its own configuration panel.",
       "image": {
         "file": "/screenshots/2HOzQm-mb8M/05.webp",
         "caption": "The Widgets tab searched for \"spread,\" showing Spreadsheet, Spreadsheet to Form, and Rss Reader as the matching results."
       }
     },
     {
-      "heading": "Prepare your Excel file with an access code column",
-      "body": "Before uploading anything, structure your spreadsheet so one column holds a unique identifier per row — an order number, a customer ID, a code you've already issued — since this is what a user will type in to trigger the lookup. Every other column becomes a candidate for autofilling a form field: name, address, phone number, order details, whatever your form needs pre-populated. A spreadsheet without a clean, unique key column won't map reliably, so get this structure right before uploading."
+      "heading": "Name your spreadsheet columns to match your form's field labels exactly",
+      "body": "This is the step the rest of the setup depends on, and it's easy to get wrong. Jotform does not give you a mapping screen where you manually pair a spreadsheet column with a form field. Instead, the widget matches columns to fields automatically by name: a column header of \"E-mail\" only fills the form field labeled \"E-mail\", not one labeled \"Email Address\" or \"Your Email\". Rename your spreadsheet headers, or your form field labels, until they match exactly, character for character. One column also needs to hold a unique value per row, an order number, a customer ID, or another code you've already issued, since that's what a user types in to trigger the lookup."
     },
     {
-      "heading": "Add the widget and upload the spreadsheet",
-      "body": "Clicking Spreadsheet to Form from the search results drops it onto your form canvas and opens its configuration panel. From there you upload the prepared .xlsx file directly — the widget reads the column headers from the file so you can reference them in the next step. Keep the file's header row clean and consistent, since those exact header labels are what you'll be mapping shortly."
-    },
-    {
-      "heading": "Set the access code column and map the rest",
-      "body": "In the widget's settings, designate which uploaded column is the access code — the lookup key — and then map the remaining spreadsheet columns to the corresponding fields already on your form, like matching an \"Email\" column header to the form's E-mail field. This mapping step is what actually connects a spreadsheet row to specific inputs on the page; get a mapping wrong and that field will either populate with the wrong data or stay empty."
+      "heading": "Upload the spreadsheet and set the access code column",
+      "body": "In the widget's configuration panel, upload the XLS or XLSX file. Then tell the widget which uploaded column is the access code, the lookup key a visitor will type. There's no separate mapping step after this: every other column populates its matching field automatically, based purely on the header-to-label match you set up in the previous step."
     },
     {
       "heading": "Customize the access code prompt and test it live",
-      "body": "The widget adds a front-end input box where users type their access code, along with a verification button — both are customizable, so you can adjust the label text and button styling to match your form's design rather than leaving Jotform's defaults. Once configured, preview the form and test the flow end to end: enter a code from your spreadsheet and confirm every mapped field populates correctly, then repeat the check on a mobile viewport, since form layouts often behave differently at narrow widths."
+      "body": "The widget adds a front-end input box where users type their access code, plus a verification button. Both are editable, so you can adjust the label text and styling to fit your form. Preview the form afterward and test the flow end to end: enter a code from your spreadsheet and confirm every field with a matching column header populates. Note that the access code is case-sensitive, so \"AB100\" and \"ab100\" are treated as different values. Then repeat the check on a mobile viewport, since layouts can behave differently at narrow widths."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A field never populates, even with the right access code",
+      "cause": "The spreadsheet's column header doesn't exactly match that field's label. Jotform maps columns to fields by name, not by a manual pairing screen, so a mismatch of even one word or a trailing space breaks that field silently.",
+      "fix": "Rename the column header (or the form field label) so the two are identical, then re-upload the file."
+    },
+    {
+      "problem": "The widget rejects the uploaded file",
+      "cause": "The file isn't XLS or XLSX. CSV exports and Google Sheets links aren't accepted.",
+      "fix": "Save or export the data as an .xlsx file before uploading."
+    },
+    {
+      "problem": "A code that should work returns no match",
+      "cause": "The access code is case-sensitive by design, with no built-in setting to make it case-insensitive.",
+      "fix": "Check the exact capitalization in the spreadsheet against what the tester typed, or standardize how codes are issued (all uppercase, for example) so visitors aren't guessing at case."
     }
   ],
   "faq": [
     {
       "question": "What file formats does the Spreadsheet to Form widget accept?",
-      "answer": "The widget is built around Excel files, so preparing your data as a properly structured .xlsx file with clean column headers is the standard approach."
+      "answer": "XLS or XLSX only. CSV files and Google Sheets exports aren't supported, so convert your data to Excel format first."
+    },
+    {
+      "question": "How does the widget know which spreadsheet column fills which form field?",
+      "answer": "By matching the column header to the form field's label exactly. There's no manual mapping screen, so a column named \"Email\" won't populate a field labeled \"E-mail Address\" until the two match word for word."
+    },
+    {
+      "question": "Is the access code case-sensitive?",
+      "answer": "Yes, and there's no setting to turn that off. \"Order100\" and \"order100\" are treated as different codes."
     },
     {
       "question": "Can one access code fill in multiple fields at once?",
-      "answer": "Yes. Once a spreadsheet column is mapped to a form field, entering the matching access code populates every mapped field from that row in one action."
-    },
-    {
-      "question": "Does this widget work on mobile forms?",
-      "answer": "Yes, but test the live autofill flow on both desktop and mobile after setup, since layout and input behavior can differ at narrow widths."
+      "answer": "Yes. Every column whose header matches a field label populates from the same row when its access code is entered."
     },
     {
       "question": "What happens if a user enters an access code that isn't in the spreadsheet?",
-      "answer": "The widget won't find a matching row, so the mapped fields won't populate — the form typically remains fillable manually in that case."
-    },
-    {
-      "question": "Where do I add the Spreadsheet to Form widget?",
-      "answer": "Click Add Element in the Form Builder, switch to the Widgets tab, and search for \"spreadsheet\" — Spreadsheet to Form appears alongside related results."
+      "answer": "No row matches, so the mapped fields stay empty rather than showing an error, and the form remains fillable by hand."
     }
   ],
+  "references": [
+    {
+      "label": "Jotform: How to Use the Spreadsheet to Form Widget (official)",
+      "url": "https://www.jotform.com/help/442-how-to-use-the-spreadsheet-to-form-widget/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a Form Builder walkthrough. The column-matching mechanism, supported file formats, and access-code case sensitivity were re-checked against Jotform's official help article in September 2026, which corrected this guide's earlier description of a manual column-mapping step; matching is automatic and depends on exact label matches.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

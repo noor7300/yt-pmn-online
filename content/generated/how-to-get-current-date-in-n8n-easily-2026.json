@@ -1,60 +1,104 @@
 {
   "slug": "how-to-get-current-date-in-n8n-easily-2026",
   "seoTitle": "How to Get the Current Date and Time in n8n",
-  "metaDescription": "Learn how to fetch and format the current date in n8n using expressions or the Date & Time node, including offsetting for future dates.",
-  "intro": "Almost every automation eventually needs to know what day it is — for a timestamp on a logged row, a comparison against a due date, or an expiry check on a token. n8n gives you two ways to get there: a quick inline expression you type straight into a parameter, and a dedicated Date & Time node when you need real formatting and offset control. This guide covers both, plus the ISO-timestamp habit that keeps your data consistent once it starts flowing into other systems.",
+  "metaDescription": "Get the current date in n8n with the $now and $today expressions, or the Date & Time node's own operations for formatting, timezones, and date math.",
+  "intro": "Almost every automation eventually needs to know what day it is: a timestamp on a logged row, a comparison against a due date, an expiry check on a token. n8n gives you two ways to get there. Inline expressions such as $now and $today work straight inside any parameter, no extra node required. The Date & Time node earns its place once you need real formatting, a specific timezone, or date math as its own step. This guide covers both, plus the ISO-timestamp habit that keeps your data consistent once it starts flowing into other systems.",
   "steps": [
     {
       "heading": "Open your n8n workspace",
-      "body": "Start from the Overview screen of your n8n instance, where every workflow, credential, and data table you have access to is listed. This is the same screen whether you're on n8n Cloud or a self-hosted instance, and it's where you'll either open an existing workflow or click Create workflow to start a fresh canvas for testing date expressions. The stats across the top — production executions, failure rate, run time — are a useful gut check before you start adding new logic, since a spike in failures is worth investigating before you build on top of it.",
+      "body": "Start from the Overview screen of your n8n instance. It lists every workflow, credential, and data table you can access, whether you're on n8n Cloud or self-hosted. Open an existing workflow here, or click Create workflow for a blank canvas to test date expressions on. The stats across the top (production executions, failure rate, run time) are worth a glance before you build on top of anything: a spike in failures is easier to catch now than after five more nodes depend on it.",
       "image": {
         "file": "/screenshots/Xa_P7cq0l1s/05.webp",
         "caption": "The n8n Overview screen, listing every workflow in the workspace along with execution stats at the top."
       }
     },
     {
-      "heading": "Call the current date with an inline expression",
-      "body": "The fastest route is to skip adding a node entirely. Click into any parameter field on any node, switch it to expression mode, and reference the current date directly using n8n's built-in variable — no extra step in your workflow just to know what day it is. This works well for quick uses like stamping a note field or filtering records, but because it returns a raw JavaScript date object, it's not always in a shape that plays nicely with every API you send it to."
+      "heading": "Reference the current date with an inline expression",
+      "body": "The fastest route skips adding a node entirely. Click into any parameter field, switch it to expression mode, and reference n8n's built-in date variables directly. $now returns the full current timestamp as a Luxon object; $today returns that same moment rounded down to midnight. Both work well for a quick stamp on a note field or a same-day filter. They return Luxon objects, not plain strings, so sending one straight to an API or a spreadsheet column can produce a value that system doesn't expect. That's exactly what the Date & Time node exists to fix."
     },
     {
-      "heading": "Add a Date & Time node when you need formatting",
-      "body": "For anything more deliberate than a quick inline reference, drop a Date & Time node onto your canvas. Search for it from the node panel like you would any other node, and connect it after the trigger or step where you need the timestamp generated. This node exists specifically to turn a raw date into a clean, predictable string, which matters the moment that value needs to be compared, sorted, or stored somewhere outside n8n."
+      "heading": "Add a Date & Time node for anything more deliberate",
+      "body": "Drop a Date & Time node onto the canvas when a value needs real formatting, a specific timezone, or date math as its own step. Search for it in the node panel like any other node, and connect it after the trigger or step where the timestamp gets generated. The node currently splits every action into its own operation, chosen from the Operation dropdown at the top: Get Current Date, Format a Date, Add to a Date, Subtract From a Date, Extract Part of a Date, Round a Date, and Get Time Between Dates. Older tutorials that describe one combined screen with a single offset field are describing a previous version of this node."
     },
     {
-      "heading": "Set the operation and pick a format",
-      "body": "Inside the node, set the operation to format a date, then choose the output layout — day-month-year, year-month-day, or whatever your downstream system expects — along with the correct timezone. Getting the timezone right here matters more than it seems: a workflow that runs fine in testing can quietly log the wrong day once it's scheduled to run at midnight in a different region."
+      "heading": "Format the date",
+      "body": "Set the operation to Format a Date, then pick the output layout — day-month-year, year-month-day, or a custom pattern using Luxon's formatting tokens — along with the correct timezone. Getting the timezone right matters more than it looks. n8n defaults self-hosted instances to America/New_York unless GENERIC_TIMEZONE is set, or you override it in the workflow's own settings, and a workflow that looks correct in testing can quietly log the wrong day once it runs at midnight somewhere else."
     },
     {
-      "heading": "Offset the date for past or future values",
-      "body": "Most real workflows don't just want today — they want yesterday, seven days from now, or an expiry threshold thirty days out. The Date & Time node's offset option lets you add or subtract days and hours from the current timestamp to calculate exactly that kind of relative date, which is what you'll use for anything involving trial expirations, follow-up reminders, or rolling date-range filters."
+      "heading": "Add or subtract time on a separate operation",
+      "body": "Need yesterday, seven days from now, or a thirty-day expiry threshold? Switch to the Add to a Date or Subtract From a Date operation instead of looking for an offset toggle inside formatting; n8n moved that behavior into its own screen. Pick a unit (years, months, weeks, days, hours, minutes, or seconds), enter the amount, and name the output field. This is what you'll reach for on anything involving trial expirations, follow-up reminders, or rolling date-range filters."
     },
     {
       "heading": "Check the output and standardize on ISO",
-      "body": "Before wiring the date into the rest of your workflow, open the data preview pane and confirm the value looks the way you expect — right format, right timezone, right offset. If this value is heading to an external API or a CRM, format it as a standardized ISO timestamp rather than a locale-specific string; ISO keeps the structure consistent no matter which system reads it next, which saves you from parsing errors down the line. Once it checks out, drag a connection from the node into whatever step consumes the date."
+      "body": "Before wiring the date into the rest of the workflow, open the data preview pane and confirm the value looks right: correct format, correct timezone, correct offset. If it's heading to an external API or a CRM, format it as a standardized ISO timestamp instead of a locale-specific string. ISO keeps the structure consistent no matter which system reads it next, and it saves you from parsing errors later. Once it checks out, drag a connection from the node into whatever step consumes the date."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Date & Time node operations",
+      "columns": ["Operation", "What it does"],
+      "rows": [
+        ["Get Current Date", "Returns today's date, with a toggle to include the time and a timezone selector"],
+        ["Format a Date", "Converts a date into a preset layout or a custom Luxon-token pattern"],
+        ["Add to a Date", "Adds a chosen unit and amount (days, hours, and so on) to a date"],
+        ["Subtract From a Date", "Subtracts a chosen unit and amount from a date"],
+        ["Extract Part of a Date", "Pulls a single component, like the year or the day, out of a date"],
+        ["Round a Date", "Rounds a date up or down to the nearest unit boundary"],
+        ["Get Time Between Dates", "Calculates the difference between two dates, optionally as an ISO 8601 duration"]
+      ],
+      "note": "Each row is its own selectable operation on the current Date & Time node, not a single combined settings screen."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The date logged is one calendar day off from what was expected.",
+      "cause": "n8n defaults self-hosted instances to the America/New_York timezone unless GENERIC_TIMEZONE is set or the workflow's own timezone is overridden, so a run near midnight in another timezone can land on the wrong day.",
+      "fix": "Set the correct timezone in the workflow's settings, or pass an explicit zone into the expression with setZone()."
+    },
+    {
+      "problem": "An API or CRM rejects the date field.",
+      "cause": "$now and $today return Luxon date objects, and sending one through unformatted produces a value the receiving system doesn't recognize.",
+      "fix": "Format it first, either with toISO()/toFormat() in the expression or with the node's Format a Date operation."
+    },
+    {
+      "problem": "There's no offset field on the Date & Time node.",
+      "cause": "Older versions of the node combined date math into one screen with an offset setting; the current version splits that into separate Add to a Date and Subtract From a Date operations.",
+      "fix": "Choose one of those two operations from the node's Operation dropdown instead of looking for a single offset field."
     }
   ],
   "faq": [
     {
-      "question": "Can I get the current date without adding an extra node?",
-      "answer": "Yes, you can use an inline expression inside any parameter field to reference the current date directly, without placing a separate node on the canvas."
+      "question": "What's the fastest way to get today's date in n8n?",
+      "answer": "Type $now or $today into any parameter field in expression mode. No extra node is needed for a quick reference."
     },
     {
-      "question": "How do I format the date differently in n8n?",
-      "answer": "Add a Date & Time node, set its operation to format a date, and choose the output layout and timezone you need."
+      "question": "What's the difference between $now and $today?",
+      "answer": "$now is the full current timestamp, down to the millisecond. $today is that same moment rounded down to midnight."
     },
     {
-      "question": "Can n8n calculate a date in the future or past?",
-      "answer": "Yes. The Date & Time node has an offset option that adds or subtracts days and hours from the current timestamp, which is how you calculate things like tomorrow or a 30-day expiry."
+      "question": "How do I calculate a date in the past or future?",
+      "answer": "Add a Date & Time node and choose the Add to a Date or Subtract From a Date operation, then set a unit and an amount. These replaced the single offset field from older versions of the node."
     },
     {
-      "question": "Why would I use a standardized ISO timestamp?",
-      "answer": "ISO timestamps keep date formatting consistent when passing data to external APIs, CRMs, or databases, avoiding parsing errors caused by locale-specific date strings."
+      "question": "Why did a scheduled workflow log the wrong day?",
+      "answer": "Usually a timezone mismatch. n8n defaults self-hosted instances to America/New_York unless you set GENERIC_TIMEZONE or override the timezone in the workflow's own settings."
     },
     {
-      "question": "Does the timezone setting actually matter if I'm just testing?",
-      "answer": "Yes — a workflow that looks correct in manual testing can log the wrong date once scheduled, especially around midnight, if the timezone in the Date & Time node doesn't match where the workflow actually needs to run."
+      "question": "Why convert dates to ISO before sending them elsewhere?",
+      "answer": "ISO timestamps keep the format consistent regardless of which system reads them next, which avoids the parsing errors that locale-specific date strings tend to cause."
     }
   ],
+  "references": [
+    {
+      "label": "n8n Docs — Date & Time node (official)",
+      "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.datetime"
+    },
+    {
+      "label": "n8n Docs — Work with dates and times (official)",
+      "url": "https://docs.n8n.io/build/work-with-data/handle-special-data-types/work-with-dates-and-times"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. The expression variable names ($now, $today), the node's operation list, and the offset behavior were re-checked against n8n's official Date & Time node docs and its dates-and-times guide in September 2026 — that check is what corrected the article's description of a single 'offset' field into the node's current seven separate operations.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

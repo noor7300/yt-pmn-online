@@ -1,45 +1,64 @@
 {
   "slug": "how-to-create-a-scheduled-flow-in-microsoft-power-automate-easily-2026",
   "seoTitle": "How to Create a Scheduled Flow in Power Automate",
-  "metaDescription": "Build a scheduled cloud flow in Power Automate step by step — pick the scheduled flow option, set the recurrence trigger, add actions, and confirm it runs.",
-  "intro": "A scheduled flow is Power Automate's answer to anything that needs to happen on a timer instead of in response to an event — a weekly report, a nightly backup, a recurring reminder. The setup takes just a few screens: choosing the scheduled flow type, configuring how often it fires, adding the actions it performs, and confirming a run actually succeeded. This guide follows a real example flow called Weekly Project Report from creation through its first successful test run, so you can see exactly what each stage looks like.",
+  "metaDescription": "Build a scheduled cloud flow in Power Automate: pick the scheduled flow type, configure the Recurrence trigger's start time and frequency, add actions, and confirm it runs.",
+  "intro": "A scheduled flow is Power Automate's answer to anything that needs to happen on a timer instead of in response to an event: a weekly report, a nightly backup, a recurring reminder. The setup takes a handful of screens: choosing the scheduled flow type, configuring the Recurrence trigger, adding the actions it performs, and confirming a run actually succeeded. This guide follows a real example flow called Weekly Project Report from creation through its first successful test run.",
+  "costNote": "Scheduled flows don't need a Power Automate Premium license on their own; a Microsoft 365 license covers them as long as every connector the flow uses is a standard connector, per Microsoft's licensing FAQ. The moment one action in the flow uses a premium connector, the flow's owner needs a Premium (or Process) license, regardless of who else the flow is shared with.",
   "steps": [
     {
       "heading": "Choose Scheduled cloud flow when creating a flow",
-      "body": "From the Create page in Power Automate, you're offered several starting points under \"Three ways to make a flow\": Automated cloud flow, Instant cloud flow, Scheduled cloud flow, Describe it to design it, Desktop flow, and Process mining. Scheduled cloud flow is the one built specifically for time-based automation — its subtitle reads \"You choose when and how often it runs,\" which is the giveaway that separates it from Automated (triggered by an event) or Instant (triggered manually). Below the blank-start options, Power Automate also lists community templates like \"Schedule a reply to send at the perfect time\" and \"Automate weekly reminders,\" which are worth scanning before you build from scratch in case one already does most of what you need.",
+      "body": "From My flows, select New flow, or from the Create page, you're offered several starting points: Automated cloud flow, Instant cloud flow, Scheduled cloud flow, Describe it to design it (Copilot), Desktop flow, and Process mining. Scheduled cloud flow is built specifically for time-based automation, its subtitle reads \"You choose when and how often it runs\", which separates it from Automated (triggered by an event) or Instant (triggered manually). If you have Copilot access, you can also describe the schedule in plain language instead of building it screen by screen; this guide follows the manual path. Community templates below the blank-start options, things like \"Schedule a reply to send at the perfect time\", are worth a scan in case one already does most of what you need.",
       "image": { "file": "/screenshots/zXr4SjyF6Yg/02.webp", "caption": "The flow creation screen showing the six starting options, with Scheduled cloud flow highlighted as the one for time-based automation." }
     },
     {
-      "heading": "Set up the Recurrence trigger",
-      "body": "Naming your flow and picking Scheduled cloud flow drops you into the designer canvas with a single Recurrence block already sitting at the top. This trigger is where the actual schedule lives — you set the interval (every N minutes, hours, days, weeks, or months) and, for daily or weekly patterns, the specific time and days it should fire. Everything else in the flow builds downward from this block using the plus icon underneath it, so getting the recurrence right first means every action you add after inherits the correct timing.",
+      "heading": "Set the starting time and repeat interval",
+      "body": "Naming your flow and picking Scheduled cloud flow asks for two things upfront: a Starting date and time, and how often to Repeat every (an interval in minutes, hours, days, weeks, or months). Confirming these drops you into the designer canvas with a single Recurrence block sitting at the top. For anything more specific than a plain interval, a particular time of day, particular days of the week, open the Recurrence trigger and select Show advanced options; that's where Time zone, At these hours, At these minutes, and, for a weekly schedule, On these days actually live. Everything else in the flow builds downward from this block using the plus icon underneath it.",
       "image": { "file": "/screenshots/zXr4SjyF6Yg/03.webp", "caption": "A fresh scheduled flow canvas with just the Recurrence trigger placed, ready for actions to be added below it." }
     },
     {
       "heading": "Add the actions the flow should perform",
-      "body": "Click the plus icon below Recurrence to add your first action. In the example flow, that's Get file metadata, connected to OneDrive for Business — the parameters panel on the left lets you browse folders like Documents, Meetings, OUTLOOK EMAILS, and PMN ONLINE FILES to pick the exact file the flow should check each time it runs. This is the pattern for every action you add: configure its connection, point it at the right file or data source, and let it feed into whatever comes next, whether that's generating a report, sending an email, or writing to another system.",
+      "body": "Click the plus icon below Recurrence to add your first action. In the example flow, that's Get file metadata, connected to OneDrive for Business; the parameters panel on the left lets you browse folders to pick the exact file the flow should check each run. This is the pattern for every action you add: configure its connection, point it at the right file or data source, and let it feed into whatever comes next, whether that's generating a report, sending an email, or writing to another system. Worth noting for licensing: most file and email connectors are standard, but if an action you add is a premium connector, the flow's owner will need a Premium or Process license to keep it running.",
       "image": { "file": "/screenshots/zXr4SjyF6Yg/04.webp", "caption": "The Get file metadata action added under Recurrence, with a OneDrive for Business folder picker open to select the target file." }
     },
     {
       "heading": "Save the flow and give it a clear name",
-      "body": "Power Automate saves flows under the name you gave them at creation — in this walkthrough, \"Weekly Project Report\" — and that name is what shows up in My flows, in run history, and in any notifications tied to it. Pick something that describes what the flow does and how often, not a generic placeholder, since you'll be scanning a list of flow names later when something needs troubleshooting and a vague name won't help you find the right one quickly."
+      "body": "Power Automate saves flows under the name given at creation, \"Weekly Project Report\" in this walkthrough, and that name shows up in My flows, in run history, and in any notifications tied to it. Pick something that describes what the flow does and how often, not a generic placeholder; you'll be scanning a list of flow names later when something needs troubleshooting, and a vague name won't help."
     },
     {
       "heading": "Test the flow and confirm it ran",
-      "body": "Once saved, open the flow's details page to see its Status (On), Type (Scheduled), owner, and a 28-day run history table listing every execution with its start time, duration, and status. In the example, a manual test run completed in 00:00:01 and shows \"Test succeeded\" highlighted in the Status column — that's the confirmation the flow is wired correctly before you let it run unattended on its schedule. This page is also where you'd catch a failure early: a red \"Failed\" status here means fixing the flow now, not waiting for someone to notice a report never arrived.",
+      "body": "Once saved, open the flow's details page to see its Status (On), Type (Scheduled), owner, connections, and a 28-day run history table listing every execution with its start time, duration, and status. In the example, a manual test run completed in a few seconds and shows \"Test succeeded\" in the Status column, confirmation the flow is wired correctly before it runs unattended on its own schedule. This page is also where a failure shows up early: a red \"Failed\" status means fixing the flow now, not waiting for someone to notice a report never arrived.",
       "image": { "file": "/screenshots/zXr4SjyF6Yg/05.webp", "caption": "The Weekly Project Report flow's details page, showing its Scheduled type, On status, connections, and a run history entry marked Test succeeded." }
     },
     {
       "heading": "Monitor it going forward",
-      "body": "After the first successful run, keep an eye on the run history periodically rather than assuming a scheduled flow will quietly work forever — connections can expire, source files can move, and permissions can change. The same details page you used to confirm the test run is where every future execution logs its status, so bookmarking it (or checking My flows regularly) is enough to catch problems before they become a pattern of missed reports or failed automations."
+      "body": "After the first successful run, check the run history periodically rather than assuming a scheduled flow will quietly work forever; connections can expire, source files can move, and permissions can change. The same details page used to confirm the test run is where every future execution logs its status, so bookmarking it, or checking My flows regularly, is enough to catch problems before they turn into a pattern of missed reports."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Recurrence trigger: what each frequency needs",
+      "columns": ["Frequency", "Extra fields under Show advanced options", "Notes"],
+      "rows": [
+        ["Minute / Hour", "None beyond the interval", "Runs every N minutes or hours from the start time."],
+        ["Day", "At these hours, At these minutes", "Fires at the specific times you list, every day."],
+        ["Week", "On these days, At these hours, At these minutes", "Pick the day(s) of the week as well as the time."],
+        ["Month", "None beyond the interval", "Runs on the same date each month as the start date."]
+      ],
+      "note": "Fields shown are those Microsoft documents under the Recurrence trigger's advanced options."
     }
   ],
   "faq": [
-    { "question": "How often can a scheduled flow run?", "answer": "The Recurrence trigger accepts an interval in minutes, hours, days, weeks, or months, plus a specific time and days for daily or weekly patterns, so it covers everything from a few-minute interval to a monthly job." },
-    { "question": "Can I change the schedule after creating the flow?", "answer": "Yes. Open the flow in the designer, click the Recurrence trigger, and edit its interval or time settings, then save — existing actions downstream aren't affected." },
-    { "question": "How do I check if a scheduled flow ran successfully?", "answer": "Open the flow's details page and look at the run history table, which lists each execution's start time, duration, and status, such as \"Test succeeded\" or a failure state." },
-    { "question": "What kinds of tasks are good candidates for scheduled flows?", "answer": "Anything that should happen on a timer rather than in response to an event — recurring reports, file checks, reminders, backups, and data syncs are all common uses." },
-    { "question": "What's the difference between Scheduled and Automated cloud flows?", "answer": "A Scheduled cloud flow runs on a recurrence you define, while an Automated cloud flow is triggered by an event, like a new email arriving or a file being created." }
+    { "question": "How often can a scheduled flow run?", "answer": "The Recurrence trigger accepts an interval in minutes, hours, days, weeks, or months, with additional day/time controls under Show advanced options for daily and weekly patterns." },
+    { "question": "Does a scheduled flow cost extra on top of Microsoft 365?", "answer": "Not by itself. A scheduled flow built entirely from standard connectors runs under a Microsoft 365 license. It only needs a Power Automate Premium (or Process) license if one of its actions uses a premium connector." },
+    { "question": "Can I change the schedule after creating the flow?", "answer": "Yes. Open the flow in the designer, select the Recurrence trigger, adjust its interval, start time, or advanced day/time options, then save; downstream actions aren't affected." },
+    { "question": "How do I check if a scheduled flow ran successfully?", "answer": "Open the flow's details page and check the run history table, which lists each execution's start time, duration, and status, such as \"Test succeeded\" or a failure state." },
+    { "question": "What's the difference between Scheduled and Automated cloud flows?", "answer": "A Scheduled cloud flow runs on a recurrence you define. An Automated cloud flow is triggered by an event instead, like a new email arriving or a file being created." }
   ],
+  "references": [
+    { "label": "Microsoft Learn: Run a cloud flow on a schedule in Power Automate (official)", "url": "https://learn.microsoft.com/en-us/power-automate/run-scheduled-tasks" },
+    { "label": "Microsoft Learn: Power Automate licensing FAQ (official)", "url": "https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/faqs" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough of a real scheduled flow. The Recurrence trigger's field names and the frequency table were re-checked against Microsoft's official Power Automate documentation in September 2026, which corrected this guide's vaguer description of \"a specific time and days\" into the actual Starting/Repeat every/advanced-options structure. The licensing note was checked against Microsoft's official Power Automate licensing FAQ.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }
