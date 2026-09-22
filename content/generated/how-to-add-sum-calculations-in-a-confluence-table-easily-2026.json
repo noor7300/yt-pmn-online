@@ -1,44 +1,76 @@
 {
   "slug": "how-to-add-sum-calculations-in-a-confluence-table-easily-2026",
   "seoTitle": "How to Add Sum Calculations in a Confluence Table (2026)",
-  "metaDescription": "Add real sum formulas to a Confluence page using the Elements Spreadsheets macro — enter data, reference a cell range, and get a live total.",
-  "intro": "A plain Confluence table can hold numbers, but it can't add them up on its own — there's no built-in formula bar on a standard table cell. The Elements Spreadsheets macro fixes that by embedding an actual Excel-like spreadsheet inside your page, complete with cell references, functions, and a formula bar. This guide walks through opening that macro from a Confluence page, entering a sum formula against a range of cells, and getting a live total that updates with your data, plus a note on Confluence's native Databases feature as a lighter alternative for simple running totals.",
+  "metaDescription": "Add real sum formulas to a Confluence page with the Elements Spreadsheet macro, using =SUM(), plus Confluence's own Databases Calculate option for simpler totals.",
+  "intro": "A plain Confluence table can hold numbers, but nothing on the page adds them up for you; there's no formula bar on a standard table cell. The Elements Spreadsheet macro fixes that by embedding an Excel-like spreadsheet inside your page, with cell references, functions, and its own formula bar. This guide covers opening that macro, entering a real SUM formula against a range of cells, and getting a live total that updates with your data. It ends with Confluence's native Databases feature, a lighter option worth knowing about before you reach for a macro at all.",
   "steps": [
     {
       "heading": "Open the spreadsheet macro from your page",
-      "body": "From an existing Confluence page — in this case one already containing a Databases-style table with fields and tags — insert or open the Elements Spreadsheets macro. Confluence shows a brief loading state while the macro initializes, with an Update and Cancel option in the modal header and the underlying page (with its own \"DATA BASE\" table and tag fields like \"Not started\" and \"Done\") still visible behind it. This confirms the macro lives inside your page rather than as a separate file — the totals you calculate stay attached to the document your team already reads.",
+      "body": "From an existing Confluence page, in this case one already built as a Databases-style table with fields and status tags, insert or open the Elements Spreadsheet macro. Confluence shows a brief loading state while it initializes, with Update and Cancel sitting in the modal header and the page's own table still visible behind it. That confirms the macro's data lives inside the page itself, not as a separate attached file.",
       "image": { "file": "/screenshots/moH4dB7rKp8/05.webp", "caption": "The Elements Spreadsheets macro loading on top of a Confluence page that already has its own data table, showing the macro opening in context." }
     },
     {
       "heading": "Lay out your columns",
-      "body": "Once the macro opens, it behaves like a standard spreadsheet grid with lettered columns and numbered rows, plus its own toolbar for fonts, cell formatting, alignment, and functions. Set up your headers in row 1 — ID, Number 1, Age, Sum — and fill in the rows beneath with your actual values. Unlike a plain Confluence table, every cell here can hold either a value or a formula, which is what makes the sum calculation possible in the next step.",
+      "body": "Once the macro opens, it behaves like a standard spreadsheet grid: lettered columns, numbered rows, and a toolbar for fonts, cell formatting, alignment, and functions. Set up headers in row 1, for example ID, Number 1, Age, Sum, and fill in the rows beneath with your actual values. Every cell here can hold a value or a formula, which is what makes the next step possible.",
       "image": { "file": "/screenshots/moH4dB7rKp8/01.webp", "caption": "The Elements Spreadsheets grid with ID, Number 1, and Age columns filled in, and an empty Sum column ready for a formula." }
     },
     {
-      "heading": "Write a sum formula against the range",
-      "body": "Click into the Sum cell for a row and type an equals sign to start a formula, referencing a range of cells you want added together — for example =A2:A6 to sum every value in that column from row 2 through row 6. The formula bar shows exactly what you've typed as you build it, with red and green buttons to cancel or confirm once the range looks right. This is the core difference from a static table: the total isn't typed in by hand, it's calculated live from the cells you point it at, so editing any number in the range updates the sum automatically.",
+      "heading": "Write a SUM formula against the range, then confirm it",
+      "body": "Click into the Sum cell for a row and type an equals sign to start a formula. Put the range inside the SUM function instead of typing the range on its own: =SUM(A2:A6) adds every value in that column from row 2 through row 6. A bare range reference like =A2:A6 is not a total in Elements Spreadsheet. The macro's own documentation shows formulas built around named functions, so SUM has to be there. The formula bar shows exactly what you've typed, with a green check to confirm and a red X to cancel. Confirm it and the Sum cell shows the calculated total, not the formula text. Click back into the cell later and it still shows =SUM(A2:A6), not a hardcoded number. Add a new row inside that range, and the total updates on its own the next time the sheet recalculates.",
       "image": { "file": "/screenshots/moH4dB7rKp8/03.webp", "caption": "A sum formula referencing the range A2:A6, with confirm and cancel buttons next to the formula bar before the calculation is locked in." }
     },
     {
-      "heading": "Confirm and check the result",
-      "body": "Click the green checkmark to lock in the formula. The Sum cell then displays the calculated total instead of the formula text, and the underlying formula stays attached to the cell — click back into it later and you'll see =A2:A6 again rather than a hardcoded number. If you add a new row of data inside that range, the sum updates on its own the next time the sheet recalculates, which is the entire point of using a spreadsheet macro instead of manually retyping a total every time the numbers change."
-    },
-    {
       "heading": "Update the page to save your changes",
-      "body": "Once the formula and totals look correct, click Update in the macro's modal header (visible next to Cancel while the macro loads) to save the spreadsheet back into the page, then publish the page itself if you haven't already. The macro's data is stored as part of the page content, so anyone opening it afterward sees the same live totals without needing edit access to the spreadsheet themselves."
+      "body": "Click Update in the macro's modal header to save the spreadsheet back into the page, then publish the page itself if you haven't already. The macro's data is stored as part of the page content, so anyone opening it afterward sees the same live totals without needing edit access to the spreadsheet."
     },
     {
       "heading": "Know the lighter, native alternative",
-      "body": "If your needs are simpler — one running total on a small table rather than a full spreadsheet with multiple formulas — Confluence's native Databases feature has its own built-in Calculate option that can add a Sum to the bottom of a numeric column without embedding a separate macro at all. It's less powerful than Elements Spreadsheets (no arbitrary formulas, just aggregate functions like sum, average, and count), but it's faster to set up when a single column total is all you actually need."
+      "body": "If a full spreadsheet is more than you need, Confluence's own Databases feature has a built-in Calculate option: select it below any field on a database block and choose Sum, Average, Min, Max, Count values, Count unique values, Count empty, or Percent empty. It only aggregates a whole column; there's no per-row math, so nothing built into Confluence can multiply a price column by a quantity column the way a spreadsheet formula can. For one running total on a small table, it's faster to set up than installing a macro at all."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Elements Spreadsheet macro vs. native Databases Calculate",
+      "columns": ["", "Elements Spreadsheet macro", "Databases Calculate"],
+      "rows": [
+        ["Formula support", "400+ functions (SUM, IF, VLOOKUP, COUNTIF, and more), written like Excel", "None; a fixed list of aggregate calculations only"],
+        ["Per-row math", "Yes, one cell can reference others, e.g. price times quantity", "No, calculations run on a whole column only"],
+        ["Where it lives", "Third-party macro from the Atlassian Marketplace (Elements Apps)", "Built into Confluence Cloud, nothing to install"],
+        ["Best for", "Multiple formulas in one embedded spreadsheet", "A single quick total at the bottom of a database column"]
+      ],
+      "note": "Marketplace pricing and availability can change; check the Elements Spreadsheet listing on the Atlassian Marketplace for current terms."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Typing =A2:A6 into a cell doesn't produce a total",
+      "cause": "Elements Spreadsheet treats a bare range as a reference, not a calculation. A range needs to sit inside a function to do anything with it.",
+      "fix": "Wrap it in the SUM function: =SUM(A2:A6)."
+    },
+    {
+      "problem": "The total didn't change after a new row of data was added",
+      "cause": "The new row sits outside the range the formula points at.",
+      "fix": "Edit the formula to extend the range, or build it against a few extra blank rows up front so future entries fall inside it automatically."
+    },
+    {
+      "problem": "There's no Calculate option under a column",
+      "cause": "Calculate only appears on Confluence's native Database blocks. A plain table, or a table inside the Elements Spreadsheet macro, doesn't have it.",
+      "fix": "Convert the table to a Database block if the built-in aggregate option is what you're after, or stay with the macro's own SUM formula."
     }
   ],
   "faq": [
-    { "question": "Can a regular Confluence table calculate a sum on its own?", "answer": "No, a plain table has no formula support. To get a real sum you need either the Elements Spreadsheets macro, which embeds a full spreadsheet in the page, or Confluence's native Databases feature, which has a simpler built-in Calculate option for aggregate totals." },
-    { "question": "How do I write a sum formula in the Elements Spreadsheets macro?", "answer": "Click into the target cell, type an equals sign followed by the cell range you want added — for example =A2:A6 — and confirm with the green checkmark in the formula bar." },
-    { "question": "Does the sum update automatically if I change the data?", "answer": "Yes, as long as the changed cells fall inside the range referenced by the formula. The formula stays attached to the cell rather than being replaced by a static number." },
-    { "question": "Do I need to publish the page after editing the spreadsheet macro?", "answer": "Yes. Click Update in the macro to save your changes back into the page content, then publish the page itself so the updated totals are visible to everyone with access." },
-    { "question": "What's the difference between Elements Spreadsheets and Confluence's native Databases Calculate option?", "answer": "Elements Spreadsheets is a full Excel-like macro supporting arbitrary formulas and functions. The native Databases Calculate option is simpler and faster to use but limited to aggregate functions like sum, average, and count on a single column." }
+    { "question": "Can a regular Confluence table calculate a sum on its own?", "answer": "No, a plain table has no formula support. A real sum needs either the Elements Spreadsheet macro, which embeds a full spreadsheet in the page, or Confluence's native Databases feature, which has a simpler built-in Calculate option." },
+    { "question": "How do I write a sum formula in the Elements Spreadsheet macro?", "answer": "Click into the target cell, type =SUM( followed by the cell range, for example =SUM(A2:A6), close the parenthesis, and confirm with the green checkmark. A bare range without SUM() won't total anything." },
+    { "question": "Does the sum update automatically if I change the data?", "answer": "Yes, as long as the changed cells fall inside the range the formula references. The formula stays attached to the cell instead of being replaced by a static number." },
+    { "question": "Do I need to publish the page after editing the spreadsheet macro?", "answer": "Yes. Click Update in the macro to save the changes into the page content, then publish the page so the updated totals are visible to everyone with access." },
+    { "question": "What's the difference between Elements Spreadsheet and Confluence's native Databases Calculate option?", "answer": "Elements Spreadsheet is a full Excel-like macro with 400+ functions. Databases Calculate is built into Confluence and limited to a fixed set of aggregates: Sum, Average, Min, Max, and a few count variants, applied to one column at a time." }
   ],
+  "references": [
+    { "label": "Elements Spreadsheet: Formulas (official)", "url": "https://doc.elements-apps.com/spread/formulas" },
+    { "label": "Elements Spreadsheet macro overview (official)", "url": "https://doc.elements-apps.com/spreadsheet/spreadsheet-macro" },
+    { "label": "Confluence Cloud: Perform simple calculations on your data (official, Atlassian Support)", "url": "https://support.atlassian.com/confluence-cloud/docs/perform-simple-calculations-on-your-data/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough of the Elements Spreadsheet macro. Formula syntax was re-checked against Elements Apps' own documentation in September 2026, which corrected the article's earlier instruction to type a bare range (=A2:A6) as a sum; the macro requires the SUM function, so the correct formula is =SUM(A2:A6). The list of calculation types under Confluence's native Databases Calculate option was also verified against Atlassian's official support documentation and expanded to match what it offers (Sum, Average, Min, Max, and four count variants, not just sum/average/count).",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

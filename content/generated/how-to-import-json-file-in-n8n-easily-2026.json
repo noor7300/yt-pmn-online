@@ -1,45 +1,87 @@
 {
   "slug": "how-to-import-json-file-in-n8n-easily-2026",
   "seoTitle": "How to Import and Parse a JSON File in n8n",
-  "metaDescription": "Learn how to fetch a JSON file into n8n and use the Extract From File node to parse it into structured data your workflow can actually use.",
-  "intro": "Getting a JSON file into an n8n workflow is really two separate problems: getting the raw file into the workflow at all, and then converting whatever n8n received — usually a binary blob — into structured data your other nodes can read. n8n handles both, but they use different nodes, and mixing them up is the most common reason people get stuck. This guide walks through the standard path: bringing the file in, parsing it with the Extract From File node, and confirming the output before you build on top of it.",
+  "metaDescription": "Learn how to fetch a JSON file into n8n and use the Extract From File node to parse it into structured data your workflow can use.",
+  "intro": "Getting a JSON file into an n8n workflow is really two separate problems: getting the raw file into the workflow at all, and then converting whatever n8n received, usually a binary blob, into structured data your other nodes can read. n8n handles both, but they use different nodes, and mixing them up is the most common reason people get stuck. This guide walks through the standard path: bringing the file in, parsing it with the Extract From File node, and reading the output correctly before you build anything on top of it.",
+  "prerequisites": [
+    "An n8n workflow (cloud or self-hosted) with a node upstream that already has the file as binary data (an HTTP Request, a Read/Write File node, or an incoming webhook or form trigger). Extract From File parses a file that is already in the workflow; it does not fetch one on its own."
+  ],
   "steps": [
     {
       "heading": "Decide where your JSON file is coming from",
-      "body": "How you bring a file into n8n depends entirely on where it lives. If it's hosted somewhere reachable over HTTP, an HTTP Request node fetching that URL will pull it in as binary data automatically. If it's already sitting on disk in a self-hosted n8n setup, a Read/Write File node can load it directly. If it's arriving as part of an upload — through a webhook or a form trigger — the binary data is typically already attached to the incoming item, and you just need to reference the right property name rather than fetch anything yourself."
+      "body": "How you bring a file into n8n depends on where it lives. If it is hosted somewhere reachable over HTTP, an HTTP Request node fetching that URL pulls it in as binary data automatically. If it is already sitting on disk in a self-hosted n8n setup, a Read/Write File node loads it directly. If it is arriving through a webhook or a form trigger, the binary data is typically already attached to the incoming item, so you only need to reference the right property name instead of fetching anything yourself."
     },
     {
       "heading": "Confirm the file landed as binary data",
-      "body": "Whichever route you used, check the item's Binary tab in the node's output before doing anything else. n8n stores incoming files under a binary property — often named data by default, though HTTP Request and other nodes let you rename it. If you can't see a populated binary property here, nothing downstream will work, so this is worth confirming before you add a parsing node on top of a fetch that silently failed."
+      "body": "Check the item's Binary tab in the node's output before doing anything else. n8n stores incoming files under a binary property, named data by default, though HTTP Request and other nodes let you rename it. If nothing shows up here, nothing downstream will work, so confirm this before adding a parsing node on top of a fetch that silently failed."
     },
     {
-      "heading": "Add the Extract From File node",
-      "body": "Extract From File is the node built specifically to turn binary file content into structured data — it isn't limited to JSON, but JSON is one of its explicit operation modes, alongside CSV, XML, and a handful of other formats. Place it right after whatever node produced your binary data, since it needs that binary property as its input."
+      "heading": "Add the Extract From File node and set it to JSON",
+      "body": "Extract From File is the node built to turn binary content into structured data. It is not limited to JSON: the Operations dropdown also covers CSV, HTML, PDF, XLSX, XLS, ODS, RTF, ICS and plain text, plus a mode that just base64-encodes the file. Place it right after whatever node produced your binary data, then set Operation to Extract From JSON."
     },
     {
-      "heading": "Set the operation and point it at the right property",
-      "body": "Inside Extract From File, set the operation to the JSON option, then double-check the Binary Property field matches whatever your file actually landed under — this is the single most common misconfiguration, since a mismatched property name produces an error that looks like a parsing failure but is really just the node looking in the wrong place. Once that's aligned, the node reads the raw bytes and outputs them as a normal n8n JSON item, with the original file structure now available as regular fields rather than an opaque binary blob."
+      "heading": "Point the Input Binary Field and Destination Output Field at the right names",
+      "body": "Two fields matter here. Input Binary Field must match the binary property name you confirmed in step two, data by default, but not if an upstream node renamed it. Destination Output Field decides where the parsed JSON lands in the output item: whatever name you type there is the key everything downstream needs to read from. It is easy to assume the parsed fields appear as ordinary top-level output the way most nodes produce them. Here they are nested one level down, under that field name."
     },
     {
-      "heading": "Review the parsed output",
-      "body": "After running the node, check its output panel — a successfully parsed JSON file appears as structured keys and values just like the output of any other node, which means you can click into individual fields the same way you would with data from an API call. If the source file was an array of objects, expect one n8n item per array entry rather than a single item containing the whole array, since that's how n8n typically expands list-shaped JSON."
-    },
-    {
-      "heading": "Handle a file that won't parse",
-      "body": "If Extract From File throws an error, the two most likely causes are a wrong binary property reference or a file that isn't actually valid JSON despite the extension — a truncated download or a file that's secretly HTML (like an error page returned instead of the real file) will both fail here. Open the raw binary preview if you're unsure, or add a temporary node before Extract From File to inspect exactly what bytes arrived, rather than assuming the parser itself is broken."
+      "heading": "Review the output and split arrays if you need one item per record",
+      "body": "Run the node and check its output panel. A single JSON object appears with its keys under the Destination Output Field you set. If the source file was an array, the whole array lands as one n8n item. It does not automatically expand into one item per entry, which surprises people used to nodes that pull list-shaped data from an API. Add a Split Out node afterward, pointed at that array field, if your workflow needs one item per element."
     },
     {
       "heading": "Pass the parsed data downstream",
-      "body": "Once the output looks right, connect Extract From File to whatever comes next — a database node to store it, an IF or Switch node to route based on its contents, or another API call built from its fields. From this point on, the data behaves like any other n8n item, so nothing about the rest of the workflow needs to know it originally came from a JSON file rather than a live API response."
+      "body": "Once the shape looks right, connect Extract From File, or Split Out if you added one, to whatever comes next: a database node to store it, an IF or Switch node to route on its contents, or another API call built from its fields. From here the data behaves like output from any other node."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Other formats the same node handles",
+      "columns": ["Operation", "Typical source"],
+      "rows": [
+        ["Extract From CSV", "Spreadsheet exports, tabular reports"],
+        ["Extract From JSON", "APIs, config files, structured exports"],
+        ["Extract From XLSX / XLS", "Excel workbooks"],
+        ["Extract From PDF", "The text layer of a PDF document"],
+        ["Extract From HTML", "Saved web pages"],
+        ["Move File to Base64 String", "Any file you need to pass on as raw text"]
+      ],
+      "note": "All eleven operations live in the same node; you only switch the Operation dropdown."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Extract From File errors with something like \"input is not valid JSON\", even though the file extension is .json",
+      "cause": "The file is JSON Lines (one JSON object per line) or several JSON arrays concatenated together instead of one valid JSON structure. The Extract From JSON operation parses a single structure, and n8n does not read JSONL natively.",
+      "fix": "Reformat the file before parsing, for example with a Code node that wraps the lines into a single array, or split it at the source if you control how it is generated."
+    },
+    {
+      "problem": "The node runs with no error, but downstream fields show as undefined",
+      "cause": "Destination Output Field nested the parsed data under a field name your later expressions never reference.",
+      "fix": "Check the output panel for the exact field name, then read downstream from that path, for example {{$json[\"parsedData\"].someKey}}."
+    },
+    {
+      "problem": "Only one item appears downstream instead of one per record",
+      "cause": "A parsed JSON array lands as a single n8n item by default. Extract From File does not expand it on its own.",
+      "fix": "Add a Split Out node after it, pointed at the array field, to turn it into one item per element."
+    },
+    {
+      "problem": "Input Binary Field errors that the property doesn't exist",
+      "cause": "The name typed there doesn't match what the upstream node used. HTTP Request and other nodes let you rename the binary property away from the data default.",
+      "fix": "Open the upstream node's Binary tab and copy the exact property name into Input Binary Field."
     }
   ],
   "faq": [
-    { "question": "What node parses a JSON file in n8n?", "answer": "The Extract From File node, set to its JSON operation, converts raw binary JSON data into structured n8n items." },
+    { "question": "What node parses a JSON file in n8n?", "answer": "The Extract From File node, set to its Extract From JSON operation, converts raw binary JSON data into structured n8n output." },
     { "question": "How do I get a JSON file into my n8n workflow in the first place?", "answer": "Fetch it with an HTTP Request node if it's hosted online, read it with a Read/Write File node if it's on local disk, or take it directly from an upload's binary property." },
-    { "question": "Why does Extract From File fail even though my file is valid JSON?", "answer": "Almost always a mismatched Binary Property field — the node is looking for the file under a property name that doesn't match where it actually landed." },
-    { "question": "Does a JSON array turn into one item or several in n8n?", "answer": "n8n typically expands a top-level array into one item per entry, so plan downstream nodes around processing multiple items rather than a single big object." },
-    { "question": "Can I use the parsed JSON data in later nodes?", "answer": "Yes. Once extracted, the data behaves like output from any other node and can be routed to database, logic, or further API nodes." }
+    { "question": "Why does Extract From File say a file isn't valid JSON when it clearly is?", "answer": "It's usually JSON Lines, or several JSON objects concatenated without an enclosing array. n8n's JSON operation expects one valid structure, not newline-delimited JSON." },
+    { "question": "Does a JSON array turn into one item or several in n8n?", "answer": "One item. The array lands nested under whatever field name you set in Destination Output Field. Add a Split Out node if you want one n8n item per array entry." },
+    { "question": "Where does the parsed data end up in the output?", "answer": "Under the field name you enter in Destination Output Field, not spread across the top level automatically the way some other nodes work. Reference that field name in downstream expressions." }
   ],
+  "references": [
+    { "label": "n8n docs: Extract From File node (official)", "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.extractfromfile/" },
+    { "label": "n8n docs: Split Out node (official)", "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.splitout/" },
+    { "label": "n8n community: Extract from JSON file thread", "url": "https://community.n8n.io/t/extract-from-json-file/42647" }
+  ],
+  "verifiedNote": "Step order and the general shape of the workflow come from the original walkthrough. Field names and node behaviour were re-checked against n8n's official Extract From File and Split Out documentation, plus a community thread, in September 2026. That check corrected two claims in the earlier version: the binary field is called Input Binary Field, not \"Binary Property\", and a parsed JSON array lands as a single n8n item instead of expanding into one item per array entry automatically. Reaching that requires a separate Split Out node.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

@@ -1,43 +1,67 @@
 {
   "slug": "how-to-verify-domains-in-brevo-easily-2026",
   "seoTitle": "How to Verify Your Domain in Brevo",
-  "metaDescription": "Authenticate your sending domain in Brevo with DKIM and a Brevo verification TXT record to protect deliverability and meet Gmail, Yahoo, and Microsoft rules.",
-  "intro": "Domain authentication is no longer optional for email marketing — Gmail, Yahoo, and Microsoft all filter or flag mail from unverified domains, and Brevo builds the whole process around adding a small set of DNS records to prove you own the domain you're sending from. The setting lives inside general account settings rather than anywhere marketing-related, and the records themselves (a Brevo ownership code plus a DKIM key) are specific enough that a typo breaks verification silently. This guide covers where to find the setting and what the underlying records actually look like, based on Brevo's own settings panel and developer documentation.",
+  "metaDescription": "Authenticate your sending domain in Brevo with a Brevo code and DKIM, understand the CNAME vs TXT record options, and meet Gmail, Yahoo, and Microsoft's rules.",
+  "intro": "Domain authentication is no longer optional for email marketing. Gmail, Yahoo, and Microsoft all filter or flag mail from unverified domains, and Brevo builds the whole process around adding a small set of DNS records to prove you own the domain you're sending from. The setting lives in general account settings, not anywhere marketing-related, and the records themselves are specific enough that a typo or the wrong record type breaks verification without an obvious error message. This guide covers where to find the setting and what the underlying DNS records look like, based on Brevo's own help documentation.",
+  "prerequisites": [
+    "Access to your domain's DNS zone editor, through your registrar or whichever service hosts your DNS"
+  ],
   "steps": [
     {
       "heading": "Find domains under account settings",
-      "body": "Domain verification isn't under Campaigns or Contacts — it's filed under Settings, in the Organization settings block alongside Users, SMTP & API, and Security. Brevo's settings sidebar groups it as \"Senders, domains, IPs,\" which is easy to scroll past if you're expecting it under a marketing-labeled menu. Click into that section to reach the Domains tab where you'll add and manage your sending domains.",
+      "body": "Domain verification isn't under Campaigns or Contacts. It's filed under Settings, in the Organization settings block alongside Users, SMTP & API, and Security. Brevo's settings sidebar groups it as \"Senders, domains, IPs,\" easy to scroll past if you're expecting it under a marketing-labeled menu. Click into that section to reach the Domains tab, where you add and manage your sending domains.",
       "image": { "file": "/screenshots/Pf2DPxXN2Ok/03.webp", "caption": "The Brevo settings sidebar. Senders, domains, IPs sits in Organization settings, separate from personal profile options like Language and Individual email." }
     },
     {
       "heading": "Add your domain",
-      "body": "In the Domains tab, click Add a domain and enter your root domain — just the domain itself, like yourcompany.com, with no https:// prefix and no trailing path. Save it to move into the verification options."
+      "body": "In the Domains tab, click Add a domain and enter your root domain, just the domain itself, like yourcompany.com, with no https:// prefix and no trailing path. Save it to move into the verification options."
     },
     {
       "heading": "Pick automatic or manual authentication",
-      "body": "Brevo offers two routes. Automatic Verification signs you into your domain registrar directly and lets Brevo inject the required DNS entries for you, which is faster if your registrar supports the integration. Authenticate the domain yourself instead generates the specific record values so you can add them manually through your host's DNS zone editor — useful if your registrar isn't one of the supported automatic partners, or if DNS is managed by someone else on your team."
+      "body": "Brevo offers two routes. Automatic authentication signs into your domain registrar directly and lets Brevo add the required DNS entries for you, faster if your registrar is one of the supported partners. The manual route generates the record values so you can add them yourself through your host's DNS zone editor, useful if your registrar isn't supported for automatic setup, or if DNS is managed by someone else on your team."
     },
     {
-      "heading": "Understand what the DNS records actually contain",
-      "body": "Brevo's developer documentation shows exactly what a domain's configuration looks like once records are in place: a dkim_record entry with type TXT, a value string starting with a public key format like k=rsa;p=..., and a host name of mail._domainkey — plus a separate brevo_code entry, also a TXT record, that proves ownership of the domain to Brevo specifically. Both records report a verified and authenticated status of true or false, which is what the dashboard is checking each time you refresh the domain's status.",
-      "image": { "file": "/screenshots/Pf2DPxXN2Ok/05.webp", "caption": "Brevo's developer documentation showing a sample domain configuration response, with the DKIM record and Brevo ownership code both returned as TXT record values." }
+      "heading": "Know what the DNS records are",
+      "body": "Two records matter here: a Brevo code that proves ownership, and a DKIM record that lets receiving mail servers confirm your messages weren't altered in transit. The Brevo code is always a single TXT record. DKIM is where accounts differ: Brevo's current default sets up two CNAME records, typically named mail._domainkey and mail2._domainkey, that point at Brevo's own signing infrastructure and rotate their keys automatically without you touching DNS again. Some accounts instead show a single TXT record for DKIM, an older format using a fixed key (1024-bit by default, with 2048-bit available on request) that doesn't rotate on its own. Which one you see depends on how the domain was set up; the important part is matching the record type Brevo displays exactly. Entering a CNAME's target value into a TXT record, or the reverse, is the most common way this step goes wrong.",
+      "image": { "file": "/screenshots/Pf2DPxXN2Ok/05.webp", "caption": "Brevo's domain configuration view, listing the DNS records Brevo expects to find and their current verification status." }
     },
     {
-      "heading": "Add the TXT records at your DNS host",
-      "body": "If you went the manual route, log into whatever service manages your DNS — your registrar or a separate host — and open the zone editor. Create two new TXT records using the exact host names and values Brevo displayed (mail._domainkey for the DKIM record and the host name shown for the Brevo code record). A single missing character in the value string is enough to fail verification, so copy rather than retype where possible."
+      "heading": "Add the DNS records at your DNS host",
+      "body": "If you went the manual route, log into whatever service manages your DNS, your registrar or a separate host, and open the zone editor. Create each record using the exact type, host name, and value Brevo displayed, TXT or CNAME as shown, not assumed. Copy the values instead of retyping them; a single missing character is enough to fail verification."
     },
     {
       "heading": "Confirm the domain shows as verified",
-      "body": "DNS changes don't apply instantly — propagation can take anywhere from a few minutes to around 48 hours depending on your host and existing record TTLs. Return to the Domains tab in Brevo periodically and refresh; once both records resolve correctly, the domain's status updates and it becomes available to select as a sender for your campaigns."
+      "body": "DNS changes don't apply instantly. Propagation can take anywhere from a few minutes to around 48 hours, depending on your host and existing record TTLs. Return to the Domains tab periodically and use Brevo's check configuration option to refresh the status; once every record resolves correctly, the domain becomes available to select as a sender for your campaigns."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The domain stays stuck on unverified well past a day",
+      "cause": "Either DNS propagation is still working through (up to 48 hours is normal), or a record was added as the wrong type, a CNAME value pasted into a TXT record, or vice versa.",
+      "fix": "Wait out the propagation window first. If it's still failing after that, reopen the Domains tab, compare each record's type and value character for character against what Brevo shows, and correct any mismatch."
+    },
+    {
+      "problem": "Brevo won't let a domain be added at all",
+      "cause": "Brevo only authenticates domains you control. Free consumer email domains like gmail.com or yahoo.com can't be authenticated by anyone.",
+      "fix": "Use your own custom domain, not a free email provider's domain, as the sending domain."
+    },
+    {
+      "problem": "DKIM shows as a single TXT record instead of the two CNAME records described in setup guides",
+      "cause": "The domain is using Brevo's older TXT-based DKIM format, not the current CNAME rotation setup, usually because it was authenticated some time ago.",
+      "fix": "The TXT format still works and doesn't need to be changed. If automatic key rotation matters, re-authenticate the domain to pick up the current CNAME-based setup."
     }
   ],
   "faq": [
-    { "question": "Where do I go in Brevo to verify a domain?", "answer": "Settings → Senders, domains, IPs → Domains tab. It's grouped under Organization settings, not under Campaigns or Marketing." },
-    { "question": "What DNS records does domain verification require?", "answer": "A DKIM TXT record (host name mail._domainkey) and a separate Brevo ownership code TXT record. Brevo's API returns both with a verified/authenticated true-or-false status." },
-    { "question": "What's the difference between automatic and manual verification?", "answer": "Automatic Verification signs into your domain registrar and adds the records for you. Manual verification generates the record values for you to copy into your DNS host's zone editor yourself." },
-    { "question": "How long does DNS verification take?", "answer": "It depends on your host's propagation time and existing record TTLs — anywhere from a few minutes up to roughly 48 hours." },
+    { "question": "Where do I go in Brevo to verify a domain?", "answer": "Settings, then Senders, domains, IPs, then the Domains tab. It's grouped under Organization settings, not under Campaigns or Marketing." },
+    { "question": "What DNS records does domain verification require?", "answer": "A Brevo ownership code, always a TXT record, and a DKIM record. DKIM is usually two CNAME records (mail._domainkey and mail2._domainkey) on current accounts, though some older accounts still use a single TXT record instead. Match whichever type Brevo displays for your domain." },
+    { "question": "What's the difference between automatic and manual verification?", "answer": "Automatic authentication signs into your domain registrar and adds the records for you. Manual verification generates the record values for you to copy into your DNS host's zone editor yourself." },
+    { "question": "How long does DNS verification take?", "answer": "It depends on your host's propagation time and existing record TTLs, anywhere from a few minutes up to roughly 48 hours." },
     { "question": "What happens if I don't verify my domain?", "answer": "Mail from unverified domains is more likely to be filtered, bounced, or marked as spam by Gmail, Yahoo, and Microsoft, all of which now expect authenticated senders." }
   ],
+  "references": [
+    { "label": "Brevo Help Center: Authenticate your domain with Brevo (Brevo code, DKIM, DMARC) (official)", "url": "https://help.brevo.com/hc/en-us/articles/12163873383186-Authenticate-your-domain-with-Brevo-Brevo-code-DKIM-DMARC" }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough of Brevo's settings panel. The DNS record description was re-checked against Brevo's own Help Center in September 2026, which corrected a real error: the article previously described DKIM as always a single TXT record. Brevo's current default is two CNAME records that rotate keys automatically, with a single TXT record only on the older format some existing accounts still carry. The article now covers both and flags matching the record type as the step most likely to trip people up.",
   "generatedAt": "2026-07-31T09:10:00Z",
   "deep": true
 }

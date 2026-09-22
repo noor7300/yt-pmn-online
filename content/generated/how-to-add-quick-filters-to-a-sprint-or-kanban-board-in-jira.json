@@ -1,62 +1,79 @@
 {
   "slug": "how-to-add-quick-filters-to-a-sprint-or-kanban-board-in-jira",
   "seoTitle": "How to Add Quick Filters to a Jira Board",
-  "metaDescription": "Add quick filters to a Jira Scrum or Kanban board from Board settings, using a name and a JQL query to build one-click toggles for your team.",
-  "intro": "Once a board fills up with more than a handful of cards, scanning it for just your own tickets or just the high-priority ones gets tedious fast. Quick filters solve this with one-click toggles sitting right above the board columns, each backed by a short JQL query that narrows what's visible. This guide walks through where that toolbar lives, how to reach the settings screen that manages it, and what the create-a-filter form actually asks for.",
+  "metaDescription": "Add quick filters to a Jira Scrum or Kanban board from board settings, using a name and a JQL query to build one-click toggles for your team.",
+  "intro": "Once a board fills up with more than a handful of cards, scanning it for just your own tickets or just the high-priority ones gets tedious fast. Quick filters fix this with one-click toggles sitting above the board columns, each backed by a short JQL query that narrows what's visible. This guide covers where that toolbar lives, the settings screen that manages it, and what the create-a-filter form asks for.",
+  "prerequisites": [
+    "Board admin, space admin, or Jira admin permissions on the board (quick filter creation is gated by permission)",
+    "Basic familiarity with JQL, or at least a willingness to copy the syntax of an existing filter"
+  ],
   "steps": [
     {
       "heading": "Notice where quick filters live on the board",
-      "body": "Open any board — a Kanban board like \"Marketing\" works the same way a Scrum board does here. Along the toolbar above the columns, next to Epic, Type, and Label dropdowns, there's a Quick filters control. This is the toggle bar your team will actually click day to day; everything else in this guide is about populating it with filters worth having.",
+      "body": "Open any board; a Kanban board like \"Marketing\" works the same way a Scrum board does here. Along the toolbar above the columns, next to the Epic, Type, and Label dropdowns, there's a Quick filters control. This is the toggle bar your team will click day to day. Everything else in this guide is about populating it with filters worth having.",
       "image": {
         "file": "/screenshots/r8jJvUdukUI/01.webp",
         "caption": "A board's toolbar, with Quick filters sitting alongside the Epic, Type, and Label dropdowns used to narrow the view."
       }
     },
     {
-      "heading": "Open Board settings",
-      "body": "From the board, open its settings — reachable from the board's menu — which takes you to a dedicated settings screen for that specific board, not the whole space. The left-hand panel here lists Details, Working Days, Timeline, and a Layout section that expands into Columns, Swimlanes, Card colors, Card layout, and Quick filters. Click Quick filters."
-    },
-    {
-      "heading": "Find the Quick filters settings page",
-      "body": "This settings page is scoped to one board at a time — in this case, a board called \"TS board\" inside the TEST SPACE. That scoping matters: quick filters you build here apply to this board specifically, not every board across the space, so if your team works from multiple boards you'll set this up separately on each one.",
+      "heading": "Open board settings and go to Quick Filters",
+      "body": "From the board, open the ••• menu and choose Configure board (some Jira sites label this Board settings in the newer navigation; either takes you to the same screen). This settings page is scoped to one board at a time, in this case a board called \"TS board\" inside the TEST SPACE, so quick filters you build here only apply to this board. Atlassian's own documentation lists Quick Filters as its own tab in the left-hand panel alongside Columns, Swimlanes, Card colors, and Card layout, not tucked inside a combined Layout section as older write-ups describe. Click Quick Filters to open it.",
       "image": {
         "file": "/screenshots/r8jJvUdukUI/04.webp",
-        "caption": "The Quick filters entry inside a board's Layout settings, the destination for managing every filter available on that board."
+        "caption": "The Quick filters entry in a board's settings, listed alongside Columns and Swimlanes and not nested under a separate Layout tab."
       }
     },
     {
       "heading": "Click Create quick filter",
-      "body": "The Quick filters page lists any filters that already exist for the board — by default you'll typically see starter filters like \"Recently Updated\" and \"Assigned to me\" already in place. Click Create quick filter in the top right to open the creation form and add your own."
+      "body": "The Quick filters page lists any filters that already exist for the board. New boards ship with two by default: Atlassian's documentation names them \"Only My Work items\" and \"Recently Updated,\" though older boards or different templates may show similarly named starter filters. Click Create quick filter in the top right to open the creation form and add your own."
     },
     {
       "heading": "Fill in the name, JQL query, and description",
-      "body": "The Create quick filter form asks for three things: a required Name (what shows on the toggle itself, so keep it short — \"My Bugs,\" not \"Bugs Currently Assigned to Me\"), a required JQL query that defines the actual filter logic, and an optional Description for context. The existing \"Assigned to me\" filter, for reference, is built on a query checking that the issue is assigned to the current user, and \"Recently Updated\" checks for items updated within the last day — both useful patterns to copy if you're unsure how to phrase your own.",
+      "body": "The Create quick filter form asks for three things: a required Name (what shows on the toggle itself, so keep it short, \"My Bugs\" rather than \"Bugs Currently Assigned to Me\"), a required JQL query that defines the filter logic, and an optional Description for context. The board's default filters are useful patterns to copy if you're unsure how to phrase your own: \"Only My Work items\" checks that the issue is assigned to the current user, and \"Recently Updated\" checks for items updated within the last day.",
       "image": {
         "file": "/screenshots/r8jJvUdukUI/05.webp",
-        "caption": "The Create quick filter dialog, requiring a name and a JQL query, with existing filters like Assigned to me listed for reference."
+        "caption": "The Create quick filter dialog, requiring a name and a JQL query, with existing filters listed for reference."
       }
     },
     {
-      "heading": "Write JQL for the slice of work you actually need",
-      "body": "For a priority filter, something like priority = High narrows the board to urgent items. For an issue-type filter, type = Bug isolates defects from stories and tasks. You can combine conditions with AND if a single toggle needs to represent more than one rule — just keep in mind that more conditions make the filter's name and purpose harder to guess at a glance, so favor a few well-named filters over one that tries to do everything."
+      "heading": "Write JQL for the slice of work you need",
+      "body": "For a priority filter, something like priority = High narrows the board to urgent items. For an issue-type filter, type = Bug isolates defects from stories and tasks. You can combine conditions with AND if a single toggle needs to represent more than one rule, though more conditions make the filter's name and purpose harder to guess at a glance. A few well-named filters generally work better than one that tries to do everything."
     },
     {
       "heading": "Save, then test it from the board",
-      "body": "Click Create to save the filter, then go back to the board and find it in the Quick filters toolbar. Click it and confirm the board actually narrows the way you expected — if it shows nothing or everything, the JQL syntax is the first place to check, since a small typo there is the most common reason a new filter doesn't behave."
+      "body": "Click Create to save the filter, then go back to the board and find it in the Quick filters toolbar. Click it and confirm the board narrows the way you expected."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no \"Configure board\" or \"Board settings\" option in the ••• menu",
+      "cause": "Creating or editing quick filters requires board admin, space admin, or Jira admin permissions. Without one of those, the menu option may be hidden or the settings page may open read-only.",
+      "fix": "Ask a project or board admin to either grant you board admin rights or add the filter for you."
+    },
+    {
+      "problem": "A new quick filter shows nothing, or shows everything, when toggled on",
+      "cause": "A syntax error in the JQL query is the most common reason. A missing quote, wrong field name, or mismatched operator will silently return an empty or unfiltered result instead of an error.",
+      "fix": "Re-open the filter from the Quick Filters settings page and check the query against a known-working one, like the board's default \"Only My Work items\" filter."
+    },
+    {
+      "problem": "A filter that works on one board isn't available on another",
+      "cause": "Quick filters are scoped to the individual board they were created on, not to the space or the underlying Jira project.",
+      "fix": "Recreate the filter on each board that needs it; there's no single place that pushes one filter to multiple boards."
     }
   ],
   "faq": [
     {
       "question": "Do I need to know JQL to create a quick filter?",
-      "answer": "Yes, quick filters are built on a JQL query, though simple ones — filtering by assignee, issue type, or priority — use fairly basic syntax you can copy from the board's existing default filters."
+      "answer": "Yes, quick filters are built on a JQL query, though simple ones (filtering by assignee, issue type, or priority) use basic syntax you can copy from the board's existing default filters."
     },
     {
       "question": "Can multiple quick filters be applied at once?",
-      "answer": "Yes, you can typically toggle on more than one quick filter at a time to narrow the board down further."
+      "answer": "Yes, you can toggle on more than one quick filter at a time to narrow the board down further."
     },
     {
-      "question": "Are quick filters visible to the whole team?",
-      "answer": "Quick filters are set at the board level inside Board settings, so anyone with access to that specific board can see and use them."
+      "question": "What are the default quick filters a new board comes with?",
+      "answer": "Atlassian's documentation names them \"Only My Work items,\" scoped to the current user, and \"Recently Updated,\" scoped to items changed in the last day. Both are visible from the Quick Filters settings page and can be edited or removed."
     },
     {
       "question": "Do quick filters apply to every board in a space?",
@@ -64,9 +81,16 @@
     },
     {
       "question": "Can I edit a quick filter after creating it?",
-      "answer": "Yes, go back into Board settings → Layout → Quick filters at any time to adjust the name, JQL query, or description, or remove it entirely."
+      "answer": "Yes. Go back into the board's Configure board (or Board settings) screen, open Quick Filters, and adjust the name, JQL query, or description, or remove it entirely."
     }
   ],
+  "references": [
+    {
+      "label": "Atlassian Support: Configure quick filters, Jira Cloud (official)",
+      "url": "https://support.atlassian.com/jira-software-cloud/docs/configure-quick-filters/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough of a Jira Cloud board. The settings-screen path, the tab layout, and the default filter names were re-checked against Atlassian's official Jira Cloud documentation in September 2026. That check corrected two things: Quick Filters is its own top-level tab in board settings, not nested under a combined Layout section, and the two filters a new board ships with are named \"Only My Work items\" and \"Recently Updated,\" not \"Assigned to me.\" The two settings-navigation steps were also merged into one, since they described the same click path twice.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

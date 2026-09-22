@@ -1,12 +1,12 @@
 {
   "slug": "how-to-create-project-schedule-in-smartsheet-easily-2026",
   "seoTitle": "Create a Project Schedule in Smartsheet with Gantt",
-  "metaDescription": "Build a project schedule in Smartsheet starting from the Project Schedule Management template, with task hierarchies, predecessors, and a live Gantt view.",
-  "intro": "A solid project schedule needs more than a list of dates, it needs a hierarchy of tasks and dependencies that adjust automatically when something shifts. This guide covers starting a new sheet from Smartsheet's home screen, using the built-in Project Schedule Management template instead of building columns from scratch, and then layering on the hierarchy, predecessors, and Gantt view that turn a flat task list into an actual schedule.",
+  "metaDescription": "Build a project schedule in Smartsheet from the Project Schedule Management template, with task hierarchies, predecessors, a live Gantt view, and the plan tier Dependencies requires.",
+  "intro": "A solid project schedule needs more than a list of dates. It needs a hierarchy of tasks and dependencies that adjust automatically when something shifts. This guide covers starting a new sheet from Smartsheet's home screen, using the built-in Project Schedule Management template instead of building columns from scratch, and layering on the hierarchy, predecessors, and Gantt view that turn a flat task list into an actual schedule.\n\nOne thing to know going in: the automatic date-shifting comes from a feature Smartsheet calls Dependencies, and it needs a paid plan plus Owner or Admin permission on the sheet to turn on.",
   "steps": [
     {
       "heading": "Start from your Smartsheet home screen",
-      "body": "Log in and land on the Recents tab, which lists the sheets, reports, and dashboards you've touched most recently along with their location in your workspace. If you're setting up a new project, this is also where the Create button in the top right lives, which is the fastest route into a fresh schedule rather than digging through folders for an old one.",
+      "body": "Log in and land on the Recents tab, which lists the sheets, reports, and dashboards you've touched most recently along with their location in your workspace. If you're setting up a new project, this is also where the Create button in the top right lives, the fastest route into a fresh schedule instead of digging through folders for an old one.",
       "image": {
         "file": "/screenshots/gIGpr2I6xLI/01.webp",
         "caption": "The Smartsheet Recents screen, listing recently viewed sheets and dashboards with the Create button in the top-right corner."
@@ -14,7 +14,7 @@
     },
     {
       "heading": "Open the Create menu",
-      "body": "Click Create and a dropdown opens with every item type you can start: Sheet, Report, Dashboard, Form, or Import, plus a Workspace option if you're organizing a brand-new project from the ground up. Each of the item types with an arrow expands into sub-options, including starting a sheet blank or from a template.",
+      "body": "Click Create and a dropdown opens with every item type you can start: Sheet, Report, Dashboard, Form, or Import, plus a Workspace option if you're organizing a brand-new project from the ground up. Each item type with an arrow expands into sub-options, including starting a sheet blank or from a template.",
       "image": {
         "file": "/screenshots/gIGpr2I6xLI/04.webp",
         "caption": "The Create dropdown, listing Sheet, Report, Dashboard, Form, and Import as the item types you can start from here."
@@ -22,7 +22,7 @@
     },
     {
       "heading": "Use the Project Schedule Management template",
-      "body": "Rather than building tracking columns by hand, look for the Project Schedule Management template in the gallery. Its description spells out exactly what it's built for: managing the work required to initiate, plan, and launch a project using predecessors, dependencies, and duration to monitor your schedule and visualize adjustments. It's marked Medium complexity, which is a fair warning that it comes with more moving parts than a blank sheet, but those parts are exactly what a real schedule needs. Click Create from template to generate your own copy.",
+      "body": "Instead of building tracking columns by hand, look for the Project Schedule Management template in the gallery. Its description spells out what it's built for: managing the work required to initiate, plan, and launch a project using predecessors, dependencies, and duration to monitor your schedule and visualize adjustments. It's marked Medium complexity, a fair warning that it comes with more moving parts than a blank sheet, but those parts are what a real schedule needs. Click Create from template to generate your own copy.",
       "image": {
         "file": "/screenshots/gIGpr2I6xLI/05.webp",
         "caption": "The Project Schedule Management template's preview page, describing its use of predecessors, dependencies, and duration to track a project."
@@ -33,26 +33,61 @@
       "body": "Once your sheet is created, list out your tasks in rows and use the indent and outdent controls in the toolbar to nest subtasks underneath their parent phase. A clean parent-child structure, like a Design Phase row with Wireframes and Mockups indented beneath it, is what lets Smartsheet later roll up progress and dates from individual tasks up to the phase and project level."
     },
     {
-      "heading": "Turn on the Dependencies Engine",
-      "body": "In your sheet's project settings, enable dependencies so that task timelines can shift automatically instead of requiring you to manually update every date when something slips. Once it's on, Smartsheet starts calculating the critical path, the chain of tasks that directly determines your project's overall finish date."
+      "heading": "Turn on Dependencies",
+      "body": "Smartsheet's automatic date-shifting lives behind a setting it calls Dependencies, not a separate engine you install. Right-click any column header (or use the settings icon in the top right of Gantt view) and choose Project Settings, then open Dependency Settings. Check Dependencies enabled, and pick which columns to use as your Predecessor and Duration columns; Smartsheet creates them for you if they don't already exist.\n\nTwo things matter before you flip this on. It's limited to the Smartsheet, Pro, Business, and Enterprise plans, and only a sheet's Owner or an Admin can turn it on. It also disables formulas in the Start Date, End Date, Duration, % Complete, and Predecessors columns, so decide upfront whether you need those cells calculated by dependencies or by your own formulas, since you can't have both at once."
     },
     {
       "heading": "Link tasks with the Predecessors column",
-      "body": "Enter predecessor row numbers in the Predecessors column to connect tasks that depend on one another, such as a Testing Phase that can't start until Development finishes. With dependencies enabled, moving the end date on Development automatically pushes Testing's start date to match, keeping downstream milestones honest without manual rework."
+      "body": "Enter predecessor row numbers in the Predecessors column to connect tasks that depend on one another, such as a Testing Phase that can't start until Development finishes. The default relationship is Finish-to-Start: a plain row number like 3 means start after row 3 finishes. Other relationship types and lag time are available for cases where two tasks should start together or overlap by a few days (see the table below). With Dependencies enabled, moving the end date on Development automatically pushes Testing's start date to match, keeping downstream milestones honest without manual rework."
     },
     {
       "heading": "Configure the Gantt Chart view",
-      "body": "Switch to Gantt Chart view to see your whole schedule laid out visually, with bars representing task durations and their dependency lines connecting related work. Add RYG (red, yellow, green) status balls to a column so overdue or at-risk tasks are visible at a glance, which is what turns this from a planning tool into something you can actually run status meetings off of."
+      "body": "Switch to Gantt Chart view to see your whole schedule laid out visually, with bars representing task durations and dependency lines connecting related work. Add RYG (red, yellow, green) status balls to a column so overdue or at-risk tasks are visible at a glance, which is what turns this from a planning tool into something you can run status meetings off of."
+    }
+  ],
+  "costNote": "Building the hierarchy and using the template itself work on Smartsheet's free tier. Turning on Dependencies, the setting behind automatic date-shifting and the critical path, needs a paid plan (Smartsheet, Pro, Business, or Enterprise) and Owner or Admin permission on that sheet.",
+  "tables": [
+    {
+      "title": "Predecessor relationship types",
+      "columns": ["Type", "Meaning", "Example"],
+      "rows": [
+        ["FS (Finish-to-Start)", "The dependent task starts only after the predecessor finishes. This is the default.", "3FS: starts after row 3 finishes"],
+        ["SS (Start-to-Start)", "The dependent task starts when the predecessor starts.", "3SS: starts when row 3 starts"],
+        ["FF (Finish-to-Finish)", "The dependent task finishes when the predecessor finishes.", "3FF: finishes when row 3 finishes"],
+        ["SF (Start-to-Finish)", "The dependent task finishes right before the predecessor starts. Rarely used.", "3SF: finishes when row 3 starts"]
+      ],
+      "note": "Add lag or lead time after the type, for example 3FS+2d starts two working days after row 3 finishes, and 3FS-1d starts one day early."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Formulas in the Start Date or Duration column stopped working",
+      "cause": "Turning on Dependencies disables formulas in the Start Date, End Date, Duration, % Complete, and Predecessors columns.",
+      "fix": "Move any custom calculation to a different column, since those five can't hold both a formula and dependency-driven values at the same time."
+    },
+    {
+      "problem": "The Dependencies setting isn't there, or is greyed out",
+      "cause": "Dependencies needs a Smartsheet, Pro, Business, or Enterprise plan, and only the sheet's Owner or an Admin can enable it.",
+      "fix": "Check your plan tier and permission level, or ask the sheet's owner to turn it on from Project Settings."
+    },
+    {
+      "problem": "Changing a predecessor task's date doesn't move the dependent task",
+      "cause": "The relationship type might not be the default Finish-to-Start, or the predecessor reference points at the wrong row.",
+      "fix": "Open Edit Predecessors on the cell and confirm the row number and relationship type (FS, SS, FF, or SF) match what you intended."
     }
   ],
   "faq": [
     {
       "question": "Does Smartsheet automatically shift dates when a task is delayed?",
-      "answer": "Yes, once the Dependencies Engine is enabled and tasks are linked through the Predecessors column, downstream dates adjust automatically."
+      "answer": "Yes, once Dependencies is enabled and tasks are linked through the Predecessors column, downstream dates adjust automatically."
     },
     {
       "question": "Do I have to build my schedule columns from scratch?",
       "answer": "No, the Project Schedule Management template comes pre-built with predecessor, dependency, and duration tracking, so you can start from that instead of a blank sheet."
+    },
+    {
+      "question": "What plan do I need to turn on Dependencies?",
+      "answer": "Smartsheet, Pro, Business, or Enterprise. It isn't available on the free tier, and only a sheet's Owner or an Admin can enable it, even on a paid plan."
     },
     {
       "question": "How do I organize tasks into project phases?",
@@ -60,13 +95,18 @@
     },
     {
       "question": "What are RYG status indicators?",
-      "answer": "They're red, yellow, green balls used as a visual status column to help you spot overdue or at-risk milestones at a glance in the Gantt view."
+      "answer": "Red, yellow, green balls used as a visual status column to help you spot overdue or at-risk milestones at a glance in the Gantt view."
     },
     {
-      "question": "Can I see my schedule as a Gantt chart?",
-      "answer": "Yes, the Gantt Chart view can be activated directly from your sheet to visualize the full timeline and its dependency lines."
+      "question": "What do I give up by turning Dependencies on?",
+      "answer": "Formulas in the Start Date, End Date, Duration, % Complete, and Predecessors columns. Once Dependencies is active, those five columns are calculated from duration and predecessor relationships instead, and can't also hold a custom formula."
     }
   ],
+  "references": [
+    { "label": "Smartsheet Help: Activate dependencies and use predecessors in grid and Gantt view", "url": "https://help.smartsheet.com/articles/765727-enabling-dependencies-using-predecessors" },
+    { "label": "Smartsheet Help: Track the critical path in a sheet", "url": "https://help.smartsheet.com/articles/1979152-tracking-a-project-s-critical-path" }
+  ],
+  "verifiedNote": "Screens and click path come from a walkthrough recorded in July 2025. The dependency-automation feature was re-checked against Smartsheet's own help center in September 2026: Smartsheet calls it Dependencies, not a \"Dependencies Engine.\" That check is what corrected the name and added the plan and permission gate, the formula restriction on five columns, and the predecessor relationship-type table, none of which the previous version mentioned.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

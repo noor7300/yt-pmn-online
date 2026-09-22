@@ -1,12 +1,12 @@
 {
   "slug": "how-to-create-multiple-correct-answer-questions-in-microsoft-forms-easily-2026",
   "seoTitle": "Multiple Correct Answers in Microsoft Forms Quizzes",
-  "metaDescription": "Learn how to let quiz-takers pick more than one correct choice in Microsoft Forms, assign points, and grade the combination automatically.",
-  "intro": "Single-choice questions fall short when a quiz needs more than one right answer, whether you're certifying technical skills or grading a compliance test. This guide shows how a plain Multiple Choice question in Microsoft Forms converts from radio buttons to checkboxes the moment you flip on Multiple Answers, and how the Select total options setting lets you control exactly how many boxes a respondent is allowed to check. It's grounded in the actual question-builder screens, not just the toggle names.",
+  "metaDescription": "How to let quiz-takers pick more than one correct choice in Microsoft Forms: turning on Multiple answers, capping selections with Select total options, and the all-or-nothing grading rule that catches people out.",
+  "intro": "Single-choice questions fall short when a quiz needs more than one right answer, whether you're certifying technical skills or grading a compliance test. This guide shows how a plain Multiple Choice question in Microsoft Forms converts from radio buttons to checkboxes the moment you turn on Multiple answers, and how the Select total options setting controls exactly how many boxes a respondent can check.\n\nIt also covers the part Microsoft doesn't put front and center: Forms grades a multi-answer question as all-or-nothing, so a respondent who misses one correct box gets zero, not partial credit.",
   "steps": [
     {
       "heading": "Start with a fresh Multiple Choice question",
-      "body": "Add a new question and choose the Multiple Choice type, and by default it behaves like a normal single-answer question — each option gets a round radio button, meaning only one can be selected at a time. Below the option list sit two toggles side by side, Multiple answers and Required, both switched off at this starting point. This is the state every question begins in, so the multi-answer behavior is something you turn on deliberately rather than something built in from the start.",
+      "body": "Add a new question and choose the Multiple Choice type. By default it behaves like a normal single-answer question: each option gets a round radio button, so only one can be selected at a time. Below the option list sit two toggles side by side, Multiple answers and Required, both off at this starting point. Every question begins in this state, so multi-answer behavior is something you turn on deliberately, not something built in from the start.",
       "image": {
         "file": "/screenshots/dH9z7EckEu8/03.webp",
         "caption": "A fresh Multiple Choice question with two blank options and the Multiple answers toggle still switched off."
@@ -14,11 +14,11 @@
     },
     {
       "heading": "Flip on Multiple answers",
-      "body": "Switch the Multiple answers toggle to on, and the option markers immediately change from round radio buttons to square checkboxes — the visible signal that respondents can now select more than one option instead of being locked to a single choice. This one toggle is the entire mechanism; there's no separate question type to hunt for."
+      "body": "Switch the Multiple answers toggle on, and the option markers change immediately from round radio buttons to square checkboxes, the visible signal that respondents can now select more than one option. This one toggle is the entire mechanism; there's no separate question type to hunt for."
     },
     {
       "heading": "Set how many options must be selected",
-      "body": "Once Multiple answers is on, a new control appears labeled Select total options, with a dropdown offering No limit, Equal to, and At most, paired with a number field. No limit lets a respondent check as many or as few boxes as they want; Equal to forces an exact count, useful for a question where you know precisely how many of the listed items are correct; and At most caps the number they're allowed to check without requiring they hit that number.",
+      "body": "Once Multiple answers is on, a new control appears labeled Select total options, with a dropdown offering No limit, Equal to, and At most, paired with a number field. No limit lets a respondent check as many or as few boxes as they want. Equal to forces an exact count, useful for a question where you know precisely how many of the listed items are correct. At most caps the number they're allowed to check without requiring they hit that number.",
       "image": {
         "file": "/screenshots/dH9z7EckEu8/04.webp",
         "caption": "The Select total options dropdown open, showing No limit, Equal to, and At most as the available constraints on a multi-answer question."
@@ -26,37 +26,49 @@
     },
     {
       "heading": "See the finished checkbox layout",
-      "body": "With Multiple answers on and the total-options rule set, the question settles into its final shape — every option, including any custom Other field you've added, now shows a checkbox instead of a radio button, and the Select total options row stays visible under the option list as a permanent part of the question rather than a one-time setup step you won't see again.",
+      "body": "With Multiple answers on and the total-options rule set, the question settles into its final shape. Every option, including any custom Other field you've added, now shows a checkbox instead of a radio button, and the Select total options row stays visible under the option list as a permanent part of the question, not a one-time setup step.",
       "image": {
         "file": "/screenshots/dH9z7EckEu8/05.webp",
         "caption": "The completed multi-answer question with checkboxes on every option and the total-options rule set to No limit."
       }
     },
     {
-      "heading": "Add this to a quiz for automatic grading",
-      "body": "The checkbox mechanics work in any form, but automated correct-answer grading and point values only exist inside the Quiz format. If you're building an assessment rather than a plain survey, make sure you started the project as a quiz, since that's what unlocks marking specific options as correct and assigning a point value once you've finished setting the multi-answer rule."
+      "heading": "Add this to a quiz, and know its grading rule",
+      "body": "The checkbox mechanics work in any form, but automated correct-answer grading and point values only exist inside the Quiz format. If you're building an assessment instead of a plain survey, start the project as a quiz, since that unlocks marking specific options as correct and assigning a point value once the multi-answer rule is set.\n\nThe grading itself is all-or-nothing per question. A respondent has to select every correct option and no incorrect ones to earn full points; missing one correct box, or checking a single wrong one, scores that question at zero. Microsoft Forms has no built-in partial-credit setting for multi-answer questions. If partial credit matters for a given question, the workaround is manual: reopen that response under grading and adjust the score by hand, or split the question into several single-answer questions that can each be graded and weighted separately."
     },
     {
       "heading": "Turn on Required for questions that can't be skipped",
-      "body": "The Required toggle sits right next to Multiple answers in the same row, and switching it on stops a respondent from submitting the form without answering that question. For a multi-select scoring question, this matters more than it might for open text — an empty answer under a loose grading setup can otherwise slip through and skew your results."
+      "body": "The Required toggle sits right next to Multiple answers in the same row, and switching it on stops a respondent from submitting the form without answering that question. For a multi-select scoring question, this matters more than it might for open text: an empty answer under a loose grading setup can otherwise slip through and skew your results."
     },
     {
       "heading": "Preview before you publish",
-      "body": "Run the Preview option before sharing the quiz with real respondents. It renders the question exactly as they'll see it, so you can click through the checkboxes yourself and confirm the total-options rule behaves the way you expect — for instance, that Equal to actually blocks submission until the right number of boxes are checked."
+      "body": "Run the Preview option before sharing the quiz with real respondents. It renders the question exactly as they'll see it, so you can click through the checkboxes yourself and confirm the total-options rule behaves as expected, for instance that Equal to blocks submission until the right number of boxes are checked."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A respondent who got most of a multi-answer question right still scored zero for it",
+      "cause": "Forms grades multi-answer questions as all-or-nothing. Selecting all but one correct option, or one extra wrong option, earns no points for that question.",
+      "fix": "Manually adjust that response's score from the grading view, or redesign the question as separate single-answer questions if partial credit needs to count."
+    },
+    {
+      "problem": "Scores don't change after editing the correct-answer key",
+      "cause": "Forms doesn't retroactively rescore responses that were already submitted and graded when the answer key changes.",
+      "fix": "Reopen and manually review already-graded responses after changing an answer key."
     }
   ],
   "faq": [
     {
       "question": "Do I need a quiz instead of a regular form?",
-      "answer": "Yes — automated correct-answer grading and point values only exist in the Quiz format. The multi-answer checkbox behavior itself works in any form, but scoring requires a quiz."
+      "answer": "Yes. Automated correct-answer grading and point values only exist in the Quiz format. The multi-answer checkbox behavior itself works in any form, but scoring requires a quiz."
     },
     {
-      "question": "What does the Select total options setting actually control?",
-      "answer": "It restricts how many checkboxes a respondent can select on a multi-answer question — choose No limit for any number, Equal to for an exact count, or At most for a maximum."
+      "question": "What does the Select total options setting control?",
+      "answer": "It restricts how many checkboxes a respondent can select on a multi-answer question: No limit for any number, Equal to for an exact count, or At most for a maximum."
     },
     {
-      "question": "Will Multiple Answers work on mobile devices?",
-      "answer": "Yes — the checkbox layout is responsive, so it's worth using Preview to confirm it displays and behaves correctly on both desktop and mobile before sharing the quiz."
+      "question": "Does a respondent get partial credit for selecting some but not all correct answers?",
+      "answer": "No. Microsoft Forms scores a multi-answer question as all-or-nothing: every correct box checked and no incorrect ones, or zero points for that question. The only workaround is adjusting an individual response's score by hand."
     },
     {
       "question": "Can I go back and edit correct answers after responses come in?",
@@ -65,8 +77,17 @@
     {
       "question": "How is a multi-answer question different from a regular Multiple Choice question?",
       "answer": "The option markers switch from round radio buttons to square checkboxes once you turn on Multiple answers, and a Select total options rule appears to control how many can be checked."
+    },
+    {
+      "question": "Can I assign a different point value to each option?",
+      "answer": "No. Points are set once for the whole question, in a single Points box, not per option. That's part of why the all-or-nothing grading rule exists: there's no per-answer weighting to fall back on."
     }
   ],
+  "references": [
+    { "label": "Microsoft Support: Create a quiz with Microsoft Forms", "url": "https://support.microsoft.com/en-us/forms/create-a-quiz-with-microsoft-forms" },
+    { "label": "Microsoft Q&A: Can multiple choice questions with multiple answers be set up with the correct number of marks?", "url": "https://learn.microsoft.com/en-us/answers/questions/5247046/can-multiple-choice-questions-with-multiple-answer" }
+  ],
+  "verifiedNote": "Screens and click path come from a walkthrough recorded in July 2025. Point assignment was re-checked against Microsoft's own quiz-creation support article in September 2026. That article doesn't document the all-or-nothing grading behavior for multi-answer questions, so it was confirmed instead against a consistent pattern reported across multiple threads on Microsoft's own Q&A forum. That's the main correction this pass adds: the previous version didn't mention that a multi-answer question scores zero unless every correct box, and no incorrect one, is checked.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

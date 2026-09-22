@@ -1,12 +1,12 @@
 {
   "slug": "how-to-connect-asana-to-notion-easily-2026",
   "seoTitle": "How to Connect Asana to Notion: Sync Tasks Easily",
-  "metaDescription": "Connect Asana to Notion by finding the Notion integration in Asana's app directory, authorizing the connection, and pulling live task data into Notion.",
-  "intro": "Keeping documentation in Notion while managing tasks in Asana usually means retyping the same information twice — a status update in one place that someone forgets to mirror in the other. Asana and Notion's native integration closes that gap by letting you connect the two accounts directly and pull live task data from an Asana project into a Notion page. This guide follows the actual connection flow starting from inside Asana, through its app directory, to the Notion authorization screen.",
+  "metaDescription": "Connect Asana to Notion, then paste a project link as a synced database. Covers the authorization step, the three paste options, and why the synced table is read-only.",
+  "intro": "Keeping documentation in Notion while managing tasks in Asana usually means retyping the same information twice, with a status update in one place that someone forgets to mirror in the other. The native integration closes that gap: connect the two accounts once, then paste an Asana project link into a Notion page to pull in a live view of its tasks. This guide follows the connection flow starting from inside Asana, through its app directory, to the Notion authorization screen, and covers a detail both apps' own help pages leave easy to miss: the resulting Notion table is read-only.",
   "steps": [
     {
       "heading": "Start from the Asana project you want to connect",
-      "body": "Open the Asana project that holds the tasks you want reflected in Notion — in this walkthrough, a \"Product Blog\" project with sections like Requests / New Idea, To Do, In Progress, and Completed. Note the project's structure before connecting anything: task names, assignees, due dates, and priority columns are exactly what will need to map cleanly into Notion once the two are linked, so it's worth having the List view open and organized first.",
+      "body": "Open the Asana project that holds the tasks you want reflected in Notion, in this walkthrough a \"Product Blog\" project with sections like Requests / New Idea, To Do, In Progress, and Completed. Note the project's structure before connecting anything. Task names, assignees, due dates, and priority columns are what will map into Notion once the two are linked, so have the List view open and organized first.",
       "image": {
         "file": "/screenshots/4mXwTOzBY9U/01.webp",
         "caption": "An Asana project in List view, showing task sections, assignees, due dates, and priority — the data that will carry over once Notion is connected."
@@ -14,7 +14,7 @@
     },
     {
       "heading": "Open Asana's Add apps directory",
-      "body": "From the project header, open the apps menu to bring up the Add apps modal. It's organized into categories down the left side — Featured apps, Communication, Reporting, File sharing, Marketing & Design, Product Management, Sales, Operations, Productivity, and Made by Developers — with a search bar at the top if you'd rather type the app name directly than browse. This is Asana's general integration marketplace, so alongside Notion you'll see reporting tools like Power BI and Tableau, and file-sharing apps like Dropbox and Google Drive, all installed and managed from this same panel.",
+      "body": "From the project header, open the apps menu to bring up the Add apps modal. It's organized into categories down the left side (Featured apps, Communication, Reporting, File sharing, Marketing & Design, Product Management, Sales, Operations, Productivity, and Made by Developers), with a search bar at the top if you'd rather type the app name than browse. This is Asana's general integration marketplace, so alongside Notion you'll see reporting tools like Power BI and Tableau and file-sharing apps like Dropbox and Google Drive, all installed and managed from the same panel. Notion's own help center describes the connection being installed from Notion's side instead, under Settings & Members → My Connected Apps, so either starting point gets you to the same result.",
       "image": {
         "file": "/screenshots/4mXwTOzBY9U/02.webp",
         "caption": "Asana's Add apps directory, browsable by category or searchable by name — Notion is added through this same integration marketplace."
@@ -22,7 +22,7 @@
     },
     {
       "heading": "Authorize the connection between the two accounts",
-      "body": "Selecting Notion from the directory (or adding it from Notion's own side, since the integration works from either app) opens an authorization screen titled \"Connect Notion to Asana,\" marked Step 1 of 2. A short line of fine print explains that connecting means agreeing to Asana's privacy policy and authorizing the Notion app to access your tasks, projects, and workspaces — read that line before clicking through, since it's granting real read access to your Asana data. The screen shows a brief \"Connecting...\" state while the two accounts establish the link.",
+      "body": "Selecting Notion from the directory opens an authorization screen titled \"Connect Notion to Asana,\" marked Step 1 of 2. A short line of fine print explains that connecting means agreeing to Asana's privacy policy and authorizing the Notion app to access your tasks, projects, and workspaces. Read that line before clicking through, since it grants read access to your Asana data. The screen shows a brief \"Connecting...\" state while the two accounts establish the link.",
       "image": {
         "file": "/screenshots/4mXwTOzBY9U/03.webp",
         "caption": "The authorization screen for linking the two accounts, confirming that Notion will gain access to your Asana tasks, projects, and workspaces."
@@ -30,39 +30,58 @@
     },
     {
       "heading": "Copy a project or task link from Asana",
-      "body": "Once the accounts are connected, go back to the Asana project or task you want in Notion and copy its share link from the browser address bar or the item's share menu. This link is what Notion uses to identify exactly which project or task to pull in — a task link brings in a single item, while a project link brings in the full list."
+      "body": "Once the accounts are connected, go back to the Asana project or task you want in Notion and copy its share link from the browser address bar or the item's share menu. This link is what Notion uses to identify which project or task to pull in: a task link brings in a single item, and a project link brings in the full list."
     },
     {
-      "heading": "Paste the link into Notion as a synced database",
-      "body": "In your Notion page, type a slash command or simply paste the Asana link directly. Notion recognizes the URL and offers a choice: embed it as a plain link, or convert it into a full synced database view that mirrors the Asana project's task list inside the page, with its own columns for the properties Asana tracks. Choosing the synced database option is what makes this more than a bookmark — the Notion view stays live rather than becoming a static snapshot taken at paste time."
+      "heading": "Paste the link into Notion and choose Paste as database",
+      "body": "In your Notion page, paste the Asana link directly. Notion recognizes the URL and offers a small menu of options, not just one: create a plain bookmark, Paste as preview for a rich card showing due date and assignee, or Paste as database for a full synced table that mirrors the project's task list with its own columns for each Asana property. Choosing the synced database option is what makes this more than a bookmark. Notion's help documentation is specific about one limitation worth knowing before you pick this option: the sync runs one direction only. Content updates automatically when something changes in Asana, but you cannot edit a task's due date, assignee, or status from inside the Notion table itself; that change has to happen back in Asana first."
     },
     {
-      "heading": "Adjust the view to match how your team works",
-      "body": "Once the synced database appears in Notion, you can switch its layout between List, Board, or Table view, the same way you would for any native Notion database, and adjust which Asana fields — assignee, due date, status — show as columns. This is where the connection actually earns its keep day to day: a project manager can review the same live task data as a Notion table without asking anyone to leave Asana or manually re-enter anything on either side."
+      "heading": "Adjust the view without expecting to edit the data",
+      "body": "Once the synced database appears in Notion, you can switch its layout between List, Board, or Table view, filter and sort it, and choose which Asana fields show as columns, the same as any native Notion database. What you can't do is type over a cell and have it stick: the underlying data stays locked to Asana. A project manager can read the same live task list as a Notion table without leaving Asana or re-entering anything, but changing a task still means opening it in Asana."
     }
   ],
   "faq": [
     {
-      "question": "Where do I connect Asana and Notion — from Asana or from Notion?",
-      "answer": "Either works. You can add the Notion app from Asana's Add apps directory, or add the Asana integration from within Notion; both paths lead to the same account authorization screen."
+      "question": "Where do I connect Asana and Notion, from Asana or from Notion?",
+      "answer": "Either works. You can add the Notion app from Asana's Add apps directory, or connect Asana from Notion's Settings & Members → My Connected Apps screen; both paths lead to the same account authorization."
     },
     {
       "question": "What does Notion gain access to when I authorize the connection?",
-      "answer": "The authorization screen states plainly that connecting grants the Notion app access to your Asana tasks, projects, and workspaces, so review that before confirming."
+      "answer": "The authorization screen states that connecting grants the Notion app access to your Asana tasks, projects, and workspaces, so review that line before confirming."
     },
     {
-      "question": "Can I bring in a whole project, not just one task?",
-      "answer": "Yes. Pasting a project link into Notion and choosing the synced database option pulls in the full task list from that project, not a single item."
+      "question": "Can I edit an Asana task from inside the synced Notion table?",
+      "answer": "No. Notion's synced databases only sync one direction, Asana to Notion. Changing a due date, assignee, or status has to happen in Asana; Notion will pick up the change on its next sync, not the other way around."
+    },
+    {
+      "question": "What's the difference between Paste as preview and Paste as database?",
+      "answer": "Paste as preview shows a single rich card for one task or project. Paste as database creates a full synced table covering every task in the project, with its own columns and filters inside Notion."
     },
     {
       "question": "Can I change how the synced tasks are displayed in Notion?",
-      "answer": "Yes. Once the synced database exists in your Notion page, you can switch between List, Board, or Table view and adjust which Asana properties appear as columns."
-    },
-    {
-      "question": "Is Notion the only place I'll see the connected apps directory?",
-      "answer": "No. Asana's own Add apps directory lists Notion alongside dozens of other integrations grouped by category — Reporting, File sharing, Communication, and more — all installed from the same panel."
+      "answer": "Yes. You can switch between List, Board, or Table view and choose which Asana properties appear as columns. Display and sorting are editable in Notion; the task data itself is not."
     }
   ],
+  "references": [
+    {
+      "label": "Notion Help: Use Asana link previews to keep your teams on the same page (official)",
+      "url": "https://www.notion.com/help/guides/use-asana-link-previews-to-keep-your-teams-on-the-same-page"
+    },
+    {
+      "label": "Notion Help: Synced databases (official)",
+      "url": "https://www.notion.com/help/synced-databases"
+    },
+    {
+      "label": "Notion Help: Import projects from Asana for a connected work experience (official)",
+      "url": "https://www.notion.com/help/guides/import-projects-asana-connected-work"
+    },
+    {
+      "label": "Asana: Notion integration overview (official)",
+      "url": "https://asana.com/apps/notion"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The paste options and sync direction were re-checked against Notion's official help center in September 2026, which corrected two things this guide previously got wrong: pasting an Asana link offers three choices, not two, and the resulting synced database can only be edited from Asana, not from Notion.",
   "generatedAt": "2026-07-24T12:32:33.000Z",
   "deep": true
 }

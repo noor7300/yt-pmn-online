@@ -1,60 +1,72 @@
 {
   "slug": "how-to-use-gmail-with-thunderbird-imap-setup-guide-easily-2026",
   "seoTitle": "How to Use Gmail With Thunderbird: IMAP Setup Guide",
-  "metaDescription": "Connect Gmail to Thunderbird using IMAP with this setup guide, covering server settings, syncing emails, and fixing common connection issues.",
-  "intro": "Thunderbird gives you a desktop email client with more control than Gmail's web interface — offline access, custom filters, and one inbox for multiple accounts — but it only works well once IMAP is configured correctly on both ends. Skip a setting on Gmail's side or mistype a server address in Thunderbird and you'll end up with a client that either won't connect, silently fails to sync, or shows duplicate folders that make the whole thing feel more broken than it actually is. This guide walks through the setup in the order that actually matters: enabling IMAP in Gmail first, then configuring Thunderbird to match, confirming everything is syncing the way it should, and fixing the handful of things most likely to go wrong along the way.",
+  "metaDescription": "Connect Gmail to Thunderbird using IMAP: enable IMAP in Gmail, add the account, sign in through Google, and fix the most common sync problems.",
+  "intro": "Thunderbird gives you a desktop email client with more control than Gmail's web interface: offline access, custom filters, and one inbox for multiple accounts. It only works well once IMAP is configured correctly on both ends. Skip a setting on Gmail's side or get the authentication step wrong in Thunderbird and you'll end up with a client that won't connect, silently fails to sync, or shows duplicate folders that make the whole thing feel more broken than it is. This guide covers the setup in the order that matters: enabling IMAP in Gmail first, adding the account in Thunderbird, signing in the way Google now requires, and fixing the things most likely to go wrong.",
+  "prerequisites": [
+    "A Gmail account you can sign into directly, since Thunderbird authenticates through a Google sign-in window, not a typed password"
+  ],
   "steps": [
     {
       "heading": "Turn on IMAP access in your Gmail settings",
-      "body": "Before Thunderbird can do anything, Gmail needs to allow IMAP connections at all. In Gmail, open Settings, go to the \"Forwarding and POP/IMAP\" tab, and make sure IMAP access is set to enabled — it's off by default on some accounts. This single toggle is the most common reason a Thunderbird connection fails outright, so confirm it before touching anything in Thunderbird itself. If you manage a Google Workspace account rather than a personal Gmail address, your organization's admin may also need to allow IMAP access at the domain level before the toggle in your own settings has any effect."
+      "body": "Before Thunderbird can do anything, Gmail needs to allow IMAP connections at all. In Gmail, open Settings, go to the Forwarding and POP/IMAP tab, and make sure IMAP access is enabled; it's off by default on some accounts. Confirm this before touching anything in Thunderbird, since it's the single most common reason a first connection attempt fails outright. If you manage a Google Workspace account instead of a personal Gmail address, your organization's admin may also need to allow IMAP access at the domain level before your own toggle has any effect."
     },
     {
       "heading": "Add your Gmail account to Thunderbird",
-      "body": "Open Thunderbird and use the built-in account setup wizard rather than manually entering server details on the first attempt. Enter your name, your full Gmail address, and your password, and let Thunderbird try to auto-detect the correct IMAP settings — it recognizes Gmail's servers in most cases and fills in the configuration for you, which avoids typos in the server address or port number. The wizard will present the detected settings for you to confirm before finishing; take a moment to read them rather than clicking through, since this is the easiest point to catch a wrong setting before it becomes a connection problem later."
+      "body": "Open Thunderbird and use the built-in account setup wizard instead of entering server details by hand on the first attempt. Enter your name, your full Gmail address, and let Thunderbird auto-detect the correct IMAP and SMTP settings; it recognizes Gmail's servers in most cases. If auto-detection doesn't complete, or you want to check its work, go to Account Settings > Server Settings and confirm the incoming server is imap.gmail.com on port 993 with SSL/TLS, and the outgoing server is smtp.gmail.com on port 587 with STARTTLS or port 465 with SSL/TLS. A mismatch between the port and the encryption setting is the most common cause of a connection that times out."
     },
     {
-      "heading": "Verify the IMAP server settings match Gmail's requirements",
-      "body": "If auto-detection doesn't complete or you need to check the settings manually, go to Account Settings > Server Settings in Thunderbird and confirm the incoming server is imap.gmail.com on port 993 with SSL/TLS connection security, and the outgoing (SMTP) server is smtp.gmail.com on port 465 or 587 depending on the encryption method selected. A mismatch on any one of these — wrong port, wrong encryption setting — is the second most common cause of a connection that times out or rejects your password. It's worth writing these values down somewhere before you start, since Thunderbird's error messages when one is wrong tend to be vague, more often reporting a generic connection failure than pointing at the specific field that's misconfigured."
-    },
-    {
-      "heading": "Sign in through Google's authentication flow, not a typed password",
-      "body": "When Thunderbird prompts for authentication, it typically opens a Google sign-in window rather than accepting your Gmail password directly inside the app, especially if you have two-factor authentication enabled. Complete that sign-in and grant Thunderbird the permissions it requests. If you've previously created an app-specific password for another mail client, that can also work here, but the Google sign-in flow is the more reliable path for most accounts. Keep in mind Google occasionally re-prompts for this authorization months later as a routine security check, which is worth remembering so it doesn't look like Thunderbird has suddenly broken when it's really just asking you to reauthorize."
+      "heading": "Authenticate through Google's sign-in window, not a typed password",
+      "body": "When Thunderbird asks you to sign in, it opens a Google sign-in window, not a password field inside Thunderbird itself. This isn't optional for most accounts: Google discontinued plain username-and-password sign-in for third-party mail apps in 2022, so typing your normal Gmail password when prompted will be rejected regardless of whether two-factor authentication is turned on. Complete the sign-in popup and grant Thunderbird the permissions it requests. An app password generated from your Google Account's security settings, which requires 2-Step Verification to be on, is the fallback for setups that need basic authentication instead. Google occasionally re-prompts for this authorization months later as a routine security check, which is worth remembering so it doesn't look like Thunderbird suddenly broke."
     },
     {
       "heading": "Let the initial sync finish before making changes",
-      "body": "Once connected, Thunderbird will start pulling down your existing Gmail folders, labels, and messages, and depending on how large your mailbox is, this first sync can take anywhere from a couple of minutes to over an hour. Avoid creating new folders or moving messages around in either Gmail or Thunderbird while this initial sync is running, since changes made mid-sync are more likely to cause duplicated or missing folders afterward."
+      "body": "Once connected, Thunderbird starts pulling down your existing Gmail folders, labels and messages. Depending on the size of your mailbox, this first sync can take anywhere from a couple of minutes to over an hour. Avoid creating folders or moving messages around in either Gmail or Thunderbird while it's running, since changes made mid-sync are more likely to cause duplicated or missing folders afterward."
     },
     {
       "heading": "Confirm labels and folders are mapping correctly",
-      "body": "Gmail's labels appear as folders in Thunderbird, including system ones like Sent, Drafts, and All Mail, so check that these are showing up where you'd expect rather than as duplicate or oddly nested folders. If a label isn't appearing, go back to Gmail's Settings under the Labels tab and make sure \"Show in IMAP\" is checked for that specific label — labels hidden from IMAP won't sync to Thunderbird at all."
+      "body": "Gmail's labels appear as folders in Thunderbird, including system ones like Sent, Drafts and All Mail, so check these are showing up where expected, not as duplicate or oddly nested folders. If a label isn't appearing, go back to Gmail's Settings, open the Labels tab, and make sure Show in IMAP is checked for that specific label. Labels hidden from IMAP won't sync to Thunderbird at all."
     },
     {
       "heading": "Troubleshoot a stalled or incomplete sync",
-      "body": "If syncing stalls partway through or new emails stop appearing, the fix is usually one of three things: re-checking that IMAP is still enabled in Gmail (it can get toggled off during a security review), re-authenticating through Google's sign-in if your session expired, or right-clicking the account in Thunderbird and choosing \"Subscribe\" to make sure all the folders you want are actually selected for syncing rather than hidden."
+      "body": "If syncing stalls partway through or new emails stop appearing, the fix is usually one of three things: recheck that IMAP is still enabled in Gmail, since it can get toggled off during a security review; re-authenticate through Google's sign-in if your session expired; or right-click the account in Thunderbird and choose Subscribe to confirm every folder you want is selected for syncing, not hidden."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Thunderbird rejects the password you type in, over and over",
+      "cause": "Google discontinued plain username-and-password sign-in for third-party mail apps in 2022. A typed Gmail password will not work here anymore, with or without two-factor authentication.",
+      "fix": "Let Thunderbird open the Google sign-in window and authenticate there, or generate an app password from your Google Account's security settings (requires 2-Step Verification) if your setup needs basic authentication."
+    },
+    {
+      "problem": "The connection times out, or Thunderbird reports a generic failure with no specific field flagged",
+      "cause": "A mismatched port and encryption pairing, most often SMTP set to SSL/TLS on port 587 instead of STARTTLS, or STARTTLS on port 465 instead of SSL/TLS.",
+      "fix": "In Account Settings > Server Settings, use imap.gmail.com on port 993 with SSL/TLS for incoming, and smtp.gmail.com on either port 587 with STARTTLS or port 465 with SSL/TLS for outgoing."
+    },
+    {
+      "problem": "A label from Gmail never shows up as a folder in Thunderbird",
+      "cause": "The label has Show in IMAP turned off in Gmail's own Labels settings.",
+      "fix": "In Gmail, go to Settings > Labels, enable Show in IMAP for that label, and let Thunderbird resync."
+    },
+    {
+      "problem": "Sync stalls or new mail stops arriving after working fine for a while",
+      "cause": "IMAP access got toggled off during a Google account security review, or the OAuth session simply expired.",
+      "fix": "Recheck Gmail's Forwarding and POP/IMAP tab, and re-authenticate the account in Thunderbird if it prompts you to."
     }
   ],
   "faq": [
-    {
-      "question": "Why use Thunderbird instead of Gmail's web interface?",
-      "answer": "Thunderbird offers a desktop email client with more control, offline access, custom filtering, and the ability to manage multiple accounts in one unified inbox."
-    },
-    {
-      "question": "Do I need to enable IMAP before connecting Thunderbird?",
-      "answer": "Yes. IMAP has to be turned on in Gmail's Forwarding and POP/IMAP settings before Thunderbird can connect — this is the most common reason a first setup attempt fails."
-    },
-    {
-      "question": "Can I manage multiple Gmail accounts in Thunderbird?",
-      "answer": "Yes. You can add each account through the same setup wizard, and Thunderbird will keep them separated with their own folder trees while showing everything in one window."
-    },
-    {
-      "question": "What should I do if my emails aren't syncing correctly?",
-      "answer": "Recheck that IMAP is still enabled in Gmail, confirm the server settings (imap.gmail.com, port 993, SSL/TLS) match, and check that the specific labels you need are set to \"Show in IMAP\" in Gmail's Labels settings."
-    },
-    {
-      "question": "Why is Thunderbird asking me to sign in through a Google window instead of typing my password?",
-      "answer": "Accounts with two-factor authentication enabled require Google's own sign-in flow rather than a typed password, which is Thunderbird's standard way of authenticating securely with Gmail."
-    }
+    { "question": "Why use Thunderbird instead of Gmail's web interface?", "answer": "Thunderbird offers a desktop email client with more control, offline access, custom filtering, and the ability to manage multiple accounts in one window." },
+    { "question": "Do I need to enable IMAP before connecting Thunderbird?", "answer": "Yes. IMAP has to be turned on in Gmail's Forwarding and POP/IMAP settings before Thunderbird can connect. This is the most common reason a first setup attempt fails." },
+    { "question": "Why is Thunderbird asking me to sign in through a Google window instead of letting me type my password?", "answer": "Google stopped accepting plain username-and-password logins from third-party mail apps in 2022. The Google sign-in window (OAuth) is now the standard way Thunderbird authenticates with Gmail, whether or not you have two-factor authentication on." },
+    { "question": "Can I still use an app password instead of the Google sign-in window?", "answer": "Yes, if you turn on 2-Step Verification and generate one from your Google Account's security settings. It's a fallback for setups that need basic authentication instead of the default path." },
+    { "question": "Can I manage multiple Gmail accounts in Thunderbird?", "answer": "Yes. Add each account through the same setup wizard, and Thunderbird keeps them in separate folder trees while showing everything in one window." },
+    { "question": "What should I do if my emails aren't syncing correctly?", "answer": "Recheck that IMAP is still enabled in Gmail, confirm the server settings match imap.gmail.com:993 and smtp.gmail.com:587 or 465, and check that the labels you need have Show in IMAP turned on." }
   ],
+  "references": [
+    { "label": "Google Account Help: Less secure apps & your Google Account (official)", "url": "https://support.google.com/accounts/answer/6010255?hl=en" },
+    { "label": "Google Mail Help: Check Gmail through other email platforms (official)", "url": "https://support.google.com/mail/answer/7126229?hl=en" }
+  ],
+  "verifiedNote": "Step order and screen descriptions come from the original walkthrough. The authentication step was re-checked against Google's official documentation on the 2022 retirement of password-only sign-in for third-party apps in September 2026. That check corrected the earlier version, which implied a typed Gmail password might still work for accounts without two-factor authentication; it doesn't, for any personal Gmail account, and the Google sign-in window (or an app password) is required.",
   "generatedAt": "2026-07-31T12:00:00Z",
   "deep": true
 }

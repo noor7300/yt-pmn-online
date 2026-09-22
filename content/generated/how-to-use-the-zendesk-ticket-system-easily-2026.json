@@ -1,45 +1,78 @@
 {
   "slug": "how-to-use-the-zendesk-ticket-system-easily-2026",
   "seoTitle": "How to Use the Zendesk Ticket System (2026 Guide)",
-  "metaDescription": "Learn the core Zendesk ticket workflow: filtering views, replying to customers, leaving internal notes, using macros, and closing out resolved tickets.",
-  "intro": "A support queue stops feeling chaotic the moment you understand the handful of screens Zendesk actually revolves around: the views list, the individual ticket, and the reply box that switches between talking to your team and talking to the customer. This guide walks through that core loop using the real 2026 agent workspace — filtering down to what needs attention, reading a customer's history before you respond, leaving a private note, and updating the ticket's status so your reporting stays accurate. None of it requires an app or a config change, just knowing where each control lives.",
+  "metaDescription": "Learn the core Zendesk ticket workflow: filtering views, replying to customers, leaving internal notes, using macros, and what each ticket status does.",
+  "intro": "A support queue stops feeling chaotic once you know the handful of screens Zendesk revolves around: the views list, the individual ticket, and the reply box that switches between talking to your team and talking to the customer. This guide walks through that core loop in the Agent Workspace, filtering down to what needs attention, reading a customer's history before you respond, leaving a private note, and updating the ticket's status correctly, since Zendesk's status system has a couple of behaviors that aren't obvious from the screen alone.",
   "steps": [
     {
       "heading": "Start from Your unsolved tickets view",
-      "body": "The left-hand Views panel is the front door to the whole queue, and \"Your unsolved tickets\" is the one you'll return to most — it lists only what's still assigned to you and open. Each row shows the ticket status, subject, requester, when it came in, and its priority, so you can triage without opening anything yet. Other views like Unassigned tickets and Recently updated tickets sit right below it for when you're covering overflow or checking on something you replied to earlier. Clicking a subject opens the full ticket in a new tab next to whatever else you already have open.",
+      "body": "The left-hand Views panel is the front door to the whole queue, and \"Your unsolved tickets\" is the one you'll return to most: it lists only what's still assigned to you and not yet solved. Each row shows the ticket status, subject, requester, when it came in, and its priority, so you can triage before opening anything. Unassigned tickets and Recently updated tickets sit right below it for when you're covering overflow or checking on something you replied to earlier. Clicking a subject opens the full ticket in a new tab next to whatever else you already have open.",
       "image": { "file": "/screenshots/p0fYP62LhhQ/02.webp", "caption": "The Your unsolved tickets view, listing open tickets by subject, requester, and priority before you open any of them." }
     },
     {
       "heading": "Open a ticket and check the requester panel",
-      "body": "Once you're inside a ticket, the layout splits into three columns: ticket properties on the left, the conversation thread in the middle, and the requester's profile on the right. That right-hand panel shows the customer's email, local time zone, and language, which matters if you're deciding how formal to be or whether they're likely awake. The center thread shows every message exchanged so far, tagged with who sent it and how long ago. Before typing a reply, skim this thread and the Interaction history box so you're not asking the customer to repeat something they already told you.",
+      "body": "Once you're inside a ticket, the layout splits into three columns: ticket properties on the left, the conversation thread in the middle, and the requester's profile on the right. That right-hand panel shows the customer's email, local time zone, and language, useful for deciding how formal to be or whether they're likely awake. The center thread shows every message exchanged so far, tagged with who sent it and when. Before typing a reply, skim this thread and the Interaction history box so you're not asking the customer to repeat something they already told you.",
       "image": { "file": "/screenshots/p0fYP62LhhQ/01.webp", "caption": "An open ticket with the requester, assignee, and follower fields on the left and the customer's profile details on the right." }
     },
     {
       "heading": "Set the requester and assignee fields",
-      "body": "The left column holds the ticket's core metadata, starting with Requester and Assignee. Requester is who the ticket is from; Assignee is which agent or team owns resolving it, and it defaults to whoever is logged in once you click \"take it.\" Below that, Followers lets you add other agents who should be kept in the loop without being responsible for the reply — Zendesk notes that follower names are never exposed to the customer in email. These fields look small, but they're what makes filtered views and reporting work later, so it's worth setting them correctly on every ticket rather than leaving them blank."
+      "body": "The left column holds the ticket's core metadata, starting with Requester and Assignee. Requester is who the ticket is from; Assignee is which agent owns resolving it, and it defaults to whoever is logged in once you click \"take it.\" Below that, Followers lets you add other agents who should stay in the loop without owning the reply. Zendesk's documentation confirms follower names and email addresses never appear in notifications sent to the customer or to CC'd end users, which is what makes Followers different from CC: a CC's address is visible in the thread, a Follower's isn't. These fields look small, but filtered views and reporting depend on them, so set them correctly on every ticket instead of leaving them blank."
     },
     {
       "heading": "Switch between public reply and internal notes",
-      "body": "The reply box at the bottom of the thread has a dropdown that toggles between Public reply and internal note. Public reply sends exactly what you type to the customer at the email address shown in their profile. Switching the same box to note mode keeps the text visible only to your team — useful for flagging something to a teammate or leaving context for whoever picks up the ticket next, like the \"Hello! Test\" note added to the customer notes field in this ticket. Get in the habit of checking which mode is active before you hit send, since the two look almost identical except for a color change around the box.",
+      "body": "The reply box at the bottom of the thread has a dropdown that toggles between Public reply and internal note. Public reply sends exactly what you type to the customer's email. Switching the same box to note mode keeps the text visible only to your team, useful for flagging something to a teammate or leaving context for whoever picks up the ticket next, like the \"Hello! Test\" note already saved to this ticket. Get in the habit of checking which mode is active before you hit send, since the two look almost identical except for a color change around the box.",
       "image": { "file": "/screenshots/p0fYP62LhhQ/05.webp", "caption": "The reply composer with a draft public reply typed in, and a team-only note already saved to the customer notes field on the right." }
     },
     {
       "heading": "Apply a macro for repeat questions",
-      "body": "For questions you answer often, the Apply macro dropdown at the bottom of the ticket properties panel saves real time. A macro is a saved bundle of actions — typically pre-written reply text, but it can also set tags, change priority, or update status — that runs the moment you select it. Instead of retyping a troubleshooting explanation for the tenth time that week, you pick the matching macro and it drops the text into the reply box ready to send, then you personalize a line or two before submitting."
+      "body": "For questions you answer often, the Apply macro dropdown at the bottom of the ticket properties panel saves real time. A macro is a saved bundle of actions, typically pre-written reply text, but it can also set tags, change priority, or update status, that runs the moment you select it. Instead of retyping a troubleshooting explanation for the tenth time that week, pick the matching macro and personalize a line or two before sending. One constraint worth knowing: Zendesk's own documentation notes a macro can only update a ticket field if that field is present on the ticket form, so a macro that seems to do nothing is often trying to set a field the form doesn't include."
     },
     {
       "heading": "Update the status and submit",
-      "body": "Every ticket carries a status — Open, Pending, Solved, or a couple of others depending on your setup — and the submit button at the bottom right always shows which one you're about to apply. Clicking the small arrow next to the button opens the full status list, where Pending is typically used while you're waiting on the customer to respond, as the tooltip in this workspace spells out directly. Once the issue is actually resolved, switch it to Solved and submit; that's what pulls the ticket out of your unsolved queue and into the reporting Explore uses to track resolution counts.",
+      "body": "Zendesk tickets move through five standard statuses: New (untouched), Open (an agent is on it), Pending (waiting on the requester; it flips back to Open automatically once they reply), On-hold (waiting on someone other than the requester, such as another team; the requester still sees it as Open), and Solved. A ticket only leaves your unsolved queue once it's set to Solved, not just replied to. From there, Zendesk closes it automatically through an automation, four days after Solved by default and never later than 28 days, and a Closed ticket can't be reopened by the customer. Click the small arrow next to the submit button to open the full status list, and pick the one that matches where the ticket stands.",
       "image": { "file": "/screenshots/p0fYP62LhhQ/04.webp", "caption": "The status dropdown open on a ticket, with Open, In Progress, Pending, and Solved listed and a tooltip explaining what Pending means." }
     }
   ],
-  "faq": [
-    { "question": "What's the difference between an internal note and a public reply?", "answer": "Internal notes are only visible to your team, while public replies are sent directly to the customer's email address shown in their profile." },
-    { "question": "Can I undo marking a ticket as solved?", "answer": "Yes, you can typically reopen a solved ticket by changing its status again, though your workflow may set a window before it fully closes for good." },
-    { "question": "How do macros save time on repeat questions?", "answer": "Macros let you apply a saved combination of text, tags, and status changes with a single click from the Apply macro dropdown instead of typing everything manually." },
-    { "question": "What happens if a ticket isn't assigned to anyone?", "answer": "Unassigned tickets sit in the Unassigned tickets view until an agent clicks \"take it,\" which is why checking that view regularly matters as much as your own queue." },
-    { "question": "Why does the requester panel show a time zone and language?", "answer": "It helps you judge when the customer is likely to see your reply and whether to adjust your tone, without having to ask them directly." }
+  "troubleshooting": [
+    {
+      "problem": "A macro is applied but nothing changes on the ticket",
+      "cause": "Zendesk only lets a macro update a field that's present on the ticket's form. If the macro is trying to set a field the current ticket form doesn't include, that part of the macro silently does nothing.",
+      "fix": "Check the macro's action list against the ticket form's fields, or ask an admin to add the missing field to the form."
+    },
+    {
+      "problem": "A note meant for the team went out to the customer",
+      "cause": "Public reply and internal note share the same box and look nearly identical except for a color change, so it's easy to type a note without switching the dropdown first.",
+      "fix": "Check the mode indicator before every send, and if it happens, follow up with the customer directly since a sent public reply can't be unsent."
+    },
+    {
+      "problem": "A ticket won't leave the unsolved queue even after replying",
+      "cause": "Replying doesn't change status by itself. The ticket stays unsolved until it's explicitly set to Solved, and even On-hold still counts as unsolved even though the customer sees it as Open.",
+      "fix": "Set the status to Solved once the issue is resolved, not just answered."
+    }
   ],
+  "faq": [
+    { "question": "What's the difference between an internal note and a public reply?", "answer": "Internal notes are visible only to your team; public replies go straight to the customer's email. The two share one composer, so check the mode before sending." },
+    { "question": "What happens after a ticket is marked Solved?", "answer": "It leaves your unsolved queue immediately, then Zendesk closes it automatically through an automation, four days later by default and no more than 28 days out. Once closed, the customer can no longer reopen it." },
+    { "question": "How do macros save time on repeat questions?", "answer": "Macros apply a saved combination of text, tags, and status changes with one click from the Apply macro dropdown, though any field the macro tries to set has to exist on the ticket's form for the change to apply." },
+    { "question": "What happens if a ticket isn't assigned to anyone?", "answer": "It sits in the Unassigned tickets view until an agent clicks \"take it,\" which is why checking that view regularly matters as much as your own queue." },
+    { "question": "Why does the requester panel show a time zone and language?", "answer": "It helps you judge when the customer is likely to see your reply and whether to adjust your tone, without asking them directly." },
+    { "question": "Can a customer see that a ticket is On-hold?", "answer": "No. On-hold is for when an agent is waiting on someone other than the requester, and the requester's own view still shows the ticket as Open." }
+  ],
+  "references": [
+    {
+      "label": "Zendesk Help: About the ticket lifecycle and ticket statuses (official)",
+      "url": "https://support.zendesk.com/hc/en-us/articles/8263915942938-About-the-ticket-lifecycle-and-ticket-statuses"
+    },
+    {
+      "label": "Zendesk Help: Understanding CCs and followers (official)",
+      "url": "https://support.zendesk.com/hc/en-us/articles/5179445630234-Understanding-CCs-and-followers"
+    },
+    {
+      "label": "Zendesk Help: Using macros to update tickets (official)",
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough of the Agent Workspace. Ticket statuses, the Followers/CC distinction, and macro field behavior were re-checked against Zendesk's official help center in September 2026. That check corrected a vague line about statuses (\"Open, Pending, Solved, or a couple of others\") into the actual five-status lifecycle plus automatic closing, and added the macro-field constraint and the On-hold-looks-like-Open behavior, neither of which was in the earlier version.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }
