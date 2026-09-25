@@ -1,68 +1,105 @@
 {
   "slug": "how-to-manually-set-existing-contacts-as-marketing-contacts-in-hubspot-easily-20",
   "seoTitle": "Set Existing Contacts as Marketing Contacts in HubSpot",
-  "metaDescription": "Learn how to reclassify existing HubSpot contacts as marketing contacts using bulk edit, and how to keep an eye on your monthly subscription limits.",
-  "intro": "HubSpot bills separately for non-marketing records and marketing-eligible contacts, so if you want to email a group that's already sitting in your CRM, you need to flip their status manually first. This guide walks through the actual navigation — from the home dashboard into CRM, then into the Contacts table — filtering to the right segment, selecting records, and running the bulk update that marks them as marketing contacts. It also covers why that confirmation step and the billing usage meter matter before you commit a large batch.",
+  "metaDescription": "Bulk-set existing HubSpot contacts as marketing contacts from Contacts or a segment, what the confirmation dialog asks for, and why reversing it doesn't take effect until your next update date.",
+  "intro": "In HubSpot, only marketing contacts can receive marketing email or join ad audiences, and those are the contacts you pay for. Sales one-to-one and transactional email still reach non-marketing contacts. If a group is already sitting in your CRM as non-marketing, you have to switch them over before you can email them.\n\nThe switch takes a minute: filter, tick, More, confirm. Reversing it is slower. Once a contact counts as marketing, it keeps counting until your account's next update date, and a tier upgrade it triggers stays until your subscription renews. So the real work in this guide is picking the right contacts before you click.",
+  "prerequisites": [
+    "A Marketing Hub Starter, Professional or Enterprise subscription with marketing contacts",
+    "Marketing contact access permissions on your HubSpot user"
+  ],
+  "costNote": "Marketing contacts count toward your contact tier the moment you set them. Go over your tier by even one contact and HubSpot upgrades you automatically, and you're billed at the higher tier until your next renewal date even if the count drops later. To stop that happening, set a maximum number of marketing contacts in your account; contacts beyond it are then left as non-marketing.",
   "steps": [
     {
-      "heading": "Start from your HubSpot home dashboard",
-      "body": "Logging into HubSpot lands you on a home screen greeting you by name, with today's meetings, an empty task list, and an activity feed prompting you to connect your calendar and inbox. The left-hand navigation here is the spine of the whole app — Home, CRM, Marketing, Content, Sales, Commerce, Service, Data Management, Automation, and Reporting all live in this same rail. Contacts isn't visible yet at this level; it's tucked one layer down inside CRM, which is worth knowing since it's easy to go hunting for it under Sales instead.",
+      "heading": "Open CRM from the left navigation",
+      "body": "After signing in you land on the home dashboard, with today's meetings, your tasks and an activity feed. The left rail holds Home, CRM, Marketing, Content, Sales, Commerce, Service, Data Management, Automation and Reporting.\n\nContacts lives under CRM. People often look for it under Sales or Marketing first.",
       "image": {
         "file": "/screenshots/YhwuFDbVph0/03.webp",
         "caption": "The HubSpot home dashboard, with the left navigation rail collapsed to its top-level sections before CRM is expanded."
       }
     },
     {
-      "heading": "Open CRM and go to Contacts",
-      "body": "Hovering the CRM item in the left rail expands a flyout with Contacts, Companies, Deals, Tickets, and Orders at the top, followed by Segments (Lists), Inbox, Calls, Meetings, Tasks, Playbooks, Message Templates, and Snippets further down. Contacts is the first item in that list and takes you to your full database in table form. If you only need a specific subset of contacts, Segments (Lists) right below it is where any saved views you've already built will be waiting.",
+      "heading": "Choose Contacts, or a segment you've already built",
+      "body": "Hover CRM and a flyout opens with Contacts, Companies, Deals, Tickets and Orders at the top, then Segments (Lists), Inbox, Calls, Meetings, Tasks, Playbooks, Message Templates and Snippets.\n\nPick Contacts to work from the full table. If the group you want is already a contact-based segment (say, a past event import), open Segments (Lists) and click that segment's name instead. The bulk action is the same on both screens.",
       "image": {
         "file": "/screenshots/YhwuFDbVph0/04.webp",
         "caption": "The CRM flyout menu from the home dashboard, with Contacts as the first option above Companies, Deals, and Segments (Lists)."
       }
     },
     {
-      "heading": "Filter to the segment you want to update",
-      "body": "On the Contacts screen, a row of tabs across the top separates saved views like All contacts, Newsletter subscribers, Unsubscribed, and All customers, and the table itself gives you filters for Contact owner, Create date, Last activity date, and Lead status, plus an Advanced filters option for anything more specific. If you're reclassifying a group tied to a past import or campaign, building a filter here first keeps you from scrolling through unrelated records. A small sample table might show just a couple of rows, like two test contacts with placeholder emails, but the same filtering and selection mechanics apply whether you're working with two records or two thousand.",
+      "heading": "Filter the table and tick the contacts",
+      "body": "Tabs across the top of the Contacts table hold saved views such as All contacts, Newsletter subscribers, Unsubscribed and All customers. Above the table sit quick filters for Contact owner, Create date, Last activity date and Lead status, plus Advanced filters for anything more specific. The sample account here has only two test contacts, but the controls are the same at two thousand.\n\nNarrow the view until it holds only the people you mean to email. Then tick the checkbox beside each one, or the header checkbox to take everything visible. Every contact you tick will be billed, so a loose filter is the expensive mistake here.",
       "image": {
         "file": "/screenshots/YhwuFDbVph0/05.webp",
         "caption": "The Contacts table with its All contacts tab active, showing the checkbox column, search bar, and Filters, Sort, and Advanced filters controls."
       }
     },
     {
-      "heading": "Select the target rows",
-      "body": "Once your view is filtered to the right group, check the box in the table header to select every visible row at once, or check individual rows if you only want a handful. HubSpot shows a running count of how many contacts are selected, which is your last chance to sanity-check the batch size before you commit — a filter that's too loose can accidentally sweep in far more contacts than you meant to reclassify."
+      "heading": "Set as marketing contacts and type the count",
+      "body": "With contacts ticked, click the More dropdown at the top of the table and select Set as marketing contacts. The dialog asks you to type the number of contacts you're changing. That number is the confirmation. If it doesn't match what you expected, cancel and recheck your filter.\n\nEnter the number and click Set [x] contacts. The change is immediate, and those contacts now count toward your tier."
     },
     {
-      "heading": "Run the bulk action and confirm",
-      "body": "With rows selected, a refreshed toolbar appears above the table with a More dropdown; choosing Set as marketing contacts from that menu opens an inline modal explaining the change. Because this action directly affects your billing tier, HubSpot asks you to type a confirmation keyword into a safety field before the update button becomes active — a deliberate friction point so a bulk edit doesn't silently reclassify thousands of records and bump you into a higher pricing tier by accident. Clicking the update button flips the eligibility flag for every selected contact immediately."
+      "heading": "Check the count in Account & Billing",
+      "body": "Click your account name in the top right, go to Account & Billing, and open Marketing Contacts in the left sidebar. It shows your current marketing contact count against your tier limit and your next update date.\n\nLook at this right away after a large batch. If you went over the tier, the upgrade has already happened."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Set as marketing contacts is missing from the More menu",
+      "cause": "Your user lacks marketing contact access permissions, or the account isn't on a Marketing Hub Starter, Professional or Enterprise subscription.",
+      "fix": "Ask a super admin to grant the permission, or confirm the subscription includes marketing contacts."
     },
     {
-      "heading": "Check your billing limits afterward",
-      "body": "After a bulk update, it's worth a quick trip to your Account & Billing settings to see the usage meter for total live marketing contacts against your plan's limit. Marketing-eligible contacts are what HubSpot actually bills against, so a large reclassification can push you close to a tier boundary even if your total database size hasn't changed. Checking this right after the update, rather than waiting for a surprise invoice, is the cheapest way to catch it."
+      "problem": "Some ticked contacts are still non-marketing afterwards",
+      "cause": "Your account has a maximum number of marketing contacts set. Once that cap is reached, the rest are set as non-marketing.",
+      "fix": "Raise the maximum (accepting the tier cost), or free up room by setting unengaged contacts to non-marketing, which applies at the next update date."
+    },
+    {
+      "problem": "You marked the wrong contacts and switching them back didn't lower the count",
+      "cause": "Setting a contact as non-marketing only takes effect after your next update date. Until then the contact shows Marketing contact until next update as Yes.",
+      "fix": "Set them as non-marketing now so the change is queued. Note that a tier upgrade already triggered won't reverse until your subscription renews."
     }
   ],
   "faq": [
     {
-      "question": "Does setting a contact as marketing-eligible cost extra?",
-      "answer": "It can. Marketing contacts count against your subscription tier, so it's worth checking your Account & Billing usage meter before and after a large bulk update."
+      "question": "Does setting contacts as marketing cost extra?",
+      "answer": "It can. They count toward your contact tier straight away, and going over the tier by one contact auto-upgrades you until renewal. Set a maximum marketing contacts limit if you want a hard stop."
     },
     {
-      "question": "Can I undo marking contacts as marketing contacts?",
-      "answer": "Yes, you can typically switch them back to non-marketing status the same way, through the More bulk action dropdown in Contacts."
+      "question": "Can I undo it?",
+      "answer": "Yes, by setting them as non-marketing, but not instantly. The change applies on your next update date: the same day each month on a monthly subscription, or the first of the month on a yearly one."
     },
     {
-      "question": "Why do I need to type a confirmation keyword?",
-      "answer": "It's a safety step in the Set as marketing contacts modal to prevent accidentally reclassifying a large batch of contacts and affecting your billing tier."
+      "question": "Why does the dialog ask me to type a number?",
+      "answer": "It's a check on batch size. You type how many contacts you're changing, which catches a filter that swept in more people than you meant."
     },
     {
-      "question": "Where do I check how many marketing contacts I'm using?",
-      "answer": "Your Account & Billing settings show a usage meter for total live marketing contacts against your plan's limit — worth checking right after any bulk change."
+      "question": "Are there ways to set marketing status other than by hand?",
+      "answer": "Yes. Contacts who submit a marketing form are set as marketing by default. An import has a Set these contacts as marketing contacts option. On Marketing Hub Professional or Enterprise, a workflow can use the Set marketing contact status action."
     },
     {
-      "question": "Where do I find Contacts in the HubSpot navigation?",
-      "answer": "From the home dashboard, hover CRM in the left rail — Contacts is the first item in the flyout menu, above Companies, Deals, and Segments (Lists)."
+      "question": "Where do I see how many marketing contacts I have?",
+      "answer": "Account name (top right) > Account & Billing > Marketing Contacts. It shows your count, your tier limit and your next update date."
     }
   ],
+  "references": [
+    {
+      "label": "HubSpot Knowledge Base: Understand marketing contacts",
+      "url": "https://knowledge.hubspot.com/records/marketing-contacts"
+    },
+    {
+      "label": "HubSpot Knowledge Base: Set contacts as marketing",
+      "url": "https://knowledge.hubspot.com/records/set-contacts-as-marketing"
+    },
+    {
+      "label": "HubSpot Knowledge Base: Set contacts as non-marketing",
+      "url": "https://knowledge.hubspot.com/records/set-contacts-as-non-marketing"
+    },
+    {
+      "label": "HubSpot Knowledge Base: Understand marketing contacts billing",
+      "url": "https://knowledge.hubspot.com/account/understand-marketing-contacts-billing"
+    }
+  ],
+  "verifiedNote": "Navigation and the Contacts screens come from the original screen recording. The bulk action, the confirmation dialog, subscription and permission requirements, tier billing and the non-marketing update-date rule were re-checked against HubSpot's Knowledge Base in September 2026. That check corrected two claims: the dialog asks for the number of contacts (not a keyword), and switching contacts back to non-marketing is not immediate.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

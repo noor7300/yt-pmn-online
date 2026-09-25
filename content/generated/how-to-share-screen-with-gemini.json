@@ -1,64 +1,110 @@
 {
   "slug": "how-to-share-screen-with-gemini",
   "seoTitle": "How to Share Your Screen With Gemini for Real-Time AI Help",
-  "metaDescription": "Share your screen with Gemini to get real-time AI assistance during presentations, demos, or collaborative problem-solving sessions.",
-  "intro": "Describing a problem to an AI assistant in text only gets you so far when the problem is actually on your screen. Gemini's Live API in Google AI Studio can watch your screen in real time and talk you through what it sees, which turns a slow back-and-forth into something closer to pairing with a colleague. This guide walks through starting a live session, sharing a window instead of typing out a description, and using that connection for presentations, demos, and troubleshooting. It also covers what to do when the stream doesn't behave, since screen sharing depends on browser permissions that trip people up the first time.",
+  "metaDescription": "Share your screen with Gemini on a computer through Google AI Studio's Live mode, or on Android and iPhone through Gemini Live. Where each works, what each can see, and why sessions cut out.",
+  "intro": "There are two ways to show Gemini your screen, and which one you use depends on the device. On a phone or tablet, the Gemini app's Gemini Live mode has a screen-sharing button. On a computer, the Gemini web app doesn't offer Live at all, so the route is Google AI Studio, Google's developer playground, which has a Share Screen option built on the same Live API.\n\nThis guide walks through the computer route shown in the recording, then covers the phone version. It also explains two behaviours that surprise people: Gemini sees your screen as a slow series of still frames, and sessions with video have a short time limit.",
+  "tables": [
+    {
+      "title": "Where you can share your screen with Gemini",
+      "columns": ["Where", "Screen sharing?", "What gets shared"],
+      "rows": [
+        ["Gemini app on Android", "Yes, in Gemini Live", "Your entire screen; you can't limit it to one app"],
+        ["Gemini app on iPhone or iPad", "Yes, in Gemini Live", "Your screen, once notifications for Gemini Live are on"],
+        ["Gemini web app (gemini.google.com)", "No", "Gemini Live isn't available in the web app"],
+        ["Google AI Studio in a desktop browser", "Yes, Share Screen", "A window, a browser tab or the whole screen, picked in the browser's own dialog"]
+      ],
+      "note": "From Google's Gemini Apps Help and Gemini API documentation, September 2026."
+    }
+  ],
   "steps": [
     {
-      "heading": "Open Google AI Studio and start a Live session",
-      "body": "Screen sharing with Gemini happens through the Playground in Google AI Studio, not the consumer Gemini app, so head to aistudio.google.com and sign in with your Google account. In the Playground, the run settings panel on the right lets you pick the model powering the session — the Live variant (labeled as a low-latency, audio-to-audio model built for real-time dialogue) is what enables screen and voice interaction rather than plain text chat. Leave the default voice and media resolution settings alone for your first run; you can tune those later once you know the workflow. This is also where you'd add system instructions if you want Gemini to adopt a particular tone while it's watching your session."
+      "heading": "Open the Live (Stream) mode in Google AI Studio",
+      "body": "Go to aistudio.google.com and sign in with your Google account. Open the Live mode, which some Google docs call Stream. In the run settings on the right, make sure a Live model is selected; these are the low-latency models built for real-time voice and video. Leave the voice and media resolution settings on their defaults for a first try. If you want Gemini to answer in a particular way while it watches, add that under system instructions before you start."
     },
     {
-      "heading": "Find the Share Screen option",
-      "body": "Once you're in a fresh Playground session, the center of the screen shows three buttons for starting the Live API: Talk, Webcam, and Share Screen. Share Screen is the one that matters here — clicking it hands control to your browser's own screen-sharing dialog rather than anything Google-specific, so the picker you see next is the same one you'd get sharing a window in a video call.",
+      "heading": "Click Share Screen",
+      "body": "A fresh session shows three buttons in the centre: Talk, Webcam and Share Screen. Click Share Screen. What opens next is your browser's own sharing dialog, the same one you'd see in a video call, not a Google screen.",
       "image": {
         "file": "/screenshots/t9IWQGytRys/03.webp",
-        "caption": "The Live API Playground with its three entry points — Talk, Webcam, and Share Screen — before a session has started."
+        "caption": "The Live API Playground with its three entry points, Talk, Webcam and Share Screen, before a session has started."
       }
     },
     {
-      "heading": "Choose a window and confirm the stream",
-      "body": "Your browser will ask which window, tab, or full screen you want to share. Pick a specific application window when you can — sharing your entire desktop tends to send Gemini more visual noise than it needs and can expose things you didn't mean to show. After you confirm, AI Studio drops a small live thumbnail of the shared window into the Playground and a persistent bar at the bottom of the browser reading \"aistudio.google.com is sharing a window,\" with a Stop sharing button next to it. That bar is your indicator that the feed is actually live, and it's the fastest way to check the connection without asking Gemini anything.",
+      "heading": "Pick a window and confirm the stream is live",
+      "body": "Choose a single window or tab when you can. The whole screen sends Gemini more clutter and can show notifications or other apps you didn't mean to share.\n\nOnce you confirm, AI Studio shows a small thumbnail of the shared window, and the browser adds a bar reading \"aistudio.google.com is sharing a window\" with a Stop sharing button. That bar is the quickest check that the feed is running.",
       "image": {
         "file": "/screenshots/t9IWQGytRys/04.webp",
-        "caption": "A window mid-share — the thumbnail preview in the center of the Playground and the \"Stream is live\" status confirm Gemini can see it."
+        "caption": "A window mid-share, with the thumbnail preview in the centre of the Playground and the \"Stream is live\" status confirming Gemini can see it."
       }
     },
     {
-      "heading": "Talk to Gemini about what's on screen",
-      "body": "With the stream live, use the Talk button or the text prompt box to ask questions about whatever is visible in the shared window. Because Gemini is processing the video in real time, you can point at specific elements verbally — a chart, an error message, a line of code — instead of describing them from scratch, and it will respond to what's actually rendered at that moment. This is the core value of the feature over a static screenshot upload: the model reacts to changes as you make them, so you can iterate live instead of re-capturing and re-asking."
+      "heading": "Ask Gemini about what's on screen",
+      "body": "Speak, or type in the prompt box, and refer to what's visible: \"what does this error mean?\", \"is this chart's axis labelled correctly?\". Gemini answers from what it sees, and you can change the screen and ask again without re-uploading anything.\n\nOne thing to know. The Live API takes video in as still frames at no more than one frame per second. Gemini isn't watching smooth video, so after you scroll or switch tabs, pause a second before asking about the new view."
     },
     {
-      "heading": "Use it for presentations, demos, and collaboration",
-      "body": "The same setup works well beyond one-on-one troubleshooting. Share a slide deck or a live product and let Gemini answer audience questions about what's on screen, or use it during a client walkthrough so it can flag inconsistencies or summarize sections as you move through them. For team demos, it doubles as a second set of eyes — ask it to note anything confusing about the flow you're showing, since it's seeing the interface with no prior context, similar to a first-time user."
+      "heading": "On a phone, use Gemini Live instead",
+      "body": "In the Gemini app on Android or iPhone, open Live and tap Turn on screen sharing, then follow the prompts. You can also start it from outside the app: summon Gemini with \"Hey Google\" or by touch and tap Share screen with Live. Notifications for Gemini Live must be on or the option won't work.\n\nOn Android the whole screen is shared; you can't restrict it to one app. Sharing stops automatically if you put Live on hold or lock the phone, and it doesn't resume by itself. To stop sharing, tap Turn off screen sharing in the app, or on Android swipe down from the top and tap Stop sharing on the screen-sharing card."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Clicking Share Screen on a Mac does nothing, or shows a black window",
+      "cause": "macOS hasn't given your browser permission to record the screen. The browser's own settings aren't enough.",
+      "fix": "Open System Settings, then Privacy & Security, then Screen & System Audio Recording (Screen Recording on older macOS), switch on your browser, then quit and reopen it."
     },
     {
-      "heading": "Troubleshoot a stream that won't start or drops out",
-      "body": "Most Share Screen problems trace back to browser permissions rather than Gemini itself. If the picker never appears, check that your browser has screen-recording permission enabled at the OS level, not just inside the browser's own settings — this is a common blocker on macOS in particular. If the stream starts but freezes, confirm you shared a window and not a tab that's since been closed or navigated away from, since that severs the feed. And if Gemini seems to respond to a stale image, give it a few seconds — there's a small delay between what changes on your screen and what the model has actually processed, so pause briefly after making a change before asking about it."
+      "problem": "The session ends after a couple of minutes",
+      "cause": "The Live API limits sessions that include video to about 2 minutes unless the app uses session-management techniques such as context compression. Audio-only sessions last up to 15 minutes.",
+      "fix": "Start a new session and share again. For long walkthroughs, split the work into short sessions with a clear question each."
+    },
+    {
+      "problem": "Gemini describes what was on screen a moment ago",
+      "cause": "Frames reach the model at one per second at most, so a fresh scroll or tab switch may not have been captured yet.",
+      "fix": "Hold the view still for a second or two before asking about it."
+    },
+    {
+      "problem": "There's no screen-sharing option in the Gemini app",
+      "cause": "Either notifications for Gemini Live are turned off, or you're on the Gemini web app, which doesn't support Live.",
+      "fix": "Turn on notifications for Gemini Live in the phone's settings, or use Google AI Studio on a computer."
     }
   ],
   "faq": [
     {
-      "question": "What is screen sharing with Gemini useful for?",
-      "answer": "It supports dynamic presentations, collaborative brainstorming sessions, and real-time troubleshooting, making it useful for both client-facing demos and internal debugging where describing the screen in text would be slower."
+      "question": "Can I share my screen with Gemini on a computer?",
+      "answer": "Not in the Gemini web app, which doesn't offer Gemini Live. On a computer, use the Live mode in Google AI Studio and its Share Screen button."
     },
     {
-      "question": "Where do I actually turn on screen sharing with Gemini?",
-      "answer": "Through the Live API Playground in Google AI Studio (aistudio.google.com), using the Share Screen button alongside Talk and Webcam — not the standard Gemini chat app."
+      "question": "Can I share just one app on my phone?",
+      "answer": "Not on Android. Google's help page says Gemini Live shares your full screen. In AI Studio on a computer you can pick a single window or tab."
     },
     {
-      "question": "Why won't the screen share start?",
-      "answer": "It's almost always a permissions issue. Check that your browser has screen-recording access enabled at the operating system level, then retry the Share Screen button."
+      "question": "Does Gemini see my screen as live video?",
+      "answer": "Not quite. The Live API receives still images at up to one frame per second, which is plenty for documents, code and dashboards but will miss fast animation."
     },
     {
-      "question": "Is this feature only for professionals?",
-      "answer": "No — it works the same way for casual use, like getting help with a personal project, as it does for client-facing presentations or team demos."
-    },
-    {
-      "question": "Can Gemini react to changes on my screen as I make them?",
-      "answer": "Yes, since the model processes the shared window continuously, though there's a short delay between a change and Gemini registering it, so pause briefly before asking about something you just did."
+      "question": "Why did screen sharing stop on my phone?",
+      "answer": "It stops automatically when Live is put on hold or the screen locks, and you have to turn it back on yourself."
     }
   ],
+  "references": [
+    {
+      "label": "Gemini Apps Help: Talk naturally with Gemini Live, Android (official)",
+      "url": "https://support.google.com/gemini/answer/15274899?hl=en&co=GENIE.Platform%3DAndroid"
+    },
+    {
+      "label": "Gemini Apps Help: Talk naturally with Gemini Live, iPhone and iPad (official)",
+      "url": "https://support.google.com/gemini/answer/15274899?hl=en&co=GENIE.Platform%3DiOS"
+    },
+    {
+      "label": "Gemini API docs: Live API overview (official)",
+      "url": "https://ai.google.dev/gemini-api/docs/live-api"
+    },
+    {
+      "label": "Gemini API docs: Live API capabilities guide (official)",
+      "url": "https://ai.google.dev/gemini-api/docs/live-guide"
+    }
+  ],
+  "verifiedNote": "The AI Studio screens (Talk, Webcam and Share Screen buttons, the window picker and the sharing bar) come from the original screen recording. Gemini Live screen-sharing support on Android and iOS, its lack of support in the Gemini web app, the one-frame-per-second video input and the Live API session limits were re-checked against Google's Gemini Apps Help and Gemini API documentation in September 2026. That check corrected the earlier claim that the Gemini app can't share your screen, and the macOS permission step reflects general macOS behaviour, not Google documentation.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

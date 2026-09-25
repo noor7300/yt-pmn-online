@@ -1,68 +1,89 @@
 {
   "slug": "how-to-extract-data-from-a-pdf-to-google-sheets-easily-2026",
   "seoTitle": "Extract Data From a PDF to Google Sheets Easily",
-  "metaDescription": "Learn how to extract data from PDF files into Google Sheets using a Workspace add-on — install it, select the pages you need, and pull the data straight into a spreadsheet.",
-  "intro": "Retyping numbers out of an invoice or a research report is slow and it's exactly the kind of task where a stray keystroke turns into a bad total three tabs later. Google Sheets doesn't parse PDFs on its own, but the Workspace Marketplace has add-ons built specifically for this, and once one is installed the whole job becomes point-and-click instead of copy-and-paste. This guide walks through finding a PDF-to-Sheets add-on, installing it, and running it against a real PDF so the tables land in your spreadsheet ready to use. It's aimed at anyone who handles invoices, reports, or forms regularly and would rather spend that time on analysis than data entry.",
+  "metaDescription": "Pull tables out of a PDF into Google Sheets with a Workspace Marketplace add-on: install it from Extensions, pick the pages, process them, then clean up the result. Plus what to do with scanned PDFs.",
+  "intro": "Retyping figures from an invoice or report is slow, and one wrong keystroke becomes a bad total three tabs later. Google Sheets can't open a PDF and read its tables by itself. Add-ons from the Google Workspace Marketplace fill that gap, and once one is installed the job is mostly point and click.\n\nThis guide installs an extraction add-on from inside Sheets, runs it against a sample PDF, and covers the cleanup that almost every extraction needs. The add-on in the walkthrough opens a dialog titled PDF to Sheets. Others in the Marketplace work along similar lines, but their buttons, free limits and OCR support differ, so read the listing before you install.",
+  "costNote": "Google doesn't charge for add-ons, but the developers set their own pricing, and many PDF extractors cap the free tier by page count. One Marketplace listing from a developer named PDF to Sheets, for example, allows 5 free pages before a paid plan. Check the Pricing line on a listing before you rely on it for a long document.",
   "steps": [
     {
-      "heading": "Find a PDF extraction add-on in the Workspace Marketplace",
-      "body": "Open a spreadsheet, go to Extensions, and choose Add-ons > Get add-ons to open the Google Workspace Marketplace directly inside Sheets. Search for PDF-related tools and you'll see several options built for exactly this job, each listing what it connects to and its install count and rating. Look for one that explicitly mentions PDF-to-Sheets conversion rather than a general document tool, since those are tuned to recognize tables and page layouts. Installing is a single click, and it asks for permission to access the spreadsheet you're working in — that's normal for any add-on that needs to write data back into your sheet.",
+      "heading": "Install a PDF extraction add-on",
+      "body": "Open a spreadsheet and click Extensions > Add-ons > Get add-ons. The Google Workspace Marketplace opens on top of the sheet, already filtered to apps that work with Sheets, and each card shows a rating and install count. Search \"pdf\" and pick a tool that says it converts PDF tables to Sheets. A general document utility won't do the same job.\n\nClick the add-on to read its full description, then click Install and Continue. Most add-ons ask for access to data they need, such as the spreadsheet they'll write into. Read the request, click Allow, then Done.",
       "image": {
         "file": "/screenshots/p84JNR132Io/03.webp",
-        "caption": "The Google Workspace Marketplace opened from inside Sheets, showing PDF and data-import add-ons with their install counts and ratings."
+        "caption": "The Google Workspace Marketplace opened from inside Sheets, filtered to apps that work with Sheets, each card showing its rating and install count."
       }
     },
     {
-      "heading": "Open the add-on from the Extensions menu",
-      "body": "Once installed, every add-on you add lives under the same Extensions menu you used to find it — it doesn't add a new top-level menu of its own. Open the spreadsheet where you want the extracted data to land, click Extensions, and you'll see the add-on listed with its own submenu, usually with an option like \"Open\" or \"Start.\" This is also a good moment to set up the destination sheet: a blank tab with clear column headers makes it much easier to check that the extraction lined up correctly once it runs.",
+      "heading": "Launch it from the Extensions menu",
+      "body": "Installed add-ons don't get a menu of their own. They sit under Extensions, each with a submenu for opening it.\n\nBefore launching, decide where the data should land. A blank tab keeps the import away from anything you've already built, and it's easier to spot a misaligned column against an empty grid.",
       "image": {
         "file": "/screenshots/p84JNR132Io/04.webp",
-        "caption": "A fresh spreadsheet with the Extensions menu open — this is where any installed PDF add-on shows up to be launched."
+        "caption": "A spreadsheet with the pointer on the Extensions menu, where installed add-ons are launched."
       }
     },
     {
-      "heading": "Upload the PDF and select the pages to process",
-      "body": "The add-on opens its own dialog with a preview of every page in the PDF you upload, numbered and displayed as thumbnails. Click a page to select it — selected pages highlight in blue — and hold Shift to grab a run of consecutive pages at once, which matters if you're pulling data from a multi-page report rather than a single-page invoice. Take a moment here rather than selecting everything by default: processing only the pages that actually contain tables keeps the extraction clean and avoids pulling in cover pages or narrative text that Sheets has no use for.",
+      "heading": "Pick the pages and process them",
+      "body": "After you upload the PDF, the PDF to Sheets dialog shows every page as a numbered thumbnail. Click a page to select it and it highlights in blue. Hold Shift to select a run of consecutive pages. There are also Select All and Clear buttons.\n\nSelect only the pages that hold tables. Cover pages and running text add rows you'll just delete later, and on a page-capped free tier they use up your allowance. Then click Process Selected Pages and the add-on writes what it finds into the spreadsheet.",
       "image": {
         "file": "/screenshots/p84JNR132Io/05.webp",
-        "caption": "The PDF-to-Sheets dialog with a page-by-page preview. Selected pages are highlighted in blue before you click Process Selected Pages."
+        "caption": "The PDF to Sheets dialog with a page-by-page preview, plus Select All, Clear and Process Selected Pages buttons."
       }
     },
     {
-      "heading": "Process the pages and check the output",
-      "body": "With the right pages selected, click Process Selected Pages and the add-on reads the tables and text on those pages and writes them into your spreadsheet. Well-structured tables with clear rows and columns come through cleanly; PDFs with merged cells, multi-line entries, or inconsistent spacing are more likely to need a manual fix afterward. Scroll through the new data before doing anything else with it — catching a misaligned column now is far cheaper than catching it after you've built a formula on top of it."
+      "heading": "Check and clean up the output",
+      "body": "Clean tables with clear rows and columns usually come through intact. Merged cells, entries that wrap onto two lines, and uneven spacing are where things go wrong.\n\nScroll through before you build anything on top. Look for three things. Numbers stored as text sit left-aligned instead of right-aligned, and SUM ignores them. Dates may arrive in an unexpected format. Columns can split or merge if the PDF's layout wasn't a strict grid. For text that landed in one cell but belongs in several, use Data > Split text to columns. Then set number and date formats explicitly from the Format menu instead of trusting Sheets' guess. If you pull the same kind of document every month, keep the destination tab's columns the same each time so the checks become routine."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The add-on returns nothing, or gibberish, for a scanned PDF",
+      "cause": "A scanned page is an image with no text layer, so a tool without OCR has nothing to read.",
+      "fix": "Use an add-on whose listing mentions OCR for scanned PDFs. For plain text (not tables), Google Drive's own Open with > Google Docs converts PDFs of 2 MB or smaller, though Google warns tables are not likely to be detected."
     },
     {
-      "heading": "Clean up formatting issues",
-      "body": "Extracted data rarely arrives perfectly shaped. Watch for numbers imported as text (they'll left-align instead of right-align), dates in an unexpected format, and columns that got split or merged because the PDF's layout wasn't a strict grid. Use Data > Split text to columns for anything that landed in a single cell that should be several, and reformat number columns explicitly rather than assuming Sheets guessed correctly. This cleanup step is usually faster than the manual retyping it replaces, but it's not optional — skipping it is how extraction errors turn into reporting errors."
+      "problem": "The add-on no longer appears under Extensions",
+      "cause": "It has been turned off for this spreadsheet.",
+      "fix": "Go to Extensions > Add-ons > Manage add-ons, open the add-on's Options (three dots) and turn on Use in this document."
     },
     {
-      "heading": "Set up the process for recurring documents",
-      "body": "If you're pulling the same kind of document — a monthly vendor invoice, a weekly export — every cycle, keep the destination sheet and column layout consistent so each new extraction drops into the same shape. Some add-ons support saving a page-selection template or watching a folder for new PDFs, which turns this from a repeated manual task into something closer to automatic. Even without that, a consistent process — same add-on, same tab layout, same cleanup checklist — cuts the time each new document takes by more than half after the first couple of runs."
+      "problem": "Totals don't add up after import",
+      "cause": "Some numbers came in as text, often because of currency symbols, stray spaces or thousands separators in the PDF.",
+      "fix": "Select the column and apply Format > Number. Any cells still left-aligned need their stray characters removed first."
     }
   ],
   "faq": [
     {
-      "question": "Can Google Sheets extract data from a scanned PDF?",
-      "answer": "Not on its own, and not reliably with most extraction add-ons either — a scanned PDF is really an image, so it typically needs OCR (optical character recognition) processing first before any tool can pull out real text and numbers."
+      "question": "Can Google Sheets read a PDF without an add-on?",
+      "answer": "No. Sheets has no built-in PDF import. You need a Marketplace add-on, or you can convert the PDF to text in Google Drive first and paste it across, which loses the table structure."
     },
     {
-      "question": "Do I need to install anything to extract PDF data into Sheets?",
-      "answer": "Yes. Google Sheets doesn't parse PDFs natively; you install a PDF-to-Sheets add-on from the Workspace Marketplace via Extensions > Add-ons > Get add-ons, and it runs from that same Extensions menu afterward."
+      "question": "What about scanned PDFs?",
+      "answer": "A scanned PDF is really an image, so it needs OCR. Some add-ons include it. Google Drive can also OCR a PDF via Open with > Google Docs, but only files of 2 MB or less, and Google says tables are not likely to survive."
     },
     {
-      "question": "What if the extracted data doesn't line up correctly?",
-      "answer": "This is common with complex layouts — merged cells, multi-line fields, or inconsistent spacing in the original PDF. Use Data > Split text to columns and reformat number and date columns manually after extraction."
+      "question": "Can I extract only certain pages of a long PDF?",
+      "answer": "Yes, in the add-on shown here. Click individual thumbnails, or hold Shift to select a consecutive range, then click Process Selected Pages."
     },
     {
-      "question": "Can I extract just certain pages of a long PDF?",
-      "answer": "Yes. The extraction dialog shows a thumbnail of every page; click to select individual pages or hold Shift to select a consecutive range, then process only those."
-    },
-    {
-      "question": "Can this be automated for recurring reports?",
-      "answer": "Some add-ons support saved page-selection templates or folder-watching for new files. Even without that, keeping a consistent destination sheet and cleanup routine makes repeat extractions much faster after the first one."
+      "question": "How do I remove an add-on I no longer want?",
+      "answer": "Open Extensions > Add-ons > Manage add-ons, click Options next to the add-on, and choose Uninstall."
     }
   ],
+  "references": [
+    {
+      "label": "Google Docs Editors Help: Use add-ons, Apps Script, AppSheet & Data Studio",
+      "url": "https://support.google.com/docs/answer/2942256?hl=en&co=GENIE.Platform%3DDesktop"
+    },
+    {
+      "label": "Google Drive Help: Convert PDF and photo files to text",
+      "url": "https://support.google.com/drive/answer/176692"
+    },
+    {
+      "label": "Google Workspace Marketplace: Convert PDF to CSV & Sheets (developer: PDF to Sheets)",
+      "url": "https://workspace.google.com/marketplace/app/pdf_to_sheets/286135378508"
+    }
+  ],
+  "verifiedNote": "The Marketplace screen, the PDF to Sheets dialog and its page-selection controls come from the original screen recording. The install, permission and manage/uninstall steps were re-checked against Google's Docs Editors Help, and the Drive OCR route and its 2 MB limit against Google Drive Help, in September 2026. Add-on pricing was read from one Marketplace listing on the same date; the recording doesn't show which listing its add-on came from, so treat that figure as an example. This pass also removed an unsupported claim that a repeat routine halves the time per document.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

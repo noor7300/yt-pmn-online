@@ -1,68 +1,97 @@
 {
   "slug": "how-to-link-data-from-cells-in-different-sheets-in-smartsheet-easily-2026",
   "seoTitle": "Link Cell Data Between Sheets in Smartsheet",
-  "metaDescription": "Set up live cell links between Smartsheet sheets using Link from Cell in Other Sheet, so master portfolios update automatically without copy-pasting.",
-  "intro": "Copy-pasting data between sheets breaks the moment the source changes, leaving you with a summary that quietly goes stale. Smartsheet's cell linking feature keeps a live connection instead, pulling task names, dates, and completion percentages from a source sheet into a destination one so they update on their own. This guide covers preparing a destination sheet, opening the Link from Cell in Other Sheet wizard, and confirming the link actually took once you're back in your own grid.",
+  "metaDescription": "Create live cell links between Smartsheet sheets: where the option lives in grid and table view, the 500-links-per-pass limit, permissions, and what breaks a link.",
+  "intro": "Copy-pasting between sheets leaves you with a summary that goes stale the moment the source changes. A Smartsheet cell link keeps a live connection instead. The destination cell shows whatever the source cell holds and updates when it changes.\n\nThis guide links a column of task names from a project schedule into a summary sheet. It covers where the option is (its name differs between grid and table view), the permissions you need, the arrows that tell you which cells are linked, and the actions that break a link.",
+  "prerequisites": [
+    "At least Viewer permission on the source sheet and Editor permission on the destination sheet",
+    "Source cells that contain data. Empty cells that never held a value cannot be linked."
+  ],
   "steps": [
     {
-      "heading": "Understand what a live link actually does",
-      "body": "A standard copy-paste captures a snapshot: the data lands in your sheet and then sits there, disconnected from wherever it came from. A cell link is different, it keeps a running connection to the source cell, so if that source value changes later, the linked cell updates too, without you touching it again. That distinction matters most for portfolio or summary sheets that are supposed to reflect the current state of several project sheets at once."
-    },
-    {
-      "heading": "Prepare your destination sheet",
-      "body": "Set up the sheet that will receive the linked data, giving its Primary Column a clear label so it's obvious later what the pulled-in values represent. A short heading like the one shown here keeps the destination sheet self-explanatory even after you've forgotten the exact source it's pulling from.",
+      "heading": "Set up the destination sheet",
+      "body": "Open or create the sheet that will receive the data and label its columns clearly, so it is obvious later what the pulled-in values are. Pick empty cells for the links. Creating a link overwrites anything already in the destination cells.\n\nCheck the column types too. Attachments and discussions columns never accept links. On a Project or Gantt sheet with dependencies turned on, cells Smartsheet calculates itself (finish dates, predecessors, parent rollups, dependent start dates and column-formula cells) cannot take an inbound link either.",
       "image": {
         "file": "/screenshots/lM5PEU2cv6I/03.webp",
         "caption": "A destination sheet with its Primary Column labeled, ready to receive linked data from another sheet."
       }
     },
     {
-      "heading": "Open Link from Cell in Other Sheet",
-      "body": "Select the cell where you want the incoming data to land, then use the Link from Cell in Other Sheet feature to launch the wizard. It opens with a workspace directory on the left, listing every sheet you have access to, and a live preview of the currently selected source sheet on the right. In the example here, the source is a project schedule with columns for Task Name, % Complete, Start Date, End Date, Priority, and a Completion % field, with row numbers along the left edge for precise selection.",
+      "heading": "Open the cell linking form",
+      "body": "Select the first destination cell. The option's name depends on the view. In grid view, click Cell Linking in the toolbar. In table view, right-click the cell and choose Link cell to another sheet, or press Cmd + Shift + K.\n\nOlder guides, and some versions of the interface, call this Link from Cell in Other Sheet. It is the same feature.",
       "image": {
         "file": "/screenshots/lM5PEU2cv6I/04.webp",
-        "caption": "The Link from Cell in Other Sheet wizard, with the source sheet's directory on the left and a live data preview, including task names and completion percentages, on the right."
+        "caption": "The cell linking form, with the source sheet's directory on the left and a live data preview, including task names and completion percentages, on the right."
       }
     },
     {
-      "heading": "Select your source cells and confirm",
-      "body": "Click the specific cell or drag across a range in the preview grid to choose exactly what feeds into your destination sheet. You can link a single value, like one task's completion percentage, or select a full column of task names to bulk-link an entire block at once, which is faster than repeating the wizard row by row when you're building out a summary sheet."
+      "heading": "Pick the source sheet and cells",
+      "body": "In the form, choose the source sheet from the list on the left, or type its name in the search bar. Its data appears on the right. Click one cell, or drag across a range, then select Create Cell Links.\n\nMultiple cells each get their own link and land in the destination in the same order as the source. One pass can create up to 500 links from the same source sheet, and a destination sheet can hold 500,000 inbound links in total. You are linking cells, not structures. Smartsheet cannot link a whole sheet, column or row, so new rows added to the source later will not appear in the destination on their own."
     },
     {
-      "heading": "Check the result in your destination sheet",
-      "body": "Back in your own sheet, the linked cells now display the pulled-in values, in this case a full list of task names from the source project schedule, each with a small link indicator next to it. That indicator is your visual confirmation the cell is live rather than static text, and it's what you'd look for later if you're auditing which fields on a sheet are actually connected versus manually typed.",
+      "heading": "Confirm the links and read the arrows",
+      "body": "Back in the destination sheet, the linked cells show the source values. Each destination cell carries a light blue arrow on its right side, which marks an inbound link. In the source sheet, Smartsheet adds a matching outbound link automatically, shown as a grey arrow in the cell's bottom-right corner.\n\nSelect any linked cell to see which sheet it connects to, and hover over the text that appears to jump to that sheet. A destination cell can have only one inbound link, but one source cell can feed any number of destinations.",
       "image": {
         "file": "/screenshots/lM5PEU2cv6I/05.webp",
         "caption": "The destination sheet after linking, showing task names pulled in from the source schedule with link indicators next to each row."
       }
     },
     {
-      "heading": "Read the link direction indicators",
-      "body": "Smartsheet marks linked cells with directional arrow icons, distinguishing cells receiving an inbound feed from cells sending data out to another sheet. Getting comfortable reading these at a glance saves you from second-guessing whether a number on a dashboard sheet is the source of truth or just a mirror of one."
+      "heading": "Or start from the source sheet with Paste Special",
+      "body": "When you are already in the source sheet, or want the same cells linked into several destinations, copy the cells there. Then, in the same browser tab, open the destination sheet, right-click the target cell (Ctrl + click on a Mac), choose Paste Special, pick Link to copied cells and click OK.\n\nRepeat the paste in each additional destination sheet. It fails for cells in empty rows and for cells deleted after you copied them."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The cell linking button is greyed out",
+      "cause": "The selected cell cannot accept a link (an attachments or discussions column, or a dependency-controlled cell on a Project sheet), or you lack Editor permission on the destination sheet.",
+      "fix": "Pick a cell in an ordinary column, or ask the sheet owner for Editor access. You also need at least Viewer access to the source sheet."
     },
     {
-      "heading": "Preserve links when you restructure",
-      "body": "Cell links can break if you delete the source row, rename the source sheet in a way that orphans the reference, or otherwise restructure columns without checking what's connected to them first. Before doing any major cleanup on a sheet you know feeds other sheets, it's worth a quick check of what's linked to it so you don't quietly break a portfolio dashboard three clicks away."
+      "problem": "A linked cell shows as broken",
+      "cause": "The row containing the source cell was deleted.",
+      "fix": "Relink the destination cell to the correct source cell. Before deleting rows in a sheet that feeds others, look for grey outbound arrows."
+    },
+    {
+      "problem": "Linked dates change to MM/DD/YYYY",
+      "cause": "When a date cell is linked into a text/number column, Smartsheet converts it to U.S. format regardless of your region settings.",
+      "fix": "Link dates into a date-type column in the destination sheet."
+    },
+    {
+      "problem": "An automation or formula does not fire when a linked value changes",
+      "cause": "Cells with cell links do not trigger actions that change the sheet automatically, including formulas that reference a cell via an inbound link.",
+      "fix": "Base the automation on the source sheet, where the value is edited, instead of the destination."
     }
   ],
   "faq": [
     {
-      "question": "What's the difference between linking cells and copy-pasting?",
-      "answer": "A cell link stays live and updates automatically when the source changes, while copy-pasting only captures a static snapshot at the moment you pasted it."
+      "question": "What's the difference between a cell link and copy-paste?",
+      "answer": "A cell link stays live and updates when the source changes. An ordinary paste is a snapshot that never updates."
     },
     {
-      "question": "Can I link a whole range of cells at once?",
-      "answer": "Yes, you can select or drag across multiple rows in the source preview to bulk-link a data block in one pass through the wizard."
+      "question": "Can I link a whole column or sheet?",
+      "answer": "No. Smartsheet links individual cells only. You can select a range and link up to 500 cells at once, but rows added to the source later are not picked up."
     },
     {
-      "question": "How do I tell if a cell is linked?",
-      "answer": "Linked cells display a small directional arrow icon showing whether the cell is receiving data from another sheet or sending it out."
+      "question": "How do I tell which cells are linked?",
+      "answer": "A light blue arrow on the right of a cell means it receives an inbound link. A grey arrow in the bottom-right corner means it sends data out."
     },
     {
-      "question": "Will restructuring my columns break the link?",
-      "answer": "It can, especially if you delete the source row or rename the sheet, so it's best practice to check what's linked before making structural changes."
+      "question": "Can I edit a linked cell from the mobile app or a report?",
+      "answer": "No. Linked cells cannot be edited from the mobile or tablet app, reports, update requests, edit forms or published sheets. Open the destination sheet in a browser."
+    },
+    {
+      "question": "How do I remove a link?",
+      "answer": "In grid view, right-click and choose Remove Link. In table view, choose Clear contents, then Remove cell link. Backspace also deletes an inbound link."
     }
   ],
+  "references": [
+    {
+      "label": "Smartsheet Help Center: Cell links, consolidate or maintain data consistency (official)",
+      "url": "https://help.smartsheet.com/articles/861579-cell-linking"
+    }
+  ],
+  "verifiedNote": "Screens and the task-name example come from the original walkthrough recording. The menu names, permissions, link limits, arrow indicators and restrictions were re-checked against Smartsheet's Help Center in September 2026. That check updated the option's name (now Cell Linking in grid view and Link cell to another sheet in table view), corrected the claim that a whole column can be linked, and dropped an unsupported claim that renaming a sheet breaks links.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }
