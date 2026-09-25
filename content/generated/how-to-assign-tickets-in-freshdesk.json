@@ -1,44 +1,71 @@
 {
   "slug": "how-to-assign-tickets-in-freshdesk",
   "seoTitle": "How to Assign Tickets in Freshdesk",
-  "metaDescription": "Learn how to assign support tickets to specific agents or groups in Freshdesk, one at a time or in bulk, so the right person handles each request.",
-  "intro": "A ticket sitting in an unassigned queue is a customer waiting longer than they should. Freshdesk gives you two ways to fix that: assign tickets one by one from the detail view, or select a batch and hand them off together. This guide walks through both, using the actual ticket list and bulk-update screen so you can see exactly where the assignment controls live and what a real support inbox looks like once sentiment and status columns are turned on.",
+  "metaDescription": "Assign Freshdesk tickets one at a time or in bulk, choose between a person and a group, and see where automated assignment is gated by plan.",
+  "intro": "A ticket sitting in an unassigned queue is a customer waiting longer than they should. Freshdesk gives you two manual ways to fix that: assign tickets one by one from the detail view, or select a batch and hand them off together. Beyond manual assignment, Freshdesk can also route tickets automatically, though how much of that automation is available depends on the plan. This guide covers both the manual controls and where the automated ones sit.",
   "steps": [
     {
       "heading": "Open your ticket list and see what needs an owner",
-      "body": "Freshdesk's default view is the All tickets table, which lists every open request with its contact, subject, sentiment, and state in columns you can sort and filter. Tickets with no agent or group assigned are the ones worth scanning for first, since those are the requests nobody currently owns. The filters panel on the right lets you narrow this down fast — by agent, by group, by sentiment, or by how recently the ticket was created — so a busy queue doesn't force you to eyeball every row.",
+      "body": "Freshdesk's default view is the All tickets table, listing every open request with its contact, subject, sentiment, and state in sortable, filterable columns. Tickets with no agent or group assigned are worth scanning for first, since those are the requests nobody currently owns. The filters panel on the right narrows this down fast, by agent, by group, by sentiment, or by how recently the ticket was created, so a busy queue doesn't force you to eyeball every row.",
       "image": { "file": "/screenshots/6APlbN5JCc8/02.webp", "caption": "The All tickets table, with sentiment and state columns visible and a filters panel open on the right for narrowing down which tickets need attention." }
     },
     {
       "heading": "Assign a single ticket from its detail view",
-      "body": "Click into a ticket and you get the full conversation on the left with the requester's contact details on the right — name, title, email, and a recent activity timeline showing their other open tickets. This context matters before you assign: a VP flagging an API authentication failure probably needs a senior agent, not whoever's next in a round-robin queue. The assignment control itself sits near the top of the ticket alongside Reply, Note, Forward, and Close, and picking an agent or group there routes the ticket without leaving the conversation.",
+      "body": "Click into a ticket and you get the full conversation on the left with the requester's contact details on the right: name, title, email, and a recent activity timeline showing their other open tickets. This context matters before you assign. A VP flagging an API authentication failure probably needs a senior agent, not whoever's next in a round-robin queue. The assignment control sits near the top of the ticket alongside Reply, Note, Forward, and Close, and picking an agent or group there routes the ticket without leaving the conversation.",
       "image": { "file": "/screenshots/6APlbN5JCc8/03.webp", "caption": "An open ticket showing the full email thread on the left and the requester's contact info and recent ticket history on the right." }
     },
     {
-      "heading": "Assign several tickets at once with Bulk update",
-      "body": "When multiple tickets need the same owner — say a batch of similar bug reports — checking their boxes in the list and clicking Bulk update is faster than opening each one. The Bulk update panel exposes Type, Status, Priority, Group, and Agent fields you can set in a single pass; opening the Agent dropdown shows every available agent in the account so you pick a name and apply it to the whole selection at once. This is also where you'd reassign a group of tickets after someone goes on leave, without touching each ticket individually.",
+      "heading": "Assign several tickets at once, and choose a person or a group",
+      "body": "When multiple tickets need the same owner, say a batch of similar bug reports, checking their boxes in the list and clicking Bulk update is faster than opening each one. Freshdesk's own documentation describes the Bulk update panel as covering ticket Status, Internal group, and Agent; opening the Agent dropdown lists every available agent in the account so you can apply one to the whole selection in a single pass. Whether you route to a named agent or to a group changes how quickly a ticket gets picked up. Assigning directly to a person works best when you already know who should handle it: a specific account, a known escalation, a subject-matter expert. Assigning to a group suits general queues, since any available agent in that group can claim the ticket, which spreads the load instead of making one person a bottleneck when they're out.",
       "image": { "file": "/screenshots/6APlbN5JCc8/04.webp", "caption": "The Bulk update panel with several tickets selected and the Agent dropdown open, listing the agents available to receive the batch." }
     },
     {
-      "heading": "Decide between assigning to a person or a group",
-      "body": "Freshdesk lets you route a ticket to an individual agent or to a group, and the choice changes how quickly it gets picked up. Assigning directly to a person is best when you already know who should handle it — a specific account, a known escalation, a subject-matter expert. Assigning to a group is better for general queues, since any available agent in that group can claim the ticket, which spreads the load and avoids a single person becoming a bottleneck when they're out."
-    },
-    {
       "heading": "Use sentiment and state to prioritize what you assign first",
-      "body": "The ticket list surfaces Initial Sentiment and Current Sentiment alongside State flags like Overdue and Undelivered, and these are worth reading before you assign anything. A ticket that started Negative and is still Negative, and is also flagged Overdue, should jump the queue ahead of a Neutral ticket with no state flags — assigning strictly in creation order ignores signals Freshdesk is already showing you for free."
+      "body": "The ticket list surfaces Initial Sentiment and Current Sentiment alongside state flags like Overdue and Undelivered, and these are worth reading before assigning anything. A ticket that started Negative and is still Negative, and is also flagged Overdue, should jump ahead of a Neutral ticket with no state flags. Assigning strictly in creation order ignores signals Freshdesk is already showing for free."
     },
     {
-      "heading": "Set up automatic assignment for recurring patterns",
-      "body": "Once you notice the same type of request landing in the same place — password resets always going to one group, billing questions to another — set up an automation rule so Freshdesk assigns those tickets on arrival instead of waiting for a human to sort them. Automation rules live under the admin settings and match on criteria like keywords, source, or category, then apply an agent or group the moment a matching ticket is created. This doesn't replace manual assignment entirely, but it clears the predictable cases so your team's attention goes to the tickets that actually need judgment."
+      "heading": "Automate the recurring patterns",
+      "body": "Once the same type of request keeps landing in the same place, password resets always going to one group, billing questions to another, an automation rule can assign those tickets on arrival instead of waiting for someone to sort them. Freshdesk splits this into two rule types: rules that run on ticket creation, which match new tickets as they arrive on criteria like keywords, source, or category, and rules that run on ticket updates, which react to events on tickets that already exist, such as reassigning a ticket when an agent replies to it. A separate feature, Scenario Automations, bundles an action like \"Assign to Internal Group/Agent\" so you can trigger it manually against a set of already-selected tickets, similar to Bulk update but reusable. None of this replaces manual assignment entirely; it clears the predictable cases so a team's attention goes to tickets that need judgment."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Automated ticket assignment by plan",
+      "columns": ["Plan", "Automated assignment included"],
+      "rows": [
+        ["Growth", "Round-robin and load-balanced auto-assignment"],
+        ["Pro", "Round-robin and load-balanced auto-assignment"],
+        ["Enterprise", "Round-robin and load-balanced, plus skill-based assignment"]
+      ],
+      "note": "Manual assignment, single-ticket and Bulk update, is not plan-gated. Based on Freshdesk's published pricing page as of September 2026; plan names and inclusions change over time."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Running a Scenario doesn't assign some of the tickets you selected",
+      "cause": "Freshdesk scenarios that assign to an internal group only run if the ticket's current status is mapped to that group; unmapped statuses are skipped without an error.",
+      "fix": "Check the status-to-group mapping under Admin > Agent Productivity > Scenario Automations before running the scenario again."
+    },
+    {
+      "problem": "A new automation rule doesn't touch tickets already sitting in the queue",
+      "cause": "Rules built as ticket-creation automations only fire the moment a ticket is created; they don't apply retroactively to existing tickets.",
+      "fix": "Use a ticket-update automation rule for ongoing tickets, or select the existing tickets and reassign them with Bulk update or a Scenario."
     }
   ],
   "faq": [
     { "question": "Can I reassign a ticket after it's been assigned?", "answer": "Yes. Open the ticket and change the assignee from the same control used to assign it the first time, or select it in the list and use Bulk update to reassign it along with others." },
     { "question": "Can tickets be assigned to a group instead of a person?", "answer": "Yes. The assignment field accepts either an individual agent or a group, and any agent in that group can then pick up the ticket." },
     { "question": "How do I assign multiple tickets at the same time?", "answer": "Check the boxes next to the tickets in the list view, click Bulk update, open the Agent dropdown, and apply your choice to the whole selection in one action." },
-    { "question": "Does the agent get notified when assigned a ticket?", "answer": "Yes, agents receive a notification when a ticket is assigned to them, whether it was assigned individually or as part of a bulk update." },
-    { "question": "Can ticket assignment be automated?", "answer": "Yes. Freshdesk's automation rules can assign tickets to an agent or group automatically based on conditions like keywords, source, or category, so recurring request types don't need manual sorting." }
+    { "question": "What's the difference between a Scenario and an automation rule?", "answer": "A Scenario is a bundled action you trigger manually against tickets you've selected, useful for one-off batches. An automation rule runs on its own, either the moment a ticket is created or when an existing ticket is updated, with no manual step." },
+    { "question": "Can ticket assignment be automated without any manual setup?", "answer": "Round-robin and load-balanced auto-assignment come with Freshdesk's Growth and Pro plans; skill-based assignment, which routes by agent expertise, is limited to Enterprise." }
   ],
+  "references": [
+    { "label": "Freshdesk Support: Using bulk actions and scenarios", "url": "https://support.freshdesk.com/support/solutions/articles/224200-using-bulk-actions-and-scenarios-" },
+    { "label": "Freshdesk Support: Automation rules that run on ticket creation", "url": "https://support.freshdesk.com/support/solutions/articles/37614-setting-up-automation-rules-to-run-on-ticket-creation" },
+    { "label": "Freshdesk Support: Automation rules that run on ticket updates", "url": "https://support.freshdesk.com/support/solutions/articles/99047-automation-rules-that-run-on-ticket-updates" },
+    { "label": "Freshworks: Freshdesk pricing and plans", "url": "https://www.freshworks.com/freshdesk/pricing/" }
+  ],
+  "verifiedNote": "Screens and click path (ticket list, single-ticket assignment, Bulk update) come from a recorded walkthrough. The Bulk update field list, the Scenario status-mapping requirement, the split between creation-triggered and update-triggered automation rules, and the plan-tier breakdown of automated assignment were checked against Freshdesk's own support articles and Freshworks' pricing page in September 2026. The original draft understated the difference between a one-off Scenario and a standing automation rule, and didn't mention that skill-based assignment is an Enterprise-only feature; both are corrected here.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

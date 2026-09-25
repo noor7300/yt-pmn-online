@@ -1,43 +1,90 @@
 {
   "slug": "how-to-send-a-test-email-in-brevo-easily-2026",
   "seoTitle": "How to Send a Test Email in Brevo Before Launch",
-  "metaDescription": "Check your Brevo campaign for layout glitches and broken links before sending, using the Preview & Test button on the campaign creation screen.",
-  "intro": "Sending an unvetted campaign draft straight to your full list is how broken images, dead links, and mangled merge tags end up in front of real customers. Brevo builds a test-send option directly into the campaign creation screen, right next to the button that actually launches the campaign, so there's no excuse to skip it. This guide walks through where that option lives and what to check once the test lands in your inbox.",
+  "metaDescription": "Use Brevo's Preview & Test tools to check a campaign before it sends: preview it as a real contact, then send an actual test copy to a controlled list of addresses.",
+  "intro": "Sending an unproven campaign draft straight to your full list is how broken images, dead links and mangled merge tags end up in front of real customers. Brevo builds two separate check-before-you-send tools into the campaign screen: a Preview tab that shows the email exactly as a chosen real contact would see it, and a Send test email tool that fires an actual copy to a short list of addresses you control. This guide covers where both live, how the underlying test list works, and what to check once a test lands in your inbox.",
   "steps": [
     {
       "heading": "Start from your Brevo dashboard",
-      "body": "Log in and you'll land on the Home screen, which shows a quick snapshot of your account: contacts, anything planned for today, and your plan usage — how many emails, prepaid credits, and SMS credits you have left for the billing period. From here, open Campaigns in the left sidebar under Marketing to get to the email you want to test.",
+      "body": "Log in and you land on the Home screen, which shows a snapshot of your account: contacts, anything planned for today, and how much of your plan's email, credit and SMS allowance is left for the billing period. From here, open Campaigns in the left sidebar under Marketing to reach the email you want to test.",
       "image": { "file": "/screenshots/VYIKeeaZtcs/03.webp", "caption": "The Brevo dashboard home screen, showing contact counts and remaining plan usage before you head into Campaigns to build or test an email." }
     },
     {
-      "heading": "Open the campaign you want to test",
-      "body": "Inside Campaigns, open the draft you're working on. The campaign builder lays the setup out as a checklist: Sender, Recipients, Subject, and Design, each with a green checkmark once it's filled in. You don't need every section complete to run a test, but Design needs at least a working layout for the test to actually show you anything worth reviewing."
+      "heading": "Open the campaign you're testing",
+      "body": "Inside Campaigns, open the draft. The builder lays the setup out as a checklist: Sender, Recipients, Subject and Design, each getting a green checkmark once it's filled in. You don't need every section complete to run a test, but Design needs a working layout, or there's nothing worth previewing yet.",
+      "image": null
     },
     {
       "heading": "Click Preview & Test",
-      "body": "At the top of the campaign screen, next to the black Schedule button, sits a Preview & Test button. This is the one to use before Schedule, not after — it sends a real copy of the current draft to addresses you choose, without touching your actual recipient list or counting against a live send.",
+      "body": "At the top of the campaign screen, next to the black Schedule button, sits Preview & Test. Opening it splits into two tools: a Preview tab for checking the design against a real contact, and a Send test email tab for firing an actual copy to addresses you control. Neither touches your live recipient list or counts as a real send.",
       "image": { "file": "/screenshots/VYIKeeaZtcs/04.webp", "caption": "The campaign creation screen, with Preview & Test sitting directly next to Schedule at the top of the page." }
     },
     {
-      "heading": "Send the test to yourself or your team",
-      "body": "From the Preview & Test menu, enter one or more email addresses to receive the test — your own inbox, a coworker's, or a small internal group. Because this bypasses your real contact list, it's the safest way to catch a broken layout before your subscribers see it."
+      "heading": "Preview the email as a real contact",
+      "body": "On the Preview tab, start typing a recipient's address into the Select a contact field and click it. The design reloads showing exactly what that person would receive, with personalization variables replaced by their real attributes. Use the desktop and mobile icons in the header to switch views, and check the separate View in inbox tab if you want to see how the layout renders across clients like Gmail or Outlook, not just Brevo's own preview pane.",
+      "image": null
     },
     {
-      "heading": "Check the test email on desktop and mobile",
-      "body": "Open the delivered test in both a desktop mail client and your phone's mail app if you can. Spacing, image scaling, and button placement often look fine in the builder's preview pane but shift once rendered by an actual email client, which is exactly the gap a test send exists to catch."
+      "heading": "Send a real test email to your test list",
+      "body": "The Send test email tab sends an actual copy of the draft, but only to addresses already on your Brevo test list, managed separately under Settings, then Campaigns, then Test List. That list holds up to 20 addresses. If the person you want isn't on it yet, click Manage test list, add them, refresh the page, then select them in the Recipients field.\n\nThere's a daily cap of 50 test sends across your account, and on a Free plan, links inside a test email expire roughly 30 minutes after it arrives, so click through them soon after the test lands, not the next morning.",
+      "image": null
     },
     {
-      "heading": "Verify links and personalization tags",
-      "body": "Click through every link in the test to confirm it lands on the right page, and check any merge tags for names or custom fields. If you're not sending the test to an address that exists in your real contact list, personalization tags may show blank or use the fallback text you configured instead of a real name — that's expected for test sends, not a bug, so don't mistake it for broken merge tags once the real campaign goes out."
+      "heading": "Check links, and expect blank merge tags in the test copy",
+      "body": "Click every link in the test to confirm it lands on the right page. Merge tags behave differently depending on which tool sent the email: the Preview tab pulls real attribute data because you picked an actual contact, but a Send test email copy goes to test-list addresses that usually aren't real customers, so names and custom fields show blank or fall back to whatever default text you configured. That's expected, not a sign the tags are broken for the real send.",
+      "image": null
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The test email link doesn't work anymore",
+      "cause": "On Brevo's Free plan, links inside a test email expire about 30 minutes after delivery.",
+      "fix": "Send a fresh test and click through the links promptly, or test from a paid plan if the links need to stay live longer."
+    },
+    {
+      "problem": "I can't add a coworker's address to the test send",
+      "cause": "Send test email only accepts addresses already on your account's test list, which is capped at 20.",
+      "fix": "Open Settings, then Campaigns, then Test List, add the address there, refresh the campaign page, then select it in Recipients."
+    },
+    {
+      "problem": "The test email never arrives",
+      "cause": "Brevo's own troubleshooting points to a few common causes: an improperly authenticated sending domain, a firewall or spam filter blocking it, or the message queued at the recipient's mail provider.",
+      "fix": "Check your domain authentication in Brevo's sender settings first, then check spam and promotions folders before assuming the send failed."
     }
   ],
   "faq": [
-    { "question": "Does sending a test email count against my sending limit?", "answer": "Preview & Test sends are separate from your live campaign send and don't go to your real contact list, though it's still worth checking your specific plan's terms if you're near a sending cap." },
-    { "question": "Can I send a test to multiple people at once?", "answer": "Yes. The Preview & Test option accepts more than one address, so you can loop in a coworker or two before the campaign goes live." },
-    { "question": "Why do my merge tags show up empty in the test email?", "answer": "Test addresses usually aren't part of your real contact list, so they don't carry the custom attribute data merge tags pull from. This is expected in a test send and doesn't mean the tags are broken for real recipients." },
-    { "question": "Where is the test option in the Brevo campaign builder?", "answer": "On the campaign creation screen, at the top of the page next to the Schedule button — labeled Preview & Test." },
-    { "question": "Should I test on mobile as well as desktop?", "answer": "Yes. Spacing, image scaling, and button layout frequently render differently between desktop and mobile mail clients, and the builder's own preview pane won't always catch those differences." }
+    {
+      "question": "Does sending a test email count against my sending limit?",
+      "answer": "No. Both the Preview tab and Send test email tool are separate from a live campaign send and don't touch your real contact list. There's a daily cap of 50 test sends per account, separate from your live sending limit."
+    },
+    {
+      "question": "How many addresses can I send a test to?",
+      "answer": "Up to 20 addresses can sit on your Brevo test list at once (Settings, then Campaigns, then Test List), and you can select as many of them as you need for a given test send."
+    },
+    {
+      "question": "Why do my merge tags show up empty in the test email?",
+      "answer": "Test-list addresses usually aren't part of your real contact list, so they carry no custom attribute data for merge tags to pull from. That's expected in a Send test email copy; the Preview tab, which uses a real contact, shows the actual data instead."
+    },
+    {
+      "question": "Where is the test option in the Brevo campaign builder?",
+      "answer": "At the top of the campaign creation screen, next to Schedule, labeled Preview & Test."
+    },
+    {
+      "question": "Should I check the test on mobile as well as desktop?",
+      "answer": "Yes. Use the desktop and mobile icons on the Preview tab, or the View in inbox tab to compare rendering across real email clients like Gmail and Outlook, since spacing and image scaling often shift once an actual client renders them."
+    }
   ],
+  "references": [
+    {
+      "label": "Brevo Help Center: Preview and test your email",
+      "url": "https://help.brevo.com/hc/en-us/articles/4741964626066-Preview-and-test-your-email"
+    },
+    {
+      "label": "Brevo Help Center: Create a test list",
+      "url": "https://help.brevo.com/hc/en-us/articles/209499565-Create-a-test-list"
+    }
+  ],
+  "verifiedNote": "Screens and click path come from a walkthrough recorded in July 2025. Re-checked against Brevo's official help center in September 2026, which corrected two things this guide previously simplified: test recipients must already sit on a separate, 20-address test list instead of being typed in freely, and Free-plan test emails have links that expire after about 30 minutes.",
   "generatedAt": "2026-07-31T09:15:00Z",
   "deep": true
 }

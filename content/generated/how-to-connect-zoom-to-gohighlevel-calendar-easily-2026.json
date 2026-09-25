@@ -1,68 +1,90 @@
 {
   "slug": "how-to-connect-zoom-to-gohighlevel-calendar-easily-2026",
   "seoTitle": "How to Connect Zoom to Your GoHighLevel Calendar",
-  "metaDescription": "Connect Zoom to your GoHighLevel calendar step by step, from the Connections settings page to authorizing Zoom, so meeting links generate automatically.",
-  "intro": "Manually creating a Zoom link and pasting it into every booking confirmation doesn't scale past a handful of appointments a week. GoHighLevel has a native video conferencing connection built into its calendar settings that generates a fresh Zoom link automatically every time someone books, no copy-pasting required. This guide shows exactly where that setting lives, what the Zoom authorization screen looks like when you connect it, and what to check afterward so clients actually receive working meeting links.",
+  "metaDescription": "Connect Zoom to a GoHighLevel calendar the way HighLevel's own docs describe it: a per-user connection, not an account-wide one, limited to specific calendar types.",
+  "intro": "Manually creating a Zoom link and pasting it into every booking confirmation doesn't scale past a handful of appointments a week. GoHighLevel has a native video conferencing connection built into its calendar settings that generates a fresh Zoom link automatically every time someone books.\n\nOne thing the setup screens don't make obvious: this connection lives on each user's own profile, not on the sub-account as a whole, and it only works on certain calendar types. This guide shows where the setting lives, what the Zoom authorization screen looks like, and the constraints HighLevel's own documentation puts on both.",
+  "prerequisites": [
+    "A Zoom account for each team member who takes bookings, since the connection is per user, not per sub-account",
+    "A calendar already set up as one of the types that support dynamic Zoom links: Personal, Round Robin, Collective, or Service"
+  ],
   "steps": [
     {
-      "heading": "Open Calendars, then Connections in Settings",
-      "body": "From the main GoHighLevel sidebar, go to Settings and choose Calendars. At the top of that page you'll find four tabs — Calendars, Meetings, Rentals, and Connections — and Connections is where every third-party tool your calendar can talk to lives, including video conferencing providers, not just calendar sync. On a fresh sub-account this page opens to an empty state under the Calendars tab reading \"No connections found,\" with an Add new button, which is easy to mistake for the whole page rather than just one of its three sections.",
+      "heading": "Understand the per-user connection, then open the settings",
+      "body": "GoHighLevel ties a Zoom connection to an individual user's profile, not to the sub-account as a whole: one Zoom account per user, and each teammate taking bookings needs to connect their own. Start from either of two places: Settings, then My Profile, then the Video conferencing tab under Calendar, or Settings, then Calendars, then Connections. Connections lists every third-party tool your calendars can talk to, video conferencing included, and on a fresh sub-account it opens to an empty state reading \"No connections found\" under its Calendars tab. That's easy to mistake for the whole page instead of one of its several tabs.",
       "image": {
         "file": "/screenshots/ANtkVGOaROQ/03.webp",
         "caption": "The Connections page under Settings, Calendars. Video conferencing tools like Zoom live in their own tab here, separate from calendar sync."
       }
     },
     {
-      "heading": "Switch to the Video conferencing tab and click Connect on Zoom",
-      "body": "Within Connections, click over to the Video conferencing tab. This section lists Google Meet, Zoom, and Microsoft Teams side by side, each with its own Connect button, and a short line explaining that connecting one lets GoHighLevel automatically generate a unique meeting link every time an appointment is scheduled. Google Meet has a dependency worth noting — GoHighLevel flags that it requires Google Calendar to be connected first — but Zoom has no such prerequisite, so you can connect it on its own.",
+      "heading": "Open the Video conferencing tab and click Connect on Zoom",
+      "body": "Within Connections, switch to the Video conferencing tab. It lists Google Meet, Zoom, and Microsoft Teams side by side, each with its own Connect button, plus a line explaining that connecting one lets GoHighLevel generate a unique meeting link every time an appointment is booked. Google Meet needs Google Calendar connected first; Zoom has no such prerequisite, so you can connect it on its own.",
       "image": {
         "file": "/screenshots/ANtkVGOaROQ/05.webp",
         "caption": "The Video conferencing section, listing Google Meet, Zoom, and Microsoft Teams with individual Connect buttons for each provider."
       }
     },
     {
-      "heading": "Sign in to Zoom and authorize the connection",
-      "body": "Clicking Connect opens Zoom's own sign-in screen in an overlay, complete with Zoom's branding and the usual email and password fields, plus SSO, Apple, Google, Facebook, and Microsoft as alternate sign-in options. Enter the credentials for the Zoom account you want GoHighLevel to book meetings through — this matters if your business has more than one Zoom account, since whichever one you authorize here is the one every future booking will use. After signing in, Zoom will ask you to approve the permissions GoHighLevel is requesting; accept, and control returns to the Connections page with Zoom now showing as connected.",
+      "heading": "Sign in to Zoom and authorize",
+      "body": "Clicking Connect opens Zoom's own sign-in screen in an overlay, with the usual email and password fields plus SSO, Apple, Google, Facebook, and Microsoft as alternatives. Sign in with the Zoom account this user should book meetings through. Because the connection lives on your own profile, a colleague doing the same thing later authorizes their own Zoom account separately, and the two don't overwrite each other. After signing in, approve the permissions GoHighLevel requests, and you land back on Connections with Zoom showing as connected.",
       "image": {
         "file": "/screenshots/ANtkVGOaROQ/04.webp",
-        "caption": "Zoom's sign-in screen appears in an overlay after clicking Connect, prompting you to log in with the Zoom account GoHighLevel should use."
+        "caption": "Zoom's sign-in screen appears in an overlay after clicking Connect, prompting you to log in with the Zoom account this user should book meetings through."
       }
     },
     {
-      "heading": "Attach Zoom to the specific calendar or event type",
-      "body": "Connecting Zoom at the account level makes it available, but each individual calendar or appointment type still needs Zoom selected as its meeting location. Open the calendar you want to use it on, find the meeting location or conferencing setting, and choose Zoom from the list instead of a physical address or phone call. Skip this and clients booking that calendar won't get a Zoom link even though the integration itself is live — a common gap between \"connected\" and \"actually being used.\""
+      "heading": "Set Zoom as the meeting location on an eligible calendar",
+      "body": "A connected Zoom account only generates links on calendar types that support it. Per GoHighLevel's own documentation, that's Personal, Round Robin, Collective, and Service calendars; other calendar types won't offer Zoom as a meeting-location option no matter how the account is connected. Open the calendar you want to use it on, find its meeting location setting, and choose Zoom instead of a physical address or phone call."
     },
     {
       "heading": "Confirm the automatic link generation works",
-      "body": "Book a test appointment through the calendar's public booking page as if you were a client. If the connection is working, the confirmation screen and the confirmation email should both include a unique Zoom join link and dial-in details generated specifically for that booking, not a static link you set once. Check that the link actually opens a valid Zoom meeting a few minutes before the scheduled time, since a broken or expired authorization will still show a link in the email — it just won't connect to anything real."
+      "body": "Book a test appointment through the calendar's public booking page, as a client would. A working connection puts a unique Zoom join link and dial-in details in both the confirmation screen and the confirmation email, generated fresh for that booking instead of a static link set once. Zoom's API allows roughly 100 meeting-creation requests a day per connected account, so a very high-volume calendar could hit that ceiling before the day resets."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Zoom shows connected, but one teammate's calendar still isn't generating links",
+      "cause": "The connection is tied to each user's own profile. Connecting Zoom under your account doesn't connect it for anyone else.",
+      "fix": "Have that teammate sign in and connect their own Zoom account under their profile."
     },
     {
-      "heading": "Layer in reminders so clients actually show up",
-      "body": "With the link generating correctly, use GoHighLevel's workflow or appointment reminder tools to send that Zoom link again closer to meeting time — a confirmation email sent days in advance is easy to lose in an inbox. A reminder an hour or a day before, with the same Zoom details restated, meaningfully cuts down on no-shows for consultations, demos, and any other meeting type booked straight from your calendar."
+      "problem": "A specific calendar never offers Zoom as a meeting location",
+      "cause": "Dynamic Zoom links only work on Personal, Round Robin, Collective, and Service calendars.",
+      "fix": "Switch the calendar to one of those types, or add the Zoom link manually for other calendar types."
+    },
+    {
+      "problem": "Links stopped generating partway through a heavy booking day",
+      "cause": "Zoom's API caps meeting-creation requests at around 100 per day per connected account.",
+      "fix": "Wait for the daily reset, or spread bookings across a second connected Zoom account for high-volume calendars."
     }
   ],
   "faq": [
     {
       "question": "Do I need a paid Zoom account to connect it to GoHighLevel?",
-      "answer": "A standard Zoom account is generally sufficient to authorize the connection, though meeting length limits and participant caps still follow whatever Zoom plan that account is on."
+      "answer": "A standard Zoom account is enough to authorize the connection. Meeting length limits and participant caps still follow whatever Zoom plan that account is on."
     },
     {
       "question": "Will clients automatically receive the Zoom link after booking?",
-      "answer": "Yes — once Zoom is connected and set as the meeting location on a calendar, GoHighLevel generates a unique link for each booking and includes it in the confirmation email automatically."
+      "answer": "Yes, once Zoom is connected and set as the meeting location on an eligible calendar. GoHighLevel generates a unique link per booking and includes it in the confirmation email."
     },
     {
-      "question": "Can I disconnect Zoom from GoHighLevel later?",
-      "answer": "Yes, return to Settings, Calendars, Connections, Video conferencing, and you can disconnect or reconnect Zoom from the same panel at any time."
+      "question": "Does every team member need to connect Zoom separately?",
+      "answer": "Yes. The connection lives on each user's own profile, so a teammate taking their own bookings needs to sign in and authorize their own Zoom account, not share yours."
     },
     {
       "question": "Why isn't my calendar generating Zoom links even though Zoom shows as connected?",
-      "answer": "The account-level connection and a calendar's meeting location setting are separate. Open the specific calendar and confirm Zoom is selected as its conferencing option, not just connected at the account level."
+      "answer": "Either the calendar isn't one of the types HighLevel supports for dynamic Zoom links (Personal, Round Robin, Collective, and Service), or the connection was made under a different user's profile than the one that owns the calendar."
     },
     {
-      "question": "Does this integration work for recurring meetings?",
-      "answer": "Yes, it works on both one-time bookings and recurring appointment types, generating a fresh link for each occurrence in the same way."
+      "question": "Can I disconnect Zoom from GoHighLevel later?",
+      "answer": "Yes. Return to Settings, then Calendars, then Connections, then Video conferencing, and disconnect or reconnect Zoom from the same panel at any time."
     }
   ],
+  "references": [
+    { "label": "HighLevel Support: Integrating Zoom with HighLevel Calendars (official)", "url": "https://help.gohighlevel.com/support/solutions/articles/155000002372-integrating-zoom-with-highlevel-calendars" },
+    { "label": "HighLevel Support: Zoom Integration for Users' Calendar Bookings (official)", "url": "https://help.gohighlevel.com/support/solutions/articles/48001179593-zoom-integration-for-users-calendar-bookings" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025. Re-checked against GoHighLevel's own support articles in September 2026: the original draft described this as an account-level connection, but HighLevel ties it to each user's profile instead. Its docs also limit dynamic Zoom links to Personal, Round Robin, Collective, and Service calendars, and note a roughly 100-meeting-per-day API ceiling per connected account. All three corrections are reflected above.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

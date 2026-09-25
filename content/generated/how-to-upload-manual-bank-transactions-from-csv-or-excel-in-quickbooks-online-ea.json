@@ -1,17 +1,21 @@
 {
   "slug": "how-to-upload-manual-bank-transactions-from-csv-or-excel-in-quickbooks-online-ea",
-  "seoTitle": "Upload Bank Transactions From CSV/Excel to QBO",
-  "metaDescription": "Learn how to upload bank transactions from a CSV or Excel file into QuickBooks Online, including mapping columns correctly and verifying the import.",
-  "intro": "When a bank feed isn't available, or you'd rather control exactly what gets imported, QuickBooks Online lets you bring transactions in manually from a CSV or Excel file instead of typing each one by hand. This guide covers where that upload option actually lives, how the column-mapping step works so QuickBooks reads your file correctly, and how to check the results once they land in your account. It's aimed at business owners and accountants managing books for one company or several clients without a direct bank connection.",
+  "seoTitle": "Upload Bank Transactions From CSV or Excel to QBO",
+  "metaDescription": "Learn how to upload bank transactions into QuickBooks Online: why Excel files need saving as CSV first, how column mapping works, and the file's size and row limits.",
+  "intro": "When a bank feed isn't available, or you'd rather control exactly what gets imported, QuickBooks Online lets you bring transactions in from a file instead of typing each one by hand. The importer's fine print catches people out: it accepts CSV, QBO or QFX files, not a raw Excel workbook, and it caps both the file size and the number of transaction lines per upload. This guide covers turning an Excel sheet into a file QuickBooks will accept, how the column-mapping step works, and how to check the results once they land in your account. It's aimed at business owners and accountants managing books for one company or several clients without a direct bank connection.",
+  "prerequisites": [
+    "A bank or credit card account already set up in Bank transactions",
+    "Transaction data in a spreadsheet, saved as CSV before upload — QuickBooks Online's importer doesn't read .xlsx directly"
+  ],
   "steps": [
     {
-      "heading": "Format your file before you upload anything",
-      "body": "QuickBooks Online's importer expects a simple, consistent structure: one row per transaction, with clear columns for date, description, and amount. Keep dates in a single consistent format throughout the file rather than mixing styles, and decide up front whether your amounts will sit in one column (positive for deposits, negative for withdrawals) or split across separate spend and receive columns — you'll be asked to specify this during import, so it's easier to structure the file correctly the first time than to fix it mid-upload.",
+      "heading": "Build the file, then save it as CSV, not Excel",
+      "body": "QuickBooks Online's importer accepts CSV, QBO or QFX files. An Excel workbook (.xlsx) has to be saved as CSV before it will upload: keep the data in Excel while you build it, then use File, Save As, CSV once it's ready.\n\nThe file needs one row per transaction and either three columns (Date, Description, Amount) or four (Date, Description, Credit, Debit). Use a single, consistent date format throughout the whole file; QuickBooks recommends dd/mm/yyyy. Strip currency symbols and stray text from amount cells, drop the word \"Amount\" from Credit or Debit headers, and leave any cell that's genuinely zero blank instead of filled with a 0.\n\nQuickBooks also caps the file itself: 350KB and 1,000 transaction lines per upload. Split a larger export into smaller date ranges instead of pushing it through in one file.",
       "image": null
     },
     {
-      "heading": "Go to Bank transactions and pick the account",
-      "body": "From the left-hand menu under Accounting, open Bank transactions. Each connected or manually tracked account shows as its own tile — Salary, Uncategorized Asset, and so on — with a running pending and posted transaction count. Select the account you're uploading into, then use the Link account dropdown in the top right; alongside connecting a live bank feed, it includes the option to upload transactions from a file, which is the entry point into the import wizard.",
+      "heading": "Open Bank transactions and start the upload",
+      "body": "From the left-hand menu, open Accounting, then Bank transactions. Each connected or manually tracked account shows as its own tile, with a running pending and posted transaction count. Select the account you're uploading into, then use the Link account dropdown in the top right and choose Upload from file. Alongside the option to connect a live bank feed, this is the entry point into the import wizard, and it also accepts a PDF or image of a statement if that's what you have instead of a spreadsheet.",
       "image": {
         "file": "/screenshots/tVsvzs6O5O4/04.webp",
         "caption": "The Bank transactions screen for a specific account, showing pending and posted counts and the Link account dropdown where a file upload starts."
@@ -19,15 +23,15 @@
     },
     {
       "heading": "Map your file's columns to QuickBooks fields",
-      "body": "After selecting your file, the wizard first confirms basic file details — whether the first row is a header, how many columns hold amounts, and what date format the file uses. Step 2 is the important part: match each QuickBooks field (Date, Description, Amount, and an optional Check number) to the correct column from your file using the dropdowns provided. QuickBooks usually guesses correctly if your headers are named sensibly, but it's worth checking every row in this table before clicking Continue, since a swapped Date/Amount mapping is hard to spot until transactions land with nonsense values.",
+      "body": "After selecting your file, the wizard first confirms basic details: whether the first row is a header, and what date format the file uses. Step 2 is the important part: match each QuickBooks field (Date, Description, Amount and an optional Check number, or Credit and Debit if you built a four-column file) to the correct column from your file using the dropdowns provided. QuickBooks usually guesses correctly when headers are named sensibly, but check every row in this table before clicking Continue. A swapped Date and Amount mapping is hard to spot until transactions land with nonsense values.",
       "image": {
         "file": "/screenshots/tVsvzs6O5O4/05.webp",
         "caption": "The import wizard's field-mapping step, matching Date, Description, Amount, and Check number to the corresponding columns from an uploaded file."
       }
     },
     {
-      "heading": "Review what actually came in",
-      "body": "Once the import finishes, the transactions land in the Bank transactions list for that account, sitting under a Pending tab alongside anything already there from a connected feed. Each row shows the date, description, and amount as imported, with columns for assigning a customer or vendor and a category before you post it. Scroll through the full batch and compare the count against your source file — a mismatch usually means a formatting issue skipped a row rather than QuickBooks silently dropping data.",
+      "heading": "Review what came in",
+      "body": "Once the import finishes, the transactions land in the Bank transactions list for that account, sitting under a Pending tab alongside anything already there from a connected feed. Each row shows the date, description and amount as imported, with columns for assigning a customer or vendor and a category before you post it. Scroll through the full batch and compare the count against your source file. A mismatch usually means a formatting issue skipped a row, not QuickBooks silently dropping data.",
       "image": {
         "file": "/screenshots/tVsvzs6O5O4/02.webp",
         "caption": "Imported bank transactions sitting in the review list, each needing a customer or vendor and category assigned before posting."
@@ -35,23 +39,52 @@
     },
     {
       "heading": "Categorize and post each transaction",
-      "body": "For each row, use the \"Select customer\" or \"Select vendor\" field and the category dropdown to classify the transaction, then click Post. Batch-select several rows with matching categories when you can, using the checkboxes on the left, since posting one at a time gets slow once you're working through a file with dozens of rows. Leaving transactions sitting in Pending without posting them means they won't show up correctly in reports, so don't treat the import itself as the finish line.",
-      "image": null
-    },
-    {
-      "heading": "Troubleshoot common import issues",
-      "body": "If transactions come in with the wrong sign, missing amounts, or garbled dates, the fix is almost always back in the column mapping or the source file's date format rather than anything on the QuickBooks side. Duplicate transactions usually mean the same file — or an overlapping date range — got uploaded twice; check the Excluded tab, since QuickBooks sometimes flags likely duplicates there instead of adding them outright. When in doubt, delete the bad batch from Pending and re-run the import rather than trying to hand-correct dozens of rows individually.",
+      "body": "For each row, use the Select customer or Select vendor field and the category dropdown to classify the transaction, then click Post. Batch-select several rows with matching categories using the checkboxes on the left when you can; posting one at a time gets slow once you're working through a file with dozens of rows. Transactions left sitting in Pending won't show up correctly in reports, so don't treat the import itself as the finish line.",
       "image": null
     },
     {
       "heading": "Reconcile once everything looks right",
-      "body": "After posting a clean batch of imported transactions, run a reconciliation for that account against your actual statement to confirm the ending balance matches. This is the real verification step — a smooth-looking import can still hide an error that only shows up once you check the account's balance against reality, so don't skip it just because the upload itself went without errors."
+      "body": "After posting a clean batch, run a reconciliation for that account against your actual statement to confirm the ending balance matches. This is the real check: a smooth-looking import can still hide an error that only shows up once the account's balance is checked against reality.",
+      "image": null
+    }
+  ],
+  "tables": [
+    {
+      "title": "Two supported column layouts",
+      "columns": ["Format", "Columns required", "Best for"],
+      "rows": [
+        ["3-column", "Date, Description, Amount", "A source where deposits and withdrawals already share one signed amount column"],
+        ["4-column", "Date, Description, Credit, Debit", "A source where deposits and withdrawals are already split into separate columns"]
+      ],
+      "note": "QuickBooks Online reads one of these two layouts per file, decided during the mapping step, not both at once."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The file won't upload at all",
+      "cause": "It's an .xlsx workbook (QuickBooks Online's importer doesn't read Excel files directly), or it's over the 350KB / 1,000-line limit.",
+      "fix": "Save the file as CSV from Excel, and split anything larger by date range so each upload stays under both limits."
+    },
+    {
+      "problem": "Amounts or dates come in wrong",
+      "cause": "A mismatched column mapping, more than one date format in the same file, or leftover currency symbols and letters in a numeric column.",
+      "fix": "Recheck the mapping table field by field, use one consistent date format throughout, and clear symbols and text from amount cells before re-uploading."
+    },
+    {
+      "problem": "The same transactions show up twice",
+      "cause": "The same file, or an overlapping date range, got uploaded more than once.",
+      "fix": "Check the Excluded tab in Bank transactions, since QuickBooks often flags likely duplicates there instead of posting them outright; delete the duplicate batch from Pending instead of fixing rows individually."
+    },
+    {
+      "problem": "A four-column file's Credit or Debit values get ignored",
+      "cause": "The column headers still contain the word \"Amount\" (for example, \"Credit Amount\"), which the four-column mapping doesn't parse correctly.",
+      "fix": "Rename the headers to just Credit and Debit before uploading."
     }
   ],
   "faq": [
     {
-      "question": "What file formats can I use to upload bank transactions to QuickBooks Online?",
-      "answer": "CSV and Excel files both work, as long as the file has clear date, description, and amount columns that you can map during the import wizard."
+      "question": "Can I upload an Excel file directly to QuickBooks Online?",
+      "answer": "No. QuickBooks Online's importer accepts CSV, QBO or QFX files. Build the data in Excel if that's easiest, then save it as CSV (File, Save As, CSV) before uploading."
     },
     {
       "question": "Why would I need to manually upload bank transactions?",
@@ -59,17 +92,28 @@
     },
     {
       "question": "What should I do if the import brings in the wrong amounts or dates?",
-      "answer": "Check the field mapping and date format settings from the import wizard first — most import errors trace back to a mismatched column rather than a QuickBooks bug, and re-running the import after fixing the file is usually faster than correcting rows by hand."
+      "answer": "Check the field mapping and date format first. Most import errors trace back to a mismatched column or an inconsistent date format in the source file, not a QuickBooks bug."
     },
     {
-      "question": "Should I reconcile transactions after uploading them?",
-      "answer": "Yes. Posting the imported transactions isn't the same as verifying them — run a reconciliation against your actual statement afterward to confirm the account's ending balance is correct."
+      "question": "Is there a size limit on the file I upload?",
+      "answer": "Yes: 350KB per file and up to 1,000 transaction lines. For a longer export, split it into smaller date ranges and upload each one separately."
     },
     {
       "question": "What if the same transactions get imported twice?",
-      "answer": "Check the Excluded tab in Bank transactions, since QuickBooks often flags likely duplicates there instead of posting them automatically. If a whole batch was uploaded twice, it's cleaner to delete the duplicate set from Pending than to sort it out row by row."
+      "answer": "Check the Excluded tab in Bank transactions; QuickBooks often flags likely duplicates there instead of posting them automatically. If a whole batch was uploaded twice, delete the duplicate set from Pending instead of sorting it out row by row."
     }
   ],
+  "references": [
+    {
+      "label": "Intuit QuickBooks: Manually upload transactions into QuickBooks Online (official)",
+      "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/import-transactions/manually-upload-transactions-quickbooks-online/L0rE9OXBz_US_en_US"
+    },
+    {
+      "label": "Intuit QuickBooks: Common errors for importing bank transactions using CSV (official)",
+      "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/import-transactions/common-errors-importing-bank-transactions-using/L02IgW462_US_en_US"
+    }
+  ],
+  "verifiedNote": "Screens and click path come from a walkthrough recorded in July 2025. Re-checked against Intuit's official QuickBooks Online support articles in September 2026, which corrected the file-format claim this guide previously made: the importer takes CSV, QBO or QFX, not an .xlsx file directly, and applies a 350KB / 1,000-line cap this guide didn't previously mention.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

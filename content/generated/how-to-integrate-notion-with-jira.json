@@ -1,45 +1,77 @@
 {
   "slug": "how-to-integrate-notion-with-jira",
   "seoTitle": "How to Integrate Notion With Jira Using Notion+",
-  "metaDescription": "Connect Notion and Jira with the Notion+ marketplace app, which embeds published Notion pages as tabs inside Jira issues.",
-  "intro": "Teams often keep planning docs and specs in Notion while tracking execution in Jira, and without a link between the two, whoever's in Jira has to go hunting for the right Notion page separately. There's no first-party Notion-built integration for this — instead, the practical route is a Jira Marketplace app called Notion+ for Jira, built by a third-party developer (Appsz), which embeds published Notion pages directly inside a Jira issue as a tab. This guide covers finding that app in the Jira Marketplace, what it actually does, and what to check before installing it on a real team.",
+  "metaDescription": "Connect Notion and Jira with the Notion+ for Jira marketplace app, which embeds published Notion pages inside a Jira issue.",
+  "intro": "Teams often keep planning docs and specs in Notion while tracking execution in Jira. Without a link between the two, whoever's in Jira has to go hunting for the right Notion page separately. There's no first-party integration from either company for this. The practical route is a Jira Marketplace app called Notion+ for Jira, built by a third-party developer, Apps+, which embeds a published Notion page directly inside a Jira issue. This guide covers finding that app in the Jira Marketplace, what it does, and what to check before installing it on a real team.\n\nOne thing worth flagging up front: Apps+ has updated this app since the screenshots for this guide were recorded, and the exact embed screen you see may not match what's pictured here. The core mechanic, embedding a published Notion page inside a Jira issue, hasn't changed.",
+  "prerequisites": [
+    "A Notion page you're able to publish or share (a private draft won't embed)",
+    "Jira admin or app-install permissions, or a teammate who has them"
+  ],
   "steps": [
     {
       "heading": "Know what you're linking a Notion page to",
-      "body": "A Jira board — a Kanban view grouped by epic, with columns like To Do, In Progress, In Development, and Done — is the destination this integration is built for. Each card carries a key like TS-12 or TS-8, a due date, and an assignee, and the goal of linking Notion is to give someone looking at a card like \"Log in page fail to load\" a one-click path to whatever Notion doc has the spec or investigation notes, instead of switching tabs and searching Notion manually.",
-      "image": { "file": "/screenshots/6kdoSiNsS_o/01.webp", "caption": "A Jira Kanban board grouped by epic — the kind of board where a linked Notion doc saves someone a manual search." }
+      "body": "A Jira board is the destination this integration is built for: a Kanban view grouped by epic, with columns like To Do, In Progress, In Development and Done. Each card carries a key like TS-12 or TS-8, a due date and an assignee. Linking Notion gives someone looking at a card like \"Log in page fail to load\" a one-click path to whatever Notion doc has the spec or investigation notes, instead of switching tabs and searching Notion by hand.",
+      "image": { "file": "/screenshots/6kdoSiNsS_o/01.webp", "caption": "A Jira Kanban board grouped by epic, the kind of board where a linked Notion doc saves someone a manual search." }
     },
     {
       "heading": "Search the Jira Marketplace, not Notion's settings",
-      "body": "The integration is installed from Jira's side. Inside Jira, open Apps → Explore more apps to reach \"Explore apps for Jira,\" then search \"notion.\" This is worth knowing up front because it's easy to assume the setup starts in Notion's own integrations settings — it doesn't, since this particular connector is a Jira-side app rather than something Notion publishes itself. The search surfaces several results ranked by relevance, star rating, and install count, the same way any Jira Marketplace search works for other categories of app.",
+      "body": "The integration installs from Jira's side, not Notion's. Inside Jira, open Apps, then Explore more apps, to reach \"Explore apps for Jira,\" and search \"notion.\" It's easy to assume this starts in Notion's own integrations settings; it doesn't, since this particular connector is a Jira-side app, not something Notion publishes itself. The search surfaces several results ranked by relevance, star rating and install count, the same way any Jira Marketplace search works.",
       "image": { "file": "/screenshots/6kdoSiNsS_o/03.webp", "caption": "Searching \"notion\" inside Jira's Explore apps for Jira marketplace." }
     },
     {
       "heading": "Check the Notion+ for Jira listing before installing",
-      "body": "Notion+ for Jira, developed by Appsz, describes itself plainly: \"Fast embed published Notion pages like a pro with beautiful tabs in Jira.\" Its listing shows an overall rating of 2.5 out of 5 from 13 reviews and carries an Atlassian Cloud Fortified trust signal. That rating is worth weighing against your needs — it's not a heavily reviewed, top-tier app, so it's worth reading a few of the actual reviews on the Reviews tab before committing a whole team to it, especially if the workflow is business-critical.",
-      "image": { "file": "/screenshots/6kdoSiNsS_o/04.webp", "caption": "The Notion+ for Jira listing in the Jira Marketplace — a third-party app by Appsz with a 2.5/5 overall rating." }
+      "body": "Notion+ for Jira is built by Apps+, a marketplace partner that describes itself as the largest Atlassian app developer. As of September 2026 the listing carries an overall rating of 2.5 out of 5 from 13 reviews, a Cloud Fortified trust signal, and 400-plus installs. That's a real but thin review base for a workflow you might roll out to a whole team. Read a handful of the actual reviews on the Reviews tab before committing, especially for anything business-critical.\n\nThe listing states plainly that this is a third-party integration, independent of Notion Inc., which is worth mentioning to any teammate who assumes Notion built the connector itself.",
+      "image": { "file": "/screenshots/6kdoSiNsS_o/04.webp", "caption": "The Notion+ for Jira listing in the Jira Marketplace, a third-party app by Apps+ with a 2.5/5 overall rating." }
     },
     {
-      "heading": "Understand what gets embedded",
-      "body": "Scrolling the listing shows the actual embed picker: a tabbed panel inside a Jira issue with Notion, Note, and Image tabs, and inside the Notion tab, a library of block types split into Basic (Blocks, Lists, Full Width, Small Text, Color Rainbow, Code Blocks, Table of Contents, Bookmarks, Links) and Advanced (Image Gallery, Image Upload, Collections, Embeds, File Uploads, Math Equations, Column Layouts, Notion Inception, Tweet Embeds). In practice this means you're not just dropping a raw link — you're embedding a formatted, live-updating slice of a published Notion page directly into the Jira issue's Attach panel.",
+      "heading": "What gets embedded may not match this screenshot",
+      "body": "This screenshot shows the embed picker as it existed when this walkthrough was recorded: a tabbed panel inside a Jira issue with Notion, Note and Image tabs, and inside the Notion tab, a block library split into Basic (Blocks, Lists, Full Width, Small Text, Color Rainbow, Code Blocks, Table of Contents, Bookmarks, Links) and Advanced (Image Gallery, Image Upload, Collections, Embeds, File Uploads, Math Equations, Column Layouts, Notion Inception, Tweet Embeds) types.\n\nApps+'s current marketplace listing describes a simpler mechanic instead: open the triple-dot dropdown on a Jira issue, select Notion, paste a shared Notion link, and click Save. Whichever version you land on, the underlying idea is the same: you're embedding a formatted, published slice of a Notion page into the issue instead of dropping a raw link.",
       "image": { "file": "/screenshots/6kdoSiNsS_o/05.webp", "caption": "The Notion+ embed picker inside a Jira issue, with Basic and Advanced Notion block types available to insert." }
     },
     {
       "heading": "Check pricing before rolling it out",
-      "body": "The listing shows USD 0/month with an estimate shown after a 30-day free trial, meaning it starts free but is expected to convert to a paid tier once the trial ends — the exact post-trial price isn't shown on the overview tab, so check the Pricing details or Support tab, or just start the trial and watch for the renewal notice, before assuming it's free indefinitely. This is a common pattern for Marketplace apps and worth budgeting for if the team ends up relying on it daily."
+      "body": "Apps+ offers a 30-day free trial for teams of any size, and Notion+ for Jira is free to run for up to 10 users after that. Beyond 10 users it converts to a paid Commercial license billed through Atlassian; the exact per-seat number depends on your team size and shows up when you enter it on the Pricing tab of the listing. Budget for that conversion if the team ends up relying on it daily. Don't assume the free tier scales indefinitely.",
+      "image": null
     },
     {
       "heading": "Publish the Notion page first",
-      "body": "One prerequisite this integration makes clear by name — \"embed published Notion pages\" — is that the source page needs to be published (shared publicly or via Notion's site publishing) before it can be pulled into Jira this way. A private, unpublished Notion page won't embed correctly, so the workflow in practice is: finish and publish the Notion doc, then go into the relevant Jira issue and use Notion+ to embed it, rather than trying to link work-in-progress pages."
+      "body": "Both the older and current versions of this app work from a published Notion page, shared publicly or via Notion's site publishing, not a private draft. A private, unpublished page won't embed correctly. The practical workflow is: finish and publish the Notion doc, then go into the Jira issue and embed it, not the other way round.",
+      "image": null
     }
   ],
   "faq": [
-    { "question": "Is there an official integration built by Notion for Jira?", "answer": "Not directly — the common route shown here is a third-party Jira Marketplace app called Notion+ for Jira, built by developer Appsz, rather than a connector published by Notion itself." },
-    { "question": "Where do I install the Notion-Jira connection from?", "answer": "From Jira, not Notion. Open Apps → Explore more apps inside Jira, search \"notion,\" and install Notion+ for Jira from the Marketplace listing." },
-    { "question": "Is Notion+ for Jira free?", "answer": "It lists at USD 0/month with pricing estimated after a 30-day free trial, so it starts free but likely converts to a paid tier — check the app's pricing details before relying on it long-term." },
-    { "question": "Does the embedded Notion page update live in Jira?", "answer": "It embeds a published Notion page with its formatting and blocks intact; since it pulls from the published page, updates you publish in Notion are reflected when the embed refreshes in Jira." },
-    { "question": "Does the Notion page need to be published to embed it?", "answer": "Yes. The app is built to embed published Notion pages, so a private or unpublished page won't embed correctly until it's shared or published from Notion." }
+    {
+      "question": "Is there an official integration built by Notion for Jira?",
+      "answer": "No. The route covered here is a third-party Jira Marketplace app, Notion+ for Jira, built by Apps+. Notion doesn't publish its own Jira connector."
+    },
+    {
+      "question": "Where do I install the Notion-Jira connection from?",
+      "answer": "From Jira, not Notion. Open Apps, then Explore more apps, inside Jira, search \"notion,\" and install Notion+ for Jira from the listing."
+    },
+    {
+      "question": "Is Notion+ for Jira free?",
+      "answer": "It's free for teams of up to 10 users after a 30-day trial. Above that it needs a paid Commercial license billed through Atlassian; check the Pricing tab for your team's exact rate."
+    },
+    {
+      "question": "Why doesn't the embed screen match a screenshot I've seen?",
+      "answer": "Apps+ updated the embed interface at some point after earlier screenshots were taken. Some guides show a tabbed block picker with Basic and Advanced categories; the current listing describes a simpler flow, pasting a published Notion link through the triple-dot menu on an issue. Both versions require the source page to be published."
+    },
+    {
+      "question": "Does the Notion page need to be published to embed it?",
+      "answer": "Yes, in either version of the app. A private or unpublished page won't embed until it's shared or published from Notion."
+    }
   ],
+  "references": [
+    {
+      "label": "Notion+ for Jira: Atlassian Marketplace listing",
+      "url": "https://marketplace.atlassian.com/apps/1228889/notion-for-jira"
+    },
+    {
+      "label": "Notion+ for Jira: pricing details, Atlassian Marketplace",
+      "url": "https://marketplace.atlassian.com/apps/1228889/notion-for-jira?tab=pricing"
+    }
+  ],
+  "verifiedNote": "Board and Marketplace-search screens come from a walkthrough recorded in 2025. Re-checked the Notion+ for Jira listing on the Atlassian Marketplace directly in September 2026: the developer name, rating (2.5/5 from 13 reviews) and 30-day trial terms were confirmed live, and the embed mechanic the listing now describes (pasting a published link via the triple-dot menu) no longer matches the Basic/Advanced block picker shown in this guide's screenshot, so both are noted here.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }
