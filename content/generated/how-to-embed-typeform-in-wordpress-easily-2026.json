@@ -1,67 +1,106 @@
 {
   "slug": "how-to-embed-typeform-in-wordpress-easily-2026",
   "seoTitle": "How to Embed Typeform in WordPress (2026 Guide)",
-  "metaDescription": "Add a Typeform to your WordPress site step by step — generate the embed code, set its size and mode, then drop it into a page or post.",
-  "intro": "Sending WordPress visitors away to a separate form page loses some of them before they ever answer a question, so embedding the Typeform directly into the page tends to convert better. The embed code itself comes straight from Typeform's Share panel, not from anything in WordPress, which is the part beginners usually go looking for in the wrong place. This guide covers generating that code with the right size and display settings, then dropping it into a WordPress page so it renders exactly like the live preview.",
+  "metaDescription": "Add a Typeform to your WordPress site: generate the embed code, set its size and mode, drop it into a page, and skip re-copying it every time a setting changes.",
+  "intro": "Sending WordPress visitors away to a separate form page loses some of them before they answer a single question, so embedding the Typeform directly into the page tends to convert better. The embed code comes from Typeform's Share panel, not from anything in WordPress, which is where beginners usually go looking first. This guide covers generating that code with the right size and display settings, dropping it into a WordPress page, and one thing Typeform's own documentation contradicts that a lot of guides get wrong: editing the embed later does not mean regenerating and re-pasting it everywhere.",
+  "prerequisites": [
+    "The Typeform must be published, not just saved as a draft",
+    "The WordPress site must be served over HTTPS; Typeform's own documentation states that embedding on a plain HTTP site isn't supported"
+  ],
+  "costNote": "Embedding a form costs nothing extra. Removing the \"Powered by Typeform\" badge that appears on embedded forms needs a paid Typeform plan above the free tier; the embed itself works the same on every plan.",
   "steps": [
     {
       "heading": "Open Share and choose Embed in a web page",
-      "body": "Inside the form, click Share, then choose \"Embed in a web page\" from the sidebar — it sits alongside Share the link, Embed in an email, and Get targeted respondents. Click New embed to start a fresh configuration; each one gets its own name and its own settings, so you can keep a distinct embed for the homepage separate from one used in a blog post if their sizing needs differ. This is also where a live preview of the form renders on the right, updating instantly as you adjust settings on the left.",
+      "body": "Inside the form, click Share, then choose \"Embed in a web page\" from the sidebar, alongside Share the link, Embed in an email, and Get targeted respondents. Click New embed to start a fresh configuration; each one gets its own name and settings, so a distinct embed for the homepage can be kept separate from one used in a blog post if their sizing needs differ. A live preview of the form renders on the right, updating as settings change on the left.",
       "image": {
         "file": "/screenshots/9SP3NT8eAUY/04.webp",
-        "caption": "The Embed in a web page panel — Embed mode options, Width and Height settings, and a live preview of the form rendering exactly as it will on the page."
+        "caption": "The Embed in a web page panel: Embed mode options, Width and Height settings, and a live preview of the form rendering exactly as it will on the page."
       }
     },
     {
       "heading": "Set the embed mode, width, and height",
-      "body": "The Design tab offers several Embed modes shown as icons — a full-width standard embed, a popup card, a slide-in panel, and a compact button — so pick the one that matches how much space the form should take on the page. Width defaults to 100%, which fills its container, while Height needs a specific pixel value under Fixed unless you want the form cut off partway through a question. Two toggles worth checking before you copy anything: \"Full-screen on mobile\" (usually worth enabling, since a fixed-height form is cramped on small screens) and \"Hide headers,\" which removes Typeform's own top bar if you want the form to blend fully into your page's design.",
-      "image": null
+      "body": "Typeform offers six embed modes: Standard, Full page, Popup, Slider, Popover, and Side tab. Standard fills a space on the page; Full page takes the whole viewport; Popup and Slider both open as an overlay, with Slider adding a slide-in animation; Popover and Side tab attach the form to a small button or tab that opens it on click. Pick whichever matches how much space the form should take. For Standard embeds, set a fixed pixel Height unless the goal is Auto, which Typeform recommends for inline mobile embeds so the form isn't cut off partway through a question. One setting worth correcting here: the toggle labeled Hide type header doesn't remove Typeform's own branding bar. It hides the header that appears above a Question Group or a long, scrollable question, and it has nothing to do with the \"Powered by Typeform\" badge."
     },
     {
-      "heading": "Copy the generated embed code",
-      "body": "Once the mode and dimensions look right in the preview, the panel's code icon (next to Apply changes) opens the actual HTML/JavaScript snippet to copy. This code is what carries your settings — mode, size, toggles — into WordPress; changing a setting later in Typeform means regenerating and re-copying the code, since edits made here don't retroactively update a snippet you already pasted elsewhere.",
-      "image": null
+      "heading": "Generate the embed code, and skip worrying about re-copying it later",
+      "body": "Once the mode and dimensions look right in the preview, click Start embedding to generate the HTML/JavaScript snippet, then Copy it. Here's something the setup panel doesn't spell out: editing this embed's settings later, even after the code is already live on a page, does not require regenerating or re-pasting anything. Typeform's own documentation confirms that clicking Apply changes on an existing embed applies the update automatically to every page carrying that snippet. Re-copying is only needed the first time an embed is created, or when building an entirely separate embed configuration."
     },
     {
       "heading": "Paste it into WordPress with a Custom HTML block",
-      "body": "In the WordPress block editor, add a Custom HTML block wherever the form should appear on the page or post, and paste the copied snippet directly into it. This works without installing anything extra, since WordPress's core editor supports raw HTML blocks out of the box. If you'd rather manage embeds through a dedicated plugin instead of raw code blocks, several form and shortcode plugins support Typeform natively, but the Custom HTML approach is the most direct and doesn't add another dependency to maintain.",
-      "image": null
+      "body": "In the WordPress block editor, type /custom html wherever the form should appear, and select Custom HTML from the menu that opens. Paste the copied snippet in. This works without installing anything, since WordPress's core editor supports raw HTML blocks by default. A dedicated Typeform plugin exists for WordPress too, and page builders like Elementor and Divi have their own Typeform instructions if either is already in use instead of the block editor."
     },
     {
       "heading": "Preview the live embed on the page",
-      "body": "Publish or preview the WordPress page and confirm the form renders and behaves exactly like Typeform's own preview did — a question like an Opinion Scale should show its full 0-10 range, an OK button to advance, and the small \"Powered by Typeform\" badge in the corner unless you've upgraded to a plan that removes it. Click through a question or two on the actual live page rather than trusting the editor preview, since embed rendering can behave slightly differently once it's inside your site's real theme and CSS.",
+      "body": "Publish or preview the WordPress page and confirm the form behaves like Typeform's own preview did: a question such as an Opinion Scale should show its full range, an OK button to advance, and the small \"Powered by Typeform\" badge in the corner unless the account is on a plan that removes it. Click through a question or two on the actual live page instead of trusting the editor preview, since embed rendering can behave slightly differently once it sits inside a site's real theme and CSS.",
       "image": {
         "file": "/screenshots/9SP3NT8eAUY/05.webp",
-        "caption": "The embedded form live on the page — an Opinion Scale question rendering exactly as configured, with its OK button and the Typeform badge in the corner."
+        "caption": "The embedded form live on the page: an Opinion Scale question rendering exactly as configured, with its OK button and the Typeform badge in the corner."
       }
     },
     {
-      "heading": "Match the form's design to your site before going live",
-      "body": "Before publishing broadly, revisit the form's own Design settings in Typeform — background, colors, font — so it doesn't look visually bolted onto your site's theme. A form that shares roughly the same palette as the page around it reads as a native part of the site rather than an obviously external widget, which matters more for conversion than most people expect from something as small as a color match."
+      "heading": "Match the form's design to the site before going live",
+      "body": "Before publishing broadly, revisit the form's own Design settings in Typeform: background, colors, font. A form sharing roughly the same palette as the page around it reads as a native part of the site instead of an obviously external widget, and that match matters more for conversion than its size would suggest."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The embed still shows old settings after changing something in Typeform",
+      "cause": "The WordPress page is probably showing a cached version, since the live embed script pulls the latest settings automatically once Apply changes is clicked.",
+      "fix": "Confirm Apply changes was clicked in Typeform, then clear any WordPress or browser cache before assuming the code needs to be regenerated."
+    },
+    {
+      "problem": "The form looks cut off partway through a question on WordPress",
+      "cause": "The embed's Height is set to a fixed pixel value that's too short for that question, common on Standard embeds viewed on mobile.",
+      "fix": "Switch Height to Auto, which Typeform recommends for inline mobile embeds, or enable Full-screen on mobile under the Design tab."
+    },
+    {
+      "problem": "Toggling Hide type header didn't remove the Powered by Typeform badge",
+      "cause": "Hide type header only hides the header shown above Question Groups and long, scrollable questions; it isn't connected to Typeform's branding badge.",
+      "fix": "Removing the badge needs a paid Typeform plan with white-labeling; the toggle itself won't do it."
+    },
+    {
+      "problem": "The embedded form doesn't load at all on the live page",
+      "cause": "Typeform's own documentation states that embedding on an HTTP, non-HTTPS, site isn't supported.",
+      "fix": "Confirm the WordPress site has a valid SSL certificate and loads over HTTPS before troubleshooting anything else."
     }
   ],
   "faq": [
     {
       "question": "Do I need a plugin to embed Typeform in WordPress?",
-      "answer": "No — WordPress's block editor supports a Custom HTML block that can hold the embed code directly, so no plugin is required, though dedicated form plugins can offer more managed shortcode-based options if you prefer."
+      "answer": "No. WordPress's block editor supports a Custom HTML block that can hold the embed code directly, so no plugin is required, though a dedicated Typeform plugin and page-builder integrations for Elementor and Divi exist if a more managed option is preferred."
     },
     {
       "question": "Can I show the form as a popup instead of inline on the page?",
-      "answer": "Yes. Typeform's Embed mode options in the Share panel include a popup card and a slide-in panel alongside the standard inline embed — pick the mode before copying the code, since each generates a different snippet."
+      "answer": "Yes. Typeform's Embed panel offers six modes: Standard, Full page, Popup, Slider, Popover, and Side tab. Pick the mode before generating the code, since each produces a different snippet."
+    },
+    {
+      "question": "If I change the embed's size or mode after publishing, do I need to re-copy the code?",
+      "answer": "No. Typeform's own help documentation states that clicking Apply changes on an existing embed updates it automatically everywhere it's already pasted. Re-copying is only necessary when creating a brand-new embed."
     },
     {
       "question": "Will the embedded form match my WordPress site's branding?",
-      "answer": "Not automatically — adjust the form's colors, background, and font in Typeform's Design settings before embedding so it visually matches your site rather than standing out as an obviously separate widget."
+      "answer": "Not automatically. Adjust the form's colors, background, and font in Typeform's Design settings before embedding so it visually matches the site instead of standing out as an obviously separate widget."
+    },
+    {
+      "question": "What does the Hide type header toggle do?",
+      "answer": "It hides the header shown above a Question Group or a long, scrollable question. It doesn't remove Typeform's own branding bar or the \"Powered by Typeform\" badge."
     },
     {
       "question": "Can I embed the same Typeform on multiple pages?",
       "answer": "Yes, the same embed code can be pasted into multiple WordPress pages or posts, though creating a separate named embed per placement makes it easier to give each one different sizing if needed."
-    },
-    {
-      "question": "What do I do if I change the embed's size or mode after publishing?",
-      "answer": "Update the settings in Typeform's Embed in a web page panel, then regenerate and re-copy the code — changes made in Typeform don't automatically update a snippet already pasted into WordPress, so the old embed needs to be replaced."
     }
   ],
+  "references": [
+    {
+      "label": "Typeform Help Center: Embed your form (official)",
+      "url": "https://help.typeform.com/hc/en-us/articles/360029249212-Embed-your-form"
+    },
+    {
+      "label": "Typeform Help Center: Embed your form on WordPress (official)",
+      "url": "https://help.typeform.com/hc/en-us/articles/360029572751-Embed-your-form-on-WordPress"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. Embed mode names, the Hide type header behavior, the HTTPS requirement, and the claim about needing to re-copy the code after a settings change were re-checked against Typeform's official Help Center in September 2026. That check reversed the original guide's incorrect claim that edited settings require a new embed code, and corrected what the Hide type header toggle hides.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

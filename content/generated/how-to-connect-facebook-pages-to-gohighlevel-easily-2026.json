@@ -2,11 +2,14 @@
   "slug": "how-to-connect-facebook-pages-to-gohighlevel-easily-2026",
   "seoTitle": "Connect Facebook Pages to GoHighLevel: Setup Guide",
   "metaDescription": "Link your Facebook Page to GoHighLevel to manage Messenger conversations, sync leads, and automate follow-ups from your CRM.",
-  "intro": "If you're running conversations and leads through a Facebook Page, GoHighLevel can pull all of that into the same dashboard where you already manage email, SMS, and workflows. Instead of logging into Meta Business Suite separately, you connect the page once and let GoHighLevel handle the syncing. This guide walks through where that connection actually lives inside the platform, what the account-linking screen looks like, and what to check once a page is attached so messages and leads actually flow through.",
+  "intro": "If you're running conversations and leads through a Facebook Page, GoHighLevel can pull all of that into the same dashboard where you already manage email, SMS, and workflows. You connect the page once, instead of logging into Meta Business Suite separately, and let GoHighLevel handle the syncing. This guide walks through where that connection lives inside the platform, what the account-linking screen looks like, and what to check once a page is attached so messages and leads flow through as expected. It also covers two Meta-side rules GoHighLevel's own interface doesn't spell out: whose Facebook login you need, and why personal profiles no longer work here.",
+  "prerequisites": [
+    "Admin access, under one Facebook login, to every Page you want to connect — GoHighLevel only lists Pages that login administers"
+  ],
   "steps": [
     {
       "heading": "Start from your GoHighLevel dashboard",
-      "body": "Log into your sub-account and look at the Launchpad, which GoHighLevel shows new and returning users as a personalized setup checklist — items like adding contacts, setting up communication channels, and launching campaigns, each with a progress percentage. Facebook isn't listed here directly, but this is a useful home base because it confirms which foundational pieces (payments, phone numbers, email sending) are already switched on before you start layering a social integration on top. If your account is brand new, expect most of these items to sit at 0%, which is normal.",
+      "body": "Log into your sub-account and check the Launchpad, the personalized setup checklist GoHighLevel shows new and returning users: items like adding contacts, setting up communication channels, and launching campaigns, each with its own progress percentage. Facebook isn't listed here directly, but the Launchpad is a useful home base since it confirms which foundational pieces, payments, phone numbers, email sending, are already switched on before you layer a social integration on top. If your account is brand new, expect most items to sit at 0%. That's normal.",
       "image": {
         "file": "/screenshots/iZ9rpxiqwhM/02.webp",
         "caption": "The GoHighLevel Launchpad, showing the account's foundational setup progress before any Facebook connection is made."
@@ -14,37 +17,55 @@
     },
     {
       "heading": "Open Marketing and find the Social Planner",
-      "body": "From the left-hand menu, click Marketing, then the Social Planner tab. This is where GoHighLevel manages every social account tied to the sub-account, and it's the actual home for linking a Facebook Page — not a hidden settings menu, just a normal tab under Marketing. If you've never connected anything here, the page opens with an empty state prompting you to pick a network."
+      "body": "From the left-hand menu, click Marketing, then the Social Planner tab. This is where GoHighLevel manages every social account tied to the sub-account, and it's where a Facebook Page gets linked: a normal tab under Marketing, not a hidden settings menu. If you've never connected anything here, the page opens with an empty state prompting you to pick a network."
     },
     {
-      "heading": "Connect your Facebook Page",
-      "body": "The Social Planner screen lays out a row of account cards — Facebook, Instagram, LinkedIn, TikTok, YouTube, plus a second row for Pinterest, Threads, Bluesky, Google Business Profile, and Community. Click Connect on the Facebook card and you're handed off to Meta's own login and page-selection flow. Pick the Facebook account tied to your business, then choose the specific Page you want linked — GoHighLevel only manages Pages you explicitly select here, not your whole personal profile.",
+      "heading": "Connect your Facebook Page from Social Planner's settings",
+      "body": "Social Planner's main screen shows account cards for each network: Facebook, Instagram, LinkedIn, TikTok, YouTube, and more. GoHighLevel's own support documentation describes the connection step as living one level in, behind the gear icon in the top right corner of Social Planner: click it, then choose Connect a new Facebook page. Either route hands you off to Meta's own login and page-selection screen. Sign in with the Facebook profile that has admin access to every Page you want to connect, since GoHighLevel only lists Pages that profile administers. If your business splits Page admin rights across several people's Facebook logins, connecting all of them in one pass isn't possible; you'd need to sign in separately for each admin's set of Pages.",
       "image": {
         "file": "/screenshots/iZ9rpxiqwhM/04.webp",
-        "caption": "The Social Planner's account-connection screen, where Facebook sits alongside Instagram, LinkedIn, TikTok, and YouTube as a one-click Connect card."
+        "caption": "The Social Planner account-connection screen, with Facebook, Instagram, LinkedIn, TikTok, and YouTube listed as accounts to connect."
       }
     },
     {
-      "heading": "Grant the permissions Meta asks for",
-      "body": "Once you're inside Meta's authorization flow, you'll be asked to approve specific permissions — access to manage the Page, read and respond to messages, and view Page content. Approve all of them; if you decline any single permission, GoHighLevel typically can't sync that Page's conversations or leads reliably. This step happens on Meta's domain, not GoHighLevel's, so don't be surprised by the visual switch — it's expected, and it's the same authorization screen any third-party Facebook integration uses."
-    },
-    {
-      "heading": "Confirm the Page shows as connected",
-      "body": "After authorization finishes, you're returned to the Social Planner, and the Facebook card should now show your Page name instead of a Connect button. This is the moment to double check you linked the right Page, especially if your business manages more than one — GoHighLevel doesn't stop you from connecting the wrong one, and unwinding it later means disconnecting and reauthorizing from scratch."
+      "heading": "Grant permissions and confirm the Page is connected",
+      "body": "Meta's authorization flow asks you to approve specific permissions: managing the Page, reading and responding to messages, and viewing Page content. Approve all of them. Decline any single one and GoHighLevel typically can't sync that Page's conversations or leads reliably. This step happens on Meta's domain, not GoHighLevel's, so the visual switch is expected. After authorization finishes, you're returned to Social Planner, and the Facebook card should show your Page name instead of a Connect button. Double-check you linked the right Page here, especially if your business manages more than one: GoHighLevel doesn't stop you from connecting the wrong one, and undoing it later means disconnecting and reauthorizing from scratch. If you ever need to reconnect a Page, remove GoHighLevel from that Page's Business Integrations settings in Meta Business Suite first; reauthorizing on top of a stale connection is a common reason a reconnect doesn't take."
     },
     {
       "heading": "Check that Messenger conversations land in Conversations",
-      "body": "With the Page connected, incoming Messenger messages should start appearing in GoHighLevel's Conversations tab alongside your SMS and email threads, and new message senders should generate contact records automatically. Send yourself a test message from the connected Page to confirm it shows up before you rely on it for real customer traffic — a missed permission during authorization is the most common reason messages don't sync."
+      "body": "With the Page connected, incoming Messenger messages should start appearing in GoHighLevel's Conversations tab alongside your SMS and email threads, and new message senders should generate contact records automatically. Send yourself a test message from the connected Page before you rely on it for real customer traffic. A missed permission during authorization is the most common reason messages don't sync, and Meta's own rules add a second one: under Meta's current API rules, GoHighLevel can no longer post to or manage personal Facebook profiles, only Pages, so a personal-profile connection simply won't work here regardless of permissions."
     },
     {
       "heading": "Build a workflow around new Facebook leads",
-      "body": "Once messages are flowing in, the real payoff is automation. In the Workflows section, you can trigger a sequence whenever a new contact arrives from Facebook — an instant auto-reply, a tag that routes them to the right team, or a follow-up sequence a few hours later if no one's responded. Keep the first automated message short and conversational; a canned corporate reply is the fastest way to make someone stop replying to a Page they just messaged."
+      "body": "Once messages are flowing in, the real payoff is automation. In Workflows, trigger a sequence whenever a new contact arrives from Facebook: an instant auto-reply, a tag that routes them to the right team, or a follow-up a few hours later if no one's responded. Keep the first automated message short and conversational. A canned corporate reply is the fastest way to make someone stop replying to a Page they just messaged."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Not all of the business's Facebook Pages show up to connect.",
+      "cause": "GoHighLevel only lists Pages where the Facebook profile you signed in with has admin rights. Pages administered under a different login won't appear.",
+      "fix": "Sign in with whichever profile administers the Pages you need, or ask that Page's admin to add you before connecting."
+    },
+    {
+      "problem": "A personal Facebook profile won't connect, or messages from it never sync.",
+      "cause": "Meta's current API rules mean GoHighLevel can only manage Pages, not personal profiles, for messaging and posting.",
+      "fix": "Create or use a Facebook Page for the business instead of a personal profile, and connect that."
+    },
+    {
+      "problem": "Reconnecting a Page doesn't fix a broken sync.",
+      "cause": "The old authorization is still active in Meta Business Suite's Business Integrations settings, so a fresh connect attempt layers on top of it instead of replacing it.",
+      "fix": "Remove GoHighLevel from that Page's Business Integrations settings in Meta first, then reconnect from Social Planner."
+    },
+    {
+      "problem": "The Page shows as connected, but Messenger conversations never appear in Conversations.",
+      "cause": "One of the permissions Meta asks for, usually message access, was declined or only partially approved during authorization.",
+      "fix": "Reconnect the Page and approve every permission Meta requests during the handoff."
     }
   ],
   "faq": [
     {
       "question": "Do I need a Meta account to connect my Facebook Page?",
-      "answer": "Yes. You authorize the connection through your own Meta login during setup, and you need admin access to the Facebook Page itself for GoHighLevel to be allowed to manage it."
+      "answer": "Yes, and it needs to be the profile with admin access to the Page itself. GoHighLevel only lists Pages that your login administers, so a business with several admins may need more than one connection pass."
     },
     {
       "question": "Can I manage Facebook Messenger from GoHighLevel?",
@@ -59,10 +80,21 @@
       "answer": "Meta will ask you to approve Page management and messaging permissions during the connection flow. Declining any of them can break message or lead syncing."
     },
     {
-      "question": "Where in GoHighLevel do I actually connect Facebook?",
-      "answer": "Under Marketing → Social Planner. It's the same screen used to connect Instagram, LinkedIn, TikTok, and other networks, not a separate Facebook-only settings page."
+      "question": "Can I connect my personal Facebook profile instead of a Page?",
+      "answer": "No. Meta's API no longer lets GoHighLevel post to or manage personal profiles, only Pages, so a personal-profile connection won't sync messages or leads."
+    },
+    {
+      "question": "Where in GoHighLevel do I connect Facebook?",
+      "answer": "Under Marketing → Social Planner, specifically the gear icon in the top right, then Connect a new Facebook page. It's the same general screen used for Instagram, LinkedIn, TikTok, and other networks."
     }
   ],
+  "references": [
+    {
+      "label": "HighLevel Support: How to connect to your Facebook Page(s) (official)",
+      "url": "https://help.gohighlevel.com/support/solutions/articles/48001210327-how-to-connect-to-your-facebook-page-s-"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a July 2025 walkthrough. The connection flow, the admin-rights-per-login requirement, the personal-profile restriction, and the reconnect-via-Business-Integrations step were re-checked against GoHighLevel's official support article in September 2026, which also clarified that connecting happens via the gear icon in Social Planner instead of only the account-card row shown in the recording. Corrections above reflect that.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

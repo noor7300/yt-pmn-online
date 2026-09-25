@@ -2,11 +2,11 @@
   "slug": "how-to-connect-jira-with-power-bi-agile-reporting-setup-easily-2026",
   "seoTitle": "How to Connect Jira With Power BI for Agile Reporting",
   "metaDescription": "Learn how to connect Jira with Power BI using a marketplace connector app, then build agile dashboards for sprint progress and team performance.",
-  "intro": "Jira is great at capturing the day-to-day of an agile team, but its native reports only go so far once stakeholders start asking for cross-project or historical views. The fastest way to bridge that gap isn't wiring up the Jira REST API by hand — it's installing one of the dedicated Power BI connector apps from the Atlassian Marketplace and letting it handle the plumbing. This guide walks through that real setup: starting from your boards, finding a connector, installing it against your site, and then turning the data it pulls into an actual agile dashboard. It's aimed at project managers and analysts who want sprint and velocity reporting without becoming API experts first.",
+  "intro": "Jira is great at capturing the day-to-day of an agile team, but its native reports only go so far once stakeholders start asking for cross-project or historical views. The fastest way to bridge that gap isn't wiring up the Jira REST API by hand. It's installing one of the dedicated Power BI connector apps from the Atlassian Marketplace and letting it handle the plumbing. This guide walks through that setup: starting from your boards, finding a connector, installing it against your site, and turning the data it pulls into an actual agile dashboard. It's aimed at project managers and analysts who want sprint and velocity reporting without becoming API experts first.",
   "steps": [
     {
       "heading": "Know what you're reporting on before you connect anything",
-      "body": "Before touching Power BI, open Jira and look at the boards and spaces you actually work in — Marketing, Scrum boards, a Test Board, whatever your team runs sprints against. The connector you install later will pull from whichever projects and boards you have access to, so it's worth knowing up front which ones matter for the report you're building. If your Jira instance has a lot of legacy or unused boards, this is also the moment to note which ones to exclude, since dragging every historical project into a Power BI report just adds noise.",
+      "body": "Before touching Power BI, open Jira and look at the boards and spaces your team works in: Marketing, Scrum boards, a Test Board, whatever you run sprints against. The connector you install later pulls from whichever projects and boards you have access to, so it helps to know upfront which ones matter for the report you're building. If your Jira instance carries a lot of legacy or unused boards, note which ones to exclude now, since dragging every historical project into a Power BI report just adds noise.",
       "image": {
         "file": "/screenshots/SJe4uvlBV3w/02.webp",
         "caption": "A Jira instance's board list under a space. These are the boards a Power BI connector will eventually read sprint and issue data from."
@@ -14,7 +14,7 @@
     },
     {
       "heading": "Search the Atlassian Marketplace for a Power BI connector",
-      "body": "From Jira, go to Apps and open the Marketplace, then search \"powerbi.\" Several dedicated connectors show up — options like Power BI Connector for Jira and similar apps from vendors such as Tempo and Appfire — each promising no-code report building and pre-built dashboard templates. Ratings and install counts are visible right in the results, which is worth checking since these are third-party apps with their own pricing tiers rather than a single official Microsoft integration. Read a couple of the app descriptions before picking one; some focus on embedding Power BI visuals inside Jira issues, while others focus on exporting Jira data out to Power BI Desktop.",
+      "body": "From Jira, go to Apps and open the Marketplace, then search \"powerbi.\" Several dedicated connectors show up: options like Power BI Connector for Jira from Tempo Software, and similar apps from vendors such as Alpha Serve and Appfire, each promising no-code report building and pre-built dashboard templates. Ratings and install counts appear right in the results. Check them, since these are third-party apps with their own pricing tiers; Microsoft doesn't publish a native Jira connector for Power BI, so there's no single official integration to default to. Read a couple of app descriptions before picking one. Some focus on embedding Power BI visuals inside Jira issues, others on exporting Jira data out to Power BI Desktop.",
       "image": {
         "file": "/screenshots/SJe4uvlBV3w/03.webp",
         "caption": "Marketplace search results for \"powerbi\" inside Jira, showing several competing connector apps with their ratings and install counts."
@@ -22,7 +22,7 @@
     },
     {
       "heading": "Install the connector against your Jira site",
-      "body": "Once you pick a connector, clicking install opens a short flow: select which site to install it on if you manage more than one, confirm the Jira products it will attach to (Jira Software, Jira Service Management, and so on), and review before confirming. Most of these apps start as a free trial, so you can test the connection before committing to a paid tier. This step is also where the app requests its permissions — it needs read access to issues, boards, and sprints to do anything useful in Power BI, so expect a permissions prompt during install.",
+      "body": "Once you pick a connector, installing it opens a short flow: select which site to install it on if you manage more than one, confirm the Jira products it will attach to (Jira Software, Jira Service Management, and so on), and review before confirming. Most of these apps start with a free trial, commonly 30 days and often extendable, so you can test the connection before committing to a paid, per-user tier. This step is also where the app requests its permissions. It needs read access to issues, boards, and sprints to do anything useful in Power BI, so expect a permissions prompt during install.",
       "image": {
         "file": "/screenshots/SJe4uvlBV3w/04.webp",
         "caption": "The app install flow, selecting which Atlassian site the Power BI connector should be installed on before reviewing and confirming."
@@ -30,21 +30,46 @@
     },
     {
       "heading": "Authenticate and pull your Jira data into Power BI",
-      "body": "After installation, the connector typically adds a setup page inside Jira or a companion authentication step in Power BI itself, where you sign in with your Microsoft account and grant the app access to your Power BI workspace. From there you choose which projects or boards to sync — this is where the board list you reviewed earlier pays off, since you're picking specific data sources rather than importing everything. Many connectors include pre-built dashboard templates at this stage, letting you get a working report before you've built anything yourself.",
+      "body": "After installation, the connector typically adds a setup page inside Jira or a companion authentication step in Power BI itself, where you sign in with your Microsoft account and grant the app access to your Power BI workspace. From there you choose which projects or boards to sync. This is where the board list you reviewed earlier pays off, since you're picking specific data sources instead of importing everything. Many connectors include pre-built dashboard templates at this stage, letting you get a working report before you've built anything yourself.",
       "image": null
     },
     {
-      "heading": "Build the fields into an actual agile report",
-      "body": "With data flowing into Power BI, build visuals around the fields that matter for agile tracking: issue status, sprint start and end dates, story points, and assignee. A stacked bar chart of issues by status per sprint gives you an instant burndown-style view, and grouping by assignee surfaces workload imbalances that Jira's own boards don't show as clearly. Because you're now in Power BI rather than Jira, you can also blend in data from outside Jira entirely — budget figures, time-tracking exports, or other project data — something the native Jira reporting screens can't do.",
+      "heading": "Build the report and point it at real agile questions",
+      "body": "With data flowing into Power BI, build visuals around the fields that matter for agile tracking: issue status, sprint start and end dates, story points, and assignee. A stacked bar chart of issues by status per sprint gives an instant burndown-style view, and grouping by assignee surfaces workload imbalances that Jira's own boards don't show as clearly. Because you're now in Power BI, you can also blend in data from outside Jira entirely: budget figures, time-tracking exports, or other project data, something the native Jira reporting screens can't do. Point the finished report at the questions your team really asks: is this sprint trending toward completion, whose queue keeps growing, which issue types keep bouncing back to \"in progress.\" A portfolio view that combines multiple boards is one of the bigger wins here, since Jira's native dashboards struggle to show more than one project cleanly at a time. Save these as separate report pages so stakeholders can flip between a single-sprint view and a program-level view without you rebuilding anything.",
       "image": null
-    },
-    {
-      "heading": "Apply it to real agile scenarios",
-      "body": "Once the basic report works, point it at the questions your team actually asks: is this sprint trending toward completion, which team member's queue keeps growing, and which issue types keep bouncing back to \"in progress.\" A portfolio view that combines multiple boards is one of the biggest wins here, since Jira's native dashboards struggle to show more than one project cleanly at a time. Save these as report pages so stakeholders can flip between a single-sprint view and a program-level view without you rebuilding anything."
     },
     {
       "heading": "Keep the dashboard current",
-      "body": "A Power BI report is only as useful as its last refresh, so set up a scheduled refresh once you're happy with the layout rather than re-pulling data by hand before every meeting. Most of these connector apps support scheduled sync on a paid tier, pulling fresh issue and sprint data on an interval you set. If you're still on a trial, at least get in the habit of refreshing manually before any report-out, since a dashboard showing last week's sprint status undermines the whole point of connecting the two tools."
+      "body": "A Power BI report is only as useful as its last refresh. Set up a scheduled refresh once you're happy with the layout, instead of re-pulling data by hand before every meeting. Most connector apps support scheduled sync on a paid tier, pulling fresh issue and sprint data on an interval you set. If you're still on a trial, get in the habit of refreshing manually before any report-out. A dashboard showing last week's sprint status undermines the point of connecting the two tools in the first place."
+    }
+  ],
+  "tables": [
+    {
+      "title": "A few Power BI connectors for Jira on the Atlassian Marketplace",
+      "columns": ["Connector", "Vendor", "Typical focus", "Trial"],
+      "rows": [
+        ["Power BI Connector for Jira", "Tempo Software", "No-code report building with pre-built dashboard templates", "Free trial available"],
+        ["BI Connector (Power BI for Jira)", "Appfire", "Direct Jira-to-Power BI data connection", "Free trial available"],
+        ["Various Power BI connectors for Jira", "Other vendors (e.g. Alpha Serve, CData)", "Embedding visuals in Jira, or exporting to Power BI Desktop", "Varies by listing"]
+      ],
+      "note": "Pricing is per-user and varies by vendor. Check each listing's own pricing page on the Atlassian Marketplace before installing."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The connector can't see some Jira projects or boards after install.",
+      "cause": "These apps only read what the installing account already has permission to view. Admin install doesn't automatically grant visibility into every project.",
+      "fix": "Confirm the account authorizing the connector has browse access to each project or board you want to report on."
+    },
+    {
+      "problem": "The Power BI dashboard doesn't update on its own.",
+      "cause": "Scheduled refresh is usually a paid-tier feature of these connectors, not part of every free trial.",
+      "fix": "Check your connector's plan for scheduled or auto sync, or refresh manually before any report-out while on a trial."
+    },
+    {
+      "problem": "Two people install different connectors and get different-looking reports for the same sprint.",
+      "cause": "Each vendor's connector maps Jira fields to Power BI slightly differently, and some support custom fields better than others.",
+      "fix": "Standardize on one connector per team before building shared dashboards, and check a connector's field-mapping documentation if a number looks off."
     }
   ],
   "faq": [
@@ -54,7 +79,7 @@
     },
     {
       "question": "Is there one official Microsoft connector for Jira?",
-      "answer": "No — the Marketplace lists several third-party connector apps from different vendors, each with its own features, pricing, and trial terms, so it's worth comparing a couple before installing."
+      "answer": "No. The Marketplace lists several third-party connector apps from different vendors, each with its own features, pricing, and trial terms. Compare a couple before installing."
     },
     {
       "question": "Can Power BI show sprint burndown charts using Jira data?",
@@ -62,13 +87,24 @@
     },
     {
       "question": "How current is the Jira data shown in Power BI?",
-      "answer": "It reflects whatever was pulled at the last sync. Scheduled refresh (usually a paid connector feature) keeps the dashboard aligned with ongoing sprint activity without manual exports."
+      "answer": "It reflects whatever was pulled at the last sync. Scheduled refresh, usually a paid connector feature, keeps the dashboard aligned with ongoing sprint activity without manual exports."
     },
     {
       "question": "Can I combine data from multiple Jira projects in one dashboard?",
-      "answer": "Yes — this is one of the main reasons to make the jump to Power BI, since you can sync several boards or projects and build a single portfolio-level report that Jira's native dashboards don't handle as well."
+      "answer": "Yes. This is one of the main reasons to make the jump to Power BI: you can sync several boards or projects and build a single portfolio-level report that Jira's native dashboards don't handle as well."
+    },
+    {
+      "question": "Is there a free way to connect Jira to Power BI?",
+      "answer": "Most Marketplace connectors offer a free trial, commonly 30 days, so testing costs nothing. A fully free, ongoing connection is uncommon since these are commercial per-user apps; expect to pay once the trial ends if you keep using one."
     }
   ],
+  "references": [
+    {
+      "label": "Power BI Connector for Jira | Atlassian Marketplace (official listing)",
+      "url": "https://marketplace.atlassian.com/apps/1221150/power-bi-connector-for-jira"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a July 2025 walkthrough. Re-checked against the Atlassian Marketplace's own listing for Tempo Software's Power BI Connector for Jira in September 2026, which confirmed it's a third-party, per-user-priced app with a free trial, not a Microsoft product. This matches what the article already said; the main addition is naming a real vendor, adding trial and pricing specifics, and a comparison table the recording couldn't show.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
