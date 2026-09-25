@@ -1,64 +1,98 @@
 {
   "slug": "how-to-connect-sharepoint-list-to-power-bi-direct-connection-easily-2026",
   "seoTitle": "How to Connect a SharePoint List to Power BI Directly",
-  "metaDescription": "Learn how to set up a direct connection from a SharePoint list to Power BI so your list data flows into reports without manual exports.",
-  "intro": "If your team tracks data in a SharePoint list, you don't need to export it manually to build a Power BI report. Power BI has a dedicated SharePoint Online Lists connector built specifically for this, sitting right alongside the Excel and SharePoint folder options in Get Data. This tutorial covers where that connector lives, the exact fields it asks for — including a setting that trips people up if they get it wrong — and how to keep the list data flowing in without repeating the setup every time.",
+  "metaDescription": "Connect a SharePoint Online list to Power BI Desktop with the dedicated connector: the exact site URL it wants, 2.0 vs 1.0, the All vs Default view choice, and the 12-lookup limit.",
+  "intro": "If your team tracks work in a SharePoint list, you can pull it straight into Power BI with no CSV exports. Power BI Desktop ships a dedicated SharePoint Online list connector for this, separate from the SharePoint folder connector that sits next to it.\n\nThe setup is short. What goes wrong is usually one of three things: a list URL pasted where Power BI wants the site URL, the wrong view mode, or a list with too many lookup columns for the 2.0 connector. This guide covers the click path and all three.",
+  "prerequisites": [
+    "Power BI Desktop installed",
+    "A work or school account with at least read access to the SharePoint site and the specific list"
+  ],
+  "costNote": "Power BI Desktop and the SharePoint Online list connector are free. Cost only enters when you publish and schedule refreshes: Microsoft caps scheduled refresh at 8 per day on Power BI Pro and 48 per day on Premium Per User or Premium/Fabric capacity.",
   "steps": [
     {
-      "heading": "Review your SharePoint list before connecting",
-      "body": "Confirm the list you want to pull in actually has the columns your report needs — status fields, dates, owners, whatever you're planning to build visuals around. It's much easier to add a missing column in SharePoint before connecting than to discover the gap after you've already built half a report in Power BI Desktop."
+      "heading": "Copy the site URL from SharePoint",
+      "body": "Open the list in your browser, then click Home in the site's navigation pane (or the site icon at the top). Copy the address from the browser bar at that point. It should look like https://yourcompany.sharepoint.com/sites/yourteam and end there.\n\nThis is the address the connector asks for. Microsoft's own troubleshooting note says to supply the root address of the site \"without any subfolders or documents\", so a link to the list itself, or one ending in /Lists/Tasks/AllItems.aspx, is the wrong thing to paste. While you're in SharePoint, check the list has the columns your report needs. Adding one now is easier than discovering the gap halfway through building visuals."
     },
     {
-      "heading": "Open Get Data and find the SharePoint connectors",
-      "body": "In Power BI Desktop, click Get Data to open the full source catalog. You'll notice SharePoint folder listed under File, but that's for document libraries — a list of files, not structured list data. What you actually want is a level down in the catalog, under Online Services, where the dedicated SharePoint Online Lists connector lives.",
+      "heading": "Open Get Data and pick SharePoint Online list",
+      "body": "In Power BI Desktop, click Get data and choose More to open the full catalog. SharePoint folder shows up near the top of the All list, under File. Skip it. That connector reads files in a document library, not rows in a list.\n\nThe one you want is SharePoint Online list, filed under Online Services. Typing SharePoint into the search box finds it faster than scrolling. Select it and click Connect.",
       "image": {
         "file": "/screenshots/NErgUe7AwC4/03.webp",
-        "caption": "The Get Data catalog with its full connector list. SharePoint folder appears under File, but list data needs the separate SharePoint Online Lists connector."
+        "caption": "The Get Data catalog. SharePoint folder appears under File, but list data needs the separate SharePoint Online list connector."
       }
     },
     {
-      "heading": "Enter the site URL and choose the right implementation",
-      "body": "Selecting SharePoint Online Lists opens a dialog asking for the Site URL — and this is the detail most people get wrong: it wants the root URL of the SharePoint site itself, not a link to the specific list or a subfolder within it. Paste something like https://yourcompany.sharepoint.com/sites/yourteam and nothing more; adding the list path onto the end causes the connection to fail or return nothing. Below that, an Implementation setting offers 2.0 or 1.0 — leave it on 2.0 unless you have a specific reason to fall back, since it's the newer, more reliable engine.",
+      "heading": "Paste the site URL, then choose implementation and view mode",
+      "body": "The SharePoint Online Lists dialog has three settings. Paste the root site URL into Site URL; hovering the info icon shows Microsoft's own reminder not to include subfolders. An invalid address puts a warning icon next to the box before you even click OK.\n\nImplementation offers 2.0 and 1.0. Pick 2.0 for new reports. It uses a newer API and has been generally available since September 2022. Choose deliberately, though: Microsoft states 2.0 isn't backwards compatible with 1.0, so flipping an existing report from one to the other can break the queries built on it.\n\nUnder Advanced options, View Mode has two choices. All returns every user-created and system column in the list. Default returns only the columns in whichever view is set as the list's default in SharePoint, so if you want a trimmed column set, edit or create that default view in SharePoint and pick Default here. There is no option to pick any other named view.",
       "image": {
         "file": "/screenshots/NErgUe7AwC4/04.webp",
-        "caption": "The SharePoint Online Lists connector dialog — Site URL, an Implementation choice between 2.0 and 1.0, and an Advanced options section with View Mode."
+        "caption": "The SharePoint Online Lists dialog, with the Site URL tooltip asking for the root site URL, the 2.0 and 1.0 implementation choice, and View Mode under Advanced options."
       }
     },
     {
-      "heading": "Set the View Mode in Advanced options",
-      "body": "Expanding Advanced options reveals a View Mode dropdown, defaulted to \"All - Retrieve all columns from a SharePoint list.\" This pulls every column regardless of whether it's shown in any SharePoint view, which is usually what you want for a report, but it can also drag in hidden system columns you don't need. If your list has a lot of internal metadata columns, switching this to a specific view can cut down the noise and speed up your refresh."
+      "heading": "Sign in and pick the list in Navigator",
+      "body": "The first time you connect to a site, Power BI asks how to authenticate. For SharePoint Online, choose Microsoft account and sign in with your work account, then pick which level the credentials apply to (the site URL is the usual choice) and click Connect.\n\nNavigator then shows every list on that site. Tick only the ones the report needs. Click Load to bring them in as-is, or Transform Data to open Power Query first and drop the columns you don't need."
     },
     {
-      "heading": "Pick the list and authenticate",
-      "body": "After confirming the site URL, Power BI's Navigator shows every list available at that site — pick the one you actually need rather than everything visible, since a busy SharePoint site can easily have a dozen lists unrelated to your report. You'll be prompted to authenticate with your organizational account if you haven't already; make sure it's an account with at least read access to that specific list, not just the site in general, since list-level permissions can be more restrictive."
+      "heading": "Publish and set a refresh schedule",
+      "body": "Once loaded, the list behaves like any other table. Build your visuals, then publish to the Power BI service so it can refresh without you.\n\nIn the service, open the workspace, select the semantic model, and choose Refresh > Schedule refresh. If the schedule toggle is greyed out, open Data source credentials on the same page and sign in to the SharePoint source first. Then turn on Configure a refresh schedule and pick your time slots. SharePoint Online is a cloud source, so no on-premises gateway is involved."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The connection fails, or Navigator comes back empty",
+      "cause": "The Site URL points at the list, a subfolder or a page instead of the site root.",
+      "fix": "Trim the address back to the site itself, e.g. https://contoso.sharepoint.com/sites/yourteam, and reconnect."
     },
     {
-      "heading": "Build visuals and keep the connection current",
-      "body": "Once loaded, list data behaves like any other Power BI table — build status trackers, feedback summaries, or timeline visuals directly from the columns you pulled in. Publish to the Power BI service and set a scheduled refresh so changes made in the SharePoint list, like a status update or a new row, show up in the report without anyone re-running the import by hand."
+      "problem": "With Implementation 2.0 the query fails on a list with many lookup columns",
+      "cause": "The 2.0 connector uses a different API that is subject to SharePoint's limit of 12 join operations per query, so pulling more than 12 lookup-type columns at once fails.",
+      "fix": "In SharePoint, set a default view with fewer than 12 lookup columns, then choose Default under View Mode."
+    },
+    {
+      "problem": "View Mode is set to All, but some columns are still missing",
+      "cause": "The list's default view in SharePoint is a Calendar or Board view. SharePoint then returns only that view's columns, and Microsoft documents this as by design.",
+      "fix": "Change the list's default view to a standard list view in SharePoint and refresh."
+    },
+    {
+      "problem": "Date/time values are several hours off (Implementation 1.0)",
+      "cause": "The SharePoint API sends times in UTC. The browser converts them to your time zone; the 1.0 connector does not.",
+      "fix": "In Power Query, change the column type to Date/Time/Timezone and apply DateTimeZone.ToLocal to convert it."
     }
   ],
   "faq": [
     {
-      "question": "Does this connection require any special SharePoint permissions?",
-      "answer": "You need at least read access to the SharePoint site and specifically to the list, since list-level permissions can be more restrictive than general site access."
-    },
-    {
-      "question": "What URL should I enter in the SharePoint Online Lists connector?",
-      "answer": "The root URL of the SharePoint site itself, such as https://yourcompany.sharepoint.com/sites/yourteam — not a link to the specific list or a subfolder, which is the most common reason this connection fails."
+      "question": "What URL should I enter in the connector?",
+      "answer": "The root URL of the SharePoint site, such as https://yourcompany.sharepoint.com/sites/yourteam. Not the list's own link and not a subfolder. Clicking Home in the site's navigation and copying the address bar gets you the right one."
     },
     {
       "question": "Should I use Implementation 2.0 or 1.0?",
-      "answer": "Stick with 2.0 unless you have a specific compatibility reason to use 1.0. It's the newer, more reliable engine and is the default for good reason."
+      "answer": "2.0 for anything new. The one reason to stay on 1.0 is an existing report built on it, because the two versions aren't backwards compatible. Lists with more than 12 lookup columns also hit a limit that only applies to 2.0."
     },
     {
-      "question": "Can I refresh the data automatically after the initial connection?",
-      "answer": "Yes, you can set up scheduled refreshes once the report is published to the Power BI service, so your report reflects the latest changes made to the SharePoint list."
+      "question": "What's the difference between the All and Default view modes?",
+      "answer": "All pulls every user and system column. Default pulls only the columns in the list's default view in SharePoint. There's no way to target a different named view from this dialog."
     },
     {
-      "question": "Can multiple SharePoint lists be combined into one Power BI report?",
-      "answer": "Yes, you can connect to several lists — from the same site or different ones — and merge or relate them within your Power BI data model."
+      "question": "Can the report refresh automatically?",
+      "answer": "Yes, once published. Set it under Refresh > Schedule refresh on the semantic model. Pro allows up to 8 scheduled refreshes a day and Premium/PPU up to 48. Power BI switches the schedule off after four consecutive failures, so check Refresh history if data stops updating."
+    },
+    {
+      "question": "Can I combine several lists in one report?",
+      "answer": "Yes. Tick several lists in Navigator, or repeat Get Data for lists on other sites, then relate them in the model view."
     }
   ],
+  "references": [
+    {
+      "label": "Power Query SharePoint Online list connector (Microsoft Learn)",
+      "url": "https://learn.microsoft.com/en-us/power-query/connectors/sharepoint-online-list"
+    },
+    {
+      "label": "Configure scheduled refresh in Power BI (Microsoft Learn)",
+      "url": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh"
+    }
+  ],
+  "verifiedNote": "The Get Data catalog and connector dialog come from a walkthrough recording in Power BI Desktop. The site URL rule, implementation versions, view modes, the 12-join limit and the refresh steps and limits were re-checked against Microsoft Learn documentation in September 2026. That check corrected this guide's earlier suggestion that View Mode could target any specific view; the only options are All and Default.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

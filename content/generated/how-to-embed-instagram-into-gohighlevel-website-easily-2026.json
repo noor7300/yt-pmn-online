@@ -1,72 +1,100 @@
 {
   "slug": "how-to-embed-instagram-into-gohighlevel-website-easily-2026",
   "seoTitle": "How to Embed Instagram Into a GoHighLevel Website",
-  "metaDescription": "Learn how to embed your Instagram feed into a GoHighLevel website using the Custom Code element, so visitors see your latest posts without leaving the page.",
-  "intro": "A live Instagram feed on your website does something a static gallery can't: it proves the business behind the page is active right now. GoHighLevel doesn't have a dedicated Instagram widget, but its site editor includes a Custom Code element that accepts any embed snippet, and Instagram generates exactly that kind of snippet for free from any public post. This guide walks through grabbing that code from Instagram and dropping it into a GoHighLevel page section, plus where in your layout it actually earns its space instead of just adding clutter.",
+  "metaDescription": "Embed an Instagram post on a GoHighLevel (HighLevel) website with the Custom Code element: copying the code from a browser, why the editor shows a blank box, and why the post may appear unstyled.",
+  "intro": "An Instagram post on your website shows visitors the business behind the page is active. GoHighLevel has no dedicated Instagram widget, but its site builder has a Custom Code element that takes any HTML snippet, and Instagram hands out exactly that kind of snippet for public posts.\n\nThe paste itself is quick. Two things confuse people afterwards. The builder never shows the post, only a grey \"Custom HTML/Javascript\" box. And on the live page the post can show up as a plain link if the script that styles it gets delayed. This guide covers the click path and both of those.",
+  "prerequisites": [
+    "A public Instagram account whose owner hasn't turned off embedding (private accounts can't be embedded)",
+    "Access to the GoHighLevel website or funnel page you want to edit"
+  ],
   "steps": [
     {
-      "heading": "Get the embed code from Instagram",
-      "body": "Open the post you want to feature on Instagram's web version and use the share or options menu to bring up its embed dialog. Instagram generates a block of HTML starting with a blockquote tag carrying the post's permalink, and a toggle lets you choose whether the original caption comes along with it. Click the button to copy the code — Instagram confirms with a label like \"Embed code copied\" once it's on your clipboard, and that's the exact snippet you'll paste into GoHighLevel. Using this method means the embed is live: it pulls the post's current likes and comments rather than a screenshot frozen in time.",
+      "heading": "Copy the embed code in a browser, not the app",
+      "body": "Instagram doesn't give out embed code in its mobile app. Open instagram.com on a computer (or in a phone's browser), find the post, click the three-dot menu above it and choose Embed.\n\nThe dialog shows the code, which starts with a blockquote tag carrying the post's link. Tick Include caption if you want the caption to come along, then click Copy embed code. The button changes to \"Embed code copied\". Posts, reels and profiles can all be embedded this way, as long as the account is public.",
       "image": {
         "file": "/screenshots/KrapaTCgvpo/02.webp",
-        "caption": "Instagram's embed dialog on a post, with the generated blockquote code copied and ready to paste elsewhere."
+        "caption": "Instagram's embed dialog on the web, with the Include caption checkbox and the button reading Embed code copied."
       }
     },
     {
-      "heading": "Open the Quick Add panel in your GoHighLevel page editor",
-      "body": "In the GoHighLevel website builder, open the page you want the feed on and click into a section where you want it to sit. The Quick Add panel slides in with a searchable list of rows, elements, and prebuilt sections — headlines, paragraphs, buttons, forms, and further down, a Custom Code element built specifically for pasting in outside snippets like the one Instagram just gave you. Pick a one-column row first if you're placing a single embedded post, since Instagram's blockquote renders at a fixed width and a narrow column keeps it from looking squeezed.",
+      "heading": "Add a row and a Custom Code element",
+      "body": "Open the page in the GoHighLevel site builder and click the plus icon at the top left to open Quick Add. Drop in a row first; a 1 Column row suits a single post, because an embedded post has a limited width and looks lost in a full-width section.\n\nThen add the Custom Code element into that row. It's further down the Quick Add list, and typing code into the search box finds it faster.",
       "image": {
         "file": "/screenshots/KrapaTCgvpo/03.webp",
-        "caption": "The Quick Add panel in the GoHighLevel site editor, listing rows and elements including the Custom Code block used for embeds."
+        "caption": "The Quick Add panel in the GoHighLevel builder, with row layouts at the top and the searchable element list below."
       }
     },
     {
-      "heading": "Paste the code into the Custom Code element",
-      "body": "Drop a Custom Code element into your chosen section and click it to open its settings panel on the right. You'll see an \"Open Code Editor\" button under the General tab — click it, paste the blockquote snippet you copied from Instagram, and save. GoHighLevel treats this as raw HTML/Javascript, so it renders whatever Instagram sent, including the small script that turns the plain blockquote into the styled, interactive embed with the profile photo and post image.",
+      "heading": "Paste the snippet through Open Code Editor",
+      "body": "Click the new element. Its settings open on the right with General and Styles tabs. Under General, click Open Code Editor, paste the Instagram code, and save.\n\nPaste the whole snippet exactly as copied. It is a blockquote followed by a separate script tag that loads Instagram's embed script, and the script is what turns the plain blockquote into the styled post card. The code box in Instagram's dialog scrolls sideways, so use the copy button instead of selecting the text by hand, which is an easy way to lose the script tag at the end.",
       "image": {
         "file": "/screenshots/KrapaTCgvpo/04.webp",
-        "caption": "The Custom Code element's settings panel, with the Open Code Editor button used to paste in the Instagram embed snippet."
+        "caption": "The Custom Code element selected, with its General tab and the Open Code Editor button on the right."
       }
     },
     {
-      "heading": "Place the feed where it supports your existing content",
-      "body": "An embedded Instagram post works best positioned near content it reinforces, not dropped into the hero at the top of the page where it competes with your main call to action. A gallery, testimonials section, or the area just above your footer are natural spots — visitors who've already engaged with your services are the ones most likely to click through to follow you. For a restaurant, that might mean placing it near a menu section; for a fitness brand, next to transformation photos or class listings.",
+      "heading": "Save, then check it in preview",
+      "body": "In the builder, the element stays a box labelled Custom HTML/Javascript. That's normal. The builder doesn't run custom scripts, so the post never appears there.\n\nSave the page and open the preview (the eye icon at the top right) to see the real embed. HighLevel runs custom code in preview only after the page finishes loading, so give it a moment.",
       "image": {
         "file": "/screenshots/KrapaTCgvpo/05.webp",
-        "caption": "A published GoHighLevel page section, showing how a custom-coded element sits alongside the rest of the page's layout."
+        "caption": "The builder after saving: the Custom Code element still appears as a Custom HTML/Javascript placeholder above the footer."
       }
     },
     {
-      "heading": "Repeat for multiple posts if you want a fuller feed",
-      "body": "Instagram's individual embed code only pulls one post at a time, so a richer feed means repeating the copy-and-paste process for several posts, each in its own Custom Code element inside a multi-column row. Keep the row to two or three columns on desktop so each embed has enough width to render its image properly, and check the mobile preview in the GoHighLevel editor afterward — a row that looks fine on desktop can stack awkwardly narrow on phones if the columns weren't set to adjust."
+      "heading": "Publish and check the live page",
+      "body": "Click Publish, then load the live URL. Confirm the post renders as a card with its image, not as a bare \"View this post on Instagram\" link, and that clicking it opens the post on Instagram.\n\nEach snippet embeds one post. For more, repeat the process with one Custom Code element per post, in a two- or three-column row, and check the mobile view in the builder so the columns stack cleanly. Put them near content they back up (a gallery, testimonials, or just above the footer) and keep them out of the hero, where they'd compete with your main call to action."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The builder shows a grey \"Custom HTML/Javascript\" box instead of the post",
+      "cause": "Expected behaviour. Custom code runs in preview and on the published page, not inside the editor.",
+      "fix": "Save and open the preview, or check the live page after publishing."
     },
     {
-      "heading": "Save and publish, then verify the live page",
-      "body": "Save your changes and hit Publish, then load the live URL rather than trusting the editor preview alone — embed scripts occasionally behave differently once a page is actually served. Confirm the post renders with its image intact, the like and comment counts are visible, and clicking through the embed opens the real Instagram post in a new tab. If a post you embedded gets deleted or the account goes private later, the embed will break silently, so it's worth a periodic check rather than a one-time setup."
+      "problem": "The live page shows a plain link or text block, not the styled post",
+      "cause": "Instagram's embed script didn't run. Either the script tag at the end of the snippet was lost when copying, or the page's Optimize JavaScript setting delayed it. HighLevel notes that setting holds back non-essential scripts until a visitor interacts.",
+      "fix": "Re-copy the code with Instagram's copy button and paste all of it. If it still doesn't render on load, turn off Optimize JavaScript for that page, as HighLevel recommends when custom code must run on page load."
+    },
+    {
+      "problem": "A post that used to show has disappeared",
+      "cause": "The account went private, the owner turned off embedding, or the post was deleted. Instagram notes a removed embed can take a while to vanish from other sites.",
+      "fix": "Pick a current public post and paste its fresh embed code into the same Custom Code element."
     }
   ],
   "faq": [
     {
-      "question": "Do I need a business Instagram account to embed my feed?",
-      "answer": "No — Instagram's embed feature works on any public post regardless of account type. The post simply needs to be visible to the public, since the embed pulls live data from Instagram's servers each time the page loads."
+      "question": "Do I need a business Instagram account to embed a post?",
+      "answer": "No. Instagram lets you embed posts, reels and profiles from any public account, provided the owner hasn't switched embedding off. Private accounts can't be embedded."
     },
     {
-      "question": "Will embedding Instagram slow down my GoHighLevel website?",
-      "answer": "It adds a small amount of load time since the browser fetches the embed script and post data from Instagram's servers, but for one or a handful of posts the impact is minor. Embedding many posts on one page will add up, so keep the count reasonable."
+      "question": "Can I get the embed code from the Instagram app?",
+      "answer": "No. Instagram only offers embed code in a browser, on a computer or on a phone."
     },
     {
-      "question": "Can I customize which posts appear in the embedded feed?",
-      "answer": "With the native embed method, you choose posts one at a time by grabbing each one's individual embed code — there's no automatic \"latest posts\" feed built into GoHighLevel itself. For a live auto-updating feed you'd need a third-party widget instead."
+      "question": "Will this show my latest posts automatically?",
+      "answer": "No. Each embed code is tied to one post. A feed that updates by itself needs a third-party widget, which you'd paste into the same Custom Code element."
     },
     {
-      "question": "Is embedding Instagram useful for service-based businesses?",
-      "answer": "Yes — fitness centers, salons, and similar service businesses can use it to visually back up claims with real client results or before-and-after content, which builds more trust than text alone."
-    },
-    {
-      "question": "What if my embedded post stops showing up?",
-      "answer": "This usually means the original post was deleted, the account was set to private, or Instagram changed its embed script. Re-copy a fresh embed code from a current public post to fix it."
+      "question": "Why can't I see the post in the GoHighLevel editor?",
+      "answer": "The editor shows custom code as a placeholder box and doesn't run it. Use preview or the published page to see the embed."
     }
   ],
+  "references": [
+    {
+      "label": "Embed an Instagram post or profile (Instagram Help Centre)",
+      "url": "https://www.facebook.com/help/instagram/620154495870484/"
+    },
+    {
+      "label": "Hydration event in custom code in Funnels (HighLevel Support Portal)",
+      "url": "https://help.gohighlevel.com/support/solutions/articles/155000002421-hydration-event-in-custom-code-in-funnels"
+    },
+    {
+      "label": "FAQs and basic troubleshooting for Funnels, Websites and Webinars (HighLevel Support Portal)",
+      "url": "https://help.gohighlevel.com/support/solutions/articles/155000004983-faqs-basic-troubleshooting-funnels-websites-webinars"
+    }
+  ],
+  "verifiedNote": "The Instagram embed dialog, Quick Add panel and Custom Code settings come from a walkthrough recording. Instagram's embed rules (public accounts only, no embed code from the app, owners can turn embedding off) and HighLevel's custom-code behaviour (runs in preview after load, Optimize JavaScript can delay it) were re-checked against the Instagram Help Centre and HighLevel's support portal in September 2026. The check also corrected an earlier caption that described the editor view as a published page.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

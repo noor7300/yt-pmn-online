@@ -1,64 +1,134 @@
 {
   "slug": "how-to-connect-figma-to-claude-ai",
   "seoTitle": "How to Connect Figma to Claude AI for Design-to-Code",
-  "metaDescription": "Connect Figma to Claude AI to convert design elements into code faster and reduce manual effort in your development workflow.",
-  "intro": "Handing a Figma file to a developer usually means someone manually re-reading every spacing value and color token, then translating it into CSS by eye. Connecting Figma to Claude AI shortens that gap by letting Claude pull real design context directly from your files through a connector, so it can generate code that actually matches what's on the canvas instead of guessing from a screenshot. This guide follows the connection from an open Figma project through to a live, working link inside Claude, covers what to do with it once it's set up, and flags where a human review is still worth the extra few minutes.",
+  "metaDescription": "Add the Figma connector in Claude, authorize it, and point Claude at a specific frame. Includes Figma's tool-call limits by plan and seat, which decide how far a free account gets.",
+  "intro": "Handing a Figma file to a developer usually means someone re-reading every spacing value and colour by eye and retyping it as CSS. The Figma connector in Claude removes most of that. It links Claude to Figma's remote MCP server, so Claude can read components, variables and layout data from a real frame instead of guessing from a screenshot.\n\nSetup takes a couple of minutes and works on Claude's free plan, which is what the recording uses. The limit most people hit comes from the Figma side: how many design reads your Figma plan and seat allow. That table is below, after the steps.",
+  "costNote": "Directory connectors, Figma included, are available on every Claude plan, Free among them. The constraint is Figma's. Its MCP server is open to all Figma plans and seats, but reads are rationed: View and Collab seats get 20 tool calls a month on the Starter plan and only 6 a month on paid plans, while Dev and Full seats get daily allowances of 200 to 600.",
   "steps": [
     {
-      "heading": "Start from an actual Figma project, not a blank file",
-      "body": "Before connecting anything, open Figma and land on your Recents view so you can see the projects you'd actually want Claude to reference — dashboards, mobile app screens, a shared team library, whatever you're currently building. Having a real, populated project open matters here, because the whole benefit of this integration is Claude reading your existing design system rather than starting from nothing. Note which file you want to work from before switching over to Claude, and if your team has a shared component library file separate from the working project, keep its name handy too, since referencing it later gives Claude a better sense of your established patterns.",
-      "image": { "file": "/screenshots/6vQu_bzNywY/02.webp", "caption": "A Figma workspace's Recents view, showing the kind of active project files worth connecting to Claude rather than an empty canvas." }
+      "heading": "Pick the Figma file you want Claude to read",
+      "body": "Open Figma and decide which file and frame you want to work from. The recording starts in the Recents view with several live projects visible. The connector works on existing designs, so a populated file with real components and styles gives Claude far more to work with than a blank canvas.\n\nIf your team keeps a shared component library in a separate file, note that as well. You can point Claude at it later.",
+      "image": {
+        "file": "/screenshots/6vQu_bzNywY/02.webp",
+        "caption": "A Figma workspace's Recents view listing active project files."
+      }
     },
     {
-      "heading": "Open your account menu in Claude",
-      "body": "Switch to Claude.ai and click your profile icon in the bottom-left corner to open the account menu. This is where connectors live, alongside Settings, Language, and Get help. The option you want is \"Get apps and extensions,\" which is easy to miss the first time since it reads more like a marketplace link than a settings panel — but it's the door into every third-party connection Claude supports, Figma included. If you're on a team or enterprise Claude plan, an admin may need to enable connectors workspace-wide before individual members can add them, so check with whoever manages your Claude account if the option appears greyed out.",
-      "image": { "file": "/screenshots/6vQu_bzNywY/03.webp", "caption": "Claude's account menu, opened from the profile icon, with \"Get apps and extensions\" as the entry point to connectors." }
+      "heading": "Open the connectors directory in Claude",
+      "body": "In the recording, the route is the profile icon at the bottom left, then Get apps and extensions. Claude's help centre now documents a different entry point: click Customize in the left sidebar, open the Connectors tab, click the + button and choose Browse connectors. Both land in the same Directory, with Skills, Connectors and Plugins tabs down the left.\n\nOn a Team or Enterprise plan, an Owner or Primary Owner has to enable connectors for the organisation first. If you cannot connect anything, that is the likely reason.",
+      "image": {
+        "file": "/screenshots/6vQu_bzNywY/03.webp",
+        "caption": "Claude's account menu opened from the profile icon, with Get apps and extensions listed."
+      }
     },
     {
-      "heading": "Find Figma in the connectors directory",
-      "body": "Clicking through opens Claude's Directory, with tabs for Skills, Connectors, and Plugins. Select Connectors and search \"Figma\" — you'll see it listed under Anthropic & Partners, tagged as one of the more popular options, alongside a second entry described as an MCP server that pulls in Figma context to generate code aligned with your codebase. Click the plus icon next to the listing you want to add it to your workspace. The directory also surfaces other connectors nearby, like Sigma and Send, which is a useful moment to notice what else is available if your workflow touches other design or data tools.",
-      "image": { "file": "/screenshots/6vQu_bzNywY/04.webp", "caption": "Claude's Directory filtered to Connectors, with Figma showing up as a popular option alongside Sigma, Send, and other integrations." }
+      "heading": "Search for Figma and add it",
+      "body": "With the Connectors tab selected, type Figma in the search box. The recording shows two Figma results under Anthropic & Partners. One is described as generating diagrams and better code from Figma context. The other describes the Figma MCP server pulling in Figma context to generate code aligned with your codebase. Click the + on the one you want.",
+      "image": {
+        "file": "/screenshots/6vQu_bzNywY/04.webp",
+        "caption": "Claude's Directory on the Connectors tab, filtered to Figma, with two Figma entries at the top."
+      }
     },
     {
-      "heading": "Authorize the connection and confirm it's live",
-      "body": "Adding the connector triggers a standard OAuth-style authorization where you sign in to Figma and grant Claude permission to read your files. Once that completes, you're dropped back into a fresh Claude chat with a small confirmation banner in the top-right corner reading \"Connected to Figma,\" which is your signal that the link is active and ready to use — no separate save step or workspace restart required. If the banner doesn't appear, double-check that you approved the permission prompt in the Figma authorization window rather than closing it, since a cancelled prompt leaves the connector listed but inactive.",
-      "image": { "file": "/screenshots/6vQu_bzNywY/05.webp", "caption": "A new Claude conversation with the \"Connected to Figma\" banner confirming the connector is authorized and ready to reference your files." }
+      "heading": "Authorize Figma and confirm the connection",
+      "body": "Adding the connector opens a Figma sign-in and permission prompt. Approve it. Closing the window without approving leaves the connector unauthorized.\n\nOnce it completes, Claude opens a new chat with a small Connected to Figma notice at the top right. The recording shows this on a Free plan account. Each person authorizes with their own Figma login, even inside a Claude team workspace, and Claude can only see files that Figma account can open.",
+      "image": {
+        "file": "/screenshots/6vQu_bzNywY/05.webp",
+        "caption": "A new Claude chat on the Free plan with the Connected to Figma notice in the top-right corner."
+      }
     },
     {
-      "heading": "Reference a specific file in your first prompt",
-      "body": "With the connector active, the most reliable way to use it is to point Claude at a specific Figma file or frame rather than asking a vague question about \"the design.\" Paste the file link or name the exact screen you want translated, and ask for what you actually need — a React component, a set of CSS variables matching your color tokens, or a breakdown of spacing and typography. Being specific here is what separates genuinely usable code from a rough approximation. If your file has multiple pages, naming the exact frame also saves Claude from guessing which of several similar-looking screens you actually meant."
+      "heading": "Give Claude a link to a specific frame",
+      "body": "Figma's documentation recommends right-clicking a frame or layer and choosing Copy link to selection, then pasting that link into your prompt. The link carries the node ID the server needs to find the exact object. Naming \"the dashboard\" in prose leaves Claude guessing between similar screens.\n\nAsk for something concrete: a React component for that frame, CSS variables for its colours, or a breakdown of its spacing and type. If the connector seems idle, click + in the chat box, hover over Connectors and check that Figma is switched on for this conversation."
     },
     {
-      "heading": "Ask for design tokens before you ask for full components",
-      "body": "If your goal is a consistent codebase rather than a one-off page, start by asking Claude to extract your color palette, spacing scale, and type styles into a tokens file before generating any components. This gives you a shared source of truth to check future output against, and it surfaces inconsistencies in the Figma file itself — slightly different shades of the same blue, for instance — that are worth fixing at the design level before more code gets built on top of them."
+      "heading": "Extract tokens first, then review the code",
+      "body": "For an ongoing codebase, ask for the colour, spacing and type values as a tokens file before generating components. It gives you one reference to check later output against, and it exposes inconsistencies in the Figma file itself, such as three near-identical blues.\n\nTreat generated components as a first draft. Hover states, breakpoints and naming are still your call. Check the output against the frame with both open side by side. On a limited Figma seat, batch your questions, since each read of the file counts toward the monthly cap."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Figma MCP server tool-call limits",
+      "columns": [
+        "Figma seat",
+        "Starter plan",
+        "Professional",
+        "Organization",
+        "Enterprise"
+      ],
+      "rows": [
+        [
+          "View or Collab",
+          "20 per month",
+          "6 per month",
+          "6 per month",
+          "6 per month"
+        ],
+        [
+          "Dev or Full",
+          "200 per day, 10 per minute",
+          "200 per day, 15 per minute",
+          "600 per day, 20 per minute",
+          "600 per day, 20 per minute"
+        ]
+      ],
+      "note": "From Figma's rate-limits documentation, September 2026. Limits apply to tools that read from Figma; a few tools, such as whoami, are exempt. Figma changes these figures, so check the source before planning around them."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Figma replies stop partway through the month",
+      "cause": "The Figma account has hit its MCP tool-call cap. View and Collab seats get 20 calls a month on Starter and 6 a month on paid plans.",
+      "fix": "Wait for the monthly reset, or move to a Dev or Full seat, which carries daily limits instead of a monthly one."
     },
     {
-      "heading": "Review generated code against the original design",
-      "body": "Treat Claude's first pass as a strong starting point rather than a final deliverable. Check spacing, responsive behavior, and component naming against your actual file, since even with direct design context, some judgment calls — how a hover state should behave, which breakpoints matter — are still yours to make. This review step is also where the time savings show up most clearly, because you're editing working code instead of writing it from a static export. Keep the Figma file open side by side with the generated code during this pass; catching a mismatch early is far faster than debugging it after the component is already wired into your app."
+      "problem": "Claude says it cannot access the file",
+      "cause": "The Figma account you authorized does not have access to that file, or the prompt names a file without linking to it.",
+      "fix": "Open the file in Figma under the same account, use Copy link to selection on the frame, and paste that link into the prompt."
+    },
+    {
+      "problem": "No connect option on a Team or Enterprise Claude plan",
+      "cause": "Connectors on those plans must be enabled for the organisation by an Owner or Primary Owner.",
+      "fix": "Ask your Claude workspace owner to enable the Figma connector, then authorize it with your own Figma login."
     }
   ],
   "faq": [
     {
-      "question": "How does connecting Figma to Claude AI help developers?",
-      "answer": "It lets Claude read real design context — layers, spacing, color tokens — straight from your Figma files through a connector, so generated code matches the design instead of approximating it from a screenshot."
+      "question": "Does the Figma connector work on Claude's free plan?",
+      "answer": "Yes. Anthropic lists directory connectors as available on all plans, and the recording completes the connection on a Free plan account. The tighter limit is on the Figma side."
     },
     {
-      "question": "Where do I find the Figma connector in Claude?",
-      "answer": "Open your account menu from the profile icon in the bottom-left corner, choose \"Get apps and extensions,\" then search \"Figma\" under the Connectors tab in the Directory."
+      "question": "Where is the connectors directory in Claude now?",
+      "answer": "Click Customize in the left sidebar, open Connectors, click + and choose Browse connectors. Older recordings, including this one, reach the same Directory through the profile menu's Get apps and extensions."
     },
     {
-      "question": "Is this integration only useful for developers?",
-      "answer": "No — it's just as useful for designers and project managers who want a faster way to hand off specs or check what a design will actually produce in code."
+      "question": "How do I tell Claude which design to use?",
+      "answer": "Right-click the frame or layer in Figma, choose Copy link to selection, and paste the link into your message. The link includes the node ID the Figma server uses to locate it."
     },
     {
-      "question": "Do I need advanced technical knowledge to set this up?",
-      "answer": "No. Adding the connector is a search-and-authorize flow inside Claude's Directory, similar to installing any other app integration."
-    },
-    {
-      "question": "What's the main benefit of this design-to-code workflow?",
-      "answer": "It cuts down the manual translation step between a finished design and working code, letting you focus on reviewing and refining rather than writing everything from scratch."
+      "question": "Do I need the Figma desktop app?",
+      "answer": "No. The connector uses Figma's remote MCP server, which Figma hosts. The separate desktop server runs through the Figma app and requires a Dev or Full seat on a paid plan."
     }
   ],
+  "references": [
+    {
+      "label": "Figma Help Center: Guide to the Figma MCP server",
+      "url": "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server"
+    },
+    {
+      "label": "Figma Developer Docs: MCP server rate limits and access",
+      "url": "https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/"
+    },
+    {
+      "label": "Claude Help Center: Browse skills, connectors, and plugins in one directory",
+      "url": "https://support.claude.com/en/articles/14328846-browse-skills-connectors-and-plugins-in-one-directory"
+    },
+    {
+      "label": "Claude Help Center: Use connectors to extend Claude's capabilities",
+      "url": "https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities"
+    }
+  ],
+  "verifiedNote": "Screens and click path come from the original recording in Claude on a Free plan account. The directory location, plan availability and Team/Enterprise owner requirement were re-checked against Claude's Help Center, and the frame-link method and tool-call limits against Figma's own documentation, in September 2026. That check added the current Customize > Connectors route (the recording uses the older Get apps and extensions menu) and Figma's per-seat limits, which the earlier version did not mention.",
   "generatedAt": "2026-07-31T12:00:00Z",
   "deep": true
 }

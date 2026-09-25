@@ -1,43 +1,91 @@
 {
   "slug": "how-to-import-an-email-subscriber-list-to-brevo-easily-2026",
   "seoTitle": "How to Import an Email Subscriber List to Brevo",
-  "metaDescription": "Upload a contact list into Brevo the right way: prep your spreadsheet, choose Import from a file or Copy-paste, and confirm consent before you finalize.",
-  "intro": "Moving a contact list into a new platform is where a lot of email marketing migrations go wrong — messy columns, no clear email header, or contacts nobody actually consented to email. Brevo's Contacts section gives you three ways to bring a list in, and the one that saves the most headaches is the simplest: a clean spreadsheet with clear column headers, uploaded through the import screen. This guide walks through preparing that spreadsheet and what Brevo's import screen actually offers once you get there.",
+  "metaDescription": "Import a subscriber list into Brevo: the file rules (CSV, XLSX or TXT, one sheet, UTF-8, under 250MB), column mapping, the settings that can overwrite or blocklist contacts, and reading the import report.",
+  "intro": "Most failed Brevo imports fail before the upload starts. The file is an old .xls, it has two sheets, the encoding scrambles accented names, or a notes column full of line breaks shifts half the data into the wrong rows. Brevo's importer is forgiving about many things, just not those.\n\nThis guide covers preparing the file so it goes through first time, the mapping and list steps, and the final settings screen. Read that screen slowly. A couple of its toggles overwrite existing data or blocklist the people you just imported, and Brevo warns that some of those changes can't be undone.",
   "steps": [
     {
-      "heading": "Build a clean source spreadsheet first",
-      "body": "Before touching Brevo, get your contact data into a simple spreadsheet with one column per field — name, email, and anything else you want to carry over. Keep each row a single contact, with the email address in its own column and no merged cells or extra header rows above your actual column labels, since anything irregular here is what causes a mapping step to fail later.",
-      "image": { "file": "/screenshots/Wm6BLiY9cyM/03.webp", "caption": "A source spreadsheet being prepped for import, with separate columns for a contact's name, a label, and their email address." }
+      "heading": "Prepare the file",
+      "body": "Put one contact per row and one field per column, with a single header row at the top. Brevo needs at least one identifier per contact: an email address, or a phone number (SMS, WhatsApp or landline) or an external ID. For an email list, that means an email column with nothing else in the cell.\n\nThen save it to match Brevo's file rules:\n\n- Format: .csv, .xlsx or .txt. The older Excel .xls format is not accepted, and neither is .vcf.\n- One sheet only. Brevo reads the first sheet and ignores the rest.\n- Encoding: UTF-8 or Windows-1252.\n- Separator: comma, semicolon or tab.\n- Size: up to 250MB. There's no cap on the number of contacts, so split anything bigger into several files.\n\nRemove line breaks and wrapped text inside cells. In a CSV each line break starts a new row, which pushes values onto the wrong contact. If you're adding brand-new contacts, leave out any CONTACT_ID column, since Brevo generates that value itself.",
+      "image": { "file": "/screenshots/Wm6BLiY9cyM/03.webp", "caption": "A source spreadsheet being prepared for import, with separate columns for name, a label and email address." }
     },
     {
-      "heading": "Save it as a CSV, xlsx, or txt file",
-      "body": "Once your columns are clean, export or save the file in one of the formats Brevo's importer accepts. A CSV saved with UTF-8 encoding is the safest choice if your list includes any accented characters or non-English names, since encoding mismatches are a common source of garbled names after import."
+      "heading": "Open the importer",
+      "body": "Go to CRM → Contacts and click Import contacts. Brevo's current help pages then show a card choice (keep Contacts selected and click Continue) followed by two options: Upload a file and Copy/Paste.\n\nThe recording shows a slightly older version of this screen, titled \"Import contacts for bulk creation or updating\", with three tiles: Import from a file, Copy-paste, and Import from another tool. The file and paste routes are the same thing under different names. Copy/Paste suits a short list: one contact per line, values separated by commas or tabs.",
+      "image": { "file": "/screenshots/Wm6BLiY9cyM/05.webp", "caption": "Brevo's contact import screen under CRM → Contacts, with Import from a file, Copy-paste and Import from another tool." }
     },
     {
-      "heading": "Open Contacts and start an import",
-      "body": "In the Brevo dashboard, open Contacts in the left sidebar, which expands into Lists, Segments, Companies, Deals, Tasks, and Custom objects. From the main Contacts screen, start the import flow, which lands you on a screen titled \"Import contacts for bulk creation or updating\" — the same screen handles both bringing in brand-new contacts and updating existing ones.",
-      "image": { "file": "/screenshots/Wm6BLiY9cyM/05.webp", "caption": "Brevo's contact import screen, offering three paths in: Import from a file, Copy-paste, and Import from another tool." }
+      "heading": "Upload and check the preview",
+      "body": "Choose Upload a file, then pick your file or drag it into the outlined area. Brevo shows a preview of the contacts and their data. Look at the columns: if everything has landed in one column, the separator wasn't recognised. There's an optional AI suggestion for mapping, which Brevo says can take extra processing time. Click Confirm your file when the preview looks right."
     },
     {
-      "heading": "Choose how you're bringing contacts in",
-      "body": "The screen offers three distinct paths: Import from a file, for uploading a CSV, XLSX, or TXT directly; Copy-paste, for pasting contact data as text straight from a spreadsheet without saving a file first; and Import from another tool, for pulling contacts automatically from a platform you're already connected to. For a one-time list migration, Import from a file is the most predictable option since you control the exact file being uploaded."
+      "heading": "Map each column to an attribute",
+      "body": "For every column, open the Contact attribute dropdown and pick where the data goes: EMAIL, FIRSTNAME, LASTNAME and so on. If the field doesn't exist yet, choose Add a new attribute, name it and click Create. For a column you don't want in Brevo, select Do not import.\n\nPhone numbers need a country code chosen here, and Brevo applies it to every number in the file that doesn't already start with + and a code. If your list mixes countries, add the full international format to each number before uploading. Click Confirm mapping when you're done."
     },
     {
-      "heading": "Map your columns to Brevo's fields",
-      "body": "After uploading, Brevo scans the file's header row and tries to match each column to a profile attribute automatically — Email, First Name, Last Name, and so on. Check this mapping carefully before confirming; a column Brevo couldn't confidently guess will need to be assigned manually, or you can create a brand-new custom attribute on the spot if the field doesn't exist yet."
+      "heading": "Pick a list and go through the final settings",
+      "body": "On Select a list, tick one or more existing lists, or switch to Create a list, name it and choose a folder. Click Confirm your list.\n\nThe finalize screen has the toggles that matter most:\n\n- Update the attributes of the existing contacts: on, and your file overwrites data for people already in Brevo. Off, and they stay as they are.\n- Import empty fields to erase existing attribute data: on, and a blank cell wipes whatever was stored. Leave it off unless that's the intent.\n- Blocklist the imported Email / SMS / WhatsApp contacts: for importing people you want to exclude from campaigns, such as a list of spam complainers. Switch these on by mistake and your new subscribers won't receive anything.\n\nLast comes the opt-in agreement. Brevo expects you to send only to people who explicitly agreed to hear from you, and you must tick \"I confirm that my new import adheres to these conditions\" to continue."
     },
     {
-      "heading": "Confirm the destination list and consent",
-      "body": "Choose an existing contact list to add these people to, or create a new one by typing a name. Brevo requires you to confirm that the contacts you're importing have consented to receive campaigns — the import screen states this plainly at the top: \"Keep in mind you must have your contacts' consent to send them campaigns.\" Only import people who actually opted in somewhere, since importing a purchased or scraped list risks your sender reputation and violates Brevo's terms."
+      "heading": "Confirm and read the import report",
+      "body": "Click Confirm your import. Brevo sends you back to the Contacts page while it processes, and large files take longer. When it finishes, a banner appears and you get an email. Click See import report (or use the bell icon) to see new, updated and unchanged counts, which lists the contacts joined, and any errors. The error table can be downloaded, so you can fix the rows and import just those again."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Brevo won't accept the file",
+      "cause": "It's saved as .xls, .vcf or another unsupported type, or it has no recognisable separator.",
+      "fix": "Re-save as .csv, .xlsx or .txt with comma, semicolon or tab separators."
+    },
+    {
+      "problem": "\"The imported file's encoding is not supported\"",
+      "cause": "The file was saved in an encoding other than UTF-8 or Windows-1252.",
+      "fix": "In your spreadsheet app, export again as CSV UTF-8."
+    },
+    {
+      "problem": "Fewer contacts imported than there are rows",
+      "cause": "Brevo skips duplicates within the file and doesn't recreate contacts it already has. It also reads only the first sheet, and rejects email addresses in the wrong format.",
+      "fix": "Check the import report's new/updated/unchanged counts and the error table. Merge extra sheets into the first one before importing."
+    },
+    {
+      "problem": "Imported contacts show an Email (Declined) tag",
+      "cause": "Brevo checked a sample of the new contacts and suspects not all of them are legitimate opt-ins.",
+      "fix": "Import only contacts who consented to hear from you. Brevo's help centre covers cleaning the database after a suspension."
     }
   ],
   "faq": [
-    { "question": "What file format does Brevo require for imports?", "answer": "CSV, XLSX, or TXT. A UTF-8-encoded CSV is the safest choice if your contact names include accented or non-English characters." },
-    { "question": "Can I import a list without saving a file first?", "answer": "Yes. Brevo's import screen includes a Copy-paste option that lets you paste contact data as text directly from a spreadsheet, alongside the standard file upload." },
-    { "question": "Do I need consent to import a contact list?", "answer": "Yes. Brevo states directly on the import screen that you must have your contacts' consent to send them campaigns, and importing a list without it risks your sender reputation and violates Brevo's terms." },
-    { "question": "Can I map custom fields beyond name and email?", "answer": "Yes. During mapping you can match spreadsheet columns to any existing custom attribute in Brevo, or create a new attribute on the fly if one doesn't already exist." },
-    { "question": "Where do I start an import in Brevo?", "answer": "Contacts in the left sidebar, which also expands to Lists, Segments, Companies, Deals, and Tasks — the import flow itself is reached from the main Contacts screen." }
+    {
+      "question": "Can I import an Excel .xls file into Brevo?",
+      "answer": "No. Brevo accepts .csv, .xlsx and .txt. Open the .xls in Excel or Google Sheets and save it as .xlsx or CSV first."
+    },
+    {
+      "question": "Is there a limit on how many contacts I can import at once?",
+      "answer": "Not on the number of contacts. The limit is file size: 250MB per file. Split larger lists into several files and import them one after another."
+    },
+    {
+      "question": "Will importing the same person twice create a duplicate?",
+      "answer": "No. Brevo removes duplicates within a file and recognises contacts already in your account. Whether it updates their details depends on the \"Update the attributes of the existing contacts\" toggle."
+    },
+    {
+      "question": "Can I use an import to update contacts I already have?",
+      "answer": "Yes. Turn on \"Update the attributes of the existing contacts\" at the finalize step. Keep \"Import empty fields to erase existing attribute data\" off unless you mean to clear fields."
+    },
+    {
+      "question": "Do I need consent to import a list?",
+      "answer": "Yes. Brevo requires you to tick an opt-in agreement confirming your contacts explicitly agreed to receive your messages, and bought or scraped lists breach its Terms of Use."
+    }
   ],
+  "references": [
+    {
+      "label": "Brevo Help Center: Import your contacts to Brevo (official)",
+      "url": "https://help.brevo.com/hc/en-us/articles/115000719584-Import-your-contacts-to-Brevo"
+    },
+    {
+      "label": "Brevo Help Center: Troubleshooting, why can't I import contacts? (official)",
+      "url": "https://help.brevo.com/hc/en-us/articles/4406327485330-Troubleshooting-Why-can-t-I-import-contacts"
+    }
+  ],
+  "verifiedNote": "The spreadsheet and import screen come from the original screen recording. File formats, the 250MB limit, encoding and separator rules, the mapping, list and finalize steps, and the import report were re-checked against Brevo's official Help Center articles in September 2026. Brevo's current docs name the options Upload a file and Copy/Paste and add a Contacts card step that the recorded screen doesn't show; both versions are described above.",
   "generatedAt": "2026-07-31T09:25:00Z",
   "deep": true
 }

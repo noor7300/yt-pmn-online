@@ -1,68 +1,108 @@
 {
   "slug": "how-to-restore-a-deleted-microsoft-loop-page-easily-2026",
   "seoTitle": "How to Restore a Deleted Microsoft Loop Page",
-  "metaDescription": "Recover an accidentally deleted Microsoft Loop page using the workspace trash bin, OneDrive, or SharePoint recycle bin recovery methods.",
-  "intro": "Accidentally deleting a Loop page doesn't have to mean losing your work for good. Loop backs its pages with the same Microsoft 365 storage infrastructure as the rest of your tenant, which means a deleted page usually isn't actually gone — it's sitting in one of a few different trash locations depending on where the page lived. This guide walks through the workspace's own recycle bin first, since that's where most deletions land, then covers the OneDrive and SharePoint paths for pages tied to a private chat or a shared Teams channel.",
+  "metaDescription": "Restore a deleted Microsoft Loop page from the workspace Recycle bin, find Loop components deleted in Teams or Outlook, and what an admin can do if a whole workspace was deleted.",
+  "intro": "A page deleted inside a Loop workspace goes to that workspace's Recycle bin, and restoring it takes three clicks. The harder cases are the ones the Loop app doesn't cover: a Loop component that lived in a Teams chat or an Outlook email, or an entire workspace that someone deleted.\n\nWhere a piece of Loop content is stored depends on where it was created, and that decides which recycle bin it lands in. This guide starts with the workspace bin, then shows where to look for everything else, including the admin route for deleted workspaces that Microsoft's end-user help says can't be restored.",
+  "tables": [
+    {
+      "title": "Where deleted Loop content goes",
+      "columns": [
+        "Created in",
+        "Stored in",
+        "Where to look after deletion"
+      ],
+      "rows": [
+        [
+          "Loop app workspace (shared or My workspace)",
+          "SharePoint Embedded container",
+          "The workspace's own Recycle bin in Loop"
+        ],
+        [
+          "Teams private chat or private meeting",
+          "Creator's OneDrive",
+          "The creator's OneDrive recycle bin"
+        ],
+        [
+          "Teams channel or channel meeting",
+          "The team's SharePoint site",
+          "That SharePoint site's recycle bin"
+        ],
+        [
+          "Outlook email, OneNote, Whiteboard",
+          "Creator's OneDrive",
+          "The creator's OneDrive recycle bin"
+        ]
+      ],
+      "note": "Storage locations from Microsoft's \"Overview of Loop storage\" admin article, checked September 2026. Teams chat notes and Teams channel workspaces are stored in SharePoint Embedded containers, like Loop app workspaces."
+    }
+  ],
   "steps": [
     {
-      "heading": "Open your Loop workspace",
-      "body": "Sign in and land on the Loop home screen, which greets you with \"Good Evening\" (or the time-appropriate equivalent) above a grid of your workspaces — cards like \"Workspace for Beginners\" or \"Workspace 101,\" each showing when it was last touched. Click into the specific workspace that contained the page you lost. Everything from here happens inside that workspace's own sidebar, not from this top-level home screen, so this is really just the jumping-off point.",
+      "heading": "Open the workspace the page was in",
+      "body": "Go to loop.cloud.microsoft and sign in. The home screen lists your workspaces as cards, each showing when it was last opened. Open the one that held the deleted page.",
       "image": {
         "file": "/screenshots/p15md0ZZqYw/01.webp",
-        "caption": "The Loop home screen listing available workspaces as cards, each timestamped with how recently it was opened."
+        "caption": "The Loop home screen listing workspaces as cards, each with the time it was last opened."
       }
     },
     {
-      "heading": "Find the recycle bin at the bottom of the sidebar",
-      "body": "Once inside a workspace, the left sidebar lists your pages under \"Sorted by hierarchy,\" the same list you use every day to navigate between pages. Scroll all the way to the bottom of that sidebar, below the last page in the list, and you'll find a Recycle bin link sitting on its own. It's easy to miss precisely because it's tucked at the very bottom rather than near the top-level navigation, but it's the first place to check for anything deleted from this specific workspace.",
+      "heading": "Open Recycle bin at the bottom of the sidebar",
+      "body": "The left sidebar lists the workspace's pages under \"Sorted by hierarchy\". Scroll past the last page and Recycle bin sits on its own at the very bottom. You can open it from any page in the workspace.",
       "image": {
         "file": "/screenshots/p15md0ZZqYw/03.webp",
-        "caption": "A workspace sidebar with the page list under \"Sorted by hierarchy\" and the Recycle bin link visible at the very bottom."
+        "caption": "A workspace sidebar with pages under \"Sorted by hierarchy\" and the Recycle bin link at the bottom."
       }
     },
     {
-      "heading": "Restore the page from the recycle bin",
-      "body": "Clicking Recycle bin opens a grid of everything recently deleted from that workspace. Hover over the missing page's title to reveal a three-dot menu, and choose Restore — the page pops back into the sidebar in roughly its original spot, with its content, tables, and components intact as of the moment it was deleted. This workspace-level recycle bin is the fastest recovery path and covers the vast majority of accidental deletions, so it's worth checking here before assuming a page needs a more involved recovery."
+      "heading": "Restore the page",
+      "body": "Find the page in the Recycle bin, select More (the three dots) and choose Restore. It goes back into the workspace's page list.\n\nStay away from Empty all at the top of the Recycle bin page. It clears everything in the bin, and Microsoft's help doesn't offer a way back for items removed that way."
     },
     {
-      "heading": "Check OneDrive for pages tied to a private chat",
-      "body": "Not every Loop page lives inside a shared workspace — pages created inside a one-on-one or small group chat are backed by your personal OneDrive rather than the workspace's shared storage. If a page you can't find in the workspace recycle bin was one you created inside a chat, open your Microsoft 365 OneDrive hub separately and check its own trash. Loop components created this way get stored as individual files there, so they're recovered the same way you'd recover any other accidentally deleted OneDrive file."
+      "heading": "Not in the workspace bin? Check where it was created",
+      "body": "If the \"page\" was a Loop component shared in Teams or Outlook, it never lived in a Loop workspace, so it won't be in that bin. Use the table above to find its home.\n\nComponents from a Teams private chat, private meeting, Outlook email, OneNote or Whiteboard are files in the creator's OneDrive. Open onedrive.com with your work account, select Recycle bin, pick the file and click Restore. Work and school OneDrive keeps deleted files for 93 days unless your administrator changed that setting. If someone else created the component, it's in their OneDrive, not yours, and Microsoft notes that items shared with you can't be restored from your own recycle bin. Ask the creator to restore it. Components from a Teams channel or channel meeting are stored on the team's SharePoint site, so check that site's recycle bin."
     },
     {
-      "heading": "Check SharePoint for pages shared in a Teams channel",
-      "body": "Pages shared into a Teams channel are backed by that channel's connected SharePoint site instead of OneDrive. Open the channel's Files tab, jump into the associated SharePoint site, and open its recycle bin from there — deleted channel components typically show up in that SharePoint trash even when they don't appear in the workspace's own Recycle bin link. This is the path to try when a teammate reports a shared page is missing and neither of the first two locations turn it up."
-    },
-    {
-      "heading": "Escalate to an IT admin for a fully deleted workspace",
-      "body": "If an entire workspace was deleted rather than a single page, none of the recovery paths above will help, since there's no sidebar left to check. In that case, the fastest route is your organization's IT admin, who can use the Microsoft 365 admin dashboard to restore a deleted workspace shell, provided the request comes in before the retention window closes — typically 93 days for a fully deleted workspace, after which recovery generally isn't possible at all."
-    },
-    {
-      "heading": "Confirm the restored page is complete",
-      "body": "After any recovery path — workspace bin, OneDrive, or SharePoint — open the restored page and check that its tables, task lists, and any embedded components loaded back correctly rather than assuming a successful restore means everything came back intact. It's worth doing this check immediately rather than days later, since a partial restore is much easier to flag and fix while the deletion is still fresh in everyone's memory."
+      "heading": "If the whole workspace was deleted, ask an admin",
+      "body": "Microsoft's Loop help is blunt about this: once deleted, workspaces can't be restored from the Loop app. An administrator may still be able to recover it. Loop workspaces are SharePoint Embedded containers, and an admin with the SharePoint Embedded Administrator or Global Administrator role can open the SharePoint admin center, expand SharePoint Embedded, choose Deleted containers, select the workspace and click Restore. It reappears under Active containers when the background job finishes.\n\nTiming matters. Deleted containers are purged permanently after 93 days unless a retention policy says otherwise, and an admin can also permanently delete one sooner."
     }
   ],
   "faq": [
     {
-      "question": "How long do deleted Loop pages stay recoverable?",
-      "answer": "Deleted items typically stay in the recycle bin for a limited retention window, so it's best to restore a page as soon as you notice it's missing."
+      "question": "Can I restore a deleted Loop workspace myself?",
+      "answer": "No. Microsoft's Loop help says deleted workspaces can't be restored from the app. An admin can restore the underlying container from the SharePoint admin center within 93 days."
     },
     {
-      "question": "Can I recover a page if the whole workspace was deleted?",
-      "answer": "In more serious cases, an IT admin may be able to use admin tools to recover a fully deleted workspace before the roughly 93-day retention window closes."
+      "question": "Is there one Recycle bin for all of Loop?",
+      "answer": "Not in the app. The Recycle bin link sits in each workspace's sidebar, so open it inside the workspace the page was deleted from."
     },
     {
-      "question": "Where do private Loop pages get stored when deleted?",
-      "answer": "Pages tied to individual chats are generally recoverable through your personal OneDrive trash rather than the shared workspace bin."
+      "question": "How long do I have to restore a Loop component from Teams chat?",
+      "answer": "Components from a private chat are OneDrive files, and work or school OneDrive keeps deleted files for 93 days unless your admin changed the setting."
     },
     {
-      "question": "Will restoring a page bring back its comments and tables?",
-      "answer": "Restoring a page from the recycle bin generally returns it to its last saved state, including its structured components, though it's worth double-checking after recovery."
-    },
-    {
-      "question": "Why isn't a deleted page showing up in the workspace recycle bin?",
-      "answer": "If the page was created inside a private chat or shared through a Teams channel, it may be backed by OneDrive or SharePoint storage instead, so check those trash locations before assuming the page is unrecoverable."
+      "question": "What does Empty all do?",
+      "answer": "It clears every item from that workspace's Recycle bin. Restore anything you need first."
     }
   ],
+  "references": [
+    {
+      "label": "Microsoft Support: Get started with Microsoft Loop, including deleting and restoring (official)",
+      "url": "https://support.microsoft.com/en-us/loop/get-started-with-microsoft-loop"
+    },
+    {
+      "label": "Microsoft Learn: Overview of Loop storage (official)",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/loop/loop-storage"
+    },
+    {
+      "label": "Microsoft Learn: Manage SharePoint Embedded containers in SharePoint admin center (official)",
+      "url": "https://learn.microsoft.com/en-us/sharepoint/dev/embedded/concepts/admin-exp/consuming-tenant-admin/ctaux"
+    },
+    {
+      "label": "Microsoft Support: Restore deleted files or folders in OneDrive (official)",
+      "url": "https://support.microsoft.com/en-us/onedrive/restore-deleted-files-or-folders-in-onedrive"
+    }
+  ],
+  "verifiedNote": "The Loop home screen and workspace sidebar come from the original screen recording. The restore steps, storage locations, workspace deletion rules and admin container restore were re-checked against Microsoft Support and Microsoft Learn in September 2026. That check corrected the earlier claim that deleted workspaces are restored through the Microsoft 365 admin dashboard (it's the SharePoint admin center's Deleted containers page) and replaced a vague storage explanation with Microsoft's own mapping.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

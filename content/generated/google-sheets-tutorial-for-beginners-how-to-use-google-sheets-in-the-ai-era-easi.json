@@ -1,49 +1,113 @@
 {
   "slug": "google-sheets-tutorial-for-beginners-how-to-use-google-sheets-in-the-ai-era-easi",
   "seoTitle": "Google Sheets Tutorial for Beginners in the AI Era",
-  "metaDescription": "A beginner walkthrough of Google Sheets: importing data, building a weekly schedule from a template, conditional formatting, and sharing your sheet.",
-  "intro": "Most Google Sheets tutorials start with a blank grid and a list of formulas to memorize, which is exactly the part beginners find least useful. This one starts differently — from a real weekly schedule template, built out with actual entries, conditional formatting rules, and a share step at the end. That's a more honest picture of what day-to-day spreadsheet work looks like: importing data you already have, adapting a template instead of building from scratch, and getting the file in front of other people. Follow along and you'll come away knowing how to bring outside data in, use a prebuilt layout productively, and share the result.",
+  "metaDescription": "A beginner walkthrough of Google Sheets: importing Excel files, starting from a template, conditional formatting, sharing, and what Gemini in Sheets needs before it appears.",
+  "intro": "Most Google Sheets tutorials open on a blank grid and a list of formulas to memorize. That is the part beginners find least useful. This one works from a real weekly schedule template instead, filled in with entries, given a formatting rule, and shared at the end.\n\nIt mirrors how day-to-day spreadsheet work goes: bring in data you already have, adapt a layout someone else built, and get the file in front of other people. The last step covers the AI side. Gemini in Sheets is real and useful, but it sits behind a plan requirement that most beginner guides skip over, so you should know whether you have it before you go looking for it.",
   "steps": [
     {
-      "heading": "Import an existing file instead of starting blank",
-      "body": "If you already have data in Excel or another format, Google Sheets can bring it in directly rather than making you retype everything. From File, choose Import, and select the file you want — the dialog confirms once the upload succeeds and gives you an \"Open now\" link. The more important choice is the import location underneath it: Create new spreadsheet, Insert new sheet(s), Replace spreadsheet, or a few other options for merging into what's already open. Picking the wrong one here is the single most common beginner mistake, since \"Replace spreadsheet\" wipes out anything already in the file.",
-      "image": { "file": "/screenshots/zBkpcrlfpyE/02.webp", "caption": "The Import file dialog after a successful upload, with import-location options like Create new spreadsheet and Replace spreadsheet." }
+      "heading": "Import an existing file",
+      "body": "If your data already lives in Excel or a CSV, don't retype it. Open File > Import, upload the file, and Sheets confirms with a Success message and an Open now link. Google lists .xls, .xlsx, .xlsm, .xlt, .xltx, .xltm, .ods, .csv, .txt, .tsv and .tab as importable.\n\nThe choice that matters is Import location. There are six options: Create new spreadsheet, Insert new sheet(s), Replace spreadsheet, Replace current sheet, Append to current sheet, and Replace data at selected cell. Not every file type gets all six. With the .xlsx file in the recording, the last three are greyed out, which leaves you choosing between a new file, new tabs, or overwriting the whole spreadsheet. Replace spreadsheet deletes everything already in the open file, so pick Insert new sheet(s) unless you mean it. For plain-text files such as .csv, Sheets also asks which separator to split on, with Detect automatically as the default.",
+      "image": {
+        "file": "/screenshots/zBkpcrlfpyE/02.webp",
+        "caption": "The Import file dialog after a successful upload, with Replace current sheet and the two options below it greyed out for an .xlsx file."
+      }
     },
     {
-      "heading": "Start from a template instead of a blank grid",
-      "body": "Rather than building row and column structure from nothing, Google Sheets' template gallery includes ready-made layouts like a Weekly schedule, with a \"Week of\" date selector at the top and a day-by-day grid already formatted below it. Clicking into the date field lets you set the schedule's start date, and the days across the top update to match. For a beginner, working inside a template like this teaches spreadsheet structure — headers, merged cells, labeled rows — far faster than staring at an empty sheet trying to decide where to begin.",
-      "image": { "file": "/screenshots/zBkpcrlfpyE/03.webp", "caption": "A Weekly schedule template with a selectable start date and the days of the week laid out as column headers." }
+      "heading": "Start from a template",
+      "body": "From the Sheets home page, click Template gallery at the top right. From inside a spreadsheet, the same list is under File > New > From a template. Picking one opens your own copy, so nothing you type changes the original.\n\nThe Weekly schedule template used here has a Week of cell at the top and a grid of half-hour time slots below it. Click the date next to Week of and set your start date. The seven day headers recalculate from it, which is why the week in the recording begins on a Friday. Working inside a layout like this teaches spreadsheet structure (headers, labelled rows, merged title cells) faster than an empty grid does.",
+      "image": {
+        "file": "/screenshots/zBkpcrlfpyE/03.webp",
+        "caption": "The Weekly schedule template, with the start date set in the Week of cell and the day columns following from it."
+      }
     },
     {
-      "heading": "Enter data and apply conditional formatting",
-      "body": "Typing entries into the schedule — Grocery, Laundry, Shopping against specific time slots — turns the template into an actual working document. From here, open Format and choose Conditional format rules to have cells change appearance automatically based on their content, which is visible in the panel on the right alongside a couple of dollar values sitting outside the main grid. This is where Sheets starts doing real work for you: instead of manually color-coding entries, a rule does it consistently every time new data goes in.",
-      "image": { "file": "/screenshots/zBkpcrlfpyE/04.webp", "caption": "The Conditional format rules panel open beside a partially filled-in weekly schedule, with an option to add another rule." }
+      "heading": "Fill it in and add a conditional formatting rule",
+      "body": "Type entries into the time slots (Grocery, Laundry, Shopping) and the template becomes a working document. To make certain entries stand out automatically, select the cells, then open Format > Conditional formatting. A panel titled Conditional format rules opens on the right.\n\nEach rule has three parts: the range it applies to, a condition under Format cells if, and a formatting style. Choose Single color for a straightforward highlight, or Color scale to shade numbers from low to high. Custom formula is there for rules based on other cells, but it can only reference the same sheet without INDIRECT. When one range carries several rules, Sheets checks them top to bottom and the first true rule decides the format. Drag rules in the panel to reorder them.",
+      "image": {
+        "file": "/screenshots/zBkpcrlfpyE/04.webp",
+        "caption": "The Conditional format rules panel beside a partly filled weekly schedule, with Add another rule at the top."
+      }
     },
     {
-      "heading": "Use core formulas to summarize your data",
-      "body": "Once a sheet has real entries, formulas are what turn raw rows into answers — SUM for totals, AVERAGE for typical values, COUNTIF for tallying entries that match a condition. Reference a range like B6:B14 rather than retyping numbers, since formulas recalculate automatically the moment the underlying cells change. For a schedule like the one in this template, a simple COUNTIF across the week can tell you at a glance how many time slots are still empty."
+      "heading": "Summarize with a few core formulas",
+      "body": "Formulas turn rows into answers. SUM adds up a range, AVERAGE gives the typical value, and COUNTIF tallies cells that match a condition. For a schedule, COUNTBLANK across a day's column tells you how many slots are still free.\n\nAlways point formulas at a range such as C6:C30 instead of typing the numbers in. They recalculate the moment a cell changes. Keep dates in one format and avoid blank rows in the middle of a range, because sort and filter behave unpredictably on inconsistent data."
     },
     {
-      "heading": "Keep data clean as the sheet grows",
-      "body": "A schedule or tracker that starts tidy tends to stay usable longer if you're consistent about formatting dates the same way, avoiding stray blank rows in the middle of a range, and using Data validation to restrict a column to a fixed set of entries where that makes sense. Sheets' filter and sort tools only work reliably when the underlying data is consistent, so a few minutes of cleanup discipline early on saves much more time later."
+      "heading": "Name the file and share it",
+      "body": "Click Share on a file that still says Untitled spreadsheet and Sheets stops you with a Name before sharing prompt. You can Skip, but save a real name. A collaborator's Drive fills up with untitled files fast.\n\nIn the share dialog, add people by email and choose a role for each: Viewer can only read, Commenter can read and leave comments, and Editor can change the sheet and reshare it. Under General access you can instead switch to Anyone with the link. Google caps a single share at 600 email addresses, and editing is limited to 100 open tabs or devices at once.",
+      "image": {
+        "file": "/screenshots/zBkpcrlfpyE/05.webp",
+        "caption": "The Name before sharing prompt, with the Untitled spreadsheet name still in the field and Skip and Save buttons."
+      }
     },
     {
-      "heading": "Name and share the file",
-      "body": "Sharing an untitled document prompts a \"Name before sharing\" dialog, asking you to give the spreadsheet a real name before it goes out — you can Save a name or Skip and share it as-is. Naming it properly matters more than it seems: an \"Untitled spreadsheet\" landing in a collaborator's Drive is easy to lose track of, while a clear name like \"July Weekly Schedule\" is instantly identifiable in a shared folder full of other files.",
-      "image": { "file": "/screenshots/zBkpcrlfpyE/05.webp", "caption": "The Name before sharing prompt, asking for a real spreadsheet name with Skip and Save options." }
+      "heading": "Use Gemini in Sheets, if your plan includes it",
+      "body": "The spark icon at the top right, beside Share and Upgrade, is Ask Gemini. It opens a side panel where you can ask for a table, a formula, a chart, a pivot table, conditional formatting or a written summary of the data. There is also an AI function you type straight into a cell, for example =AI(\"Classify this task as errand or chore\", C6). It only sees the range you pass it, and it generates up to 350 cells at a time.\n\nBoth require an eligible Google Workspace or Google AI plan. On a free personal account the panel may not appear at all. If you imported an Excel file and kept it as .xlsx, save it as a Google Sheets file first (File > Save as Google Sheets), because Gemini does not work on the .xlsx version. Google's own help pages warn that Gemini can suggest inaccurate information, so check any formula it writes against what you learned in the steps above."
+    }
+  ],
+  "costNote": "Importing, templates, conditional formatting, formulas and sharing all work on a free Google account. Gemini in Sheets and the AI function do not: Google states both require an eligible Google Workspace or Google AI plan, and a Workspace admin can also switch them off.",
+  "troubleshooting": [
+    {
+      "problem": "Replace current sheet, Append and Replace data at selected cell are greyed out when importing",
+      "cause": "Google notes that not every file type offers all six import locations. In the recording, an .xlsx upload only allowed the first three.",
+      "fix": "Use Insert new sheet(s) to bring the workbook in as new tabs, then copy the rows you need into the existing sheet. If you need to append rows directly, export the data as .csv and import that."
     },
     {
-      "heading": "Bring in AI-assisted features where they save time",
-      "body": "Modern Sheets includes AI-driven suggestions for formulas, formatting, and even generating a first draft of a table from a plain-language description, which is worth exploring once you're comfortable with the manual basics covered above. Treat these as an accelerant rather than a replacement — knowing how a formula or a conditional rule actually works means you can verify what the AI suggests instead of accepting it blindly."
+      "problem": "No Ask Gemini button, or Gemini won't respond in this file",
+      "cause": "The account isn't on an eligible Workspace or Google AI plan, an admin has turned Gemini off, or the file is still an .xlsx opened in Sheets.",
+      "fix": "Check your plan first. If the file is still in .xlsx format, use File > Save as Google Sheets and work in the converted copy."
+    },
+    {
+      "problem": "A conditional formatting rule is set up correctly but the cells don't change",
+      "cause": "Another rule on the same range is listed above it. Sheets applies the first rule that evaluates true and ignores the rest.",
+      "fix": "Open Format > Conditional formatting and drag the rule you want higher in the list."
     }
   ],
   "faq": [
-    { "question": "Do I need any prior spreadsheet experience to follow along?", "answer": "No. This walkthrough starts from importing a file and working inside a template, which is a more approachable entry point than building formulas from a blank sheet." },
-    { "question": "What's the safest import location option when bringing in a file?", "answer": "\"Insert new sheet(s)\" is generally safest for beginners, since it adds your imported data as a new tab rather than \"Replace spreadsheet,\" which overwrites everything already in the file." },
-    { "question": "How does conditional formatting help with a schedule or tracker?", "answer": "It automatically changes a cell's appearance — color, bold, and so on — based on rules you set, so entries that meet a condition stand out without you manually formatting each one." },
-    { "question": "Why does Sheets ask me to name a file before sharing it?", "answer": "An untitled file is hard for collaborators to identify once it lands in their Drive alongside other shared documents, so Sheets prompts for a real name at share time if you haven't already set one." },
-    { "question": "Should beginners rely on AI features in Sheets right away?", "answer": "It's better to learn the core formulas and formatting tools first, so you can check that an AI suggestion is actually correct rather than accepting it without understanding what it did." }
+    {
+      "question": "Which import option is safest for a beginner?",
+      "answer": "Insert new sheet(s). It adds the imported data as new tabs and leaves everything else alone. Replace spreadsheet overwrites the whole file."
+    },
+    {
+      "question": "Does editing a template change it for everyone else?",
+      "answer": "No. Choosing a template from the gallery opens a copy in your own Drive."
+    },
+    {
+      "question": "Is Gemini in Google Sheets free?",
+      "answer": "No. Google's help pages say Ask Gemini and the AI function need an eligible Google Workspace or Google AI plan. Everything else in this guide works on a free account."
+    },
+    {
+      "question": "Can I let someone comment without letting them edit?",
+      "answer": "Yes. Give them the Commenter role in the share dialog. They can add comments but can't change any cells."
+    }
   ],
+  "references": [
+    {
+      "label": "Google Docs Editors Help: Import data sets in Google Sheets",
+      "url": "https://support.google.com/docs/answer/40608"
+    },
+    {
+      "label": "Google Docs Editors Help: Use templates",
+      "url": "https://support.google.com/docs/answer/148833?hl=en&co=GENIE.Platform%3DDesktop"
+    },
+    {
+      "label": "Google Docs Editors Help: Use conditional formatting rules in Google Sheets",
+      "url": "https://support.google.com/docs/answer/78413"
+    },
+    {
+      "label": "Google Docs Editors Help: Share files from Google Drive",
+      "url": "https://support.google.com/docs/answer/2494822"
+    },
+    {
+      "label": "Google Docs Editors Help: Collaborate with Gemini in Google Sheets",
+      "url": "https://support.google.com/docs/answer/14356410?hl=en"
+    },
+    {
+      "label": "Google Docs Editors Help: Use the AI function in Google Sheets",
+      "url": "https://support.google.com/docs/answer/15877199"
+    }
+  ],
+  "verifiedNote": "Screens (the import dialog, the Weekly schedule template, the conditional formatting panel and the naming prompt) come from the original screen recording. Import formats and options, the template path, conditional formatting behaviour, sharing roles and limits, and the Gemini plan requirement were re-checked against Google's Docs Editors Help pages in September 2026. That check corrected the menu name (Format > Conditional formatting) and added the plan requirement and .xlsx limitation for Gemini, which the earlier version presented as available to everyone.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }
