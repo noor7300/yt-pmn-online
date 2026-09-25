@@ -2,45 +2,68 @@
   "slug": "how-to-use-trello-and-slack-easily-2026",
   "seoTitle": "How to Use Trello and Slack Together (2026 Guide)",
   "metaDescription": "Connect Trello and Slack so card updates stream into your channels automatically, check the workspace permission that controls the link, and manage cards with slash commands from chat.",
-  "intro": "If your team lives in Slack but plans its work in Trello, you're probably already copy-pasting card links back and forth to keep everyone in the loop. Linking the two tools removes that step: board activity like card moves, due dates, and comments can post straight into a Slack channel, and you can create or check on cards without leaving your chat window. The setup itself is quick, but it touches two separate admin surfaces — Slack's app directory and Trello's Workspace settings — so it helps to know where both live before you start. This guide walks through logging in, finding the right workspace controls, and getting the Power-Up talking to your channel.",
+  "intro": "If your team lives in Slack but plans its work in Trello, you're probably already copy-pasting card links back and forth to keep everyone in the loop. Linking the two tools removes that step: board activity like card moves, due dates, and comments can post straight into a Slack channel, and you can create or check on cards without leaving your chat window. The setup touches two separate admin surfaces, Slack's app directory and Trello's Workspace settings, so it helps to know where both live before you start. It also has two layers people mix up: a Workspace-level link that turns on notifications, and a personal account link each teammate needs before slash commands will work for them.",
   "steps": [
     {
       "heading": "Log in to Trello",
-      "body": "Start at Trello's login screen and sign in with your work email, or use one of the single sign-on options underneath — Google, Microsoft, Apple, or Slack itself. Signing in with the Slack button is worth knowing about even if you don't use it here, since Atlassian (Trello's parent company) shares an account system across Trello, Jira, and Confluence, and the same login screen is the entry point for all of them. Once you're in, you'll land on your boards or your most recently viewed workspace.",
-      "image": { "file": "/screenshots/wdSpTFAfMYM/02.webp", "caption": "Trello's login screen. Signing in with the Slack button is a shortcut, not the integration itself — that gets configured separately once you're inside a board." }
+      "body": "Start at Trello's login screen and sign in with your work email, or use one of the single sign-on options underneath: Google, Microsoft, Apple, or Slack itself. Signing in with the Slack button is a shortcut into Trello, not the integration covered in this guide. Atlassian, Trello's parent company, shares one account system across Trello, Jira, and Confluence, so this same screen is the entry point for all three. Once you're in, you land on your boards or your most recently viewed workspace.",
+      "image": { "file": "/screenshots/wdSpTFAfMYM/02.webp", "caption": "Trello's login screen. Signing in with the Slack button is a shortcut, not the integration itself, which gets configured separately once you're inside a board." }
     },
     {
-      "heading": "Open the workspace that owns your board",
-      "body": "Slack integrations in Trello are configured per Workspace, not per individual board, so the first real step is confirming which Workspace your project lives in. From the sidebar, expand Trello Workspace to see Boards, Members, Settings, and Billing — this is also where you'll end up if a teammate says Slack notifications aren't firing for a board that clearly has the Power-Up installed, since the fix is often a Workspace-level restriction rather than anything on the card itself.",
+      "heading": "Link the Workspace to Slack",
+      "body": "Slack integrations in Trello are configured per Workspace, not per board, so confirm which Workspace your project lives in first. From the sidebar, expand Trello Workspace to see Boards, Members, Settings, and Billing. Inside Settings, any member can normally select Add to Slack to connect the Workspace to a Slack workspace. On a Premium or Enterprise Workspace, an admin can lock this down: look for \"Slack workspaces restrictions\" in the permissions list, which switches the link from any-member to admins-only. If a teammate says the connection won't complete, this setting is the first thing to check, and on a free Workspace it isn't there at all, since it's a Premium/Enterprise control.",
       "image": { "file": "/screenshots/wdSpTFAfMYM/04.webp", "caption": "The Workspace sidebar with Boards, Members, Settings, and Billing. Slack linking permissions live under Settings, one level above any individual board." }
     },
     {
       "heading": "Check who's allowed to link Slack workspaces",
-      "body": "Inside Workspace Settings, scroll to the permissions list and look for \"Slack workspaces restrictions.\" This controls whether any member can link or unlink the Trello Workspace from a Slack workspace, or whether that's locked down to admins only. If you're setting this up for a team rather than just yourself, it's worth checking this setting first — it's the difference between the integration working the first time you try it and a confusing permissions error partway through.",
+      "body": "If Settings shows \"Slack workspaces restrictions,\" it decides whether any member can link or unlink the Trello Workspace from Slack, or whether that's locked to admins. Setting this up for a team, not just yourself? Check it first. It's the difference between the integration working on the first try and a permissions error partway through, with no clear reason why.",
       "image": { "file": "/screenshots/wdSpTFAfMYM/05.webp", "caption": "Workspace Settings, showing the \"Slack workspaces restrictions\" row that decides who on the team can connect or disconnect Slack." }
     },
     {
       "heading": "Add the Slack Power-Up to your board",
-      "body": "Open the specific board you want to connect and find Power-Ups in the board menu. Search for Slack, add it, and you'll be prompted to sign in to the Slack workspace you want to receive updates — this is the step that actually creates the link, separate from the login-page SSO button and separate from the Workspace-level permission you just checked. Once authorized, pick the destination channel from a dropdown.",
+      "body": "Open the board you want to connect and find Power-Ups in the board menu. Search for Slack, select Add, and follow its prompts to sign in to the Slack workspace that should receive updates. This creates the board-level link, separate from the login-page SSO button and separate from the Workspace permission you just checked. Once authorized, pick the destination channel and select Add Slack alert to choose which triggers post there: card moves between lists, new comments, due date changes, member assignments, and more. Turn on only what the team actually wants to see. A busy board pushing every comment into a shared channel gets muted fast.",
       "image": null
     },
     {
-      "heading": "Choose which card activity gets posted",
-      "body": "After the channel is selected, you'll see a list of triggers you can turn on individually: card moves between lists, new comments, due date changes, and member assignments among them. Turn on only what your team actually wants to see — a busy board pushing every comment into a shared channel gets muted fast, while a lean set of triggers (say, just moves into a \"Done\" list) tends to stay useful for months.",
+      "heading": "Link your own account for slash commands",
+      "body": "The board-level Power-Up handles notifications, but it doesn't automatically give every member access to slash commands in Slack. Each person who wants to create or search cards from chat needs to link their own account once, by typing /trello login in any Slack message box and selecting Link account. Skip this and /trello commands either do nothing or prompt for login again the next time you try.",
       "image": null
     },
     {
-      "heading": "Manage cards from Slack with slash commands",
-      "body": "Once the Power-Up is live, you don't need to open Trello to interact with it. Typing /trello in a Slack message box brings up commands for creating a card, adding yourself to one, or joining a board directly from chat, and pasting a raw Trello card link into a channel will usually unfurl into a preview showing the card's title, list, and members. Run one test — move a card and watch for the notification in your channel — before you tell the rest of the team it's ready."
+      "heading": "Manage cards from Slack",
+      "body": "Once both links are in place, /trello create [title] adds a card, /trello search [terms] finds one, and /trello info shows details on a linked board. Pasting a raw Trello card link into a channel usually unfurls into a preview with the card's title, list, and members. Move a card and watch for the notification in your channel before telling the rest of the team it's ready."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Slash commands like /trello create don't do anything",
+      "cause": "The board-level Slack Power-Up only handles notifications. Individual slash commands need each person's own Slack account linked to their Trello account.",
+      "fix": "Type /trello login in Slack and select Link account. This is a one-time step per person, not per board."
+    },
+    {
+      "problem": "A teammate can't link the Trello Workspace to Slack",
+      "cause": "On Premium and Enterprise Workspaces, an admin can restrict this under \"Slack workspaces restrictions\" so only admins can complete the link.",
+      "fix": "Have a Workspace admin either complete the link themselves or change the restriction setting to allow any member."
+    },
+    {
+      "problem": "The Power-Up is installed but nothing posts to the channel",
+      "cause": "No triggers were selected when the alert was configured, or the wrong channel was chosen during setup.",
+      "fix": "Reopen the Slack Power-Up on the board, check Add Slack alert, and confirm both the channel and the specific triggers (card moves, comments, due dates) are turned on."
     }
   ],
   "faq": [
-    { "question": "Can I create Trello cards directly from Slack?", "answer": "Yes. Once the Power-Up is connected, typing /trello in a Slack message opens commands for creating, assigning, and joining cards without switching apps." },
-    { "question": "How do I avoid too many notifications in my channel?", "answer": "When you add the Slack Power-Up to a board, you choose which triggers are active — card moves, comments, due-date changes, and so on. Turn off anything your team doesn't need alerts for." },
-    { "question": "Why can't I link my board to Slack?", "answer": "Check Workspace Settings for \"Slack workspaces restrictions.\" If it's set to admins only, a regular member won't be able to complete the link even with the Power-Up installed." },
-    { "question": "Do I need to be a Trello board admin to set this up?", "answer": "You need permission to add Power-Ups to the specific board, and depending on the Workspace's Slack restrictions setting, you may also need admin rights to authorize the Slack connection itself." },
-    { "question": "Can I preview a Trello card right inside a Slack message?", "answer": "Yes — once connected, pasting a card's link into a Slack channel typically unfurls into a live preview with the card's title, list, and members." }
+    { "question": "Can I create Trello cards directly from Slack?", "answer": "Yes, once you've linked your own account with /trello login. Typing /trello in a Slack message then opens commands for creating, assigning, and joining cards without switching apps." },
+    { "question": "How do I avoid too many notifications in my channel?", "answer": "When you add the Slack Power-Up to a board, choose which triggers are active: card moves, comments, due-date changes, and so on. Turn off anything the team doesn't need alerts for." },
+    { "question": "Why can't I link my board to Slack?", "answer": "Check Workspace Settings for \"Slack workspaces restrictions.\" On Premium and Enterprise Workspaces this can be set to admins only, which blocks a regular member even with the Power-Up installed." },
+    { "question": "I installed the Slack Power-Up, so why don't slash commands work for me?", "answer": "The Power-Up covers channel notifications, not personal slash commands. Run /trello login in Slack and link your own account separately." },
+    { "question": "Do I need to be a Trello board admin to set this up?", "answer": "You need permission to add Power-Ups to the specific board. Depending on the Workspace's Slack restrictions setting, linking the Workspace itself may also require admin rights." },
+    { "question": "Can I preview a Trello card right inside a Slack message?", "answer": "Yes. Once connected, pasting a card's link into a Slack channel typically unfurls into a live preview with the card's title, list, and members." }
   ],
+  "references": [
+    { "label": "The Trello app for Slack (official, Atlassian Support)", "url": "https://support.atlassian.com/trello/docs/the-trello-app-for-slack/" },
+    { "label": "Enable and manage a Power-Up on a board (official, Atlassian Support)", "url": "https://support.atlassian.com/trello/docs/enabling-power-ups/" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The Workspace-level Slack link, the \"Slack workspaces restrictions\" setting, and slash commands were re-checked against Atlassian's official Trello support documentation in September 2026. That check added the personal /trello login step, which the article previously implied happened automatically once the Power-Up was installed, and clarified that the restrictions setting only exists on Premium and Enterprise Workspaces.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

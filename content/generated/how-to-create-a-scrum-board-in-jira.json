@@ -1,12 +1,16 @@
 {
   "slug": "how-to-create-a-scrum-board-in-jira",
   "seoTitle": "How to Create a Scrum Board in Jira",
-  "metaDescription": "Create a Scrum board in Jira from an existing space's backlog, name it, choose what feeds it, and start planning sprints.",
-  "intro": "A Scrum board gives a team a shared view of sprints — what's planned, what's in progress, and what's shipped — pulled straight from the backlog. In Jira, a new board isn't a separate top-level object you hunt for in a menu; it's created from inside a space's existing backlog, in a short dialog that asks for a name and what should feed into it. This guide walks through that flow using a real space's backlog, from opening the create dialog to seeing what a populated Scrum backlog looks like once sprints are underway.",
+  "metaDescription": "Create a Scrum board in Jira from a space's backlog: name it, choose what feeds it, and avoid the two mistakes that leave a new board empty.",
+  "intro": "A Scrum board gives a team a shared view of sprints: what's planned, what's in progress, what's shipped, pulled straight from the backlog. In Jira, a board isn't a separate object you hunt for in a top-level menu; it's created from inside a space's backlog, in a short dialog asking for a name and what should feed it. (Atlassian renamed Jira's \"projects\" to \"spaces\" in February 2026; this guide uses the current term.) This walks through that flow using a real space's backlog, from opening the create dialog to what a populated Scrum backlog looks like once sprints are underway.",
+  "prerequisites": [
+    "Browse spaces permission for the space, or spaces, the board will pull work from",
+    "A company-managed space — team-managed spaces can't have extra boards added this way (see the note in step 3)"
+  ],
   "steps": [
     {
       "heading": "See what a working Scrum backlog looks like",
-      "body": "Before building one, it helps to look at an established example. A space like \"PMN Online's Scrum\" shows the pattern clearly: an active sprint at the top (Release 1.0 Sprint 2, dated 27 Jun – 25 Jul) listing its six work items with statuses like To Do, In Progress, and In Review, and a separate Backlog section below holding items not yet pulled into a sprint. This is the structure a Scrum board is built to support — a defined sprint window sitting above an unscheduled backlog.",
+      "body": "Before building one, it helps to look at an established example. A space like \"PMN Online's Scrum\" shows the pattern: an active sprint at the top, dated and scoped, listing its work items with statuses like To Do, In Progress, and In Review, and a separate Backlog section below holding items not yet pulled into a sprint. That's the structure a Scrum board exists to support: a defined sprint window sitting above an unscheduled backlog.",
       "image": {
         "file": "/screenshots/yHFVFZlcfmc/01.webp",
         "caption": "An established Scrum backlog, with a dated, in-progress sprint above an unscheduled backlog of further work items."
@@ -14,11 +18,11 @@
     },
     {
       "heading": "Open the space where you want the board",
-      "body": "From the left sidebar under Spaces, open the space you're setting the board up in — for example, a space called TEST SPACE. Inside it you'll find its existing boards listed underneath, such as a \"TS board.\" Rather than creating a board from a blank slate, you typically create it alongside a space's existing backlog and board list."
+      "body": "From the left sidebar under Spaces, open the space you're setting the board up in, for example one called TEST SPACE. Its existing boards are listed underneath, such as a \"TS board.\" A new board is typically created alongside a space's existing backlog and board list instead of from a blank slate."
     },
     {
       "heading": "Start the board creation dialog",
-      "body": "From within the space's backlog view, use the add action (the + control near the board list) to open the \"Create a board\" dialog. It's a short form: a required Name this board field, and a required \"Choose what to include in this board\" dropdown that determines which work items the new board will actually pull in.",
+      "body": "From within the space's backlog view, use the add action (the + control near the board list) to open Create a board, then choose Create a Scrum board. There's a second route to the same dialog: the global search field (or the / shortcut), then \"Go to all: Boards,\" then Create board. Either way you land on a short form: a required Name this board field, and a required \"Choose what to include in this board\" dropdown.\n\nOne limit worth knowing before you start: team-managed spaces don't support adding extra boards this way, since each ships with exactly one board already. If you don't see the + control, you're likely in a team-managed space, and a saved-filter-based board from the global route is the workaround.",
       "image": {
         "file": "/screenshots/yHFVFZlcfmc/05.webp",
         "caption": "The Create a board dialog, asking for a board name and what work items should be included in it before it's created."
@@ -26,43 +30,71 @@
     },
     {
       "heading": "Name the board and set what it includes",
-      "body": "Give the board a name your team will recognize at a glance — something tied to the sprint cadence or the team itself rather than something generic. Then use the include dropdown to scope the board to the right set of work items; getting this wrong is the most common reason a freshly created board looks empty or shows unrelated issues, so double-check the selection before clicking Create."
+      "body": "Give the board a name your team will recognize at a glance, tied to the sprint cadence or the team itself, not something generic. Basing the board on a space auto-generates a filter behind the scenes, roughly space = \"YOUR SPACE\" ORDER BY Rank ASC, so getting the include dropdown wrong is the most common reason a freshly created board looks empty: the filter ends up pointed at the wrong space, or none at all. Double-check the selection before clicking Create, since a board's type (Scrum or Kanban) can't be changed after it's made."
     },
     {
-      "heading": "Create the board and confirm it appears",
-      "body": "Click Create, and the new board should appear in the space's board list in the sidebar alongside any others. Open it once to confirm it's showing the work items you expected — if it's empty, the include setting from the previous step is the first thing to revisit rather than assuming something broke."
+      "heading": "Create the board and confirm it's populated",
+      "body": "Click Create. The new board appears in the space's board list in the sidebar alongside any others. Open it once to confirm it shows the work items you expected. If it's empty, check the board's underlying filter and its JQL before assuming something broke. That filter, not the board itself, decides what shows up."
     },
     {
-      "heading": "Populate the backlog before your first sprint",
-      "body": "A Scrum board is only useful once its backlog has real work items in it. Add the issues your team plans to tackle, prioritize them by dragging them into order, and make sure each has enough detail — a clear title and any relevant labels or story points — that whoever picks it up during the sprint doesn't need to ask what it means."
+      "heading": "Populate the backlog and start your first sprint",
+      "body": "A Scrum board is only useful once its backlog has real work in it. Add the issues your team plans to tackle, prioritize by dragging them into order, and give each enough detail, a clear title plus any relevant labels or story points, that whoever picks it up doesn't need to ask what it means. Then select the items for your first sprint and start it, the same way the sprint at the top of the PMN Online's Scrum example is dated and scoped. Once started, those items move onto the active board where the team drags them across statuses as work progresses."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A new board appears in the list but shows no work items",
+      "cause": "The board's auto-generated filter is scoped to the wrong space, or the include dropdown picked during creation didn't match the space you meant.",
+      "fix": "Open the board's settings and check the filter's actual JQL, not just what you selected in the creation dialog."
     },
     {
-      "heading": "Start your first sprint from the backlog",
-      "body": "With the backlog populated, select the items for your first sprint and start it, the same way the sprint at the top of the PMN Online's Scrum example is dated and scoped to six work items. Once started, those items move onto the active board where the team drags them across statuses as work progresses, giving everyone a live view of where the sprint stands."
+      "problem": "There's no + control to create a board inside a space",
+      "cause": "Team-managed spaces don't support adding extra boards; each one ships with a single board already built in.",
+      "fix": "Use the global route instead: search, then \"Go to all: Boards,\" then Create board, and base the new board on a saved filter."
+    },
+    {
+      "problem": "Wanting to switch an existing board from Kanban to Scrum, or the reverse",
+      "cause": "Jira doesn't support changing a board's type once it's created.",
+      "fix": "Create a new board of the correct type against the same space or filter, instead of trying to convert the existing one."
     }
   ],
   "faq": [
     {
       "question": "What's the difference between a Scrum board and a Kanban board in Jira?",
-      "answer": "A Scrum board is built around fixed-length sprints pulled from a backlog, while a Kanban board shows continuous flow without sprint boundaries. Jira's board list can hold both types side by side within the same space."
+      "answer": "A Scrum board is built around fixed-length sprints pulled from a backlog; a Kanban board shows continuous flow with no sprint boundaries. A space's board list can hold both types side by side, but one board can't switch between them after creation."
     },
     {
-      "question": "Where do I actually create a new board?",
-      "answer": "From inside a space, using the create action near the board list, which opens a dialog asking for a board name and what work items to include."
+      "question": "Where do I create a new board?",
+      "answer": "From inside a space, using the + control near its board list, or from the global search bar via \"Go to all: Boards\" then Create board. Both open the same dialog asking for a name and what to include."
     },
     {
       "question": "Why is my new board showing no work items?",
-      "answer": "Check the \"Choose what to include in this board\" setting from creation — an incorrect scope here is the most common reason a board looks empty right after being created."
+      "answer": "Check the \"Choose what to include in this board\" setting from creation, then check the board's actual filter JQL. A mismatch between the two is the most common reason a board looks empty right after being created."
     },
     {
       "question": "Do I need issues in the backlog before starting a sprint?",
-      "answer": "Yes. A sprint pulls from backlog issues, so populate and prioritize the backlog before starting your first sprint."
+      "answer": "Yes. A sprint pulls from backlog issues, so populate and prioritize the backlog before starting your first one."
+    },
+    {
+      "question": "Why can't I add a new board inside one of my spaces?",
+      "answer": "It's likely a team-managed space, which supports only its single built-in board. Create additional boards from the global \"Go to all: Boards\" route using a saved filter instead."
     },
     {
       "question": "Can multiple teams share the same Scrum board?",
-      "answer": "It's possible by scoping one board to include work from multiple teams, but most teams find a dedicated board per team keeps sprint planning and reporting cleaner."
+      "answer": "It's possible by scoping one board's filter to include work from multiple spaces, but most teams find a dedicated board per team keeps sprint planning and reporting cleaner."
     }
   ],
+  "references": [
+    {
+      "label": "Atlassian Support: Create a Scrum board based on spaces, Jira Cloud (official)",
+      "url": "https://support.atlassian.com/jira-software-cloud/docs/create-a-board/"
+    },
+    {
+      "label": "Atlassian: Jira Spaces — a new name (official launch notes)",
+      "url": "https://jirareleases.atlassian.com/announcements/jira-spaces-a-new-name-that-matches-how-you-really-work"
+    }
+  ],
+  "verifiedNote": "Click path and screenshots come from a walkthrough recorded before Atlassian's February 2026 project-to-space rename; wording has been updated to match. Re-checked against Atlassian's official board-creation documentation in September 2026: added the global \"Go to all: Boards\" creation route this guide previously omitted, the team-managed-space limitation, the auto-generated filter behind a space-based board, and the fact that a board's type can't be changed after creation.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

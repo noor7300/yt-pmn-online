@@ -1,43 +1,82 @@
 {
   "slug": "how-to-add-video-to-brevo-emails-easily-2026",
   "seoTitle": "How to Add Video to Brevo Email Campaigns",
-  "metaDescription": "Embed video in a Brevo email using the native Video content block: paste a URL, set a thumbnail, and style the play button, no HTML required.",
-  "intro": "Most email clients won't actually play a video file inline, which is why every \"video in email\" trick really just means a clickable thumbnail that opens the video somewhere else. Brevo handles that pattern with a dedicated Video block in its drag-and-drop editor, so you paste a link and get a working thumbnail and play button without writing any HTML. This guide covers where the block lives and what you configure once it's on the canvas.",
+  "metaDescription": "Add a video to a Brevo email with the native Video block: which hosting platforms it recognizes, why the thumbnail sometimes doesn't appear, and what to check before sending.",
+  "intro": "Most email clients won't play a video file inline, so every \"video in email\" trick is really a clickable thumbnail that opens the video somewhere else. Brevo's drag-and-drop editor has a dedicated Video block for exactly this: paste a link and get a working thumbnail and play button, no HTML required. The block only recognizes a handful of hosting platforms, though, and one of them doesn't get an automatic thumbnail at all. This guide covers where the block lives, what it needs from your video's source platform, and where people get the thumbnail wrong.",
+  "prerequisites": [
+    "A video already uploaded to YouTube, Dailymotion, Vimeo, Google Drive, Instagram, or TikTok, with its visibility set to Public",
+    "A Brevo email campaign already open in the drag-and-drop editor"
+  ],
   "steps": [
     {
-      "heading": "Get to your campaign from the dashboard",
-      "body": "From the Brevo Home screen, open Campaigns under Marketing in the left sidebar and select the email you want to edit. The Home screen itself is a useful checkpoint before you dive in — it shows your contact count and remaining plan usage, worth a glance if you're about to send to a large list.",
+      "heading": "Get to your campaign's design editor",
+      "body": "From the Brevo Home screen, open Campaigns under Marketing in the left sidebar, select the email you want to edit, then click Edit design to enter the builder. The left-hand panel lists every content block you can drop into the email: text, image, button, and further down, Video.",
       "image": { "file": "/screenshots/VdW8AgdTMNE/03.webp", "caption": "The Brevo dashboard home. Campaigns lives under Marketing in the left sidebar, which is where you'll open the email you want to add video to." }
     },
     {
-      "heading": "Open the drag-and-drop designer",
-      "body": "Inside the campaign, click Edit design to enter the builder. The left-hand panel lists every content block you can drop into the email — text, image, button, and further down, Video. Drag the Video block out of that panel and drop it into the body wherever you want the video to sit."
+      "heading": "Drag the Video block into the email",
+      "body": "Drag the Video block out of the left panel and drop it into the body wherever you want the video to sit. Click it to open its settings on the left: a Video URL field, a Tooltip field for hover text, and a Thumbnail section that stays empty until a URL is added."
     },
     {
-      "heading": "Paste your video URL",
-      "body": "Click the newly placed video block to open its settings panel on the left. The Video URL field accepts a link to your hosted video — Brevo notes this expects a direct video URL rather than a generic page link, so a raw asset link (the kind you'd get from your own hosting or a video CDN) works more reliably than pasting a YouTube watch page in some setups. There's also a Tooltip field if you want hover text on the block.",
+      "heading": "Paste a link from a platform Brevo recognizes",
+      "body": "Brevo's Video block only generates a working preview for six platforms: YouTube, Dailymotion, Vimeo, Google Drive, Instagram, and TikTok. Paste a normal share link from one of those, not a generic web page. The video also has to be set to Public on the source platform; Private or Unlisted videos will open to an error page for recipients even though the thumbnail looked fine inside Brevo. If your host isn't on that list, Brevo's own workaround is to screenshot the video, drop it in as an Image block, and link that image out to the video's real URL.",
       "image": { "file": "/screenshots/VdW8AgdTMNE/05.webp", "caption": "The Video block's settings panel: a Video URL field, a Tooltip field, and a Thumbnail section that stays empty until a URL is added." }
     },
     {
-      "heading": "Set or replace the thumbnail",
-      "body": "Until a video URL is entered, the Thumbnail section shows a placeholder illustration with the note \"Add a video URL to display the thumbnail.\" Once your link is in, Brevo attempts to generate a preview image automatically; if you'd rather control exactly what recipients see before they click, upload your own static image instead of relying on the auto-generated one."
+      "heading": "Check the thumbnail, especially on Google Drive",
+      "body": "Once a valid link is in the URL field, Brevo pulls a preview image automatically from the platform, for every supported host except Google Drive. If your video is on Drive, the thumbnail area stays blank and you need to upload a static image yourself from your content library. For every other platform, you can still replace the auto-generated thumbnail with your own if you want more control over what recipients see before they click."
     },
     {
-      "heading": "Adjust layout, width, and spacing",
-      "body": "Below the thumbnail settings, the Layout section controls the block's width as a percentage and its horizontal alignment (left, center, or right), while Spacing controls padding and margin in pixels, with a \"Group sides\" toggle to link all four padding values together. These are the same layout controls Brevo uses across other content blocks, so if you've styled an image or button block before, this will look familiar."
+      "heading": "Style the block, then send yourself a test",
+      "body": "Below the thumbnail settings, Layout controls the block's width and alignment, and Spacing controls padding and margin, with a Group sides toggle to link all four values together. Once it looks right, use Preview & test at the top of the editor, then send a real test email to yourself. Since clicking the thumbnail always sends recipients out to the hosting platform instead of playing inline, open that test email and click through to confirm the destination link works before the campaign goes out."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "No thumbnail appears after pasting a valid video URL",
+      "cause": "The video is hosted on Google Drive, which Brevo doesn't auto-generate a thumbnail for, or the video's visibility isn't set to Public.",
+      "fix": "Upload a custom thumbnail manually for Google Drive links, and confirm the video's privacy setting is Public on every other platform."
     },
     {
-      "heading": "Preview and test before sending",
-      "body": "Use the Preview & test button at the top of the editor to confirm the thumbnail and play-button overlay render the way you expect, and send yourself a real test email — video thumbnails can behave differently once actually delivered versus how they look in the builder's live preview. Since clicking the thumbnail always routes recipients out to view the video externally rather than playing it inline, double-check that the destination link works before the campaign goes out."
+      "problem": "The Video block won't generate any preview at all",
+      "cause": "The link isn't from one of the six platforms Brevo recognizes: YouTube, Dailymotion, Vimeo, Google Drive, Instagram, or TikTok.",
+      "fix": "Move the video to a supported host, or use Brevo's screenshot-plus-Image-block workaround for anything else."
+    },
+    {
+      "problem": "A test recipient clicks the thumbnail and lands on a private or unavailable video page",
+      "cause": "The video's visibility was set to Private or Unlisted, either from the start or changed after the campaign was built.",
+      "fix": "Check the privacy setting directly on the hosting platform, not just inside Brevo, before every send."
     }
   ],
   "faq": [
-    { "question": "Does the video actually play inside the email?", "answer": "No. Clicking the thumbnail opens the video externally, in a browser or on your video host, rather than playing natively inside the email itself — this is a limitation of email clients generally, not something specific to Brevo." },
-    { "question": "Can I use a custom thumbnail instead of the automatic one?", "answer": "Yes. If you don't add a video URL, the block shows a placeholder until you do; once a URL is added, you can still upload your own static image to override the automatically generated thumbnail." },
-    { "question": "What kind of link goes in the Video URL field?", "answer": "A direct link to your hosted video. Brevo's video block is built around a URL field plus a separate thumbnail, so test with your actual hosting link before sending to confirm the preview generates correctly." },
-    { "question": "Will adding video hurt my email deliverability?", "answer": "Using a linked thumbnail rather than an attached video file avoids the size and format issues that trigger spam filters — the email itself only contains an image and a link, not embedded video data." },
-    { "question": "Does the video block work on mobile email clients?", "answer": "The block uses the same responsive width and alignment controls as Brevo's other content blocks, but it's worth sending a real test email and checking it on a phone before a full send, since rendering can vary by mail app." }
+    {
+      "question": "Does the video play inside the email itself?",
+      "answer": "No. Clicking the thumbnail opens the video externally on its hosting platform. This is a limitation of email clients generally, not something specific to Brevo."
+    },
+    {
+      "question": "Which platforms does the Video block support?",
+      "answer": "Six: YouTube, Dailymotion, Vimeo, Google Drive, Instagram, and TikTok. Links from anywhere else won't generate a working block."
+    },
+    {
+      "question": "Why is there no thumbnail after I added the URL?",
+      "answer": "Either the video is on Google Drive, which doesn't get an automatic thumbnail, or its visibility isn't set to Public. Both are easy to miss since the block still looks fine while you're building it."
+    },
+    {
+      "question": "Can I use a custom thumbnail instead of the automatic one?",
+      "answer": "Yes, for any supported platform. Upload your own static image from the Thumbnail section instead of relying on the one Brevo pulls in."
+    },
+    {
+      "question": "Will adding video hurt my email deliverability?",
+      "answer": "A linked thumbnail avoids the size and format issues that trigger spam filters, since the email itself only contains an image and a link, not embedded video data."
+    }
   ],
+  "references": [
+    {
+      "label": "Brevo Help: Insert videos in your email campaign (official)",
+      "url": "https://help.brevo.com/hc/en-us/articles/208692209-Insert-videos-in-your-email-campaign"
+    }
+  ],
+  "verifiedNote": "Click path and screenshots come from a walkthrough recorded in 2025. Re-checked against Brevo's official help article on inserting video blocks in September 2026: corrected the video-URL guidance (this guide previously suggested a raw hosting link works better than a platform link, when Brevo recognizes six specific platforms by their normal share URLs instead) and added the Google Drive thumbnail exception, which isn't obvious from the editor alone.",
   "generatedAt": "2026-07-31T09:20:00Z",
   "deep": true
 }

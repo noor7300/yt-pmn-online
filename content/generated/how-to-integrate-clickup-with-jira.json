@@ -1,45 +1,83 @@
 {
   "slug": "how-to-integrate-clickup-with-jira",
   "seoTitle": "How to Integrate ClickUp With Jira",
-  "metaDescription": "Connect ClickUp with Jira using ClickUp's built-in Jira integration so tasks and issues stay linked between the two tools.",
-  "intro": "When one part of an organization runs on ClickUp and another relies on Jira, keeping both in sync avoids duplicated work and missed updates. ClickUp ships a native Jira integration right in its App Center — no separate marketplace purchase required — that lets you preview, create, and search Jira issues from inside ClickUp. This guide walks through finding that integration, connecting the two accounts, and understanding what the sync actually gives you once it's live.",
+  "metaDescription": "Connect ClickUp with Jira through ClickUp's Jira Connected Search integration, so you can search, preview, and create issues without leaving ClickUp.",
+  "intro": "ClickUp's Jira integration lives right in its App Center, no separate marketplace purchase needed, and it's officially called the Jira Connected Search integration. It lets you search Jira, get a live preview when you paste a Jira link into a task, and create new issues without switching tabs. That's a different, lighter tool than ClickUp's separate Jira Sync integration, which mirrors tasks and issues both ways and is still in beta. This guide covers finding the right one, connecting it, and what each does once it's live.",
+  "prerequisites": [
+    "A ClickUp account with full-member access — guests and limited members can't use this integration",
+    "A Jira Cloud account you're able to sign in to and authorize"
+  ],
   "steps": [
     {
-      "heading": "See what you're connecting to on the Jira side",
-      "body": "Before linking anything, it's worth knowing what a Jira space actually looks like, since that's what ClickUp will be reaching into. A typical Jira Scrum space organizes work into an active sprint and a backlog beneath it, with each item — SPRINT 2.0, Design Packaging, Need to track performance — carrying a status like To Do and an assignee avatar. Jira's own \"For you\" home screen, by contrast, is a personal feed of recently worked-on and assigned items across every space you belong to, which is the kind of cross-project view ClickUp's integration is trying to surface without making you leave ClickUp.",
-      "image": { "file": "/screenshots/GkGsZavSJS8/01.webp", "caption": "A Jira Scrum backlog with an active sprint above it — the kind of space ClickUp's Jira integration reads issues from." }
+      "heading": "See what a Jira space looks like",
+      "body": "Before connecting anything, it helps to know what ClickUp is reaching into. A typical Jira Scrum space organizes work into an active sprint and a backlog beneath it, with each item carrying a status such as To Do and an assignee avatar. Jira's own \"For you\" screen works differently: it's a personal feed of items across every space you belong to. That cross-project view is close to what ClickUp's integration surfaces without making you leave ClickUp.",
+      "image": { "file": "/screenshots/GkGsZavSJS8/01.webp", "caption": "A Jira Scrum backlog with an active sprint above it, the kind of space ClickUp's Jira integration reads issues from." }
     },
     {
       "heading": "Find Jira in ClickUp's App Center",
-      "body": "Inside ClickUp, open the App Center (from the sidebar) and Jira appears right in the Featured row alongside Dropbox, Figma, GitHub, Google Calendar, Google Drive, Microsoft Teams, Outlook Calendar, Salesforce, Slack, and Zoom — this is ClickUp's own first-party integration, not a third-party marketplace add-on. Its description is direct about what it does: \"Preview, create, and search Jira issues.\" Below the Featured row, All Apps lists dozens more connectors (including an Atlassian MCP entry for AI-driven access), but for a straightforward ClickUp-Jira link, the Featured Jira card is the one to use.",
+      "body": "Open the App Center from ClickUp's sidebar. Jira sits in the Featured row alongside Dropbox, Figma, GitHub, Google Calendar, Google Drive, Microsoft Teams, Outlook Calendar, Salesforce, Slack, and Zoom. This card is ClickUp's own Jira Connected Search integration, not a third-party add-on, and its description says plainly what it does: preview, create, and search Jira issues. Below the Featured row, All Apps lists dozens more connectors, including a separate Jira Sync entry for teams that need two-way syncing instead.",
       "image": { "file": "/screenshots/GkGsZavSJS8/03.webp", "caption": "ClickUp's App Center, with Jira listed as a Featured integration alongside Slack, GitHub, and Google Drive." }
     },
     {
-      "heading": "Walk through the connection setup",
-      "body": "Clicking the Jira card opens a Setup screen with three plain steps: Jira opens automatically in a new browser tab (with a retry link if it doesn't), you follow Jira's own setup and authorization instructions in that tab, and then you come back to ClickUp and click Next to confirm the connection. This hand-off design — leaving ClickUp to authenticate directly with Atlassian, then returning — is standard for this kind of integration, since it means your Jira credentials are entered on Jira's own login page rather than inside a third-party form.",
-      "image": { "file": "/screenshots/GkGsZavSJS8/04.webp", "caption": "ClickUp's Jira setup screen, walking through the three-step handoff to Jira's own login and authorization page." }
+      "heading": "Connect your Jira account",
+      "body": "Clicking the Jira card opens a setup screen with three steps: Jira opens automatically in a new browser tab, with a retry link if it doesn't; you complete Jira's own login and authorization there; then you return to ClickUp and click Next to confirm. You can add this as a personal connection, which only works for your own account, or, if you're a workspace owner or admin, as a workspace connection that gives every full member search access. Note the personal/workspace choice now, since it changes who can do what later.",
+      "image": { "file": "/screenshots/GkGsZavSJS8/04.webp", "caption": "ClickUp's Jira setup screen, walking through the handoff to Jira's own login and authorization page." }
     },
     {
-      "heading": "Confirm the connection from the Apps page",
-      "body": "Once authorized, the connection is managed from Apps in the ClickUp sidebar, where you can review or revoke access later without repeating the full setup flow. It's worth checking this page after the initial connection to confirm Jira shows as connected rather than assuming the browser tab closing successfully means the link is live — a failed handoff is the most common reason a first attempt doesn't take.",
+      "heading": "Check who can use the connection",
+      "body": "Once authorized, manage the connection from Apps in ClickUp's sidebar, where you can review or revoke it later without redoing setup. Confirm it shows as connected rather than assuming a closed browser tab means the link succeeded; a failed handoff is the most common reason a first attempt doesn't take. Also remember the guest and limited-member restriction from before: even on a workspace connection, those account types still can't search or preview Jira issues.",
       "image": { "file": "/screenshots/GkGsZavSJS8/02.webp", "caption": "Jira's \"For you\" home screen, open in the browser tab during the connection handoff from ClickUp's Apps setup." }
     },
     {
-      "heading": "Use the integration inside a ClickUp task",
-      "body": "With Jira connected, you can attach a Jira issue to a ClickUp task, search existing Jira issues without leaving ClickUp, and create a new Jira issue directly from a ClickUp task when engineering needs to pick something up. This is what \"preview, create, and search\" means in practice — it's a reference-and-lookup connection rather than a full two-way field-mapping sync, so don't expect every custom field or automation you'd get from a dedicated sync platform; it's built for keeping visibility across tools, not for merging the two systems into one."
+      "heading": "Search, preview, and create issues from ClickUp",
+      "body": "Paste a Jira link into a task and it expands into a live preview showing name, project, assignee, status, and labels, instead of sitting there as a bare URL. Press Cmd+K (or Ctrl+K on Windows) and type \"Create New Jira issue\" to open one directly from ClickUp. Creating an issue this way needs your own personal connection; a workspace-only connection covers search and preview but not creation. This is what \"preview, create, and search\" means in practice: a reference-and-lookup tool, not a full field-mapping sync."
     },
     {
-      "heading": "Decide if you need more than the built-in link",
-      "body": "For teams that need deeper two-way syncing — auto-updating ClickUp status when a Jira issue moves, or mapping custom fields between the two — a dedicated automation platform like Zapier or a specialized connector from the marketplace may still be worth layering on top of the native integration. Start with ClickUp's built-in Jira app first, since it costs nothing extra and covers the most common need (seeing and linking issues across tools), and only add a heavier sync tool if the team outgrows that."
+      "heading": "Decide if you need Jira Sync instead",
+      "body": "If a team needs a ClickUp status change to update the linked Jira issue automatically, or custom fields mapped between the two, that's ClickUp's own Jira Sync integration, a separate App Center listing still in beta. It requires the Jira account to be on a premium plan with global admin permissions, and ClickUp recommends setting it up with a dedicated service account rather than a personal login, since the account that configures the sync can't also use it day to day. Start with the Connected Search integration covered above; move to Sync, or a platform like Zapier, only once that stops being enough."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Which Jira integration do you need?",
+      "columns": ["Question", "Jira Connected Search", "Jira Sync"],
+      "rows": [
+        ["What it does", "Search, preview, and create Jira issues from ClickUp", "Keeps ClickUp tasks and Jira issues updated in both directions"],
+        ["Plan needed", "Any ClickUp plan; any Jira plan", "Jira account must be on a premium plan"],
+        ["Setup", "Personal or workspace connection, live in the App Center", "Workspace owner or admin sets it up; currently in beta"],
+        ["Best for", "Looking things up or creating the odd issue without switching tools", "Teams that need every change mirrored automatically"]
+      ]
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A teammate says they can't search or preview Jira issues, even though the App Center shows Jira as connected",
+      "cause": "The connection was made as a personal connection, which only works for the account that authorized it, or the teammate is a guest or limited member",
+      "fix": "Reconnect as a workspace connection so every full member gets access; guests and limited members are excluded regardless."
+    },
+    {
+      "problem": "Typing \"Create New Jira issue\" in the command bar doesn't do anything",
+      "cause": "Issue creation needs your own personal Jira connection; a workspace-only connection covers search and preview but not creation",
+      "fix": "Add a personal connection under your own ClickUp account alongside the workspace one."
+    },
+    {
+      "problem": "Updating a ClickUp task doesn't change anything in the linked Jira issue",
+      "cause": "That two-way behavior belongs to the separate Jira Sync integration, not the search-and-preview integration set up here",
+      "fix": "Search for Jira Sync in the App Center and request beta access, after confirming your Jira account is on a premium plan."
     }
   ],
   "faq": [
-    { "question": "Is there an official ClickUp and Jira integration?", "answer": "Yes. ClickUp includes a native Jira integration as a Featured app in its App Center that lets you preview, create, and search Jira issues from inside ClickUp, with no separate marketplace purchase required." },
-    { "question": "Does the ClickUp-Jira integration sync every field automatically?", "answer": "No. The built-in integration is focused on linking, previewing, creating, and searching Jira issues from ClickUp rather than a full two-way field sync — teams that need deeper automation often add a platform like Zapier on top." },
-    { "question": "How do I authorize the connection?", "answer": "ClickUp opens Jira in a new browser tab where you complete Jira's own login and authorization steps, then you return to ClickUp and click Next to confirm the connection." },
-    { "question": "Can I disconnect or review the Jira connection later?", "answer": "Yes. Connected apps, including Jira, are managed from the Apps page in ClickUp's sidebar, where you can review or revoke access without redoing the entire setup." },
-    { "question": "Does this integration require a paid ClickUp plan?", "answer": "The Jira integration itself is available in ClickUp's App Center without a separate purchase, though your overall ClickUp plan may still affect other feature limits unrelated to the integration." }
+    { "question": "Is ClickUp's Jira integration free?", "answer": "Yes for the integration used in this guide. The Jira Connected Search integration is available on every ClickUp plan. Its two-way counterpart, Jira Sync, needs a Jira account on a premium plan." },
+    { "question": "Who can use the Jira integration in a workspace?", "answer": "Full members only. Guests and limited members can't use it, whether the connection was made for everyone or just for you." },
+    { "question": "Can I create a Jira issue without leaving ClickUp?", "answer": "Yes. Press Cmd+K or Ctrl+K and type \"Create New Jira issue.\" This specific action requires a personal connection; a workspace-only connection won't allow it." },
+    { "question": "What's the difference between this and Jira Sync?", "answer": "This integration searches, previews, and creates issues. Jira Sync mirrors ClickUp tasks and Jira issues in both directions automatically, but it needs a premium Jira plan and is still in beta." },
+    { "question": "Do I need admin access in ClickUp to connect Jira?", "answer": "Not for a personal connection; anyone can add their own account. A workspace-wide connection needs an owner or admin to set up." }
   ],
+  "references": [
+    { "label": "ClickUp Help: Jira Connected Search integration (official)", "url": "https://help.clickup.com/hc/en-us/articles/24501909609751-Jira-Connected-Search-integration" },
+    { "label": "ClickUp Help: Jira Sync integration (official)", "url": "https://help.clickup.com/hc/en-us/articles/26324629158423-Jira-Sync-integration" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in 2025 of ClickUp's App Center. The integration's actual name, the guest/limited-member restriction, the personal-vs-workspace distinction for creating issues, and the separate Jira Sync integration were checked against ClickUp's official help articles in September 2026. That check is what added the comparison in this guide; the earlier version described only one Jira connection and implied it could be extended with third-party tools alone, when ClickUp has a native (beta) option for deeper sync.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

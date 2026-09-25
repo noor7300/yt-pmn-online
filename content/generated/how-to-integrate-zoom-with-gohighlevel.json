@@ -1,12 +1,17 @@
 {
   "slug": "how-to-integrate-zoom-with-gohighlevel",
   "seoTitle": "Integrate Zoom With GoHighLevel Using Zoom For Workflows",
-  "metaDescription": "Connect Zoom to GoHighLevel through the Zoom For Workflows Marketplace app and automate meeting and webinar creation inside your workflows.",
-  "intro": "Zoom doesn't plug into GoHighLevel as a flip-a-switch setting — it comes in through the App Marketplace as a dedicated app called Zoom For Workflows, which adds Zoom-specific actions you can drop into any automation. That distinction matters: this isn't just about attaching a meeting link to a booking, it's about giving your workflows the ability to create, update, and manage Zoom meetings and webinars on their own. This guide covers finding the app, what it actually does once installed, and how to start building Zoom into an automation.",
+  "metaDescription": "Connect Zoom to GoHighLevel with the Zoom For Workflows Marketplace app for custom automations, and know when GoHighLevel's built-in calendar integration is the simpler fit instead.",
+  "intro": "GoHighLevel actually connects to Zoom two different ways, and picking the wrong one means extra setup for nothing. If all you want is a Zoom link attached to booked appointments, GoHighLevel has a native integration for that under calendar settings, no marketplace app required. If you want a workflow to create meetings, register attendees, or manage webinars on its own, that needs a separate Marketplace app called Zoom For Workflows. This guide covers the second, heavier option: finding the app, what its actions do, and how to wire one into an automation.",
+  "costNote": "Zoom For Workflows is free to install from GoHighLevel's Marketplace. What it can actually do is still bounded by your Zoom plan; a free Zoom Basic account, for instance, caps group meeting length and limits webinar hosting, and this app can't get around those limits.",
   "steps": [
     {
+      "heading": "Confirm you need the Marketplace app, not the calendar setting",
+      "body": "GoHighLevel's built-in Zoom connection lives under Settings, then Calendar Settings, then Video Conferencing, and it auto-attaches a Zoom link to any booked appointment on any plan with no workflow to build. That covers the common case. Reach for Zoom For Workflows instead when you need a workflow to create a meeting from something other than a calendar booking, pull meeting details back into a message, or manage webinar registrants programmatically."
+    },
+    {
       "heading": "Search for Zoom in the App Marketplace",
-      "body": "From the left sidebar, open Marketplace Apps, then type \"zoom\" into the search bar at top right. GoHighLevel's Marketplace holds thousands of apps in total, and the Zoom search narrows it down to a handful of relevant results rather than one obvious native option — worth noting since it's a different pattern than searching for, say, a CRM sync tool.",
+      "body": "From the left sidebar, open Marketplace Apps, then type \"zoom\" into the search bar at top right. The Marketplace holds thousands of apps, and the search narrows that down to a handful of relevant results rather than surfacing one obvious native option.",
       "image": {
         "file": "/screenshots/JB68UjxRZFU/03.webp",
         "caption": "Searching \"zoom\" in the Marketplace Apps directory, part of a catalog of over two thousand available apps."
@@ -14,59 +19,72 @@
     },
     {
       "heading": "Open the Zoom For Workflows listing",
-      "body": "The app you want is Zoom For Workflows, built by All The Apps and listed as free with a White-Label Verified badge. Its category is Webinar, and the listing states plainly what it's for: giving sub-accounts the actions they need to manage virtual meetings and webinars without leaving GoHighLevel. It's built for sub-account level use, and both agencies and sub-accounts are shown as able to install it.",
+      "body": "The app you want is Zoom For Workflows, built by All The Apps and listed as free with a White-Label Verified badge. Its category is Webinar, and the listing states plainly what it's for: giving sub-accounts the actions they need to manage virtual meetings and webinars without leaving GoHighLevel. Both agencies and sub-accounts are shown as able to install it.",
       "image": {
         "file": "/screenshots/JB68UjxRZFU/04.webp",
         "caption": "The Zoom For Workflows app page, showing it's free, sub-account level, and focused on webinar and meeting automation."
       }
     },
     {
-      "heading": "Install the app to your sub-account",
-      "body": "Click Install on the app page. Since it needs access to your Zoom account to create and manage meetings on your behalf, you'll be sent through Zoom's own authorization screen to approve the connection — a standard OAuth handoff, not something GoHighLevel controls directly. Once approved, the app's actions become available inside your workflow builder."
+      "heading": "Install and authorize your Zoom account",
+      "body": "Click Install on the app page. Because it needs access to your Zoom account to create and manage meetings on your behalf, you'll be sent through Zoom's own authorization screen to approve the connection, a standard OAuth handoff that GoHighLevel doesn't control directly. Once approved, the app's actions appear inside your workflow builder."
     },
     {
       "heading": "Review the actions it unlocks",
-      "body": "Scrolling down the app's listing lays out exactly what you get: Create Meeting, Get Meeting, Update Meeting, Add a Meeting Registrant, Update Meeting Registrant Status, Get Meeting Registrant, Format Date, plus a parallel set of webinar actions — Create Webinar, Delete Webinar, and Add Webinar Registrant. Each is meant to be dropped into a workflow rather than triggered manually, which is the core difference between this and a simple calendar-level Zoom link toggle.",
+      "body": "Scrolling down the app's listing lays out what you get: Create Meeting, Get Meeting, Update Meeting, Add a Meeting Registrant, Update Meeting Registrant Status, Get Meeting Registrant, Format Date, plus a parallel set of webinar actions, Create Webinar, Delete Webinar, and Add Webinar Registrant. Each one drops into a workflow rather than triggering manually, which is the real difference between this and the calendar-level Zoom link toggle.",
       "image": {
         "file": "/screenshots/JB68UjxRZFU/05.webp",
         "caption": "The full list of workflow actions Zoom For Workflows adds, from creating a meeting to registering and approving webinar attendees."
       }
     },
     {
-      "heading": "Add a Create Meeting action to a workflow",
-      "body": "Open Automation, either build a new workflow or edit one tied to your booking or contact-creation trigger, and add the Create Meeting action. Configure the fields it exposes — time, duration, host, and password — so the meeting details match how you actually run calls. The app's own examples suggest triggering this right after a form submission, so a lead who books a call gets a Zoom meeting generated automatically as part of the same automation."
+      "heading": "Build and test a meeting-creation workflow",
+      "body": "Open Automation, build or edit a workflow tied to your booking or contact-creation trigger, and add Create Meeting. Configure the fields it exposes: time, duration, host, password. Later in the same workflow, use Get Meeting to retrieve the join link, agenda, and participant list, and insert that into a confirmation email or SMS. Before relying on any of this, run a test contact through the full sequence and confirm the link that arrives opens a live meeting with the settings you configured. Given this app's modest install base and review count at the time of recording, that test run is worth doing rather than assuming it behaves exactly like a long-established integration."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The app feels like more setup than the task needs",
+      "cause": "You only need a Zoom link on booking confirmations, which is what GoHighLevel's built-in calendar-level Zoom connection already does",
+      "fix": "Connect Zoom under Settings, Calendar Settings, Video Conferencing instead; skip the Marketplace app entirely."
     },
     {
-      "heading": "Pull meeting details into follow-up messages",
-      "body": "Once a meeting exists, the Get Meeting action retrieves its join link, agenda, and participant list, which you can then insert into a confirmation email or SMS later in the same workflow. This is how you get a Zoom link into a reminder without manually copying it — the workflow fetches it and inserts it wherever you reference that action's output."
+      "problem": "Create Meeting runs, but the confirmation message never carries a working link",
+      "cause": "The workflow referenced Create Meeting's own output instead of running Get Meeting afterward to fetch the join URL",
+      "fix": "Add a Get Meeting step after Create Meeting and pull the link from its output."
     },
     {
-      "heading": "Test the full automation before relying on it",
-      "body": "Run a test contact through the entire workflow — trigger, Create Meeting, and the follow-up message — and confirm the Zoom link that arrives actually opens a live meeting with the settings you configured. Because this app version was listed at 1.3.0 with a modest install base and a low review count at the time of this recording, it's worth testing thoroughly rather than assuming it behaves identically to a more established native integration."
+      "problem": "A test contact doesn't receive any Zoom invite",
+      "cause": "The Zoom authorization can fail silently on first setup, which is more likely on a lower-traffic app like this one",
+      "fix": "Reopen the app's connection from GoHighLevel's Apps page and reauthorize with Zoom before assuming the workflow logic is at fault."
     }
   ],
   "faq": [
     {
-      "question": "Is Zoom a built-in integration in GoHighLevel?",
-      "answer": "No. It's added through the App Marketplace as a separate app called Zoom For Workflows, which connects your Zoom account and adds meeting and webinar actions to the workflow builder."
+      "question": "Do I need this app just to add a Zoom link to appointment reminders?",
+      "answer": "No. GoHighLevel has a native Zoom connection under Settings, Calendar Settings, Video Conferencing that attaches a meeting link to bookings automatically. Zoom For Workflows is for automations beyond that, such as generating a meeting from a form submission or managing webinar registrants."
     },
     {
-      "question": "Is the Zoom For Workflows app free?",
-      "answer": "Yes, the app is listed as free on the Marketplace, though your own Zoom plan's meeting and webinar limits still apply."
-    },
-    {
-      "question": "Can this automatically add a Zoom link to appointment reminders?",
-      "answer": "Yes, indirectly — a workflow can create the meeting, use Get Meeting to pull the join link, and insert that link into a reminder message sent later in the same automation."
+      "question": "Is Zoom For Workflows free?",
+      "answer": "Yes, the app itself is listed as free on the Marketplace, though your own Zoom plan's meeting and webinar limits still apply."
     },
     {
       "question": "Does it support webinars as well as regular meetings?",
-      "answer": "Yes. Alongside meeting actions, it includes Create Webinar, Delete Webinar, and Add Webinar Registrant actions."
+      "answer": "Yes. Alongside meeting actions, it includes Create Webinar, Delete Webinar, and Add Webinar Registrant."
     },
     {
       "question": "Who can install Zoom For Workflows?",
-      "answer": "The listing shows it's available at both the agency and sub-account level, so either an agency admin or an individual sub-account can add it."
+      "answer": "The listing shows it available at both the agency and sub-account level, so either an agency admin or an individual sub-account can add it."
+    },
+    {
+      "question": "How do I get a Zoom join link into a follow-up message?",
+      "answer": "Run Get Meeting after Create Meeting in the same workflow, then reference its output in a later email or SMS step."
     }
   ],
+  "references": [
+    { "label": "HighLevel Support: Integrating Zoom with HighLevel Calendars (official)", "url": "https://help.gohighlevel.com/support/solutions/articles/155000002372-integrating-zoom-with-highlevel-calendars" }
+  ],
+  "verifiedNote": "Screens and the app's action list come from a Marketplace walkthrough recorded in 2025. In September 2026 this was checked against GoHighLevel's own support documentation, which confirmed a separate, built-in Zoom-to-calendar integration exists outside the Marketplace app described here, a distinction this guide previously didn't draw. Pricing and plan details for Zoom For Workflows itself come from the recording; the app's own Marketplace listing did not return readable content when checked in this session, so that part was not independently re-verified.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
