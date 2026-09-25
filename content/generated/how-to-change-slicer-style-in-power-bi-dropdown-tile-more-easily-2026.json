@@ -1,72 +1,109 @@
 {
   "slug": "how-to-change-slicer-style-in-power-bi-dropdown-tile-more-easily-2026",
   "seoTitle": "Change Slicer Style in Power BI: Dropdown, Tile & More",
-  "metaDescription": "Learn how to change slicer styles in Power BI, switching between dropdown, tile, and other formats to make your reports easier to filter and read.",
-  "intro": "The way a slicer looks can change how easily people interact with your Power BI report, and the default style Power BI applies when you add one isn't always the right fit for your data or your audience. A slicer with fifty date values is unreadable as a wall of tiles but works fine as a searchable dropdown; a slicer with five product categories is the opposite case, where a dropdown just adds an unnecessary extra click to see options that would fit comfortably on screen at once. This guide covers how to switch between dropdown, vertical list, and other slicer styles directly from the Format pane, using a real report with a date field to show what each style actually looks like in practice and why you'd reach for one over another.",
+  "metaDescription": "Switch a Power BI slicer between Dropdown, Vertical list, Tile, Between and date styles, and find out why Tile disappears from the list for date and hierarchy fields.",
+  "intro": "A Power BI slicer can take nine different shapes, all controlled by one Style setting in the Format pane. The right one depends on the field. A slicer with fifty dates is unreadable as a row of tiles but fine as a searchable dropdown, and five product categories in a dropdown just add a click.\n\nWhat most guides skip is that the Style list changes with the field. Tile only works with text and numeric columns, the range and relative styles only with dates or numbers, and several styles refuse hierarchies. This guide walks through the switch on a real date slicer, covers which style is available for which kind of field, and flags the Select all behaviour that surprises people after a data refresh.",
   "steps": [
     {
-      "heading": "Start from a report with a slicer-worthy field",
-      "body": "Before formatting a slicer, make sure you've built a chart worth filtering — in this case a line chart tracking a metric across Year, Quarter, Month, and Day, pulled from a Date hierarchy in the data pane. A slicer is only useful when it's actually connected to visuals on the page, so confirm your chart and its fields are in place before you add the filtering control on top of it."
-    },
-    {
-      "heading": "Add a slicer and confirm its default style",
-      "body": "Add a slicer visual bound to your Date field, and Power BI drops it in with a default \"Between\" style — two draggable handles on a slider, letting viewers pick a start and end point across the range. This default works reasonably well for a continuous range like dates, but it's rarely the final answer once you see how it looks against your specific dataset and page layout.",
+      "heading": "Add a slicer for the field you want to filter",
+      "body": "The report here already has a line chart tracking a metric across Year, Quarter, Month and Day from a Date hierarchy. With nothing selected on the canvas, click the Slicer icon in the Visualizations pane, then pick the field in the Data pane. The slicer fills with that field's unique values and filters the other visuals on the page.\n\nIn the recording the date slicer arrived in Between style: a range slider with two handles and input boxes. Microsoft's current documentation gives Dropdown as the default for new slicers, so a text field will usually start out collapsed.",
       "image": {
         "file": "/screenshots/waYgSMetzk8/03.webp",
-        "caption": "A slicer added to the report with Power BI's default Between style — a range slider with two draggable handles for selecting a start and end date."
+        "caption": "A slicer added to the report in Between style, a range slider with two draggable handles for selecting a start and end date."
       }
     },
     {
-      "heading": "Switch to the Dropdown style",
-      "body": "With the slicer selected, open the Format pane, go to Visual, then Slicer settings, then Options, and change the Style field from its default to Dropdown. The slicer collapses into a single compact box labeled with the field name and showing \"All\" until a viewer clicks it open — this is the style to reach for when a slicer has many possible values and screen space is tight, since it takes up almost no room until someone interacts with it.",
+      "heading": "Switch the style to Dropdown",
+      "body": "Select the slicer, then in the Format pane open Visual, Slicer settings, Options and change Style to Dropdown. The slicer shrinks to one box showing the field name and All until someone opens it. Of all the styles it takes the least canvas space, which makes it the usual choice for long lists.\n\nTurn on Search under Slicer settings so viewers can type to find a value. Choosing Dropdown also adds a top-level Dropdown section to the Visual formatting options, with border colour, rounded corners and an accent bar.",
       "image": {
         "file": "/screenshots/waYgSMetzk8/04.webp",
-        "caption": "The Format pane's Slicer settings, with Style changed to Dropdown — the slicer collapses to a single compact box until clicked."
+        "caption": "The Format pane's Slicer settings, with Style changed to Dropdown and the slicer collapsed to a single compact box until clicked."
       }
     },
     {
-      "heading": "Switch to the Vertical list style",
-      "body": "Change the same Style dropdown to Vertical list instead, and the slicer expands to show every individual value as a checkbox row — in this example, each specific date spelled out with its full weekday and month. This style trades compactness for visibility: every option is on screen at once, which suits a shorter list of categories far better than a long list of unique dates, where it quickly becomes a lot of scrolling.",
+      "heading": "Try Vertical list",
+      "body": "Set the same Style option to Vertical list and every value appears as a checkbox row, here each date spelled out with its weekday and month. It shows every option at a glance, which suits a short list and becomes a lot of scrolling with hundreds of dates. Search works in this style too. Vertical list and Dropdown both accept hierarchies, so a Year > Month > Day slicer can expand and collapse.",
       "image": {
         "file": "/screenshots/waYgSMetzk8/05.webp",
-        "caption": "The same slicer switched to Vertical list style, showing every date as an individually checkable row rather than a collapsed dropdown."
+        "caption": "The same slicer switched to Vertical list style, showing every date as an individually checkable row."
       }
     },
     {
-      "heading": "Match the style to your data volume and audience",
-      "body": "As a rule of thumb, dropdown suits long lists and dashboards where space is limited, while vertical list and tile styles suit shorter lists where you want every option visible without an extra click — think five product categories rather than fifty individual customer names. For touchscreen dashboards, favor tile or vertical list styles with larger tap targets over a dropdown, since dropdowns are noticeably fussier to operate with a finger than a mouse, requiring a precise tap to open and another to select. Also consider how often people actually change the filter: a slicer that's set once and rarely touched again can afford to be a compact dropdown, while one people adjust constantly during a live walkthrough benefits from staying visibly expanded."
+      "heading": "Use Tile on a text or number field",
+      "body": "Tile lays values out as a horizontal row of buttons, with scroll arrows when they overflow. It suits short labels like statuses or years, and bigger targets are easier to hit on a touch screen. After choosing Tile, turn on Responsive layout so the buttons rearrange as the slicer is resized.\n\nTile only supports text and numeric columns, and never a hierarchy. On the date slicer in this report it won't appear in the Style list at all. Build a separate slicer on a category or number field to use it. If you want images, grids or more styling than Tile offers, Microsoft points to the separate Button slicer visual."
     },
     {
-      "heading": "Apply consistent styling across your report",
-      "body": "Once you've settled on a style that fits a given slicer's data, apply the same choice to equivalent slicers on other pages of the report so the interaction pattern stays predictable for viewers moving between pages. Mixing dropdown slicers on one page with tile slicers on another for essentially the same kind of filter is a common source of confusion — consistency here matters more than which specific style you picked, since a viewer who's learned how the date filter behaves on page one shouldn't have to relearn it on page two."
+      "heading": "Set selection behaviour and the header",
+      "body": "Style is one setting among several. Under Slicer settings, Selection holds Single select (off by default; when on, vertical-list checkboxes become radio buttons) and Show \"Select all\" option (also off by default). These selection controls only exist for Dropdown, Tile and Vertical list.\n\nIn Slicer header, Title text shows the field name. Edit it or switch it off once the label is obvious from context. Colours behave differently by style: Values > Background colour fills the input boxes on Between, the whole dropdown box on Dropdown, each row on Vertical list, and each button on Tile. The checkbox or radio colour for Vertical list and Dropdown sits in its own Selection icon section."
     },
     {
-      "heading": "Combine styles with other slicer settings for a cleaner report",
-      "body": "Style is just one setting inside the Format pane's Slicer settings section — Selection controls whether multiple values can be picked at once or only a single value, and Slicer header lets you hide the field name entirely once the label is obvious from context, freeing up a little more room. Adjusting these alongside style, rather than treating style as the only lever available, is usually what separates a slicer that feels native to the report from one that feels like it was just dropped on and left at its defaults."
+      "heading": "Keep equivalent slicers consistent across pages",
+      "body": "Once a style fits a field, use the same one wherever that field is filtered, so a viewer who learned the date filter on page one doesn't have to relearn it on page two. The tidiest way is to sync the slicer itself. On the View ribbon, open Sync slicers, select the slicer, then tick the pages where it should apply (Sync) and where it should appear (Visible). Synced copies can be moved and resized independently on each page."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Slicer styles and the fields they accept",
+      "columns": ["Style", "Field types", "Suits"],
+      "rows": [
+        ["Dropdown", "Text, numeric, date, hierarchy", "Long lists, tight layouts"],
+        ["Vertical list", "Text, numeric, date, hierarchy", "Short to medium lists, drill-down"],
+        ["Tile", "Text, numeric (no hierarchy)", "Short labels, touch screens"],
+        ["Between", "Date, numeric (no hierarchy)", "A start-to-end range"],
+        ["Before / After", "Date, numeric (no hierarchy)", "Everything up to, or from, a cut-off"],
+        ["Relative date", "Date (no hierarchy)", "Rolling periods like last 7 days"],
+        ["Relative time", "DateTime (no hierarchy)", "Rolling periods in hours or minutes"],
+        ["Date picker", "Date (no hierarchy)", "Calendar selection plus rolling ranges"]
+      ],
+      "note": "From Microsoft Learn's Slicer visual documentation, updated August 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Tile is missing from the Style dropdown",
+      "cause": "The slicer is built on a date field or a hierarchy. Tile supports only single text or numeric columns.",
+      "fix": "Put a text or numeric field in the slicer, or use Dropdown or Vertical list for dates."
+    },
+    {
+      "problem": "Between, Relative date or Date picker isn't offered",
+      "cause": "Those styles need a single date (or, for Between, Before and After, numeric) column. A text field or a multi-level hierarchy rules them out.",
+      "fix": "Use one date column in the slicer, not the whole Date hierarchy."
+    },
+    {
+      "problem": "After a refresh the slicer includes values nobody selected",
+      "cause": "Choosing Select all and then clearing a few items makes Power BI store an inverted \"is not\" filter. Anything new that arrives in a refresh is included automatically.",
+      "fix": "If the slicer must show only specific values, clear the selection and tick the values you want individually."
     }
   ],
   "faq": [
     {
-      "question": "Which slicer style is best for a long list of filter options?",
-      "answer": "The dropdown style generally works better for long lists since it collapses to a single compact box and still lets users search and select options without taking up page space."
+      "question": "Which slicer style works best for a long list?",
+      "answer": "Dropdown with Search turned on. It takes the least space on the canvas, and viewers can type to find a value."
     },
     {
-      "question": "Can I change slicer style without affecting the underlying data?",
-      "answer": "Yes, changing the slicer's visual style in the Format pane only affects its appearance and interaction pattern — it doesn't change the data or filtering logic behind it."
+      "question": "How do I stop people selecting more than one value?",
+      "answer": "Turn on Single select under Slicer settings > Selection. In a vertical list the checkboxes become radio buttons."
     },
     {
-      "question": "Is the tile slicer style better for touchscreen dashboards?",
-      "answer": "Yes, tile and vertical list styles tend to work better on touchscreens since the larger, visible options are easier to tap accurately than a dropdown's smaller expand-and-select interaction."
+      "question": "What's the difference between Tile and the Button slicer?",
+      "answer": "Tile is a style of the standard Slicer visual. The Button slicer is a separate visual with grid layouts, images, icons and more formatting, and Microsoft suggests it when Tile isn't flexible enough."
     },
     {
-      "question": "Can I mix different slicer styles on the same report page?",
-      "answer": "Yes, Power BI allows different slicer styles on the same page depending on what fits each specific filter, though keeping the same style for similar filter types helps the page feel more consistent."
-    },
-    {
-      "question": "Where exactly do I change a slicer's style in Power BI?",
-      "answer": "Select the slicer, open the Format pane, go to Visual then Slicer settings then Options, and use the Style dropdown — that single field switches between Between, Dropdown, Vertical list, Tile, and other available layouts."
+      "question": "Can one slicer filter several report pages?",
+      "answer": "Yes. Use the Sync slicers pane from the View ribbon and tick the pages it should filter. It can filter a page without being visible on it."
     }
   ],
+  "references": [
+    {
+      "label": "Microsoft Learn: Slicer visual in Power BI (official)",
+      "url": "https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicer-visual"
+    },
+    {
+      "label": "Microsoft Learn: Overview of slicers in Power BI (official)",
+      "url": "https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicers"
+    }
+  ],
+  "verifiedNote": "Screens and the date-slicer example come from a walkthrough recording. The Style path, the field types each style accepts, selection and formatting options, Select all behaviour and Sync slicers were re-checked against Microsoft Learn's Power BI documentation in September 2026. That check corrected the earlier version, which implied Tile was available for this date slicer; Tile doesn't support date fields or hierarchies.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

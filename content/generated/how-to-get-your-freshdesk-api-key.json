@@ -1,39 +1,88 @@
 {
   "slug": "how-to-get-your-freshdesk-api-key",
-  "seoTitle": "How to Get Your Freshdesk API Key",
-  "metaDescription": "Find your Freshdesk API key in My Profile Settings, so you can connect Freshdesk to other tools and build custom integrations without sharing your login.",
-  "intro": "An API key lets you connect Freshdesk to external tools, scripts, or integrations without handing out your login credentials. It's tucked into your personal profile rather than the admin settings, which trips up a lot of people looking for it in the wrong place. This guide follows the actual path from your profile menu to the key itself, using the real Freshdesk settings screen so you know precisely what you're looking for and where it sits once you get there.",
+  "seoTitle": "How to Get Your Freshdesk API Key (and Why It Might Be Missing)",
+  "metaDescription": "Find your Freshdesk API key under Profile Settings, get past the View API key captcha, test it with basic auth, and understand why Free-plan and unverified accounts don't show a key at all.",
+  "intro": "Freshdesk's API key lives on your personal profile page, not in Admin settings, which is where most people look first. Each agent has their own key, and anything that uses it acts with that agent's permissions.\n\nThis guide covers where the key sits, the captcha newer accounts show before revealing it, how to test it with a single request, and what to do if it leaks. It also covers the two reasons the key doesn't appear at all: a Free plan, or an agent account that hasn't been verified yet.",
+  "prerequisites": [
+    "A Freshdesk account on a paid plan. Freshdesk's help centre states API access starts on paid plans and the key isn't shown on the Free plan",
+    "A verified agent account (the key is only displayed once the agent is verified)"
+  ],
   "steps": [
     {
-      "heading": "Open My Profile Settings",
-      "body": "Click your avatar in the top-right corner of Freshdesk and choose Profile settings. This lands you on a page titled My Profile Settings, which is different from the account-wide Admin settings — it holds things tied specifically to you as an agent, like your time zone, display language, and email signature. If you're on a trial account you'll still see the usual banner reminders across the top, but they don't affect anything on this page.",
-      "image": { "file": "/screenshots/HAJ-vqcJqCA/04.webp", "caption": "The My Profile Settings page, showing time zone, language, and signature fields alongside personal preferences like Focus Mode and Undo send." }
+      "heading": "Open Profile Settings",
+      "body": "Click your profile picture in the top-right corner of Freshdesk and choose Profile Settings. The page is titled My Profile Settings and holds settings tied to you as an individual agent: time zone, language, email signature, and preferences such as Focus Mode and Undo send. Account-wide Admin settings are a separate area and don't contain the key.",
+      "image": {
+        "file": "/screenshots/HAJ-vqcJqCA/04.webp",
+        "caption": "The My Profile Settings page, showing time zone, language, and signature fields alongside personal preferences like Focus Mode and Undo send."
+      }
     },
     {
-      "heading": "Scroll to the top of the page for your API key",
-      "body": "The key itself sits above the fields you just saw, in a card labeled Your API Key right next to your Profile Details — full name, email, and phone number. It's a long alphanumeric string shown in a read-only box, already masked or partially selected so you don't accidentally edit it. Right below the key is a Reset API Key button, which is worth noting now even if you don't need it yet.",
-      "image": { "file": "/screenshots/HAJ-vqcJqCA/05.webp", "caption": "The top of the profile page with Your API Key displayed next to Profile Details, and a Reset API Key button underneath it." }
+      "heading": "Reveal and copy the key",
+      "body": "The key sits in the right-hand pane, in a card labelled Your API Key next to Profile Details (name, email, phone). On the account in the recording the key is displayed directly. Freshdesk's current help article describes a View API key option instead, which asks you to complete a captcha before showing the string. If you see that button, click it and finish the captcha.\n\nCopy the key straight into the tool, script or password manager that needs it. Don't park it in a plain text file or a chat thread. The key authenticates as you, with your role's permissions, so anyone holding it can read and change Freshdesk data as you.",
+      "image": {
+        "file": "/screenshots/HAJ-vqcJqCA/05.webp",
+        "caption": "The top of the profile page with Your API Key displayed next to Profile Details, and a Reset API Key button underneath it."
+      }
     },
     {
-      "heading": "Copy the key and store it somewhere safe",
-      "body": "Select the string in the API key box, copy it, and paste it directly into whatever integration, script, or password manager you're setting up — don't leave it sitting in a plain text file or a chat message. This key authenticates as you, with your exact permissions, so anything with the key can read and write Freshdesk data on your behalf. If you're building something a whole team will maintain, consider creating a dedicated service agent for the integration rather than tying it to one person's personal key."
+      "heading": "Test it with one read request",
+      "body": "Freshdesk's API uses HTTP basic authentication with the API key as the username and any placeholder as the password. The developer docs use X. A quick test from a terminal looks like this: curl -u YOUR_API_KEY:X https://yourdomain.freshdesk.com/api/v2/tickets\n\nRequests must go over HTTPS, and every endpoint lives under https://yourdomain.freshdesk.com/api/v2/. If you're building the Authorization header by hand, Base64-encode the whole apikey:X string first. A missing encoding step is the usual reason a correct key gets rejected. Run a read like this before wiring up anything that writes data."
     },
     {
-      "heading": "Use the key with basic authentication",
-      "body": "Freshdesk's REST API accepts the API key as the username in HTTP basic authentication, with any string (commonly the letter X) as the password — this is documented in Freshdesk's API reference and is the standard pattern most integration tools expect. Test the connection with a simple read request, like fetching your ticket list, before wiring up anything that writes data, so you catch a bad key or wrong domain early rather than after an automation starts running."
+      "heading": "Reset the key if it's exposed",
+      "body": "If the key ends up in a public repository, a screenshot or anywhere it shouldn't be, click Reset API Key under the key on the same page. Resetting revokes the old key, and Freshdesk notes it disconnects every app that was using it. Each of those integrations stops working until you paste in the new key, so make a list of where the key is used before you reset.\n\nFor integrations a whole team depends on, consider a dedicated agent account for the connection. That way one person leaving or resetting their key doesn't break it."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no API key on the Profile Settings page",
+      "cause": "The account is on the Free plan, where Freshdesk doesn't provide API access, or the agent hasn't been verified yet.",
+      "fix": "Check the plan under Admin billing and confirm the agent has completed verification. Freshdesk also suggests trying another browser or clearing cache and cookies if the key still doesn't appear."
     },
     {
-      "heading": "Reset the key if it's ever exposed",
-      "body": "If you accidentally commit the key to a public repository, paste it somewhere it shouldn't be, or simply suspect it's been seen by someone it shouldn't have, use the Reset API Key button on the same profile page. Resetting immediately invalidates the old key, so update every integration that used it right away — Freshdesk won't warn those tools individually, they'll just start failing until you swap in the new value."
+      "problem": "Requests return 401 even though the key was copied correctly",
+      "cause": "The key and password placeholder weren't Base64-encoded in the Authorization header, or the request went to HTTP instead of HTTPS.",
+      "fix": "Send apikey:X Base64-encoded, or let your HTTP client handle basic auth (curl -u does this). Make sure the URL starts with https:// and uses your own Freshdesk subdomain."
+    },
+    {
+      "problem": "Several integrations broke at the same time",
+      "cause": "Someone clicked Reset API Key, which disconnects every app using the old key.",
+      "fix": "Copy the new key from Profile Settings and update each integration."
     }
   ],
   "faq": [
-    { "question": "Where is the Freshdesk API key located?", "answer": "It's on your individual My Profile Settings page — click your avatar, choose Profile settings, and the key is shown near the top next to your Profile Details, not in the account-wide Admin settings." },
-    { "question": "Is the API key the same for every agent?", "answer": "No. Each agent has their own unique API key tied to their account, and API calls made with it carry that agent's specific permissions." },
-    { "question": "Can I regenerate my API key?", "answer": "Yes. The Reset API Key button sits right under the key on the same profile page — use it if the key is compromised or you simply want a fresh one, and update any integrations afterward." },
-    { "question": "Is it safe to share my API key?", "answer": "No. Treat it like a password — anyone with the key can read and write your Freshdesk data through the API, so store it in a secrets manager or environment variable, never in plain text or shared chat." },
-    { "question": "How do I use the API key to authenticate requests?", "answer": "Pass it as the username in HTTP basic authentication, with any string as the password — this is the standard pattern Freshdesk's REST API expects and what most integration tools default to." }
+    {
+      "question": "Where is the Freshdesk API key?",
+      "answer": "Profile picture (top right) > Profile Settings, in the right-hand pane. It's on your personal profile, not in Admin settings. Newer accounts show a View API key button with a captcha before the key appears."
+    },
+    {
+      "question": "Does every agent get their own key?",
+      "answer": "Yes. Each agent has a separate key, and API calls made with it follow that agent's role permissions. Freshdesk's help centre notes that installing marketplace apps and setting up integrations needs an administrator's key."
+    },
+    {
+      "question": "Can I use the API on Freshdesk's Free plan?",
+      "answer": "No. Freshdesk states API access is available from paid plans onwards, and the key isn't visible on Free accounts."
+    },
+    {
+      "question": "What goes in the password field?",
+      "answer": "Anything. Freshdesk's API docs use X. The API key goes in the username field of basic authentication."
+    }
   ],
+  "references": [
+    {
+      "label": "Freshdesk Support: How to find your API key",
+      "url": "https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key"
+    },
+    {
+      "label": "Freshdesk Support: Where can I find my API key?",
+      "url": "https://support.freshdesk.com/support/solutions/articles/225435-where-can-i-find-my-api-key-"
+    },
+    {
+      "label": "Freshdesk API reference (developers.freshdesk.com)",
+      "url": "https://developers.freshdesk.com/api/"
+    }
+  ],
+  "verifiedNote": "Screens and the click path come from the original walkthrough recording. The location of the key, the View API key captcha, the verified-agent and paid-plan requirements, reset behaviour and the basic-auth format were re-checked against Freshdesk's support articles and API reference in September 2026. That check added the Free-plan and verification caveats and the View API key step, which the recorded account did not show.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

@@ -1,72 +1,108 @@
 {
   "slug": "how-to-combine-multiple-excel-files-in-power-bi-one-query-all-files-easily-2026",
   "seoTitle": "How to Combine Multiple Excel Files in Power BI Easily",
-  "metaDescription": "Learn how to combine multiple Excel files into one Power BI query, saving time when consolidating budgets, reports, or data from several sources.",
-  "intro": "Manually pasting together data from a handful of separate Excel files is tedious and error-prone, especially when new files keep arriving from different departments. This guide shows how to combine multiple Excel files in Power BI using the Folder connector's built-in Combine option, so every file in a folder feeds into one clean table through a single query. It also covers a save error that can show up midway through the process, since knowing what it means saves a lot of confused troubleshooting the first time you hit it.",
+  "metaDescription": "Combine every Excel file in a folder into one Power BI query with the Folder connector, and fix the \"key didn't match any rows\" error that appears when sheet names differ.",
+  "intro": "Pasting together data from a stack of Excel files by hand is slow, and it breaks the moment a new file arrives. Power BI's Folder connector handles this with one query: point it at a folder, pick one file as the example, and Power Query applies the same extraction to every other file and stacks the results.\n\nThat example-file mechanism is also why the combine fails. Power Query treats every file exactly like the one you chose, down to the sheet or table name. This guide walks the click path and then explains the \"key didn't match any rows in the table\" error the recording runs into, which almost always comes from that rule.",
+  "prerequisites": [
+    "Power BI Desktop installed (the Folder connector described here is the Desktop version)",
+    "Two or more Excel files with the same columns, stored in one folder, each holding its data on a sheet or table with the same name"
+  ],
   "steps": [
     {
-      "heading": "Put your Excel files in one folder",
-      "body": "Before opening Power BI, gather the files you want to combine into a single folder — in this walkthrough that's a folder on the desktop containing EmployeeData.xlsx and SalesReport.xlsx. The files should share a reasonably consistent structure, since the combine step works by stacking each file's contents on top of the others; wildly different column layouts between files will produce a messy result even if the combine itself succeeds."
+      "heading": "Put files with matching structure in one folder",
+      "body": "Gather the workbooks into a single folder. The walkthrough uses a desktop folder holding EmployeeData.xlsx and SalesReport.xlsx.\n\nMicrosoft's documentation is explicit about what \"matching\" means here. Every file must have the same file type and structure, including the same columns. The data also has to sit on an identically named sheet or table in each workbook, because Power Query will look for that exact name in every file. Two workbooks about different subjects (employees and sales, say) will not stack into a meaningful table even if the combine runs. Monthly exports of the same report are the textbook case.\n\nThe connector also reads subfolders. Any file sitting in a subfolder is included and processed the same way, so keep stray workbooks out of the tree or plan to filter them."
     },
     {
-      "heading": "Choose Excel workbook from Get Data",
-      "body": "From an open report, click Get Data to see the Common data sources list, with Excel workbook as the first option and a tooltip confirming \"Import data from a Microsoft Excel workbook.\" For combining several files at once rather than a single workbook, you'll actually want the Folder connector further down the same list, which is the one that scans an entire directory instead of asking you to pick one file.",
+      "heading": "Open the Folder connector",
+      "body": "On the Home ribbon, click the Get data arrow. The Common data sources list opens with Excel workbook at the top, but Folder is not on that short list. Click More at the bottom to open the full Get Data dialog, choose the File category, select Folder, and click Connect.\n\nExcel workbook only opens one file at a time, so skip it for this task. Browse to your folder (or paste its path) and click OK.",
       "image": {
         "file": "/screenshots/9w5jNPhDaG8/02.webp",
-        "caption": "The Get Data source list, with Excel workbook highlighted — the Folder connector nearby is the one that scans a whole directory for combining."
+        "caption": "The Common data sources list under Get data, with Excel workbook highlighted. Folder is reached through More at the bottom."
       }
     },
     {
-      "heading": "Point the Folder connector at your files",
-      "body": "Once you select Folder and browse to the directory, Power BI lists every file it finds inside — here, EmployeeData.xlsx and SalesReport.xlsx, each with its extension, dates, and full folder path shown in a table. At the bottom of this dialog sit four buttons: Combine, Load, Transform Data, and Cancel. Combine is the one that does the actual merging work, so that's what you click next rather than Load, which would just import the file list itself as a table of metadata.",
+      "heading": "Check the file list before you combine",
+      "body": "Power BI lists every file it found, with Name, Extension, date columns and Folder Path. Scan it for anything that should not be there: a notes file, a template, a copy in a subfolder.\n\nThe buttons along the bottom are Combine, Load, Transform Data and Cancel. If the list is clean, open Combine. If it contains extras, click Transform Data instead, filter the list on Extension or Folder Path in Power Query Editor, then use Combine files on the Content column. Load on its own imports this file list as a table of metadata, which is not what you want.",
       "image": {
         "file": "/screenshots/9w5jNPhDaG8/03.webp",
-        "caption": "The Folder connector's file list, showing every Excel file found in the folder along with its extension, dates, and path, ready to combine."
+        "caption": "The Folder connector's preview, listing each Excel file with its extension, dates and folder path above the Combine, Load and Transform Data buttons."
       }
     },
     {
-      "heading": "Choose Combine & Transform vs. Combine & Load",
-      "body": "Clicking Combine opens a small menu with two choices: Combine & Transform Data and Combine & Load. Combine & Transform Data routes you through Power Query first, letting you clean column names, fix data types, and remove any duplicate header rows before anything loads into your report — this is the safer default almost every time. Combine & Load skips straight to loading the merged result, which is faster but leaves you cleaning up formatting problems after the fact instead of before.",
+      "heading": "Pick Combine & Transform Data and choose the example object",
+      "body": "Combine opens two choices. Combine & Transform Data merges the files and opens Power Query Editor so you can fix headers and data types before anything reaches the report. Combine & Load merges and loads straight into the model. Use Transform the first time you build the query.\n\nEither choice opens the Combine files dialog. By default the first file in the list is the example file, and you can switch to another from the Example file drop-down. Select the sheet or table that holds the data in that example. Whatever you pick here is the name Power Query will request from every other file. The dialog also offers Skip files with errors, which drops any file that fails instead of failing the whole load. Handy, but it can hide a file you meant to include, so check the row count afterwards.",
       "image": {
         "file": "/screenshots/9w5jNPhDaG8/04.webp",
-        "caption": "The Combine menu, offering Combine & Transform Data or Combine & Load — Transform first is the safer choice for catching formatting issues early."
+        "caption": "The Combine menu offering Combine & Transform Data or Combine & Load."
       }
     },
     {
-      "heading": "Recognize a save error if one shows up",
-      "body": "Occasionally, applying changes after a combine throws a Load error like the one shown here: \"Failed to save modifications to the server. Error returned: 'OLE DB or ODBC error: [Expression.Error] The key didn't match any rows in the table.'\" This typically points to a mismatch between what a query step expects and what's actually in the combined data — often because one of the source files has a renamed column or a structural difference from the others. If you hit this, go back into Power Query, check each source file's query step by step, and confirm the column names driving the combine are identical across every file before reapplying.",
+      "heading": "Understand the queries Power Query builds",
+      "body": "After the combine, the Queries pane holds more than one query. Power Query creates a Transform Sample File query that performs the extraction on the example file, a function that applies those same steps to any file, and your main folder query that runs the function on each file and expands the results into columns. The helpers sit in a group named Transform file from, followed by your query's name.\n\nTo change how every file is processed (promote headers, remove a totals row), edit Transform Sample File. The function is linked to it, so the change flows to every file. If you rename columns or change types there, check the final step of the main query, because a Changed Type step that references an old column name will error."
+    },
+    {
+      "heading": "Fix \"The key didn't match any rows in the table\"",
+      "body": "In the recording, clicking Apply changes produces a Load dialog listing the main query, Transform Sample File and Sample File, each with \"[Expression.Error] The key didn't match any rows in the table.\"\n\nThis error means a navigation step asked for a name that is not there. In a folder combine, that is nearly always the sheet or table picked in the Combine files dialog. Power Query looks for that exact name in each file, and a workbook whose data sits on a differently named sheet has no matching row. Files built from different templates, such as EmployeeData and SalesReport, are a classic trigger.\n\nTo fix it, open each workbook and give the data sheet (or Excel table) the same name everywhere, then refresh. If you cannot control the source files, remove the non-matching workbooks from the folder, or filter them out of the file list in Power Query Editor.",
       "image": {
         "file": "/screenshots/9w5jNPhDaG8/05.webp",
-        "caption": "A Load error after applying changes — a sign that one of the combined files has a structural mismatch worth checking in Power Query."
+        "caption": "The Load dialog after applying changes, showing the key-didn't-match error on the folder query and both sample-file helper queries."
       }
     },
     {
-      "heading": "Refresh to pick up new files automatically",
-      "body": "The real payoff of connecting to a folder rather than individual files is that the query isn't tied to specific filenames — it's tied to the folder itself. Drop a new file with the same structure into that folder and hit Refresh, and Power BI picks it up and folds it into the combined table without you touching the query again. This is what makes the folder-based approach worth the initial setup over just importing each file separately."
+      "heading": "Refresh to pull in new files",
+      "body": "The query is tied to the folder, not to individual file names. Drop another workbook with the same structure and sheet name into the folder, click Refresh, and its rows join the combined table without any edits to the query. A new file with a different sheet name will bring the key error straight back, so agree on the template with whoever supplies the files."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Apply changes fails with \"The key didn't match any rows in the table\"",
+      "cause": "At least one workbook does not contain the sheet or table name chosen in the Combine files dialog. Power Query requests that exact name from every file.",
+      "fix": "Rename the data sheet or table so it matches in every workbook, or remove or filter out the files that do not follow the template, then refresh."
+    },
+    {
+      "problem": "The combined table contains rows from files you did not mean to include",
+      "cause": "The Folder connector reads every file in the folder and its subfolders.",
+      "fix": "Rebuild via Transform Data, filter the file list on Extension or Folder Path, then run Combine files on the Content column."
+    },
+    {
+      "problem": "A step-level error appears after editing Transform Sample File",
+      "cause": "Renaming columns or changing types in the sample query leaves a later Changed Type step in the main query pointing at columns that no longer exist.",
+      "fix": "Open the main query, check its last steps, and update or delete the Changed Type step that references the old names."
     }
   ],
   "faq": [
     {
       "question": "Do all the Excel files need identical column structures?",
-      "answer": "It works best when files share the same columns and layout, since mismatched structures can cause errors — including save errors like a key not matching rows in the table — or missing data during the combine step."
+      "answer": "Yes. Microsoft's documentation says the files must share the same file type and structure, including the same columns. The data also needs to sit on a sheet or table with the same name in every workbook, since Power Query looks for the name you picked from the example file."
+    },
+    {
+      "question": "Why is Folder missing from the Get data list?",
+      "answer": "The Common data sources dropdown shows only a short list. Click More to open the full Get Data dialog, and you will find Folder in the File category."
     },
     {
       "question": "What happens if I add a new Excel file to the folder later?",
-      "answer": "As long as the query is connected to the folder, refreshing the report will automatically include the new file's data in the combined table, no query changes needed."
+      "answer": "Refresh the report and the new file's rows are appended, as long as it follows the same structure and sheet name as the example file."
     },
     {
-      "question": "Should I use Combine & Transform Data or Combine & Load?",
-      "answer": "Combine & Transform Data is the safer default, since it routes you through Power Query first to clean column names and data types before anything loads. Combine & Load is faster but skips that cleanup step."
-    },
-    {
-      "question": "What does a 'key didn't match any rows in the table' error mean during combine?",
-      "answer": "It usually signals a structural mismatch between one of the source files and what a query step expects — commonly a renamed or differently formatted column. Check each file's structure in Power Query before reapplying changes."
-    },
-    {
-      "question": "Will combining large numbers of files slow down my report?",
-      "answer": "Combining many large files can increase refresh times, so it's worth monitoring performance and considering filtering unnecessary data early in the process."
+      "question": "Can I combine files stored in SharePoint or OneDrive instead of a local folder?",
+      "answer": "Yes. The same combine process works with the SharePoint folder connector, which appears alongside Folder in the File category. Microsoft's combine-files overview lists SharePoint sites and Azure storage as supported sources."
     }
   ],
+  "references": [
+    {
+      "label": "Microsoft Learn: Power Query Folder connector",
+      "url": "https://learn.microsoft.com/en-us/power-query/connectors/folder"
+    },
+    {
+      "label": "Microsoft Learn: Combine files overview (Power Query)",
+      "url": "https://learn.microsoft.com/en-us/power-query/combine-files-overview"
+    },
+    {
+      "label": "Microsoft Learn: Data sources in Power BI Desktop",
+      "url": "https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-data-sources"
+    }
+  ],
+  "verifiedNote": "Screens and click path come from the original screen recording in Power BI Desktop. The Folder connector steps, the Combine files dialog, the helper queries it creates and the same-structure requirement were re-checked against Microsoft Learn documentation in September 2026. That check corrected two points: Folder sits under Get data > More > File (it is not in the Common data sources list), and the key-didn't-match error is now traced to mismatched sheet or table names across files, which the documentation's example-file rule explains.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

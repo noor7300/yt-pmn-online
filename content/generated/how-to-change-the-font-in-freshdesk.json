@@ -1,44 +1,87 @@
 {
   "slug": "how-to-change-the-font-in-freshdesk",
   "seoTitle": "How to Change the Font in Freshdesk",
-  "metaDescription": "Find the agent portal font settings in Freshdesk and update the default font and size agents use when replying to customers.",
-  "intro": "The font setting most people are looking for in Freshdesk isn't a customer-facing portal theme option — it's the Agent portal default font preference, tucked inside Helpdesk Settings, which controls the font your support agents see and type in while composing replies to customers. It's a small setting, but it affects legibility for your whole team every time they open a ticket, and Freshdesk also lets you decide whether agents can override the default themselves. This guide shows exactly where that setting lives and what each option controls.",
+  "metaDescription": "Set the default font and size agents compose replies in, under Admin > Account > Helpdesk Settings in Freshdesk, and decide whether agents can override it.",
+  "intro": "When people ask how to change the font in Freshdesk, they usually mean the font agents type in while replying to tickets. That lives in one place: the Agent portal default font preference, on the Helpdesk Settings page in Admin. It sets a default typeface and size for the whole team, and a second toggle decides whether each agent may pick their own.\n\nThe customer-facing help center has separate font controls under Portals. This guide covers the agent side first, then points to the portal option at the end so you don't change the wrong one.",
+  "prerequisites": [
+    "An admin role in Freshdesk. Helpdesk Settings sits inside the Admin area, which agents without admin access cannot open."
+  ],
   "steps": [
     {
-      "heading": "Start from the ticket dashboard you already know",
-      "body": "Everything begins from Freshdesk's main view, All tickets, where every conversation is listed with columns for Contact, Subject, Initial Sentiment, Current Sentiment, and State. This is the screen agents live in day to day, and it's also the one that makes font legibility matter — a compose font that's too small or the wrong style shows up here across every reply an agent writes. There's no font control on this screen itself; it's just useful context for why the setting you're about to change matters.",
-      "image": { "file": "/screenshots/4f_WU4f4Ric/01.webp", "caption": "The All tickets dashboard, where agents read and reply to every conversation — the screen the compose font actually affects." }
+      "heading": "Open Admin from the ticket view",
+      "body": "Sign in and you land on All tickets, the list agents work from all day. There's no font control here. Click the gear icon in the left sidebar to open Admin.",
+      "image": {
+        "file": "/screenshots/4f_WU4f4Ric/01.webp",
+        "caption": "The All tickets list, where the agent sidebar holds the gear icon that opens Admin."
+      }
     },
     {
-      "heading": "Open the Admin panel",
-      "body": "Click the gear icon in the left sidebar to open Admin. This is the control center for the whole helpdesk, grouped into sections like Freddy (AI tools), Team (agents, groups, roles, business hours), Channels, Workflows, Agent Productivity, Support Operations, and Account. Font preferences live under a general settings area rather than inside Team or Channels, so if you're scanning this page for the first time, look past the AI and team-management sections toward the broader helpdesk configuration options.",
-      "image": { "file": "/screenshots/4f_WU4f4Ric/03.webp", "caption": "The Admin panel, organized into sections like Freddy, Team, Channels, and Support Operations." }
+      "heading": "Go to Account > Helpdesk Settings",
+      "body": "Admin is split into sections such as Freddy, Team, Channels, Workflows, Agent Productivity, Support Operations and Account. The font preference isn't under Team or Channels. Scroll down to Account and open Helpdesk Settings; Freshdesk's own documentation gives the path as Admin > Account > Helpdesk Settings.\n\nThis is one long page. It also holds the helpdesk name and URL, date format and time zone, the next ticket ID, ticket view layout and branding, so expect to scroll. On a slow connection the page can sit blank for a moment before its fields load.",
+      "image": {
+        "file": "/screenshots/4f_WU4f4Ric/03.webp",
+        "caption": "The Admin panel, grouped into Freddy, Team, Channels, Support Operations and Account."
+      }
     },
     {
-      "heading": "Navigate to Helpdesk Settings",
-      "body": "From Admin, the breadcrumb changes to Admin > Helpdesk Settings once you're in the right place — this is a longer settings page you'll need to scroll through rather than a single small panel, since it also covers things like hiding first-response-due times and chat widget access for admins. Give the page a second to fully render before scrolling; on a slower connection it can briefly show as a mostly blank page before the toggles and dropdowns load in."
+      "heading": "Pick the default font and size",
+      "body": "Find Agent portal default font preference. The Default font dropdown starts on System and lists the typefaces Freshdesk offers. Under it, the Font size dropdown runs from 10px to 20px and renders the sample line \"The quick brown fox jumps over the lazy dog\" at each size as you hover, so you can judge it before choosing.\n\nPick something an agent can read for a whole shift. Very small sizes tire the eyes over hundreds of replies. Very large ones push the reply box's content off screen.",
+      "image": {
+        "file": "/screenshots/4f_WU4f4Ric/05.webp",
+        "caption": "The Font size dropdown under Agent portal default font preference, previewing each size against a sample sentence."
+      }
     },
     {
-      "heading": "Set the Agent portal default font preference",
-      "body": "Scroll to \"Agent portal default font preference,\" where a Default font dropdown (set to System by default) controls which typeface your agents use while composing messages and replies to customers — Freshdesk states this plainly under the dropdown. Right below it, a separate Font size control opens a list running from 10px up to 20px, with a live sample line, \"The quick brown fox jumps over the lazy dog,\" rendered in the size you're hovering so you can judge readability before committing. Pick a size that's comfortable for a full shift of ticket replies — most teams land somewhere between 13px and 16px, since anything smaller strains the eyes over a long day and anything larger wastes vertical space in the reply box.",
-      "image": { "file": "/screenshots/4f_WU4f4Ric/05.webp", "caption": "The Font size dropdown under Agent portal default font preference, previewing each size against a sample sentence." }
+      "heading": "Choose whether agents can override it, then click Save",
+      "body": "Below the size picker is Font preference for agents. With it on, each agent can change font style and size while composing messages and replies. Leave it off if you want every reply to look the same no matter who wrote it.\n\nThe dropdowns do not save themselves. Click Save at the bottom of the page, as Freshdesk's documentation instructs. Then open any ticket, start a reply and check that the compose box shows the new font."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The font went back to the old one after leaving the page",
+      "cause": "Helpdesk Settings needs an explicit Save. Changing a dropdown alone does not store it.",
+      "fix": "Reopen Admin > Account > Helpdesk Settings, set the font and size again and click Save before navigating away."
     },
     {
-      "heading": "Decide whether agents can override the default",
-      "body": "Just below the size picker is \"Font preference for agents,\" a separate toggle that, when enabled, lets individual agents change their own font style and size away from the account-wide default while composing. Turn this on if your team has a mix of preferences or visual needs and you'd rather not force one setting on everyone; leave it off if you want every agent's replies to render consistently regardless of who's typing, which can matter for a support team practicing strict brand consistency."
+      "problem": "The help center your customers visit still uses the old font",
+      "cause": "The agent portal font preference only affects the agent side. The customer portal is styled separately.",
+      "fix": "Go to Admin > Portals, edit the portal, open the Appearance tab, choose Customize portal and change the fonts under Portal Fonts. Freshdesk restricts portal theme customization by plan, so check the portal article linked below if the option is missing."
     },
     {
-      "heading": "Save and confirm the change sticks",
-      "body": "Freshdesk settings pages typically save immediately when you select a new value from these dropdowns, but it's worth refreshing the page afterward to confirm the font and size you picked are still selected rather than reverted. Have an agent open a ticket and start a reply to visually confirm the new default is actually showing up in the compose box — that's the real test, since the settings page preview and the live compose experience are two different renders."
+      "problem": "An agent's compose box doesn't match the new default",
+      "cause": "Font preference for agents is switched on, and that agent has chosen their own style or size.",
+      "fix": "Either ask the agent to switch back, or turn the toggle off and save so the account default applies to everyone."
     }
   ],
   "faq": [
-    { "question": "Where exactly is the font setting in Freshdesk?", "answer": "Open Admin (the gear icon), go to Helpdesk Settings, and scroll to \"Agent portal default font preference.\" It's not under Team or Channels — it's part of the general Helpdesk Settings page." },
-    { "question": "Does this font setting change what customers see on the support portal?", "answer": "No. This particular setting controls the font agents see and type in while composing replies inside the agent portal, not the customer-facing help center's site theme or fonts." },
-    { "question": "What font sizes can I choose from?", "answer": "The Font size dropdown offers a range from 10px up to 20px, with a live sample sentence shown for each size so you can judge readability before selecting one." },
-    { "question": "Can individual agents use a different font than the account default?", "answer": "Only if you enable \"Font preference for agents,\" a separate toggle below the default font settings that lets agents override the account-wide default for their own compose window." },
-    { "question": "Do I need admin access to change the agent font settings?", "answer": "Yes. Helpdesk Settings, including the agent portal font preference, is inside the Admin panel and restricted to admin-level accounts." }
+    {
+      "question": "Where is the font setting in Freshdesk?",
+      "answer": "Admin > Account > Helpdesk Settings, under Agent portal default font preference. It isn't in the Team or Channels sections."
+    },
+    {
+      "question": "Does this change the font customers see on the support portal?",
+      "answer": "No. It sets the font in the agent portal while composing. The customer help center has its own Portal Fonts option under Admin > Portals > Appearance > Customize portal."
+    },
+    {
+      "question": "What font sizes are available?",
+      "answer": "The Font size dropdown goes from 10px to 20px, with a sample sentence previewed at each size."
+    },
+    {
+      "question": "Can each agent use a different font?",
+      "answer": "Only when Font preference for agents is enabled. That lets individual agents change font style and size while writing messages and replies."
+    }
   ],
+  "references": [
+    {
+      "label": "Freshdesk Support: Configure Helpdesk Settings (official)",
+      "url": "https://support.freshdesk.com/support/solutions/articles/37563-configure-helpdesk-settings"
+    },
+    {
+      "label": "Freshdesk Support: Customizing your customer portal (official)",
+      "url": "https://support.freshdesk.com/support/solutions/articles/50000003753-customizing-your-customer-portal"
+    }
+  ],
+  "verifiedNote": "Screens and the font-size range come from a recorded walkthrough of the Freshdesk admin area. The navigation path, the Save requirement and the agent-override toggle were re-checked against Freshdesk's official Helpdesk Settings article in September 2026. That check corrected this guide's earlier claim that the dropdowns save automatically, and the customer portal font path was added from Freshdesk's portal customization article.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

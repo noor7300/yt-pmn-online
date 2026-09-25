@@ -1,64 +1,96 @@
 {
   "slug": "how-to-add-a-column-in-airtable-easily-2026",
   "seoTitle": "How to Add a Column (Field) in Airtable",
-  "metaDescription": "Add a new column to your Airtable base by choosing a field type, from single select to formulas, and configuring its display settings.",
-  "intro": "Airtable calls a column a \"field,\" and that's not just naming — it's the reason Airtable can do more than a spreadsheet. Every field you add has a type, so instead of a plain cell you can add attachments, a single-select status tag, a linked record from another table, or a formula that calculates itself. This guide walks through opening a base, finding the control that adds a new field, and picking the right type for what you're actually tracking, so your grid stays structured instead of turning into a wall of unlabeled text.",
+  "metaDescription": "Add a column to an Airtable table: where the + control is, how to insert a field between two others, who is allowed to add fields, and the 500-field limit that applies on every plan.",
+  "intro": "Airtable calls a column a field, and the name reflects a real difference. Every field has a type, so a column can hold attachments, a status picked from a fixed list, a link to a record in another table, or a formula that calculates itself. Choosing the type is the only decision that takes any thought.\n\nThis guide covers the two places you can add a field from, how to pick and configure the type, and what happens to your data if you change that type later. Adding the field takes seconds. Getting the type right first time saves reformatting every row afterwards.",
   "steps": [
     {
-      "heading": "Open your workspace and pick a base",
-      "body": "From Airtable's Home screen, you'll see every base you've opened recently grouped by workspace, along with when each was last touched. If you're working across a team account, note the Workspace column on the right — it tells you which shared workspace a base lives in before you click into it, which matters if you have similarly named bases in different workspaces. Click through to the base and table you want to edit.",
+      "heading": "Open the base and table",
+      "body": "Airtable's Home screen lists the bases you've opened recently, along with when each was last touched and, on team accounts, which workspace it belongs to. Check that Workspace column if you have similarly named bases in different workspaces. Open the base, pick the table along the top, and make sure you're in a Grid view.\n\nYou need creator or owner permission on the base to add fields. Collaborators with commenter or read-only access don't get the option at all.",
       "image": {
         "file": "/screenshots/mij5VlrB-ZY/03.webp",
         "caption": "Airtable's Home screen, listing recently opened bases grouped by when they were last touched and which workspace they belong to."
       }
     },
     {
-      "heading": "Scroll to the end of your existing columns",
-      "body": "Inside the table, switch to Grid view if you aren't already there, then scroll horizontally past your last column. A plus icon sits at the far right edge of the header row, right after your last field — that's the add-column control, and it's easy to miss on a wide table since it's off-screen until you scroll."
+      "heading": "Click + at the end of the headers, or insert beside an existing field",
+      "body": "The quickest route is the + icon to the far right of the field headers, just after your last column. On a wide table it's off-screen until you scroll right.\n\nIf you want the new column in a particular spot, click the header of a neighbouring field and choose Insert left or Insert right. The new field then lands exactly where you want it and you skip dragging it across afterwards."
     },
     {
-      "heading": "Open the field type picker",
-      "body": "Clicking the plus icon opens a panel with a search box at the top labeled \"Find a field type,\" and below it a long list of standard field types: Link to another record, Single line text, Long text, Attachment, Checkbox, Multiple select, Single select, User, Date, Phone number, Email, and URL, among others. There's also a separate \"Field agents\" section above the standard list for AI-assisted fields like generating an image or researching a company automatically — those are a different feature from a plain column and worth ignoring unless you specifically need automated enrichment.",
+      "heading": "Name the field and choose its type",
+      "body": "The panel that opens has a name box and a search box labelled Find a field type. Name the field first, or you'll end up with a column called Field 6. Then pick the type that matches the data: Single select for a fixed list like status or priority, Multiple select when several tags can apply, Attachment for files and images, Long text for anything that won't fit on one line, Link to another record to connect tables.\n\nAbove the standard list sits a Field agents section. These are AI-powered fields, built on Airtable's Omni, that can research a company or generate an image for each record. They draw on your monthly AI credit allowance. Every plan includes some, but they aren't unlimited, so leave them alone if you just need a plain column.",
       "image": {
         "file": "/screenshots/mij5VlrB-ZY/05.webp",
-        "caption": "The new-field panel, showing the field type search box and the standard field list — Single line text, Attachment, Checkbox, Single select, Date, and more."
+        "caption": "The new-field panel, showing the field type search box and the standard field list: Single line text, Attachment, Checkbox, Single select, Date, and more."
       }
     },
     {
-      "heading": "Name the column and choose its type",
-      "body": "Type a clear column name at the top of the panel before you pick a type — it's easy to forget and end up with a field still called \"Field 6.\" Then pick the type that matches the data you're actually storing: Single select for a fixed list like status or priority, Multiple select when more than one tag can apply at once, Attachment for files and images, and Long text for anything that won't fit in a single line. Picking the closest type up front saves you from reformatting every row later."
+      "heading": "Configure the type's options and click Create field",
+      "body": "Most types add settings once selected. For Single and Multiple select, define the options and their colours now so people pick from a list and don't type near-duplicates. Date fields let you set the display format and whether to include a time. Some types also take a default value; that applies only to records created afterwards, and primary fields can't have one.\n\nClick Create field. The column appears straight away for everyone looking at the base."
     },
     {
-      "heading": "Set type-specific options",
-      "body": "Most field types unlock extra settings once selected. Single select and Multiple select let you predefine the exact options and colors so people pick from a list instead of typing free text that won't match later. Date fields let you choose the display format and whether to include a time. Attachment fields don't need much configuration at all — they're ready to accept files as soon as you save."
+      "heading": "Move or hide it in each view",
+      "body": "To reposition the field, click and hold its header, drag it to the new spot and release. Field order is stored per view, so rearranging one grid view leaves your other views untouched. The same goes for hiding: Hide fields in the view toolbar (or right-click a header and choose Hide field) removes the column from that view only, and the data stays in the table. The one field you can't hide is the primary field, the first column of every table."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no + icon at the end of the field headers",
+      "cause": "Your permission level on the base is commenter or read-only. Only creators and owners can add fields.",
+      "fix": "Ask a base owner to raise your permission level, or to add the field for you."
     },
     {
-      "heading": "Save and reorder if needed",
-      "body": "Click the save or create button to add the field to your live grid — it appears immediately for anyone else viewing the base too. If it doesn't land where you want it, drag the column header left or right to reposition it; this only changes its position in the current view, so other views of the same table can keep their own column order."
+      "problem": "Existing values disappeared after changing a field's type",
+      "cause": "Airtable converts values where it can, but some conversions have no sensible result. Changing a text field to Attachment, for example, clears the text.",
+      "fix": "Before converting a field full of data, add a new field of the target type and move the data across, keeping the old field until you've checked the result."
+    },
+    {
+      "problem": "Airtable won't let you add another field",
+      "cause": "Tables are capped at 500 fields. The cap is the same on every plan, so upgrading doesn't raise it.",
+      "fix": "Move groups of related fields into a separate table and connect the two with a Link to another record field."
     }
   ],
   "faq": [
     {
-      "question": "What field types can I choose from in Airtable?",
-      "answer": "Airtable offers a wide library of standard field types including single line text, long text, attachments, single select, multiple select, checkbox, date, phone number, email, URL, and linked records to other tables."
+      "question": "Is a column the same as a field in Airtable?",
+      "answer": "Yes. Airtable uses \"field\" for what a spreadsheet calls a column, and \"record\" for a row."
     },
     {
-      "question": "Can I change a column's field type after creating it?",
-      "answer": "Yes, you can edit an existing field's type later, though converting between very different types may require reformatting the existing data."
+      "question": "How many fields can one table have?",
+      "answer": "500. Airtable applies the same per-table limit on Free, Team, Business and Enterprise plans. Record limits do vary by plan, but field limits don't."
+    },
+    {
+      "question": "Can I change a field's type after creating it?",
+      "answer": "Yes. Click the dropdown arrow on the field header and choose Edit field. Airtable tries to convert the existing values, but some conversions clear them, so test on a copy if the column holds data you care about."
     },
     {
       "question": "How do I hide a column without deleting it?",
-      "answer": "You can hide fields from a specific view without removing the underlying data, which keeps your grid focused while preserving the column for other views."
+      "answer": "Use Hide fields in the view toolbar, or right-click the header and choose Hide field. The field is hidden only in that view, and nothing is deleted."
     },
     {
-      "question": "Is there a limit to how many columns I can add?",
-      "answer": "Airtable allows a large number of fields per table, though very high field counts can affect performance depending on your plan."
-    },
-    {
-      "question": "What's the difference between a standard field and a 'Field agent'?",
-      "answer": "Standard fields like text, select, and date store data you enter directly. Field agents are AI-assisted fields that can automatically research, generate, or analyze content for you, and they sit in a separate section of the same field-type panel."
+      "question": "Do field agents cost extra?",
+      "answer": "They use AI credits. All Airtable plans include a monthly allowance, which is larger on higher tiers, and field agents draw it down as they run."
     }
   ],
+  "references": [
+    {
+      "label": "Airtable Help Center: Airtable field actions (official)",
+      "url": "https://support.airtable.com/articles/6540330000-airtable-field-actions"
+    },
+    {
+      "label": "Airtable Help Center: Field type overview (official)",
+      "url": "https://support.airtable.com/articles/2361876459-field-type-overview"
+    },
+    {
+      "label": "Airtable Help Center: Airtable grid view (official)",
+      "url": "https://support.airtable.com/articles/7905594155-airtable-grid-view"
+    },
+    {
+      "label": "Airtable Help Center: Airtable plans overview (official)",
+      "url": "https://support.airtable.com/articles/2277136852-airtable-plans-overview"
+    }
+  ],
+  "verifiedNote": "Screens come from a walkthrough recording. The + and Insert left/right routes, the Create field button, permission requirements, per-view field order, type-conversion behaviour and the 500-field limit were re-checked against Airtable's Help Center in September 2026. That check replaced this guide's earlier claim that the field limit depends on your plan; it is 500 per table on all plans.",
   "generatedAt": "2026-07-23T07:02:41.000Z",
   "deep": true
 }

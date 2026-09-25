@@ -1,58 +1,71 @@
 {
   "slug": "how-to-fix-google-chrome-screen-shifts-to-the-right-or-left-display-fix-easily-2",
   "seoTitle": "How to Fix Chrome Screen Shifting Left or Right",
-  "metaDescription": "Fix Google Chrome's display shifting to the left or right with these troubleshooting steps for Windows and Mac, restoring your browser view quickly.",
-  "intro": "A Chrome window that suddenly shifts off-center — content pushed to one side, part of the page cut off, or the whole browser rendering slightly offset — is disruptive in the middle of a video call or research session, but it's rarely a hardware problem. Most of the time it traces back to a display setting, an appearance customization, an extension, or a zoom level that got changed without you noticing, and each has a different fix. This guide covers where to look inside Chrome's own settings, what a normal settings layout looks like for comparison, how a custom theme or new-tab setup can factor into the display looking off, and the reset option to fall back on if nothing else works.",
+  "metaDescription": "Chrome page shifted left or right or cut off? Rule out system scaling, reset zoom and saved site zoom levels, test extensions, then reset Chrome settings as a last step.",
+  "intro": "When Chrome's page slides off to one side or loses a strip at the edge, the cause is almost always one of four things: a display setting outside Chrome, a zoom level Chrome saved for that site, an extension changing the layout, or a rendering glitch tied to graphics acceleration. Each has a different fix, so work through them in order from cheapest to most disruptive.\n\nThe last resort, Reset settings, does more than most guides admit. It also clears cookies and site data, so you'll be signed out of websites afterwards. The details are in step 5.",
   "steps": [
     {
-      "heading": "Rule out a system-level display issue first",
-      "body": "Before touching Chrome, check whether other applications on your desktop show the same shift — if your entire screen or every open window looks offset, the problem is your operating system's display scaling or resolution, not Chrome. Only move on to Chrome-specific fixes once you've confirmed the shift is isolated to the browser window itself. On a multi-monitor setup, also check whether the issue follows the window when you drag it to a different display, since a single monitor's scaling settings can sometimes be the actual source even when Chrome looks like the obvious suspect."
+      "heading": "Check whether the problem is Chrome at all",
+      "body": "Look at your other apps. If every window, or the desktop itself, is offset, the problem sits in your operating system's display scaling or resolution, or in the monitor's own position settings. Chrome can't fix that.\n\nIf only Chrome looks wrong, drag its window to another monitor if you have one, then maximise it. A window left partly off-screen can pass for a shifted page. Press F11 (Cmd+Ctrl+F on Mac) to toggle full screen and see whether the layout snaps back."
     },
     {
-      "heading": "Open Chrome's Settings page",
-      "body": "Click the three-dot menu in the top-right corner of Chrome and choose Settings, or type chrome://settings directly into the address bar. This opens the same settings interface with a left-hand navigation list covering You and Google, Autofill and passwords, Privacy and security, Performance, AI innovations, Appearance, Search engine, Default browser, and more further down. Appearance and Default browser are the two sections most relevant to a display shift, so head there first rather than scrolling through every category. The System section, further down the same list, is also worth a glance if you suspect hardware acceleration might be involved, since toggling it off and on has resolved rendering glitches for some users.",
-      "image": { "file": "/screenshots/tBAIlfZ_CkI/04.webp", "caption": "Chrome's Settings page, with the full left-hand navigation showing Appearance, Default browser, System, and other sections worth checking for display issues." }
+      "heading": "Reset the zoom, including zoom saved for individual sites",
+      "body": "Press Ctrl+0 (Cmd+0 on Mac) to return the current page to its default zoom. Chrome remembers zoom per site, so a page that's shifted or cropped on one website but fine on others is usually a saved zoom level.\n\nTo check the global default, open Settings from the three-dot menu, choose Appearance and look at Page zoom. To clear saved zoom for specific sites, go to Settings > Privacy and security > Site settings > Additional content settings > Zoom levels and click the X next to each domain.",
+      "image": {
+        "file": "/screenshots/tBAIlfZ_CkI/04.webp",
+        "caption": "Chrome's Settings page, with Appearance, System and Reset settings in the left-hand navigation."
+      }
     },
     {
-      "heading": "Check your zoom level and page layout settings",
-      "body": "A page zoom stuck at something other than 100 percent is one of the simplest explanations for content that looks shifted or cropped. Press Ctrl+0 (or Cmd+0 on Mac) to reset zoom to default, and check the zoom control under the three-dot menu to confirm it's reading 100%. This alone resolves a surprising number of reports that look like a display bug but are actually just a zoom setting left over from a previous session. Remember that Chrome can save a custom zoom level per site rather than globally, so a page that looks fine on one site and shifted on another is a strong sign this is exactly what's happening."
+      "heading": "Test without extensions",
+      "body": "Open the same page in an Incognito window. Extensions don't run there unless you've allowed them to, so if the page looks normal in Incognito, an extension is the likely culprit. Extensions that resize windows, inject styles or manage tab layouts are the usual suspects.\n\nGo to chrome://extensions and turn extensions off one at a time, reloading the page after each. Disabling everything at once fixes the symptom but leaves you guessing which one caused it."
     },
     {
-      "heading": "Review your Appearance and theme settings",
-      "body": "Under Settings > Appearance, check whether a custom theme or background image is applied to your new tab page, since a heavily customized layout can sometimes make normal page rendering look shifted by comparison, particularly on ultrawide or non-standard resolution monitors. A new tab page with a custom color scheme and a \"Customize Chrome\" option in the corner is normal Chrome behavior, not a bug — but it's worth ruling out as the source of confusion before assuming something is broken. If switching back to Chrome's default theme resolves the visual oddity, the theme itself — not a rendering bug — was the cause, and you can decide whether to keep it or pick a different one.",
-      "image": { "file": "/screenshots/tBAIlfZ_CkI/05.webp", "caption": "A Chrome new tab page with a custom theme applied — normal behavior, but worth checking under Appearance settings if the layout looks unexpectedly different." }
-    },
-    {
-      "heading": "Disable extensions that modify page layout",
-      "body": "Some browser extensions — ones that resize windows, inject custom styling, or manage tab layouts — can shift how pages render without it being obvious which extension is responsible. Open chrome://extensions, disable them one at a time, and reload the affected page after each to isolate the culprit rather than disabling everything at once and losing track of what fixed it. Testing in an incognito window first is a faster way to confirm an extension is involved at all, since most extensions are disabled there by default unless you've specifically allowed them to run in incognito."
+      "heading": "Turn graphics acceleration off and on",
+      "body": "If the shift looks like a rendering glitch (flicker, a strip of the page drawn in the wrong place, or content jumping when you scroll), open Settings > System and switch Use graphics acceleration when available off. Relaunch Chrome and check the page. If nothing changes, switch it back on, since leaving it off can make video playback heavier."
     },
     {
       "heading": "Reset Chrome's settings if the shift persists",
-      "body": "If none of the above resolves it, go to Settings > Reset settings and choose \"Restore settings to their original defaults.\" This clears custom startup pages, disables extensions, and resets appearance customizations without touching your saved bookmarks or passwords, which makes it a safe last step before assuming something deeper, like a corrupted profile, is at play."
+      "body": "Open Settings, choose Reset settings, then Restore settings to their original defaults, and confirm with Reset settings. According to Google, this resets your default search engine, homepage and tabs, the new tab page, pinned tabs, content settings, cookies and site data, and extensions and themes. Bookmarks and passwords aren't touched.\n\nTwo things to know first. Clearing cookies signs you out of most websites. And if you're signed in to Chrome, the reset applies across your signed-in devices. Google also says it isn't a full reset: fonts and accessibility settings are left alone.",
+      "image": {
+        "file": "/screenshots/tBAIlfZ_CkI/05.webp",
+        "caption": "A Chrome new tab page with a custom theme, one of the customisations a settings reset returns to default."
+      }
     },
     {
-      "heading": "Create a fresh Chrome profile as a last resort",
-      "body": "If the shift survives a full settings reset, the issue may be specific to your Chrome profile rather than Chrome's settings. Create a new profile from the profile icon in the top-right corner, sign in, and see if the display looks normal there. If it does, your original profile likely has a corrupted preference file, and the practical fix is migrating your bookmarks and saved passwords over to the new profile rather than continuing to troubleshoot the old one."
+      "heading": "Try a fresh Chrome profile",
+      "body": "If the shift survives a reset, click your profile icon at the top right and add a new profile. If pages look normal there, the problem lives in your old profile's data. The practical fix is to move your bookmarks and passwords to the new profile and stop troubleshooting the old one."
     }
   ],
   "faq": [
     {
-      "question": "Does this fix work on both Windows and Mac?",
-      "answer": "Yes. The settings locations are the same in Chrome regardless of operating system, though the zoom reset shortcut differs slightly (Ctrl+0 on Windows, Cmd+0 on Mac)."
+      "question": "Why is only one website shifted or cut off in Chrome?",
+      "answer": "Chrome saves zoom per site. Press Ctrl+0 (Cmd+0 on Mac) on that site, or clear its entry under Settings > Privacy and security > Site settings > Additional content settings > Zoom levels."
     },
     {
-      "question": "Why does Chrome's display shift in the first place?",
-      "answer": "It's most often a leftover zoom level, a display extension modifying layout, or a system-level scaling issue rather than damage to Chrome itself."
+      "question": "Will resetting Chrome delete my bookmarks or passwords?",
+      "answer": "No. Google states bookmarks and passwords aren't deleted or changed. The reset does clear cookies and site data, disable extensions and reset themes, so expect to sign back in to websites."
     },
     {
-      "question": "Is this a common issue for remote workers?",
-      "answer": "Yes — a misaligned screen can disrupt productivity, especially during online meetings or extended research sessions, which makes it a relevant fix for anyone working from a laptop connected to an external monitor."
+      "question": "Do these fixes work on both Windows and Mac?",
+      "answer": "Yes. The Settings paths are the same. Only the shortcuts differ: Ctrl+0 and F11 on Windows, Cmd+0 and Cmd+Ctrl+F on Mac."
     },
     {
-      "question": "Will I need to restart Chrome after making changes?",
-      "answer": "Restarting Chrome after adjusting zoom, appearance, or extension settings is a good idea to make sure the changes take full effect, though most fixes apply immediately."
+      "question": "Do I need to restart Chrome after changing these settings?",
+      "answer": "Zoom and extension changes apply immediately. The graphics acceleration toggle needs a relaunch, which Chrome offers when you switch it."
     }
   ],
+  "references": [
+    {
+      "label": "Google Chrome Help: Reset Chrome settings to default (official)",
+      "url": "https://support.google.com/chrome/answer/3296214?hl=en"
+    },
+    {
+      "label": "Google Chrome Help: Change text, image and video sizes (zoom) on desktop (official)",
+      "url": "https://support.google.com/chrome/answer/96810?hl=en&co=GENIE.Platform%3DDesktop"
+    }
+  ],
+  "verifiedNote": "Settings screens come from a recorded walkthrough of Chrome on desktop. The zoom paths, per-site zoom behaviour and full-screen shortcuts, plus exactly what Reset settings changes, were re-checked against Google's Chrome Help Center in September 2026. That check added the fact that a reset also clears cookies and site data, which this guide previously left out.",
   "generatedAt": "2026-07-31T12:00:00Z",
   "deep": true
 }

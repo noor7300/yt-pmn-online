@@ -1,44 +1,114 @@
 {
   "slug": "how-to-generate-reports-in-zendesk-easily-2026",
-  "seoTitle": "How to Generate Reports in Zendesk Using Explore",
-  "metaDescription": "Build support performance reports in Zendesk Explore: pick a dataset, stack metrics against attributes, filter by date, and add charts to a dashboard.",
-  "intro": "Guessing at your team's response times or ticket volume isn't a substitute for real data, and Zendesk already has the numbers sitting in your account whether you're looking at them or not. This guide shows how to move from the built-in real-time dashboards to building your own custom report in Explore — picking a dataset, choosing what to count, slicing it by an attribute like agent name, and saving the result so it can be reused. It's aimed at anyone who wants a specific answer Zendesk's default views don't already show.",
+  "seoTitle": "How to Generate Reports in Zendesk Using Explore (2026)",
+  "metaDescription": "Build a custom report in Zendesk Explore: which plan and role you need, how metrics and attributes fit together, why reports don't save on their own, and how to schedule a dashboard by email.",
+  "intro": "Zendesk gives you two places to look at numbers. The real-time monitoring home shows what is happening in your queues right now. Explore, the analytics workspace, is where you build a report that answers a specific question over a date range you choose.\n\nThis guide starts with the live view, then builds a custom Explore report: pick a dataset, add a metric, slice it by attributes, filter it, save it, and put it on a dashboard that can be emailed on a schedule. Two limits trip people up. Creating reports needs a Professional plan or higher plus an Admin or Editor role in Explore, and a report you don't explicitly save is simply gone when you leave the page.",
+  "prerequisites": [
+    "A Zendesk Suite or Support plan at Professional, Enterprise or Enterprise Plus (Zendesk lists these as the plans that can create reports)",
+    "An Admin or Editor role in Explore; viewers can open reports but cannot build or store them",
+    "Some ticket and agent data already in Zendesk Support, or the report will come back empty"
+  ],
+  "costNote": "Custom reports, the real-time monitoring dashboards and scheduled dashboard deliveries all sit on Professional, Enterprise or Enterprise Plus plans, according to Zendesk's help centre. Emailing dashboards to end users (people without an agent seat) additionally needs Enterprise.",
   "steps": [
     {
       "heading": "Check the real-time monitoring home first",
-      "body": "Before building anything custom, it's worth knowing what Zendesk already tracks automatically. The Real-time monitoring home groups live numbers into Queues, Tickets, and Agents columns — tickets currently in queue, open tickets in the last 24 hours, and agents available, each split by channel (Email, Messaging, Voice). Below that sit trend charts for average time to first assignment, solved tickets, and average full resolution time, all refreshing every 20 seconds per the page's own description. If your question is a snapshot of \"right now,\" this page often answers it without opening Explore at all.",
-      "image": { "file": "/screenshots/xXP8JTunzvE/03.webp", "caption": "The Real-time monitoring home, showing live queue, ticket, and agent counts split by channel with trend charts refreshing every 20 seconds." }
+      "body": "Open the Zendesk products menu in the top bar and choose Analytics, then click the real-time monitoring home icon. The page groups live counts into Queues, Tickets and Agents: tickets waiting in queue, tickets opened in the last 24 hours, and available agents, each split by Email, Messaging and Voice. Trend charts below track average time to first assignment, solved tickets and average full resolution time.\n\nThe refresh rates differ by element. Zendesk documents KPIs and tables as refreshing every 20 seconds, while charts covering the last several hours or days refresh once a minute. These dashboards are read-only, so you can filter them but not add your own metrics. If your question is \"what is happening right now\", you may not need Explore at all. From here, View opens the Incoming tickets, Ticket progress or Agent productivity dashboard.",
+      "image": {
+        "file": "/screenshots/xXP8JTunzvE/03.webp",
+        "caption": "The Real-time monitoring home, showing live queue, ticket, and agent counts split by channel above the trend charts."
+      }
     },
     {
-      "heading": "Open Explore and start a new report",
-      "body": "For anything beyond a live snapshot — a custom date range, a specific agent, a trend over weeks — you need Explore, the separate analytics workspace reached from the Products menu. Starting a new report drops you on an empty canvas with a dataset already selected in the top-left corner, in this case \"Support: Tickets [default],\" which is the right starting point for almost any ticket-volume or resolution-time question. The empty state spells out the four-step process directly: select metrics, slice by attributes and filters, choose a visualization, then save and add it to a dashboard.",
-      "image": { "file": "/screenshots/xXP8JTunzvE/05.webp", "caption": "A new, empty report on the Support: Tickets dataset, with Explore's own four-step guide to building a report laid out on the canvas." }
+      "heading": "Start a new report and choose a dataset",
+      "body": "For a custom date range, a single agent, or a trend over weeks, go to Reports inside Analytics and click New report. Explore asks which dataset to use. Support > Support - Tickets covers most ticket-volume and resolution questions, so pick it and click Start report.\n\nThe report builder opens on an empty canvas with the dataset name in the top-left corner. Explore's own empty state lays out the sequence: select metrics, slice by attributes and filters, choose a visualization, then save and add the report to a dashboard. You can also start a report from the Dataset library (hover the dataset, open its settings icon, choose New report from this) or from inside a dashboard in edit mode.",
+      "image": {
+        "file": "/screenshots/xXP8JTunzvE/05.webp",
+        "caption": "A new, empty report on the Support: Tickets dataset, with Explore's own four-step guide to building a report laid out on the canvas."
+      }
     },
     {
-      "heading": "Add the metric you want to count",
-      "body": "In the left-hand panel, Metrics is where you define what the report is actually counting. It's a small but important distinction: a metric is a number, like COUNT(Unsolved tickets) or COUNT(Assigned unsolved tickets), and you build it by clicking Add under the Metrics heading and picking from the library of standard ticket measures. You can stack more than one metric on the same report — a working example already has three metrics added: unassigned unsolved tickets, assigned unsolved tickets, and total unsolved tickets — which lets you compare related numbers on one chart instead of building three separate reports."
+      "heading": "Add a metric, then slice it with attributes",
+      "body": "A metric is the number being counted: tickets, replies, first reply time. At least one is required. Click Add under Metrics, tick the ones you want, and click Apply. Several metrics can sit on one report, so unassigned unsolved, assigned unsolved and total unsolved tickets can share a single chart.\n\nAttributes decide how that number is broken up. Put a date attribute such as Ticket created - Date in Columns to plot the metric over time, and a category such as Assignee name in Rows to get one series per agent. Explore also has an Explosions panel, which splits the result into a separate chart per value. If you don't type a report name, Explore generates one from the metrics and attributes, and reading it back is a quick check that you built what you meant to.",
+      "image": {
+        "file": "/screenshots/xXP8JTunzvE/04.webp",
+        "caption": "A report builder with three ticket-count metrics, a Ticket created date column, and the resulting chart plotted below."
+      }
     },
     {
-      "heading": "Slice the metric with columns and rows",
-      "body": "Once a metric exists, Columns and Rows are where you decide how to break it apart. Columns commonly holds a date attribute — \"Ticket created - Date\" in this case — so the chart plots the metric across time instead of showing one flat total. Rows works the same way for a category, such as assignee name, so you get one line or bar per agent instead of a single combined figure. The report title updates automatically to describe what you've built, for example \"Unsolved tickets by creation date (30 days),\" which is a useful sanity check that the report matches what you intended to measure.",
-      "image": { "file": "/screenshots/xXP8JTunzvE/04.webp", "caption": "A report builder with three ticket-count metrics, a Ticket created date column, and the resulting chart plotted below." }
+      "heading": "Filter the data and pick a chart type",
+      "body": "Add attributes to the Filters panel to narrow the report, for example to the last 30 days or to one channel. A report with no date filter covers all the ticket history in the dataset, which is rarely what anyone wants on a weekly dashboard.\n\nExplore picks a visualization automatically based on what you added. Switch it from the visualization type menu to a table, bar, line or one of the other types without touching the metrics underneath."
     },
     {
-      "heading": "Choose a chart type and apply filters",
-      "body": "The icon column on the right edge of the builder switches how the same data displays — table, bar chart, line chart, and a few others — without needing to rebuild the metrics or columns underneath. Filters sit along the top of the canvas and are where you narrow the report to a specific window, like the last 30 days, or exclude a channel you don't want counted. Add filters before you save, since a report saved without a date filter will keep pulling in your entire ticket history every time someone opens it."
+      "heading": "Save the report",
+      "body": "Click Save in the top-right corner. Reports don't save automatically, so closing the tab before saving discards the work. To make a variation of an existing report without overwriting it, use Save as new instead."
     },
     {
-      "heading": "Save the report and add it to a dashboard",
-      "body": "The Save button in the top-right corner of the builder stores the report to your personal or shared library so it can be reused without rebuilding it. From there, the separate Dashboards section lets you pull multiple saved reports onto one page — pairing your unsolved-tickets trend next to an agent-productivity chart, for instance — so a manager can see everything relevant in a single view instead of clicking through individual reports. Dashboards also support the scheduled email delivery Explore is built around, so the same view can land in a leader's inbox automatically."
+      "heading": "Add it to a dashboard and schedule delivery",
+      "body": "Open Dashboards, click New dashboard, then Add > Add report and pick the report you saved. Drag to position and resize it, add any other reports, and use Share to give Zendesk groups access. Changes to a dashboard only become visible to others after you click Publish.\n\nFrom a dashboard you can edit, you can schedule it to be emailed to agents, admins or groups as CSV, Excel, PNG or PDF, for up to 12 months at a time. Zendesk caps each email at 25 MB and suggests not sending Image and PDF together on large dashboards. Explore's data sync can take up to two hours, so Zendesk recommends scheduling a full-day dashboard for 2 AM or later."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no New report button, or the report can't be saved",
+      "cause": "Your Explore role is Viewer, or the account is on a plan below Professional.",
+      "fix": "Ask a Zendesk admin to give you the Editor or Admin role in Explore. If the plan is the blocker, report creation needs Professional, Enterprise or Enterprise Plus."
+    },
+    {
+      "problem": "Explore's numbers lag behind what the real-time home shows",
+      "cause": "Explore's historical datasets sync hourly on Professional and Enterprise, while the real-time monitoring dashboards refresh every 20 seconds to a minute.",
+      "fix": "Use the real-time dashboards for same-hour questions and Explore for anything over a longer period. Don't expect the two to match minute for minute."
+    },
+    {
+      "problem": "A scheduled dashboard arrives split into several emails",
+      "cause": "The export exceeded Zendesk's 25 MB attachment limit, so it was sent in numbered parts.",
+      "fix": "Pick one format per schedule (avoid Image plus PDF together) or split the dashboard into smaller tabs."
     }
   ],
   "faq": [
-    { "question": "What's the difference between a metric and an attribute in Explore?", "answer": "A metric is what you're counting or measuring, like ticket count, while an attribute — added to Columns or Rows — is how you group or slice that number, like by agent or by date." },
-    { "question": "Can I schedule reports to be emailed automatically?", "answer": "Yes, dashboards built from saved Explore reports can be set up for scheduled email delivery so leadership gets recurring updates without opening Zendesk." },
-    { "question": "Do I need Explore, or does the real-time dashboard cover most needs?", "answer": "The Real-time monitoring home is enough for live snapshots like current queue size, but anything involving a custom date range, a specific agent, or a saved recurring view needs a report built in Explore." },
-    { "question": "Can I combine multiple charts into one dashboard?", "answer": "Yes, the dashboard builder is designed to let you place several saved reports onto a single shared view." },
-    { "question": "Why does my new report start with a date filter already applied?", "answer": "Explore templates and sample reports commonly ship with a default date range, like the last 30 days, so the chart isn't empty or overloaded with your full ticket history the moment you open it." }
+    {
+      "question": "What's the difference between a metric and an attribute in Explore?",
+      "answer": "A metric is the number being measured, such as ticket count or first reply time. An attribute groups or filters that number, such as by assignee, channel or creation date."
+    },
+    {
+      "question": "Can Explore email reports automatically?",
+      "answer": "Yes, at the dashboard level. Anyone who can edit a dashboard can schedule it to agents, admins or groups in CSV, Excel, PNG or PDF. Sending to end users needs an Enterprise plan and the explore tag on each recipient's profile."
+    },
+    {
+      "question": "Why don't my Explore numbers match the live dashboard?",
+      "answer": "They refresh on different schedules. Explore's historical data syncs hourly, while the real-time monitoring dashboards update every 20 seconds (KPIs and tables) or every minute (charts)."
+    },
+    {
+      "question": "I built a report and it disappeared. What happened?",
+      "answer": "Explore doesn't autosave. Click Save in the top-right corner before leaving the builder, or Save as new if you're editing a copy of an existing report."
+    }
   ],
+  "references": [
+    {
+      "label": "Zendesk help: Creating reports",
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408821589530-Creating-reports"
+    },
+    {
+      "label": "Zendesk help: Getting started with Zendesk Explore, hands-on tutorial",
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408824320794-Getting-started-with-Zendesk-Explore-Hands-on-tutorial"
+    },
+    {
+      "label": "Zendesk help: Accessing the real-time monitoring dashboards",
+      "url": "https://support.zendesk.com/hc/en-us/articles/9757102346010-Accessing-the-real-time-monitoring-dashboards"
+    },
+    {
+      "label": "Zendesk help: Understanding real-time dashboard limitations",
+      "url": "https://support.zendesk.com/hc/en-us/articles/9757137259546-Understanding-real-time-dashboard-limitations"
+    },
+    {
+      "label": "Zendesk help: Scheduling dashboard deliveries",
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408843602714-Scheduling-dashboard-deliveries"
+    },
+    {
+      "label": "Zendesk help: Data refresh intervals for analytics",
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408823242778-Data-refresh-intervals-for-analytics"
+    }
+  ],
+  "verifiedNote": "Screens and the report-builder layout come from the original walkthrough recording. Plan and role requirements, the New report and Start report flow, refresh rates, scheduling limits and the no-autosave behaviour were re-checked against Zendesk's official help centre in September 2026. That check corrected the earlier claim that the real-time trend charts refresh every 20 seconds (Zendesk documents one minute for charts) and added the Professional-plan and Editor-role requirements the previous version left out.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

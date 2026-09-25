@@ -1,48 +1,105 @@
 {
   "slug": "how-to-remove-gemini-ai-photo-watermark",
-  "seoTitle": "How to Remove a Gemini AI Photo Watermark (What's Allowed)",
-  "metaDescription": "Remove the watermark from a Gemini AI-generated image using Canva's Magic Eraser, plus what's actually permitted before you use the result commercially.",
-  "intro": "Gemini stamps a small watermark on the images it generates, and if you're planning to use that image in a client deliverable, an ad, or a product mockup, a watermark in the corner is a problem. This guide covers a practical way to remove it using Canva's Magic Eraser, a free tool that's more reliable on complex backgrounds than most people expect, plus the compliance question that matters more than the technical steps: what you're actually allowed to do with an AI-generated image once the watermark is gone. Get that part right first, since the editing itself takes seconds — the part people skip is the part that actually determines whether the final image is safe to publish.",
+  "seoTitle": "How to Remove the Gemini AI Image Watermark (2026): The Official Setting",
+  "metaDescription": "Gemini now has a Media Watermark setting that stops the visible mark on new images. How to turn it off, where it isn't available, what it can't remove (SynthID), and the Canva fallback for older images.",
+  "intro": "Gemini adds a small visible watermark to the images it generates. Most guides, including an earlier version of this one, jump straight to erasing it in a photo editor. There's a simpler route now: Gemini has a Media Watermark setting that switches the visible mark off for images you generate afterwards. It's available to most users, with an exception in three countries covered below.\n\nThe visible mark is only one of three labels, though. Every Gemini image also carries an invisible SynthID watermark and Content Credentials metadata, and neither the setting nor any eraser tool changes those. This guide covers the setting first, a Canva fallback for images you've already made, and what you're allowed to do with the result.",
+  "costNote": "The Media Watermark setting costs nothing in most countries. In India, South Korea and Vietnam it only appears with a Google AI Ultra subscription. The Canva fallback was recorded on a Canva for Education account, and Canva's help page for Magic Eraser doesn't say which plans include it, so a free account may hit an upgrade prompt.",
+  "tables": [
+    {
+      "title": "The three labels on a Gemini image",
+      "columns": ["Label", "Visible?", "Can you turn it off?"],
+      "rows": [
+        ["Visible watermark", "Yes, a small mark on the image", "Yes, with Settings > Media Watermark (Ultra-only in India, South Korea and Vietnam)"],
+        ["SynthID", "No, embedded in the pixels", "No. Present in all media created or edited with Gemini Apps"],
+        ["Content Credentials (C2PA)", "No, stored as metadata", "No setting for it in Gemini Apps"]
+      ],
+      "note": "From Google's Gemini Apps Help, checked September 2026."
+    }
+  ],
   "steps": [
     {
-      "heading": "Understand what's actually allowed before you edit anything",
-      "body": "AI image generators including Gemini attach watermarks partly to signal that an image is AI-generated, and removing that marker doesn't change the image's underlying origin or your rights to it. Google's terms govern how Gemini-generated images can be used, and those terms — not the presence or absence of a visible watermark — are what actually determine whether a given use is permitted. This guide isn't legal advice: if you're using generated images commercially, especially in a business or client context, read the current terms for the plan you're on and check whether disclosure of AI-generated content applies in your region before you publish anything. Some platforms and ad networks have their own separate rules about AI-generated imagery too, so it's worth checking the destination — a social platform, a print vendor, an ad network — in addition to Google's own terms, since a use that's fine under one policy can still run into a different one downstream."
+      "heading": "Know what you can remove and what you can't",
+      "body": "The visible watermark is a courtesy label. SynthID is the one that matters for detection: Google embeds it invisibly in all media created or edited with Gemini Apps, and anyone can upload an image to Gemini and ask whether Google AI made it. Hiding the visible mark doesn't change that answer.\n\nIt also doesn't change what you're allowed to do. Google's Generative AI Prohibited Use Policy bans misrepresenting generated content as made solely by a human in order to deceive. Removing the mark for a cleaner look is one thing. Passing the image off as a photograph or hand-drawn work is another. This isn't legal advice. For commercial or client work, read the terms for your plan and any AI-disclosure rules where you publish (ad networks and social platforms set their own)."
     },
     {
-      "heading": "Generate or locate the image in Gemini",
-      "body": "Open Gemini and either generate a new image from a prompt or pull up one you've already created. The example here is a simple test case — an artistic image of two cartoon characters in a kitchen — generated directly in the Gemini chat interface, which stamps its usual small watermark into the corner of the output once the image renders. If you're generating specifically for this workflow, aim for a composition with a reasonably busy or textured background rather than a lot of flat empty space, since that detail makes the watermark removal step later noticeably easier to pull off cleanly.",
-      "image": { "file": "/screenshots/v6aD96CtUbM/03.webp", "caption": "A Gemini-generated image ready to download, with the share, copy, and download icons visible in the top corner of the image card." }
+      "heading": "Turn off Media Watermark, then generate and download",
+      "body": "On a computer, go to gemini.google.com, click Settings at the bottom left, then Media Watermark, and turn it off. In the Android app, tap Menu, then Settings, and switch off Media Watermark. The same setting covers images, video and music, and it applies only to Gemini Apps, not to AI features in other Google products. If you're in India, South Korea or Vietnam, you'll only see this setting with an AI Ultra subscription. Everyone else there gets visible watermarks on all visual media automatically.\n\nWith the setting off, generate the image. Google describes the setting in terms of newly generated images, so an image you made while it was on may still carry the mark. The fastest fix is often to run the same prompt again.\n\nSave the result with the download icon at the top right of the image, not a screenshot. A screenshot loses resolution and makes any later clean-up look rougher. Keep your prompt with the file so you can regenerate it later.\n\nOne thing about this example: the prompt asks for Tom and Jerry. Those characters belong to their rights holder, so an image like this isn't safe for commercial use with or without a watermark.",
+      "image": {
+        "file": "/screenshots/v6aD96CtUbM/03.webp",
+        "caption": "A Gemini-generated image with share, copy and download icons at its top right, and the Settings gear at the bottom left of the sidebar."
+      }
     },
     {
-      "heading": "Download the image at full resolution",
-      "body": "Use the download icon on the image to save it locally rather than screenshotting it — a screenshot compresses the image and can make later edits, including watermark removal, look noticeably rougher around the edges. Keep the original file somewhere you can get back to it, since you'll want it as a fallback if an edit doesn't turn out the way you expected. It's also worth keeping a personal record of your original prompt alongside the file, so you can regenerate a fresh version quickly if the edited copy ever needs redoing from scratch rather than patched further."
+      "heading": "For an older image, place it in Canva",
+      "body": "If you can't regenerate (the prompt is lost, or you liked that exact result), Canva's Magic Eraser can paint the mark out. Start a new design, upload the downloaded image from Uploads, and drag it onto the canvas.",
+      "image": {
+        "file": "/screenshots/v6aD96CtUbM/04.webp",
+        "caption": "A blank Canva canvas, ready for the downloaded Gemini image to be uploaded and placed before editing."
+      }
     },
     {
-      "heading": "Open a blank canvas in Canva",
-      "body": "Start a new design in Canva and upload the downloaded image onto the canvas. Canva's free tier includes the tools needed for this specific job, so there's no need for a paid plan or a separate photo editor just to clean up one watermark.",
-      "image": { "file": "/screenshots/v6aD96CtUbM/04.webp", "caption": "A blank Canva canvas, ready for the downloaded Gemini image to be uploaded and placed before editing." }
+      "heading": "Erase the mark with Magic Eraser, then check it",
+      "body": "Click the image, click Edit in the toolbar, and under Tools select Magic Eraser. Choose Brush, set the brush size just large enough to cover the mark, paint over it and click Erase. Click mode (select an object by clicking it) can work better on a mark sitting over a flat area. Canva suggests erasing a slightly larger area if something is left behind.\n\nIn Brush mode, zoom and undo/redo of brush strokes don't work, so if a pass goes wrong, use Reset Edits and start again. Then zoom in on the patch. Busy backgrounds like this kitchen hide the fill well; flat colour shows smudges and seams, which matter more if the image is going to print.",
+      "image": {
+        "file": "/screenshots/v6aD96CtUbM/05.webp",
+        "caption": "Canva's Magic Eraser mid-edit, brush tool selected and sized to paint over the watermark area directly on the image."
+      }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no Media Watermark option in Gemini's settings",
+      "cause": "You're in India, South Korea or Vietnam without an AI Ultra subscription, or you're looking in a different Google product. The setting exists only in Gemini Apps (web and mobile).",
+      "fix": "Check at gemini.google.com under Settings. If you're in one of those three countries, the setting needs AI Ultra."
     },
     {
-      "heading": "Remove the watermark with Magic Eraser",
-      "body": "With the image placed on the canvas, open Canva's Magic Eraser tool from the editing panel. Select the Brush option, size it to roughly cover the watermark without spilling much past its edges, and paint over the mark. The tool uses AI to fill in what it predicts should be there based on the surrounding pixels, which works cleanly on busy backgrounds like the kitchen scene shown here, where there's plenty of surrounding detail for it to blend into. There's also a Click mode and a Foreground option alongside Brush, which can work better for a watermark sitting on a single flat-colored area rather than a mixed, detailed one — worth trying if Brush doesn't give a clean result on your first attempt.",
-      "image": { "file": "/screenshots/v6aD96CtUbM/05.webp", "caption": "Canva's Magic Eraser mid-edit, brush tool selected and sized to paint over the watermark area directly on the image." }
+      "problem": "The watermark is still there after turning the setting off",
+      "cause": "The image was generated before you changed the setting. Google describes the setting in terms of newly generated images.",
+      "fix": "Run the prompt again with the setting off, or use the Canva fallback."
     },
     {
-      "heading": "Check the result before you rely on it",
-      "body": "Zoom in on the area you just erased and look for smudging, warped lines, or a patch that doesn't quite match the surrounding texture — Magic Eraser is good, not perfect, and busier backgrounds tend to hide small mistakes better than flat, solid-colored ones. If the first pass leaves an obvious artifact, undo and try a smaller brush size or a couple of shorter strokes instead of one long pass. It also helps to check the edit at both actual size and zoomed in, since something that looks perfectly clean at a glance can still show a faint seam once you view it at full resolution, which matters if the image is headed for print or a large display."
-    },
-    {
-      "heading": "Export and use the image within the rules you checked earlier",
-      "body": "Download the final version from Canva once you're happy with it. Before it goes into a client deliverable, an ad campaign, or any commercial use, circle back to the terms you reviewed in the first step — a clean image with no visible watermark doesn't automatically mean every use case is covered, and getting that confirmed up front is a lot cheaper than finding out otherwise after the image is already published. Keep a note of which images went through this process, especially in a shared team folder, so anyone reusing the asset later knows it started as an AI generation and can check the same terms before repurposing it somewhere new."
+      "problem": "Undo does nothing while erasing in Canva",
+      "cause": "In Magic Eraser's Brush mode, undo and redo of brush strokes aren't supported.",
+      "fix": "Click Reset Edits and repaint, using a smaller brush."
     }
   ],
   "faq": [
-    { "question": "Is it legal to remove the watermark from a Gemini AI image?", "answer": "This depends on how you intend to use the image and the terms that apply to your Gemini plan — removing a watermark doesn't itself violate copyright law, but it doesn't grant you rights you didn't already have either. Check Google's current terms for your use case, particularly for commercial work." },
-    { "question": "Do I need paid software to remove an AI watermark?", "answer": "No. Canva's free tier includes the Magic Eraser tool used in this guide, which is enough for a single watermark on an otherwise clean image." },
-    { "question": "Does Magic Eraser work on any background?", "answer": "It works best on busy or textured backgrounds where the tool has plenty of surrounding detail to blend into. Flat, solid-colored backgrounds make any smudging or artifacts from the edit more noticeable." },
-    { "question": "Can businesses use watermark-free Gemini images in marketing?", "answer": "Often yes, but confirm this against the applicable terms for your account and region before publishing, since disclosure requirements for AI-generated content vary and aren't determined by whether a watermark is visible." },
-    { "question": "What should I do if the erased area looks smudged?", "answer": "Undo the edit and try again with a smaller brush size or a couple of shorter strokes rather than one large pass — this usually produces a cleaner blend than trying to cover the whole watermark in a single stroke." }
+    {
+      "question": "Can I stop Gemini from adding a watermark?",
+      "answer": "The visible one, yes. Turn off Settings > Media Watermark in Gemini Apps. In India, South Korea and Vietnam this needs an AI Ultra subscription. The invisible SynthID watermark can't be turned off."
+    },
+    {
+      "question": "Does removing the visible watermark hide that the image is AI-generated?",
+      "answer": "No. SynthID and Content Credentials stay with the image, and Gemini's verification tool can still identify it as made by Google AI."
+    },
+    {
+      "question": "Is it allowed to remove the watermark?",
+      "answer": "Google gives you a setting to turn the visible mark off, so hiding it isn't the issue. What Google's Generative AI Prohibited Use Policy forbids is claiming generated content was made solely by a human in order to deceive. Check your plan's terms and any disclosure rules where you publish."
+    },
+    {
+      "question": "Can I use a watermark-free Gemini image commercially?",
+      "answer": "The watermark doesn't decide that. Your plan's terms and the image's content do. An image showing someone else's characters or brand carries those rights problems whatever the watermark status."
+    }
   ],
+  "references": [
+    {
+      "label": "Gemini Apps Help: Manage watermark settings in Gemini Apps (official)",
+      "url": "https://support.google.com/gemini/answer/17405358?hl=en&co=GENIE.Platform%3DDesktop"
+    },
+    {
+      "label": "Gemini Apps Help: Verify AI-generated images, videos, and audio (official)",
+      "url": "https://support.google.com/gemini/answer/16722517?hl=en&co=GENIE.Platform%3DDesktop"
+    },
+    {
+      "label": "Google: Generative AI Prohibited Use Policy (official)",
+      "url": "https://policies.google.com/terms/generative-ai/use-policy"
+    },
+    {
+      "label": "Canva Help: Erase or retouch photos (official)",
+      "url": "https://www.canva.com/help/magic-eraser/"
+    }
+  ],
+  "verifiedNote": "Screens come from a walkthrough recorded in July 2026. Re-checked against Google's Gemini Apps Help, Google's Generative AI Prohibited Use Policy and Canva's help center in September 2026. That check found Gemini's own Media Watermark setting, which this guide previously didn't mention, and the India/South Korea/Vietnam AI Ultra restriction on it. It also corrected the earlier claim that Magic Eraser is on Canva's free tier (the walkthrough used an Education account, and Canva's docs don't confirm free access) and the advice to undo strokes, which Brush mode doesn't support.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

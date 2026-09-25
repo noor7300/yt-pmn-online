@@ -1,47 +1,105 @@
 {
   "slug": "how-to-generate-presentation-slides-with-gemini-ai-in-google-slides",
   "seoTitle": "How to Generate Slides With Gemini AI in Google Slides",
-  "metaDescription": "Use Gemini's built-in panel inside Google Slides to generate a starting presentation, then customize it, without leaving the Slides editor.",
-  "intro": "Google has built Gemini directly into Slides, which means the AI assistance for building a deck lives in a side panel next to the slide you're actually editing, rather than in a separate app you have to copy content out of. That's a meaningful difference from generating slides elsewhere and importing them: you stay in the real editor the whole time, so what Gemini produces is immediately something you can click into and adjust, rather than a static export you'd need to rebuild in your actual presentation software. For anyone who's ever burned an evening staring at a blank title slide before a big meeting, this closes most of that gap — Gemini handles the first pass of structure and wording, and you spend your time on the parts that actually need a human eye. This guide walks through opening that panel, generating a starting point, and shaping it into something presentation-ready.",
+  "metaDescription": "Generate a full Google Slides deck with Gemini: start from a blank presentation, describe it in Ask Gemini, approve the slide plan, then refine. Plan and language requirements included.",
+  "intro": "Gemini can build a whole, editable Google Slides deck from a description, but only under specific conditions. The presentation has to be blank, you have to be on a computer, the feature is English-only for now, and your account needs an eligible Google Workspace or Google AI plan. Miss one of those and the option just doesn't appear.\n\nThe process is also more of a conversation than a single prompt. Gemini asks follow-up questions, shows you a slide-by-slide plan to edit, and only builds the deck once you approve it. This guide walks through that flow and what to do with the result.",
+  "prerequisites": [
+    "Google Slides on a computer. Google lists deck generation as desktop-only and English-only.",
+    "A presentation with no existing slides. Gemini only offers to build a full deck in a blank file."
+  ],
+  "costNote": "Google says this feature needs an eligible Google Workspace or Google AI plan. People on personal Google accounts without one may still get it through Google Workspace Experiments, Google's trusted tester program for new AI features.",
   "steps": [
     {
-      "heading": "Open Google Slides and find your starting point",
-      "body": "Go to slides.google.com, where you'll land on the home screen showing template options across the top and your recent presentations below. If you're building something from an existing structure, check whether one of your recent files is close enough to adapt — but for most new Gemini-assisted decks, starting from Blank presentation gives the cleanest result since there's no existing formatting for the AI-generated content to fight against. The recent presentations list is also a useful reference point even when you're starting fresh, since seeing your typical deck length and style can help you judge whether what Gemini generates later is roughly the right scope for how you actually present.",
-      "image": { "file": "/screenshots/i2nzwTM9aok/03.webp", "caption": "The Google Slides home screen, with template options and recent presentations listed below. Starting from Blank presentation avoids formatting conflicts with whatever Gemini generates next." }
+      "heading": "Start a new presentation from the Slides home screen",
+      "body": "Go to slides.google.com on your computer. The start screen shows template options across the top and your recent files below. Google's documentation describes a Presentation option on this start screen that goes straight into Gemini generation; if you don't see it, open a Blank presentation instead.\n\nName the file straight away. It's easy to lose track of drafts once you start trying different prompts.",
+      "image": {
+        "file": "/screenshots/i2nzwTM9aok/03.webp",
+        "caption": "The Google Slides home screen, with template options along the top and recent presentations below."
+      }
     },
     {
-      "heading": "Open a blank presentation",
-      "body": "Click Blank presentation to open a new file with a single title slide. This is your working canvas — Gemini builds within this file rather than creating a separate document you'd have to merge in afterward, so any slides it generates land directly where you'll be editing them. Give the file a real name right away rather than leaving it as \"Untitled presentation,\" since it's easy to lose track of which draft is which once you're a few Gemini-generated versions deep into experimenting with different prompts."
+      "heading": "Click Ask Gemini to open the side panel",
+      "body": "In the blank presentation, click Ask Gemini at the top right. The panel opens with a prompt box and a short list of things Gemini can do in Slides, such as generating images and slides and writing or rewriting content.\n\nThe full-deck option only appears when the presentation has no slides. In a deck you've already started, Ask Gemini generates one slide at a time instead (see the table below).",
+      "image": {
+        "file": "/screenshots/i2nzwTM9aok/04.webp",
+        "caption": "The Gemini panel open next to a blank slide, with its prompt box and a summary of what it can do in Slides."
+      }
     },
     {
-      "heading": "Open the Gemini panel from the toolbar",
-      "body": "In the top-right corner of the Slides editor, click the Gemini icon (the sparkle-style diamond) to open the assistant panel. On a new file it introduces itself with a short pitch and a prompt box, along with a list of what it can help with across Slides, Docs, and other Workspace apps — image generation, drafting, and planning among them. Notice it also mentions capabilities in Gmail and Meet in that same panel, which is a reminder that this is one consistent assistant across your whole Workspace account rather than something scoped narrowly to Slides alone.",
-      "image": { "file": "/screenshots/i2nzwTM9aok/04.webp", "caption": "The Gemini panel open next to a blank slide, showing its prompt box and a summary of what it can generate directly inside Slides." }
+      "heading": "Describe the deck and add any sources",
+      "body": "Say what the presentation is, who it's for and roughly how long it should be. Google's own example is \"Create a 5-slide presentation on quantum computing for a general audience with a modern design.\" Audience and purpose do more for the result than clever wording.\n\nTwo optional extras sit in the panel. Add sources lets you pick files from Drive for Gemini to draw on, so the content comes from your material and not general knowledge. Match presentation style lets you point at an existing deck so the new one follows its design."
     },
     {
-      "heading": "Prompt Gemini with your topic and structure",
-      "body": "In the panel's prompt box, describe what the presentation is for and, if you already know it, roughly how many slides or sections you want — a pitch deck for a specific audience, a lecture recap, a project status update. Being specific about the audience and purpose up front produces slides that need less rewriting afterward than a vague one-line prompt does. Mention the tone you're after too — formal and data-driven reads very differently from casual and conversational, and Gemini will follow that cue if you give it, rather than defaulting to a generic middle-ground voice that fits nothing particularly well."
+      "heading": "Answer the follow-ups, edit the plan, then Approve",
+      "body": "Gemini usually asks a few follow-up questions. You can answer or skip them. Click Next and it produces a presentation plan: a list of slide titles.\n\nThis is the cheapest place to fix structure. Rename slides, add or remove them, and click Update plan to regenerate the outline. When it looks right, click Approve. Generation takes a few minutes, and Google says to keep the tab open until it finishes."
     },
     {
-      "heading": "Review the generated slides slide by slide",
-      "body": "Once Gemini finishes, go through the deck one slide at a time rather than skimming the thumbnail panel. Check that the content on each slide is accurate for your topic, that nothing reads as generic filler, and that the amount of text fits the slide without needing to shrink the font to make it fit. Pay particular attention to the middle slides of a longer deck, since the opening and closing tend to get the most attention during generation and the middle is where filler content is most likely to slip through unnoticed."
+      "heading": "Refine the deck and check it before presenting",
+      "body": "The result is an ordinary, editable presentation. Click into any text box to rewrite it, or ask Gemini to refine content one slide at a time, generate extra slides, or add and edit images. Google notes that Gemini-generated images are for use only within Google Slides.\n\nGoogle also warns that Gemini may suggest inaccurate information. Check every number, date and claim against your source material, and read the deck aloud once. Phrasing that looks fine on screen can sound stiff when spoken, and generated decks tend to repeat themselves."
+    }
+  ],
+  "tables": [
+    {
+      "title": "Whole presentation vs. single slide",
+      "columns": ["Feature", "Generate a presentation", "Generate a slide"],
+      "rows": [
+        ["Where it works", "A blank presentation with no slides", "Any open presentation"],
+        ["What you get", "A full deck built from an approved plan", "One slide per prompt"],
+        ["Review step", "Follow-up questions, then an editable slide plan (Update plan, Approve)", "Choose Insert as a new slide or Replace the current one"],
+        ["Design matching", "Match presentation style", "Match a presentation style, or start from scratch"]
+      ],
+      "note": "Both features are desktop-only, English-only and need an eligible Workspace or Google AI plan, per Google's Docs Editors Help in September 2026."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Gemini only makes one slide, not a whole deck",
+      "cause": "The presentation already has slides. Full-deck generation is only offered in a blank presentation.",
+      "fix": "Start a new blank presentation, generate the deck there, then copy slides across if needed."
     },
     {
-      "heading": "Customize wording, layout, and visuals",
-      "body": "Edit text directly on the slide the same way you would in any manually built presentation — click into a text box and rewrite. For layout or design changes, use Slides' own Theme and Layout options rather than regenerating the whole deck, since a full regeneration can undo edits you've already made. Swap in your own images or brand assets where the AI-generated visuals are close but not quite right."
-    },
-    {
-      "heading": "Apply a few best practices before you present",
-      "body": "Read through the whole deck out loud once before it goes in front of an audience — AI-generated phrasing can sound fine on a quiet read but awkward when spoken. Keep an eye out for repeated phrasing across slides, which happens more with AI-generated content than hand-written decks, and vary it manually where you notice it. Finally, double-check any numbers, dates, or specific claims Gemini included, since generated content should always be fact-checked against your actual source material before it's presented as fact, especially anything involving figures you didn't personally supply in the original prompt. Save a version right after generation and before you start heavily editing, too — that gives you a clean baseline to compare against if a later manual edit introduces an error you don't immediately notice."
+      "problem": "There's no Ask Gemini button",
+      "cause": "The account isn't on an eligible Workspace or Google AI plan, you're on a phone or tablet, or your language setting isn't English.",
+      "fix": "Switch to a computer and an English interface. If it's still missing, check your plan or ask your Workspace admin whether Gemini is enabled."
     }
   ],
   "faq": [
-    { "question": "How do I access Gemini inside Google Slides?", "answer": "Open any presentation and click the Gemini icon in the top-right corner of the editor toolbar. This opens a side panel with a prompt box, without leaving the Slides editor." },
-    { "question": "Can I edit the slides Gemini generates?", "answer": "Yes. Generated slides are regular editable slides — click into any text box to rewrite it, and use Slides' Theme and Layout tools for design changes rather than regenerating the whole deck." },
-    { "question": "Do I need design experience to use this?", "answer": "No. Gemini handles the initial layout and structure; you're mainly reviewing content for accuracy and adjusting wording or swapping images afterward." },
-    { "question": "Will regenerating a slide undo my manual edits?", "answer": "It can, since regeneration replaces the slide's content. Make manual layout adjustments through Slides' own tools once you're happy with the content, rather than regenerating after you've already started editing." },
-    { "question": "Should I fact-check what Gemini generates for a presentation?", "answer": "Yes, always. Verify any numbers, dates, or specific claims against your actual source material before presenting the deck, the same way you would with any AI-generated content." }
+    {
+      "question": "How do I open Gemini in Google Slides?",
+      "answer": "Click Ask Gemini at the top right of the presentation. A side panel opens with a prompt box."
+    },
+    {
+      "question": "Can Gemini create a presentation from my own documents?",
+      "answer": "Yes. Use Add sources in the Gemini panel to pick files from Drive, and Gemini builds the deck from them."
+    },
+    {
+      "question": "Can I edit what Gemini generates?",
+      "answer": "Yes. Every generated slide is a normal editable slide. You can edit it by hand or ask Gemini to refine a single slide."
+    },
+    {
+      "question": "Is Gemini in Google Slides free?",
+      "answer": "No, not in general. Google requires an eligible Workspace or Google AI plan, though some personal accounts can try it through Google Workspace Experiments."
+    },
+    {
+      "question": "Can I use Gemini's generated images outside Slides?",
+      "answer": "Google states that Gemini-generated images in Slides are for use only within Google Slides."
+    }
   ],
+  "references": [
+    {
+      "label": "Google Docs Editors Help: Generate presentations with Gemini in Google Slides (official)",
+      "url": "https://support.google.com/docs/answer/17111393?hl=en"
+    },
+    {
+      "label": "Google Docs Editors Help: Generate a slide with Gemini in Google Slides (official)",
+      "url": "https://support.google.com/docs/answer/16961475?hl=en"
+    },
+    {
+      "label": "Google Docs Editors Help: Collaborate with Gemini in Google Slides (official)",
+      "url": "https://support.google.com/docs/answer/14207419?hl=en"
+    }
+  ],
+  "verifiedNote": "The Slides home screen and Gemini panel come from a recorded walkthrough. The generation flow (Add sources, Match presentation style, the editable plan, Approve), the blank-presentation rule and the plan, language and device requirements were checked against Google's Docs Editors Help in September 2026. That check replaced this guide's earlier single-prompt description with the plan-and-approve flow Google documents, and added the eligibility requirements it previously omitted.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }
