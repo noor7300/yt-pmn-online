@@ -18,7 +18,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { TableOfContents } from "@/components/TableOfContents";
 import { articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, SITE_OWNER } from "@/lib/site";
-import { toParagraphs, headingAnchors } from "@/lib/format";
+import { toParagraphs, headingAnchors, formatDate } from "@/lib/format";
 
 export function generateStaticParams() {
   // Only visible tutorials get built; hidden (not-yet-deep) ones 404.
@@ -123,7 +123,18 @@ export default async function TutorialPage({
         {video.title}
       </h1>
 
-      <p className="mt-4 text-sm text-muted">By {SITE_OWNER}</p>
+      <p className="mt-4 text-sm text-muted">
+        By {SITE_OWNER}
+        {article.verifiedAt && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <a href="#sources-heading" className="hover:text-accent-strong hover:underline">
+              Last checked against official docs{" "}
+              <time dateTime={article.verifiedAt}>{formatDate(article.verifiedAt)}</time>
+            </a>
+          </>
+        )}
+      </p>
 
       <div className="mt-7 space-y-4 text-lg leading-relaxed text-foreground/90">
         {toParagraphs(article.intro).map((p, i) => (

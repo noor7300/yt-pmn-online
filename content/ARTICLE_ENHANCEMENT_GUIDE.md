@@ -138,7 +138,8 @@ Write the updated JSON back to `content/generated/<slug>.json`. It must:
 - Keep `"deep": true` and the existing `generatedAt`
 - Keep the original `slug`
 - Keep every `step.image` path unchanged
-- Carry a `verifiedNote`
+- Carry a `verifiedNote`, plus `verifiedAt` set to today's date as
+  `YYYY-MM-DD` (shown as "Last checked" under the byline)
 
 `verifiedNote` doubles as the marker that an article has been through this
 pass, so an article without one is treated as not yet enhanced.

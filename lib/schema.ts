@@ -8,7 +8,7 @@ export function articleSchema(t: PublishedTutorial, url: string, imagePaths: str
     headline: t.article.seoTitle,
     description: t.article.metaDescription,
     datePublished: t.video.publishedAt,
-    dateModified: t.article.generatedAt,
+    dateModified: t.article.verifiedAt ?? t.article.generatedAt,
     author: { "@type": "Person", name: SITE_OWNER },
     publisher: { "@type": "Organization", name: SITE_NAME },
     mainEntityOfPage: url,

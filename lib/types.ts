@@ -117,4 +117,9 @@ export interface GeneratedArticle {
    * so it can state precisely what was verified rather than implying a
    * hands-on retest that did not happen. */
   verifiedNote?: string;
+
+  /** Date the verifiedNote's check was recorded, YYYY-MM-DD. Backfilled from
+   * the git commit that first added each note, so it reflects when the check
+   * actually landed. */
+  verifiedAt?: string;
 }
