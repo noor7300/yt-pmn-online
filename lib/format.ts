@@ -32,6 +32,23 @@ export function headingAnchors(headings: string[]): string[] {
   });
 }
 
+const CHANGE_WORDS = /\b(correct(?:ed|ion|ions)|reversed|removed|replaced|was wrong|previously|missing|missed|added)\b/i;
+
+/** The sentence of a verifiedNote that says what the re-check changed, e.g.
+ * "That check corrected the audio step…". The opening sentence only says
+ * where the screenshots came from, so it is skipped. Returns null when no
+ * sentence names a change, so callers can leave that guide out. */
+export function correctionSummary(note: string): string | null {
+  const sentences = note
+    .split(/(?<=[.!?])\s+(?=["'“]?[A-Z])/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(1);
+  const pick = sentences.find((s) => /^That check/i.test(s)) ?? sentences.find((s) => CHANGE_WORDS.test(s));
+  if (!pick) return null;
+  return pick.replace(/^That check\b/i, "Our re-check");
+}
+
 /** Trim prose to a whole word near `max` characters, adding an ellipsis. */
 export function excerpt(text: string, max = 180): string {
   if (text.length <= max) return text;

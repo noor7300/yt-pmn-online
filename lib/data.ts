@@ -3,7 +3,7 @@ import path from "node:path";
 import type { CategorizedVideo, GeneratedArticle } from "./types";
 import { TAXONOMY } from "./taxonomy";
 import { INDEXABLE_LIMIT } from "./site";
-import { articleWordCount } from "./format";
+import { articleWordCount, correctionSummary } from "./format";
 
 const CATEGORIZED_PATH = path.join(process.cwd(), "data", "categorized", "videos.json");
 const GENERATED_DIR = path.join(process.cwd(), "content", "generated");
@@ -247,39 +247,79 @@ function withInlineImage(tutorials: PublishedTutorial[]): PublishedTutorial[] {
   return tutorials.filter((t) => t.article.steps.some((s) => s.image));
 }
 
-/** The most recent rewrite date among deep articles, e.g. "2026-08-31". Deep
- * rewrites land in batches on a single day each, so this identifies "today's
- * batch" (or whichever batch is newest) without hardcoding a date. */
-function latestGeneratedDate(tutorials: PublishedTutorial[]): string | null {
-  return tutorials[0]?.article.generatedAt.slice(0, 10) ?? null;
+/** Guides that have been re-checked against the vendor's own documentation.
+ * The verifiedNote is written by that pass and nothing else, so it is the
+ * marker. */
+export function getCheckedTutorials(): PublishedTutorial[] {
+  return getVisibleTutorials().filter((t) => t.article.verifiedNote);
 }
 
-/** Both homepage feature strips draw from the newest rewrite batch — whatever
- * was just published, not a fixed set of categories. getDeepTutorials() is
- * already sorted newest-first (see its sort above), so the latest date is
- * pool[0]'s date and the pool is everything sharing it. */
-function latestBatch(excludeIds: Set<string>): PublishedTutorial[] {
-  const all = withInlineImage(getDeepTutorials()).filter((t) => !excludeIds.has(t.video.id));
-  const date = latestGeneratedDate(all);
-  if (!date) return [];
-  return all.filter((t) => t.article.generatedAt.slice(0, 10) === date);
+export interface SiteStats {
+  guides: number;
+  checked: number;
+  sources: number;
+  sourceSites: number;
 }
 
-/** Homepage "Featured — Start here" picks: today's newly rewritten guides,
- * most-viewed first. */
+export function getSiteStats(): SiteStats {
+  const checked = getCheckedTutorials();
+  const refs = checked.flatMap((t) => t.article.references ?? []);
+  const hosts = new Set<string>();
+  for (const r of refs) {
+    try {
+      hosts.add(new URL(r.url).hostname.replace(/^www\./, ""));
+    } catch {
+      // A malformed URL still counts as a source; it just adds no host.
+    }
+  }
+  return {
+    guides: getVisibleTutorials().length,
+    checked: checked.length,
+    sources: refs.length,
+    sourceSites: hosts.size,
+  };
+}
+
+/** Homepage feature strips draw from checked guides that carry both sources
+ * and a troubleshooting section, so the front page leads with the most
+ * complete pages. Each strip reshuffles daily with its own seed offset, which
+ * keeps the three from lining up on the same few guides. */
+function featurePool(excludeIds: Set<string>, seedOffset: number): PublishedTutorial[] {
+  const pool = withInlineImage(getCheckedTutorials()).filter(
+    (t) => !excludeIds.has(t.video.id) && t.article.references?.length && t.article.troubleshooting?.length
+  );
+  return seededShuffle(pool, ROTATION_SEED + seedOffset);
+}
+
+/** Homepage "Start here" picks. */
 export function getFeaturedTutorials(limit = 4, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
-  return latestBatch(excludeIds)
-    .sort((a, b) => b.video.viewCount - a.video.viewCount)
-    .slice(0, limit);
+  return featurePool(excludeIds, 1).slice(0, limit);
 }
 
-/** Homepage "Featured guides — Deep dives worth your time" picks: today's
- * newly rewritten guides, longest first, excluding anything already used in
- * the "Start here" picks so the two sections don't repeat. */
+/** Homepage "Deep dives" picks: guides that also carry a comparison table,
+ * longest of the day's draw first. */
 export function getDeepDiveGuides(limit = 2, excludeIds: Set<string> = new Set()): PublishedTutorial[] {
-  return latestBatch(excludeIds)
+  return featurePool(excludeIds, 2)
+    .filter((t) => t.article.tables?.length)
+    .slice(0, limit * 4)
     .sort((a, b) => articleWordCount(b.article) - articleWordCount(a.article))
     .slice(0, limit);
+}
+
+/** Homepage "What our last check changed" picks: guides whose verifiedNote
+ * names a specific change, paired with that sentence. */
+export function getRecentlyCorrected(
+  limit = 6,
+  excludeIds: Set<string> = new Set()
+): { tutorial: PublishedTutorial; change: string }[] {
+  const out: { tutorial: PublishedTutorial; change: string }[] = [];
+  for (const t of seededShuffle(getCheckedTutorials(), ROTATION_SEED + 3)) {
+    if (excludeIds.has(t.video.id)) continue;
+    const change = correctionSummary(t.article.verifiedNote!);
+    if (change) out.push({ tutorial: t, change });
+    if (out.length === limit) break;
+  }
+  return out;
 }
 
 export const HOME_PAGE_SIZE = 7;

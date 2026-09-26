@@ -63,6 +63,12 @@ export function TutorialListItem({
               </Link>
             </>
           )}
+          {article.references?.length ? (
+            <>
+              <span aria-hidden="true"> · </span>
+              {article.references.length} official source{article.references.length === 1 ? "" : "s"}
+            </>
+          ) : null}
         </p>
 
         <p className="mt-2.5 line-clamp-2 text-sm leading-relaxed text-muted">{excerpt(article.intro)}</p>
