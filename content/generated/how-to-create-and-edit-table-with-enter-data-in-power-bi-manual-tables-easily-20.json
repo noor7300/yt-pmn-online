@@ -1,12 +1,15 @@
 {
   "slug": "how-to-create-and-edit-table-with-enter-data-in-power-bi-manual-tables-easily-20",
   "seoTitle": "Create and Edit Manual Tables With Enter Data in Power BI",
-  "metaDescription": "Learn how to use Power BI's Enter Data feature to create and edit manual tables, perfect for custom datasets that don't come from an external source.",
-  "intro": "Sometimes you need a custom table in Power BI that doesn't come from an external data source — a short lookup list, a set of category labels, or a handful of reference values that don't justify setting up a full connection to a database or file just to hold five or six rows. The Enter Data feature covers exactly this case, letting you type values directly into a grid that becomes a proper table in your data model, joinable and filterable just like any table pulled from Excel or SQL Server. This guide walks through creating one from scratch, loading it into the report, verifying it landed correctly, and going back to edit it later once your data needs inevitably change.",
+  "metaDescription": "Learn how to use Power BI's Enter Data feature to create and edit manual tables, plus the Desktop-only editing rule Microsoft's docs spell out.",
+  "intro": "Sometimes a custom table is needed in Power BI that doesn't come from an external data source: a short lookup list, a set of category labels, or a handful of reference values that don't justify a full connection to a database or file just to hold five or six rows. The Enter Data feature covers exactly this case, letting values be typed directly into a grid that becomes a proper table in the data model, joinable and filterable just like any table pulled from Excel or SQL Server. This guide covers creating one from scratch, loading it into the report, verifying it landed correctly, and going back to edit it later once the data inevitably changes.",
+  "prerequisites": [
+    "Power BI Desktop. Enter Data is a Desktop feature, and Microsoft's documentation is explicit that tables it creates can only be edited from Desktop, not from the browser-based Power BI service."
+  ],
   "steps": [
     {
       "heading": "Open the Create Table dialog",
-      "body": "From the ribbon in Power BI Desktop, click Enter Data. A dialog titled \"Create Table\" opens with a small spreadsheet-like grid, starting with a single column named Column1 and one empty row ready for input. A Name field at the bottom lets you rename the table before loading it — Power BI defaults to something generic like Table, so give it a descriptive name now rather than renaming it later once other visuals may already reference it.",
+      "body": "From the ribbon in Power BI Desktop, click Enter Data. A dialog titled \"Create Table\" opens with a small spreadsheet-like grid, starting with a single column named Column1 and one empty row ready for input. A Name field at the bottom renames the table before loading it. Power BI defaults to something generic like Table, so give it a descriptive name now instead of renaming it later once other visuals may already reference it.",
       "image": {
         "file": "/screenshots/xfnQA86lvxA/03.webp",
         "caption": "The Create Table dialog, with a single Column1 field and an empty row ready for manual data entry, plus a Name field for the table."
@@ -14,11 +17,11 @@
     },
     {
       "heading": "Add columns and enter your values",
-      "body": "Click the plus icon next to Column1 to add additional columns, and rename each one by double-clicking its header — for a simple product-and-price reference table, that might mean columns named Product and Price. Click into each cell and type your values directly, pressing Tab to move across a row and Enter to drop to the next one, the same way you'd fill in any small spreadsheet."
+      "body": "Click the plus icon next to Column1 to add columns, and rename each one by double-clicking its header. For a simple product-and-price reference table, that might mean columns named Product and Price. Click into each cell and type values directly, pressing Tab to move across a row and Enter to drop to the next one, the same way you'd fill in any small spreadsheet."
     },
     {
       "heading": "Load the table into your report",
-      "body": "Once your data is entered, click Load rather than Edit — Load brings the table straight into your model and closes the dialog, while Edit routes you through Power Query first if you need to apply transformations before the data lands. After loading, Power BI shows a confirmation dialog reporting how many rows were loaded successfully, which is a quick way to catch a typo if the count doesn't match what you expect.",
+      "body": "Once the data is entered, click Load instead of Edit. Load brings the table straight into the model and closes the dialog, while Edit routes through Power Query first for transformations before the data lands. After loading, Power BI shows a confirmation dialog reporting how many rows loaded successfully, a quick way to catch a typo if the count doesn't match expectations.",
       "image": {
         "file": "/screenshots/xfnQA86lvxA/04.webp",
         "caption": "The Load confirmation dialog after entering data manually, confirming the table loaded with the expected number of rows."
@@ -26,7 +29,7 @@
     },
     {
       "heading": "Verify and edit the table in Data view",
-      "body": "Switch to Data view using the icon on the left sidebar, and select your new table from the Data pane on the right to see it laid out as rows and columns, just like any table pulled from an external source. To edit values later, you don't need to reopen Enter Data at all — select the table, use New table or the transform tools on the ribbon, or return to Power Query's Edit Queries to adjust the source values directly in the same grid you started with.",
+      "body": "Switch to Data view using the icon on the left sidebar, and select the new table from the Data pane to see it laid out as rows and columns, the same as any table pulled from an external source. To edit values later, there's no need to reopen Enter Data: select the table and use the transform tools on the ribbon, or return to Power Query's Edit Queries to adjust the source values in the same grid used originally.\n\nOne constraint is worth knowing before relying on this for anything shared with a team: Microsoft's documentation states that a manually entered table can only be updated, added to, or deleted from inside Power BI Desktop, then republished. Editing it from the Power BI service isn't supported, so a colleague viewing the published report in a browser can't patch a typo there.",
       "image": {
         "file": "/screenshots/xfnQA86lvxA/05.webp",
         "caption": "The manually entered table shown in Data view, with Product and Price columns and their values laid out as a normal table in the model."
@@ -34,39 +37,61 @@
     },
     {
       "heading": "Know when a manual table makes sense",
-      "body": "Manual tables are the right tool for small, stable reference data — a mapping of region codes to region names, a short list of budget categories, or threshold values a report checks against, the kind of thing that might change once or twice a year at most. They're the wrong tool for anything that changes often or grows past a few dozen rows, since every update means manually reopening and re-editing the grid rather than refreshing from a live source, and that manual step is exactly the kind of thing that gets forgotten when a report is handed off to someone else on the team."
+      "body": "Manual tables suit small, stable reference data: a mapping of region codes to region names, a short list of budget categories, or threshold values a report checks against, the kind of thing that might change once or twice a year at most. They're the wrong tool for anything that changes often or grows past a few dozen rows, since every update means manually reopening and re-editing the grid instead of refreshing from a live source. That manual step is exactly the kind of thing that gets forgotten when a report is handed off to someone else on the team."
     },
     {
       "heading": "Keep manual tables organized as your model grows",
-      "body": "Label manually entered tables clearly — a prefix like \"Ref_\" or \"Manual_\" in the table name makes it obvious at a glance which tables come from a live connection and which ones a person typed in by hand. This matters most when you're troubleshooting a report months later and need to quickly tell whether a value needs updating in a source system or just needs a quick manual edit, especially if someone other than the original report author is doing the troubleshooting."
+      "body": "Label manually entered tables clearly. A prefix like \"Ref_\" or \"Manual_\" in the table name makes it obvious at a glance which tables come from a live connection and which ones a person typed in by hand. This matters most when troubleshooting a report months later and needing to quickly tell whether a value needs updating in a source system or just needs a manual edit, especially when someone other than the original report author is doing the troubleshooting."
     },
     {
       "heading": "Relate a manual table to your other data",
-      "body": "A manual table becomes far more useful once it's connected to the rest of your model rather than sitting on its own — open Manage relationships and link its key column (Product, in the example above) to the matching column in a larger fact table, the same way you'd relate any two imported tables. Once that relationship exists, values from your small manual table can filter, label, or categorize the larger dataset, which is usually the whole point of building it by hand in the first place rather than just leaving it as a disconnected reference list."
+      "body": "A manual table becomes far more useful once it's connected to the rest of the model instead of sitting on its own. Open Manage relationships and link its key column (Product, in the example above) to the matching column in a larger fact table, the same way any two imported tables would be related. Once that relationship exists, values from the small manual table can filter, label, or categorize the larger dataset, which is usually the whole point of building it by hand instead of leaving it as a disconnected reference list."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A typo in the manual table can't be fixed from a report opened in a browser.",
+      "cause": "Microsoft's documentation states that data in a table created with Enter Data can only be updated, added to, or deleted inside Power BI Desktop; the Power BI service can't make that change directly.",
+      "fix": "Open the .pbix in Power BI Desktop, edit the table there using the ribbon's transform tools or Power Query's Edit Queries, then republish the report."
+    },
+    {
+      "problem": "The first row typed in becomes column headers instead of a data row.",
+      "cause": "Power BI Desktop attempts minor transformations on entered data, and Microsoft's documentation notes it may promote what looks like a header row automatically.",
+      "fix": "Before clicking Load, click Edit to check Power Query's header detection, and demote or promote headers there if it guessed wrong."
+    },
+    {
+      "problem": "Values in the manual table don't filter the rest of the report.",
+      "cause": "No relationship exists yet between the manual table's key column and a matching column in another table.",
+      "fix": "Open Manage relationships and link the key column manually. Power BI doesn't infer a relationship for a table created through Enter Data on its own."
     }
   ],
   "faq": [
     {
       "question": "When should I use Enter Data instead of importing a file?",
-      "answer": "Enter Data is best for small, custom datasets you're building from scratch — reference lists or lookup tables — rather than large datasets that already exist in an external file or source, which are better imported directly."
+      "answer": "Enter Data suits small, custom datasets built from scratch, such as reference lists or lookup tables, instead of large datasets that already exist in an external file or source, which are better imported directly."
     },
     {
       "question": "Can I edit a manual table after it's created?",
-      "answer": "Yes. Select the table in Data view and use the ribbon's transform tools, or return to Power Query's Edit Queries, to update, add, or remove entries in an existing manual table."
+      "answer": "Yes, but only from Power BI Desktop. Select the table in Data view and use the ribbon's transform tools, or return to Power Query's Edit Queries, to update, add, or remove entries."
+    },
+    {
+      "question": "Can a manual table be edited from the Power BI service?",
+      "answer": "No. Microsoft's documentation states changes to an Enter Data table must be made in Power BI Desktop and republished; the browser-based service can't edit it directly."
     },
     {
       "question": "Is there a limit to how much data I can enter manually?",
-      "answer": "There's no hard limit, but manual entry is best suited for smaller datasets — a few dozen rows at most — since larger volumes are far easier to maintain through an automated data connection."
+      "answer": "There's no hard limit stated in Microsoft's documentation, but manual entry suits smaller datasets, a few dozen rows at most, since larger volumes are far easier to maintain through an automated data connection."
     },
     {
       "question": "Can manual tables be combined with imported data in the same report?",
-      "answer": "Yes, manual tables can be related to and used alongside data imported from other sources within the same Power BI model, the same as any other table."
+      "answer": "Yes. Manual tables can be related to and used alongside data imported from other sources within the same Power BI model, the same as any other table, once a relationship is set up."
     },
     {
       "question": "What's the difference between clicking Load and clicking Edit in the Create Table dialog?",
-      "answer": "Load brings your entered data straight into the model as-is. Edit instead routes you through Power Query first, which is useful if you want to apply transformations to the manually entered values before they load."
+      "answer": "Load brings the entered data straight into the model as-is. Edit routes through Power Query first, useful for applying transformations to the manually entered values before they load."
     }
   ],
   "generatedAt": "2026-07-22T11:29:50.000Z",
+  "verifiedNote": "Click path and screens come from a recorded Power BI Desktop walkthrough. The Create Table dialog name, the Load-versus-Edit distinction, and the Desktop-only editing rule were re-checked against Microsoft's official Power BI documentation in September 2026. The Desktop-only editing constraint was missing from the previous version; it's now called out as a prerequisite, a troubleshooting entry, and an FAQ.",
   "deep": true
 }

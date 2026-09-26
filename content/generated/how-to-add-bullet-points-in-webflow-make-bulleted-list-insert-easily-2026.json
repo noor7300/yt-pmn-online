@@ -1,68 +1,83 @@
 {
   "slug": "how-to-add-bullet-points-in-webflow-make-bulleted-list-insert-easily-2026",
   "seoTitle": "Add and Style Bullet Points in Webflow",
-  "metaDescription": "Insert a proper List element in Webflow, switch its marker style between bullets, numbers, and letters, and style its typography and spacing.",
-  "intro": "Pasting raw bullet symbols into a text block breaks semantic HTML and looks inconsistent from one paragraph to the next. Webflow's native List element builds a proper structured list instead, made up of individual List Item blocks that each carry their own marker style and their own typography settings in the right-hand panel. This guide covers finding the List element in the Add panel, seeing how each list item's marker can be switched independently, and where the spacing and font controls live once your content is in place.",
+  "metaDescription": "Insert a real List element in Webflow instead of typing bullet characters, switch marker styles per item, and style the typography once so every list on the site matches.",
+  "intro": "Pasting raw bullet symbols into a text block breaks semantic HTML and looks inconsistent from one paragraph to the next. Webflow's native List element builds a proper structured list instead, made of individual List Item blocks that each carry their own marker style and their own typography settings in the right-hand panel. This guide covers finding List in the Add panel, how an individual item's marker can be switched independently of its neighbors, and where the spacing and font controls live once your content is in place.",
   "steps": [
     {
-      "heading": "Open the Add Elements panel",
-      "body": "Click the plus icon in the left rail to open the Add panel, which splits into Elements and Layouts tabs. Elements is organized into sections like Basic, Advanced, and more, each showing a grid of draggable components with small preview icons and labels — Radio Button, Select, Form Button, Search, Dropdown, Code Embed, Navbar, and dozens more sit here alongside the List component you're looking for.",
+      "heading": "Open the Add panel and find List under Basic",
+      "body": "Click the plus icon in the left rail, or press A, to open the Add panel. It splits into an Elements tab and a Layouts tab. List sits in the Basic section of Elements, grouped with headings and paragraphs. The screenshot below shows the panel's Advanced section further down: Search, Background Video, Code Embed, Locales List, Navbar, Slider, Tabs, Map, and the social icons. It's a useful landmark for confirming you're in the right panel even when List itself is scrolled out of view above it.",
       "image": {
         "file": "/screenshots/hZiv3z2VlR0/03.webp",
-        "caption": "The Add Elements panel open over the canvas, showing the grid of draggable components including form fields, embeds, and navigation blocks."
+        "caption": "The Add panel's Advanced section. List lives further up, under Basic, not among these components."
       }
     },
     {
-      "heading": "Drag the List element onto your page",
-      "body": "Dragging a List component onto the canvas creates a container made up of individual List Item blocks stacked vertically, each one an empty, dashed-outline box ready for text. Unlike typing bullet characters into a paragraph, every item here is its own structured element in the layer tree, addressable and styleable on its own."
+      "heading": "Drag a List element onto the canvas",
+      "body": "Dragging List onto the page creates one list container holding three empty List Item blocks, stacked vertically with dashed outlines. Webflow's own documentation lists unordered as the default, so each item starts as a plain bullet. Every item is a real element in the layer tree, addressable on its own, not a text character typed into a paragraph."
     },
     {
-      "heading": "Click into each item and see its own marker",
-      "body": "Selecting a single List Item shows a small marker to its left — depending on the style applied, that can render as a letter, a number, or a plain bullet dot, and each item can carry a different marker style from its neighbors. The right-hand panel's Style row for a selected List Item includes a set of icon buttons for switching between these marker types, so you're not locked into one bullet look for the whole list.",
+      "heading": "Give an item its own marker style",
+      "body": "Select a single List Item and its settings panel shows a Style row of icon buttons for the marker type: bullet, number, or letter. That setting lives on the item, not only on the list as a whole, which is why a list item copied in from elsewhere can end up on a different marker than its neighbors without anyone choosing that on purpose. The screenshot below shows exactly this: the first item switched to an alphabetic marker while the two below it stay plain bullets, all inside one list.",
       "image": {
         "file": "/screenshots/hZiv3z2VlR0/04.webp",
-        "caption": "A List element with its items selected, showing the alphabetic and bullet markers alongside the Style icon row in the settings panel."
+        "caption": "One List Item switched to an alphabetic marker (a.) while its two siblings stay bulleted, showing the marker setting lives on the item, not the list."
       }
     },
     {
-      "heading": "See the same list with a different marker mix",
-      "body": "Switching styles per item is exactly what produces a list where one entry shows a letter, the next a number, and another a plain dot — useful for demonstrating the range of built-in marker types even if a real page would normally keep one consistent style throughout. It's a good way to preview every option side by side before committing to one for your actual content."
-    },
-    {
-      "heading": "Set the typography for your list text",
-      "body": "With a List Item selected, the panel's Typography section controls font, weight, size, line height, color, alignment, and decoration for that item's text — the same controls you'd use on any text block elsewhere on the page. Getting this right for one item and then copying the styling, or applying a shared class, is what keeps every bullet reading consistently rather than each one picking up whatever the page's default text style happens to be.",
+      "heading": "Set the typography for the list text",
+      "body": "With a List Item selected, the Typography section controls font, weight, size, line height, color, alignment, and decoration for that item's text, the same controls used on any text block on the page. The screenshot below catches the same list mid-edit with three different markers active at once: a letter, a number, and another letter. That's a handy way to preview every marker option side by side, though a finished page would normally settle on one consistent style for the whole list.",
       "image": {
         "file": "/screenshots/hZiv3z2VlR0/05.webp",
-        "caption": "The List Item's settings panel showing Typography controls — font, weight, size, color, and alignment — for the selected item's text."
+        "caption": "Typography controls for a selected List Item, with the list's three items still showing three different marker types from testing the options."
       }
     },
     {
       "heading": "Apply a class so every list matches",
-      "body": "Once one list item looks right, give it a class in the Style Selector field at the top of the panel rather than leaving it unstyled. Any other list item you assign that same class to picks up the identical marker style, spacing, and typography automatically, which is what keeps bullet lists looking consistent across different blog posts or pages instead of restyling each one from scratch."
+      "body": "Once one list item looks right, name it in the Style Selector field at the top of the panel instead of leaving it unstyled. Any other list item assigned that same class inherits the identical marker style, spacing, and typography. That keeps bulleted lists consistent across different pages instead of restyling each one from scratch."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A list shows different marker types on different lines and nobody set it up that way",
+      "cause": "Marker style is a per-item setting in Webflow, not a list-wide one. Copying an item in from another list, or styling one item and skipping its siblings, leaves each item's marker independent.",
+      "fix": "Select every item in the list and check its own Style row, or apply one shared class to all of them so they inherit a single marker setting."
+    },
+    {
+      "problem": "A newly dragged List looks like three blank boxes",
+      "cause": "Webflow's List Item ships empty by design, with no placeholder text or default bullet content.",
+      "fix": "Double-click into each item to add a heading, paragraph, image, or even a nested list before publishing."
     }
   ],
   "faq": [
     {
-      "question": "Why use the List element instead of typing bullet characters into a paragraph?",
-      "answer": "The List element creates real structured List Item blocks, each individually selectable and styleable, rather than plain text characters that don't carry any semantic list structure."
+      "question": "Do all items in a Webflow list have to use the same bullet or number style?",
+      "answer": "No. The marker type is set on each List Item individually, so one item can show a letter while its neighbors stay bulleted. Webflow's own glossary describes unordered as the list's default, but the per-item Style row can still override that for a single item."
     },
     {
-      "question": "Can each item in a list have a different bullet style?",
-      "answer": "Yes — the Style row in a selected List Item's settings panel includes icon buttons for switching that individual item's marker between bullet, number, and letter styles."
+      "question": "Where does the List element live in the Add panel?",
+      "answer": "Under Basic, grouped with headings and paragraphs, not under Advanced with things like Code Embed and Locales List."
     },
     {
-      "question": "How do I keep list styling consistent across my whole site?",
-      "answer": "Assign a shared class to your list items in the Style Selector field so any list item using that class automatically inherits the same marker style, typography, and spacing."
+      "question": "Can a List Item hold anything besides text?",
+      "answer": "Yes. Webflow describes List Items as containers that can hold headings, paragraphs, images, videos, or even another nested list."
     },
     {
-      "question": "Where do I change the font or size of my list text?",
-      "answer": "Select a List Item and open the Typography section in the right-hand settings panel — it has the same font, weight, size, and color controls used on any other text element."
-    },
-    {
-      "question": "Does the list layout adjust for mobile screens?",
-      "answer": "Test your list at different responsive breakpoints in preview mode to confirm marker alignment and spacing still read cleanly on smaller screens."
+      "question": "How do I keep every list on my site looking the same?",
+      "answer": "Give one styled list item a class in the Style Selector field. Any list item you apply that same class to picks up its marker style, spacing, and typography automatically."
     }
   ],
+  "references": [
+    {
+      "label": "Webflow University: List (glossary)",
+      "url": "https://university.webflow.com/glossary/list"
+    },
+    {
+      "label": "Webflow University: List Item (glossary)",
+      "url": "https://university.webflow.com/glossary/list-item"
+    }
+  ],
+  "verifiedNote": "Click path and the three screenshots come from the original recording. Re-checked against Webflow's own List and List Item glossary pages in September 2026, which confirm unordered as the default style and place List under the Add panel's Basic section. Webflow's fuller help-center article on lists returned a 403 to automated fetching, so the glossary pages were the primary written source. The recorded screenshots settled a point the glossary didn't spell out: a List Item's marker type can be changed independently of its siblings, visible in two frames where one list shows several different markers at once.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

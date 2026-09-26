@@ -1,58 +1,95 @@
 {
   "slug": "how-to-add-claude-ai-to-slack",
-  "seoTitle": "How to Add Claude AI to Slack for Team Workflow",
-  "metaDescription": "Integrate Claude AI into your Slack workspace to automate routine tasks and get instant answers without leaving your team chat.",
-  "intro": "Slack is where most teams already spend their day, so putting Claude there instead of asking people to open another tab is the whole point of this integration. It takes a few minutes to install, one extra step for each teammate to link their own Claude.ai account, and after that Claude behaves like any other app in your sidebar — searchable, pinnable, and available in both channels and direct messages. This guide walks through the actual install screen, what a finished setup looks like, and how to get the most out of it once it's live in your workspace, including the rollout detail that trips up most teams: installing the app once does not automatically give every member access.",
+  "seoTitle": "How to Add Claude to Slack in 2026 (Claude Tag Setup)",
+  "metaDescription": "Adding Claude to Slack changed in 2026: Claude Tag is now the setup path for Team and Enterprise plans, run by an org Owner, not a one-click app install anyone can do.",
+  "intro": "Putting Claude in Slack instead of asking people to open another tab used to be a simple app install: search, click, done. As of 2026, Anthropic runs that setup through something called Claude Tag, and it works differently in ways worth knowing before you start. Claude Tag needs a Claude Team or Enterprise plan, an Owner in that organization, and a short pairing step run from inside Slack. It is not available on Free, Pro, or Max plans. This guide covers that current setup path, how channel use differs from direct messages once it's live, and the earlier standalone app some workspaces still have, since a few readers will land on those exact install screens instead.",
+  "prerequisites": [
+    "A Claude Team or Enterprise organization; Claude Tag isn't offered on Free, Pro, or Max individual plans",
+    "Owner permissions in that Claude organization, and a Slack workspace admin available to run the pairing step (often the same person)"
+  ],
+  "costNote": "Claude Tag has no per-seat charge for channel work. It draws from a shared organization usage balance, capped by a monthly spend limit an Owner sets ($500, $1,000, $2,500, $5,000, unlimited, or a custom amount up to $1,000,000). Direct messages with Claude are the exception: those bill against the sender's own claude.ai seat, which needs to include Claude Code.",
   "steps": [
     {
-      "heading": "Open the Apps section of your Slack workspace",
-      "body": "In Slack, click Apps in the left sidebar tools panel, then choose \"Apps\" underneath it rather than Workflows or Channel Templates. This opens a searchable directory of everything available to your workspace, split between what's already installed and what Slack recommends. If your team already has a couple of tools connected, like a project tracker, you'll see them listed under \"apps in My Space\" at the top, which is a useful check that you're in the right place before hunting for Claude specifically. Whoever does this setup should ideally be a workspace admin, since some Slack plans restrict app installation to admins by default, which can stall the process if a regular member tries it first."
+      "heading": "Check whether your organization is eligible",
+      "body": "Claude Tag requires a Team or Enterprise plan on claude.ai. Anthropic's setup documentation also excludes organizations with Zero Data Retention or customer-managed encryption policies, since Claude Tag stores channel memory and session transcripts that those settings don't permit. You'll also need the Routines capability turned on in your Claude organization; until it is, Claude answers every mention with a message that it's unavailable."
     },
     {
-      "heading": "Weigh Claude against your other connected tools",
-      "body": "Before installing, it's worth glancing at what's already in your workspace's app list, since it gives you a realistic sense of how much app sprawl your team can handle. A workspace that already juggles a project tracker, a calendar app, and a video conferencing tool doesn't need Claude cluttering things further if nobody has a clear reason to use it yet — decide on at least one concrete use case, like drafting replies or summarizing threads, before adding one more icon to the sidebar."
+      "heading": "Have an Owner start setup and install the Slack app",
+      "body": "An Owner in the Claude organization goes to the Claude Tag setup page in Claude's admin settings and clicks Start setup. The first step links to the Claude listing in Slack's Marketplace; clicking Add to Slack there and approving the requested permissions installs the app into the workspace. If the app is already installed, adding it again reinstalls over the existing one and keeps current settings."
     },
     {
-      "heading": "Search for Claude and start the install",
-      "body": "Type Claude into the \"Search by app name or category\" box at the top of the Apps page. Slack's directory also surfaces a row of recommended apps by default, things like Google Drive, Google Calendar, Zoom, and Jira Cloud, each with a one-click Install button, which gives you a sense of how the Claude listing will look once you find it. Click Install on the Claude app card to kick off the authorization flow; Slack will ask which workspace to add it to if you belong to more than one.",
-      "image": { "file": "/screenshots/4ohovFZsfFE/03.webp", "caption": "Slack's Apps directory, where Claude is added the same way as any other tool — search, then Install from the app card." }
+      "heading": "Pair the workspace from inside Slack",
+      "body": "In Slack, invite the app to any channel with /invite @Claude, then post \"@Claude connect\" as its own message. Claude replies with a one-time pairing code visible only to the person who sent it. Paste that code into the setup page to finish pairing; codes expire 15 minutes after Claude posts them, so it helps to have the Slack admin and the Claude org Owner online at the same time."
     },
     {
-      "heading": "Confirm the installation finished",
-      "body": "Once you approve the permissions Slack asks for, you land on a plain confirmation page titled \"Claude is installed,\" with three short instructions: close the window and return to Slack, find Claude in the Apps section of your sidebar, and click on it to start chatting. This page also flags something worth telling your team ahead of time — each member needs to connect their own Claude.ai account before they can actually chat with it, so installing the app workspace-wide doesn't automatically give everyone access. It's worth screenshotting or pasting this exact text into your team announcement, since it saves you from having to explain the two-step process from memory later."
+      "heading": "Connect tools, set a spend limit, and launch",
+      "body": "The setup page asks which tools Claude should reach, such as an issue tracker or a document store, and lets you connect a GitHub organization separately. Both can be skipped and finished later. Before Claude Tag goes live, an Owner sets the monthly spend limit that caps channel usage against the organization's balance, then clicks Launch. Mentions of Claude get \"Claude is disabled in this channel\" until this step completes."
     },
     {
-      "heading": "Connect your individual Claude.ai account",
-      "body": "Click into Claude from your Slack sidebar for the first time and you'll be prompted to sign in with your existing Claude.ai account, or create one if you don't have it yet. This is a per-person step, not a workspace-wide setting, which matters for rollout planning: if you're introducing this to a team of ten, expect ten individual sign-ins rather than one admin toggle that covers everyone. Anyone on a free Claude plan can still connect, though usage limits will apply the same way they would outside of Slack, so heavier users on your team may want to consider a paid plan before relying on it daily.",
-      "image": { "file": "/screenshots/4ohovFZsfFE/04.webp", "caption": "The confirmation screen after installation, with the three steps needed to actually start using Claude from inside Slack." }
+      "heading": "Use it: channels need no login, direct messages do",
+      "body": "Once launched, anyone in a paired channel can mention @Claude and get a reply with no personal sign-in and no per-seat cost; that usage counts against the shared organization balance. A direct message works differently: it runs on the sender's own claude.ai account instead, so it needs a seat that includes Claude Code, and it bills to that person instead of the shared balance."
     },
     {
-      "heading": "Customize Claude for how your team actually works",
-      "body": "Once people are connected, spend a little time deciding what Claude should be used for in your workspace rather than leaving it as a novelty in one channel. Common starting points are pinning it in a shared channel for quick questions, using it to draft or summarize long threads, and letting individuals DM it the way they would a colleague for scheduling help or quick research. None of this requires extra configuration on Slack's side; it's a matter of setting expectations with your team about when to reach for it. A short pinned message in your main channel explaining two or three approved use cases does more for adoption than any settings change would."
+      "heading": "If your workspace still has the earlier Claude app",
+      "body": "Some Slack workspaces installed Claude before Claude Tag existed, through the same Apps directory used for tools like Google Drive or Zoom. That earlier app keeps working after installing it once, according to Anthropic, so this is what you'd see searching for it there today instead of the admin-driven flow above. Whoever runs it should have permission to install apps, since some Slack plans restrict that to admins.",
+      "image": {
+        "file": "/screenshots/4ohovFZsfFE/03.webp",
+        "caption": "Slack's Apps directory before searching for Claude specifically. This is the earlier standalone app's install path, not Claude Tag."
+      }
     },
     {
-      "heading": "Roll it into real workflows",
-      "body": "The value shows up once Claude is part of the daily routine rather than something people remember to open occasionally. Try using it to draft a status update from a scattered thread, summarize a long customer support conversation before handing it off, or answer a policy question that would otherwise mean pinging a manager. Because it lives in Slack, none of this requires switching tools, which is the main efficiency gain over using an AI assistant separately from your team chat. Revisit adoption after a couple of weeks — if certain teammates aren't using it, a quick check-in usually reveals they either forgot it was there or never saw the announcement, both easy fixes."
+      "heading": "Finish the earlier app's install",
+      "body": "After approving permissions, the earlier app lands on a confirmation page: close the window, find Claude in the Apps section of the Slack sidebar, and click it to start chatting. The page also states plainly that installing the app doesn't give the whole team access; each person still connects their own Claude.ai account the first time they open it. Anthropic's current documentation focuses on Claude Tag and doesn't describe this older flow in detail, so treat this step as based on what the recording shows, not a page fetched during this pass.",
+      "image": {
+        "file": "/screenshots/4ohovFZsfFE/04.webp",
+        "caption": "The earlier Claude app's install confirmation, stating that each team member still connects their own account."
+      }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Tagging @Claude in a channel gets no reply",
+      "cause": "Claude Tag hasn't been launched yet, or the channel falls outside wherever the workspace was paired. Anthropic's setup guide notes a mention before launch returns \"Claude is disabled in this channel.\"",
+      "fix": "Confirm an Owner completed the Launch step in Claude's admin settings, and check whether pairing covers the whole workspace or a specific channel list."
+    },
+    {
+      "problem": "The pairing code from @Claude connect doesn't work",
+      "cause": "Pairing codes expire 15 minutes after Claude posts them in Slack.",
+      "fix": "Send @Claude connect again for a fresh code and paste it right away."
+    },
+    {
+      "problem": "The Claude Tag setup page won't move past Start setup",
+      "cause": "The signed-in account isn't an Owner in the Claude organization, or the organization has Zero Data Retention or customer-managed encryption enabled, neither of which Claude Tag supports.",
+      "fix": "Have an Owner run setup, and check with an admin about ZDR or CMEK policy before assuming it's a bug."
     }
   ],
   "faq": [
     {
-      "question": "What can Claude AI actually do inside Slack?",
-      "answer": "It can assist with scheduling, reminders, and information retrieval, while also automating routine tasks and providing instantaneous answers to queries right inside a channel or DM."
+      "question": "Is Claude in Slack the same thing as Claude Tag?",
+      "answer": "Not exactly. Claude Tag is Anthropic's current path for bringing Claude into Slack channels, available on Team and Enterprise plans. An earlier, simpler Claude app also exists, and Anthropic's documentation says workspaces that already installed it keep it running."
     },
     {
-      "question": "Is setting up Claude AI in Slack difficult for beginners?",
-      "answer": "No. It's the same install-and-authorize flow as any other Slack app, followed by each person signing into their own Claude.ai account the first time they open it."
+      "question": "Can I add Claude to Slack on a free or Pro plan?",
+      "answer": "Not through Claude Tag; Anthropic's documentation limits it to Team and Enterprise organizations. The earlier standalone app, where a workspace already has it, is the closer fit outside a Team plan."
     },
     {
-      "question": "Does every team member need to do anything after the app is installed?",
-      "answer": "Yes — installation adds Claude to the workspace, but each person still needs to connect their own Claude.ai account before they can start chatting with it."
+      "question": "Does every teammate need to sign in separately?",
+      "answer": "Under Claude Tag, no: anyone in a paired channel can tag @Claude without signing in, and only direct messages need the sender's own claude.ai account. Under the earlier app shown in this guide's screenshots, each person connects their own account before chatting, regardless of channel or DM."
     },
     {
-      "question": "Who benefits from this integration?",
-      "answer": "Tech enthusiasts, business professionals, and teams looking to enhance their collaboration tools within Slack, especially anyone who wants quick answers without switching apps."
+      "question": "Who is allowed to set Claude Tag up?",
+      "answer": "An Owner in the Claude organization runs setup on Claude's side, and pairing the workspace from Slack needs a Slack workspace admin. Anthropic's guide suggests having both available at once, since pairing codes expire in 15 minutes."
+    },
+    {
+      "question": "Does adding Claude to Slack cost extra per person?",
+      "answer": "Not for channel work. Claude Tag draws from a shared organization usage balance under a monthly spend limit; only direct messages bill against an individual's own Claude seat."
     }
   ],
+  "references": [
+    { "label": "Anthropic: Work with Claude Tag (overview)", "url": "https://claude.com/docs/claude-tag/overview" },
+    { "label": "Anthropic: Set up Claude Tag", "url": "https://claude.com/docs/claude-tag/admins/setup-overview" }
+  ],
+  "verifiedNote": "The two screenshots come from a recording of the earlier standalone Claude Slack app, made in July 2026. Re-checked in September 2026 against Anthropic's official Claude Tag documentation, which is the setup path Anthropic now documents for Team and Enterprise organizations. That check corrected this article's original premise, that any user on a free plan could search Slack's Apps directory and install Claude in a couple of clicks; Claude Tag is Owner-run, plan-gated, and involves a Slack-side pairing step instead. Anthropic's own docs say existing installs of the earlier app keep working, so that flow is presented here as the legacy path, not the current recommendation.",
   "generatedAt": "2026-07-31T12:00:00Z",
   "deep": true
 }

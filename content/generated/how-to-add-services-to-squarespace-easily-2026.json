@@ -1,12 +1,17 @@
 {
   "slug": "how-to-add-services-to-squarespace-easily-2026",
   "seoTitle": "Add Services to Your Squarespace Website Easily",
-  "metaDescription": "Learn how to add and showcase services on your Squarespace website, including booking and payment integrations, to attract more clients.",
-  "intro": "Presenting your services clearly on your website can be the difference between a visitor booking with you or moving on to a competitor. Squarespace treats a service as just another product type in its commerce system, alongside physical goods, gift cards, and downloads — which means the setup uses the same product editor you'd use to sell anything else, with a few fields tuned for booking rather than shipping. This guide walks through where that product type lives, what the creation form actually asks for, and how pricing and inventory settings behave differently for a service than for a physical item. It's aimed at business owners, freelancers, and consultants who want their offerings looking professional and bookable, not buried in a generic page of text.",
+  "metaDescription": "Add and price a service product on Squarespace, including the plan tiers commerce actually requires and why you can't combine a payment plan with a subscription.",
+  "intro": "Presenting your services clearly on your website can be the difference between a visitor booking with you or moving on to a competitor. Squarespace treats a service as just another product type in its commerce system, alongside physical goods, gift cards, and downloads, which means the setup uses the same product editor you'd use to sell anything else, with a few fields tuned for booking instead of shipping. This guide walks through where that product type lives, what the creation form asks for, and how pricing, inventory, and payment settings behave differently for a service than for a physical item, including one constraint about payment plans and subscriptions that catches people out. It's aimed at business owners, freelancers, and consultants who want their offerings looking professional and bookable, not buried in a generic page of text.",
+  "prerequisites": [
+    "A Squarespace site on a plan with commerce enabled (Basic, Core, Plus, or Advanced, or a qualifying legacy Business/Commerce plan)",
+    "Stripe or Squarespace Payments connected to the account before you try to accept real payment"
+  ],
+  "costNote": "Adding a service costs nothing extra on its own, but selling one requires commerce enabled on the site's plan. On current Squarespace plans that means Basic, Core, Plus, or Advanced (certain legacy Business and Commerce plans also qualify). Without commerce enabled, the Inventory and Payment options tabs don't appear at all.",
   "steps": [
     {
       "heading": "Find where product types live in Squarespace",
-      "body": "From the admin sidebar, Products & Services sits near the top, with Products, Orders, Discounts, and Selling Tools nested underneath it. Opening Products shows a gallery of product type templates rather than a blank form: a physical product card with an \"Add to Cart\" button, appointment-style cards labeled Service 1 and Service 2, a Consulting package card built around tiered pricing ($500, $1,000, $1,500 \"Choose your package\" options), a Gift card with selectable values like $25, $75, and $100, and a Download card for digital files. Scrolling further turns up more types, including Custom merchandise. Picking the right starting template matters — a Consulting package's tiered pricing structure suits a fixed-scope offering far better than a generic service card would.",
+      "body": "From the admin sidebar, Products & Services sits near the top, with Products, Orders, Discounts, and Selling Tools nested underneath it. Opening Products shows a gallery of product type templates, not a blank form: a physical product card with an \"Add to Cart\" button, appointment-style cards labeled Service 1 and Service 2, a Consulting package card built around tiered pricing ($500, $1,000, $1,500 \"Choose your package\" options), a Gift card with selectable values like $25, $75, and $100, and a Download card for digital files. Scrolling further turns up more types, including Custom merchandise. Picking the right starting template matters: a Consulting package's tiered pricing structure suits a fixed-scope offering better than a generic service card.",
       "image": {
         "file": "/screenshots/fxcphq6Ta9A/03.webp",
         "caption": "The Products & Services gallery, showing a Consulting package with tiered pricing, a Gift card with selectable values, and Service and Download card templates."
@@ -14,7 +19,7 @@
     },
     {
       "heading": "Fill in the Create Service Product form",
-      "body": "Once you pick a service-style template, the editor opens with a left-hand tab list: Details, Forms, Images, Inventory, Payment options, Organization, Selling Tools, and Marketing, with the product's status showing as Draft at the top until you publish. The Forms tab lets you attach an \"Add to Cart\" form to collect extra information from a client when they book — useful for asking about preferred appointment times or project details before payment. Images works the same as any product: an \"Add images\" tile where you upload the photos that represent the service, since a services page without visuals reads noticeably less trustworthy than one with them.",
+      "body": "Once you pick a service-style template, the editor opens with a left-hand tab list: Details, Forms, Images, Inventory, Payment options, Organization, Selling Tools, and Marketing, with the product's status showing as Draft at the top until you publish. The Forms tab lets you attach an \"Add to Cart\" form to collect extra information from a client when they book, useful for asking about preferred appointment times or project details before payment. Images works the same as any product: an \"Add images\" tile where you upload the photos that represent the service. A services page without visuals reads noticeably less trustworthy than one with them.",
       "image": {
         "file": "/screenshots/fxcphq6Ta9A/04.webp",
         "caption": "The Create Service Product editor's Forms and Images sections — a \"Create new form\" link for collecting booking details, and an \"Add images\" tile below it."
@@ -22,7 +27,7 @@
     },
     {
       "heading": "Set pricing, stock, and payment options",
-      "body": "The Inventory tab is where a service product diverges most from a physical one. Price is a straightforward field — one example service is priced at ₱2,000.00 — and there's an On Sale toggle if you want to discount it temporarily. Stock defaults to unlimited for most services, shown as an infinity symbol with an \"Unlimited Stock\" toggle switched on, since a consulting session or a service booking generally isn't scarcity-limited the way a physical product with 12 units in a warehouse is. Every product also gets an auto-generated SKU for your own tracking. Below Inventory, the newer Payment options section adds a Payment Plan toggle, letting a customer pay a deposit at checkout with the remaining balance billed in scheduled installments — though Squarespace requires a minimum price (₱100.00 in this case) before that option unlocks.",
+      "body": "The Inventory tab is where a service product diverges most from a physical one. Price is a straightforward field (one example service here is priced at ₱2,000.00), with an On Sale toggle if you want to discount it temporarily. Stock defaults to unlimited, shown as an infinity symbol with an \"Unlimited Stock\" toggle switched on, since a consulting session generally isn't scarcity-limited the way a physical product with 12 units in a warehouse is. Turn that toggle off if you do need a cap, and a separate limit lets you restrict how many units a single order can include. Every product also gets an auto-generated SKU for your own tracking.\n\nBelow Inventory, the Payment options section adds a Payment Plan toggle, letting a customer pay a deposit at checkout with the remaining balance billed in scheduled installments; Squarespace requires a minimum price (₱100.00 in this case) before that option unlocks. A service product can also be sold as a recurring Subscription instead of a one-time purchase. Squarespace doesn't let you turn on both at once: a service is either a one-time sale (optionally with a Payment Plan) or a Subscription, not both.",
       "image": {
         "file": "/screenshots/fxcphq6Ta9A/05.webp",
         "caption": "The Inventory tab set to ₱2,000.00 with Unlimited Stock enabled and an auto-generated SKU, and the Payment options section below offering deposit-plus-installment plans."
@@ -30,35 +35,63 @@
     },
     {
       "heading": "Decide if you need a booking or payment integration",
-      "body": "Squarespace's own product editor handles the listing, pricing, and checkout for a service, but it doesn't include a calendar or availability system on its own — that's what third-party tools like Calendly or Squarespace's separate Scheduling feature are for. If your service needs a client to pick a specific time slot rather than just buy and wait to be contacted, connect a scheduling tool before you publish, since retrofitting a booking flow onto a product customers are already buying creates confusion. Stripe or Squarespace Payments needs to be active on the account before any of this collects real money, the same as with any other product type."
+      "body": "Squarespace's own product editor handles the listing, pricing, and checkout for a service, but it doesn't include a calendar or availability system on its own. That's what third-party tools like Calendly, or Squarespace's separate Scheduling feature, are for. If your service needs a client to pick a specific time slot instead of just buying and waiting to be contacted, connect a scheduling tool before you publish; retrofitting a booking flow onto a product customers are already buying creates confusion. Stripe or Squarespace Payments needs to be active on the account before any of this collects real money, the same as with any other product type."
     },
     {
       "heading": "Publish and place the service where clients will find it",
-      "body": "Once Details, Forms, Images, and Inventory are filled in, switch the product from Draft to published from the same SAVE menu at the top of the editor. Add the service to your site's main navigation or a dedicated Services page — a service that only exists as an unlinked product URL won't get discovered by browsing visitors, only by people who already had a direct link. If you're listing several services, group them on one Products & Services collection page so a visitor can compare offerings side by side instead of hunting through your main menu."
+      "body": "Once Details, Forms, Images, and Inventory are filled in, switch the product from Draft to published from the same SAVE menu at the top of the editor. Add the service to your site's main navigation or a dedicated Services page. A service that only exists as an unlinked product URL won't get discovered by browsing visitors, only by people who already had a direct link. If you're listing several services, group them on one Products & Services collection page so a visitor can compare offerings side by side instead of hunting through your main menu."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The Subscription option won't turn on",
+      "cause": "Squarespace doesn't allow a Payment Plan and a Subscription on the same service product.",
+      "fix": "Turn off Payment Plan if you want the service sold as a recurring subscription instead, or keep Payment Plan and skip the subscription."
+    },
+    {
+      "problem": "The Payment Plan toggle is greyed out",
+      "cause": "Squarespace only unlocks Payment Plan above a minimum price (₱100.00 in this example; the equivalent minimum varies by currency).",
+      "fix": "Raise the service's price above the minimum, or leave Payment Plan off for lower-priced services."
+    },
+    {
+      "problem": "A service is published but nobody can book a specific time",
+      "cause": "The product editor handles listing and payment only; it has no built-in calendar.",
+      "fix": "Connect Squarespace Scheduling or a third-party tool like Calendly before publishing the service."
     }
   ],
   "faq": [
     {
       "question": "Can I let clients book appointments directly from my Squarespace service pages?",
-      "answer": "The product editor itself handles listing and payment, but appointment scheduling comes from a separate tool — either Squarespace's own Scheduling feature or a third-party integration like Calendly connected to the page."
+      "answer": "The product editor itself handles listing and payment, but appointment scheduling comes from a separate tool: either Squarespace's own Scheduling feature or a third-party integration like Calendly connected to the page."
     },
     {
-      "question": "Do I need a Squarespace Commerce plan to add services?",
-      "answer": "You need commerce features active to accept payment for a service product, since Inventory, Payment options, and checkout all depend on Squarespace's commerce tools being enabled on your plan."
+      "question": "Do I need a specific Squarespace plan to add services?",
+      "answer": "Yes. Commerce needs to be enabled, which on current Squarespace plans means Basic, Core, Plus, or Advanced (some legacy Business and Commerce plans also qualify). Without it, the Inventory and Payment options tabs won't appear."
     },
     {
       "question": "Does a service product need to track stock like a physical product?",
-      "answer": "No — services default to Unlimited Stock, shown as an infinity symbol in the Inventory tab, since most services aren't limited by a physical unit count the way inventory-based products are."
+      "answer": "No, by default. Services start on Unlimited Stock, shown as an infinity symbol in the Inventory tab, though you can turn that off and set a quantity if you want to cap how many units a single order can include."
     },
     {
       "question": "Can customers pay for a service in installments?",
       "answer": "Yes, if the price meets Squarespace's minimum (₱100.00 in the example shown), the Payment options tab offers a Payment Plan letting customers pay a deposit at checkout with the rest billed in scheduled installments."
     },
     {
+      "question": "Can I sell a service as a recurring subscription instead of a one-time purchase?",
+      "answer": "Yes, but not alongside a Payment Plan on the same product. Squarespace treats a one-time sale (with an optional Payment Plan) and a recurring Subscription as mutually exclusive options on a service."
+    },
+    {
       "question": "Where should I list multiple services so clients can compare them?",
-      "answer": "Group them on a single Products & Services collection page linked from your main navigation, rather than leaving each service as a standalone page a visitor has to stumble onto."
+      "answer": "Group them on a single Products & Services collection page linked from your main navigation, instead of leaving each service as a standalone page a visitor has to stumble onto."
     }
   ],
+  "references": [
+    {
+      "label": "Squarespace Help Center: Service products (official)",
+      "url": "https://support.squarespace.com/hc/en-us/articles/206540867-Service-products"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Re-checked against Squarespace's official Service products help article in September 2026, which added the specific commerce-plan names, the per-order quantity limit, and a constraint the article previously missed entirely: a service product cannot carry both a Payment Plan and a recurring Subscription at once.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

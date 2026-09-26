@@ -1,68 +1,97 @@
 {
   "slug": "how-to-create-a-crm-with-google-sheets-and-gemini-ai",
   "seoTitle": "How to Build a No-Code CRM With Google Sheets and Gemini AI",
-  "metaDescription": "Build a functional CRM using Google Sheets and Gemini AI with no coding required, ideal for freelancers and small business owners.",
-  "intro": "You don't need dedicated CRM software to track customers and manage a sales pipeline, especially if Google Sheets and Gemini are already part of your toolkit. The trick is not starting from a blank spreadsheet and guessing at columns — it's asking Gemini to design the structure for you first, then building the sheet around that plan. This guide covers prompting Gemini for a CRM blueprint tailored to your actual business, translating that blueprint into a working spreadsheet, and automating the data entry that would otherwise eat your week. It's aimed at freelancers and small teams who want something that works today, not a system they'll spend a month configuring. It also covers how to keep the system from becoming bloated as your customer list grows, which is where most homegrown CRMs eventually fail.",
+  "metaDescription": "Build a CRM in Google Sheets by having Gemini design the structure first, and know when Gemini's own Sheets tools can build the tabs for you instead of copying them by hand.",
+  "intro": "You don't need dedicated CRM software to track customers and manage a sales pipeline, especially if Google Sheets and Gemini are already part of your toolkit. The trick isn't starting from a blank spreadsheet and guessing at columns. It's asking Gemini to design the structure first, then building the sheet around that plan, either by hand or with Gemini's own in-Sheets tools if your account has access to them. This guide covers prompting Gemini for a CRM blueprint tailored to your business, turning that blueprint into a working spreadsheet, and automating the data entry that would otherwise eat your week.",
+  "prerequisites": [
+    "A Google account signed into Gemini and Google Sheets",
+    "An eligible Google Workspace or Google AI plan, only if you want Gemini's native Sheets tools (Ask Gemini side panel, Build) instead of copying a blueprint over by hand"
+  ],
+  "costNote": "The standalone Gemini chat used for planning is generally available on a free Google account. Gemini's tools inside Sheets itself, the Ask Gemini side panel and the Build feature that can generate a whole spreadsheet from a prompt, require an eligible Google Workspace or Google AI plan. If you don't have one, you can still do the whole workflow below by copying Gemini's blueprint into tabs manually.",
   "steps": [
     {
       "heading": "Start from a blank Gemini prompt",
-      "body": "Open Gemini and you'll land on a simple \"Where should we start?\" screen with a single input box and a model selector — Flash is the default and is plenty for this kind of planning task. Rather than opening Google Sheets first and improvising columns, start here: describing your business to Gemini up front gets you a structure suited to how you actually sell, instead of a generic contacts list you'll rebuild in a month.",
+      "body": "Open Gemini and you'll land on a simple \"Where should we start?\" screen with a single input box and a model selector; Flash is the default and is plenty for this kind of planning task. Instead of opening Google Sheets first and improvising columns, start here: describing your business to Gemini up front gets you a structure suited to how you actually sell, instead of a generic contacts list you'll rebuild in a month.",
       "image": {
         "file": "/screenshots/o9vcJdEK_uE/04.webp",
-        "caption": "Gemini's empty prompt screen. This is where the CRM planning starts — describe your business before you touch a spreadsheet."
+        "caption": "Gemini's empty prompt screen. This is where the CRM planning starts, before you touch a spreadsheet."
       }
     },
     {
       "heading": "Ask Gemini to design your CRM structure",
-      "body": "Prompt Gemini with specifics about your business rather than a generic \"build me a CRM\" request — the example here asks for a CRM for a paper company, and Gemini responds by identifying the real drivers of that business (B2B distribution, high-volume recurring orders, contract manufacturing, freight logistics) before proposing anything. It then lays out a plan in two parts: an interactive simulator to visualize how the system should behave, followed by a written database and pipeline architecture — starting with a \"Core Architecture Blueprint\" section that defines the tables and fields you'll actually build. The more concrete your prompt is about your product, customers, and sales cycle, the more useful this blueprint becomes.",
+      "body": "Prompt Gemini with specifics about your business, not a generic \"build me a CRM\" request. The example here asks for a CRM for a paper company, and Gemini responds by identifying the real drivers of that business (B2B distribution, high-volume recurring orders, contract manufacturing, freight logistics) before proposing anything. It lays out a plan in two parts: an interactive simulator to visualize how the system should behave, followed by a written database and pipeline architecture, starting with a \"Core Architecture Blueprint\" section that defines the tables and fields you'll actually build. The more concrete your prompt is about your product, customers, and sales cycle, the more useful this blueprint becomes.",
       "image": {
         "file": "/screenshots/o9vcJdEK_uE/05.webp",
         "caption": "Gemini generating a CRM blueprint from a business-specific prompt, starting with a Core Architecture Blueprint section."
       }
     },
     {
-      "heading": "Translate the blueprint into a Google Sheet",
-      "body": "Once Gemini has proposed the architecture — typically a customer table, a deals or pipeline table, and an interactions log — recreate those as tabs in a new Google Sheet, using Gemini's suggested field names as your column headers. Keeping the structure Gemini proposed, rather than merging everything into one tab, is what makes filtering and reporting work cleanly later, since deals and interactions each need their own row-per-record rather than being crammed into notes columns on a contacts sheet. If Gemini's blueprint includes an interactive simulator, treat it as a way to sanity-check the structure before you build — walking through a mock scenario in the simulator can surface a missing field faster than staring at a list of proposed columns."
+      "heading": "Turn the blueprint into an actual sheet",
+      "body": "Once Gemini has proposed the architecture, typically a customer table, a deals or pipeline table, and an interactions log, you have two ways to build it. If your account has an eligible Workspace or Google AI plan, open Google Sheets and use the Build panel: describe the blueprint and Gemini can generate the tabs, columns, and template outline directly, which you then review before keeping. Without that access, recreate the tables as tabs by hand using Gemini's suggested field names as column headers. Either way, keep the structure Gemini proposed rather than merging everything into one tab; deals and interactions each need their own row-per-record for filtering and reporting to work cleanly later. If you're starting from an uploaded Excel file rather than a new sheet, save it as a native Google Sheet first (File > Save as Google Sheets), since Gemini's Sheets-side tools don't work directly on .xlsx files."
     },
     {
       "heading": "Automate repetitive data entry",
-      "body": "With the sheet structured, use Gemini to cut down on manual typing: ask it to draft formulas that flag stale deals, auto-calculate days-since-last-contact, or standardize inconsistent entries like phone numbers and company names pasted in from different sources. This is where the AI half of the build pays off day to day — the spreadsheet itself is just Google Sheets, but Gemini keeps generating the small pieces of logic that would otherwise require you to know spreadsheet functions by heart. If you're pulling in leads from a form, an inbox, or another tool, ask Gemini to write the specific formula or script for that exact source rather than a generic one, since the messiness of pasted-in data tends to be source-specific."
+      "body": "With the sheet structured, use Gemini to cut down on manual typing: ask it to draft formulas that flag stale deals, auto-calculate days-since-last-contact, or standardize inconsistent entries like phone numbers and company names pasted in from different sources. If you have access to the Ask Gemini side panel inside Sheets, you can request these formulas without leaving the spreadsheet; otherwise, ask in the standalone Gemini chat and paste the formula in yourself. If you're pulling in leads from a form, an inbox, or another tool, ask for the specific formula or script for that exact source rather than a generic one, since messy pasted-in data tends to be source-specific."
     },
     {
       "heading": "Manage outreach and your pipeline",
-      "body": "Use the pipeline tab as your single source of truth for where each deal stands, updating stage columns — New, Contacted, Proposal Sent, Closed — as conversations progress instead of tracking status in your inbox. Sort and filter by stage or by last-contact date at the start of each week to see who's overdue for a follow-up; that habit is what actually makes a lightweight CRM outperform sticky notes and memory, regardless of how simple the underlying tool is."
+      "body": "Use the pipeline tab as your single source of truth for where each deal stands, updating stage columns (New, Contacted, Proposal Sent, Closed) as conversations progress instead of tracking status in your inbox. Sort and filter by stage or by last-contact date at the start of each week to see who's overdue for a follow-up. That habit is what makes a lightweight CRM outperform sticky notes and memory, regardless of how simple the underlying tool is."
     },
     {
-      "heading": "Keep the system lightweight as you grow",
-      "body": "Resist the urge to add every possible field the moment you set this up — a CRM that's tedious to update gets abandoned within a few weeks. Add new tabs or columns only when you hit a real gap, and periodically ask Gemini to review your structure against how you're actually using it, since it can suggest simplifications once it sees which fields you've left consistently empty."
+      "heading": "Keep it lightweight, and know when you'll outgrow it",
+      "body": "Resist adding every possible field the moment you set this up; a CRM that's tedious to update gets abandoned within a few weeks. Add new tabs or columns only when you hit a real gap, and periodically ask Gemini to review your structure against how you're actually using it. A spreadsheet-based CRM also has a natural ceiling: once you're tracking more than a few hundred active relationships, or need multiple people editing simultaneously without version conflicts, dedicated CRM software starts earning its cost. Keep your data structured cleanly enough from the start that exporting it into a dedicated tool later, if you ever need to, is straightforward rather than a rebuild from scratch."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "There's no Ask Gemini or Build option in Google Sheets",
+      "cause": "Those Sheets-side Gemini features require an eligible Google Workspace or Google AI plan; not every Google account has access.",
+      "fix": "Check your plan's eligibility, or fall back to the standalone Gemini chat for planning and copy the blueprint into tabs by hand."
     },
     {
-      "heading": "Plan for the point you outgrow it",
-      "body": "A spreadsheet-based CRM has a natural ceiling — once you're tracking more than a few hundred active relationships, or need multiple people editing simultaneously without version conflicts, dedicated CRM software starts earning its cost. Treat this build as the right tool for where your business is now rather than a permanent decision, and keep your data structured cleanly enough from the start that exporting it into a dedicated tool later, if you ever need to, is straightforward rather than a rebuild from scratch."
+      "problem": "Gemini's Sheets tools won't run on your file",
+      "cause": "The file was uploaded or created as an Excel (.xlsx) file rather than a native Google Sheet.",
+      "fix": "Convert it first with File > Save as Google Sheets, then try again."
+    },
+    {
+      "problem": "Your planning conversation with Gemini disappears",
+      "cause": "Chat history in Gemini's side panel isn't saved automatically and is lost if you reload the browser, close the spreadsheet, or go offline.",
+      "fix": "Insert the generated content into your sheet, or copy the blueprint into a doc, before you close the tab."
     }
   ],
   "faq": [
     {
       "question": "Do I need coding knowledge to build this CRM?",
-      "answer": "No. The entire build uses Gemini's chat interface to design the structure and Google Sheets to hold the data — no scripts or formulas beyond what Gemini can generate for you on request."
+      "answer": "No. The build uses Gemini's chat interface to design the structure and Google Sheets to hold the data, plus whatever formulas Gemini generates for you on request."
+    },
+    {
+      "question": "Can Gemini build the actual spreadsheet for me, not just describe it?",
+      "answer": "If your account has an eligible Google Workspace or Google AI plan, yes: Sheets has a Build panel that can generate tabs and columns directly from a prompt. Without that plan, you recreate Gemini's suggested structure by hand."
+    },
+    {
+      "question": "Does this work if my data is in an Excel file?",
+      "answer": "Only after you convert it. Gemini's Sheets-side tools work on native Google Sheets, not .xlsx files, so use File > Save as Google Sheets first."
     },
     {
       "question": "Can this CRM actually replace dedicated CRM software?",
-      "answer": "For freelancers and small teams tracking a manageable number of deals, yes — it covers contacts, pipeline stages, and follow-up tracking without a monthly software bill. Larger teams with complex approval workflows will eventually outgrow it."
+      "answer": "For freelancers and small teams tracking a manageable number of deals, yes, covering contacts, pipeline stages, and follow-up tracking without a monthly bill. Larger teams with complex approval workflows will eventually outgrow it."
     },
     {
       "question": "What should I actually ask Gemini for when starting out?",
       "answer": "Be specific about your business model, not just \"build me a CRM.\" Mention your product, typical deal size, and sales cycle so Gemini proposes a structure suited to your actual workflow, the way it tailored a paper company's CRM around B2B distribution and recurring orders."
-    },
-    {
-      "question": "What can Gemini automate within this setup?",
-      "answer": "Beyond the initial structure, Gemini can generate formulas for flagging overdue follow-ups, standardizing messy data entries, and calculating pipeline metrics — reducing the manual spreadsheet work as you use it."
-    },
-    {
-      "question": "Who is this approach best suited for?",
-      "answer": "Freelancers, small business owners, and small teams who want core CRM functionality without a software budget or a lengthy setup process."
     }
   ],
+  "references": [
+    {
+      "label": "Collaborate with Gemini in Google Sheets — Google Docs Editors Help (official)",
+      "url": "https://support.google.com/docs/answer/14356410?hl=en"
+    },
+    {
+      "label": "Build or edit entire spreadsheets with Gemini in Sheets — Google Docs Editors Help (official)",
+      "url": "https://support.google.com/docs/answer/16959434?hl=en"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025 using the standalone Gemini chat app. Re-checked against Google's official Docs Editors Help Center in September 2026, which added the native Build and Ask Gemini options inside Sheets itself, their Workspace/Google AI plan requirement, and the requirement to convert an Excel file to a native Google Sheet first, none of which the original draft mentioned.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

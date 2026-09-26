@@ -1,39 +1,59 @@
 {
   "slug": "how-to-add-users-in-freshdesk",
   "seoTitle": "How to Add Users in Freshdesk",
-  "metaDescription": "Add new agents to Freshdesk using the Invite Agents dialog — enter their email, assign a role, and send the invite so your team can start working tickets.",
-  "intro": "Getting a new hire into Freshdesk isn't a long process, but knowing exactly where the invite flow lives saves you a hunt through settings. Freshdesk surfaces it right from the dashboard's Quick start checklist as well as from the admin area, and the invite dialog itself is short: an email, a role, and an Invite button. This guide follows that actual flow so you can see the dialog as it appears and understand what the Role field controls before you send anything.",
+  "metaDescription": "Add new agents in Freshdesk through the Invite Agents dialog: enter an email, pick a role, send the invite, and see which profile details get filled in later from Admin > Agents.",
+  "intro": "Getting a new hire into Freshdesk is not a long process, but knowing where the invite flow lives saves a hunt through settings. Freshdesk surfaces it from the dashboard's Quick start checklist as well as from the admin area, and the invite dialog itself is short: an email, a role, and an Invite button. This guide follows that flow, notes the fuller agent details Freshdesk's own documentation says get filled in afterward, and covers what to do if an invited agent never shows up as active.",
+  "prerequisites": [
+    "Administrator permissions on the Freshdesk account. Inviting agents and the Admin > Agents section are both restricted to admins."
+  ],
+  "costNote": "Agent seats are tied to your Freshdesk plan and billing; how many you can invite depends on what you're subscribed to. Customer contacts, which are created a different way, don't count against that seat limit.",
   "steps": [
     {
       "heading": "Find the invite prompt in Quick start",
-      "body": "New Freshdesk accounts show a Quick start checklist on first login, walking through three steps to get the support desk ready: connecting support channels, exploring your inbox, and inviting your team. The third card, \"Invite your team,\" is built specifically for this — it explains that bringing your team in as agents lets them view tickets, get assigned work, and collaborate on customer replies. Clicking through it opens the same invite dialog you'd reach from the admin area later.",
-      "image": { "file": "/screenshots/IWxIUdsDkp0/03.webp", "caption": "The Quick start checklist, with \"Invite your team\" as the third step alongside connecting support channels and exploring your inbox." }
+      "body": "New trial accounts show a Quick start checklist on first login, walking through three cards to get the support desk ready: connecting support channels, exploring the inbox, and inviting the team. The screenshot below is from a Freshdesk Omni trial; Freshworks has folded its newer omnichannel branding into some accounts, but the invite flow underneath is the same one this guide covers. The third card explains that bringing your team in as agents lets them view tickets, get assigned work, and reply to customers. Clicking it opens the same Invite Agents dialog you'd reach from the admin area later.",
+      "image": { "file": "/screenshots/IWxIUdsDkp0/03.webp", "caption": "The Quick start checklist on a Freshdesk Omni trial, with Invite your team as the third card." }
     },
     {
       "heading": "Fill out the Invite Agents dialog",
-      "body": "The dialog itself is titled Invite Agents and is deliberately minimal: an Email field, a Role dropdown defaulting to Agent, and a small note reminding you that agents and roles are managed from Admin > Agents afterward. Type the person's email address, leave the role as Agent for a standard support seat or open the dropdown to pick something else if your account has custom roles configured, then click Invite. An Add link below the first row lets you queue up several people before sending anything, so you don't have to repeat the whole flow for each new hire.",
-      "image": { "file": "/screenshots/IWxIUdsDkp0/04.webp", "caption": "The Invite Agents dialog, with an Email field, a Role dropdown set to Agent, and an Add link for inviting more than one person at once." }
+      "body": "The dialog is titled Invite Agents and is deliberately short: an Email field, a Role dropdown defaulting to Agent, and a note that agents and roles are managed from Admin > Agents afterward. Type the person's email, leave the role as Agent for a standard support seat or pick something else if custom roles are configured, then click Invite. An Add link below the first row lets you queue up several people before sending anything.",
+      "image": { "file": "/screenshots/IWxIUdsDkp0/04.webp", "caption": "The Invite Agents dialog: an Email field, a Role dropdown set to Agent, and an Add link for inviting more than one person at once." }
     },
     {
-      "heading": "Understand what Role controls",
-      "body": "The Role dropdown isn't cosmetic — it determines what the new user can see and do once they log in. A standard Agent role can work tickets, reply to customers, and see the queues they're assigned to, while higher roles typically add access to admin settings, reporting, or the ability to manage other agents. If you're not sure which role someone needs, start narrower rather than wider; it's easier to grant more access later than to walk back permissions after someone's had broad access for a while."
+      "heading": "Understand what Role controls, and what this dialog leaves for later",
+      "body": "The Role dropdown determines what the new agent can see and do once they log in: a standard Agent works tickets and replies to customers within their assigned scope, while higher roles typically add admin settings or reporting access. This quick-invite dialog only asks for email and role. Freshdesk's own support documentation describes a fuller agent profile, covering time zone, portal language, signature, ticket scope (all tickets, a specific group, or assigned only), and group membership, which is set from Admin > Agents once the invite exists, not at invite time. If you're unsure which role someone needs, start narrower; it's easier to grant more access later than walk it back."
     },
     {
       "heading": "Distinguish agents from customer contacts",
-      "body": "Everything in the Invite Agents dialog is for internal team members who will work inside Freshdesk. Customers who submit tickets become contacts automatically the first time they email in or fill out a form — you don't invite them the same way, and they don't count against your agent seat limit. If you need to add a contact manually, that's a separate flow under the Contacts section rather than Admin > Agents, and it's worth not conflating the two when you're setting up a new account."
+      "body": "Everything in Invite Agents is for internal team members who work inside Freshdesk. Customers become contacts automatically the first time they email in or submit a form; they aren't invited the same way, and they don't count against the agent seat limit. Adding a contact manually is a separate flow under Contacts, not Admin > Agents."
     },
     {
       "heading": "Confirm the invitation and follow up",
-      "body": "After you click Invite, Freshdesk sends an email to each address you entered with a link to set a password and finish account setup. New agents won't show up as fully active until they accept, so if someone doesn't appear in your team list after a day or two, check with them directly — the invite may have landed in a spam folder rather than failed outright. You can resend an invitation from Admin > Agents if needed, without creating a duplicate seat."
+      "body": "After clicking Invite, Freshdesk emails each address with a link to set a password and finish setup. New agents don't show as fully active until they accept. Resend an invitation from Admin > Agents if someone hasn't shown up after a day or two, instead of creating a second one."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "An invited agent never shows up as active",
+      "cause": "Agents aren't active until they open the invitation email and set a password; it sometimes lands in spam instead of failing outright.",
+      "fix": "Check with the person directly, then resend the invite from Admin > Agents instead of sending a fresh one, which would create a duplicate."
+    },
+    {
+      "problem": "A new agent can't see tickets you expected them to",
+      "cause": "The Invite Agents dialog only sets email and role. Ticket scope and group membership, which control what an agent can see, are separate settings filled in afterward.",
+      "fix": "Open the agent's profile from Admin > Agents and set their ticket scope and group assignments there."
     }
   ],
   "faq": [
-    { "question": "Who can add new users in Freshdesk?", "answer": "Inviting agents requires administrator permissions on the account — the Invite Agents dialog and the Admin > Agents section are both restricted to admins." },
-    { "question": "Is there a limit to how many users I can add?", "answer": "Agent seats are tied to your Freshdesk plan and billing, while customer contacts, who are added separately, are typically unlimited." },
-    { "question": "Can I set different permission levels for users?", "answer": "Yes. The Role dropdown in the invite dialog lets you assign a role like Agent or a custom role your account has configured, and roles can be changed later from Admin > Agents." },
-    { "question": "Do new users need to confirm their account?", "answer": "Yes. Invited agents receive an email with a link to set a password and activate their account before they can log in and work tickets." },
-    { "question": "How is inviting an agent different from adding a customer contact?", "answer": "Agents are invited through Admin > Agents (or the Quick start checklist) and count toward your plan's seat limit. Customer contacts are usually created automatically when they first submit a ticket, through a separate part of Freshdesk entirely." }
+    { "question": "Who can add new users in Freshdesk?", "answer": "Inviting agents requires administrator permissions. The Invite Agents dialog and the Admin > Agents section are both restricted to admins." },
+    { "question": "Is there a limit to how many agents I can add?", "answer": "Agent seats are tied to your Freshdesk plan and billing. Customer contacts are added separately and typically aren't limited the same way." },
+    { "question": "Can I set different permission levels for agents?", "answer": "Yes, through the Role dropdown in the invite dialog. Roles can be changed afterward from Admin > Agents, along with details the quick invite doesn't ask for, like ticket scope and group membership." },
+    { "question": "Do invited agents need to confirm their account?", "answer": "Yes. They receive an email with a link to set a password and activate the account before they can log in." },
+    { "question": "How is inviting an agent different from adding a customer contact?", "answer": "Agents are invited through Admin > Agents or the Quick start checklist and count toward the plan's seat limit. Contacts are usually created automatically when a customer first submits a ticket, through a different part of Freshdesk entirely." }
   ],
+  "references": [
+    { "label": "Freshdesk Support: Add or edit support agents (official)", "url": "https://support.freshdesk.com/support/solutions/articles/37591-add-or-edit-support-agents" }
+  ],
+  "verifiedNote": "Click path and both screenshots come from the original recording, taken on a Freshdesk Omni trial account. Re-checked against Freshdesk's own support article on adding and editing agents in September 2026, which describes a fuller New Agent form (agent type, time zone, language, ticket scope, groups) than the quick Invite Agents dialog shown here. That gap between the quick invite and the full profile is now called out directly instead of left implied.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

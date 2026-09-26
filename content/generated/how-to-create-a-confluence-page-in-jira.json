@@ -1,24 +1,24 @@
 {
   "slug": "how-to-create-a-confluence-page-in-jira",
-  "seoTitle": "How to Create a Confluence Page from Jira",
-  "metaDescription": "Create a Confluence page directly from a Jira work item, using the built-in editor to add content and publish without leaving Jira.",
-  "intro": "When Jira and Confluence share the same Atlassian workspace, you don't have to leave a work item just to start writing documentation about it — an editor opens right there, lets you build out a page, and hands you a Publish button when it's ready. This guide walks through that flow starting from an open work item, through the Confluence editor that appears, to publishing the finished page.",
+  "seoTitle": "How to Create a Confluence Page from a Jira Work Item",
+  "metaDescription": "Create a Confluence page from inside a Jira work item using the + Add or create related work menu, and know when to link an existing page instead.",
+  "intro": "When Jira and Confluence share the same Atlassian workspace, you don't have to leave a work item just to start writing documentation about it. A menu on the item itself opens a real Confluence editor, lets you build out a page, and hands you a Publish button when it's ready. This guide walks through that flow starting from an open work item, through the editor that appears, to publishing the finished page, and covers the option to link an existing page instead of creating a new one.",
   "steps": [
     {
       "heading": "Open the Jira work item you want to document",
-      "body": "Click into the item — in this walkthrough, a task called \"TEST work\" (TPT-10) — which opens its full view with Description, Subtasks, Linked work items, and an Activity section on the left, and a Details panel on the right showing Assignee, Reporter, Priority, and similar metadata. This is the item whatever Confluence page you create will end up tied back to.",
+      "body": "Click into the item; in this walkthrough, a task called \"TEST work\" (TPT-10), which opens its full view with Description, Subtasks, Linked work items, and an Activity section on the left, and a Details panel on the right showing Assignee, Reporter, Priority, and similar metadata. Whatever Confluence page you create next will end up tied back to this item.",
       "image": {
         "file": "/screenshots/ZDDYHKEYt4o/03.webp",
         "caption": "An open Jira work item, TEST work (TPT-10), showing its description, activity, and details panel before any Confluence content is attached."
       }
     },
     {
-      "heading": "Start creating Confluence content from the item",
-      "body": "From the icons near the top of the item, next to the title, there's a create-content control that opens Confluence content creation directly inside Jira rather than sending you to a separate tab. This is the built-in link between the two products — it only works if your Jira and Confluence sites are part of the same Atlassian workspace."
+      "heading": "Create the page from the + menu",
+      "body": "Near the top of the item is a + control labeled \"Add or create related work.\" Open its dropdown, select Page, then Create page. This only works if your Jira and Confluence sites are part of the same Atlassian workspace; it's the built-in link between the two products, not a separate integration you install. The same dropdown also offers Live Doc, for a Confluence live document instead of a standard page, if that fits what you're documenting better."
     },
     {
       "heading": "Work inside the Confluence editor that opens",
-      "body": "A panel titled \"Open In Confluence\" appears with a full rich-text toolbar — text styles, formatting, tables, emoji, and more — sitting above a live page draft. In this example the page is titled \"JIRA TASKS - Confluence,\" attributed to the same user who owns the Jira item, giving you a real editor rather than a stripped-down preview.",
+      "body": "A panel appears with a full rich-text toolbar, text styles, formatting, tables, emoji, and more, sitting above a live page draft. In this example the page is titled \"JIRA TASKS - Confluence,\" attributed to the same user who owns the Jira item, giving you a real editor rather than a stripped-down preview.",
       "image": {
         "file": "/screenshots/ZDDYHKEYt4o/05.webp",
         "caption": "The Confluence editor opened from inside Jira, mid-draft on a page titled \"JIRA TASKS - Confluence,\" with a Publish button ready."
@@ -26,43 +26,63 @@
     },
     {
       "heading": "Add structured content, not just text",
-      "body": "The editor supports more than paragraphs — the draft shown here has an embedded database block titled \"Untitled database 2026-07-01\" inserted directly into the page, with a confirmation toast noting \"Database added under this content\" and an option to open it in a new tab for easier editing. That's worth knowing if your documentation needs more structure than plain notes, such as tracking a table of related decisions or test cases alongside the issue."
+      "body": "The editor supports more than paragraphs. The draft shown here has an embedded database block titled \"Untitled database 2026-07-01\" inserted directly into the page, with a confirmation toast noting \"Database added under this content\" and an option to open it in a new tab for easier editing. Worth knowing if your documentation needs more structure than plain notes, such as a table of related decisions or test cases alongside the issue."
     },
     {
-      "heading": "Write the actual documentation",
-      "body": "Fill in whatever the issue actually needs recorded — meeting notes, a spec, acceptance criteria, or a summary of a decision made in the comments. Since the page lives in Confluence once published, treat it like any other Confluence page: give it a clear title people can find later, not just a name that only makes sense next to the Jira item it started from."
+      "heading": "Write the documentation and publish",
+      "body": "Fill in whatever the issue actually needs recorded: meeting notes, a spec, acceptance criteria, or a summary of a decision made in the comments. Give the page a clear title people can find later, not just a name that only makes sense next to the Jira item it started from. When it's ready, click Publish in the top right of the editor. The page then exists as a normal Confluence page in whatever space it was created under, and a link to it appears under Confluence Content on the Jira work item, so anyone opening the issue later can find it without searching Confluence separately."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "A teammate can open the Jira item but not the linked Confluence page",
+      "cause": "A newly published page inherits the permissions of its Confluence space, which can be more restrictive than the Jira project it's linked from.",
+      "fix": "Check the space's access settings rather than recreating the page; this is a permissions issue, not a broken link."
     },
     {
-      "heading": "Publish the page",
-      "body": "Click Publish in the top right of the editor to finalize it. Once published, the page exists as a normal Confluence page in whatever space it was created under, and it stays referenced back to the Jira item it was created from — so anyone opening the issue later can find the documentation without having to search Confluence separately."
+      "problem": "You want to attach a page that already exists instead of making a new one",
+      "cause": "The + menu's default path, Page then Create page, always generates a brand-new page.",
+      "fix": "Use the same dropdown and choose Page, then Link page, to connect the work item to an existing Confluence page instead."
     },
     {
-      "heading": "Check visibility if teammates can't see it",
-      "body": "A newly published page inherits the permissions of its Confluence space, which may be more restrictive than the Jira project it's linked from. If a teammate can open the Jira item but not the linked Confluence page, that's a space-permission issue, not a broken link — check the space's access settings rather than recreating the page."
+      "problem": "There's no Page option under the + (Add or create related work) menu",
+      "cause": "The Jira and Confluence sites aren't part of the same Atlassian workspace, so the create-content link between them isn't available.",
+      "fix": "Ask a site admin to confirm both products are on the same Atlassian organization before trying again."
     }
   ],
   "faq": [
     {
       "question": "Do Jira and Confluence need to be connected first?",
-      "answer": "Yes, this only works when your Jira and Confluence sites are part of the same Atlassian workspace, which is how the create-content control ends up available directly inside a work item."
+      "answer": "Yes. This only works when your Jira and Confluence sites are part of the same Atlassian workspace, which is what makes the Page option available under the + Add or create related work menu on a work item."
+    },
+    {
+      "question": "Can I link an existing Confluence page instead of creating a new one?",
+      "answer": "Yes. From the same + menu, choose Page, then Link page, rather than Create page, to connect the work item to a page that already exists."
     },
     {
       "question": "Can I add more than text to the Confluence page?",
-      "answer": "Yes. The editor supports rich formatting and structured content blocks — the example here embeds a database block directly into the page, not just plain paragraphs."
+      "answer": "Yes. The editor supports rich formatting and structured content blocks; the example here embeds a database block directly into the page, not just plain paragraphs."
     },
     {
       "question": "Will changes to the Jira issue update the linked Confluence page?",
-      "answer": "No. The two stay linked for reference, but content on each is independent — editing the Jira item afterward won't change anything already published on the Confluence page."
+      "answer": "No. The two stay linked for reference, but content on each is independent; editing the Jira item afterward won't change anything already published on the Confluence page."
     },
     {
       "question": "Who can see the newly created Confluence page?",
-      "answer": "Visibility depends on the permissions of the Confluence space the page is published into, which can be more restrictive than the Jira project — check space access if a teammate can't open it."
-    },
-    {
-      "question": "Do I have to publish immediately, or can I keep drafting?",
-      "answer": "The editor lets you keep working before hitting Publish — the page shown mid-draft here already had content and a database block added before the final publish step."
+      "answer": "Visibility depends on the permissions of the Confluence space the page is published into, which can be more restrictive than the Jira project; check space access if a teammate can't open it."
     }
   ],
+  "references": [
+    {
+      "label": "Link a Confluence page to a work item — Atlassian Support (official)",
+      "url": "https://support.atlassian.com/jira-software-cloud/docs/link-a-confluence-page-to-an-epic/"
+    },
+    {
+      "label": "Use Jira and Confluence together — Atlassian Support (official)",
+      "url": "https://support.atlassian.com/confluence-cloud/docs/use-jira-and-confluence-together/"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The control's exact name, the + (Add or create related work) menu, and the Page > Link page alternative to creating a new page were checked against Atlassian's official Confluence Cloud support documentation in September 2026, which describes that button and the Link page option directly. The requirement that both sites share a workspace, and the space-permission caveat now in troubleshooting, were already stated in the original walkthrough and were not independently re-confirmed against a separate docs page.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }

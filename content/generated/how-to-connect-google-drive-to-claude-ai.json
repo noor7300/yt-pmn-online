@@ -1,68 +1,107 @@
 {
   "slug": "how-to-connect-google-drive-to-claude-ai",
   "seoTitle": "How to Connect Google Drive to Claude.ai and Query Your Files",
-  "metaDescription": "Link Google Drive to Claude.ai so you can ask questions about your files directly, streamlining data retrieval for work and projects.",
-  "intro": "Connecting Google Drive to Claude lets you ask questions about the files already sitting in your Drive instead of downloading them, opening each one, and hunting for the answer yourself. The setup takes about three minutes, and most of that time is a standard Google account sign-in rather than anything Claude-specific. This guide covers exactly where the connector lives inside Claude's settings, what the Google authorization screen looks like, and what to actually expect once your files are searchable from inside a conversation. It also walks through what the connection does and doesn't grant, since understanding the permission boundary matters as much as the setup steps themselves.",
+  "metaDescription": "Connect the Google Drive connector to Claude.ai from Customize > Connectors: what Claude can read, what it can create, and where the setup breaks.",
+  "intro": "Connecting Google Drive to Claude lets you ask questions about files already sitting in your Drive instead of opening each one yourself. The setup lives under Customize, not Settings, and it grants Claude more than read access: once connected, Claude can search your Drive, read what it finds, and create new files there too. This guide covers where the connector actually lives, what the Google sign-in screen asks you to approve, and the difference between turning the connector on for Claude to search on its own versus attaching one specific file to a chat.",
+  "prerequisites": [
+    "A Google account with files already in Drive",
+    "On Team or Enterprise plans, an Owner must add Google Drive to the workspace's connector list before it shows up for members"
+  ],
   "steps": [
     {
-      "heading": "Open Claude's Connectors settings",
-      "body": "Head to Settings inside Claude and open the Connectors page. This is the same place every other integration lives — the example here already shows Canva, Figma, and a GitHub Integration connected, each listed with a Web type and a green checkmark confirming it's active. Google Drive isn't connected yet at this point, which is exactly the state you're starting from; adding it follows the same pattern as any connector already on the list. Seeing several connectors listed together is a useful reminder that Drive isn't a special case — once you've connected one service this way, adding the next one is largely repeating the same few clicks.",
+      "heading": "Open Customize > Connectors",
+      "body": "In claude.ai, go to Customize, the page that holds your connectors, skills, and plugins. This is not under Settings, despite that being the more obvious guess. Find Google Drive in the list and select Connect. On Team and Enterprise plans, Google Drive won't appear here at all until an Owner has enabled it for the organization; each member then connects their own Google account separately.",
       "image": {
         "file": "/screenshots/jgUYLwTE_G8/03.webp",
-        "caption": "Claude's Connectors settings, showing Canva, Figma, and GitHub already connected. Google Drive gets added the same way."
+        "caption": "Claude's Connectors page under Customize, showing Canva, Figma, and GitHub already connected. Google Drive gets added the same way."
       }
     },
     {
-      "heading": "Add Google Drive and choose your account",
-      "body": "Clicking Add and selecting Google Drive redirects you to a standard Google sign-in screen headed \"Choose an account,\" continuing to \"Claude for Google Drive.\" If you're already signed into Google in that browser, your account will be listed and ready to select; otherwise use \"Use another account\" to sign in first. Before continuing, Google surfaces links to Claude for Google Drive's privacy policy and terms of service — worth a glance, since this is the point where you're granting an external app access to files in your account.",
+      "heading": "Sign in to Google and grant the requested permissions",
+      "body": "Selecting Connect opens Google's own \"Choose an account\" screen. Pick the account whose Drive you want Claude to reach, or sign in first if you're not already authenticated in that browser. Read what Google says Claude is requesting before continuing: the connector isn't read-only. Claude can search your Drive, read the files it finds, and create new files there, so this is a broader grant than a simple viewer permission.",
       "image": {
         "file": "/screenshots/jgUYLwTE_G8/04.webp",
-        "caption": "Google's account picker for the Claude for Google Drive connector, the point where you choose which account's files Claude will be able to search."
+        "caption": "Google's account picker for the Claude connector, the point where you choose which account's files Claude will be able to reach."
       }
     },
     {
-      "heading": "Confirm the permissions you're granting",
-      "body": "After choosing an account, Google will show you the specific scopes Claude is requesting — typically read access to your Drive files rather than the ability to edit or delete them. Review this screen rather than clicking through automatically, since it tells you precisely what Claude can and can't touch. Once you approve, you're redirected back to Claude and Google Drive will now appear in your Connectors list alongside the others, marked as connected."
+      "heading": "Turn the connector on inside a conversation",
+      "body": "Connecting the account once doesn't make Drive searchable everywhere by default. In a chat, select the + at the lower left of the message box, choose Connectors, and turn on Google Drive for that conversation. Claude can then search your Drive on its own and will ask for your approval before it uses one of the connector's tools."
     },
     {
-      "heading": "Understand how file queries actually work",
-      "body": "With Drive connected, you can ask Claude about a document by name, request a summary of a spreadsheet, or ask it to find a file related to a topic without knowing exactly where it's stored. Claude searches within the scope of what your Google account has access to, so shared drives and folders you can already open are fair game, while anything outside your own permissions stays out of reach — the connector doesn't expand what you can see, only how you can ask about it. Being specific in your query still helps: naming the file, the folder it's likely in, or an approximate date narrows the search the same way it would if you were using Drive's own search bar."
+      "heading": "Ask a question that needs your files, or attach one directly",
+      "body": "With the connector on, ask something like \"find the design brief for the onboarding project and summarize the open decisions.\" If you'd rather point Claude at one specific document instead of letting it search, use the same + menu and select Add from Google Drive, then search by name or paste the file's URL. That route works for Google Docs, Sheets, and Slides, and it re-reads the file's current content from Drive every time you send a message. Adding a Drive file to a project's knowledge, rather than a single chat, only works in a private project — the option is dimmed in a shared one."
     },
     {
-      "heading": "Apply it to real work",
-      "body": "This is most useful for retrieving information you know exists somewhere in Drive but don't want to manually search for — pulling figures from a report before a meeting, checking what a contract says without reopening it, or asking Claude to compare two versions of a document. For small teams, it turns Drive from a folder structure you have to remember into something you can just ask questions of directly."
+      "heading": "Reconnect or remove it later",
+      "body": "Everything about the connector after setup lives back on the same Customize > Connectors page. Select Google Drive under Your connectors to Disconnect, Reconnect, or use the three-dot menu to Remove it entirely. If a reconnection error keeps recurring, disconnect, then connect and sign in to Google again rather than repeating the same reconnect attempt."
+    }
+  ],
+  "tables": [
+    {
+      "title": "File types Claude can read through the connector",
+      "columns": ["File type", "Claude can read it"],
+      "rows": [
+        ["Google Docs, Sheets, Slides", "Yes"],
+        ["PDF", "Yes"],
+        ["Word, Excel, PowerPoint files", "Yes"],
+        ["OpenDocument text/spreadsheet/presentation files", "Yes"],
+        ["PNG and JPEG images", "Yes"],
+        ["A file's comments or suggested edits", "No — content only"]
+      ],
+      "note": "Very large files may come through incomplete regardless of type."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "Claude can't find or use a file even though the connector is on",
+      "cause": "The file is over Google's roughly 10 MB export cap for Docs, Sheets, and Slides, or it's a very large file whose content Claude receives incomplete.",
+      "fix": "Check the file's size, or attach it directly via + > Add from Google Drive and confirm Claude reports reading its content."
     },
     {
-      "heading": "Keep the connection tidy as you go",
-      "body": "If you ever want to disconnect Google Drive, the same Connectors settings page is where you'll remove it, and you can also revoke Claude's access directly from your Google Account's third-party app permissions. Checking back on this list periodically is good practice once you've connected several tools, since it's the fastest way to see everything Claude currently has access to in one place."
+      "problem": "The Google Drive option is dimmed when adding files to a project",
+      "cause": "Drive files can only be added to a project's knowledge in a private project, not a shared one.",
+      "fix": "Add the file to a private project, or use the connector inside an individual chat instead."
     },
     {
-      "heading": "Pair it with other connectors thoughtfully",
-      "body": "Drive tends to be most useful alongside other connectors rather than on its own — reference a document from Drive while drafting something in another connected tool, or pull background from a file before asking Claude to summarize a related conversation elsewhere. Add connectors one at a time as you find an actual use for them rather than turning everything on up front; it keeps your Connectors list easy to audit and makes it obvious what Claude can currently reach."
+      "problem": "Google Drive doesn't show up in the connector list at all",
+      "cause": "On Team and Enterprise plans, an Owner has to enable Google Drive for the whole workspace before it appears for individual members.",
+      "fix": "Ask an Owner or Primary Owner to add it under the organization's connector settings."
     }
   ],
   "faq": [
     {
-      "question": "How long does it take to connect Google Drive to Claude?",
-      "answer": "Only a few minutes — most of the process is a standard Google account sign-in and permission confirmation, the same flow you'd see connecting Drive to any third-party app."
+      "question": "Is the Google Drive connector read-only?",
+      "answer": "No. Claude can search your Drive, read the files it finds, and create new files there. It is a broader permission than a simple viewer grant, so it's worth reading the Google consent screen rather than clicking through it."
     },
     {
       "question": "Where do I find the Google Drive connector in Claude?",
-      "answer": "In Claude's Settings, under Connectors. Click Add and select Google Drive to start the Google sign-in flow."
+      "answer": "Under Customize > Connectors, not Settings. Select Connect next to Google Drive and sign in with the Google account you want Claude to reach."
     },
     {
-      "question": "What can Claude actually see once Drive is connected?",
-      "answer": "Only the files and folders your signed-in Google account already has access to. The connector changes how you can ask about your files, not what you're permitted to see."
+      "question": "Do I need to turn the connector on every time?",
+      "answer": "You connect the account once, but you still turn it on per conversation from the + menu under Connectors, so Claude only searches Drive in chats where you've enabled it."
     },
     {
-      "question": "Is this integration only for large businesses?",
-      "answer": "No — it's just as useful for freelancers and small teams who want to ask questions about their own files without manually digging through folders."
+      "question": "What's the difference between the connector and \"Add from Google Drive\"?",
+      "answer": "The connector lets Claude search Drive on its own inside a conversation. Add from Google Drive attaches one specific file you pick by name or URL, which also works for adding a file to a private project's knowledge."
     },
     {
-      "question": "How do I revoke Claude's access to my Drive later?",
-      "answer": "Remove Google Drive from Claude's Connectors settings, or revoke access directly from your Google Account's third-party app permissions page."
+      "question": "Can I use this in a shared project?",
+      "answer": "You can use the connector in a shared conversation, but adding a Drive file to a shared project's knowledge base is disabled — that only works in a private project."
     }
   ],
+  "references": [
+    {
+      "label": "Google Drive connector documentation (official)",
+      "url": "https://claude.com/docs/connectors/google/drive"
+    },
+    {
+      "label": "Use Google Workspace connectors — Claude Help Center (official)",
+      "url": "https://support.claude.com/en/articles/10166901-use-google-workspace-connectors"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The connector location, permission scope, file-type support, and reconnect steps were re-checked against Claude's official documentation and Help Center in September 2026. That check corrected two things this guide previously got wrong: the connector lives under Customize, not Settings, and it can create new files in Drive rather than only reading them.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
