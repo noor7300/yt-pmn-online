@@ -1,44 +1,69 @@
 {
   "slug": "how-to-get-the-freshdesk-widget",
   "seoTitle": "How to Get the Freshdesk Widget",
-  "metaDescription": "Set up the Freshdesk web widget step by step — customize its branding, configure appearance and profile info, then grab the embed code for your site.",
-  "intro": "The Freshdesk web widget puts a support chat panel right on your website, so visitors can message you or search help content without leaving the page. Setting it up walks through a short wizard — Customize, Preview, Launch — followed by a deeper Widget Configuration screen for anyone who wants more control than the defaults. This guide follows that actual flow, from the first branding screen through the appearance and profile settings, so you know exactly what each step changes before you put the code live.",
+  "metaDescription": "Set up the Freshdesk web widget: customize branding, configure appearance and content, then grab the embed code and know exactly where it needs to go.",
+  "intro": "The Freshdesk web widget puts a support chat panel on your website, so visitors can message you or search help content without leaving the page. Setting it up walks through a short wizard, Customize, Preview, Launch, followed by a deeper Widget Configuration screen for anyone who wants more control than the defaults. This guide follows that flow, from the first branding screen through the appearance and content settings, and corrects one detail Freshdesk's own documentation states plainly but is easy to get backwards: where the embed code actually goes.",
   "steps": [
     {
       "heading": "Start the widget setup from Admin > Web Chat",
-      "body": "In your Freshdesk admin, open Web Chat to reach the \"Customize your default widget!\" screen, the first stage of a three-step flow shown across the top: Customize, Preview, Launch. This is where you set the brand logo, brand color, button color, and widget launcher color, plus the welcome message and sub-message that greet a visitor. A live preview panel on the right updates as you type, showing the widget exactly as it'll appear on your site — in this case a dark blue panel with a \"Hello / Ask us anything\" greeting and a Topics list.",
+      "body": "In your Freshdesk admin, open Web Chat to reach the \"Customize your default widget!\" screen, the first stage of a three-step flow shown across the top: Customize, Preview, Launch. This is where you set the brand logo, brand color, button color, and widget launcher color, plus the welcome message and sub-message that greet a visitor. Freshdesk caps these at 32 and 64 characters, so keep both short. A live preview panel on the right updates as you type, showing the widget as it'll appear on your site, in this case a dark blue panel with a \"Hello / Ask us anything\" greeting and a Topics list.",
       "image": { "file": "/screenshots/HAZFtdiclVk/01.webp", "caption": "The Customize screen for the default web widget, with brand color and welcome message fields on the left and a live widget preview on the right." }
     },
     {
       "heading": "Open Widget Configuration for full control",
-      "body": "Beyond the quick customize wizard, Freshdesk has a separate Widget Configuration page reachable via Admin > Web Chat > Widget Configuration, organized into tabs: Appearance, Content, Preferences, Deploy code, and User authentication. The Appearance tab is where the real detail lives — a left-hand list breaks it into Visual branding, Titles, Profile info, Position & behaviour, and Custom CSS, so you're not scrolling one long form. One option worth knowing about here is the chat background pattern grid, which lets you pick a subtle texture behind the conversation instead of a flat color.",
+      "body": "Beyond the quick customize wizard, Freshdesk has a separate Widget Configuration page organized into tabs: Appearance, Content, Preferences, Deploy code, and User authentication. The Appearance tab holds the real detail: a left-hand list breaks it into Visual branding, Titles, Profile info, Position & behaviour, and Custom CSS, so it isn't one long scrolling form. If your account manages more than one widget, Freshdesk's current documentation describes reaching this same set of tabs through Admin > Channels > Web Chat > Widgets, picking a widget, and selecting Configure; the entry screen can differ from what's shown here, but the tabs underneath are the same.",
       "image": { "file": "/screenshots/HAZFtdiclVk/04.webp", "caption": "The Widget Configuration page's Appearance tab, showing brand color controls and a grid of chat background pattern options next to the live preview." }
     },
     {
       "heading": "Set your profile info and position",
-      "body": "Scrolling further down Appearance reaches Profile info, where you upload a small logo and set the Business name that appears in the widget header — in the preview it reads \"Example\" until you replace it with your actual brand name. Right below that is Position & behaviour, which controls things like messenger visibility — whether the widget launcher shows on every page or only specific ones. These two sections are what make the widget feel like it belongs to your business rather than a generic Freshdesk demo.",
+      "body": "Scrolling further down Appearance reaches Profile info, where you upload a small logo and set the Business name that appears in the widget header, in the preview it reads \"Example\" until you replace it with your brand name. Right below that is Position & behaviour, which controls whether the widget launcher shows on every page or only specific ones. These two sections are what make the widget feel like it belongs to your business instead of a generic Freshdesk demo.",
       "image": { "file": "/screenshots/HAZFtdiclVk/05.webp", "caption": "The Profile info section with a Business name field, and the start of Position & behaviour settings just below it." }
     },
     {
       "heading": "Choose what the widget shows: contact form or help content",
-      "body": "The Content tab next to Appearance is where you decide what visitors actually see inside the widget — a contact form for submitting a ticket, links into your knowledge base articles, or both together as Topics the way the preview shows a \"Chat with us\" option. Decide this before you spend time on colors, since it changes how much configuration the widget needs; a widget that only shows help articles needs a populated knowledge base behind it, while a pure contact-form widget doesn't."
+      "body": "The Content tab, next to Appearance, is where you decide what visitors see inside the widget: a contact form for submitting a ticket, links into your knowledge base articles, or both together as Topics, the way the preview shows a \"Chat with us\" option. Decide this before spending time on colors, since it changes how much configuration the widget needs. A widget that only shows help articles needs a populated knowledge base behind it; a pure contact-form widget doesn't."
     },
     {
       "heading": "Grab the embed code from Deploy code",
-      "body": "Once appearance and content are set the way you want, open the Deploy code tab. It generates a small JavaScript snippet tied to your account and this specific widget configuration. Copy that snippet and paste it into your site's HTML, typically just before the closing body tag, so it loads on every page you want the widget to appear on. Save your changes in Freshdesk first — the Save and Discard Changes buttons sit at the bottom of the configuration panel — or the embed code won't reflect your latest branding."
+      "body": "Once appearance and content are set, open the Deploy code tab. It generates a JavaScript snippet tied to your account and this widget configuration. Freshdesk's own documentation instructs pasting this snippet before the closing </head> tag on every page you want the widget to appear on, not before the closing body tag, which is a common assumption for embed scripts and the wrong spot for this one. Save your changes in Freshdesk first, the Save and Discard Changes buttons sit at the bottom of the configuration panel, or the embed code won't reflect your latest branding."
     },
     {
       "heading": "Preview and launch before you rely on it",
-      "body": "Before pointing real traffic at the widget, use the Preview step from the original three-stage wizard to click through it as a visitor would, checking that colors render correctly and the welcome message isn't cut off. Once it looks right, Launch makes it live. If you hit an error while saving — Freshdesk will show a red banner reading something like \"Error while updating widget details\" — re-check required fields like brand color before retrying, since a missing value is the most common cause."
+      "body": "Before pointing real traffic at the widget, use the Preview step from the original three-stage wizard to click through it as a visitor would, checking that colors render correctly and the welcome message isn't cut off. Once it looks right, Launch makes it live. If you hit an error while saving, Freshdesk shows a red banner reading something like \"Error while updating widget details\", re-check required fields like brand color before retrying, since a missing value is the most common cause."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The widget never loads on the live site",
+      "cause": "Freshdesk's documentation says to paste the deploy code before the closing </head> tag. Placing it before the closing body tag instead, or copying the snippet before saving changes in Freshdesk, are the two most common reasons it doesn't show up.",
+      "fix": "Save your changes in Freshdesk, re-copy the Deploy code snippet, and place it right before </head> on every page that needs the widget."
+    },
+    {
+      "problem": "The welcome message or sub-message looks cut off",
+      "cause": "Freshdesk limits the welcome message to 32 characters and the sub-message to 64. Longer text truncates in both the preview and the live widget.",
+      "fix": "Shorten the welcome message and sub-message to fit those limits before saving."
+    },
+    {
+      "problem": "A red \"Error while updating widget details\" banner appears while saving",
+      "cause": "A required field, most often brand color, was left blank or holds an invalid value.",
+      "fix": "Check the highlighted fields, fill in brand color and any other required field, then save again."
     }
   ],
   "faq": [
     { "question": "What does the Freshdesk widget do?", "answer": "It's an embeddable chat panel that lets website visitors submit support tickets, browse help articles, or both, without leaving your site." },
-    { "question": "Do I need to code to get the widget?", "answer": "You don't need to build the widget itself — Freshdesk generates it through the Customize and Widget Configuration screens — but you do need to paste the provided embed code from the Deploy code tab into your site's HTML." },
+    { "question": "Do I need to code to get the widget?", "answer": "You don't need to build the widget itself, Freshdesk generates it through the Customize and Widget Configuration screens, but you do need to paste the provided embed code from the Deploy code tab into your site's HTML." },
+    { "question": "Where exactly does the embed code go?", "answer": "Freshdesk's documentation says to paste it before the closing </head> tag on every page you want the widget to appear on, not before the closing body tag." },
+    { "question": "Is there a character limit on the welcome message?", "answer": "Yes. Freshdesk caps the welcome message at 32 characters and the sub-message at 64." },
     { "question": "Can I customize how the widget looks?", "answer": "Yes. The Appearance tab covers brand colors, chat background patterns, titles, profile info like your business name and logo, and position and behavior settings." },
-    { "question": "Where do I find the widget's embed code?", "answer": "Open Admin > Web Chat > Widget Configuration and go to the Deploy code tab, which generates the script to paste into your website." },
     { "question": "Why am I seeing an error while saving widget details?", "answer": "This usually happens when a required field, like brand color, is left blank or invalid. Check the highlighted fields and re-save rather than assuming it's a Freshdesk outage." }
   ],
+  "references": [
+    {
+      "label": "Freshdesk Support: How to Create and Configure a Web Widget (official)",
+      "url": "https://support.freshdesk.com/support/solutions/articles/50000011578-create-widgets"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Re-checked against Freshdesk's official documentation in September 2026, which corrected the embed code placement (before the closing </head> tag, not before the closing body tag) and added the welcome-message and sub-message character limits this guide didn't mention. The documentation also describes a multi-widget management screen (Admin > Channels > Web Chat > Widgets) that may differ from the single default-widget wizard shown in the screenshots; that's noted as a possible account or version difference rather than an error in the recording.",
   "generatedAt": "2026-07-31T09:00:00Z",
   "deep": true
 }

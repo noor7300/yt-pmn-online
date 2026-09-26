@@ -1,49 +1,66 @@
 {
   "slug": "how-to-get-your-shopify-api-key",
   "seoTitle": "How to Get Your Shopify API Key: A Quick Guide",
-  "metaDescription": "Need to connect your Shopify store to another app or CRM? Here's how to generate your Shopify API key and use it securely for integrations.",
-  "intro": "Getting a Shopify API key is the starting point for any custom integration, whether you're connecting a CRM, automating inventory updates, or building a custom app. The key itself lives a few clicks deep in your admin, behind Settings and then a dedicated developer dashboard, which trips up people expecting it under Apps directly. This guide walks through that exact path, from your admin home to the Client ID and Secret you'll actually paste into your integration, plus the security habits worth building around it once you have them. It's written for store owners, developers, and anyone looking to automate parts of their Shopify operations without exposing more of their store's data than the integration actually needs, and it covers the naming and scoping decisions worth making up front so your setup stays manageable as you add more integrations later.",
+  "metaDescription": "Need to connect your Shopify store to another app or CRM? Here's how to generate Shopify API credentials in the Dev Dashboard and use the access token they produce.",
+  "intro": "Getting a Shopify API key starts in an unexpected place. It's not under Apps, where most people look first, but behind Settings and a separate developer dashboard. This guide walks that exact path, from the admin home to the Client ID and Secret used in an integration, and covers something worth knowing in 2026: the credentials copied from that screen are not the access token itself, they get exchanged for one. It also covers scoping access narrowly and keeping the Secret safe once it exists.",
   "steps": [
     {
       "heading": "Start from your Shopify admin dashboard",
-      "body": "Log into your store and land on the admin home, the same screen where you manage orders, products, and any apps you've already installed. If you've added tools like a fraud blocker or another integration before, you'll see them listed in the left-hand Apps section — that's a useful landmark, since API key generation lives one level deeper than this everyday view and it's easy to go looking in the wrong place first.",
-      "image": { "file": "/screenshots/8OWc7h0IBGc/02.webp", "caption": "The Shopify admin home, with an installed app already showing under Apps in the left menu — the starting point before heading into Settings for API access." }
+      "body": "Log into the store and land on the admin home, the same screen used for orders, products, and any apps already installed. Existing tools, like a fraud blocker or another integration, show up under Apps in the left menu. That's a useful landmark: API key generation lives one level deeper than this everyday view, under Settings.",
+      "image": { "file": "/screenshots/8OWc7h0IBGc/02.webp", "caption": "The Shopify admin home, with an installed app already showing under Apps in the left menu. This is the starting point before heading into Settings for API access." }
     },
     {
-      "heading": "Open Settings and find Apps",
-      "body": "Scroll to the bottom of the left-hand menu and click Settings, then choose Apps from the settings list. This page shows every app currently installed on your store, plus two buttons in the top-right corner: Develop apps and Shopify App Store. The Shopify App Store button is for browsing and installing apps built by others; Develop apps is the one you actually want, since that's the door into building your own integration and generating credentials for it rather than installing something someone else already built.",
-      "image": { "file": "/screenshots/8OWc7h0IBGc/03.webp", "caption": "The Apps settings page, listing installed apps with Develop apps and Shopify App Store buttons — Develop apps is the path to generating your own API credentials." }
+      "heading": "Open Settings, then Apps",
+      "body": "Scroll to the bottom of the left-hand menu, click Settings, then choose Apps from the settings list. This page lists every app installed on the store, plus two buttons in the top right: Develop apps and Shopify App Store. Shopify App Store is for browsing and installing apps built by others. Develop apps is the door into building a custom integration and generating credentials for it.",
+      "image": { "file": "/screenshots/8OWc7h0IBGc/03.webp", "caption": "The Apps settings page, listing installed apps with Develop apps and Shopify App Store buttons — Develop apps is the path to generating custom API credentials." }
     },
     {
       "heading": "Enter the Dev Dashboard",
-      "body": "Clicking Develop apps takes you to an App development screen that, on most current Shopify stores, redirects app-building into a separate Dev Dashboard — a more capable home for managing custom apps than the legacy in-admin flow it replaced. Click through to build in the Dev Dashboard, which opens a new interface with its own navigation for monitoring, logs, versions, and settings, all scoped to the app you're about to create. It's worth naming your app something specific to its purpose from the start, since you'll likely accumulate more than one integration over time and a vague name makes them hard to tell apart later.",
-      "image": { "file": "/screenshots/8OWc7h0IBGc/04.webp", "caption": "The App development page prompting you into the Dev Dashboard, Shopify's current home for building and managing custom apps and their API credentials." }
+      "body": "Clicking Develop apps opens Shopify's Dev Dashboard, its current home for building and managing custom apps; the older in-admin app builder is being phased out for new apps. The Dev Dashboard has its own navigation for settings, monitoring, logs, and versions, scoped to the app being created. Name the app something specific to its purpose. Most stores end up with more than one integration, and a vague name makes them hard to tell apart later.",
+      "image": { "file": "/screenshots/8OWc7h0IBGc/04.webp", "caption": "The App development page prompting entry into the Dev Dashboard, Shopify's current home for building and managing custom apps and their API credentials." }
     },
     {
-      "heading": "Generate and copy your credentials",
-      "body": "Inside the Dev Dashboard, open your app's Settings tab to find the Credentials section, which lists a Client ID and a Secret — together, these are what most integrations mean by an \"API key.\" The Client ID is safe to reference in configuration, but the Secret is masked by default and should be treated like a password: copy it once into whatever integration or CRM you're connecting, and use the Rotate option if you ever suspect it's been exposed. The panel also notes exactly when the credential was created, which is a handy reference if you're ever auditing which integrations are active and when they were set up.",
-      "image": { "file": "/screenshots/8OWc7h0IBGc/05.webp", "caption": "The Credentials panel in the Dev Dashboard, showing the Client ID and a masked Secret — these two values are what your integration uses to authenticate with your store." }
+      "heading": "Generate your credentials, then get an access token",
+      "body": "Inside the Dev Dashboard, open the app's Settings tab to find the Credentials section: a Client ID and a Client Secret. Neither one is the access token an integration authenticates with. Dev Dashboard apps use a client credentials grant, so the Client ID and Secret get sent in a request to the store's token endpoint, which returns an access token valid for 24 hours. Most CRMs and no-code connectors handle this exchange automatically once the two values are pasted in; a custom script needs to request a fresh token itself when the old one expires. Treat the Client Secret like a password regardless: it's masked by default, and the Rotate option replaces it if exposure is a concern.",
+      "image": { "file": "/screenshots/8OWc7h0IBGc/05.webp", "caption": "The Credentials panel in the Dev Dashboard, showing the Client ID and a masked Secret. These two values get exchanged for the access token an integration authenticates with." }
     },
     {
-      "heading": "Understand common use cases",
-      "body": "API keys are commonly used for tasks like syncing customer data with a CRM, automating inventory management across multiple sales channels, or processing orders through third-party software. Before you build anything elaborate, decide which specific data your integration needs to read or write — Shopify's app permissions let you scope access narrowly, and starting narrow is easier than walking back overly broad access later once other systems already depend on it. A marketing automation tool, for instance, usually only needs read access to customer and order data, while an inventory sync tool needs write access to product stock levels but has no real reason to touch customer records at all."
-    },
-    {
-      "heading": "Follow best practices for security",
-      "body": "Treat your API key like a sensitive credential, since exposing it can give unauthorized access to your store's orders, customer data, or inventory. Never commit it to a public code repository, never share it over unencrypted channels, and store it in an environment variable or secrets manager rather than hardcoding it into a script. If a key does leak, rotate it from the Credentials panel immediately rather than waiting to see if it gets misused, and check your app's recent activity logs afterward to confirm nothing unexpected happened while the exposed key was still valid. It's also worth setting a calendar reminder to rotate credentials on a regular schedule even without a known leak, the same way you'd periodically change a password on any other important account."
+      "heading": "Scope access, then guard the credentials",
+      "body": "Decide which data the integration needs before wiring anything together. Shopify's app permissions allow narrow scoping: a marketing automation tool usually only needs read access to customer and order data, while an inventory sync tool needs write access to product stock levels and no reason to touch customer records at all. Starting narrow is easier than walking back broad access later, once other systems depend on it.\n\nTreat the Client Secret, and any access token derived from it, like a password. Never commit them to a public repository or send them over an unencrypted channel; store them in an environment variable or secrets manager instead of hardcoding them into a script. If a key leaks, rotate it from the Credentials panel immediately and check the app's recent activity logs afterward to confirm nothing unexpected happened while it was still valid."
     },
     {
       "heading": "Connect your store and monitor the integration",
-      "body": "Once you have your Client ID and Secret, use them in the integration or platform you're connecting — most CRMs and automation tools have a dedicated Shopify connector that asks for exactly these two values. Test the connection with a low-stakes action first, like pulling a single order or product, before wiring up anything that writes data back into your store, so a misconfigured scope or field mapping surfaces on a harmless test rather than on live customer or inventory data. Once it's live, the Dev Dashboard's Monitoring and Logs sections, in the same left-hand navigation as Settings, are worth checking periodically, since a sudden spike in failed requests is often the first sign something changed on the other end of your integration — a renamed field, a shifted permission, or an expired token elsewhere in the chain."
+      "body": "Use the Client ID and Secret in the integration or platform being connected. Most CRMs and automation tools have a dedicated Shopify connector that asks for exactly these two values and handles the token exchange internally. Test the connection with a low-stakes action first, such as pulling a single order or product, before wiring up anything that writes data back into the store.\n\nOnce it's live, the Dev Dashboard's Monitoring and Logs sections, in the same left-hand navigation as Settings, are worth checking periodically. A sudden spike in failed requests is often the first sign an access token expired mid-session or a scope changed somewhere else in the chain."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "problem": "The integration returns \"unauthorized\" even though the Client ID and Secret look correct",
+      "cause": "The Secret was pasted in as if it were the access token. Dev Dashboard apps authenticate through a client credentials grant, so the ID and Secret have to be exchanged for a token first, and that token expires after 24 hours.",
+      "fix": "Confirm the connector performs this exchange on its own, or, when writing custom code, request a fresh token from the store's token endpoint before each session."
+    },
+    {
+      "problem": "Develop apps doesn't offer the old way of creating a custom app",
+      "cause": "Shopify has been moving new custom-app creation into the Dev Dashboard, and the older in-admin builder no longer applies to new apps.",
+      "fix": "Continue through the Dev Dashboard prompt after clicking Develop apps. Existing legacy apps may still show inline, but new ones are built there."
+    },
+    {
+      "problem": "No access token shows up anywhere in the Shopify admin",
+      "cause": "This is expected for Dev Dashboard apps using a client credentials grant. Tokens aren't stored or displayed in the admin UI.",
+      "fix": "Request one programmatically with the Client ID and Secret, and re-request it after 24 hours."
     }
   ],
   "faq": [
-    { "question": "Where do I find my Shopify API key?", "answer": "Go to Settings > Apps > Develop apps in your admin, which leads into the Dev Dashboard where your app's Credentials panel shows the Client ID and Secret." },
-    { "question": "Is a Shopify API key free to generate?", "answer": "Generating a key itself is part of your existing Shopify account at no extra cost, though what you build with it may involve separate costs depending on the tools you connect." },
-    { "question": "What can I do with a Shopify API key?", "answer": "Common uses include connecting your store to CRMs, automating inventory management, and syncing order or customer data with other business software." },
-    { "question": "What's the difference between the Client ID and the Secret?", "answer": "The Client ID identifies your app and is safe to reference in configuration; the Secret authenticates it and should be handled like a password, kept out of public code and shared channels." },
-    { "question": "How do I keep my Shopify API key secure?", "answer": "Avoid hardcoding it into unsecured files or sharing it publicly, store it in an environment variable or secrets manager, and rotate it from the Credentials panel if you ever suspect exposure." }
+    { "question": "Where do I find my Shopify API key?", "answer": "There's no single \"API key\" field to copy. Go to Settings > Apps > Develop apps, which opens the Dev Dashboard, then the app's Settings tab for its Credentials: a Client ID and Client Secret. Those two values get exchanged for an access token, which is what authenticates API requests." },
+    { "question": "Is a Shopify API key free to generate?", "answer": "Generating credentials is part of an existing Shopify account, at no extra cost. Whatever gets connected to them may carry its own pricing depending on the tool." },
+    { "question": "What's the difference between the Client ID, the Client Secret, and the access token?", "answer": "The Client ID identifies the app and is safe to reference in configuration. The Client Secret authenticates it and needs to be handled like a password. Neither is used directly against Shopify's API: Dev Dashboard apps use a client credentials grant, exchanging the ID and Secret for an access token that expires after 24 hours." },
+    { "question": "What can I do with a Shopify API key?", "answer": "Common uses include connecting a store to CRMs, automating inventory management, and syncing order or customer data with other business software." },
+    { "question": "How do I keep my Shopify credentials secure?", "answer": "Avoid hardcoding the Secret into unsecured files or sharing it publicly, store it in an environment variable or secrets manager, and rotate it from the Credentials panel if exposure is ever a concern." }
   ],
+  "references": [
+    { "label": "Shopify: Get API access tokens for Dev Dashboard apps (official)", "url": "https://shopify.dev/docs/apps/build/dev-dashboard/get-api-access-tokens?lang=node" }
+  ],
+  "verifiedNote": "Click path and screens come from a walkthrough recorded in July 2025. The credentials step was re-checked against Shopify's official Dev Dashboard documentation in September 2026, which corrected this guide's previous framing of the Client ID and Secret as the API key itself: Dev Dashboard apps authenticate through a client credentials grant, exchanging those values for an access token that isn't shown anywhere in the admin UI and expires after 24 hours.",
   "generatedAt": "2026-07-31T09:03:00Z",
   "deep": true
 }

@@ -1,68 +1,89 @@
 {
   "slug": "how-to-connect-hubspot-with-microsoft-power-bi-sales-data-setup-easily-2026",
   "seoTitle": "Connect HubSpot to Power BI for Sales Reporting",
-  "metaDescription": "Learn how to connect HubSpot with Power BI to pull sales data automatically, visualize your pipeline, and cut down on manual reporting work.",
-  "intro": "Manually exporting HubSpot data into spreadsheets doesn't scale once your sales team grows, and connecting it directly to Power BI closes that gap. Power BI has no dedicated, built-in HubSpot connector the way it does for Dynamics or Salesforce, so the common route is a feed-based connection through Get Data's Online Services category. This guide covers where that connection point lives, how the feed dialog works, and what a finished pipeline report can look like once deal data is flowing in. It's aimed at sales teams and marketers who want live reporting instead of static exports.",
+  "metaDescription": "Connect HubSpot to Power BI for live sales reporting: why the OData feed URL has to come from a third-party bridge, not HubSpot itself, and what that actually costs.",
+  "intro": "Manually exporting HubSpot data into spreadsheets doesn't scale once a sales team grows, and connecting it to Power BI closes that gap. Power BI has no dedicated, built-in HubSpot connector the way it does for Dynamics or Salesforce, and HubSpot doesn't publish its own OData feed either, so the common route runs through a third-party bridge sitting between the two. This guide covers what that bridge actually does, how the Power BI side of the setup works, and what a finished pipeline report can look like once deal data is flowing in. It's aimed at sales teams and marketers who want live reporting instead of static exports.",
   "steps": [
     {
-      "heading": "Prepare HubSpot access before touching Power BI",
-      "body": "Before opening Power BI, confirm the HubSpot side is ready: you'll need API or connector-level access enabled on your account, which usually depends on your subscription tier. Have your account's feed or API endpoint handy, since the next step asks Power BI to authenticate against it directly rather than walking you through a HubSpot-branded sign-in screen."
+      "heading": "Know your three real options before you start",
+      "body": "Power BI's Get Data catalog has no HubSpot logo to click, which is the detail that trips people up first. Three routes get HubSpot data in anyway: a paid third-party bridge that generates an OData feed for Power BI to connect to (CData and Skyvia both offer this), a ready-made connector app listed in HubSpot's own App Marketplace, or a custom Power Query built against HubSpot's REST API with a private-app access token. This guide follows the OData bridge route, since it needs the least code."
     },
     {
-      "heading": "Open Get Data and choose Online Services",
-      "body": "In Power BI Desktop, click Get Data to open the full source catalog, organized into categories like File, Database, Power Platform, and Online Services along the left side. HubSpot isn't listed as its own named connector in this catalog, which is the detail that trips people up — they scroll hunting for a HubSpot logo that isn't there. Instead, the practical path is a generic feed connector under Online Services, which is what the rest of this setup uses.",
+      "heading": "Set up a bridge in front of HubSpot",
+      "body": "HubSpot does not expose its own OData endpoint, so before opening Power BI you need a middleware service, such as CData Connect Cloud or Skyvia, connected to your HubSpot account through a private app or OAuth token. That service generates the feed URL Power BI will connect to; there is no equivalent URL sitting inside HubSpot's own settings. Confirm the objects you need (deals, contacts, pipeline stages) are exposed through the bridge, since not every service surfaces every HubSpot object by default."
+    },
+    {
+      "heading": "Open Get Data and choose the OData feed connector",
+      "body": "In Power BI Desktop, click Get Data to open the source catalog, organized into categories including File, Database, Power Platform, and Online Services. Choose the OData feed connector, listed under Online Services, rather than searching further for a HubSpot-branded option that isn't there.",
       "image": {
         "file": "/screenshots/qoF_jGWtWJQ/02.webp",
-        "caption": "Power BI's Get Data catalog. HubSpot has no dedicated connector here, so the connection runs through a generic feed option instead."
+        "caption": "Power BI's Get Data catalog. HubSpot has no dedicated connector here, so the connection runs through the OData feed option instead."
       }
     },
     {
-      "heading": "Connect using the OData feed option",
-      "body": "Selecting the OData feed connector opens a simple dialog with Basic and Advanced modes and a single URL field. This is the mechanism that lets Power BI treat a data feed as a live source it can query and refresh, rather than a one-time file import. Paste your account's feed endpoint here — the field accepts any valid OData address, so the exact URL you use depends on how your HubSpot data is exposed, whether that's a direct account endpoint or one provided through a middleware/reporting layer.",
+      "heading": "Connect and pull in deal and pipeline objects",
+      "body": "Selecting OData feed opens a dialog with Basic and Advanced modes and a single URL field. Paste the feed URL your bridge service generated, not a HubSpot address; the field itself accepts any valid OData address. Once it connects, Power BI's Navigator lists the tables the bridge exposed, typically deals, contacts, and pipeline stage objects for a sales setup. Select only the tables you'll report on, since an over-broad import slows both the initial load and every refresh after it.",
       "image": {
         "file": "/screenshots/qoF_jGWtWJQ/03.webp",
-        "caption": "The OData feed dialog, where you paste the feed URL Power BI will connect to and refresh against — shown here in Basic mode with a sample address."
+        "caption": "The OData feed dialog, where you paste the feed URL generated by your bridge service — shown here in Basic mode with a sample address."
       }
     },
     {
-      "heading": "Pull in deal and pipeline objects",
-      "body": "After the feed connects, Power BI's Navigator lists the tables it found — for a sales setup this typically means deals, contacts, and pipeline stage objects. Select only the tables you'll actually report on rather than loading everything, since HubSpot accounts can expose a large number of tables and an over-broad import slows both the load and every refresh after it. Confirm field names line up with what you expect — deal amount, stage, close date — before moving to visuals."
-    },
-    {
-      "heading": "Build the pipeline view",
-      "body": "With sales data loaded, a pie or bar visual broken out by a date or stage field is usually the fastest way to see where deals sit. The example report here shows a \"Sum of amount and Sum of id by transactionDateTime\" chart — a breakdown of deal value across dated buckets, colored by segment — which is the kind of at-a-glance view sales leaders check daily. Swap the legend field to pipeline stage instead of date if you want to see where deals are stuck rather than when they closed.",
+      "heading": "Build and tighten the pipeline report",
+      "body": "With sales data loaded, a bar or pie visual broken out by a date or stage field is the fastest way to see where deals sit. The example here shows deal amounts broken out by date, colored by segment, the kind of at-a-glance view sales leaders check daily. Swap the legend field to pipeline stage instead of date to see where deals are stuck rather than when they closed. Group pipeline value, rep performance and deal counts onto one page instead of spreading them across tabs, add slicers for date range and sales rep, then set a scheduled refresh once the report is published. A scheduled refresh against a third-party bridge depends on that service staying connected within its own limits, not only on Power BI's refresh settings.",
       "image": {
         "file": "/screenshots/qoF_jGWtWJQ/01.webp",
         "caption": "A finished pipeline visual — deal amounts broken out by date, with the legend showing each time bucket's share of the total."
       }
+    }
+  ],
+  "costNote": "Getting HubSpot data into Power BI without writing your own connector generally means paying for a bridge or marketplace app on top of your HubSpot and Power BI plans. HubSpot's own App Marketplace lists a Power BI Integration app, built by the third-party Datawarehouse.io, starting at $79 a month for HubSpot Starter accounts. Writing a custom Power Query against HubSpot's REST API avoids that recurring cost but takes development time instead.",
+  "troubleshooting": [
+    {
+      "problem": "The OData feed dialog won't connect to anything",
+      "cause": "HubSpot doesn't expose its own OData endpoint, so a HubSpot URL pasted directly into the feed field has nothing to connect to. The URL has to come from a bridge service such as CData Connect Cloud or Skyvia.",
+      "fix": "Set up the bridge first, generate its OData feed URL there, then paste that URL into Power BI's feed dialog."
     },
     {
-      "heading": "Tighten the report for daily use",
-      "body": "Group related metrics onto a single page rather than spreading pipeline value, rep performance, and deal counts across separate tabs — sales leaders checking this once a day want one screen, not five. Add slicers for date range and sales rep so anyone viewing the report can filter down without editing the underlying visuals, and set a scheduled refresh once the report is published so the numbers don't quietly go stale between manual updates."
+      "problem": "Refresh works in Desktop but fails once the report is published to the Power BI service",
+      "cause": "A cloud bridge needs its own live connection and cached credentials in the service. Desktop can succeed locally while the scheduled service refresh fails if the bridge's session or gateway has expired.",
+      "fix": "Check the bridge service's own connection status and re-authenticate it, then reconfigure the scheduled refresh in the Power BI service."
+    },
+    {
+      "problem": "The initial load or every refresh after it takes a long time",
+      "cause": "HubSpot accounts can expose a large number of objects, and selecting all of them in Navigator pulls in far more than a sales report needs.",
+      "fix": "In Navigator, select only the specific tables you're reporting on, such as deals, contacts, and pipeline stages, instead of the full list."
     }
   ],
   "faq": [
     {
-      "question": "Do I need a specific HubSpot plan to connect to Power BI?",
-      "answer": "Access to HubSpot's API or reporting data typically depends on your subscription tier, so check your plan's data export and integration permissions before setting up the connection."
-    },
-    {
       "question": "Does Power BI have a dedicated HubSpot connector?",
-      "answer": "No. There's no HubSpot-branded connector in Power BI's Get Data catalog. The common workaround is connecting through a generic feed option, such as OData, pointed at your account's data endpoint."
+      "answer": "No. There's no HubSpot-branded connector in Power BI's Get Data catalog."
     },
     {
-      "question": "How often does HubSpot data refresh in Power BI?",
-      "answer": "Refresh frequency depends on how you schedule it in Power BI, ranging from manual refreshes to automated daily or more frequent updates depending on your license."
+      "question": "Where does the OData feed URL come from?",
+      "answer": "Not from HubSpot. HubSpot doesn't publish its own OData endpoint, so the URL has to come from a bridge service, such as CData Connect Cloud or Skyvia, connected to your HubSpot account."
     },
     {
-      "question": "Can I combine HubSpot data with other sales tools in one report?",
-      "answer": "Yes, Power BI can connect to multiple data sources at once, so you can blend HubSpot data with other CRM or sales platforms in a single unified report."
+      "question": "Is there a simpler, HubSpot-listed option?",
+      "answer": "HubSpot's own App Marketplace lists a third-party Power BI Integration app, built by Datawarehouse.io, that handles the connection for a monthly fee instead of requiring you to set up a bridge yourself."
     },
     {
-      "question": "Will this integration slow down my HubSpot account?",
-      "answer": "Standard API-based reporting pulls generally have minimal impact on HubSpot performance, though very frequent refreshes on large accounts could add some load, so scope your table selection carefully."
+      "question": "Does this cost anything beyond my HubSpot and Power BI plans?",
+      "answer": "Usually yes. Bridges and marketplace connector apps charge separately; Datawarehouse.io's listing starts at $79 a month."
+    },
+    {
+      "question": "Can I skip third-party tools entirely?",
+      "answer": "Yes, by writing a custom Power Query against HubSpot's REST API with a private app access token, though that takes development effort a ready-made bridge avoids."
     }
   ],
+  "references": [
+    {
+      "label": "HubSpot App Marketplace: Power BI Integration listing (third-party app, fetched for pricing and publisher details)",
+      "url": "https://ecosystem.hubspot.com/marketplace/listing/powerbi"
+    }
+  ],
+  "verifiedNote": "Click path and screens come from a recorded walkthrough. Re-checked in September 2026: Power BI still has no native HubSpot connector, and research turned up a fact the original draft got wrong. HubSpot does not publish its own OData feed, so the 'paste your account's feed endpoint' step needs a third-party bridge (CData, Skyvia) or a marketplace app such as Datawarehouse.io's Power BI Integration, confirmed as a real, paid, third-party listing in HubSpot's own App Marketplace.",
   "generatedAt": "2026-07-22T11:29:50.000Z",
   "deep": true
 }
